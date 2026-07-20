@@ -10,9 +10,11 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
-			// SPA fallback: routes we don't prerender (reflex details, language-vs-language compare,
-			// filtered/sorted views) are served this shell and rendered client-side from SQLite.
-			fallback: '200.html',
+			// SPA fallback for routes we don't prerender (reflex details, language-vs-language
+			// compare, /correspondences/set, filtered views). It MUST be 404.html: GitHub Pages
+			// ignores a 200.html fallback and serves its own 404 for unknown paths, so 404.html is
+			// the only shell it will return for deep links — the client router then renders them.
+			fallback: '404.html',
 			precompress: false,
 			strict: false
 		}),
