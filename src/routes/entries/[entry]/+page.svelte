@@ -688,6 +688,10 @@
 	@media (max-width: 900px) {
 		.entry-body {
 			flex-direction: column;
+			align-items: stretch; /* fill width so the matrix scrolls internally, not the page */
+		}
+		.matrix-col {
+			width: 100%;
 		}
 		.map-col {
 			position: static;
