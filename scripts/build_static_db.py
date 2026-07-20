@@ -66,6 +66,21 @@ def load_tags(con: sqlite3.Connection, forms_csv: Path) -> None:
     log(f"loaded structured tags for {n_tags} lemmas from {forms_csv}")
 
 
+def load_entry_glosses(con: sqlite3.Connection, params_csv: Path) -> None:
+    """Refresh entry (headword) glosses from the CLDF parameters.csv, whose Description now carries
+    cross-reference links to other entries (see ../data/link_refs.py). Entry lemmas key on
+    id == Parameter_ID; the gloss is the full CDIAL entry HTML."""
+    n = 0
+    with params_csv.open(encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            desc = row.get("Description") or ""
+            con.execute("UPDATE lemmas SET gloss = ? WHERE id = ?", (desc, row["ID"]))
+            if "data-entry" in desc:
+                n += 1
+    con.commit()
+    log(f"refreshed entry glosses with {n} cross-reference links from {params_csv}")
+
+
 def table_exists(con: sqlite3.Connection, name: str) -> bool:
     row = con.execute(
         "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)
@@ -180,7 +195,12 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
 
 
 def transform(
-    inp: Path, out: Path, page_size: int, alignments: str | None, forms: str | None
+    inp: Path,
+    out: Path,
+    page_size: int,
+    alignments: str | None,
+    forms: str | None,
+    params: str | None,
 ) -> None:
     if not inp.exists():
         log(f"FATAL: input DB not found: {inp}")
@@ -231,6 +251,12 @@ def transform(
         load_tags(con, Path(forms))
     else:
         log(f"(no forms.csv at {forms}; skipping tag load)")
+
+    # 2c. Refresh entry glosses from parameters.csv (they now carry cross-reference links).
+    if params and Path(params).exists():
+        load_entry_glosses(con, Path(params))
+    else:
+        log(f"(no parameters.csv at {params}; skipping entry-gloss refresh)")
 
     # 3. FTS5 trigram over lemma text columns (external content => no duplicated text).
     #    content_rowid uses the implicit rowid since lemmas.id is a VARCHAR PK.
@@ -320,10 +346,12 @@ def main() -> None:
                     help="path to align.py output (materialised sound-change table); skipped if absent")
     ap.add_argument("--forms", default="../data/cldf/forms.csv",
                     help="path to CLDF forms.csv (source of the structured Tags column); skipped if absent")
+    ap.add_argument("--params", default="../data/cldf/parameters.csv",
+                    help="path to CLDF parameters.csv (entry glosses + cross-ref links); skipped if absent")
     args = ap.parse_args()
 
     t0 = time.time()
-    transform(args.input, args.output, args.page_size, args.alignments, args.forms)
+    transform(args.input, args.output, args.page_size, args.alignments, args.forms, args.params)
     log(f"elapsed {time.time() - t0:.1f}s")
 
 

@@ -172,6 +172,17 @@ a:hover {
 	text-decoration: underline;
 	text-underline-offset: 2px;
 }
+/* cross-reference links to other entries (parsed from notes/descriptions) */
+a.eref {
+	color: inherit;
+	text-decoration: underline dotted var(--berry);
+	text-underline-offset: 2px;
+	text-decoration-thickness: 1px;
+}
+a.eref:hover {
+	color: var(--berry);
+	text-decoration: underline solid var(--berry);
+}
 
 h1 {
 	font-size: 2rem;
