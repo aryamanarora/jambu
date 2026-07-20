@@ -7,6 +7,7 @@
 	import FilterCell from './FilterCell.svelte';
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
+	import Tags from './Tags.svelte';
 
 	let {
 		mode = 'reflexes',
@@ -76,6 +77,7 @@
 					onFilter={state.setFilter}
 					onSort={state.setSort}
 				/>
+				<th>Tags</th>
 				<FilterCell
 					label="Notes"
 					filterKey="notes"
@@ -131,6 +133,7 @@
 							{:else}<span class="faint">—</span>{/if}
 						</td>
 						<td class="muted">{@html safe(r.gloss) || '—'}</td>
+						<td><Tags tags={r.tags} /></td>
 						<td class="muted markdown">{@html md(r.notes)}</td>
 						<td><RefList references={r.references} /></td>
 					</tr>

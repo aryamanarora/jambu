@@ -30,6 +30,7 @@ export interface Lemma {
 	phonemic: string;
 	original: string;
 	notes: string;
+	tags: string; // structured tokens lifted from notes (gender + grammatical), space-separated
 	clades: string;
 	cognateset: string;
 	order: number;

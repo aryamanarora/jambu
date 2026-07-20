@@ -24,6 +24,7 @@ The script never mutates INPUT.db; it copies it to OUTPUT.db first.
 from __future__ import annotations
 
 import argparse
+import csv
 import shutil
 import sqlite3
 import sys
@@ -39,6 +40,30 @@ LEMMA_FTS_COLUMNS = ["word", "gloss", "notes"]
 
 def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
+
+
+def load_tags(con: sqlite3.Connection, forms_csv: Path) -> None:
+    """Populate a `tags` column and refresh `notes` from the CLDF forms.csv, where gender +
+    grammatical tokens have already been lifted into a `Tags` column (see ../data/tags.py). We read
+    the structured data from the source dataset rather than re-parsing here (the webapp is a thin
+    renderer). Keyed by Form ID == lemmas.id for reflexes."""
+    con.execute("ALTER TABLE lemmas ADD COLUMN tags TEXT")
+    n_tags = 0
+    with forms_csv.open(encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        if "Tags" not in (reader.fieldnames or []):
+            log(f"WARNING: {forms_csv} has no Tags column; skipping tag load")
+            return
+        for row in reader:
+            tags = (row.get("Tags") or "").strip()
+            con.execute(
+                "UPDATE lemmas SET tags = ?, notes = ? WHERE id = ?",
+                (tags or None, row.get("Description") or "", row["ID"]),
+            )
+            if tags:
+                n_tags += 1
+    con.commit()
+    log(f"loaded structured tags for {n_tags} lemmas from {forms_csv}")
 
 
 def table_exists(con: sqlite3.Connection, name: str) -> bool:
@@ -154,7 +179,9 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
            con.execute('SELECT COUNT(*) FROM corr').fetchone()[0]))
 
 
-def transform(inp: Path, out: Path, page_size: int, alignments: str | None) -> None:
+def transform(
+    inp: Path, out: Path, page_size: int, alignments: str | None, forms: str | None
+) -> None:
     if not inp.exists():
         log(f"FATAL: input DB not found: {inp}")
         sys.exit(1)
@@ -197,6 +224,13 @@ def transform(inp: Path, out: Path, page_size: int, alignments: str | None) -> N
         """
     )
     log("created citation-join + ordering indexes")
+
+    # 2b. Load structured tags (gender, grammatical category) from the CLDF forms.csv and refresh
+    #     `notes` to its free-text-only form, so the FTS built below indexes only the free text.
+    if forms and Path(forms).exists():
+        load_tags(con, Path(forms))
+    else:
+        log(f"(no forms.csv at {forms}; skipping tag load)")
 
     # 3. FTS5 trigram over lemma text columns (external content => no duplicated text).
     #    content_rowid uses the implicit rowid since lemmas.id is a VARCHAR PK.
@@ -284,10 +318,12 @@ def main() -> None:
                     help="SQLite page size for the output (default 8192, range-fetch friendly)")
     ap.add_argument("--alignments", default="../data/cldf/alignments.csv",
                     help="path to align.py output (materialised sound-change table); skipped if absent")
+    ap.add_argument("--forms", default="../data/cldf/forms.csv",
+                    help="path to CLDF forms.csv (source of the structured Tags column); skipped if absent")
     args = ap.parse_args()
 
     t0 = time.time()
-    transform(args.input, args.output, args.page_size, args.alignments)
+    transform(args.input, args.output, args.page_size, args.alignments, args.forms)
     log(f"elapsed {time.time() - t0:.1f}s")
 
 

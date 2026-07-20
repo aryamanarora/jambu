@@ -3,6 +3,7 @@
 	import { changeInfo, changeLabel } from '$lib/soundChange';
 	import { safe, md } from '$lib/render';
 	import RefList from './RefList.svelte';
+	import Tags from './Tags.svelte';
 	import type { Lemma } from '$lib/types';
 	import type { AlignSeg } from '$lib/query';
 
@@ -28,6 +29,7 @@
 		{/if}
 		{#if lemma.phonemic}<span class="d-phon">/{lemma.phonemic}/</span>{/if}
 		{#if lemma.gloss}<span class="d-gloss">‘{@html safe(lemma.gloss)}’</span>{/if}
+		{#if lemma.tags}<Tags tags={lemma.tags} />{/if}
 		{#if lemma.cognateset}<span class="d-cog">§{lemma.cognateset}</span>{/if}
 		<span class="d-src"><RefList references={lemma.references} /></span>
 	</div>
