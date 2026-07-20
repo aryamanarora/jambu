@@ -86,6 +86,13 @@
 					onFilter={state.setFilter}
 					onSort={state.setSort}
 				/>
+				<FilterCell
+					label="Derived"
+					numeric
+					activeSort={state.params.sort ?? ''}
+					onFilter={state.setFilter}
+					onSort={state.setSort}
+				/>
 			</tr>
 		</thead>
 		<tbody>
@@ -110,6 +117,10 @@
 						<td><RefList references={e.references} /></td>
 						<td class="num">{e.lang_count?.toLocaleString() ?? ''}</td>
 						<td class="num">{e.reflex_count?.toLocaleString() ?? ''}</td>
+						<td class="num derived-col">
+							{#if e.derived_count}<a href="{base}/entries/{e.id}">{e.derived_count.toLocaleString()}</a
+								>{:else}<span class="faint">·</span>{/if}
+						</td>
 					</tr>
 				{/each}
 			{/if}

@@ -275,10 +275,15 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	// page
 	const offset = (page - 1) * PAGE_SIZE;
+	// how many derived-term etyma each headword spawns (compounds/affixed forms) — entries view only
+	const derivedCol =
+		mode === 'entries'
+			? ', (SELECT COUNT(*) FROM derivation WHERE parent_id = l.id) AS derived_count'
+			: '';
 	const fetchSql = isDefaultEntries
-		? `SELECT l.* FROM lemmas l INDEXED BY idx_entries_order
+		? `SELECT l.*${derivedCol} FROM lemmas l INDEXED BY idx_entries_order
 		   WHERE l.origin_lemma_id IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
-		: `SELECT l.* FROM lemmas l ${join} ${whereSql}
+		: `SELECT l.*${derivedCol} FROM lemmas l ${join} ${whereSql}
 		   ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
 	const rows = await query<Lemma>(fetchSql, isDefaultEntries ? [] : whereParams);
 

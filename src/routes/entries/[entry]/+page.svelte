@@ -13,6 +13,7 @@
 	import { cladeFavRank, langFavRank } from '$lib/prefs.svelte';
 	import { safe, md, striptags } from '$lib/render';
 	import CladeBars from '$lib/components/CladeBars.svelte';
+	import Ancestry from '$lib/components/Ancestry.svelte';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
@@ -259,11 +260,38 @@
 	</h1>
 	<CladeBars clades={entry.clades} size="lg" />
 </div>
+{#if graph.ancestors.length}
+	<Ancestry label="Derived from" parents={graph.ancestors} />
+{/if}
 <p class="gloss serif">{@html safe(entry.gloss)}</p>
 {#if entry.notes}
 	<details class="notes">
 		<summary>Etymological notes</summary>
 		<div class="markdown">{@html md(entry.notes)}</div>
+	</details>
+{/if}
+
+<!-- derived terms (compound / affixed etyma built on this one) — before the reflexes -->
+{#if graph.derived.length}
+	<details class="derived" open={graph.derived.length <= 12}>
+		<summary
+			>Derived terms <span class="muted">({graph.derived.length})</span></summary
+		>
+		<ul>
+			{#each graph.derived as d (d.id)}
+				<li>
+					<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
+					<span class="id-tag">[{d.id}]</span>
+					{#if shortGloss(d.gloss)}<span class="d-gloss">‘{shortGloss(d.gloss)}’</span>{/if}
+					{#if d.reflex_count}<span class="d-count muted"
+							>{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count} lang{d.lang_count ===
+							1
+								? ''
+								: 's'}</span
+						>{/if}
+				</li>
+			{/each}
+		</ul>
 	</details>
 {/if}
 
@@ -381,36 +409,22 @@
 	</div>
 {/if}
 
-{#if graph.derived.length}
-	<section class="derived">
-		<h2>Derived terms <span class="muted">({graph.derived.length})</span></h2>
-		<ul>
-			{#each graph.derived as d (d.id)}
-				<li>
-					<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
-					<span class="id-tag">[{d.id}]</span>
-					{#if shortGloss(d.gloss)}<span class="d-gloss">‘{shortGloss(d.gloss)}’</span>{/if}
-					{#if d.reflex_count}<span class="d-count muted"
-							>{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count} lang{d.lang_count ===
-							1
-								? ''
-								: 's'}</span
-						>{/if}
-				</li>
-			{/each}
-		</ul>
-	</section>
-{/if}
-
 <style>
 	.derived {
-		margin-top: 2rem;
-		border-top: 1px solid var(--border);
-		padding-top: 1rem;
+		margin: 1rem 0 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		background: var(--surface-2);
+		padding: 0.55rem 0.85rem;
 	}
-	.derived h2 {
-		font-size: 1.15rem;
-		margin: 0 0 0.6rem;
+	.derived > summary {
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 1rem;
+		list-style-position: inside;
+	}
+	.derived[open] > summary {
+		margin-bottom: 0.55rem;
 	}
 	.derived ul {
 		list-style: none;

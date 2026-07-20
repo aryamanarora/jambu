@@ -39,6 +39,7 @@ export interface Lemma {
 	// per-entry aggregates (materialised columns; populated on headwords)
 	reflex_count?: number;
 	lang_count?: number;
+	derived_count?: number; // # of derived-term etyma built on this headword (entries view)
 	// hydrated relations (optional)
 	language?: Language;
 	origin_lemma?: Lemma | null;

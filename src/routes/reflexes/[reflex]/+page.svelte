@@ -5,6 +5,7 @@
 	import type { Lemma, MapMarker } from '$lib/types';
 	import MapView from '$lib/components/Map.svelte';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
+	import Ancestry from '$lib/components/Ancestry.svelte';
 	import LangName from '$lib/components/LangName.svelte';
 
 	let reflex = $state<Lemma | null>(null);
@@ -25,6 +26,19 @@
 			loading = false;
 		});
 	});
+
+	// a reflex is a node whose parent is its etymon — same "from" line as a derived etymon's
+	const parents = $derived(
+		reflex?.origin_lemma
+			? [
+					{
+						id: reflex.origin_lemma.id,
+						word: reflex.origin_lemma.word,
+						lang: reflex.origin_lemma.language?.name
+					}
+				]
+			: []
+	);
 
 	const markers = $derived<MapMarker[]>(
 		reflex?.language && reflex.language.lat != null
@@ -55,9 +69,10 @@
 		<span class="lemma-word">{@html safe(reflex.word)}</span>
 		<span class="id-tag">[{reflex.id}]</span>
 	</h1>
+	<Ancestry label="Reflex of" {parents} />
 
 	<div class="body">
-		<ReflexDetail lemma={reflex} {segs} showOrigin linkWord={false} />
+		<ReflexDetail lemma={reflex} {segs} linkWord={false} />
 		{#if markers.length}
 			<MapView {markers} zoom={5} height="300px" />
 		{/if}
