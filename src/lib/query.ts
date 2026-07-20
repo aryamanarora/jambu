@@ -182,6 +182,15 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 			params: [`%${p.source.trim()}%`]
 		});
 	}
+	// tags: space-separated whole-token match on the `tags` column (AND across the selected tags)
+	if (p.tags?.trim()) {
+		for (const t of p.tags.trim().split(/\s+/)) {
+			conds.push({
+				sql: "(' ' || COALESCE(l.tags, '') || ' ') LIKE ?",
+				params: [`% ${t} %`]
+			});
+		}
+	}
 
 	// a sort on a language column also needs the join
 	const sortCol = p.sort?.split('-')[1];

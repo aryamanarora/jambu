@@ -14,6 +14,7 @@ export function paramsFromUrl(sp: URLSearchParams): ListParams {
 		origin_lang: g('origin_lang'),
 		origin: g('origin'),
 		clade: g('clade'),
+		tags: g('tags'),
 		sort: g('sort'),
 		page: Number.isFinite(pageNum) && pageNum > 0 ? pageNum : 1
 	};

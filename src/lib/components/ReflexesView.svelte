@@ -8,6 +8,7 @@
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
 	import Tags from './Tags.svelte';
+	import TagFilter from './TagFilter.svelte';
 
 	let {
 		mode = 'reflexes',
@@ -77,7 +78,7 @@
 					onFilter={state.setFilter}
 					onSort={state.setSort}
 				/>
-				<th>Tags</th>
+				<TagFilter value={state.params.tags ?? ""} onFilter={state.setFilter} />
 				<FilterCell
 					label="Notes"
 					filterKey="notes"

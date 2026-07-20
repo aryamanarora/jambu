@@ -15,6 +15,7 @@
 	import CladeBars from '$lib/components/CladeBars.svelte';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
 	import LangName from '$lib/components/LangName.svelte';
+	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
 	import type { Language, MapMarker } from '$lib/types';
 
@@ -344,7 +345,10 @@
 								>{@html safe(row.r.lemma.word)}</td
 							>
 						{/if}
-						<td class="c-gloss gloss-cell">{@html safe(row.r.lemma.gloss)}</td>
+						<td class="c-gloss gloss-cell"
+							>{@html safe(row.r.lemma.gloss)}{#if row.r.lemma.tags}
+								<Tags tags={row.r.lemma.tags} />{/if}</td
+						>
 						<td class="c-cog cog-cell" title={striptags(row.cogLabel)}>{row.cogCode}</td>
 					</tr>
 					{#if expanded.has(row.r.lemma.id)}

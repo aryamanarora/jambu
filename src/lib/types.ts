@@ -55,6 +55,7 @@ export interface ListParams {
 	origin_lang?: string;
 	origin?: string;
 	clade?: string;
+	tags?: string; // space-separated tags; a row must carry ALL of them
 	sort?: string; // "asc-<col>" | "desc-<col>"
 	page?: number;
 }
