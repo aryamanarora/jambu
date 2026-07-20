@@ -21,6 +21,11 @@
 
 	let { data } = $props();
 	const entry = $derived(data.entry);
+	const graph = $derived(data.graph);
+	const shortGloss = (g: string) => {
+		const m = /['‘]([^'’]{1,60})['’]/.exec(striptags(g)); // first quoted sense
+		return m ? m[1] : '';
+	};
 
 	let ea = $state<EntryAlignment | null>(null);
 	let loading = $state(true);
@@ -376,7 +381,64 @@
 	</div>
 {/if}
 
+{#if graph.derived.length}
+	<section class="derived">
+		<h2>Derived terms <span class="muted">({graph.derived.length})</span></h2>
+		<ul>
+			{#each graph.derived as d (d.id)}
+				<li>
+					<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
+					<span class="id-tag">[{d.id}]</span>
+					{#if shortGloss(d.gloss)}<span class="d-gloss">‘{shortGloss(d.gloss)}’</span>{/if}
+					{#if d.reflex_count}<span class="d-count muted"
+							>{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count} lang{d.lang_count ===
+							1
+								? ''
+								: 's'}</span
+						>{/if}
+				</li>
+			{/each}
+		</ul>
+	</section>
+{/if}
+
 <style>
+	.derived {
+		margin-top: 2rem;
+		border-top: 1px solid var(--border);
+		padding-top: 1rem;
+	}
+	.derived h2 {
+		font-size: 1.15rem;
+		margin: 0 0 0.6rem;
+	}
+	.derived ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 0.35rem 1.5rem;
+	}
+	.derived li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.35rem;
+		padding: 0.15rem 0;
+		font-size: 0.92rem;
+	}
+	.derived .d-word {
+		font-weight: 600;
+	}
+	.derived .d-gloss {
+		color: var(--muted);
+		font-style: italic;
+	}
+	.derived .d-count {
+		font-size: 0.78rem;
+		margin-left: auto;
+	}
 	.entry-head {
 		display: flex;
 		align-items: flex-start;

@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { allEntryIds, getEntryMeta } from '$lib/server/db';
+import { allEntryIds, getEntryMeta, getEntryGraph } from '$lib/server/db';
 import type { PageServerLoad } from './$types';
 
 export const prerender = true;
@@ -12,5 +12,5 @@ export function entries() {
 export const load: PageServerLoad = ({ params }) => {
 	const entry = getEntryMeta(params.entry);
 	if (!entry) throw error(404, 'Entry not found');
-	return { entry };
+	return { entry, graph: getEntryGraph(params.entry) };
 };

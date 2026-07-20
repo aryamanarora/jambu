@@ -64,6 +64,42 @@ export function getEntryMeta(id: string): EntryMeta | null {
 	return { ...e, language };
 }
 
+export interface DerivedTerm {
+	id: string;
+	word: string;
+	gloss: string;
+	reflex_count: number;
+	lang_count: number;
+}
+export interface EntryGraph {
+	ancestors: { id: string; word: string }[]; // etyma this one derives from
+	derived: DerivedTerm[]; // etyma derived from this one
+}
+
+/** The derivation-graph neighbours of an entry (few per node, so prerendered for SEO). */
+export function getEntryGraph(id: string): EntryGraph {
+	const dbh = getDb();
+	if (!tableExists(dbh, 'derivation')) return { ancestors: [], derived: [] };
+	const ancestors = dbh
+		.prepare(
+			`SELECT l.id, l.word FROM derivation d JOIN lemmas l ON l.id = d.parent_id
+			 WHERE d.child_id = ? ORDER BY l."order"`
+		)
+		.all(id) as { id: string; word: string }[];
+	const derived = dbh
+		.prepare(
+			`SELECT l.id, l.word, l.gloss, l.reflex_count, l.lang_count
+			 FROM derivation d JOIN lemmas l ON l.id = d.child_id
+			 WHERE d.parent_id = ? ORDER BY l."order"`
+		)
+		.all(id) as DerivedTerm[];
+	return { ancestors, derived };
+}
+
+function tableExists(dbh: Database.Database, name: string): boolean {
+	return !!dbh.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?").get(name);
+}
+
 export function getLanguageRow(id: string): Language | null {
 	return (getDb().prepare('SELECT * FROM languages WHERE id = ?').get(id) ?? null) as Language | null;
 }

@@ -81,6 +81,32 @@ def load_entry_glosses(con: sqlite3.Connection, params_csv: Path) -> None:
     log(f"refreshed entry glosses with {n} cross-reference links from {params_csv}")
 
 
+def load_derivation(con: sqlite3.Connection, deriv_csv: Path) -> None:
+    """Load the derivation graph (derived-term → ancestor etymon) from ../data/link_refs.py output
+    into a `derivation` table, indexed both directions for 'ancestors of X' and 'derived from X'."""
+    con.executescript(
+        """
+        DROP TABLE IF EXISTS derivation;
+        CREATE TABLE derivation (child_id TEXT, parent_id TEXT);
+        """
+    )
+    with deriv_csv.open(encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        con.executemany(
+            "INSERT INTO derivation (child_id, parent_id) VALUES (?, ?)",
+            ((r["Child_ID"], r["Parent_ID"]) for r in reader),
+        )
+    con.executescript(
+        """
+        CREATE INDEX idx_derivation_parent ON derivation(parent_id);
+        CREATE INDEX idx_derivation_child ON derivation(child_id);
+        """
+    )
+    con.commit()
+    n = con.execute("SELECT COUNT(*) FROM derivation").fetchone()[0]
+    log(f"loaded derivation graph: {n} edges from {deriv_csv}")
+
+
 def table_exists(con: sqlite3.Connection, name: str) -> bool:
     row = con.execute(
         "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)
@@ -257,6 +283,13 @@ def transform(
         load_entry_glosses(con, Path(params))
     else:
         log(f"(no parameters.csv at {params}; skipping entry-gloss refresh)")
+
+    # 2d. Derivation graph (derived-term → ancestor etymon).
+    deriv = str(Path(params).parent / "derivation.csv") if params else None
+    if deriv and Path(deriv).exists():
+        load_derivation(con, Path(deriv))
+    else:
+        log(f"(no derivation.csv at {deriv}; skipping derivation graph)")
 
     # 3. FTS5 trigram over lemma text columns (external content => no duplicated text).
     #    content_rowid uses the implicit rowid since lemmas.id is a VARCHAR PK.
