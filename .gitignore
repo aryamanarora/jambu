@@ -1,0 +1,12 @@
+node_modules/
+/.svelte-kit/
+/build/
+/dist/
+# Transformed DB + chunks are produced in CI and served from the Pages deploy — never committed.
+/static/db/
+*.db
+.DS_Store
+.env
+.env.*
+
+/.dbwork/

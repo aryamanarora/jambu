@@ -1,0 +1,33 @@
+{
+  "name": "jambu-static",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static, GitHub Pages build of the Jambu etymological dictionary (queries SQLite in-browser via sql.js-httpvfs).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "db:transform": "python3 scripts/build_static_db.py .dbwork/data.db .dbwork/jambu.db",
+    "db:stage": "mkdir -p static/db && cp .dbwork/jambu.db static/db/jambu.db"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.6",
+    "@sveltejs/kit": "^2.15.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/leaflet": "^1.9.15",
+    "@types/node": "^26.1.1",
+    "better-sqlite3": "^11.7.0",
+    "svelte": "^5.16.0",
+    "svelte-check": "^4.1.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "marked": "^15.0.12",
+    "sql.js-httpvfs": "^0.8.12"
+  }
+}

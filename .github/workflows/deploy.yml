@@ -1,0 +1,74 @@
+name: Build & deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Deployment target (project page at https://aryamanarora.github.io/jambu/):
+#   • BASE_PATH — "/<repo>" for a project page; "" for a custom domain / user root.
+#   • SITE_URL  — absolute origin (no path), used only for sitemap.xml <loc>s.
+#   • STATIC_DB_URL — the pre-built SQLite DB (FTS + alignment + correspondence tables),
+#                     published as a release asset. Regenerate locally with
+#                     `npm run db:transform` and upload as `jambu.db` on a release.
+# ─────────────────────────────────────────────────────────────────────────────
+env:
+  BASE_PATH: '/jambu'
+  SITE_URL: 'https://aryamanarora.github.io'
+  STATIC_DB_URL: 'https://github.com/aryamanarora/jambu/releases/latest/download/jambu.db'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download pre-built database (release asset)
+        run: |
+          mkdir -p static/db
+          curl -L --fail "$STATIC_DB_URL" -o static/db/jambu.db
+          echo "Downloaded $(du -h static/db/jambu.db | cut -f1)"
+
+      - name: Build site (prerender canonical pages + SPA fallback)
+        run: npm run build
+        env:
+          BASE_PATH: ${{ env.BASE_PATH }}
+          SITE_URL: ${{ env.SITE_URL }}
+          # prerender reads the same DB via better-sqlite3
+          JAMBU_DB: static/db/jambu.db
+          # no PRERENDER_LIMIT → prerender ALL entries/languages/references
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

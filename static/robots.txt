@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# The full sitemap of headword entries, languages, and references:
+Sitemap: /sitemap.xml
