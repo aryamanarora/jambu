@@ -126,7 +126,8 @@ const SORT_COLUMNS: Record<string, string> = {
 	clade: 'lang.clade',
 	reflexes: 'lang.lemma_count',
 	nreflex: 'l.reflex_count',
-	nlang: 'l.lang_count'
+	nlang: 'l.lang_count',
+	nderived: '(SELECT COUNT(*) FROM derivation WHERE parent_id = l.id)'
 };
 // columns whose sort/filter forces the languages join
 const NEEDS_LANG_JOIN = new Set(['lang', 'clade', 'reflexes']);
