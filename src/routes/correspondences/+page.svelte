@@ -480,4 +480,23 @@
 		font-size: 0.75rem;
 		margin: 2px 0 0;
 	}
+
+	@media (max-width: 640px) {
+		/* stack the environment builder: preceding ▸ *seg ▸ following */
+		.builder {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			gap: 0.5rem;
+		}
+		.segbar {
+			gap: 4px;
+		}
+		.pseg {
+			font-size: 0.98rem;
+			padding: 2px 7px;
+		}
+		.c-clade {
+			width: 130px;
+		}
+	}
 </style>

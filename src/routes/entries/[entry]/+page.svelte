@@ -695,4 +695,14 @@
 			flex-basis: auto;
 		}
 	}
+	@media (max-width: 640px) {
+		/* let the clade strip drop below the headword instead of overflowing */
+		.entry-head {
+			flex-wrap: wrap;
+		}
+		.entry-head :global(.clades) {
+			flex-wrap: wrap;
+			margin-top: 0.4rem;
+		}
+	}
 </style>
