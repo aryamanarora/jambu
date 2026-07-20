@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "db:transform": "python3 scripts/build_static_db.py .dbwork/data.db .dbwork/jambu.db",
+    "db:transform": "python3 scripts/build_static_db.py .dbwork/jambu.db --cldf ../data/cldf",
     "db:stage": "mkdir -p static/db && cp .dbwork/jambu.db static/db/jambu.db"
   },
   "devDependencies": {

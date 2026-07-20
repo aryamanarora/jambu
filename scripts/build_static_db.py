@@ -25,11 +25,26 @@ from __future__ import annotations
 
 import argparse
 import csv
-import shutil
 import sqlite3
 import sys
 import time
+from collections import defaultdict
 from pathlib import Path
+
+# Clade → colour + canonical order (== ../data clade scheme, ported from the old make_database.py).
+CLADE_COLORS = {
+    "OIA": "E2DFD2", "MIA": "FFDEAD", "Migratory": "63666A", "Nuristani": "9132a8",
+    "Pashai": "FFD6F6", "Chitrali": "FFACEF", "Shinaic": "FF81E6", "Kohistani": "FF25D5",
+    "Kunar": "ff68e0", "Kashmiric": "FF00CD", "Sindhic": "0066FF", "Lahndic": "a4d6f5",
+    "Punjabic": "7164FF", "W. Pahari": "B94E16", "C. Pahari": "9E521B", "E. Pahari": "79421B",
+    "Eastern": "FFDE54", "Bihari": "FFCD00", "E. Hindi": "FF9A54", "W. Hindi": "FF6600",
+    "Rajasthanic": "6BCD00", "Gujaratic": "00CF4A", "Marathi-Konkani": "D50000", "Bhil": "09AD02",
+    "Khandeshi": "2FFF2F", "Halbic": "AB8900", "Insular": "AC0000", "Old Dravidian": "679267",
+    "S. Dravidian I": "74C365", "S. Dravidian II": "98FB98", "C. Dravidian": "29AB87",
+    "N. Dravidian": "4B6F44", "Brahui": "49796B", "Munda": "00ffd0", "Burushaski": "f3ff05",
+    "Nihali": "ff9a00", "Other": "FAF9F6",
+}
+CLADE_ORDER = list(CLADE_COLORS.keys())
 
 # Text columns on `lemmas` exposed to substring search. Only these three are actual filter
 # columns in the UI (search.py filters: word, gloss, notes; `origin` reuses the word index).
@@ -42,43 +57,151 @@ def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
 
 
-def load_tags(con: sqlite3.Connection, forms_csv: Path) -> None:
-    """Populate a `tags` column and refresh `notes` from the CLDF forms.csv, where gender +
-    grammatical tokens have already been lifted into a `Tags` column (see ../data/tags.py). We read
-    the structured data from the source dataset rather than re-parsing here (the webapp is a thin
-    renderer). Keyed by Form ID == lemmas.id for reflexes."""
-    con.execute("ALTER TABLE lemmas ADD COLUMN tags TEXT")
-    n_tags = 0
-    with forms_csv.open(encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        if "Tags" not in (reader.fieldnames or []):
-            log(f"WARNING: {forms_csv} has no Tags column; skipping tag load")
-            return
-        for row in reader:
-            tags = (row.get("Tags") or "").strip()
-            con.execute(
-                "UPDATE lemmas SET tags = ?, notes = ? WHERE id = ?",
-                (tags or None, row.get("Description") or "", row["ID"]),
+# ── Build the base tables directly from the CLDF dataset (retires the old data.db) ──────────────
+
+
+def build_base_schema(con: sqlite3.Connection) -> None:
+    con.executescript(
+        """
+        CREATE TABLE languages (
+            id TEXT PRIMARY KEY, name TEXT, language TEXT, dialect TEXT, glottocode TEXT,
+            long FLOAT, lat FLOAT, clade TEXT, color TEXT, lemma_count INTEGER,
+            "order" INTEGER, map_marker TEXT
+        );
+        CREATE TABLE "references" (id TEXT PRIMARY KEY, short TEXT, source TEXT, progress TEXT);
+        CREATE TABLE lemmas (
+            id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT, original TEXT,
+            notes TEXT, clades TEXT, cognateset TEXT, "order" INTEGER, language_id TEXT,
+            origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER
+        );
+        CREATE TABLE lemma_reference (lemma_id TEXT, reference_id TEXT);
+        """
+    )
+
+
+def _marker_svg(clade: str, name: str) -> str:
+    color = CLADE_COLORS.get(clade, "999999")
+    if clade in ("MIA", "OIA") or "Old" in name or "Proto" in name:
+        return (
+            '<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">'
+            f'<polygon points="0,15 15,0 30,15 15,30" fill="#{color}" stroke="black" stroke-width="2"/></svg>'
+        )
+    return (
+        '<svg viewBox="-2 -2 32 32" xmlns="http://www.w3.org/2000/svg">'
+        f'<circle cx="14" cy="14" r="13" fill="#{color}" stroke="black" stroke-width="2"/></svg>'
+    )
+
+
+def load_languages(con: sqlite3.Connection, path: Path) -> dict[str, str]:
+    """languages.csv → languages table. Returns id→clade (needed for per-etymon clade aggregation)."""
+    rows, clade_of = [], {}
+    with path.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            name, clade = r["Name"], r["Clade"]
+            language, dialect = name.split(": ", 1) if ": " in name else (name, "")
+            rows.append(
+                (
+                    r["ID"], name, language, dialect, r.get("Glottocode") or "",
+                    r["Longitude"] or None, r["Latitude"] or None, clade,
+                    CLADE_COLORS.get(clade), CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
+                    _marker_svg(clade, name),
+                )
             )
-            if tags:
-                n_tags += 1
+            clade_of[r["ID"]] = clade
+    con.executemany(
+        'INSERT INTO languages (id,name,language,dialect,glottocode,long,lat,clade,color,"order",map_marker)'
+        " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        rows,
+    )
     con.commit()
-    log(f"loaded structured tags for {n_tags} lemmas from {forms_csv}")
+    log(f"loaded {len(rows)} languages")
+    return clade_of
 
 
-def load_entry_glosses(con: sqlite3.Connection, params_csv: Path) -> None:
-    """Refresh entry (headword) glosses from the CLDF parameters.csv, whose Description now carries
-    cross-reference links to other entries (see ../data/link_refs.py). Entry lemmas key on
-    id == Parameter_ID; the gloss is the full CDIAL entry HTML."""
-    n = 0
-    with params_csv.open(encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            desc = row.get("Description") or ""
-            con.execute("UPDATE lemmas SET gloss = ? WHERE id = ?", (desc, row["ID"]))
-            if "data-entry" in desc:
-                n += 1
+def load_references(con: sqlite3.Connection, path: Path) -> None:
+    with path.open(encoding="utf-8") as f:
+        rows = [(r["ID"], r["Short"], r["Source"], r["Progress"]) for r in csv.DictReader(f)]
+    con.executemany('INSERT INTO "references" (id,short,source,progress) VALUES (?,?,?,?)', rows)
     con.commit()
-    log(f"refreshed entry glosses with {n} cross-reference links from {params_csv}")
+    log(f"loaded {len(rows)} references")
+
+
+def _parse_ref(src: str) -> list[str]:
+    """"ref1:page;ref2" → ['ref1','ref2'] (ports make_database.parse_ref)."""
+    if not src:
+        return []
+    return list({r.split("[")[0] for r in src.split(";") if r.split("[")[0]})
+
+
+def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, str]) -> None:
+    """Build the unified lemmas table from the one CLDF forms.csv (etyma + reflexes). Etyma have an
+    empty Origin_ID; reflexes point at their etymon. Sets the self-referential origin_lemma_id, the
+    etymon-anchored `order`, tags, per-etymon clade set, and the lemma↔reference links."""
+    with forms_csv.open(encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+
+    lemmas = []
+    etymon_order: dict[str, int] = {}
+    # pass 1: etyma (Origin_ID empty) — word=headword, gloss=full CDIAL HTML, notes=Description
+    # (Etyma); no attested-form fields (NULL). `order` is sequential in file order (× 1000).
+    i = 0
+    for r in rows:
+        if r["Origin_ID"]:
+            continue
+        etymon_order[r["ID"]] = i * 1000
+        lemmas.append(
+            (r["ID"], r["Form"], r["Gloss"], None, None, None, r["Description"] or "",
+             None, None, i * 1000, r["Language_ID"], None, None)
+        )
+        i += 1
+
+    # pass 2: reflexes — origin from Origin_ID (strip borrowing/semi-tatsama markers), order anchored
+    # just after their etymon.
+    param_cts: dict[str, int] = defaultdict(int)
+    param_clades: dict[str, set] = defaultdict(set)
+    lemma_refs = []
+    for r in rows:
+        pid = r["Origin_ID"]
+        if not pid:
+            continue
+        if pid[0] in ">~":
+            pid = pid[1:]
+        param_cts[pid] += 1
+        lemmas.append(
+            (r["ID"], r["Form"], r["Gloss"], r["Native"], r["Phonemic"], r["Original"],
+             r["Description"] or "", None, r["Cognateset"], etymon_order.get(pid, 0) + param_cts[pid],
+             r["Language_ID"], pid, (r["Tags"] or None))
+        )
+        cl = clade_of.get(r["Language_ID"])
+        if cl:
+            param_clades[pid].add(cl)
+        for ref in _parse_ref(r["Source"]):
+            lemma_refs.append((r["ID"], ref))
+
+    con.executemany(
+        'INSERT INTO lemmas (id,word,gloss,native,phonemic,original,notes,clades,cognateset,'
+        '"order",language_id,origin_lemma_id,tags) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+        lemmas,
+    )
+    con.executemany(
+        "UPDATE lemmas SET clades=? WHERE id=?",
+        [(",".join(sorted(cs)), pid) for pid, cs in param_clades.items()],
+    )
+    # references cited by forms but absent from the bibliography → id-only rows
+    ref_ids = {r[0] for r in con.execute('SELECT id FROM "references"')}
+    con.executemany(
+        'INSERT OR IGNORE INTO "references" (id) VALUES (?)',
+        [(m,) for m in {ref for _, ref in lemma_refs if ref not in ref_ids}],
+    )
+    con.executemany(
+        "INSERT INTO lemma_reference (lemma_id,reference_id) VALUES (?,?)", lemma_refs
+    )
+    con.execute(
+        "UPDATE languages SET lemma_count = "
+        "(SELECT COUNT(*) FROM lemmas WHERE lemmas.language_id = languages.id)"
+    )
+    con.commit()
+    log(f"loaded {len(lemmas)} lemmas, {len(lemma_refs)} lemma↔reference links")
 
 
 def load_derivation(con: sqlite3.Connection, deriv_csv: Path) -> None:
@@ -220,74 +343,45 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
            con.execute('SELECT COUNT(*) FROM corr').fetchone()[0]))
 
 
-def transform(
-    inp: Path,
-    out: Path,
-    page_size: int,
-    alignments: str | None,
-    forms: str | None,
-    params: str | None,
-) -> None:
-    if not inp.exists():
-        log(f"FATAL: input DB not found: {inp}")
+def transform(out: Path, page_size: int, cldf: Path) -> None:
+    if not cldf.exists():
+        log(f"FATAL: CLDF directory not found: {cldf}")
         sys.exit(1)
 
-    log(f"copying {inp} -> {out} ({inp.stat().st_size / 1e6:.1f} MB)")
     out.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(inp, out)
-
+    if out.exists():
+        out.unlink()
     con = sqlite3.connect(out)
     con.execute("PRAGMA foreign_keys=OFF")
     check_trigram_available(con)
 
-    log("before: " + ", ".join(
-        f"{t}={count(con, t)}" for t in ("lemmas", "languages", "references")
-    ))
+    # 1. Build the base tables directly from the CLDF dataset (../data) — the frozen data.db and
+    #    neojambu's builder are no longer in the loop; ../data is the single source of truth.
+    build_base_schema(con)
+    clade_of = load_languages(con, cldf / "languages.csv")
+    load_references(con, cldf / "references.csv")
+    load_lemmas(con, cldf / "forms.csv", clade_of)
 
-    # 1. Drop unused tables (both confirmed empty in the shipped DB).
-    for t in ("lemma_concept", "concepts"):
-        if table_exists(con, t):
-            n = count(con, t)
-            con.execute(f'DROP TABLE "{t}"')
-            log(f"dropped table {t} ({n} rows)")
-
-    # 2. Indexes for the citation join (references <-> lemmas via lemma_reference).
-    #    The M2M PK gives an autoindex on (lemma_id, reference_id); we add a reference_id-first
-    #    index so "find all lemmas citing reference R" is a lookup, not a scan.
+    # 2. Indexes: the base four (from the old ORM model) + citation-join + list-ordering.
     con.executescript(
         """
-        CREATE INDEX IF NOT EXISTS idx_lemma_reference_reference_id
-            ON lemma_reference(reference_id);
-        CREATE INDEX IF NOT EXISTS idx_lemma_reference_lemma_id
-            ON lemma_reference(lemma_id);
-        -- keep the four release indexes; add order+id compound used by list ordering
-        CREATE INDEX IF NOT EXISTS idx_lemmas_language_order
-            ON lemmas(language_id, "order");
-        -- partial index for the Entries list (headwords) so ORDER BY "order" needs no temp sort
-        -- and only touches entry rows — important for page locality under HTTP Range fetching.
-        CREATE INDEX IF NOT EXISTS idx_entries_order
-            ON lemmas("order") WHERE origin_lemma_id IS NULL;
+        CREATE INDEX idx_lemmas_language_id     ON lemmas(language_id);
+        CREATE INDEX idx_lemmas_origin_lemma_id ON lemmas(origin_lemma_id);
+        CREATE INDEX idx_lemmas_order           ON lemmas("order");
+        CREATE INDEX idx_lemmas_cognateset      ON lemmas(cognateset);
+        CREATE INDEX idx_lemma_reference_reference_id ON lemma_reference(reference_id);
+        CREATE INDEX idx_lemma_reference_lemma_id     ON lemma_reference(lemma_id);
+        CREATE INDEX idx_lemmas_language_order   ON lemmas(language_id, "order");
+        -- partial index for the Entries list (headwords): ORDER BY "order" with no temp sort.
+        CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL;
         """
     )
-    log("created citation-join + ordering indexes")
+    log("created lemma + citation-join + ordering indexes")
 
-    # 2b. Load structured tags (gender, grammatical category) from the CLDF forms.csv and refresh
-    #     `notes` to its free-text-only form, so the FTS built below indexes only the free text.
-    if forms and Path(forms).exists():
-        load_tags(con, Path(forms))
-    else:
-        log(f"(no forms.csv at {forms}; skipping tag load)")
-
-    # 2c. Refresh entry glosses from parameters.csv (they now carry cross-reference links).
-    if params and Path(params).exists():
-        load_entry_glosses(con, Path(params))
-    else:
-        log(f"(no parameters.csv at {params}; skipping entry-gloss refresh)")
-
-    # 2d. Derivation graph (derived-term → ancestor etymon).
-    deriv = str(Path(params).parent / "derivation.csv") if params else None
-    if deriv and Path(deriv).exists():
-        load_derivation(con, Path(deriv))
+    # 3. Derivation graph (derived-term → ancestor etymon).
+    deriv = cldf / "derivation.csv"
+    if deriv.exists():
+        load_derivation(con, deriv)
     else:
         log(f"(no derivation.csv at {deriv}; skipping derivation graph)")
 
@@ -327,8 +421,6 @@ def transform(
     #      list can show and SORT by them. Partial indexes give sort-without-scan on the headwords.
     con.executescript(
         """
-        ALTER TABLE lemmas ADD COLUMN reflex_count INTEGER;
-        ALTER TABLE lemmas ADD COLUMN lang_count INTEGER;
         UPDATE lemmas SET
             reflex_count = (SELECT COUNT(*) FROM lemmas r WHERE r.origin_lemma_id = lemmas.id),
             lang_count   = (SELECT COUNT(DISTINCT r.language_id) FROM lemmas r
@@ -344,8 +436,9 @@ def transform(
     # 3c. Materialised etymon→reflex sound-change alignments (computed in ../data by align.py).
     #     A normalised, queryable table: one row per aligned segment. Powers the descent-tree +
     #     sound-change view and corpus-wide correspondence queries.
-    if alignments and Path(alignments).exists():
-        load_alignments(con, Path(alignments))
+    alignments = cldf / "alignments.csv"
+    if alignments.exists():
+        load_alignments(con, alignments)
     else:
         log(f"(no alignments file at {alignments}; skipping sound-change table)")
 
@@ -370,21 +463,19 @@ def transform(
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Transform raw Jambu DB into a static-site DB.")
-    ap.add_argument("input", type=Path, help="raw data.db (from the release)")
-    ap.add_argument("output", type=Path, help="transformed output path")
+    ap = argparse.ArgumentParser(
+        description="Build the static-site SQLite DB directly from the CLDF dataset (../data)."
+    )
+    ap.add_argument("output", type=Path, help="output DB path (e.g. .dbwork/jambu.db)")
+    ap.add_argument("--cldf", type=Path, default=Path("../data/cldf"),
+                    help="CLDF directory (forms.csv, parameters.csv, languages.csv, references.csv, "
+                         "alignments.csv, derivation.csv)")
     ap.add_argument("--page-size", type=int, default=8192,
                     help="SQLite page size for the output (default 8192, range-fetch friendly)")
-    ap.add_argument("--alignments", default="../data/cldf/alignments.csv",
-                    help="path to align.py output (materialised sound-change table); skipped if absent")
-    ap.add_argument("--forms", default="../data/cldf/forms.csv",
-                    help="path to CLDF forms.csv (source of the structured Tags column); skipped if absent")
-    ap.add_argument("--params", default="../data/cldf/parameters.csv",
-                    help="path to CLDF parameters.csv (entry glosses + cross-ref links); skipped if absent")
     args = ap.parse_args()
 
     t0 = time.time()
-    transform(args.input, args.output, args.page_size, args.alignments, args.forms, args.params)
+    transform(args.output, args.page_size, args.cldf)
     log(f"elapsed {time.time() - t0:.1f}s")
 
 
