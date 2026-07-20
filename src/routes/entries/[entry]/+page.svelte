@@ -277,21 +277,23 @@
 		<summary
 			>Derived terms <span class="muted">({graph.derived.length})</span></summary
 		>
-		<ul>
-			{#each graph.derived as d (d.id)}
-				<li>
-					<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
-					<span class="id-tag">[{d.id}]</span>
-					{#if shortGloss(d.gloss)}<span class="d-gloss">‘{shortGloss(d.gloss)}’</span>{/if}
-					{#if d.reflex_count}<span class="d-count muted"
-							>{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count} lang{d.lang_count ===
-							1
-								? ''
-								: 's'}</span
-						>{/if}
-				</li>
-			{/each}
-		</ul>
+		<table class="derived-table">
+			<tbody>
+				{#each graph.derived as d (d.id)}
+					<tr>
+						<td class="d-word-cell">
+							<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
+							<span class="id-tag">[{d.id}]</span>
+						</td>
+						<td class="d-gloss">{#if shortGloss(d.gloss)}‘{shortGloss(d.gloss)}’{/if}</td>
+						<td class="d-count muted"
+							>{#if d.reflex_count}{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count}
+								lang{d.lang_count === 1 ? '' : 's'}{/if}</td
+						>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
 	</details>
 {/if}
 
@@ -426,21 +428,21 @@
 	.derived[open] > summary {
 		margin-bottom: 0.55rem;
 	}
-	.derived ul {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-		gap: 0.35rem 1.5rem;
-	}
-	.derived li {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0.35rem;
-		padding: 0.15rem 0;
+	.derived-table {
+		width: 100%;
+		border-collapse: collapse;
 		font-size: 0.92rem;
+	}
+	.derived-table td {
+		padding: 0.28rem 0.6rem 0.28rem 0;
+		border-top: 1px solid var(--border);
+		vertical-align: baseline;
+	}
+	.derived-table tr:first-child td {
+		border-top: none;
+	}
+	.d-word-cell {
+		white-space: nowrap;
 	}
 	.derived .d-word {
 		font-weight: 600;
@@ -448,10 +450,12 @@
 	.derived .d-gloss {
 		color: var(--muted);
 		font-style: italic;
+		width: 100%;
 	}
 	.derived .d-count {
-		font-size: 0.78rem;
-		margin-left: auto;
+		font-size: 0.8rem;
+		white-space: nowrap;
+		text-align: right;
 	}
 	.entry-head {
 		display: flex;
