@@ -1,31 +1,45 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { createListState } from '$lib/listState.svelte';
+	import { getFilterLanguages } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
 	import { safe } from '$lib/render';
-	import { hashColor } from '$lib/clades';
+	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
+	import type { SelectOption } from './SelectFilter.svelte';
 	import CladeBars from './CladeBars.svelte';
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
 
-	const state = createListState('entries');
-	const from = $derived(state.result ? (state.result.page - 1) * PAGE_SIZE + 1 : 0);
-	const to = $derived(state.result ? from + state.result.rows.length - 1 : 0);
+	const list = createListState('entries');
+	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
+	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
+
+	let langOptions = $state<SelectOption[]>([]);
+	$effect(() => {
+		getFilterLanguages('entries').then((ls) => {
+			langOptions = ls.map((l) => ({
+				value: l.id,
+				label: l.name,
+				sub: l.clade ?? '',
+				swatch: cladeColor(l.clade)
+			}));
+		});
+	});
 </script>
 
 <div class="showing-line">
-	<div class="loader-slot">{#if state.loading}<div class="loader-line"></div>{/if}</div>
-	{#if state.result}
+	<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
+	{#if list.result}
 		<p class="muted">
 			Showing {from.toLocaleString()}–{to.toLocaleString()} of
-			{state.result.count.toLocaleString()} entries.
+			{list.result.count.toLocaleString()} entries.
 		</p>
 	{/if}
 </div>
 
-{#if state.error}
-	<p style="color: var(--bad)">Query error: {state.error}</p>
+{#if list.error}
+	<p style="color: var(--bad)">Query error: {list.error}</p>
 {/if}
 
 <div class="table-wrap">
@@ -34,71 +48,73 @@
 			<tr>
 				<FilterCell
 					label="Language"
-					filterKey="lang"
+					filterKey="origin_lang"
+					type="select"
+					options={langOptions}
 					sortKey="lang"
-					value={state.params.lang ?? ''}
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					value={list.params.origin_lang ?? ''}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Entry"
 					filterKey="word"
 					sortKey="word"
 					palette
-					value={state.params.word ?? ''}
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					value={list.params.word ?? ''}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Gloss"
 					filterKey="gloss"
 					sortKey="gloss"
 					palette
-					value={state.params.gloss ?? ''}
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					value={list.params.gloss ?? ''}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Source"
 					filterKey="source"
 					sortKey="source"
-					value={state.params.source ?? ''}
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					value={list.params.source ?? ''}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Langs"
 					sortKey="nlang"
 					numeric
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Reflexes"
 					sortKey="nreflex"
 					numeric
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Derived"
 					sortKey="nderived"
 					numeric
-					activeSort={state.params.sort ?? ''}
-					onFilter={state.setFilter}
-					onSort={state.setSort}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
 				/>
 			</tr>
 		</thead>
 		<tbody>
-			{#if state.result}
-				{#each state.result.rows as e (e.id)}
+			{#if list.result}
+				{#each list.result.rows as e (e.id)}
 					<tr>
 						<td class="lang-cell" style="border-left-color: {hashColor(e.language?.color)}">
 							<div class="lang-inner">
@@ -126,8 +142,8 @@
 	</table>
 </div>
 
-{#if state.result}
-	<Pager count={state.result.count} page={state.result.page} onpage={state.setPage} />
+{#if list.result}
+	<Pager count={list.result.count} page={list.result.page} onpage={list.setPage} />
 {/if}
 
 <style>

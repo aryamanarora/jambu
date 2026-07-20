@@ -70,6 +70,25 @@ async function languageMap(): Promise<Map<string, Language>> {
 	return languagesCache!;
 }
 
+// Languages that actually carry rows in a given list view — for the Language column's
+// dropdown. Distinct scan over the (indexed) language_id column, cached per mode; the whole
+// DB is local (OPFS) so this is a cheap one-off (~20 langs for entries, ~585 for reflexes).
+const filterLangsCache = new Map<string, Language[]>();
+export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<Language[]> {
+	if (filterLangsCache.has(mode)) return filterLangsCache.get(mode)!;
+	const cond = mode === 'entries' ? 'origin_lemma_id IS NULL' : 'origin_lemma_id IS NOT NULL';
+	const rows = await query<{ language_id: string }>(
+		`SELECT DISTINCT language_id FROM lemmas WHERE ${cond}`
+	);
+	const langs = await languageMap();
+	const out = rows
+		.map((r) => langs.get(r.language_id))
+		.filter((l): l is Language => !!l)
+		.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
+	filterLangsCache.set(mode, out);
+	return out;
+}
+
 // ---- relation hydration ---------------------------------------------------
 
 async function attachLanguages(lemmas: Lemma[]): Promise<void> {

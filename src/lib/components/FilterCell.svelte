@@ -1,11 +1,6 @@
 <script lang="ts">
 	import CharPalette from './CharPalette.svelte';
-
-	interface Option {
-		value: string;
-		label: string;
-		disabled?: boolean;
-	}
+	import SelectFilter, { type SelectOption } from './SelectFilter.svelte';
 	let {
 		label,
 		filterKey = null,
@@ -23,7 +18,7 @@
 		filterKey?: string | null;
 		sortKey?: string | null;
 		type?: 'text' | 'select';
-		options?: Option[];
+		options?: SelectOption[];
 		value?: string;
 		activeSort?: string; // current params.sort, e.g. "asc-word"
 		palette?: boolean;
@@ -78,15 +73,12 @@
 				{/if}
 			</div>
 		{:else if filterKey && type === 'select'}
-			<select
-				class="search-box"
+			<SelectFilter
+				placeholder={label}
+				{options}
 				value={local}
-				onchange={(e) => filterKey && onFilter(filterKey, e.currentTarget.value)}
-			>
-				{#each options as opt (opt.value + opt.label)}
-					<option value={opt.value} disabled={opt.disabled}>{opt.label}</option>
-				{/each}
-			</select>
+				onSelect={(v) => filterKey && onFilter(filterKey, v)}
+			/>
 		{:else}
 			<span>{label}</span>
 		{/if}
