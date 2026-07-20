@@ -111,6 +111,23 @@
 	--bad: #e57368;
 }
 
+/* Tag categories (gender reuses --berry). Light + dark variants. */
+:root,
+:root[data-theme='light'] {
+	--tag-gram: #2f7d64;
+	--tag-source: #9a6a15;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--tag-gram: #6fcaab;
+		--tag-source: #d9a94e;
+	}
+}
+:root[data-theme='dark'] {
+	--tag-gram: #6fcaab;
+	--tag-source: #d9a94e;
+}
+
 *,
 *::before,
 *::after {

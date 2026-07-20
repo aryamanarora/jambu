@@ -1,15 +1,15 @@
 <script lang="ts">
-	// Renders the structured `tags` string (space-separated gender + grammatical tokens, extracted
-	// from notes in ../data) as small pills. Gender tags get a slightly stronger accent.
+	// Renders the structured `tags` string (gender + grammatical + attestation source, extracted
+	// in ../data) as small pills, coloured by category.
+	import { tagCategory, TAG_NAMES } from '$lib/tags';
 	let { tags }: { tags?: string | null } = $props();
-	const GENDER = new Set(['m', 'f', 'n', 'mn', 'fn', 'mf']);
 	const list = $derived((tags ?? '').split(/\s+/).filter(Boolean));
 </script>
 
 {#if list.length}
 	<span class="tags">
 		{#each list as t (t)}
-			<span class="tag" class:gender={GENDER.has(t)}>{t}</span>
+			<span class="tag {tagCategory(t)}" title={TAG_NAMES[t] ?? t}>{t}</span>
 		{/each}
 	</span>
 {/if}
@@ -20,20 +20,25 @@
 		flex-wrap: wrap;
 		gap: 3px;
 		vertical-align: middle;
+		margin-left: 0.35em;
 	}
 	.tag {
 		font-size: 0.68rem;
 		line-height: 1.4;
 		padding: 0 6px;
 		border-radius: 999px;
-		border: 1px solid var(--border-strong);
-		color: var(--muted);
+		border: 1px solid currentColor;
 		background: var(--surface);
 		white-space: nowrap;
 		font-variant: small-caps;
 	}
 	.tag.gender {
 		color: var(--berry);
-		border-color: color-mix(in srgb, var(--berry) 45%, var(--border-strong));
+	}
+	.tag.grammatical {
+		color: var(--tag-gram);
+	}
+	.tag.source {
+		color: var(--tag-source);
 	}
 </style>

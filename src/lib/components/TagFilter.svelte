@@ -1,31 +1,18 @@
 <script lang="ts">
 	// Header cell for the Reflexes table: a dropdown that filters by structured tags. Multi-select
 	// with AND semantics (a row must carry every picked tag). Renders a <th> so it drops into the
-	// header row alongside the FilterCell columns.
+	// header row alongside the FilterCell columns. Chips are coloured by category.
+	import { GENDER_TAGS, GRAMMATICAL_TAGS, COMMON_SOURCES, TAG_NAMES } from '$lib/tags';
 	let {
 		value = '',
 		onFilter
 	}: { value?: string; onFilter: (key: string, value: string) => void } = $props();
 
-	const GENDER = ['m', 'f', 'n'];
-	const GRAMMATICAL = [
-		'sg', 'pl', 'du',
-		'adj', 'adv', 'pron', 'num', 'postp', 'prep', 'conj', 'interj', 'part', 'indecl', 'ord',
-		'nom', 'acc', 'dat', 'gen', 'loc', 'abl', 'instr', 'voc', 'obl',
-		'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger'
-	];
-	const NAMES: Record<string, string> = {
-		m: 'masculine', f: 'feminine', n: 'neuter',
-		sg: 'singular', pl: 'plural', du: 'dual',
-		adj: 'adjective', adv: 'adverb', pron: 'pronoun', num: 'numeral', postp: 'postposition',
-		prep: 'preposition', conj: 'conjunction', interj: 'interjection', part: 'particle',
-		indecl: 'indeclinable', ord: 'ordinal',
-		nom: 'nominative', acc: 'accusative', dat: 'dative', gen: 'genitive', loc: 'locative',
-		abl: 'ablative', instr: 'instrumental', voc: 'vocative', obl: 'oblique',
-		tr: 'transitive', intr: 'intransitive', caus: 'causative', pass: 'passive',
-		pp: 'past participle', ppp: 'past passive participle', pres: 'present', fut: 'future',
-		inf: 'infinitive', ger: 'gerund'
-	};
+	const GROUPS = [
+		{ label: 'gender', cat: 'gender', tags: GENDER_TAGS },
+		{ label: 'grammatical', cat: 'grammatical', tags: GRAMMATICAL_TAGS },
+		{ label: 'source', cat: 'source', tags: COMMON_SOURCES }
+	] as const;
 
 	const selected = $derived(new Set(value.split(/\s+/).filter(Boolean)));
 	let open = $state(false);
@@ -36,9 +23,6 @@
 		if (next.has(t)) next.delete(t);
 		else next.add(t);
 		onFilter('tags', [...next].join(' '));
-	}
-	function clear() {
-		onFilter('tags', '');
 	}
 
 	$effect(() => {
@@ -70,35 +54,26 @@
 	</div>
 	{#if open}
 		<div class="panel">
-			<div class="grp">
-				<div class="grp-lbl">
-					gender
-					{#if selected.size}<button class="clear" onclick={clear}>clear all</button>{/if}
+			{#each GROUPS as g (g.label)}
+				<div class="grp">
+					<div class="grp-lbl">
+						{g.label}
+						{#if g.label === 'gender' && selected.size}
+							<button class="clear" onclick={() => onFilter('tags', '')}>clear all</button>
+						{/if}
+					</div>
+					<div class="chips {g.cat}">
+						{#each g.tags as t (t)}
+							<button
+								class="chip"
+								class:on={selected.has(t)}
+								title={TAG_NAMES[t] ?? t}
+								onclick={() => toggle(t)}>{t}</button
+							>
+						{/each}
+					</div>
 				</div>
-				<div class="chips">
-					{#each GENDER as t (t)}
-						<button
-							class="chip gender"
-							class:on={selected.has(t)}
-							title={NAMES[t]}
-							onclick={() => toggle(t)}>{t}</button
-						>
-					{/each}
-				</div>
-			</div>
-			<div class="grp">
-				<div class="grp-lbl">grammatical</div>
-				<div class="chips">
-					{#each GRAMMATICAL as t (t)}
-						<button
-							class="chip"
-							class:on={selected.has(t)}
-							title={NAMES[t] ?? t}
-							onclick={() => toggle(t)}>{t}</button
-						>
-					{/each}
-				</div>
-			</div>
+			{/each}
 		</div>
 	{/if}
 </th>
@@ -186,6 +161,16 @@
 		flex-wrap: wrap;
 		gap: 4px;
 	}
+	/* per-category accent colour (used on hover + selected) */
+	.chips.gender {
+		--cat: var(--berry);
+	}
+	.chips.grammatical {
+		--cat: var(--tag-gram);
+	}
+	.chips.source {
+		--cat: var(--tag-source);
+	}
 	.chip {
 		font-size: 0.72rem;
 		padding: 1px 8px;
@@ -197,15 +182,12 @@
 		font-variant: small-caps;
 	}
 	.chip:hover {
-		border-color: var(--berry);
+		border-color: var(--cat);
+		color: var(--cat);
 	}
 	.chip.on {
-		background: var(--plum);
-		color: #fbeefb;
-		border-color: var(--plum);
-	}
-	.chip.gender.on {
-		background: var(--berry);
-		border-color: var(--berry);
+		background: var(--cat);
+		border-color: var(--cat);
+		color: #fff;
 	}
 </style>
