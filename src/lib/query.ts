@@ -10,7 +10,7 @@
  *  - The unfiltered list paths avoid the languages join and lean on the order indexes
  *    (idx_lemmas_order / partial idx_entries_order) so only the needed pages are fetched.
  */
-import { query, queryOne } from './db';
+import { query, queryOne } from './db.svelte';
 import { CLADE_ORDER } from './clades';
 import {
 	PAGE_SIZE,
@@ -587,39 +587,55 @@ export async function getCladeLangRows(
 	}));
 }
 
-/** Build the shared WHERE fragment for a correspondence, using a column-prefix that works for
- *  both the denormalised `alignment` table and the `corr_lang` summary (identical column names). */
-function corrFilter(q: CorrQuery, p: string): { where: string; params: unknown[] } {
-	const conds = [`${p}proto = ?`, `${p}etymon_seg = ?`, `${p}reflex_seg = ?`];
+/** Build the WHERE fragment for the `corr_lang` summary (used for the true total). */
+function corrLangFilter(q: CorrQuery): { where: string; params: unknown[] } {
+	const conds = ['proto = ?', 'etymon_seg = ?', 'reflex_seg = ?'];
 	const params: unknown[] = [q.proto, q.seg, q.reflexSeg];
 	if (q.clade) {
-		conds.push(`${p}clade = ?`);
+		conds.push('clade = ?');
 		params.push(q.clade);
 	}
 	if (q.lang) {
-		conds.push(`${p}lang = ?`);
+		conds.push('lang = ?');
 		params.push(q.lang);
 	}
 	if (q.prev) {
-		conds.push(`${p}prev_seg = ?`);
+		conds.push('prev_seg = ?');
 		params.push(q.prev);
 	}
 	if (q.next) {
-		conds.push(`${p}next_seg = ?`);
+		conds.push('next_seg = ?');
 		params.push(q.next);
 	}
 	return { where: conds.join(' AND '), params };
 }
 
 /** Every reflex exhibiting a given correspondence (etymon segment → reflex segment), for the
- *  drill-down page. Filters the denormalised `alignment` table by a pure index range scan
- *  (idx_alignment_corr), then joins only the ≤`limit` displayed rows to lemmas/languages.
- *  The true total comes from the compact `corr_lang` summary — no COUNT over the big table. */
+ *  drill-down page. Filters `alignment` by (etymon_seg, reflex_seg) via idx_alignment_seg, then
+ *  joins lemmas/languages for the proto/clade filters + display columns — cheap on the local DB.
+ *  The true total comes from the compact `corr_lang` summary. */
 export async function getCorrespondenceReflexes(
 	q: CorrQuery,
 	limit = 300
 ): Promise<CorrReflexResult> {
-	const { where, params } = corrFilter(q, 'a.');
+	const conds = ['a.etymon_seg = ?', 'a.reflex_seg = ?', 'e.language_id = ?'];
+	const params: unknown[] = [q.seg, q.reflexSeg, q.proto];
+	if (q.clade) {
+		conds.push('rl.clade = ?');
+		params.push(q.clade);
+	}
+	if (q.lang) {
+		conds.push('rf.language_id = ?');
+		params.push(q.lang);
+	}
+	if (q.prev) {
+		conds.push('a.prev_seg = ?');
+		params.push(q.prev);
+	}
+	if (q.next) {
+		conds.push('a.next_seg = ?');
+		params.push(q.next);
+	}
 	const rows = await query<{
 		id: string;
 		word: string;
@@ -636,15 +652,16 @@ export async function getCorrespondenceReflexes(
 		entryId: string | null;
 	}>(
 		`SELECT rf.id, rf.word, rf.gloss, rf.phonemic,
-		        a.lang AS lang, COALESCE(rl.name, a.lang) AS langName,
+		        rf.language_id AS lang, COALESCE(rl.name, rf.language_id) AS langName,
 		        rl.language AS language, rl.dialect AS dialect, rl.color AS color,
 		        a.change, a.prev_seg, a.next_seg,
 		        a.parameter_id AS entryId
 		 FROM alignment a
+		 JOIN lemmas e     ON e.id = a.parameter_id
 		 JOIN lemmas rf    ON rf.id = a.form_id
-		 LEFT JOIN languages rl ON rl.id = a.lang
-		 WHERE ${where}
-		 ORDER BY a.lang, a.form_id
+		 JOIN languages rl ON rl.id = rf.language_id
+		 WHERE ${conds.join(' AND ')}
+		 ORDER BY rl."order", rf.language_id, rf."order"
 		 LIMIT ?`,
 		[...params, limit]
 	);
@@ -666,7 +683,7 @@ export async function getCorrespondenceReflexes(
 	// True total from the compact summary table — cheap indexed lookup, no big-table COUNT.
 	let total = mapped.length;
 	if (mapped.length >= limit) {
-		const f = corrFilter(q, '');
+		const f = corrLangFilter(q);
 		const c = await queryOne<{ n: number }>(
 			`SELECT COALESCE(SUM(n), 0) AS n FROM corr_lang WHERE ${f.where}`,
 			f.params

@@ -96,28 +96,10 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
     # one index serves both the per-entry tree (WHERE parameter_id) and per-entry
     # correspondence (WHERE parameter_id AND pos); language comes from a join to lemmas.
     con.execute("CREATE INDEX idx_alignment_param ON alignment(parameter_id, form_id, pos)")
-    con.commit()
-
-    # Denormalise proto family / reflex clade / reflex language onto each alignment row so the
-    # correspondence drill-down page can filter with a pure index range scan (no per-row joins to
-    # lemmas over HTTP range requests — those made the page unusably slow).
-    con.executescript(
-        """
-        ALTER TABLE alignment ADD COLUMN proto TEXT;
-        ALTER TABLE alignment ADD COLUMN lang  TEXT;
-        ALTER TABLE alignment ADD COLUMN clade TEXT;
-        UPDATE alignment SET
-            proto = (SELECT language_id FROM lemmas WHERE id = alignment.parameter_id),
-            lang  = (SELECT language_id FROM lemmas WHERE id = alignment.form_id);
-        UPDATE alignment SET clade = (SELECT clade FROM languages WHERE id = alignment.lang);
-        """
-    )
-    # the drill-down filters (proto, clade, etymon_seg, reflex_seg) then groups/orders by language;
-    # this covering-prefix index makes the LIMITed fetch touch only the matching rows in lang order.
-    con.execute(
-        "CREATE INDEX idx_alignment_corr ON "
-        "alignment(proto, clade, etymon_seg, reflex_seg, lang, form_id)"
-    )
+    # small index for the correspondence drill-down (all reflexes for one etymon→reflex segment
+    # pair). The proto/clade filters and the display columns come from joins to lemmas/languages,
+    # which are cheap on the locally-loaded DB — so we don't denormalise them onto every row.
+    con.execute("CREATE INDEX idx_alignment_seg ON alignment(etymon_seg, reflex_seg, form_id)")
     con.commit()
     n = con.execute("SELECT COUNT(*) FROM alignment").fetchone()[0]
     log(f"loaded alignment table: {n} aligned segments from {path}")
@@ -132,9 +114,9 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
         DROP TABLE IF EXISTS corr_lang;
         CREATE TABLE corr_lang AS
         SELECT
-            a.proto       AS proto,        -- the etymon's (proto) family, e.g. Indo-Aryan
-            a.clade       AS clade,        -- the reflex language's clade
-            a.lang        AS lang,         -- the reflex language
+            e.language_id AS proto,        -- the etymon's (proto) family, e.g. Indo-Aryan
+            rl.clade      AS clade,        -- the reflex language's clade
+            rf.language_id AS lang,        -- the reflex language
             a.etymon_seg  AS etymon_seg,
             a.prev_seg    AS prev_seg,      -- environment
             a.next_seg    AS next_seg,
@@ -143,8 +125,11 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
             COUNT(*)      AS n,
             MIN(a.form_id) AS example
         FROM alignment a
+        JOIN lemmas e     ON e.id = a.parameter_id
+        JOIN lemmas rf    ON rf.id = a.form_id
+        JOIN languages rl ON rl.id = rf.language_id
         WHERE a.etymon_seg <> ''
-        GROUP BY a.proto, a.clade, a.lang, a.etymon_seg,
+        GROUP BY e.language_id, rl.clade, rf.language_id, a.etymon_seg,
                  a.prev_seg, a.next_seg, a.reflex_seg, a.change;
         CREATE INDEX idx_corr_lang ON corr_lang(proto, etymon_seg, clade);
 

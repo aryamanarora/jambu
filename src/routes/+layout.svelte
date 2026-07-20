@@ -4,7 +4,9 @@
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import Favorites from '$lib/components/Favorites.svelte';
+	import DbBanner from '$lib/components/DbBanner.svelte';
 	import { loadFavorites } from '$lib/prefs.svelte';
+	import { preloadDb } from '$lib/db.svelte';
 
 	let { children } = $props();
 
@@ -14,6 +16,7 @@
 	onMount(() => {
 		theme = (localStorage.getItem('jambu-theme') as Theme) || '';
 		loadFavorites();
+		preloadDb(); // init worker + check OPFS cache (auto-ready if already downloaded)
 	});
 
 	function toggleTheme() {
@@ -60,6 +63,8 @@
 		</button>
 	</nav>
 </header>
+
+<DbBanner />
 
 <main class="content">
 	{@render children()}

@@ -3,16 +3,16 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
-	// sql.js-httpvfs is a CommonJS package; force esbuild to pre-bundle it (adds the CJS→ESM
-	// interop shim) even though we import it dynamically. Its worker + wasm come in via `?url`.
+	// @sqlite.org/sqlite-wasm ships its own wasm (loaded via import.meta.url); don't pre-bundle it,
+	// so Vite emits the wasm asset correctly for the worker.
 	optimizeDeps: {
-		include: ['sql.js-httpvfs']
+		exclude: ['@sqlite.org/sqlite-wasm']
 	},
 	worker: {
 		format: 'es'
 	},
-	// COOP/COEP are not required for sql.js-httpvfs (it uses plain fetch Range, not SharedArrayBuffer),
-	// so no special headers are needed — which is exactly why it works on GitHub Pages.
+	// The OPFS SAHPool VFS needs no COOP/COEP headers (no SharedArrayBuffer), so nothing special is
+	// required here — which is why the in-browser DB works on GitHub Pages.
 	server: {
 		fs: { allow: ['..'] }
 	}
