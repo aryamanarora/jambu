@@ -77,8 +77,8 @@ export interface ListParams {
 
 export const PAGE_SIZE = 50;
 
-/** Minimum characters before a substring lemma filter activates. */
-export const MIN_SEARCH_CHARS = 3;
+/** Minimum characters before a substring lemma filter activates (1 = any non-empty input). */
+export const MIN_SEARCH_CHARS = 1;
 
 /** A cognate-set group on the entry page: [groupKey, [ [language, reflexes[]], ... ] ]. */
 export type CognateGroup = [string | null, Array<[Language, Lemma[]]>];
