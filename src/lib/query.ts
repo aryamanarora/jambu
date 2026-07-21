@@ -138,19 +138,33 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	for (const l of lemmas) l.references = map.get(l.id) ?? [];
 }
 
-/** Count the borrowed sub-reflexes hanging off each given reflex (shown as an "n →" badge). */
+/** For each given reflex, count the sub-nodes hanging off it: borrowed forms sourced from it
+ *  (`sub_count`, the "→n" borrowed badge) and its own daughter reflexes (`reflex_sub_count`, shown
+ *  when the reflex is itself an etymon with descendants — e.g. an IA head under a proto entry). */
 async function attachSubCounts(lemmas: Lemma[]): Promise<void> {
 	if (!lemmas.length) return;
 	const ids = lemmas.map((l) => l.id);
-	const rows = await inChunks<{ borrowed_from: string; c: number }>(ids, (chunk) =>
+	const borrowed = await inChunks<{ borrowed_from: string; c: number }>(ids, (chunk) =>
 		query<{ borrowed_from: string; c: number }>(
 			`SELECT borrowed_from, COUNT(*) AS c FROM lemmas
 			 WHERE borrowed_from IN (${placeholders(chunk.length)}) GROUP BY borrowed_from`,
 			chunk
 		)
 	);
-	const map = new Map(rows.map((r) => [r.borrowed_from, r.c]));
-	for (const l of lemmas) l.sub_count = map.get(l.id) ?? 0;
+	const bMap = new Map(borrowed.map((r) => [r.borrowed_from, r.c]));
+	const reflexes = await inChunks<{ origin_lemma_id: string; c: number }>(ids, (chunk) =>
+		query<{ origin_lemma_id: string; c: number }>(
+			`SELECT origin_lemma_id, COUNT(*) AS c FROM lemmas
+			 WHERE origin_lemma_id IN (${placeholders(chunk.length)}) AND relation = 'reflex'
+			 GROUP BY origin_lemma_id`,
+			chunk
+		)
+	);
+	const rMap = new Map(reflexes.map((r) => [r.origin_lemma_id, r.c]));
+	for (const l of lemmas) {
+		l.sub_count = bMap.get(l.id) ?? 0;
+		l.reflex_sub_count = rMap.get(l.id) ?? 0;
+	}
 }
 
 /** The borrowed sub-reflexes of a reflex (forms it was the source of), for its page. */

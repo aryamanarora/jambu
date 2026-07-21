@@ -314,7 +314,11 @@
 	</div>
 {/if}
 {#if entry.etymology}
-	<div class="etymology serif">{@html safe(entry.etymology)}</div>
+	<!-- a main entry and its merged addenda each keep their own CDIAL snippet, joined in the DB by
+	     an addendum-delimiter comment; render one accented block per snippet so none is dropped. -->
+	{#each entry.etymology.split('<!--addendum-->') as block, i (i)}
+		{#if block.trim()}<div class="etymology serif">{@html safe(block)}</div>{/if}
+	{/each}
 {/if}
 {#if entry.notes}
 	<details class="notes">
@@ -430,7 +434,7 @@
 						{#if view === 'normal'}
 							<td class="c-form formcell">
 								<span class="lemma-word">{@html safe(row.r.lemma.word)}</span>{#if row.r.lemma.phonemic}
-									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}{#if row.r.lemma.sub_count}&nbsp;<a class="subcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.sub_count} form(s) borrowed from this word">→&#8288;{row.r.lemma.sub_count}</a>{/if}
+									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}{#if row.r.lemma.reflex_sub_count}&nbsp;<a class="refcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.reflex_sub_count} reflex(es) of this word">→&#8288;{row.r.lemma.reflex_sub_count}</a>{/if}{#if row.r.lemma.sub_count}&nbsp;<a class="subcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.sub_count} form(s) borrowed from this word">→&#8288;{row.r.lemma.sub_count}</a>{/if}
 								{#each row.r.lemma.variants ?? [] as v (v.id)}<span class="rvar-line"
 										><span class="rvar-arrow">→</span>&nbsp;<span class="rvar"
 											>{@html safe(v.word)}</span
@@ -644,6 +648,20 @@
 		font-weight: 600;
 		background: color-mix(in srgb, var(--berry) 12%, transparent);
 		color: var(--berry);
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+	/* daughter-reflex count badge (this reflex is itself an etymon with descendants) —
+	   outlined, to read distinctly from the filled borrowed badge above */
+	.refcount {
+		display: inline-block;
+		padding: 0 0.3rem;
+		border-radius: 999px;
+		font-size: 0.7rem;
+		font-weight: 600;
+		background: transparent;
+		border: 1px solid color-mix(in srgb, var(--plum) 45%, transparent);
+		color: var(--plum);
 		white-space: nowrap;
 		vertical-align: middle;
 	}

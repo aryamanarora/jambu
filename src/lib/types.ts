@@ -43,6 +43,7 @@ export interface Lemma {
 	redirect_to?: string | null; // a CDIAL "Add. N" stub redirects to entry N (not listed)
 	borrowed_from?: string | null; // a borrowed sub-reflex points at the reflex it was borrowed from
 	sub_count?: number; // hydrated: # of borrowed sub-reflexes hanging off this reflex
+	reflex_sub_count?: number; // hydrated: # of daughter reflexes hanging off this reflex (it is itself an etymon)
 	// per-entry aggregates (materialised columns; populated on headwords)
 	reflex_count?: number;
 	lang_count?: number;

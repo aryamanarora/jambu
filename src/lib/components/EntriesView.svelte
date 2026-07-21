@@ -164,8 +164,12 @@
 						<td class="lang-cell entry-cell" style="border-left-color: {hashColor(e.language?.color)}">
 							<div class="entry-inner">
 								<span class="entry-word-line">
-									<a href="{base}/entries/{e.id}">{@html safe(e.word)}</a>
-									<span class="id-tag">[{e.id}]</span>
+									{#if e.word?.trim()}
+										<a href="{base}/entries/{e.id}">{@html safe(e.word)}</a>
+										<span class="id-tag">[{e.id}]</span>
+									{:else}
+										<a href="{base}/entries/{e.id}" class="id-link">[{e.id}]</a>
+									{/if}
 											</span>
 								{#if e.variant_forms}{#each variantList(e.variant_forms) as vf (vf)}<span class="var-line"><span class="var-arrow">→</span>&nbsp;<span class="var-form">{@html safe(vf)}</span></span>{/each}{/if}
 						<CladeBars clades={e.clades} />
@@ -249,6 +253,12 @@
 		font-family: var(--font-serif);
 		font-size: 1.18rem;
 		font-weight: 600;
+	}
+	/* word-less entries (e.g. PDr reconstructions): the id is the clickable label */
+	.entry-word-line a.id-link {
+		font-family: inherit;
+		font-size: 0.9rem;
+		font-weight: 500;
 	}
 	/* language is secondary to the headword */
 	.lang-plain {
