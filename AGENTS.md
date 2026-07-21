@@ -25,9 +25,9 @@ Flask `search.py` plus the entry/cognate grouping. Change query semantics there,
 
 - `npm run db:transform` = `python3 scripts/build_static_db.py .dbwork/jambu.db --cldf ../data/cldf`.
   It reads the sibling data repo's `cldf/` **directly** (the README's mention of a `.dbwork/data.db`
-  input is stale — the current script takes `--cldf`). It drops unused tables, adds indexes + the
-  **FTS5 trigram** index (substring search), remaps `alignment.parameter_id` onto each reflex's
-  current `origin_lemma_id`, precomputes `meta` counts, and `VACUUM`s.
+  input is stale — the current script takes `--cldf`). It dictionary-codes alignment and
+  correspondence rows, stores citation links as rowids, uses direct substring scans, precomputes
+  `meta` counts, and `VACUUM`s.
 - `npm run db:stage` copies it to `static/db/jambu.db`, served at `/db/jambu.db`.
 - In **CI** the DB is NOT built — it's downloaded from a release asset (`STATIC_DB_URL` in
   `.github/workflows/deploy.yml`). So a data change only reaches prod after you rebuild `jambu.db`

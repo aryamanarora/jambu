@@ -76,8 +76,8 @@ export interface ListParams {
 
 export const PAGE_SIZE = 50;
 
-/** Minimum characters before a full-text (trigram) lemma filter activates. */
-export const MIN_FTS_CHARS = 3;
+/** Minimum characters before a substring lemma filter activates. */
+export const MIN_SEARCH_CHARS = 3;
 
 /** A cognate-set group on the entry page: [groupKey, [ [language, reflexes[]], ... ] ]. */
 export type CognateGroup = [string | null, Array<[Language, Lemma[]]>];

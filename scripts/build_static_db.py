@@ -46,13 +46,7 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-
-# Text columns on `lemmas` exposed to substring search. Only these three are actual filter
-# columns in the UI (search.py filters: word, gloss, notes; `origin` reuses the word index).
-# native/phonemic/original are displayed but never filtered, so we don't index them — this keeps
-# the trigram index (and thus the whole DB) markedly smaller.
-LEMMA_FTS_COLUMNS = ["word", "gloss", "notes", "etymology"]
-
+MAX_OUTPUT_BYTES = 100_000_000
 
 def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
@@ -76,7 +70,11 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER,
             etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT, borrowed_from TEXT
         );
-        CREATE TABLE lemma_reference (lemma_id TEXT, reference_id TEXT);
+        CREATE TABLE lemma_reference (
+            lemma_rid INTEGER NOT NULL,
+            reference_rid INTEGER NOT NULL,
+            PRIMARY KEY (lemma_rid, reference_rid)
+        ) WITHOUT ROWID;
         """
     )
 
@@ -212,8 +210,11 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
         'INSERT OR IGNORE INTO "references" (id) VALUES (?)',
         [(m,) for m in {ref for _, ref in lemma_refs if ref not in ref_ids}],
     )
+    lemma_rowids = {r[0]: r[1] for r in con.execute("SELECT id, rowid FROM lemmas")}
+    reference_rowids = {r[0]: r[1] for r in con.execute('SELECT id, rowid FROM "references"')}
     con.executemany(
-        "INSERT INTO lemma_reference (lemma_id,reference_id) VALUES (?,?)", lemma_refs
+        "INSERT INTO lemma_reference (lemma_rid,reference_rid) VALUES (?,?)",
+        ((lemma_rowids[lemma], reference_rowids[ref]) for lemma, ref in lemma_refs),
     )
     con.execute(
         "UPDATE languages SET lemma_count = "
@@ -260,64 +261,87 @@ def count(con: sqlite3.Connection, table: str) -> int:
     return con.execute(f'SELECT COUNT(*) FROM "{table}"').fetchone()[0]
 
 
-def check_trigram_available(con: sqlite3.Connection) -> None:
-    try:
-        con.execute("CREATE VIRTUAL TABLE _trigram_probe USING fts5(x, tokenize='trigram')")
-        con.execute("DROP TABLE _trigram_probe")
-    except sqlite3.OperationalError as e:  # pragma: no cover - environment guard
-        log(f"FATAL: this SQLite build lacks FTS5 trigram support: {e}")
-        log(f"       sqlite_version={sqlite3.sqlite_version} (need >= 3.34.0 with FTS5)")
-        sys.exit(1)
-
-
 def load_alignments(con: sqlite3.Connection, path: Path) -> None:
-    """Load the normalised etymon→reflex alignment CSV into an indexed `alignment` table."""
+    """Load alignment CSV rows into dictionary-coded alignment and correspondence tables."""
     import csv
+
+    lemma_rowids = {row[0]: row[1] for row in con.execute("SELECT id, rowid FROM lemmas")}
+    symbols: dict[str, int] = {}
+    pairs: dict[tuple[int, int, int], int] = {}
+    contexts: dict[tuple[int, int], int] = {}
+
+    def intern(mapping, value):
+        if value not in mapping:
+            mapping[value] = len(mapping) + 1
+        return mapping[value]
 
     con.executescript(
         """
+        CREATE TABLE symbols (id INTEGER PRIMARY KEY, value TEXT NOT NULL);
+        CREATE TABLE align_pair (
+            id INTEGER PRIMARY KEY,
+            etymon_sid INTEGER NOT NULL,
+            reflex_sid INTEGER NOT NULL,
+            change_sid INTEGER NOT NULL
+        );
+        CREATE TABLE align_context (
+            id INTEGER PRIMARY KEY,
+            prev_sid INTEGER NOT NULL,
+            next_sid INTEGER NOT NULL
+        );
         DROP TABLE IF EXISTS alignment;
         CREATE TABLE alignment (
-            form_id      TEXT,     -- reflex lemma id (→ lemmas.id)
-            parameter_id TEXT,     -- etymon lemma id (→ lemmas.id)
-            pos          INTEGER,  -- column order within this reflex's alignment
-            etymon_idx   INTEGER,  -- stable index of the etymon segment (-1 for insertions)
-            etymon_seg   TEXT,
-            reflex_seg   TEXT,
-            change       TEXT,     -- category code (kept/loss/add/deaffrication/…); see align.py
-            prev_seg     TEXT,     -- preceding etymon segment ('#' = word edge)
-            next_seg     TEXT      -- following etymon segment
-        );
+            form_rid INTEGER NOT NULL,
+            pos INTEGER NOT NULL,
+            pair_id INTEGER NOT NULL,
+            context_id INTEGER NOT NULL,
+            PRIMARY KEY (form_rid, pos)
+        ) WITHOUT ROWID;
         """
     )
     with path.open(encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader, None)  # header
+        skipped = 0
+
+        def rows():
+            nonlocal skipped
+            for r in reader:
+                if len(r) < 9 or r[0] not in lemma_rowids:
+                    skipped += 1
+                    continue
+                etymon_sid = intern(symbols, r[4])
+                reflex_sid = intern(symbols, r[5])
+                change_sid = intern(symbols, r[6])
+                prev_sid = intern(symbols, r[7])
+                next_sid = intern(symbols, r[8])
+                yield (
+                    lemma_rowids[r[0]],
+                    int(r[2]),
+                    intern(pairs, (etymon_sid, reflex_sid, change_sid)),
+                    intern(contexts, (prev_sid, next_sid)),
+                )
+
         con.executemany(
-            "INSERT INTO alignment VALUES (?,?,?,?,?,?,?,?,?)",
-            (
-                (r[0], r[1], int(r[2]), int(r[3]), r[4], r[5], r[6], r[7], r[8])
-                for r in reader
-                if len(r) >= 9
-            ),
+            "INSERT INTO alignment VALUES (?,?,?,?)",
+            rows(),
         )
-    # align.py keys every alignment to the reflex's ETYMON, but unify then re-homes CDIAL section
-    # reflexes onto their promoted section-form (id `<etymon>-<n>`). Re-point each alignment at the
-    # reflex's *current* origin so the section form's page shows its reflexes' alignment grid.
-    con.execute(
-        "UPDATE alignment SET parameter_id = COALESCE("
-        "  (SELECT origin_lemma_id FROM lemmas WHERE lemmas.id = alignment.form_id), parameter_id)"
+    con.executemany(
+        "INSERT INTO symbols(id,value) VALUES (?,?)",
+        ((sid, value) for value, sid in symbols.items()),
     )
-    # one index serves both the per-entry tree (WHERE parameter_id) and per-entry
-    # correspondence (WHERE parameter_id AND pos); language comes from a join to lemmas.
-    con.execute("CREATE INDEX idx_alignment_param ON alignment(parameter_id, form_id, pos)")
-    # small index for the correspondence drill-down (all reflexes for one etymon→reflex segment
-    # pair). The proto/clade filters and the display columns come from joins to lemmas/languages,
-    # which are cheap on the locally-loaded DB — so we don't denormalise them onto every row.
-    con.execute("CREATE INDEX idx_alignment_seg ON alignment(etymon_seg, reflex_seg, form_id)")
+    con.executemany(
+        "INSERT INTO align_pair(id,etymon_sid,reflex_sid,change_sid) VALUES (?,?,?,?)",
+        ((pid, *value) for value, pid in pairs.items()),
+    )
+    con.executemany(
+        "INSERT INTO align_context(id,prev_sid,next_sid) VALUES (?,?,?)",
+        ((cid, *value) for value, cid in contexts.items()),
+    )
     con.commit()
     n = con.execute("SELECT COUNT(*) FROM alignment").fetchone()[0]
-    log(f"loaded alignment table: {n} aligned segments from {path}")
+    log(f"loaded alignment table: {n} aligned segments from {path}"
+        f" ({skipped} unreachable rows skipped)")
 
     # Aggregate a compact, queryable correspondence summary for the Sound Correspondence explorer:
     # per (proto family, reflex clade, etymon segment, reflex segment, change) → count + example.
@@ -325,42 +349,80 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
     # indexed table instead of scanning the alignment.
     con.executescript(
         """
-        -- language-level, environment-conditioned (queried only when a branch is expanded)
+        -- Language-level, environment-conditioned rows. Textual language and example IDs are
+        -- represented by their source-table rowids and recovered with joins at query time.
         DROP TABLE IF EXISTS corr_lang;
-        CREATE TABLE corr_lang AS
-        SELECT
-            e.language_id AS proto,        -- the etymon's (proto) family, e.g. Indo-Aryan
-            rl.clade      AS clade,        -- the reflex language's clade
-            rf.language_id AS lang,        -- the reflex language
-            a.etymon_seg  AS etymon_seg,
-            a.prev_seg    AS prev_seg,      -- environment
-            a.next_seg    AS next_seg,
-            a.reflex_seg  AS reflex_seg,
-            a.change      AS change,
-            COUNT(*)      AS n,
-            MIN(a.form_id) AS example
-        FROM alignment a
-        JOIN lemmas e     ON e.id = a.parameter_id
-        JOIN lemmas rf    ON rf.id = a.form_id
-        JOIN languages rl ON rl.id = rf.language_id
-        WHERE a.etymon_seg <> ''
-        GROUP BY e.language_id, rl.clade, rf.language_id, a.etymon_seg,
-                 a.prev_seg, a.next_seg, a.reflex_seg, a.change;
-        CREATE INDEX idx_corr_lang ON corr_lang(proto, etymon_seg, clade);
+        CREATE TABLE corr_lang (
+            proto_rid INTEGER NOT NULL,
+            lang_rid INTEGER NOT NULL,
+            etymon_sid INTEGER NOT NULL,
+            pair_id INTEGER NOT NULL,
+            context_id INTEGER NOT NULL,
+            n INTEGER NOT NULL,
+            example_rid INTEGER NOT NULL,
+            PRIMARY KEY (proto_rid, etymon_sid, pair_id, lang_rid, context_id)
+        ) WITHOUT ROWID;
+        INSERT INTO corr_lang
+        WITH grouped AS (
+            SELECT pl.rowid AS proto_rid, rl.rowid AS lang_rid,
+                   p.etymon_sid, a.pair_id, a.context_id,
+                   COUNT(*) AS n, MIN(rf.id) AS example_id
+            FROM alignment a
+            JOIN align_pair p  ON p.id = a.pair_id
+            JOIN symbols es    ON es.id = p.etymon_sid
+            JOIN lemmas rf     ON rf.rowid = a.form_rid
+            JOIN lemmas e      ON e.id = rf.origin_lemma_id
+            JOIN languages pl  ON pl.id = e.language_id
+            JOIN languages rl  ON rl.id = rf.language_id
+            WHERE es.value <> ''
+            GROUP BY pl.rowid, rl.rowid, p.etymon_sid, a.pair_id, a.context_id
+        )
+        SELECT g.proto_rid, g.lang_rid, g.etymon_sid, g.pair_id, g.context_id,
+               g.n, ex.rowid
+        FROM grouped g JOIN lemmas ex ON ex.id = g.example_id;
 
-        -- compact clade-level roll-up (the default, per-segment load)
+        -- Precomputed clade roll-up keeps the default correspondence view instantaneous. It uses
+        -- the same compact row references and WITHOUT ROWID layout rather than duplicating textual
+        -- proto/example IDs plus a separate lookup index.
+        DROP TABLE IF EXISTS clades;
+        CREATE TABLE clades (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+        INSERT INTO clades(name) SELECT DISTINCT clade FROM languages ORDER BY clade;
         DROP TABLE IF EXISTS corr;
-        CREATE TABLE corr AS
-        SELECT proto, clade, etymon_seg, prev_seg, next_seg, reflex_seg, change,
-               SUM(n) AS n, MIN(example) AS example
-        FROM corr_lang
-        GROUP BY proto, clade, etymon_seg, prev_seg, next_seg, reflex_seg, change;
-        CREATE INDEX idx_corr ON corr(proto, etymon_seg);
+        CREATE TABLE corr (
+            proto_rid INTEGER NOT NULL,
+            clade_rid INTEGER NOT NULL,
+            etymon_sid INTEGER NOT NULL,
+            pair_id INTEGER NOT NULL,
+            context_id INTEGER NOT NULL,
+            n INTEGER NOT NULL,
+            example_rid INTEGER NOT NULL,
+            PRIMARY KEY (proto_rid, etymon_sid, clade_rid, pair_id, context_id)
+        ) WITHOUT ROWID;
+        INSERT INTO corr
+        WITH grouped AS (
+            SELECT c.proto_rid, d.id AS clade_rid, c.etymon_sid, c.pair_id,
+                   c.context_id, SUM(c.n) AS n, MIN(ex.id) AS example_id
+            FROM corr_lang c
+            JOIN languages l ON l.rowid = c.lang_rid
+            JOIN clades d ON d.name = l.clade
+            JOIN lemmas ex ON ex.rowid = c.example_rid
+            GROUP BY c.proto_rid, d.id, c.etymon_sid, c.pair_id, c.context_id
+        )
+        SELECT g.proto_rid, g.clade_rid, g.etymon_sid, g.pair_id, g.context_id,
+               g.n, ex.rowid
+        FROM grouped g JOIN lemmas ex ON ex.id = g.example_id;
 
         -- tiny per-segment totals (for the segment picker; avoids scanning the big tables)
         DROP TABLE IF EXISTS corr_seg;
-        CREATE TABLE corr_seg AS
-        SELECT proto, etymon_seg, SUM(n) AS total FROM corr_lang GROUP BY proto, etymon_seg;
+        CREATE TABLE corr_seg (
+            proto_rid INTEGER NOT NULL,
+            etymon_sid INTEGER NOT NULL,
+            total INTEGER NOT NULL,
+            PRIMARY KEY (proto_rid, etymon_sid)
+        ) WITHOUT ROWID;
+        INSERT INTO corr_seg
+        SELECT proto_rid, etymon_sid, SUM(n)
+        FROM corr_lang GROUP BY proto_rid, etymon_sid;
         """
     )
     con.commit()
@@ -379,7 +441,6 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         out.unlink()
     con = sqlite3.connect(out)
     con.execute("PRAGMA foreign_keys=OFF")
-    check_trigram_available(con)
 
     # 1. Build the base tables directly from the CLDF dataset (../data) — the frozen data.db and
     #    neojambu's builder are no longer in the loop; ../data is the single source of truth.
@@ -388,15 +449,14 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     load_references(con, cldf / "references.csv")
     load_lemmas(con, cldf / "forms.csv", clade_of)
 
-    # 2. Indexes: the base four (from the old ORM model) + citation-join + list-ordering.
+    # 2. Indexes: citation joins and list/filter ordering. The composite language/order index also
+    # serves language-only lookups through its leftmost prefix, so a separate language index would
+    # duplicate the same keys.
     con.executescript(
         """
-        CREATE INDEX idx_lemmas_language_id     ON lemmas(language_id);
         CREATE INDEX idx_lemmas_origin_lemma_id ON lemmas(origin_lemma_id);
         CREATE INDEX idx_lemmas_order           ON lemmas("order");
-        CREATE INDEX idx_lemmas_cognateset      ON lemmas(cognateset);
-        CREATE INDEX idx_lemma_reference_reference_id ON lemma_reference(reference_id);
-        CREATE INDEX idx_lemma_reference_lemma_id     ON lemma_reference(lemma_id);
+        CREATE INDEX idx_lemma_reference_reference ON lemma_reference(reference_rid, lemma_rid);
         CREATE INDEX idx_lemmas_language_order   ON lemmas(language_id, "order");
         -- partial index for the Entries list (headwords): ORDER BY "order" with no temp sort.
         CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL;
@@ -412,25 +472,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         log(f"(no derivation.csv at {deriv}; skipping derivation graph)")
 
 
-    # 3. FTS5 trigram over lemma text columns (external content => no duplicated text).
-    #    content_rowid uses the implicit rowid since lemmas.id is a VARCHAR PK.
-    cols = ", ".join(LEMMA_FTS_COLUMNS)
-    con.executescript(
-        f"""
-        DROP TABLE IF EXISTS lemmas_fts;
-        CREATE VIRTUAL TABLE lemmas_fts USING fts5(
-            {cols},
-            content='lemmas',
-            content_rowid='rowid',
-            tokenize='trigram'
-        );
-        INSERT INTO lemmas_fts(rowid, {cols})
-            SELECT rowid, {cols} FROM lemmas;
-        """
-    )
-    log(f"built lemmas_fts (trigram) over: {cols}")
-
-    # 3b. Precomputed totals so the client never issues a full-table COUNT(*) (a whole-index scan
+    # 3. Precomputed totals so the client never issues a full-table COUNT(*) (a whole-index scan
     #     is many range requests over the wire; these are 1-row lookups instead).
     con.executescript(
         """
@@ -472,9 +514,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     else:
         log(f"(no alignments file at {alignments}; skipping sound-change table)")
 
-    # 4. Optimise FTS + compact the file for range-friendly layout.
-    con.execute("INSERT INTO lemmas_fts(lemmas_fts) VALUES('optimize')")
-    con.commit()
+    # 4. Analyse and compact the file for range-friendly layout.
     con.execute("ANALYZE")
     con.commit()
     log(f"setting page_size={page_size} and VACUUMing (this rewrites the file)…")
@@ -482,14 +522,20 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     con.execute("VACUUM")
     con.commit()
 
-    # Sanity: a substring MATCH must return rows.
+    # Sanity: the scan-based substring search must return rows.
     probe = con.execute(
-        "SELECT COUNT(*) FROM lemmas_fts WHERE lemmas_fts MATCH ?", ('word:"amb"',)
+        "SELECT COUNT(*) FROM lemmas WHERE instr(lower(word), ?) > 0", ("amb",)
     ).fetchone()[0]
-    log(f"sanity: trigram MATCH 'word:amb' -> {probe} lemmas")
+    log(f"sanity: substring 'word:amb' -> {probe} lemmas")
 
     con.close()
-    log(f"done: {out} ({out.stat().st_size / 1e6:.1f} MB)")
+    output_bytes = out.stat().st_size
+    if output_bytes >= MAX_OUTPUT_BYTES:
+        raise RuntimeError(
+            f"database size regression: {output_bytes / 1e6:.1f} MB "
+            f"(must remain below {MAX_OUTPUT_BYTES / 1e6:.0f} MB)"
+        )
+    log(f"done: {out} ({output_bytes / 1e6:.1f} MB)")
 
 
 def main() -> None:

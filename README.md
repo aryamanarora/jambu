@@ -13,7 +13,7 @@ directly over HTTP Range requests.
   Pages deploy.
 - **In-browser SQLite**: [`sql.js-httpvfs`](https://github.com/phiresky/sql.js-httpvfs) runs
   SQLite (WASM) in a Web Worker and fetches only the byte ranges each query touches, so the
-  ~117 MB DB is never fully downloaded. Substring search uses an **FTS5 trigram** index.
+  ~94 MB DB is cached locally. Substring search scans its compact lemma table directly.
 - **Hybrid rendering** (SvelteKit + `adapter-static`):
   - **Prerendered** to static HTML for SEO/citability: home, the list pages, and every
     `/entries/[id]` (23k), `/languages/[id]` (615), `/references/[id]` (194) — each carries its
@@ -52,7 +52,7 @@ Also enable **Settings → Pages → Source: GitHub Actions**.
 
 ## Scripts / layout
 
-- `scripts/build_static_db.py` — drops unused tables, adds indexes + the FTS5 trigram index,
+- `scripts/build_static_db.py` — dictionary-codes alignment/correspondence data, compacts indexes,
   writes precomputed `meta` counts, `VACUUM`s.
 - `src/lib/db.ts` — sql.js-httpvfs worker (single-file "full" mode).
 - `src/lib/query.ts` — the query layer (port of the old Flask `search.py` + entry grouping).
@@ -63,6 +63,6 @@ Also enable **Settings → Pages → Source: GitHub Actions**.
 
 - Single-file "full" mode is used deliberately: chunked/split mode's read-ahead can straddle a
   chunk boundary and fail on large scans, and its `maxReadSpeed` isn't configurable via the public
-  API. One file sidesteps that; the 1 GB Pages site limit comfortably fits the ~117 MB DB.
+  API. One file sidesteps that; the 1 GB Pages site limit comfortably fits the ~94 MB DB.
 - Text fields (`word`, `gloss`, `notes`) may contain hand-authored HTML and are rendered as such,
   matching the original site (trusted, curated content).

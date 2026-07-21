@@ -3,8 +3,8 @@
  * grouping in `app.py`. All queries run in the browser against the chunked SQLite via db.ts.
  *
  * Design notes for HTTP Range efficiency:
- *  - Text search uses the FTS5 **trigram** index (substring, like the old LIKE '%x%'), gated at
- *    MIN_FTS_CHARS so 1–2 char partials never trigger a full-table scan.
+ *  - Text search scans the compact local lemma table with `instr`; it is gated at MIN_SEARCH_CHARS
+ *    so 1–2 character partials never trigger a scan.
  *  - The 615-row `languages` and 194-row `references` tables are loaded/queried cheaply and
  *    cached; we attach relations in JS rather than doing wide joins over 313k lemma rows.
  *  - The unfiltered list paths avoid the languages join and lean on the order indexes
@@ -14,7 +14,7 @@ import { query, queryOne } from './db.svelte';
 import { CLADE_ORDER } from './clades';
 import {
 	PAGE_SIZE,
-	MIN_FTS_CHARS,
+	MIN_SEARCH_CHARS,
 	type Language,
 	type Lemma,
 	type Reference,
@@ -23,10 +23,6 @@ import {
 } from './types';
 
 // ---- small helpers --------------------------------------------------------
-
-function ftsPhrase(v: string): string {
-	return '"' + v.replace(/"/g, '""') + '"';
-}
 
 function placeholders(n: number): string {
 	return new Array(n).fill('?').join(',');
@@ -123,9 +119,11 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	const ids = lemmas.map((l) => l.id);
 	const rows = await inChunks<Reference & { lemma_id: string }>(ids, (chunk) =>
 		query<Reference & { lemma_id: string }>(
-			`SELECT lr.lemma_id, r.id, r.short, r.source, r.progress
-			 FROM lemma_reference lr JOIN "references" r ON r.id = lr.reference_id
-			 WHERE lr.lemma_id IN (${placeholders(chunk.length)})
+			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress
+			 FROM lemma_reference lr
+			 JOIN lemmas l ON l.rowid = lr.lemma_rid
+			 JOIN "references" r ON r.rowid = lr.reference_rid
+			 WHERE l.id IN (${placeholders(chunk.length)})
 			 ORDER BY r.short`,
 			chunk
 		)
@@ -191,8 +189,8 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 	const conds: Cond[] = [];
 	let needsLangJoin = false;
 
-	// full-text (trigram) terms combined into one MATCH
-	const fts: string[] = [];
+	// Case-insensitive substring terms. Normalising the input in JS supplies Unicode lower-casing;
+	// SQLite's lower() handles the ASCII capitals present in prose and markup.
 	for (const [key, col] of [
 		['word', 'word'],
 		['gloss', 'gloss'],
@@ -200,13 +198,12 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 		['notes', 'notes']
 	] as const) {
 		const v = (p[key] ?? '').trim();
-		if (v.length >= MIN_FTS_CHARS) fts.push(`${col}:${ftsPhrase(v)}`);
-	}
-	if (fts.length) {
-		conds.push({
-			sql: 'l.rowid IN (SELECT rowid FROM lemmas_fts WHERE lemmas_fts MATCH ?)',
-			params: [fts.join(' AND ')]
-		});
+		if (v.length >= MIN_SEARCH_CHARS) {
+			conds.push({
+				sql: `instr(lower(COALESCE(l.${col}, '')), ?) > 0`,
+				params: [v.toLocaleLowerCase()]
+			});
+		}
 	}
 
 	if (p.lang?.trim()) {
@@ -226,17 +223,18 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 			params: [p.etymon_lang.trim()]
 		});
 	}
-	if ((p.origin ?? '').trim().length >= MIN_FTS_CHARS) {
+	if ((p.origin ?? '').trim().length >= MIN_SEARCH_CHARS) {
 		conds.push({
-			sql: `l.origin_lemma_id IN (SELECT id FROM lemmas WHERE rowid IN
-			        (SELECT rowid FROM lemmas_fts WHERE lemmas_fts MATCH ?))`,
-			params: [`word:${ftsPhrase(p.origin!.trim())}`]
+			sql: `l.origin_lemma_id IN
+			        (SELECT id FROM lemmas WHERE instr(lower(COALESCE(word, '')), ?) > 0)`,
+			params: [p.origin!.trim().toLocaleLowerCase()]
 		});
 	}
 	if (p.source?.trim()) {
 		conds.push({
-			sql: `EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r ON r.id = lr.reference_id
-			         WHERE lr.lemma_id = l.id AND r.short LIKE ?)`,
+			sql: `EXISTS (SELECT 1 FROM lemma_reference lr
+			         JOIN "references" r ON r.rowid = lr.reference_rid
+			         WHERE lr.lemma_rid = l.rowid AND r.short LIKE ?)`,
 			params: [`%${p.source.trim()}%`]
 		});
 	}
@@ -694,8 +692,20 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 		reflex_seg: string;
 		change: string;
 	}>(
-		`SELECT form_id, pos, etymon_idx, etymon_seg, reflex_seg, change
-		 FROM alignment WHERE parameter_id = ? ORDER BY form_id, pos`,
+		`SELECT rf.id AS form_id, a.pos,
+		        CASE WHEN es.value = '' THEN -1 ELSE
+		          SUM(es.value <> '') OVER
+		            (PARTITION BY a.form_rid ORDER BY a.pos ROWS UNBOUNDED PRECEDING) - 1
+		        END AS etymon_idx,
+		        es.value AS etymon_seg, rs.value AS reflex_seg, cs.value AS change
+		 FROM lemmas rf
+		 JOIN alignment a ON a.form_rid = rf.rowid
+		 JOIN align_pair p ON p.id = a.pair_id
+		 JOIN symbols es ON es.id = p.etymon_sid
+		 JOIN symbols rs ON rs.id = p.reflex_sid
+		 JOIN symbols cs ON cs.id = p.change_sid
+		 WHERE rf.origin_lemma_id = ?
+		 ORDER BY rf.id, a.pos`,
 		[entryId]
 	);
 
@@ -731,8 +741,17 @@ export async function getReflexAlignment(formId: string): Promise<AlignSeg[]> {
 		reflex_seg: string;
 		change: string;
 	}>(
-		`SELECT pos, etymon_idx, etymon_seg, reflex_seg, change
-		 FROM alignment WHERE form_id = ? ORDER BY pos`,
+		`SELECT a.pos,
+		        CASE WHEN es.value = '' THEN -1 ELSE
+		          SUM(es.value <> '') OVER (ORDER BY a.pos ROWS UNBOUNDED PRECEDING) - 1
+		        END AS etymon_idx,
+		        es.value AS etymon_seg, rs.value AS reflex_seg, cs.value AS change
+		 FROM alignment a
+		 JOIN align_pair p ON p.id = a.pair_id
+		 JOIN symbols es ON es.id = p.etymon_sid
+		 JOIN symbols rs ON rs.id = p.reflex_sid
+		 JOIN symbols cs ON cs.id = p.change_sid
+		 WHERE a.form_rid = (SELECT rowid FROM lemmas WHERE id = ?) ORDER BY a.pos`,
 		[formId]
 	);
 	return rows.map((r) => ({
@@ -804,16 +823,17 @@ export async function getProtoFamilies(): Promise<ProtoFamily[]> {
 	// only the four reconstructed proto-families make sense as correspondence sets; the alignment
 	// table also carries daughter-language "protos" (e.g. from borrowings), which we exclude here.
 	return query<ProtoFamily>(
-		`SELECT s.proto AS id, COALESCE(l.name, s.proto) AS name
-		 FROM (SELECT DISTINCT proto FROM corr_seg) s LEFT JOIN languages l ON l.id = s.proto
-		 WHERE s.proto IN ('Indo-Aryan','PDr','PMu','PNur')
-		 ORDER BY CASE s.proto WHEN 'Indo-Aryan' THEN 0 WHEN 'PDr' THEN 1 WHEN 'PMu' THEN 2 ELSE 3 END`
+		`SELECT p.id, p.name FROM (SELECT DISTINCT proto_rid FROM corr_seg) s
+		 JOIN languages p ON p.rowid = s.proto_rid
+		 WHERE p.id IN ('Indo-Aryan','PDr','PMu','PNur')
+		 ORDER BY CASE p.id WHEN 'Indo-Aryan' THEN 0 WHEN 'PDr' THEN 1 WHEN 'PMu' THEN 2 ELSE 3 END`
 	);
 }
 
 export async function getProtoSegments(proto: string): Promise<ProtoSeg[]> {
 	return query<ProtoSeg>(
-		`SELECT etymon_seg AS seg, total FROM corr_seg WHERE proto = ? ORDER BY total DESC`,
+		`SELECT s.value AS seg, c.total FROM corr_seg c JOIN symbols s ON s.id = c.etymon_sid
+		 WHERE c.proto_rid = (SELECT rowid FROM languages WHERE id = ?) ORDER BY c.total DESC`,
 		[proto]
 	);
 }
@@ -829,8 +849,20 @@ export async function getSegRows(proto: string, seg: string): Promise<CorrCtx[]>
 		n: number;
 		example: string;
 	}>(
-		`SELECT clade, prev_seg, next_seg, reflex_seg, change, n, example
-		 FROM corr WHERE proto = ? AND etymon_seg = ?`,
+		`SELECT d.name AS clade, ps.value AS prev_seg, ns.value AS next_seg,
+		        rs.value AS reflex_seg, cs.value AS change, c.n,
+		        ex.id AS example
+		 FROM corr c
+		 JOIN clades d ON d.id = c.clade_rid
+		 JOIN align_pair p ON p.id = c.pair_id
+		 JOIN align_context x ON x.id = c.context_id
+		 JOIN symbols rs ON rs.id = p.reflex_sid
+		 JOIN symbols cs ON cs.id = p.change_sid
+		 JOIN symbols ps ON ps.id = x.prev_sid
+		 JOIN symbols ns ON ns.id = x.next_sid
+		 JOIN lemmas ex ON ex.rowid = c.example_rid
+		 WHERE c.proto_rid = (SELECT rowid FROM languages WHERE id = ?)
+		   AND c.etymon_sid = (SELECT id FROM symbols WHERE value = ?)`,
 		[proto, seg]
 	);
 	return rows.map((r) => ({
@@ -860,10 +892,20 @@ export async function getCladeLangRows(
 		n: number;
 		example: string;
 	}>(
-		`SELECT cl.lang, COALESCE(l.name, cl.lang) AS langName, cl.prev_seg, cl.next_seg,
-		        cl.reflex_seg, cl.change, cl.n, cl.example
-		 FROM corr_lang cl LEFT JOIN languages l ON l.id = cl.lang
-		 WHERE cl.proto = ? AND cl.etymon_seg = ? AND cl.clade = ?`,
+		`SELECT l.id AS lang, l.name AS langName, ps.value AS prev_seg,
+		        ns.value AS next_seg, rs.value AS reflex_seg, cs.value AS change,
+		        cl.n, ex.id AS example
+		 FROM corr_lang cl
+		 JOIN languages l ON l.rowid = cl.lang_rid
+		 JOIN align_pair p ON p.id = cl.pair_id
+		 JOIN align_context x ON x.id = cl.context_id
+		 JOIN symbols rs ON rs.id = p.reflex_sid
+		 JOIN symbols cs ON cs.id = p.change_sid
+		 JOIN symbols ps ON ps.id = x.prev_sid
+		 JOIN symbols ns ON ns.id = x.next_sid
+		 JOIN lemmas ex ON ex.rowid = cl.example_rid
+		 WHERE cl.proto_rid = (SELECT rowid FROM languages WHERE id = ?)
+		   AND cl.etymon_sid = (SELECT id FROM symbols WHERE value = ?) AND l.clade = ?`,
 		[proto, seg, clade]
 	);
 	return rows.map((r) => ({
@@ -881,36 +923,42 @@ export async function getCladeLangRows(
 
 /** Build the WHERE fragment for the `corr_lang` summary (used for the true total). */
 function corrLangFilter(q: CorrQuery): { where: string; params: unknown[] } {
-	const conds = ['proto = ?', 'etymon_seg = ?', 'reflex_seg = ?'];
+	const conds = [
+		'cl.proto_rid = (SELECT rowid FROM languages WHERE id = ?)',
+		'cl.etymon_sid = (SELECT id FROM symbols WHERE value = ?)',
+		`cl.pair_id IN (SELECT p.id FROM align_pair p
+		                  JOIN symbols s ON s.id = p.reflex_sid WHERE s.value = ?)`
+	];
 	const params: unknown[] = [q.proto, q.seg, q.reflexSeg];
 	if (q.clade) {
-		conds.push('clade = ?');
+		conds.push('cl.lang_rid IN (SELECT rowid FROM languages WHERE clade = ?)');
 		params.push(q.clade);
 	}
 	if (q.lang) {
-		conds.push('lang = ?');
+		conds.push('cl.lang_rid = (SELECT rowid FROM languages WHERE id = ?)');
 		params.push(q.lang);
 	}
 	if (q.prev) {
-		conds.push('prev_seg = ?');
+		conds.push(`cl.context_id IN (SELECT x.id FROM align_context x
+		                            JOIN symbols s ON s.id = x.prev_sid WHERE s.value = ?)`);
 		params.push(q.prev);
 	}
 	if (q.next) {
-		conds.push('next_seg = ?');
+		conds.push(`cl.context_id IN (SELECT x.id FROM align_context x
+		                            JOIN symbols s ON s.id = x.next_sid WHERE s.value = ?)`);
 		params.push(q.next);
 	}
 	return { where: conds.join(' AND '), params };
 }
 
 /** Every reflex exhibiting a given correspondence (etymon segment → reflex segment), for the
- *  drill-down page. Filters `alignment` by (etymon_seg, reflex_seg) via idx_alignment_seg, then
- *  joins lemmas/languages for the proto/clade filters + display columns — cheap on the local DB.
- *  The true total comes from the compact `corr_lang` summary. */
+ *  drill-down page. Scans the compact integer-coded alignment rows, then joins lemmas/languages
+ *  for the proto/clade filters and display columns. The true total comes from `corr_lang`. */
 export async function getCorrespondenceReflexes(
 	q: CorrQuery,
 	limit = 300
 ): Promise<CorrReflexResult> {
-	const conds = ['a.etymon_seg = ?', 'a.reflex_seg = ?', 'e.language_id = ?'];
+	const conds = ['es.value = ?', 'rs.value = ?', 'e.language_id = ?'];
 	const params: unknown[] = [q.seg, q.reflexSeg, q.proto];
 	if (q.clade) {
 		conds.push('rl.clade = ?');
@@ -921,11 +969,11 @@ export async function getCorrespondenceReflexes(
 		params.push(q.lang);
 	}
 	if (q.prev) {
-		conds.push('a.prev_seg = ?');
+		conds.push('ps.value = ?');
 		params.push(q.prev);
 	}
 	if (q.next) {
-		conds.push('a.next_seg = ?');
+		conds.push('ns.value = ?');
 		params.push(q.next);
 	}
 	const rows = await query<{
@@ -946,11 +994,18 @@ export async function getCorrespondenceReflexes(
 		`SELECT rf.id, rf.word, rf.gloss, rf.phonemic,
 		        rf.language_id AS lang, COALESCE(rl.name, rf.language_id) AS langName,
 		        rl.language AS language, rl.dialect AS dialect, rl.color AS color,
-		        a.change, a.prev_seg, a.next_seg,
-		        a.parameter_id AS entryId
+		        cs.value AS change, ps.value AS prev_seg, ns.value AS next_seg,
+		        e.id AS entryId
 		 FROM alignment a
-		 JOIN lemmas e     ON e.id = a.parameter_id
-		 JOIN lemmas rf    ON rf.id = a.form_id
+		 JOIN align_pair p ON p.id = a.pair_id
+		 JOIN align_context x ON x.id = a.context_id
+		 JOIN symbols es ON es.id = p.etymon_sid
+		 JOIN symbols rs ON rs.id = p.reflex_sid
+		 JOIN symbols cs ON cs.id = p.change_sid
+		 JOIN symbols ps ON ps.id = x.prev_sid
+		 JOIN symbols ns ON ns.id = x.next_sid
+		 JOIN lemmas rf    ON rf.rowid = a.form_rid
+		 JOIN lemmas e     ON e.id = rf.origin_lemma_id
 		 JOIN languages rl ON rl.id = rf.language_id
 		 WHERE ${conds.join(' AND ')}
 		 ORDER BY rl."order", rf.language_id, rf."order"
@@ -977,7 +1032,7 @@ export async function getCorrespondenceReflexes(
 	if (mapped.length >= limit) {
 		const f = corrLangFilter(q);
 		const c = await queryOne<{ n: number }>(
-			`SELECT COALESCE(SUM(n), 0) AS n FROM corr_lang WHERE ${f.where}`,
+			`SELECT COALESCE(SUM(cl.n), 0) AS n FROM corr_lang cl WHERE ${f.where}`,
 			f.params
 		);
 		total = c?.n ?? mapped.length;
