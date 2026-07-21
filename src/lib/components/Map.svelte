@@ -39,7 +39,13 @@
 		for (const m of markers) {
 			if (m.lat == null || m.long == null) continue;
 			let marker: any;
-			if (m.color) {
+			if (m.color && m.svg?.includes('polygon')) {
+				// historical-language marker: keep the rhombus shape (as on the languages page)
+				// but recolour its fill to the overlay/clade colour instead of drawing a circle.
+				const svg = m.svg.replace(/fill="[^"]*"/, `fill="${m.color}"`);
+				const icon = L.icon({ iconUrl: iconUrl(svg), iconSize: [16, 16] });
+				marker = L.marker([m.lat, m.long], { icon, opacity: m.dim ? 0.4 : 1 }).addTo(layer);
+			} else if (m.color) {
 				// filled circle — recolourable (used for correspondence overlays)
 				marker = L.circleMarker([m.lat, m.long], {
 					radius: m.radius ?? 7,
