@@ -9,6 +9,7 @@
 export const CLADE_COLORS: Record<string, string> = {
 	OIA: 'E2DFD2',
 	MIA: 'FFDEAD',
+	'Early NIA': 'B08D57',
 	Migratory: '63666A',
 	Nuristani: '9132a8',
 	Pashai: 'FFD6F6',

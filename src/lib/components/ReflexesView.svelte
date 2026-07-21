@@ -34,6 +34,19 @@
 			}));
 		});
 	});
+
+	// origin-language picker options (etymon / borrowing-source languages) for the Origin column
+	let originLangOptions = $state<SelectOption[]>([]);
+	$effect(() => {
+		getFilterLanguages('entries').then((ls) => {
+			originLangOptions = ls.map((l) => ({
+				value: l.id,
+				label: l.name,
+				sub: l.clade ?? '',
+				swatch: cladeColor(l.clade)
+			}));
+		});
+	});
 </script>
 
 <div class="showing-line">
@@ -81,6 +94,10 @@
 					sortKey="origin"
 					palette
 					value={list.params.origin ?? ''}
+					pickerKey="etymon_lang"
+					pickerOptions={originLangOptions}
+					pickerValue={list.params.etymon_lang ?? ''}
+					pickerPlaceholder="Origin lang"
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -131,8 +148,14 @@
 							</td>
 						{/if}
 						<td class="lemma-word">
-							<a href="{base}/reflexes/{r.id}">{@html safe(r.word)}</a>{#if r.phonemic}
-								<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}
+							<a href="{base}/entries/{r.id}">{@html safe(r.word)}</a>{#if r.phonemic}
+								<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}{#if r.sub_count}
+								<a
+									class="subcount"
+									href="{base}/entries/{r.id}"
+									title="{r.sub_count} form{r.sub_count === 1 ? '' : 's'} borrowed from this word"
+									>→&#8288;{r.sub_count}</a
+								>{/if}
 						</td>
 						<td
 							class:lang-cell={!showLangCol}
@@ -141,13 +164,12 @@
 								: ''}
 						>
 							{#if r.origin_lemma}
-								<a href="{base}/entries/{r.origin_lemma.id}"
+								{#if r.origin_lemma.language}<span class="olang"
+										>{r.origin_lemma.language.name}</span
+									> {/if}<a class="origin" href="{base}/entries/{r.origin_lemma.id}"
 									>{@html safe(r.origin_lemma.word)} <span class="id-tag">[{r.origin_lemma.id}]</span
 									></a
 								>
-								{#if !showLangCol && r.origin_lemma.language}
-									<div><small class="muted">{r.origin_lemma.language.name}</small></div>
-								{/if}
 							{:else}<span class="faint">—</span>{/if}
 						</td>
 						<td class="muted">{@html safe(r.gloss) || '—'}</td>
@@ -174,6 +196,29 @@
 		font-family: var(--font-serif);
 		font-size: 1.12rem;
 		font-weight: 600;
+	}
+	/* origin etymon: serif term with its (proto-)language muted just before it, like "Reflex of X" */
+	.origin {
+		font-family: var(--font-serif);
+	}
+	.olang {
+		color: var(--muted);
+		font-size: 0.9em;
+		margin-right: 0.35rem;
+	}
+	/* borrowed-descendant count: forms in other languages borrowed FROM this reflex */
+	.subcount {
+		display: inline-block;
+		margin-left: 0.35rem;
+		padding: 0 0.3rem;
+		border-radius: 999px;
+		font-family: var(--font-sans);
+		font-size: 0.72rem;
+		font-weight: 600;
+		background: color-mix(in srgb, var(--berry) 12%, transparent);
+		color: var(--berry);
+		white-space: nowrap;
+		vertical-align: middle;
 	}
 	.loader-slot {
 		height: 3px;

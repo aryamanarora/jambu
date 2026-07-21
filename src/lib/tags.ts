@@ -2,7 +2,7 @@
  * tags.ts — client-side classification of the structured `tags` tokens (mirrors ../data/tags.py).
  * Used to colour tag pills by category and to build the tag filter.
  */
-export type TagCategory = 'gender' | 'grammatical' | 'source';
+export type TagCategory = 'gender' | 'grammatical' | 'source' | 'era';
 
 export const GENDER_TAGS = ['m', 'f', 'n'];
 export const GRAMMATICAL_TAGS = [
@@ -17,14 +17,18 @@ export const COMMON_SOURCES = [
 	'RV', 'AV', 'VS', 'TS', 'ŚBr', 'Mn', 'MBh', 'R', 'Suśr', 'Pāṇ', 'Dhātup', 'BhP', 'Kathās',
 	'Kāv', 'MW', 'lex'
 ];
+// era of the earliest Sanskrit attestation (from ../data/sanskrit_works.tsv)
+export const ERA_TAGS = ['Early-Vedic', 'Late-Vedic', 'Epic', 'Classical', 'Medieval'];
 
 const GENDER_SET = new Set([...GENDER_TAGS, 'mn', 'fn', 'mf']);
 const GRAMMATICAL_SET = new Set(GRAMMATICAL_TAGS);
+const ERA_SET = new Set(ERA_TAGS);
 
-/** A tag's category — anything not gender/grammatical is treated as an attestation source. */
+/** A tag's category — anything not gender/grammatical/era is treated as an attestation source. */
 export function tagCategory(tag: string): TagCategory {
 	if (GENDER_SET.has(tag)) return 'gender';
 	if (GRAMMATICAL_SET.has(tag)) return 'grammatical';
+	if (ERA_SET.has(tag)) return 'era';
 	return 'source';
 }
 
@@ -42,5 +46,7 @@ export const TAG_NAMES: Record<string, string> = {
 	lex: 'lexicographers only', RV: 'Ṛgveda', AV: 'Atharvaveda', VS: 'Vājasaneyi Saṁhitā',
 	TS: 'Taittirīya Saṁhitā', 'ŚBr': 'Śatapatha Brāhmaṇa', Mn: 'Manu', MBh: 'Mahābhārata',
 	R: 'Rāmāyaṇa', 'Suśr': 'Suśruta', 'Pāṇ': 'Pāṇini', Dhātup: 'Dhātupāṭha', BhP: 'Bhāgavata Purāṇa',
-	'Kathās': 'Kathāsaritsāgara', 'Kāv': 'Kāvya', MW: 'Monier-Williams'
+	'Kathās': 'Kathāsaritsāgara', 'Kāv': 'Kāvya', MW: 'Monier-Williams',
+	'Early-Vedic': 'Early Vedic', 'Late-Vedic': 'Late Vedic', Epic: 'Epic period',
+	Classical: 'Classical Sanskrit', Medieval: 'Medieval'
 };

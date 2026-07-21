@@ -150,16 +150,19 @@
 :root[data-theme='light'] {
 	--tag-gram: #2f7d64;
 	--tag-source: #9a6a15;
+	--tag-era: #7b5ea8;
 }
 @media (prefers-color-scheme: dark) {
 	:root {
 		--tag-gram: #6fcaab;
 		--tag-source: #d9a94e;
+		--tag-era: #b79ae0;
 	}
 }
 :root[data-theme='dark'] {
 	--tag-gram: #6fcaab;
 	--tag-source: #d9a94e;
+	--tag-era: #b79ae0;
 }
 
 *,

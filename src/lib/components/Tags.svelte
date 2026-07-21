@@ -41,4 +41,7 @@
 	.tag.source {
 		color: var(--tag-source);
 	}
+	.tag.era {
+		color: var(--tag-era);
+	}
 </style>

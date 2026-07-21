@@ -13,12 +13,9 @@
 	let sortDir = $state<'asc' | 'desc'>('asc');
 	let showTooltips = $state(false);
 
-	function toggleSort(key: 'name' | 'clade' | 'reflexes') {
-		if (sortKey === key) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-		else {
-			sortKey = key;
-			sortDir = 'asc';
-		}
+	function setSort(key: 'name' | 'clade' | 'reflexes', dir: 'asc' | 'desc') {
+		sortKey = key;
+		sortDir = dir;
 	}
 
 	const filtered = $derived(
@@ -50,10 +47,24 @@
 			}))
 	);
 
-	function arrow(key: string) {
-		return sortKey === key ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '';
-	}
 </script>
+
+{#snippet sortArrows(key: 'name' | 'clade' | 'reflexes')}
+	<span class="sort">
+		<button
+			class="up"
+			class:active={sortKey === key && sortDir === 'asc'}
+			aria-label="Sort ascending"
+			onclick={() => setSort(key, 'asc')}
+		></button>
+		<button
+			class="down"
+			class:active={sortKey === key && sortDir === 'desc'}
+			aria-label="Sort descending"
+			onclick={() => setSort(key, 'desc')}
+		></button>
+	</span>
+{/snippet}
 
 <svelte:head>
 	<title>Languages — Jambu</title>
@@ -70,24 +81,30 @@
 <p class="muted">Showing {filtered.length.toLocaleString()} of {data.languages.length.toLocaleString()} languages.</p>
 
 <div class="table-wrap">
-	<table class="data">
+	<table class="data accent-col">
 		<thead>
 			<tr>
 				<th>
 					<div class="field">
-						<input class="search-box" placeholder="Language" bind:value={langFilter} />
-						<button class="linkish" onclick={() => toggleSort('name')}>Name{arrow('name')}</button>
+						<div class="filter-box">
+							<input class="search-box" placeholder="Language" bind:value={langFilter} />
+						</div>
+						{@render sortArrows('name')}
 					</div>
 				</th>
 				<th>
 					<div class="field">
-						<input class="search-box" placeholder="Clade" bind:value={cladeFilter} />
-						<button class="linkish" onclick={() => toggleSort('clade')}>Clade{arrow('clade')}</button>
+						<div class="filter-box">
+							<input class="search-box" placeholder="Clade" bind:value={cladeFilter} />
+						</div>
+						{@render sortArrows('clade')}
 					</div>
 				</th>
-				<th>Coordinates</th>
 				<th>
-					<button class="linkish" onclick={() => toggleSort('reflexes')}>Reflexes{arrow('reflexes')}</button>
+					<div class="field"><span>Coordinates</span></div>
+				</th>
+				<th class="numeric">
+					<div class="field"><span>Reflexes</span>{@render sortArrows('reflexes')}</div>
 				</th>
 			</tr>
 		</thead>
@@ -117,16 +134,5 @@
 		margin: 0.5rem 0;
 		font-size: 0.9rem;
 		color: var(--muted);
-	}
-	.linkish {
-		all: unset;
-		cursor: pointer;
-		color: var(--muted);
-		font-weight: 600;
-		font-size: 0.85rem;
-		white-space: nowrap;
-	}
-	.linkish:hover {
-		color: var(--plum-2);
 	}
 </style>

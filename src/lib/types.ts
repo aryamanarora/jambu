@@ -37,10 +37,12 @@ export interface Lemma {
 	language_id: string;
 	origin_lemma_id: string | null;
 	etymology?: string; // free-text etymological header (the CDIAL entry HTML); entries only
-	relation?: string | null; // '' for etyma, 'reflex' | 'variant' for children
+	relation?: string | null; // '' for etyma, 'reflex' | 'variant' | 'borrowed' for children
 	variant_of?: string | null; // a reflex-variant points at its main reflex (null ⇒ head variant)
 	variants?: Lemma[]; // hydrated: same-form alternates of a main reflex (entry page)
 	redirect_to?: string | null; // a CDIAL "Add. N" stub redirects to entry N (not listed)
+	borrowed_from?: string | null; // a borrowed sub-reflex points at the reflex it was borrowed from
+	sub_count?: number; // hydrated: # of borrowed sub-reflexes hanging off this reflex
 	// per-entry aggregates (materialised columns; populated on headwords)
 	reflex_count?: number;
 	lang_count?: number;
@@ -62,8 +64,12 @@ export interface ListParams {
 	source?: string;
 	origin_lang?: string;
 	origin?: string;
+	etymon_lang?: string; // filter reflexes by the language of their origin (etymon/source)
 	clade?: string;
 	tags?: string; // space-separated tags; a row must carry ALL of them
+	rootsOnly?: boolean; // entries with no ancestor (not derived from any other etymon)
+	sectionsOnly?: boolean; // CDIAL promoted section-forms (ids like 3643-2)
+	loanSourcesOnly?: boolean; // reflexes that are the source of borrowings into other languages
 	sort?: string; // "asc-<col>" | "desc-<col>"
 	page?: number;
 }

@@ -6,6 +6,8 @@
 	import { safe } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
+	import TagFilter from './TagFilter.svelte';
+	import Tags from './Tags.svelte';
 	import type { SelectOption } from './SelectFilter.svelte';
 	import CladeBars from './CladeBars.svelte';
 	import RefList from './RefList.svelte';
@@ -32,12 +34,43 @@
 
 <div class="showing-line">
 	<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
-	{#if list.result}
-		<p class="muted">
-			Showing {from.toLocaleString()}–{to.toLocaleString()} of
-			{list.result.count.toLocaleString()} entries.
-		</p>
-	{/if}
+	<div class="showing-row">
+		{#if list.result}
+			<p class="muted">
+				Showing {from.toLocaleString()}–{to.toLocaleString()} of
+				{list.result.count.toLocaleString()} entries.
+			</p>
+		{/if}
+		<div class="toggle-group">
+			<button
+				class="roots-toggle"
+				class:on={list.params.rootsOnly}
+				aria-pressed={list.params.rootsOnly}
+				title="Show only root nodes — entries not derived from any other etymon"
+				onclick={() => list.setFilter('roots', list.params.rootsOnly ? '' : '1')}
+			>
+				Roots only
+			</button>
+			<button
+				class="roots-toggle"
+				class:on={list.params.sectionsOnly}
+				aria-pressed={list.params.sectionsOnly}
+				title="Show only CDIAL section-forms — numbered derived forms promoted from an entry's header"
+				onclick={() => list.setFilter('sections', list.params.sectionsOnly ? '' : '1')}
+			>
+				Section-forms
+			</button>
+			<button
+				class="roots-toggle"
+				class:on={list.params.loanSourcesOnly}
+				aria-pressed={list.params.loanSourcesOnly}
+				title="Show only loan sources — reflexes that words in other languages were borrowed from"
+				onclick={() => list.setFilter('loans', list.params.loanSourcesOnly ? '' : '1')}
+			>
+				Loan sources
+			</button>
+		</div>
+	</div>
 </div>
 
 {#if list.error}
@@ -88,6 +121,7 @@
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
+				<TagFilter value={list.params.tags ?? ''} onFilter={list.setFilter} />
 				<FilterCell
 					label="Langs"
 					sortKey="nlang"
@@ -144,6 +178,7 @@
 						</td>
 						<td class="muted gloss-cell">{@html safe(e.gloss) || '—'}</td>
 						<td class="muted etym-cell">{@html safe(e.etymology) || '—'}</td>
+						<td><Tags tags={e.tags} /></td>
 						<td class="num">{e.lang_count?.toLocaleString() ?? ''}</td>
 						<td class="num">{e.reflex_count?.toLocaleString() ?? ''}</td>
 						<td class="num">{e.derived_count?.toLocaleString() ?? ''}</td>
@@ -163,6 +198,40 @@
 	.showing-line {
 		margin-top: 0.5rem;
 	}
+	.showing-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.toggle-group {
+		display: flex;
+		gap: 0.4rem;
+	}
+	.roots-toggle {
+		font-family: var(--font-sans);
+		font-size: 0.82rem;
+		font-weight: 500;
+		padding: 3px 14px;
+		border: 1px solid var(--border-strong);
+		border-radius: 999px;
+		background: var(--surface);
+		color: var(--muted);
+		cursor: pointer;
+		white-space: nowrap;
+		transition:
+			background 0.12s,
+			color 0.12s,
+			border-color 0.12s;
+	}
+	.roots-toggle:hover {
+		color: var(--ink);
+	}
+	.roots-toggle.on {
+		background: var(--plum);
+		border-color: var(--plum);
+		color: #fbeefb;
+	}
 	.loader-slot {
 		height: 3px;
 		margin-bottom: 0.4rem;
@@ -181,7 +250,7 @@
 		font-size: 1.18rem;
 		font-weight: 600;
 	}
-	/* language is now secondary to the headword */
+	/* language is secondary to the headword */
 	.lang-plain {
 		font-size: 0.92rem;
 		color: var(--muted);

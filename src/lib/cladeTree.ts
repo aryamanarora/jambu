@@ -12,6 +12,7 @@ import { CLADE_ORDER } from './clades';
 const GROUP: Record<string, string> = {
 	OIA: 'Old Indo-Aryan',
 	MIA: 'Middle Indo-Aryan',
+	'Early NIA': 'Early NIA',
 	Nuristani: 'Nuristani',
 	Pashai: 'Dardic',
 	Chitrali: 'Dardic',
@@ -57,6 +58,7 @@ export function cladeGroup(clade: string): string {
 const SUPER: Record<string, string> = {
 	'Old Indo-Aryan': 'Old Indo-Aryan',
 	'Middle Indo-Aryan': 'Middle Indo-Aryan',
+	'Early NIA': 'New Indo-Aryan',
 	Nuristani: 'New Indo-Aryan',
 	Dardic: 'New Indo-Aryan',
 	Northwestern: 'New Indo-Aryan',
@@ -91,6 +93,7 @@ export const SUPER_GROUPS: Record<string, string[]> = {
 	'Old Indo-Aryan': ['Old Indo-Aryan'],
 	'Middle Indo-Aryan': ['Middle Indo-Aryan'],
 	'New Indo-Aryan': [
+		'Early NIA',
 		'Nuristani',
 		'Dardic',
 		'Northwestern',

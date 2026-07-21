@@ -76,9 +76,13 @@ async function languageMap(): Promise<Map<string, Language>> {
 const filterLangsCache = new Map<string, Language[]>();
 export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<Language[]> {
 	if (filterLangsCache.has(mode)) return filterLangsCache.get(mode)!;
-	// entries → languages with an etymon; reflexes → every language (the reflexes list is the
-	// whole lexicon, so any language that carries a node can be filtered on).
-	const where = mode === 'entries' ? 'WHERE origin_lemma_id IS NULL' : '';
+	// entries → languages with an etymon OR a loan-source reflex (both are listable under /entries);
+	// reflexes → every language (the reflexes list is the whole lexicon, so any node's language works).
+	const where =
+		mode === 'entries'
+			? "WHERE origin_lemma_id IS NULL OR EXISTS (SELECT 1 FROM lemmas b " +
+				"WHERE b.origin_lemma_id = lemmas.id AND b.relation = 'borrowed')"
+			: '';
 	const rows = await query<{ language_id: string }>(
 		`SELECT DISTINCT language_id FROM lemmas ${where}`
 	);
@@ -136,6 +140,31 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	for (const l of lemmas) l.references = map.get(l.id) ?? [];
 }
 
+/** Count the borrowed sub-reflexes hanging off each given reflex (shown as an "n →" badge). */
+async function attachSubCounts(lemmas: Lemma[]): Promise<void> {
+	if (!lemmas.length) return;
+	const ids = lemmas.map((l) => l.id);
+	const rows = await inChunks<{ borrowed_from: string; c: number }>(ids, (chunk) =>
+		query<{ borrowed_from: string; c: number }>(
+			`SELECT borrowed_from, COUNT(*) AS c FROM lemmas
+			 WHERE borrowed_from IN (${placeholders(chunk.length)}) GROUP BY borrowed_from`,
+			chunk
+		)
+	);
+	const map = new Map(rows.map((r) => [r.borrowed_from, r.c]));
+	for (const l of lemmas) l.sub_count = map.get(l.id) ?? 0;
+}
+
+/** The borrowed sub-reflexes of a reflex (forms it was the source of), for its page. */
+export async function getBorrowedReflexes(reflexId: string): Promise<Lemma[]> {
+	const rows = await query<Lemma>(
+		'SELECT * FROM lemmas WHERE borrowed_from = ? ORDER BY "order"',
+		[reflexId]
+	);
+	await attachLanguages(rows);
+	return rows;
+}
+
 // ---- filter / sort construction (port of search.py) ----------------------
 
 const SORT_COLUMNS: Record<string, string> = {
@@ -191,6 +220,12 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 	if (p.origin_lang?.trim()) {
 		conds.push({ sql: 'l.language_id = ?', params: [p.origin_lang.trim()] });
 	}
+	if (p.etymon_lang?.trim()) {
+		conds.push({
+			sql: 'l.origin_lemma_id IN (SELECT id FROM lemmas WHERE language_id = ?)',
+			params: [p.etymon_lang.trim()]
+		});
+	}
 	if ((p.origin ?? '').trim().length >= MIN_FTS_CHARS) {
 		conds.push({
 			sql: `l.origin_lemma_id IN (SELECT id FROM lemmas WHERE rowid IN
@@ -213,6 +248,19 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 				params: [`% ${t} %`]
 			});
 		}
+	}
+
+	// root nodes only: entries not derived from any other etymon (no incoming derivation edge)
+	if (p.rootsOnly) {
+		conds.push({
+			sql: 'NOT EXISTS (SELECT 1 FROM derivation WHERE child_id = l.id)',
+			params: []
+		});
+	}
+
+	// CDIAL section-forms only: the promoted numbered head-forms, whose ids look like `<etymon>-<n>`
+	if (p.sectionsOnly) {
+		conds.push({ sql: "l.id GLOB '[0-9]*-[0-9]*'", params: [] });
 	}
 
 	// a sort on a language column also needs the join
@@ -258,7 +306,16 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	// and variants); only the per-entry reflex_count/lang_count aggregates treat variants separately.
 	// Redirect stubs (CDIAL "Add. N" pointers) are never listed.
 	const modeConds: Cond[] = [{ sql: 'l.redirect_to IS NULL', params: [] }];
-	if (mode === 'entries') modeConds.push({ sql: 'l.origin_lemma_id IS NULL', params: [] });
+	if (mode === 'entries') {
+		// normally headwords (no parent); the loan-sources view instead lists reflexes that are
+		// themselves the source of borrowings into other languages (they head a borrowing sub-tree).
+		if (params.loanSourcesOnly)
+			modeConds.push({
+				sql: "EXISTS (SELECT 1 FROM lemmas b WHERE b.origin_lemma_id = l.id AND b.relation = 'borrowed')",
+				params: []
+			});
+		else modeConds.push({ sql: 'l.origin_lemma_id IS NULL', params: [] });
+	}
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.language_id = ?', params: [languageId] });
 
@@ -270,7 +327,11 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	// Fast path: entries list with no filters/sort → partial index, no join, no temp sort.
 	const isDefaultEntries =
-		mode === 'entries' && !needsLangJoin && conds.length === 0 && !(params.sort ?? '').trim();
+		mode === 'entries' &&
+		!needsLangJoin &&
+		conds.length === 0 &&
+		!params.loanSourcesOnly &&
+		!(params.sort ?? '').trim();
 
 	const fallbackOrder =
 		mode === 'entries' || mode === 'lexicon' ? 'l."order"' : 'l."order"';
@@ -278,7 +339,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	// count — use precomputed totals for the unfiltered case (a full COUNT(*) is a whole-index
 	// scan = a large sequential read over the wire); only COUNT the (bounded) filtered set.
-	const hasFilters = conds.length > 0;
+	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly;
 	let count: number;
 	if (!hasFilters && mode === 'entries') {
 		count = await metaCount('total_entries');
@@ -319,6 +380,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	await attachLanguages(rows);
 	if (opts.withOrigin) await attachOrigin(rows);
 	await attachReferences(rows);
+	if (mode !== 'entries') await attachSubCounts(rows);
 
 	return { rows, count, page };
 }
@@ -350,7 +412,8 @@ export async function getAncestryChain(startId: string): Promise<AncestorRef[][]
 	const seen = new Set<string>([startId]);
 	let frontier = [startId];
 	for (let depth = 0; depth < 16 && frontier.length; depth++) {
-		// a variant steps up to its main reflex (variant_of); a reflex to its etymon (origin_lemma_id)
+		// step up one link: a variant → its main reflex (variant_of); anything else (reflex, borrowed
+		// form, section-form's reflex) → its immediate parent via origin_lemma_id.
 		const viaOrigin = await inChunks<{ pid: string }>(frontier, (chunk) =>
 			query<{ pid: string }>(
 				`SELECT COALESCE(variant_of, origin_lemma_id) AS pid FROM lemmas
@@ -462,6 +525,30 @@ export async function getLanguage(id: string): Promise<Language | null> {
 	return queryOne<Language>('SELECT * FROM languages WHERE id = ?', [id]);
 }
 
+export interface OriginSlice {
+	lang: string;
+	name: string;
+	clade: string | null;
+	count: number;
+}
+
+/** For one language, the distribution of its reflexes by the language of their immediate origin
+ *  (the etymon they descend from, or the reflex they were borrowed from) — for a donut chart. */
+export async function getOriginLangDistribution(languageId: string): Promise<OriginSlice[]> {
+	const rows = await query<{ lang: string; c: number }>(
+		`SELECT o.language_id AS lang, COUNT(*) AS c
+		 FROM lemmas r JOIN lemmas o ON o.id = r.origin_lemma_id
+		 WHERE r.language_id = ? AND r.relation IN ('reflex','borrowed')
+		 GROUP BY o.language_id ORDER BY c DESC`,
+		[languageId]
+	);
+	const langs = await languageMap();
+	return rows.map((r) => {
+		const l = langs.get(r.lang);
+		return { lang: r.lang, name: l?.name ?? r.lang, clade: l?.clade ?? null, count: r.c };
+	});
+}
+
 export async function getReference(id: string): Promise<Reference | null> {
 	return queryOne<Reference>('SELECT * FROM "references" WHERE id = ?', [id]);
 }
@@ -503,11 +590,13 @@ export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
 
 export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> {
 	const reflexes = await query<Lemma>(
-		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'reflex' ORDER BY cognateset",
+		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed') " +
+			'ORDER BY cognateset',
 		[entryId]
 	);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
+	await attachSubCounts(reflexes);
 	const total = reflexes.length;
 
 	// group by cognateset, then by language (mirrors app.py:336-381, defaulting to grouped view)
@@ -573,12 +662,15 @@ export interface EntryAlignment {
 }
 
 export async function getEntryAlignment(entryId: string): Promise<EntryAlignment> {
+	// a node's children: an etymon/section-form's daughter reflexes, or a reflex's borrowed sub-reflexes
 	const reflexes = await query<Lemma>(
-		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'reflex' ORDER BY \"order\"",
+		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed') " +
+			'ORDER BY "order"',
 		[entryId]
 	);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
+	await attachSubCounts(reflexes);
 
 	// attach each main reflex's comma-listed alternates (reflex-variants) for inline display
 	const rvars = await query<Lemma>(
@@ -709,9 +801,13 @@ export interface CorrReflexResult {
 }
 
 export async function getProtoFamilies(): Promise<ProtoFamily[]> {
+	// only the four reconstructed proto-families make sense as correspondence sets; the alignment
+	// table also carries daughter-language "protos" (e.g. from borrowings), which we exclude here.
 	return query<ProtoFamily>(
-		`SELECT DISTINCT s.proto AS id, COALESCE(l.name, s.proto) AS name
-		 FROM corr_seg s LEFT JOIN languages l ON l.id = s.proto ORDER BY s.proto`
+		`SELECT s.proto AS id, COALESCE(l.name, s.proto) AS name
+		 FROM (SELECT DISTINCT proto FROM corr_seg) s LEFT JOIN languages l ON l.id = s.proto
+		 WHERE s.proto IN ('Indo-Aryan','PDr','PMu','PNur')
+		 ORDER BY CASE s.proto WHEN 'Indo-Aryan' THEN 0 WHEN 'PDr' THEN 1 WHEN 'PMu' THEN 2 ELSE 3 END`
 	);
 }
 

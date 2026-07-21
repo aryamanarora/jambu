@@ -11,6 +11,10 @@
 		activeSort = '',
 		palette = false,
 		numeric = false,
+		pickerKey = null,
+		pickerOptions = [],
+		pickerValue = '',
+		pickerPlaceholder = '',
 		onFilter,
 		onSort
 	}: {
@@ -23,6 +27,10 @@
 		activeSort?: string; // current params.sort, e.g. "asc-word"
 		palette?: boolean;
 		numeric?: boolean; // right-align (for count columns)
+		pickerKey?: string | null; // optional second control: a select picker beside the text filter
+		pickerOptions?: SelectOption[];
+		pickerValue?: string;
+		pickerPlaceholder?: string;
 		onFilter: (key: string, value: string) => void;
 		onSort: (sortValue: string) => void;
 	} = $props();
@@ -56,7 +64,17 @@
 </script>
 
 <th class:numeric>
-	<div class="field">
+	<div class="field" class:split={!!pickerKey}>
+		{#if pickerKey}
+			<div class="picker-box">
+				<SelectFilter
+					placeholder={pickerPlaceholder}
+					options={pickerOptions}
+					value={pickerValue}
+					onSelect={(v) => pickerKey && onFilter(pickerKey, v)}
+				/>
+			</div>
+		{/if}
 		{#if filterKey && type === 'text'}
 			<div class="filter-box">
 				<input
@@ -103,6 +121,18 @@
 </th>
 
 <style>
+	/* two controls (text filter + picker) sharing the column equally, side by side */
+	th :global(.field.split) {
+		gap: 0.4rem;
+	}
+	th :global(.field.split .filter-box),
+	th :global(.field.split .picker-box) {
+		flex: 1 1 0;
+		min-width: 0;
+	}
+	th :global(.field.split .search-box) {
+		width: 100%;
+	}
 	th.numeric :global(.field) {
 		justify-content: flex-end;
 	}

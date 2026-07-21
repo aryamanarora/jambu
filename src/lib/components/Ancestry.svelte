@@ -32,7 +32,7 @@
 				<span class="kind">{li === 0 ? label : '↳ from'}</span>
 				{#each level as p, i (p.id)}{#if p.showLang}<span class="lang">{p.lang}</span> {/if}<a
 						class="anc"
-						href="{base}/{p.kind === 'reflex' ? 'reflexes' : 'entries'}/{p.id}"
+						href="{base}/entries/{p.id}"
 						>{@html safe(p.word)} <span class="id-tag">[{p.id}]</span></a
 					>{#if i < level.length - 1}<span class="sep">, </span>{/if}{/each}
 			</div>

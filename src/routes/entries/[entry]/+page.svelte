@@ -7,6 +7,7 @@
 		getEntryVariants,
 		getAncestryChain,
 		getDerivedTree,
+		getReflexAlignment,
 		type EntryAlignment,
 		type AlignedReflex,
 		type AlignSeg,
@@ -20,6 +21,7 @@
 	import { safe, md, striptags } from '$lib/render';
 	import CladeBars from '$lib/components/CladeBars.svelte';
 	import Ancestry from '$lib/components/Ancestry.svelte';
+	import Alignment from '$lib/components/Alignment.svelte';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
@@ -29,6 +31,16 @@
 	let { data } = $props();
 	const entry = $derived(data.entry);
 	const graph = $derived(data.graph);
+	// the ancestry line's label depends on how this node hangs off its parent
+	const relLabel = $derived(
+		entry.borrowed_from
+			? 'Borrowed from'
+			: entry.relation === 'variant'
+				? 'Variant of'
+				: entry.origin_lemma_id
+					? 'Reflex of'
+					: 'Derived from'
+	);
 	// a CDIAL "Add. N" stub is a redirect — forward to the real addendum entry
 	$effect(() => {
 		if (entry.redirect_to) goto(`${base}/entries/${entry.redirect_to}`, { replaceState: true });
@@ -42,6 +54,7 @@
 	let variants = $state<Lemma[]>([]);
 	let ancestryChain = $state<AncestorRef[][]>([]);
 	let derivedTree = $state<DerivedNode[]>([]);
+	let ownSegs = $state<AlignSeg[]>([]);
 	let loading = $state(true);
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
@@ -60,9 +73,12 @@
 		variants = [];
 		ancestryChain = [];
 		derivedTree = [];
+		ownSegs = [];
 		getEntryVariants(id).then((v) => (variants = v));
 		getAncestryChain(id).then((c) => (ancestryChain = c));
 		getDerivedTree(id).then((t) => (derivedTree = t));
+		// a non-etymon node (reflex / section-form) also shows how it itself aligns to its parent
+		getReflexAlignment(id).then((s) => (ownSegs = s));
 		getEntryAlignment(id).then((a) => {
 			ea = a;
 			loading = false;
@@ -280,7 +296,7 @@
 	<CladeBars clades={entry.clades} size="lg" />
 </div>
 {#if ancestryChain.length}
-	<Ancestry label="Derived from" chain={ancestryChain} startLang={entry.language?.name} />
+	<Ancestry label={relLabel} chain={ancestryChain} startLang={entry.language?.name} />
 {/if}
 {#if entry.gloss || entry.tags}
 	<p class="gloss serif">
@@ -305,6 +321,14 @@
 		<summary>Etymological notes</summary>
 		<div class="markdown">{@html md(entry.notes)}</div>
 	</details>
+{/if}
+
+<!-- how this node itself aligns to its parent (only non-etyma have a segment alignment) -->
+{#if ownSegs.length}
+	<div class="own-align">
+		<span class="oa-label">Sound changes</span>
+		<Alignment segs={ownSegs} />
+	</div>
 {/if}
 
 <!-- derived terms (compound / affixed etyma built on this one) — before the reflexes -->
@@ -406,7 +430,7 @@
 						{#if view === 'normal'}
 							<td class="c-form formcell">
 								<span class="lemma-word">{@html safe(row.r.lemma.word)}</span>{#if row.r.lemma.phonemic}
-									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}
+									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}{#if row.r.lemma.sub_count}&nbsp;<a class="subcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.sub_count} form(s) borrowed from this word">→&#8288;{row.r.lemma.sub_count}</a>{/if}
 								{#each row.r.lemma.variants ?? [] as v (v.id)}<span class="rvar-line"
 										><span class="rvar-arrow">→</span>&nbsp;<span class="rvar"
 											>{@html safe(v.word)}</span
@@ -520,6 +544,18 @@
 		font-size: 1.2rem;
 		margin: 0.1rem 0 0.5rem;
 	}
+	/* this node's own alignment to its parent (shown on reflex / section-form pages) */
+	.own-align {
+		margin: 0.4rem 0 0.9rem;
+	}
+	.oa-label {
+		display: block;
+		font-size: 0.68rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--muted);
+		margin-bottom: 0.3rem;
+	}
 	/* the free-text etymological entry (CDIAL dictionary text: sub-forms, sources, cross-refs) */
 	.etymology {
 		font-size: 1rem;
@@ -598,6 +634,18 @@
 		font-size: 0.82rem;
 		color: var(--muted);
 		margin-left: 3px;
+	}
+	/* borrowed-descendant count badge (forms borrowed from this reflex) */
+	.subcount {
+		display: inline-block;
+		padding: 0 0.3rem;
+		border-radius: 999px;
+		font-size: 0.7rem;
+		font-weight: 600;
+		background: color-mix(in srgb, var(--berry) 12%, transparent);
+		color: var(--berry);
+		white-space: nowrap;
+		vertical-align: middle;
 	}
 	/* comma-listed alternates of a reflex, one per line beneath it */
 	.rvar-line {

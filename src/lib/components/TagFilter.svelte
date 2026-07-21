@@ -2,7 +2,7 @@
 	// Header cell for the Reflexes table: a dropdown that filters by structured tags. Multi-select
 	// with AND semantics (a row must carry every picked tag). Renders a <th> so it drops into the
 	// header row alongside the FilterCell columns. Chips are coloured by category.
-	import { GENDER_TAGS, GRAMMATICAL_TAGS, COMMON_SOURCES, TAG_NAMES } from '$lib/tags';
+	import { GENDER_TAGS, GRAMMATICAL_TAGS, COMMON_SOURCES, ERA_TAGS, TAG_NAMES } from '$lib/tags';
 	import { floatingPanel } from '$lib/floatingPanel';
 	let {
 		value = '',
@@ -12,7 +12,8 @@
 	const GROUPS = [
 		{ label: 'gender', cat: 'gender', tags: GENDER_TAGS },
 		{ label: 'grammatical', cat: 'grammatical', tags: GRAMMATICAL_TAGS },
-		{ label: 'source', cat: 'source', tags: COMMON_SOURCES }
+		{ label: 'source', cat: 'source', tags: COMMON_SOURCES },
+		{ label: 'era', cat: 'era', tags: ERA_TAGS }
 	] as const;
 
 	const selected = $derived(new Set(value.split(/\s+/).filter(Boolean)));
@@ -175,6 +176,9 @@
 	}
 	.chips.source {
 		--cat: var(--tag-source);
+	}
+	.chips.era {
+		--cat: var(--tag-era);
 	}
 	.chip {
 		font-size: 0.72rem;

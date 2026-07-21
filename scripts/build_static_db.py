@@ -74,7 +74,7 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT, original TEXT,
             notes TEXT, clades TEXT, cognateset TEXT, "order" INTEGER, language_id TEXT,
             origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER,
-            etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT
+            etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT, borrowed_from TEXT
         );
         CREATE TABLE lemma_reference (lemma_id TEXT, reference_id TEXT);
         """
@@ -157,17 +157,22 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
             (r["ID"], r["Form"], r["Gloss"], r["Native"] or None, r["Phonemic"] or None,
              r["Original"] or None, r["Description"] or "", None, None, i * 1000,
              r["Language_ID"], None, (r["Tags"] or None), (r["Etymology"] or None), None,
-             (r.get("Redirect") or None), None)
+             (r.get("Redirect") or None), None, None)
         )
         for ref in _parse_ref(r["Source"]):
             lemma_refs.append((r["ID"], ref))
         i += 1
 
-    # pass 2: reflexes + variants — origin from Origin_ID (strip borrowing/semi-tatsama markers),
-    # order anchored just after their etymon. `relation` distinguishes daughter reflexes from
-    # same-language variants; only reflexes feed the entry's clade bar (variants are excluded).
+    # pass 2: reflexes, variants, and borrowed entries — origin from Origin_ID (strip
+    # borrowing/semi-tatsama markers), order anchored just after their etymon. `relation`
+    # distinguishes daughter reflexes from same-language variants; only reflexes feed the entry's
+    # clade bar (variants and borrowings are excluded). Borrowed dictionary head entries may still
+    # carry their source dictionary's full etymological snippet, so preserve Etymology here too.
     param_cts: dict[str, int] = defaultdict(int)
     param_clades: dict[str, set] = defaultdict(set)
+    # etyma orders, extended with each reflex's order as we go, so a borrowed form (whose origin is
+    # a source reflex, listed earlier) sorts right after that source rather than at order 0.
+    node_order: dict[str, int] = dict(etymon_order)
     for r in rows:
         pid = r["Origin_ID"]
         if not pid:
@@ -175,22 +180,26 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
         if pid[0] in ">~":
             pid = pid[1:]
         param_cts[pid] += 1
+        order = node_order.get(pid, 0) + param_cts[pid]
+        node_order[r["ID"]] = order
         lemmas.append(
             (r["ID"], r["Form"], r["Gloss"], r["Native"], r["Phonemic"], r["Original"],
-             r["Description"] or "", None, r["Cognateset"], etymon_order.get(pid, 0) + param_cts[pid],
-             r["Language_ID"], pid, (r["Tags"] or None), None, (r["Relation"] or None), None,
-             (r.get("Variant_Of") or None))
+             r["Description"] or "", None, r["Cognateset"], order,
+             r["Language_ID"], pid, (r["Tags"] or None), (r["Etymology"] or None),
+             (r["Relation"] or None), None,
+             (r.get("Variant_Of") or None), (r.get("Borrowed_From") or None))
         )
         cl = clade_of.get(r["Language_ID"])
-        if cl and r["Relation"] != "variant":
+        if cl and r["Relation"] not in ("variant", "borrowed"):
             param_clades[pid].add(cl)
         for ref in _parse_ref(r["Source"]):
             lemma_refs.append((r["ID"], ref))
 
     con.executemany(
         'INSERT INTO lemmas (id,word,gloss,native,phonemic,original,notes,clades,cognateset,'
-        '"order",language_id,origin_lemma_id,tags,etymology,relation,redirect_to,variant_of) '
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        '"order",language_id,origin_lemma_id,tags,etymology,relation,redirect_to,variant_of,'
+        'borrowed_from) '
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         lemmas,
     )
     con.executemany(
@@ -292,6 +301,13 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
                 if len(r) >= 9
             ),
         )
+    # align.py keys every alignment to the reflex's ETYMON, but unify then re-homes CDIAL section
+    # reflexes onto their promoted section-form (id `<etymon>-<n>`). Re-point each alignment at the
+    # reflex's *current* origin so the section form's page shows its reflexes' alignment grid.
+    con.execute(
+        "UPDATE alignment SET parameter_id = COALESCE("
+        "  (SELECT origin_lemma_id FROM lemmas WHERE lemmas.id = alignment.form_id), parameter_id)"
+    )
     # one index serves both the per-entry tree (WHERE parameter_id) and per-entry
     # correspondence (WHERE parameter_id AND pos); language comes from a join to lemmas.
     con.execute("CREATE INDEX idx_alignment_param ON alignment(parameter_id, form_id, pos)")
