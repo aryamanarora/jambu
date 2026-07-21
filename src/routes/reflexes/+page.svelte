@@ -8,6 +8,6 @@
 </svelte:head>
 
 <h1>Reflexes</h1>
-<p class="muted">The entire lexicon — every attested form across all languages. Type at least three characters to search a column.</p>
+<p class="muted">The entire lexicon — every attested form across all languages.</p>
 
 <ReflexesView mode="reflexes" />
