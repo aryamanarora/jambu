@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import {
 		getEntryAlignment,
+		getEntryVariants,
+		getAncestryChain,
+		getDerivedTree,
 		type EntryAlignment,
 		type AlignedReflex,
-		type AlignSeg
+		type AlignSeg,
+		type AncestorRef,
+		type DerivedNode
 	} from '$lib/query';
 	import { changeInfo, changeLabel } from '$lib/soundChange';
 	import { cladeRank } from '$lib/cladeTree';
@@ -18,17 +24,24 @@
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
-	import type { Language, MapMarker } from '$lib/types';
+	import type { Language, MapMarker, Lemma } from '$lib/types';
 
 	let { data } = $props();
 	const entry = $derived(data.entry);
 	const graph = $derived(data.graph);
+	// a CDIAL "Add. N" stub is a redirect — forward to the real addendum entry
+	$effect(() => {
+		if (entry.redirect_to) goto(`${base}/entries/${entry.redirect_to}`, { replaceState: true });
+	});
 	const shortGloss = (g: string) => {
 		const m = /['‘]([^'’]{1,60})['’]/.exec(striptags(g)); // first quoted sense
 		return m ? m[1] : '';
 	};
 
 	let ea = $state<EntryAlignment | null>(null);
+	let variants = $state<Lemma[]>([]);
+	let ancestryChain = $state<AncestorRef[][]>([]);
+	let derivedTree = $state<DerivedNode[]>([]);
 	let loading = $state(true);
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
@@ -44,6 +57,12 @@
 		loading = true;
 		selected = null;
 		expanded = new Set();
+		variants = [];
+		ancestryChain = [];
+		derivedTree = [];
+		getEntryVariants(id).then((v) => (variants = v));
+		getAncestryChain(id).then((c) => (ancestryChain = c));
+		getDerivedTree(id).then((t) => (derivedTree = t));
 		getEntryAlignment(id).then((a) => {
 			ea = a;
 			loading = false;
@@ -221,7 +240,7 @@
 		[37, 98]
 	];
 
-	const plainGloss = $derived(striptags(entry.gloss));
+	const plainGloss = $derived(striptags(entry.gloss) || shortGloss(entry.etymology ?? ''));
 	const langCount = $derived(markers.length);
 
 	function rowClick(e: MouseEvent, id: string) {
@@ -260,10 +279,27 @@
 	</h1>
 	<CladeBars clades={entry.clades} size="lg" />
 </div>
-{#if graph.ancestors.length}
-	<Ancestry label="Derived from" parents={graph.ancestors} />
+{#if ancestryChain.length}
+	<Ancestry label="Derived from" chain={ancestryChain} startLang={entry.language?.name} />
 {/if}
-<p class="gloss serif">{@html safe(entry.gloss)}</p>
+{#if entry.gloss || entry.tags}
+	<p class="gloss serif">
+		{@html safe(entry.gloss)}{#if entry.tags}
+			<Tags tags={entry.tags} />{/if}
+	</p>
+{/if}
+{#if variants.length}
+	<div class="variants">
+		<span class="v-label">Variant{variants.length === 1 ? '' : 's'}</span>
+		{#each variants as v (v.id)}<span class="v-one"
+				><a class="v-item phon" href="{base}/reflexes/{v.id}">{@html safe(v.word)}</a
+				>{#if v.gloss}<span class="v-gloss muted">&nbsp;‘{striptags(v.gloss)}’</span>{/if}</span
+			>{/each}
+	</div>
+{/if}
+{#if entry.etymology}
+	<div class="etymology serif">{@html safe(entry.etymology)}</div>
+{/if}
 {#if entry.notes}
 	<details class="notes">
 		<summary>Etymological notes</summary>
@@ -272,28 +308,33 @@
 {/if}
 
 <!-- derived terms (compound / affixed etyma built on this one) — before the reflexes -->
+{#snippet dnode(d: DerivedNode)}
+	<li>
+		<div class="drow">
+			<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
+			<span class="id-tag">[{d.id}]</span>
+			{#if shortGloss(d.gloss) || striptags(d.gloss)}<span class="d-gloss"
+					>‘{shortGloss(d.gloss) || striptags(d.gloss)}’</span
+				>{/if}
+			{#if d.reflex_count}<span class="d-count muted"
+					>{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count} lang{d.lang_count ===
+					1
+						? ''
+						: 's'}</span
+				>{/if}
+		</div>
+		{#if d.children.length}<ul class="dtree">
+				{#each d.children as c (c.id)}{@render dnode(c)}{/each}
+			</ul>{/if}
+	</li>
+{/snippet}
+
 {#if graph.derived.length}
 	<details class="derived" open={graph.derived.length <= 12}>
-		<summary
-			>Derived terms <span class="muted">({graph.derived.length})</span></summary
-		>
-		<table class="derived-table">
-			<tbody>
-				{#each graph.derived as d (d.id)}
-					<tr>
-						<td class="d-word-cell">
-							<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
-							<span class="id-tag">[{d.id}]</span>
-						</td>
-						<td class="d-gloss">{#if shortGloss(d.gloss)}‘{shortGloss(d.gloss)}’{/if}</td>
-						<td class="d-count muted"
-							>{#if d.reflex_count}{d.reflex_count} reflex{d.reflex_count === 1 ? '' : 'es'} · {d.lang_count}
-								lang{d.lang_count === 1 ? '' : 's'}{/if}</td
-						>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		<summary>Derived terms <span class="muted">({graph.derived.length})</span></summary>
+		<ul class="dtree">
+			{#each derivedTree as d (d.id)}{@render dnode(d)}{/each}
+		</ul>
 	</details>
 {/if}
 
@@ -366,6 +407,11 @@
 							<td class="c-form formcell">
 								<span class="lemma-word">{@html safe(row.r.lemma.word)}</span>{#if row.r.lemma.phonemic}
 									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}
+								{#each row.r.lemma.variants ?? [] as v (v.id)}<span class="rvar-line"
+										><span class="rvar-arrow">→</span>&nbsp;<span class="rvar"
+											>{@html safe(v.word)}</span
+										></span
+									>{/each}
 							</td>
 						{:else if row.r.segs.length}
 							{#each row.cells as cell, i (i)}
@@ -428,21 +474,24 @@
 	.derived[open] > summary {
 		margin-bottom: 0.55rem;
 	}
-	.derived-table {
-		width: 100%;
-		border-collapse: collapse;
+	.dtree {
+		list-style: none;
+		margin: 0;
+		padding: 0;
 		font-size: 0.92rem;
 	}
-	.derived-table td {
-		padding: 0.28rem 0.6rem 0.28rem 0;
-		border-top: 1px solid var(--border);
-		vertical-align: baseline;
+	/* nested derived terms indent, with a hairline guide */
+	.dtree .dtree {
+		margin-left: 0.5rem;
+		padding-left: 0.7rem;
+		border-left: 1px solid var(--border);
 	}
-	.derived-table tr:first-child td {
-		border-top: none;
-	}
-	.d-word-cell {
-		white-space: nowrap;
+	.drow {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.4rem;
+		padding: 0.16rem 0;
 	}
 	.derived .d-word {
 		font-weight: 600;
@@ -450,12 +499,11 @@
 	.derived .d-gloss {
 		color: var(--muted);
 		font-style: italic;
-		width: 100%;
 	}
 	.derived .d-count {
 		font-size: 0.8rem;
 		white-space: nowrap;
-		text-align: right;
+		margin-left: auto;
 	}
 	.entry-head {
 		display: flex;
@@ -470,7 +518,39 @@
 	}
 	.gloss {
 		font-size: 1.2rem;
-		margin: 0.1rem 0 0.6rem;
+		margin: 0.1rem 0 0.5rem;
+	}
+	/* the free-text etymological entry (CDIAL dictionary text: sub-forms, sources, cross-refs) */
+	.etymology {
+		font-size: 1rem;
+		line-height: 1.55;
+		color: var(--ink);
+		margin: 0.4rem 0 0.8rem;
+		padding: 0.7rem 1rem;
+		background: var(--surface-2);
+		border-left: 3px solid var(--berry);
+		border-radius: 0 8px 8px 0;
+	}
+	.etymology :global(a[data-entry]) {
+		color: var(--plum-2);
+	}
+	/* same-language variant / reconstructed forms, kept apart from the daughter reflexes */
+	.variants {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25rem 1.4rem;
+		font-size: 0.95rem;
+		margin: 0 0 0.7rem;
+	}
+	.variants .v-label {
+		font-size: 0.68rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--muted);
+	}
+	.variants .v-item {
+		font-family: var(--font-phon);
 	}
 	.notes summary {
 		cursor: pointer;
@@ -518,6 +598,20 @@
 		font-size: 0.82rem;
 		color: var(--muted);
 		margin-left: 3px;
+	}
+	/* comma-listed alternates of a reflex, one per line beneath it */
+	.rvar-line {
+		display: block;
+		font-size: 0.85rem;
+		color: var(--muted);
+	}
+	.rvar-arrow {
+		font-size: 0.72rem;
+		color: var(--faint);
+	}
+	.rvar {
+		font-family: var(--font-phon);
+		white-space: nowrap;
 	}
 	th.c-form {
 		text-align: left;
@@ -613,6 +707,10 @@
 	}
 	.c-clade {
 		width: 88px;
+	}
+	/* header rail lining up with the coloured clade accent on the cells below */
+	table.aln th.c-clade {
+		border-left: 3px solid var(--border-strong);
 	}
 	.c-lang {
 		width: 130px;

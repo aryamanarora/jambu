@@ -36,10 +36,16 @@ export interface Lemma {
 	order: number;
 	language_id: string;
 	origin_lemma_id: string | null;
+	etymology?: string; // free-text etymological header (the CDIAL entry HTML); entries only
+	relation?: string | null; // '' for etyma, 'reflex' | 'variant' for children
+	variant_of?: string | null; // a reflex-variant points at its main reflex (null ⇒ head variant)
+	variants?: Lemma[]; // hydrated: same-form alternates of a main reflex (entry page)
+	redirect_to?: string | null; // a CDIAL "Add. N" stub redirects to entry N (not listed)
 	// per-entry aggregates (materialised columns; populated on headwords)
 	reflex_count?: number;
 	lang_count?: number;
 	derived_count?: number; // # of derived-term etyma built on this headword (entries view)
+	variant_forms?: string | null; // same-language variant word forms, \x1f-separated (entries view)
 	// hydrated relations (optional)
 	language?: Language;
 	origin_lemma?: Lemma | null;
@@ -51,6 +57,7 @@ export interface ListParams {
 	lang?: string;
 	word?: string;
 	gloss?: string;
+	etymology?: string;
 	notes?: string;
 	source?: string;
 	origin_lang?: string;

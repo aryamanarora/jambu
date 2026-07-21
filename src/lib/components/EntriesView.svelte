@@ -14,6 +14,8 @@
 	const list = createListState('entries');
 	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
 	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
+	// variant word forms arrive \x1f-separated from group_concat (see query.ts)
+	const variantList = (s?: string | null): string[] => (s ? [...new Set(s.split(''))] : []);
 
 	let langOptions = $state<SelectOption[]>([]);
 	$effect(() => {
@@ -43,9 +45,19 @@
 {/if}
 
 <div class="table-wrap">
-	<table class="data">
+	<table class="data accent-col">
 		<thead>
 			<tr>
+				<FilterCell
+					label="Entry"
+					filterKey="word"
+					sortKey="word"
+					palette
+					value={list.params.word ?? ''}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
+				/>
 				<FilterCell
 					label="Language"
 					filterKey="origin_lang"
@@ -53,16 +65,6 @@
 					options={langOptions}
 					sortKey="lang"
 					value={list.params.origin_lang ?? ''}
-					activeSort={list.params.sort ?? ''}
-					onFilter={list.setFilter}
-					onSort={list.setSort}
-				/>
-				<FilterCell
-					label="Entry"
-					filterKey="word"
-					sortKey="word"
-					palette
-					value={list.params.word ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -78,10 +80,10 @@
 					onSort={list.setSort}
 				/>
 				<FilterCell
-					label="Source"
-					filterKey="source"
-					sortKey="source"
-					value={list.params.source ?? ''}
+					label="Etymology"
+					filterKey="etymology"
+					palette
+					value={list.params.etymology ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -110,31 +112,42 @@
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
+				<FilterCell
+					label="Source"
+					filterKey="source"
+					sortKey="source"
+					value={list.params.source ?? ''}
+					activeSort={list.params.sort ?? ''}
+					onFilter={list.setFilter}
+					onSort={list.setSort}
+				/>
 			</tr>
 		</thead>
 		<tbody>
 			{#if list.result}
 				{#each list.result.rows as e (e.id)}
 					<tr>
-						<td class="lang-cell" style="border-left-color: {hashColor(e.language?.color)}">
-							<div class="lang-inner">
-								<span>
-									{e.language?.language}{#if e.language?.dialect}: <span class="font-thin"
-											>{e.language.dialect}</span
-										>{/if}
-								</span>
-								<CladeBars clades={e.clades} />
+						<td class="lang-cell entry-cell" style="border-left-color: {hashColor(e.language?.color)}">
+							<div class="entry-inner">
+								<span class="entry-word-line">
+									<a href="{base}/entries/{e.id}">{@html safe(e.word)}</a>
+									<span class="id-tag">[{e.id}]</span>
+											</span>
+								{#if e.variant_forms}{#each variantList(e.variant_forms) as vf (vf)}<span class="var-line"><span class="var-arrow">→</span>&nbsp;<span class="var-form">{@html safe(vf)}</span></span>{/each}{/if}
+						<CladeBars clades={e.clades} />
 							</div>
 						</td>
-						<td class="lemma-word">
-							<a href="{base}/entries/{e.id}">{@html safe(e.word)}</a>
-							<span class="id-tag">[{e.id}]</span>
+						<td class="lang-plain">
+							{e.language?.language}{#if e.language?.dialect}: <span class="font-thin"
+									>{e.language.dialect}</span
+								>{/if}
 						</td>
-						<td class="muted">{@html safe(e.gloss) || '—'}</td>
-						<td><RefList references={e.references} /></td>
+						<td class="muted gloss-cell">{@html safe(e.gloss) || '—'}</td>
+						<td class="muted etym-cell">{@html safe(e.etymology) || '—'}</td>
 						<td class="num">{e.lang_count?.toLocaleString() ?? ''}</td>
 						<td class="num">{e.reflex_count?.toLocaleString() ?? ''}</td>
 						<td class="num">{e.derived_count?.toLocaleString() ?? ''}</td>
+						<td><RefList references={e.references} /></td>
 					</tr>
 				{/each}
 			{/if}
@@ -154,10 +167,47 @@
 		height: 3px;
 		margin-bottom: 0.4rem;
 	}
-	.lang-inner {
+	/* the headword leads the row, with its reflex-clade spread stacked beneath it */
+	.entry-inner {
 		display: flex;
 		flex-direction: column;
-		gap: 3px;
+		gap: 4px;
+	}
+	.entry-cell {
+		min-width: 9rem;
+	}
+	.entry-word-line a {
+		font-family: var(--font-serif);
+		font-size: 1.18rem;
+		font-weight: 600;
+	}
+	/* language is now secondary to the headword */
+	.lang-plain {
+		font-size: 0.92rem;
+		color: var(--muted);
+		white-space: nowrap;
+	}
+	.gloss-cell {
+		font-family: var(--font-serif);
+		min-width: 7rem;
+	}
+	.var-line {
+		display: block;
+		font-family: var(--font-serif);
+		font-size: 0.85rem;
+		color: var(--muted);
+	}
+	.var-arrow {
+		font-size: 0.72rem;
+		color: var(--faint);
+	}
+	.var-form {
+		white-space: nowrap;
+	}
+	.etym-cell {
+		font-size: 0.88rem;
+		line-height: 1.45;
+		font-family: var(--font-serif);
 	}
 	.num {
 		text-align: right;

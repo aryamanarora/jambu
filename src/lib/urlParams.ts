@@ -9,6 +9,7 @@ export function paramsFromUrl(sp: URLSearchParams): ListParams {
 		lang: g('lang'),
 		word: g('word'),
 		gloss: g('gloss'),
+		etymology: g('etymology'),
 		notes: g('notes'),
 		source: g('source'),
 		origin_lang: g('origin_lang'),

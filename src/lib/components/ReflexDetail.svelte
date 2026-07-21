@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { changeInfo, changeLabel } from '$lib/soundChange';
 	import { safe, md } from '$lib/render';
 	import RefList from './RefList.svelte';
 	import Tags from './Tags.svelte';
+	import Alignment from './Alignment.svelte';
 	import type { Lemma } from '$lib/types';
 	import type { AlignSeg } from '$lib/query';
 
@@ -44,14 +44,7 @@
 		</div>
 	{/if}
 	{#if lemma.notes}<div class="d-notes markdown">{@html md(lemma.notes)}</div>{/if}
-	{#if segs.length}
-		<div class="steps">
-			{#each segs as s (s.pos)}
-				{@const info = changeInfo(s.change)}
-				<span class="step {info.cls}">{changeLabel(s.etymonSeg, s.reflexSeg, s.change)}</span>
-			{/each}
-		</div>
-	{/if}
+	{#if segs.length}<Alignment {segs} />{/if}
 </div>
 
 <style>
@@ -91,34 +84,5 @@
 	.d-notes {
 		font-size: 0.88rem;
 		margin-top: 0.4rem;
-	}
-	.steps {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 5px;
-		margin-top: 0.5rem;
-	}
-	.step {
-		font-size: 0.72rem;
-		padding: 3px 9px;
-		border-radius: 999px;
-		background: var(--surface);
-		border: 1px solid var(--border);
-	}
-	.step.kept {
-		color: var(--faint);
-	}
-	.step.change {
-		color: #a85713;
-	}
-	.step.loss {
-		color: var(--bad);
-	}
-	.step.add {
-		color: #2563a8;
-	}
-	:global(:root[data-theme='dark']) .step.change,
-	:global(:root:not([data-theme='light'])) .step.change {
-		color: #e0a35a;
 	}
 </style>

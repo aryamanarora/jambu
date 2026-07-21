@@ -1,8 +1,42 @@
 /* ============================================================================
    Jambu — "jamun-berry" design system
-   Deep plum/berry on warm ivory paper. Serif (Gentium Plus, full IPA coverage) for
+   Deep plum/berry on warm ivory paper. Serif (Charis SIL, full IPA coverage) for
    linguistic content; clean sans (Inter) for UI chrome. Light + dark, theme-aware.
    ============================================================================ */
+
+/* Charis SIL, self-hosted at FULL Unicode coverage (v7.000, OFL). Google Fonts serves a
+   subsetted build that drops most IPA combining diacritics (e.g. U+032A dental, U+1DC0–1DFF
+   tone marks), so phonetic transcriptions rendered as tofu. These files are the complete font.
+   No `unicode-range` — each face covers everything. Paths are relative to this file so Vite
+   emits them with the correct hashed, base-prefixed URL. */
+@font-face {
+	font-family: 'Charis SIL';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('./fonts/Charis-Regular.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Charis SIL';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('./fonts/Charis-Bold.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Charis SIL';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url('./fonts/Charis-Italic.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Charis SIL';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url('./fonts/Charis-BoldItalic.woff2') format('woff2');
+}
 
 :root {
 	/* Light (paper) — default */
@@ -30,9 +64,9 @@
 	--warn: #b9860b;
 	--bad: #c0392b;
 
-	--font-serif: 'Gentium Plus', 'Charis SIL', 'Iowan Old Style', Georgia, serif;
-	/* phonemic / transcription text — Charis SIL has the best IPA + combining-diacritic rendering */
-	--font-phon: 'Charis SIL', 'Gentium Plus', 'Iowan Old Style', Georgia, serif;
+	/* Charis SIL for both display serif and phonemic text — self-hosted at full IPA coverage. */
+	--font-serif: 'Charis SIL', 'Iowan Old Style', Georgia, serif;
+	--font-phon: 'Charis SIL', 'Iowan Old Style', Georgia, serif;
 	--font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Fira Sans', sans-serif;
 	--maxw: 1180px;
 }
@@ -381,6 +415,11 @@ table.data td p {
 	border-left: 4px solid var(--clade-empty);
 	font-weight: 500;
 	white-space: nowrap;
+}
+/* header of a lang-accent column carries a matching 4px rail so it lines up with the coloured
+   clade accent on the cells below */
+table.data.accent-col th:first-child {
+	border-left: 4px solid var(--border-strong);
 }
 .group-row td {
 	background: var(--surface-2);

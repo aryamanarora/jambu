@@ -10,13 +10,28 @@
  * For fast LOCAL build smoke-tests only — production must prerender everything.
  */
 import Database from 'better-sqlite3';
+import { statSync } from 'node:fs';
+import { dev } from '$app/environment';
 import type { Language, Lemma, Reference } from '$lib/types';
 
 const DB_PATH = process.env.JAMBU_DB ?? '.dbwork/jambu.db';
 
 let db: Database.Database | null = null;
+let openedMtime = 0;
 export function getDb(): Database.Database {
-	if (!db) db = new Database(DB_PATH, { readonly: true, fileMustExist: true });
+	// In dev the long-lived Vite server would otherwise pin a cached connection to a stale inode:
+	// build_static_db.py replaces .dbwork/jambu.db in place, so reopen whenever its mtime changes.
+	if (dev && db) {
+		const mtime = statSync(DB_PATH).mtimeMs;
+		if (mtime !== openedMtime) {
+			db.close();
+			db = null;
+		}
+	}
+	if (!db) {
+		db = new Database(DB_PATH, { readonly: true, fileMustExist: true });
+		if (dev) openedMtime = statSync(DB_PATH).mtimeMs;
+	}
 	return db;
 }
 
@@ -83,7 +98,7 @@ export function getEntryGraph(id: string): EntryGraph {
 	const ancestors = dbh
 		.prepare(
 			`SELECT l.id, l.word FROM derivation d JOIN lemmas l ON l.id = d.parent_id
-			 WHERE d.child_id = ? ORDER BY l."order"`
+			 WHERE d.child_id = ? ORDER BY d.rowid`
 		)
 		.all(id) as { id: string; word: string }[];
 	const derived = dbh

@@ -15,6 +15,9 @@ import { browser } from '$app/environment';
 import { base } from '$app/paths';
 import { DB_APPROX_BYTES } from './dbMeta';
 
+// dev loads the local DB automatically (no manual gate); prod waits for the user to opt in.
+const DEV = import.meta.env.DEV;
+
 export type DbStatus = 'idle' | 'checking' | 'downloading' | 'ready' | 'error';
 
 let status = $state<DbStatus>('idle');
@@ -181,6 +184,7 @@ async function becomeLeader() {
 	try {
 		const res = await workerCall({ type: 'init' });
 		if (res.cached) setReady();
+		else if (DEV) void loadDatabase(); // dev: auto-load the current local DB, no manual gate
 		else if (status === 'checking') status = 'idle';
 	} catch (err) {
 		status = 'error';
@@ -195,14 +199,16 @@ function startEngine() {
 	channel = new BroadcastChannel(CHANNEL);
 	channel.onmessage = (e: MessageEvent<Chan>) => onChannelMessage(e.data);
 	const locks = (navigator as unknown as { locks?: LockManager }).locks;
-	if (locks) {
+	// In dev the DB is a per-tab in-memory copy (no OPFS exclusivity), so every tab is its own
+	// leader — this avoids proxying to a stale leader tab and lets each reload auto-load fresh.
+	if (locks && !DEV) {
 		// hold the lock (→ leadership) until this tab unloads; then a follower is promoted
 		void locks.request(LOCK, { mode: 'exclusive' }, () => {
 			void becomeLeader();
 			return new Promise<void>(() => {});
 		});
 	} else {
-		void becomeLeader(); // no Web Locks → single-tab leader
+		void becomeLeader(); // dev, or no Web Locks → single-tab leader
 	}
 }
 

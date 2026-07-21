@@ -3,6 +3,7 @@
 	// with AND semantics (a row must carry every picked tag). Renders a <th> so it drops into the
 	// header row alongside the FilterCell columns. Chips are coloured by category.
 	import { GENDER_TAGS, GRAMMATICAL_TAGS, COMMON_SOURCES, TAG_NAMES } from '$lib/tags';
+	import { floatingPanel } from '$lib/floatingPanel';
 	let {
 		value = '',
 		onFilter
@@ -17,6 +18,7 @@
 	const selected = $derived(new Set(value.split(/\s+/).filter(Boolean)));
 	let open = $state(false);
 	let root: HTMLElement;
+	let triggerEl = $state<HTMLButtonElement | null>(null);
 
 	function toggle(t: string) {
 		const next = new Set(selected);
@@ -45,6 +47,7 @@
 		<button
 			class="trigger"
 			class:active={selected.size > 0}
+			bind:this={triggerEl}
 			aria-expanded={open}
 			onclick={() => (open = !open)}
 		>
@@ -53,7 +56,7 @@
 		</button>
 	</div>
 	{#if open}
-		<div class="panel">
+		<div class="panel" use:floatingPanel={triggerEl}>
 			{#each GROUPS as g (g.label)}
 				<div class="grp">
 					<div class="grp-lbl">
@@ -82,27 +85,29 @@
 	th {
 		position: relative;
 	}
+	/* match the sibling text-filter inputs (.search-box) so the header row reads uniformly */
 	.trigger {
 		display: inline-flex;
 		align-items: center;
 		gap: 5px;
-		font: inherit;
-		font-size: 0.82rem;
-		padding: 3px 9px;
-		border: 1px solid var(--border-strong);
-		border-radius: 7px;
-		background: var(--bg);
+		width: 100%;
+		min-width: 90px;
+		padding: 0.38rem 0.5rem;
+		font-family: var(--font-serif);
+		font-size: 0.9rem;
 		color: var(--ink);
+		background: var(--surface);
+		border: 1.5px solid var(--border-strong);
+		border-radius: var(--radius-sm);
 		cursor: pointer;
 		white-space: nowrap;
 	}
-	.trigger:hover {
-		border-color: var(--berry);
-	}
+	.trigger:hover,
 	.trigger.active {
-		background: var(--plum);
-		color: #fbeefb;
-		border-color: var(--plum);
+		border-color: var(--plum-2);
+	}
+	.caret {
+		margin-left: auto;
 	}
 	.count {
 		font-size: 0.62rem;

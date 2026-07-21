@@ -3,10 +3,12 @@
 	import type { Reference } from '$lib/types';
 
 	let { references = [] }: { references?: Reference[] } = $props();
+	// dedupe by id — an entry can end up citing the same reference twice (e.g. after an addenda merge)
+	const refs = $derived([...new Map(references.map((r) => [r.id, r])).values()]);
 </script>
 
-{#if references && references.length}
-	{#each references as r, i (r.id)}{#if i > 0}, {/if}<a
+{#if refs.length}
+	{#each refs as r, i (r.id)}{#if i > 0}, {/if}<a
 			href="{base}/references/{r.id}"
 			title={r.short}>{r.short}</a
 		>{/each}

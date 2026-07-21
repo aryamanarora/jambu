@@ -49,7 +49,7 @@
 {#if list.error}<p style="color: var(--bad)">Query error: {list.error}</p>{/if}
 
 <div class="table-wrap">
-	<table class="data">
+	<table class="data" class:accent-col={showLangCol}>
 		<thead>
 			<tr>
 				{#if showLangCol}
@@ -168,6 +168,12 @@
 <style>
 	.showing-line {
 		margin-top: 0.5rem;
+	}
+	/* headword/form is the focus of each row, matching the entries table */
+	.lemma-word a {
+		font-family: var(--font-serif);
+		font-size: 1.12rem;
+		font-weight: 600;
 	}
 	.loader-slot {
 		height: 3px;

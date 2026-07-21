@@ -76,9 +76,11 @@ async function languageMap(): Promise<Map<string, Language>> {
 const filterLangsCache = new Map<string, Language[]>();
 export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<Language[]> {
 	if (filterLangsCache.has(mode)) return filterLangsCache.get(mode)!;
-	const cond = mode === 'entries' ? 'origin_lemma_id IS NULL' : 'origin_lemma_id IS NOT NULL';
+	// entries → languages with an etymon; reflexes → every language (the reflexes list is the
+	// whole lexicon, so any language that carries a node can be filtered on).
+	const where = mode === 'entries' ? 'WHERE origin_lemma_id IS NULL' : '';
 	const rows = await query<{ language_id: string }>(
-		`SELECT DISTINCT language_id FROM lemmas WHERE ${cond}`
+		`SELECT DISTINCT language_id FROM lemmas ${where}`
 	);
 	const langs = await languageMap();
 	const out = rows
@@ -165,6 +167,7 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 	for (const [key, col] of [
 		['word', 'word'],
 		['gloss', 'gloss'],
+		['etymology', 'etymology'],
 		['notes', 'notes']
 	] as const) {
 		const v = (p[key] ?? '').trim();
@@ -251,8 +254,10 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	const page = Math.max(1, params.page ?? 1);
 	const { conds, needsLangJoin } = lemmaConditions(params);
 
-	// base mode condition
-	const modeConds: Cond[] = [];
+	// base mode condition. The reflexes list is the whole lexicon (every node — etyma, reflexes,
+	// and variants); only the per-entry reflex_count/lang_count aggregates treat variants separately.
+	// Redirect stubs (CDIAL "Add. N" pointers) are never listed.
+	const modeConds: Cond[] = [{ sql: 'l.redirect_to IS NULL', params: [] }];
 	if (mode === 'entries') modeConds.push({ sql: 'l.origin_lemma_id IS NULL', params: [] });
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.language_id = ?', params: [languageId] });
@@ -278,7 +283,8 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	if (!hasFilters && mode === 'entries') {
 		count = await metaCount('total_entries');
 	} else if (!hasFilters && mode === 'reflexes') {
-		count = await metaCount('total_reflexes');
+		// the reflexes list is the whole lexicon (etyma + reflexes + variants), minus redirect stubs
+		count = await metaCount('total_lexicon');
 	} else if (!hasFilters && mode === 'lexicon' && languageId) {
 		// languages.lemma_count is exactly the per-language lemma count (verified)
 		const r = await queryOne<{ c: number }>('SELECT lemma_count AS c FROM languages WHERE id = ?', [
@@ -295,14 +301,17 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	// page
 	const offset = (page - 1) * PAGE_SIZE;
-	// how many derived-term etyma each headword spawns (compounds/affixed forms) — entries view only
+	// per-entry extras (entries view only): derived-term count and the same-language variant forms
+	// (concatenated, ordered, unit-separated) so the Entry column can list them beside the headword
 	const derivedCol =
 		mode === 'entries'
-			? ', (SELECT COUNT(*) FROM derivation WHERE parent_id = l.id) AS derived_count'
+			? ', (SELECT COUNT(*) FROM derivation WHERE parent_id = l.id) AS derived_count' +
+				", (SELECT group_concat(word, char(31)) FROM (SELECT word FROM lemmas WHERE " +
+				"origin_lemma_id = l.id AND relation = 'variant' AND variant_of IS NULL ORDER BY \"order\")) AS variant_forms"
 			: '';
 	const fetchSql = isDefaultEntries
 		? `SELECT l.*${derivedCol} FROM lemmas l INDEXED BY idx_entries_order
-		   WHERE l.origin_lemma_id IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
+		   WHERE l.origin_lemma_id IS NULL AND l.redirect_to IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
 		: `SELECT l.*${derivedCol} FROM lemmas l ${join} ${whereSql}
 		   ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
 	const rows = await query<Lemma>(fetchSql, isDefaultEntries ? [] : whereParams);
@@ -323,6 +332,130 @@ export async function getLemma(id: string): Promise<Lemma | null> {
 	await attachOrigin([l]);
 	await attachReferences([l]);
 	return l;
+}
+
+export interface AncestorRef {
+	id: string;
+	word: string;
+	lang?: string | null;
+	kind: 'entry' | 'reflex'; // link target: /entries/ vs /reflexes/
+}
+
+/** Walk up the etymology graph from a node: a reflex/variant → its etymon (origin_lemma_id); an
+ *  etymon → its derivation ancestors (and so on up to the roots). Returns the ancestors level by
+ *  level, nearest first. */
+export async function getAncestryChain(startId: string): Promise<AncestorRef[][]> {
+	const langs = await languageMap();
+	const levels: AncestorRef[][] = [];
+	const seen = new Set<string>([startId]);
+	let frontier = [startId];
+	for (let depth = 0; depth < 16 && frontier.length; depth++) {
+		// a variant steps up to its main reflex (variant_of); a reflex to its etymon (origin_lemma_id)
+		const viaOrigin = await inChunks<{ pid: string }>(frontier, (chunk) =>
+			query<{ pid: string }>(
+				`SELECT COALESCE(variant_of, origin_lemma_id) AS pid FROM lemmas
+				 WHERE id IN (${placeholders(chunk.length)}) AND COALESCE(variant_of, origin_lemma_id) IS NOT NULL`,
+				chunk
+			)
+		);
+		const viaDeriv = await inChunks<{ pid: string }>(frontier, (chunk) =>
+			query<{ pid: string }>(
+				`SELECT parent_id AS pid FROM derivation WHERE child_id IN (${placeholders(chunk.length)})`,
+				chunk
+			)
+		);
+		const pids = [...new Set([...viaOrigin, ...viaDeriv].map((r) => r.pid))].filter(
+			(p) => p && !seen.has(p)
+		);
+		if (!pids.length) break;
+		pids.forEach((p) => seen.add(p));
+		const rows = await inChunks<{ id: string; word: string; language_id: string; olid: string | null }>(
+			pids,
+			(chunk) =>
+				query(
+					`SELECT id, word, language_id, origin_lemma_id AS olid FROM lemmas
+					 WHERE id IN (${placeholders(chunk.length)})`,
+					chunk
+				)
+		);
+		levels.push(
+			rows.map((r) => ({
+				id: r.id,
+				word: r.word,
+				lang: langs.get(r.language_id)?.name,
+				kind: r.olid ? ('reflex' as const) : ('entry' as const)
+			}))
+		);
+		frontier = pids;
+	}
+	return levels;
+}
+
+export interface DerivedNode {
+	id: string;
+	word: string;
+	gloss: string;
+	reflex_count?: number;
+	lang_count?: number;
+	children: DerivedNode[];
+}
+
+/** The derived-term subtree of an entry: its derived terms, their derived terms, and so on down the
+ *  derivation graph (breadth-first, deduped against cycles/diamonds, bounded for safety). */
+export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<DerivedNode[]> {
+	const childrenOf = new Map<string, string[]>();
+	const seen = new Set<string>([rootId]);
+	let frontier = [rootId];
+	let total = 0;
+	for (let depth = 0; depth < 12 && frontier.length && total < maxNodes; depth++) {
+		const edges = await inChunks<{ p: string; c: string }>(frontier, (chunk) =>
+			query<{ p: string; c: string }>(
+				`SELECT parent_id AS p, child_id AS c FROM derivation
+				 WHERE parent_id IN (${placeholders(chunk.length)}) ORDER BY child_id`,
+				chunk
+			)
+		);
+		const next: string[] = [];
+		for (const { p, c } of edges) {
+			if (seen.has(c) || total >= maxNodes) continue;
+			seen.add(c);
+			total++;
+			const arr = childrenOf.get(p);
+			if (arr) arr.push(c);
+			else childrenOf.set(p, [c]);
+			next.push(c);
+		}
+		frontier = next;
+	}
+	const ids = [...seen].filter((id) => id !== rootId);
+	const rows = await inChunks<DerivedNode>(ids, (chunk) =>
+		query<DerivedNode>(
+			`SELECT id, word, gloss, reflex_count, lang_count, "order" FROM lemmas
+			 WHERE id IN (${placeholders(chunk.length)})`,
+			chunk
+		)
+	);
+	const info = new Map(rows.map((r) => [r.id, r]));
+	const orderOf = new Map(rows.map((r) => [r.id, (r as unknown as { order: number }).order]));
+	const build = (id: string): DerivedNode => {
+		const r = info.get(id)!;
+		const kids = (childrenOf.get(id) ?? []).sort(
+			(a, b) => (orderOf.get(a) ?? 0) - (orderOf.get(b) ?? 0)
+		);
+		return { ...r, children: kids.map(build) };
+	};
+	return (childrenOf.get(rootId) ?? [])
+		.sort((a, b) => (orderOf.get(a) ?? 0) - (orderOf.get(b) ?? 0))
+		.map(build);
+}
+
+/** Comma-listed alternates of a reflex (its reflex-variants), for the reflex page. */
+export async function getReflexVariants(reflexId: string): Promise<Lemma[]> {
+	const vs = await query<Lemma>('SELECT * FROM lemmas WHERE variant_of = ? ORDER BY "order"', [
+		reflexId
+	]);
+	await attachLanguages(vs);
+	return vs;
 }
 
 export async function getLanguage(id: string): Promise<Language | null> {
@@ -353,9 +486,24 @@ export function parseCognateset(key: string | null): { code: string | null; labe
 	return { code: key.slice(0, idx), label: key.slice(idx + 1) };
 }
 
+/** Same-language variant forms of an etymon (alternate spellings / reconstructions), shown apart
+ *  from the daughter-language reflexes. */
+export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
+	// head variants only (same-language alternates of the etymon head); reflex-variants (variant_of
+	// set) are shown grouped under their main reflex instead.
+	const variants = await query<Lemma>(
+		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'variant' " +
+			'AND variant_of IS NULL ORDER BY "order"',
+		[entryId]
+	);
+	await attachLanguages(variants);
+	await attachReferences(variants);
+	return variants;
+}
+
 export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> {
 	const reflexes = await query<Lemma>(
-		'SELECT * FROM lemmas WHERE origin_lemma_id = ? ORDER BY cognateset',
+		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'reflex' ORDER BY cognateset",
 		[entryId]
 	);
 	await attachLanguages(reflexes);
@@ -426,11 +574,25 @@ export interface EntryAlignment {
 
 export async function getEntryAlignment(entryId: string): Promise<EntryAlignment> {
 	const reflexes = await query<Lemma>(
-		'SELECT * FROM lemmas WHERE origin_lemma_id = ? ORDER BY "order"',
+		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'reflex' ORDER BY \"order\"",
 		[entryId]
 	);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
+
+	// attach each main reflex's comma-listed alternates (reflex-variants) for inline display
+	const rvars = await query<Lemma>(
+		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'variant' " +
+			'AND variant_of IS NOT NULL ORDER BY "order"',
+		[entryId]
+	);
+	const byMain = new Map<string, Lemma[]>();
+	for (const v of rvars) {
+		const arr = byMain.get(v.variant_of!);
+		if (arr) arr.push(v);
+		else byMain.set(v.variant_of!, [v]);
+	}
+	for (const r of reflexes) r.variants = byMain.get(r.id) ?? [];
 
 	const rows = await query<{
 		form_id: string;

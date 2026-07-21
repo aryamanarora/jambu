@@ -69,7 +69,7 @@
 					onblur={() => setTimeout(() => (showPalette = false), 200)}
 				/>
 				{#if showPalette}
-					<CharPalette oninsert={insert} />
+					<CharPalette oninsert={insert} anchor={inputEl} />
 				{/if}
 			</div>
 		{:else if filterKey && type === 'select'}

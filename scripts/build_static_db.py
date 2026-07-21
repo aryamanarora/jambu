@@ -31,6 +31,7 @@ import time
 from collections import defaultdict
 from pathlib import Path
 
+
 # Clade → colour + canonical order (== ../data clade scheme, ported from the old make_database.py).
 CLADE_COLORS = {
     "OIA": "E2DFD2", "MIA": "FFDEAD", "Migratory": "63666A", "Nuristani": "9132a8",
@@ -50,7 +51,7 @@ CLADE_ORDER = list(CLADE_COLORS.keys())
 # columns in the UI (search.py filters: word, gloss, notes; `origin` reuses the word index).
 # native/phonemic/original are displayed but never filtered, so we don't index them — this keeps
 # the trigram index (and thus the whole DB) markedly smaller.
-LEMMA_FTS_COLUMNS = ["word", "gloss", "notes"]
+LEMMA_FTS_COLUMNS = ["word", "gloss", "notes", "etymology"]
 
 
 def log(msg: str) -> None:
@@ -72,7 +73,8 @@ def build_base_schema(con: sqlite3.Connection) -> None:
         CREATE TABLE lemmas (
             id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT, original TEXT,
             notes TEXT, clades TEXT, cognateset TEXT, "order" INTEGER, language_id TEXT,
-            origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER
+            origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER,
+            etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT
         );
         CREATE TABLE lemma_reference (lemma_id TEXT, reference_id TEXT);
         """
@@ -142,24 +144,30 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
 
     lemmas = []
     etymon_order: dict[str, int] = {}
-    # pass 1: etyma (Origin_ID empty) — word=headword, gloss=full CDIAL HTML, notes=Description
-    # (Etyma); no attested-form fields (NULL). `order` is sequential in file order (× 1000).
+    lemma_refs = []
+    # pass 1: etyma (Origin_ID empty) — word=headword, gloss=parsed meaning + tags/native/phonemic
+    # folded up from the (dropped) self-reflex, etymology=free-text CDIAL header, notes=Description
+    # (Etyma). `order` is sequential in file order (× 1000). Refs come from the folded self-reflex.
     i = 0
     for r in rows:
         if r["Origin_ID"]:
             continue
         etymon_order[r["ID"]] = i * 1000
         lemmas.append(
-            (r["ID"], r["Form"], r["Gloss"], None, None, None, r["Description"] or "",
-             None, None, i * 1000, r["Language_ID"], None, None)
+            (r["ID"], r["Form"], r["Gloss"], r["Native"] or None, r["Phonemic"] or None,
+             r["Original"] or None, r["Description"] or "", None, None, i * 1000,
+             r["Language_ID"], None, (r["Tags"] or None), (r["Etymology"] or None), None,
+             (r.get("Redirect") or None), None)
         )
+        for ref in _parse_ref(r["Source"]):
+            lemma_refs.append((r["ID"], ref))
         i += 1
 
-    # pass 2: reflexes — origin from Origin_ID (strip borrowing/semi-tatsama markers), order anchored
-    # just after their etymon.
+    # pass 2: reflexes + variants — origin from Origin_ID (strip borrowing/semi-tatsama markers),
+    # order anchored just after their etymon. `relation` distinguishes daughter reflexes from
+    # same-language variants; only reflexes feed the entry's clade bar (variants are excluded).
     param_cts: dict[str, int] = defaultdict(int)
     param_clades: dict[str, set] = defaultdict(set)
-    lemma_refs = []
     for r in rows:
         pid = r["Origin_ID"]
         if not pid:
@@ -170,17 +178,19 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
         lemmas.append(
             (r["ID"], r["Form"], r["Gloss"], r["Native"], r["Phonemic"], r["Original"],
              r["Description"] or "", None, r["Cognateset"], etymon_order.get(pid, 0) + param_cts[pid],
-             r["Language_ID"], pid, (r["Tags"] or None))
+             r["Language_ID"], pid, (r["Tags"] or None), None, (r["Relation"] or None), None,
+             (r.get("Variant_Of") or None))
         )
         cl = clade_of.get(r["Language_ID"])
-        if cl:
+        if cl and r["Relation"] != "variant":
             param_clades[pid].add(cl)
         for ref in _parse_ref(r["Source"]):
             lemma_refs.append((r["ID"], ref))
 
     con.executemany(
         'INSERT INTO lemmas (id,word,gloss,native,phonemic,original,notes,clades,cognateset,'
-        '"order",language_id,origin_lemma_id,tags) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+        '"order",language_id,origin_lemma_id,tags,etymology,relation,redirect_to,variant_of) '
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         lemmas,
     )
     con.executemany(
@@ -385,6 +395,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     else:
         log(f"(no derivation.csv at {deriv}; skipping derivation graph)")
 
+
     # 3. FTS5 trigram over lemma text columns (external content => no duplicated text).
     #    content_rowid uses the implicit rowid since lemmas.id is a VARCHAR PK.
     cols = ", ".join(LEMMA_FTS_COLUMNS)
@@ -411,8 +422,10 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         CREATE TABLE meta (key TEXT PRIMARY KEY, value INTEGER);
         INSERT INTO meta VALUES
             ('total_lemmas',   (SELECT COUNT(*) FROM lemmas)),
-            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL)),
-            ('total_reflexes', (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NOT NULL));
+            ('total_lexicon',  (SELECT COUNT(*) FROM lemmas WHERE redirect_to IS NULL)),
+            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL AND redirect_to IS NULL)),
+            ('total_reflexes', (SELECT COUNT(*) FROM lemmas WHERE relation = 'reflex')),
+            ('total_variants', (SELECT COUNT(*) FROM lemmas WHERE relation = 'variant'));
         """
     )
     log("wrote meta counts: " + str(con.execute('SELECT key, value FROM meta').fetchall()))
@@ -422,9 +435,10 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     con.executescript(
         """
         UPDATE lemmas SET
-            reflex_count = (SELECT COUNT(*) FROM lemmas r WHERE r.origin_lemma_id = lemmas.id),
+            reflex_count = (SELECT COUNT(*) FROM lemmas r
+                            WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex'),
             lang_count   = (SELECT COUNT(DISTINCT r.language_id) FROM lemmas r
-                            WHERE r.origin_lemma_id = lemmas.id)
+                            WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex')
         WHERE origin_lemma_id IS NULL;
         CREATE INDEX idx_entries_reflex_count ON lemmas(reflex_count) WHERE origin_lemma_id IS NULL;
         CREATE INDEX idx_entries_lang_count   ON lemmas(lang_count)   WHERE origin_lemma_id IS NULL;
