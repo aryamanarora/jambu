@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import Favorites from '$lib/components/Favorites.svelte';
 	import DbBanner from '$lib/components/DbBanner.svelte';
+	import EntryPeek from '$lib/components/EntryPeek.svelte';
 	import { loadFavorites } from '$lib/prefs.svelte';
 	import { preloadDb } from '$lib/db.svelte';
 
@@ -69,3 +70,5 @@
 <main class="content">
 	{@render children()}
 </main>
+
+<EntryPeek />

@@ -13,8 +13,11 @@ marked.setOptions({ breaks: false, gfm: true });
 // The data prep step (../data/link_refs.py) marks cross-references to other entries as
 // `<a data-entry="ID">…</a>` (route-agnostic). Turn those into real, base-prefixed links here.
 function linkEntries(h: string): string {
+	// strip the stray <html>/<body> wrapper some source entries carry (a BeautifulSoup artifact)
+	if (h.includes('<html') || h.includes('<body')) h = h.replace(/<\/?(?:html|body)>/g, '');
+	// keep the entry id in data-eref so the hover popover can lazy-load the target
 	return h.includes('data-entry')
-		? h.replace(/<a data-entry="([^"]*)"/g, `<a class="eref" href="${base}/entries/$1"`)
+		? h.replace(/<a data-entry="([^"]*)"/g, `<a class="eref" data-eref="$1" href="${base}/entries/$1"`)
 		: h;
 }
 
