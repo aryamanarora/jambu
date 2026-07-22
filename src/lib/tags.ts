@@ -9,7 +9,10 @@ export const GRAMMATICAL_TAGS = [
 	'sg', 'pl', 'du',
 	'adj', 'adv', 'pron', 'num', 'postp', 'prep', 'conj', 'interj', 'part', 'indecl', 'ord',
 	'nom', 'acc', 'dat', 'gen', 'loc', 'abl', 'instr', 'voc', 'obl',
-	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger'
+	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger',
+	'verb', 'weak', 'middle', 'strong',
+	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
+	'Tamil-class-6', 'Tamil-class-7'
 ];
 // The most common attestation sources, offered in the filter (the full set is larger; see
 // ../data/tags.py). `lex` = "known only from lexicographers".
@@ -43,6 +46,11 @@ export const TAG_NAMES: Record<string, string> = {
 	tr: 'transitive', intr: 'intransitive', caus: 'causative', pass: 'passive',
 	pp: 'past participle', ppp: 'past passive participle', pres: 'present', fut: 'future',
 	inf: 'infinitive', ger: 'gerund',
+	verb: 'verb', weak: 'weak verb', middle: 'middle verb', strong: 'strong verb',
+	'Tamil-class-1': 'Tamil verb class 1', 'Tamil-class-2': 'Tamil verb class 2',
+	'Tamil-class-3': 'Tamil verb class 3', 'Tamil-class-4': 'Tamil verb class 4',
+	'Tamil-class-5': 'Tamil verb class 5',
+	'Tamil-class-6': 'Tamil verb class 6', 'Tamil-class-7': 'Tamil verb class 7',
 	lex: 'lexicographers only', RV: 'Ṛgveda', AV: 'Atharvaveda', VS: 'Vājasaneyi Saṁhitā',
 	TS: 'Taittirīya Saṁhitā', 'ŚBr': 'Śatapatha Brāhmaṇa', Mn: 'Manu', MBh: 'Mahābhārata',
 	R: 'Rāmāyaṇa', 'Suśr': 'Suśruta', 'Pāṇ': 'Pāṇini', Dhātup: 'Dhātupāṭha', BhP: 'Bhāgavata Purāṇa',
