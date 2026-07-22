@@ -47,6 +47,11 @@
 		hideTimer = setTimeout(() => (visible = false), 150);
 	}
 
+	function hideNow() {
+		clearTimeout(hideTimer);
+		visible = false;
+	}
+
 	function onOver(e: MouseEvent) {
 		const el = (e.target as HTMLElement)?.closest?.('.eref') as HTMLElement | null;
 		if (el) show(el);
@@ -56,7 +61,7 @@
 	}
 </script>
 
-<svelte:document onmouseover={onOver} onmouseout={onOut} />
+<svelte:document onmouseover={onOver} onmouseout={onOut} onclick={hideNow} />
 
 {#if visible}
 	<div
