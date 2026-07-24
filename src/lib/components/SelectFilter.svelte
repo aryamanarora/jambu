@@ -40,7 +40,7 @@
 	const valueOpt = $derived(options.find((o) => o.value === value) ?? null);
 	const filtered = $derived(
 		filter
-			? options.filter((o) => o.label.toLowerCase().includes(filter.toLowerCase()))
+			? options.filter((o) => `${o.label} ${o.sub ?? ''}`.toLowerCase().includes(filter.toLowerCase()))
 			: options
 	);
 

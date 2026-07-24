@@ -11,8 +11,31 @@ export interface Language {
 	clade: string;
 	color: string;
 	lemma_count: number;
+	entry_count: number;
 	order: number;
 	map_marker: string;
+}
+
+// Same shape as Language (name, language, dialect, glottocode, long, lat, clade, color,
+// lemma_count, order, map_marker) plus the dialect linking fields (token, language_id, entry_count).
+export interface Dialect {
+	token: string;
+	language_id: string;
+	id: string;
+	name: string;
+	language: string | null;
+	dialect: string | null;
+	glottocode: string;
+	long: number | null;
+	lat: number | null;
+	clade: string | null;
+	color: string | null;
+	location: string | null;
+	quality: string | null;
+	lemma_count: number;
+	order: number | null;
+	map_marker: string | null;
+	entry_count: number;
 }
 
 export interface Reference {
@@ -20,6 +43,10 @@ export interface Reference {
 	short: string;
 	source: string;
 	progress: string;
+	provenance: string;
+	editor: string;
+	lemma_count: number;
+	unetymologised_count: number;
 }
 
 export interface Lemma {
@@ -30,7 +57,7 @@ export interface Lemma {
 	phonemic: string;
 	original: string;
 	notes: string;
-	tags: string; // structured tokens lifted from notes (gender + grammatical), space-separated
+	tags: string; // structured source, grammar, era, and dialect tokens; space-separated
 	clades: string;
 	cognateset: string;
 	order: number;
@@ -66,6 +93,7 @@ export interface ListParams {
 	origin_lang?: string;
 	origin?: string;
 	etymon_lang?: string; // filter reflexes by the language of their origin (etymon/source)
+	dialect?: string; // exact dialect tag, used by the per-language lexicon picker
 	clade?: string;
 	tags?: string; // space-separated tags; a row must carry ALL of them
 	rootsOnly?: boolean; // entries with no ancestor (not derived from any other etymon)
@@ -94,4 +122,5 @@ export interface MapMarker {
 	color?: string; // when set, drawn as a filled circle in this colour instead of the SVG icon
 	radius?: number;
 	dim?: boolean; // draw faded (e.g. languages with no reflex at the selected position)
+	ring?: boolean; // draw a bold outline (e.g. the selected point on the isogloss map)
 }

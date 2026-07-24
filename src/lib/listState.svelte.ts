@@ -23,7 +23,7 @@ export interface ListState {
 
 export function createListState(
 	mode: 'reflexes' | 'entries' | 'lexicon',
-	opts: { languageId?: string; withOrigin?: boolean } = {}
+	opts: { languageId?: string; referenceId?: string; withOrigin?: boolean } = {}
 ): ListState {
 	let result = $state<ListResult | null>(null);
 	let loading = $state(true);
@@ -38,7 +38,13 @@ export function createListState(
 		let cancelled = false;
 		loading = true;
 		error = null;
-		fetchLemmaList({ mode, languageId: opts.languageId, params: p, withOrigin: opts.withOrigin })
+		fetchLemmaList({
+			mode,
+			languageId: opts.languageId,
+			referenceId: opts.referenceId,
+			params: p,
+			withOrigin: opts.withOrigin
+		})
 			.then((r) => {
 				if (!cancelled) {
 					result = r;

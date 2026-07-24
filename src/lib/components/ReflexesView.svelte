@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { createListState } from '$lib/listState.svelte';
-	import { getFilterLanguages } from '$lib/query';
+	import { getFilterDialects, getFilterLanguages, getLanguageDialects } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
 	import { safe, md } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
@@ -14,36 +14,67 @@
 
 	let {
 		mode = 'reflexes',
-		languageId
-	}: { mode?: 'reflexes' | 'lexicon'; languageId?: string } = $props();
+		languageId,
+		referenceId
+	}: { mode?: 'reflexes' | 'lexicon'; languageId?: string; referenceId?: string } = $props();
 
 	const showLangCol = $derived(mode === 'reflexes');
-	const list = createListState(mode, { languageId, withOrigin: true });
+	const list = createListState(mode, { languageId, referenceId, withOrigin: true });
 	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
 	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
 
 	let langOptions = $state<SelectOption[]>([]);
 	$effect(() => {
 		if (!showLangCol) return;
-		getFilterLanguages('reflexes').then((ls) => {
-			langOptions = ls.map((l) => ({
+		Promise.all([getFilterLanguages('reflexes'), getFilterDialects('reflexes')]).then(([ls, ds]) => {
+			const byId = new Map(ls.map((l) => [l.id, l]));
+			langOptions = [...ls.map((l) => ({
 				value: l.id,
 				label: l.name,
 				sub: l.clade ?? '',
 				swatch: cladeColor(l.clade)
-			}));
+			})), ...ds.map((d) => {
+				const parent = byId.get(d.language_id);
+				return {
+					value: d.token,
+					label: `${parent?.name ?? d.language_id}: ${d.name}`,
+					sub: `dialect · ${parent?.clade ?? ''}`,
+					swatch: cladeColor(parent?.clade ?? '')
+				};
+			})];
 		});
 	});
 
 	// origin-language picker options (etymon / borrowing-source languages) for the Origin column
 	let originLangOptions = $state<SelectOption[]>([]);
 	$effect(() => {
-		getFilterLanguages('entries').then((ls) => {
-			originLangOptions = ls.map((l) => ({
+		Promise.all([getFilterLanguages('entries'), getFilterDialects('entries')]).then(([ls, ds]) => {
+			const byId = new Map(ls.map((l) => [l.id, l]));
+			originLangOptions = [...ls.map((l) => ({
 				value: l.id,
 				label: l.name,
 				sub: l.clade ?? '',
 				swatch: cladeColor(l.clade)
+			})), ...ds.map((d) => {
+				const parent = byId.get(d.language_id);
+				return {
+					value: d.token,
+					label: `${parent?.name ?? d.language_id}: ${d.name}`,
+					sub: `dialect · ${parent?.clade ?? ''}`,
+					swatch: cladeColor(parent?.clade ?? '')
+				};
+			})];
+		});
+	});
+
+	let dialectOptions = $state<SelectOption[]>([]);
+	$effect(() => {
+		if (mode !== 'lexicon' || !languageId) return;
+		getLanguageDialects(languageId).then((ds) => {
+			dialectOptions = ds.map((d) => ({
+				value: d.token,
+				label: d.name,
+				sub: `${d.lemma_count.toLocaleString()} reflexes`
 			}));
 		});
 	});
@@ -84,6 +115,10 @@
 					sortKey="word"
 					palette
 					value={list.params.word ?? ''}
+					pickerKey={mode === 'lexicon' && dialectOptions.length ? 'dialect' : null}
+					pickerOptions={dialectOptions}
+					pickerValue={list.params.dialect ?? ''}
+					pickerPlaceholder="Dialect"
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}

@@ -2,18 +2,19 @@
 	// Global favourites setting: pin and order languages / clades so they sort first on the entry
 	// and Sounds pages. Lives in the top-left of the nav; opens a modal.
 	import { favorites, type FavToken } from '$lib/prefs.svelte';
-	import { getAllLanguages } from '$lib/query';
+	import { getAllDialects, getAllLanguages } from '$lib/query';
 	import { CLADE_ORDER, cladeColor } from '$lib/clades';
-	import type { Language } from '$lib/types';
+	import type { Dialect, Language } from '$lib/types';
 
 	let open = $state(false);
 	let query = $state('');
 	let langs = $state<Language[]>([]);
+	let dialects = $state<Dialect[]>([]);
 	let loaded = $state(false);
 
 	async function ensureLangs() {
 		if (loaded) return;
-		langs = await getAllLanguages();
+		[langs, dialects] = await Promise.all([getAllLanguages(), getAllDialects()]);
 		loaded = true;
 	}
 	function show() {
@@ -24,6 +25,7 @@
 
 	// search results (languages + clades), excluding anything already pinned; capped for sanity
 	interface Result {
+		key: string;
 		token: FavToken;
 		sub: string;
 		swatch?: string;
@@ -34,17 +36,30 @@
 		const out: Result[] = [];
 		for (const c of CLADE_ORDER) {
 			if (c.toLowerCase().includes(q) && !favorites.has('clade', c))
-				out.push({ token: { kind: 'clade', id: c, label: c }, sub: 'clade', swatch: cladeColor(c) });
+				out.push({ key: `clade:${c}`, token: { kind: 'clade', id: c, label: c }, sub: 'clade', swatch: cladeColor(c) });
 		}
 		for (const l of langs) {
 			if (favorites.has('lang', l.id)) continue;
 			const name = l.name ?? l.id;
 			if (name.toLowerCase().includes(q))
 				out.push({
+					key: `lang:${l.id}`,
 					token: { kind: 'lang', id: l.id, label: name, clade: l.clade },
 					sub: l.clade ?? '—',
 					swatch: cladeColor(l.clade)
 				});
+		}
+		const byId = new Map(langs.map((l) => [l.id, l]));
+		for (const d of dialects) {
+			if (!d.name.toLowerCase().includes(q) || favorites.has('lang', d.language_id)) continue;
+			const parent = byId.get(d.language_id);
+			if (!parent) continue;
+			out.push({
+				key: `dialect:${d.token}`,
+				token: { kind: 'lang', id: parent.id, label: parent.name, clade: parent.clade },
+				sub: `${d.name} dialect`,
+				swatch: cladeColor(parent.clade)
+			});
 		}
 		return out.slice(0, 40);
 	});
@@ -109,7 +124,7 @@
 		/>
 		{#if query.trim()}
 			<ul class="results">
-				{#each results as r (r.token.kind + r.token.id)}
+				{#each results as r (r.key)}
 					<li>
 						<button
 							onclick={() => {

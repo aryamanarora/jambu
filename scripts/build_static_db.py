@@ -30,6 +30,7 @@ import sys
 import time
 from collections import defaultdict
 from pathlib import Path
+from urllib.parse import quote
 
 
 # Clade → colour + canonical order (== ../data clade scheme, ported from the old make_database.py).
@@ -48,6 +49,11 @@ CLADE_COLORS = {
 CLADE_ORDER = list(CLADE_COLORS.keys())
 MAX_OUTPUT_BYTES = 100_000_000
 
+# Printed dialect prefixes which differ from the canonical language name in languages.csv.
+BASE_LANGUAGE_OVERRIDES = {
+    "Hindi": "Hindi-Urdu",
+}
+
 def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
 
@@ -63,7 +69,21 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             long FLOAT, lat FLOAT, clade TEXT, color TEXT, lemma_count INTEGER,
             "order" INTEGER, map_marker TEXT
         );
-        CREATE TABLE "references" (id TEXT PRIMARY KEY, short TEXT, source TEXT, progress TEXT);
+        -- Dialects mirror the `languages` columns (name, language, dialect, glottocode, long, lat,
+        -- clade, color, lemma_count, order, map_marker) so a dialect is described like a language,
+        -- plus the linking fields it needs: token (PK, the tag), language_id (parent) and entry_count.
+        CREATE TABLE dialects (
+            token TEXT PRIMARY KEY, language_id TEXT NOT NULL,
+            id TEXT NOT NULL, name TEXT NOT NULL, language TEXT, dialect TEXT, glottocode TEXT,
+            long FLOAT, lat FLOAT, clade TEXT, color TEXT, location TEXT, quality TEXT,
+            lemma_count INTEGER DEFAULT 0, "order" INTEGER, map_marker TEXT,
+            entry_count INTEGER DEFAULT 0
+        );
+        CREATE TABLE "references" (
+            id TEXT PRIMARY KEY, short TEXT, source TEXT, progress TEXT, provenance TEXT,
+            editor TEXT, lemma_count INTEGER DEFAULT 0,
+            unetymologised_count INTEGER DEFAULT 0
+        );
         CREATE TABLE lemmas (
             id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT, original TEXT,
             notes TEXT, clades TEXT, cognateset TEXT, "order" INTEGER, language_id TEXT,
@@ -92,36 +112,104 @@ def _marker_svg(clade: str, name: str) -> str:
     )
 
 
-def load_languages(con: sqlite3.Connection, path: Path) -> dict[str, str]:
-    """languages.csv → languages table. Returns id→clade (needed for per-etymon clade aggregation)."""
-    rows, clade_of = [], {}
+def load_languages(
+    con: sqlite3.Connection, path: Path
+) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    """Load canonical languages plus dialect-tag metadata.
+
+    A ``Language: Dialect`` CLDF row is no longer a language in the browser DB. Its full metadata
+    is retained in ``dialects`` and its forms are remapped to the base-language row. The return
+    values are (canonical-language→clade, source-id→canonical-id, source-id→dialect-token).
+    """
+    source_rows = []
     with path.open(encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            name, clade = r["Name"], r["Clade"]
-            language, dialect = name.split(": ", 1) if ": " in name else (name, "")
-            rows.append(
+        source_rows = list(csv.DictReader(f))
+
+    by_base: dict[str, list[dict[str, str]]] = defaultdict(list)
+    exact: dict[str, dict[str, str]] = {}
+    for r in source_rows:
+        printed_base = r["Name"].split(": ", 1)[0]
+        base = BASE_LANGUAGE_OVERRIDES.get(printed_base, printed_base)
+        by_base[base].append(r)
+        if ": " not in r["Name"]:
+            exact.setdefault(base, r)
+
+    rows, dialect_rows = [], []
+    clade_of: dict[str, str] = {}
+    canonical_of: dict[str, str] = {}
+    dialect_tag_of: dict[str, str] = {}
+    for base, members in by_base.items():
+        representative = exact.get(base, members[0])
+        canonical_id = representative["ID"]
+        clade = representative["Clade"]
+        # A synthesized parent has no single geographic point. Preserve every point below in the
+        # dialect table; only an independently listed base language keeps base coordinates.
+        has_base_row = base in exact
+        glottocodes = {r.get("Glottocode") or "" for r in members} - {""}
+        glottocode = representative.get("Glottocode") or ""
+        if not glottocode and len(glottocodes) == 1:
+            glottocode = next(iter(glottocodes))
+        rows.append(
+            (
+                canonical_id, base, base, "", glottocode,
+                (representative["Longitude"] or None) if has_base_row else None,
+                (representative["Latitude"] or None) if has_base_row else None,
+                clade, CLADE_COLORS.get(clade),
+                CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
+                _marker_svg(clade, base),
+            )
+        )
+        clade_of[canonical_id] = clade
+        for r in members:
+            canonical_of[r["ID"]] = canonical_id
+            if ": " not in r["Name"]:
+                continue
+            dialect = r["Name"].split(": ", 1)[1]
+            # Include the source ID because the CLDF can contain two geographically distinct rows
+            # with the same printed dialect name (e.g. the two Kausambi records).
+            token = (
+                f"dialect:{quote(canonical_id, safe='')}:{quote(r['ID'], safe='')}:"
+                f"{quote(dialect, safe='')}"
+            )
+            dialect_tag_of[r["ID"]] = token
+            dialect_rows.append(
                 (
-                    r["ID"], name, language, dialect, r.get("Glottocode") or "",
-                    r["Longitude"] or None, r["Latitude"] or None, clade,
-                    CLADE_COLORS.get(clade), CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
-                    _marker_svg(clade, name),
+                    token, canonical_id, r["ID"], dialect, base, dialect,
+                    r.get("Glottocode") or "", r["Longitude"] or None, r["Latitude"] or None,
+                    clade, CLADE_COLORS.get(clade),
+                    r.get("Location") or "", r.get("Quality") or "",
+                    CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
+                    _marker_svg(clade, base),
                 )
             )
-            clade_of[r["ID"]] = clade
     con.executemany(
         'INSERT INTO languages (id,name,language,dialect,glottocode,long,lat,clade,color,"order",map_marker)'
         " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
         rows,
     )
+    con.executemany(
+        'INSERT INTO dialects (token,language_id,id,name,language,dialect,glottocode,long,lat,'
+        'clade,color,location,quality,"order",map_marker) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+        dialect_rows,
+    )
     con.commit()
-    log(f"loaded {len(rows)} languages")
-    return clade_of
+    log(f"loaded {len(rows)} canonical languages and {len(dialect_rows)} dialect tags")
+    return clade_of, canonical_of, dialect_tag_of
 
 
 def load_references(con: sqlite3.Connection, path: Path) -> None:
     with path.open(encoding="utf-8") as f:
-        rows = [(r["ID"], r["Short"], r["Source"], r["Progress"]) for r in csv.DictReader(f)]
-    con.executemany('INSERT INTO "references" (id,short,source,progress) VALUES (?,?,?,?)', rows)
+        rows = [
+            (
+                r["ID"], r["Short"], r["Source"], r["Progress"],
+                r.get("Provenance", ""), r.get("Editor", ""),
+            )
+            for r in csv.DictReader(f)
+        ]
+    con.executemany(
+        'INSERT INTO "references" (id,short,source,progress,provenance,editor) VALUES (?,?,?,?,?,?)',
+        rows,
+    )
     con.commit()
     log(f"loaded {len(rows)} references")
 
@@ -133,16 +221,80 @@ def _parse_ref(src: str) -> list[str]:
     return list({r.split("[")[0] for r in src.split(";") if r.split("[")[0]})
 
 
-def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, str]) -> None:
+def load_lemmas(
+    con: sqlite3.Connection,
+    forms_csv: Path,
+    clade_of: dict[str, str],
+    canonical_of: dict[str, str],
+    dialect_tag_of: dict[str, str],
+) -> dict[str, str]:
     """Build the unified lemmas table from the one CLDF forms.csv (etyma + reflexes). Etyma have an
     empty Origin_ID; reflexes point at their etymon. Sets the self-referential origin_lemma_id, the
     etymon-anchored `order`, tags, per-etymon clade set, and the lemma↔reference links."""
     with forms_csv.open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
+    # Canonicalise language IDs, attach the dialect tag, then collapse exact cross-dialect copies.
+    # References to an earlier duplicate (variants and borrowings) follow the retained row ID.
+    aliases: dict[str, str] = {}
+    unique: dict[tuple[str, ...], dict[str, str]] = {}
+    deduped = []
+    ignored = {"ID", "Language_ID", "Tags"}
+    for r in rows:
+        source_language = r["Language_ID"]
+        r["Language_ID"] = canonical_of.get(source_language, source_language)
+        dialect_tag = dialect_tag_of.get(source_language)
+        base_tags = (r.get("Tags") or "").split()
+        tags = list(base_tags)
+        if dialect_tag and dialect_tag not in tags:
+            tags.append(dialect_tag)
+        r["Tags"] = " ".join(tags)
+        for field in ("Origin_ID", "Variant_Of", "Borrowed_From"):
+            if r.get(field) in aliases:
+                r[field] = aliases[r[field]]
+        # Etyma are identified by their ID, never merged. Many proto-etyma (e.g. unreconstructed
+        # DED / Proto-Indo-Iranian headwords) have a blank Form/Gloss in the source; deduping them
+        # on content would collapse thousands into one node and repoint all their reflexes onto it.
+        if not r["Origin_ID"]:
+            deduped.append(r)
+            continue
+        key = (r["Language_ID"],) + tuple(
+            r.get(k, "") for k in r.keys() if k not in ignored
+        ) + tuple(base_tags)
+        original = unique.get(key)
+        if original is None:
+            unique[key] = r
+            deduped.append(r)
+            continue
+        aliases[r["ID"]] = original["ID"]
+        merged_tags = list(dict.fromkeys((original.get("Tags") or "").split() + tags))
+        original["Tags"] = " ".join(merged_tags)
+    rows = deduped
+    if aliases:
+        for r in rows:
+            for field in ("Origin_ID", "Variant_Of", "Borrowed_From"):
+                while r.get(field) in aliases:
+                    r[field] = aliases[r[field]]
+        log(f"collapsed {len(aliases)} identical cross-dialect lemma rows")
+
+    # A canonical-language entry may be represented only by dialect attestations (for example a
+    # locally created lemma with forms from three survey sites).  Carry those dialect tokens onto
+    # the entry when parent and child are in the same canonical language, so entries-mode dialect
+    # filters and the per-language tag inventory describe where the lemma is actually attested.
+    by_id = {r["ID"]: r for r in rows}
+    for r in rows:
+        parent = by_id.get(r.get("Origin_ID") or "")
+        if not parent or parent["Language_ID"] != r["Language_ID"]:
+            continue
+        dialect_tags = [t for t in (r.get("Tags") or "").split() if t.startswith("dialect:")]
+        if not dialect_tags:
+            continue
+        parent_tags = (parent.get("Tags") or "").split()
+        parent["Tags"] = " ".join(dict.fromkeys(parent_tags + dialect_tags))
+
     lemmas = []
     etymon_order: dict[str, int] = {}
-    lemma_refs = []
+    lemma_refs = set()
     # pass 1: etyma (Origin_ID empty) — word=headword, gloss=parsed meaning + tags/native/phonemic
     # folded up from the (dropped) self-reflex, etymology=free-text CDIAL header, notes=Description
     # (Etyma). `order` is sequential in file order (× 1000). Refs come from the folded self-reflex.
@@ -151,14 +303,17 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
         if r["Origin_ID"]:
             continue
         etymon_order[r["ID"]] = i * 1000
+        # A blank Origin_ID is normally an etymon (relation NULL); a lone (unetymologised) node also
+        # has no origin but carries Relation="local" so it stays out of the entries listing.
         lemmas.append(
             (r["ID"], r["Form"], r["Gloss"], r["Native"] or None, r["Phonemic"] or None,
              r["Original"] or None, r["Description"] or "", None, None, i * 1000,
-             r["Language_ID"], None, (r["Tags"] or None), (r["Etymology"] or None), None,
+             r["Language_ID"], None, (r["Tags"] or None), (r["Etymology"] or None),
+             ("local" if r.get("Relation") == "local" else None),
              (r.get("Redirect") or None), None, None)
         )
         for ref in _parse_ref(r["Source"]):
-            lemma_refs.append((r["ID"], ref))
+            lemma_refs.add((r["ID"], ref))
         i += 1
 
     # pass 2: reflexes, variants, and borrowed entries — origin from Origin_ID (strip
@@ -191,7 +346,7 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
         if cl and r["Relation"] not in ("variant", "borrowed"):
             param_clades[pid].add(cl)
         for ref in _parse_ref(r["Source"]):
-            lemma_refs.append((r["ID"], ref))
+            lemma_refs.add((r["ID"], ref))
 
     con.executemany(
         'INSERT INTO lemmas (id,word,gloss,native,phonemic,original,notes,clades,cognateset,'
@@ -217,11 +372,37 @@ def load_lemmas(con: sqlite3.Connection, forms_csv: Path, clade_of: dict[str, st
         ((lemma_rowids[lemma], reference_rowids[ref]) for lemma, ref in lemma_refs),
     )
     con.execute(
+        '''UPDATE "references" SET
+           lemma_count = (SELECT COUNT(*) FROM lemma_reference lr
+                          WHERE lr.reference_rid = "references".rowid),
+           unetymologised_count = (SELECT COUNT(*) FROM lemma_reference lr
+                                   JOIN lemmas l ON l.rowid = lr.lemma_rid
+                                   WHERE lr.reference_rid = "references".rowid
+                                     AND l.relation = 'local')'''
+    )
+    con.execute(
         "UPDATE languages SET lemma_count = "
         "(SELECT COUNT(*) FROM lemmas WHERE lemmas.language_id = languages.id)"
     )
+    dialect_counts: dict[str, int] = defaultdict(int)
+    dialect_entry_counts: dict[str, int] = defaultdict(int)
+    loan_sources = {r["Origin_ID"] for r in rows if r.get("Relation") == "borrowed"}
+    for r in rows:
+        for tag in (r.get("Tags") or "").split():
+            if tag.startswith("dialect:"):
+                dialect_counts[tag] += 1
+                if not r["Origin_ID"] or r["ID"] in loan_sources:
+                    dialect_entry_counts[tag] += 1
+    con.executemany(
+        "UPDATE dialects SET lemma_count=?, entry_count=? WHERE token=?",
+        (
+            (count, dialect_entry_counts.get(token, 0), token)
+            for token, count in dialect_counts.items()
+        ),
+    )
     con.commit()
     log(f"loaded {len(lemmas)} lemmas, {len(lemma_refs)} lemma↔reference links")
+    return aliases
 
 
 def load_derivation(con: sqlite3.Connection, deriv_csv: Path) -> None:
@@ -261,7 +442,7 @@ def count(con: sqlite3.Connection, table: str) -> int:
     return con.execute(f'SELECT COUNT(*) FROM "{table}"').fetchone()[0]
 
 
-def load_alignments(con: sqlite3.Connection, path: Path) -> None:
+def load_alignments(con: sqlite3.Connection, path: Path, aliases: dict[str, str]) -> None:
     """Load alignment CSV rows into dictionary-coded alignment and correspondence tables."""
     import csv
 
@@ -307,7 +488,8 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
         def rows():
             nonlocal skipped
             for r in reader:
-                if len(r) < 9 or r[0] not in lemma_rowids:
+                form_id = aliases.get(r[0], r[0])
+                if len(r) < 9 or form_id not in lemma_rowids:
                     skipped += 1
                     continue
                 etymon_sid = intern(symbols, r[4])
@@ -316,14 +498,14 @@ def load_alignments(con: sqlite3.Connection, path: Path) -> None:
                 prev_sid = intern(symbols, r[7])
                 next_sid = intern(symbols, r[8])
                 yield (
-                    lemma_rowids[r[0]],
+                    lemma_rowids[form_id],
                     int(r[2]),
                     intern(pairs, (etymon_sid, reflex_sid, change_sid)),
                     intern(contexts, (prev_sid, next_sid)),
                 )
 
         con.executemany(
-            "INSERT INTO alignment VALUES (?,?,?,?)",
+            "INSERT OR IGNORE INTO alignment VALUES (?,?,?,?)",
             rows(),
         )
     con.executemany(
@@ -445,9 +627,11 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     # 1. Build the base tables directly from the CLDF dataset (../data) — the frozen data.db and
     #    neojambu's builder are no longer in the loop; ../data is the single source of truth.
     build_base_schema(con)
-    clade_of = load_languages(con, cldf / "languages.csv")
+    clade_of, canonical_of, dialect_tag_of = load_languages(con, cldf / "languages.csv")
     load_references(con, cldf / "references.csv")
-    load_lemmas(con, cldf / "forms.csv", clade_of)
+    aliases = load_lemmas(
+        con, cldf / "forms.csv", clade_of, canonical_of, dialect_tag_of
+    )
 
     # 2. Indexes: citation joins and list/filter ordering. The composite language/order index also
     # serves language-only lookups through its leftmost prefix, so a separate language index would
@@ -459,7 +643,8 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         CREATE INDEX idx_lemma_reference_reference ON lemma_reference(reference_rid, lemma_rid);
         CREATE INDEX idx_lemmas_language_order   ON lemmas(language_id, "order");
         -- partial index for the Entries list (headwords): ORDER BY "order" with no temp sort.
-        CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL;
+        -- Lone (unetymologised) nodes have an empty origin but Relation='local'; keep them out.
+        CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
         """
     )
     log("created lemma + citation-join + ordering indexes")
@@ -481,7 +666,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         INSERT INTO meta VALUES
             ('total_lemmas',   (SELECT COUNT(*) FROM lemmas)),
             ('total_lexicon',  (SELECT COUNT(*) FROM lemmas WHERE redirect_to IS NULL)),
-            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL AND redirect_to IS NULL)),
+            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL AND redirect_to IS NULL AND relation IS NOT 'local')),
             ('total_reflexes', (SELECT COUNT(*) FROM lemmas WHERE relation = 'reflex')),
             ('total_variants', (SELECT COUNT(*) FROM lemmas WHERE relation = 'variant'));
         """
@@ -497,9 +682,9 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex'),
             lang_count   = (SELECT COUNT(DISTINCT r.language_id) FROM lemmas r
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex')
-        WHERE origin_lemma_id IS NULL;
-        CREATE INDEX idx_entries_reflex_count ON lemmas(reflex_count) WHERE origin_lemma_id IS NULL;
-        CREATE INDEX idx_entries_lang_count   ON lemmas(lang_count)   WHERE origin_lemma_id IS NULL;
+        WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
+        CREATE INDEX idx_entries_reflex_count ON lemmas(reflex_count) WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
+        CREATE INDEX idx_entries_lang_count   ON lemmas(lang_count)   WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
         """
     )
     con.commit()
@@ -510,7 +695,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     #     sound-change view and corpus-wide correspondence queries.
     alignments = cldf / "alignments.csv"
     if alignments.exists():
-        load_alignments(con, alignments)
+        load_alignments(con, alignments, aliases)
     else:
         log(f"(no alignments file at {alignments}; skipping sound-change table)")
 

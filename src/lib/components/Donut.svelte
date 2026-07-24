@@ -4,20 +4,29 @@
 
 	// A donut (pie with a hole) of a language's reflexes by the language of their origin, with a
 	// legend. Rendered as pure SVG (stroke-dasharray arcs on a circle of circumference 100).
-	let { slices, size = 168 }: { slices: OriginSlice[]; size?: number } = $props();
+	let {
+		slices,
+		size = 168,
+		label = 'Distribution of origin languages',
+		unit = 'forms'
+	}: { slices: OriginSlice[]; size?: number; label?: string; unit?: string } = $props();
 
 	const OTHER = '#c3bcc9';
+	const UNETYM = '#8a8276'; // warm grey for "origin unknown" (unetymologised), distinct from OTHER
 	const R = 15.915; // 2πR ≈ 100, so a slice's dash length is its percentage
 
-	// keep the biggest sources; fold the long tail into one "others" slice
+	// keep the biggest sources; fold the long tail into one "others" slice. The unetymologised slice
+	// is pinned (never folded) and always drawn last, so it reads as its own "origin unknown" wedge.
 	const grouped = $derived.by(() => {
-		const sorted = [...slices].sort((a, b) => b.count - a.count);
+		const unetym = slices.find((s) => s.lang === '__unetym');
+		const sorted = slices.filter((s) => s.lang !== '__unetym').sort((a, b) => b.count - a.count);
 		const top = sorted.slice(0, 8);
 		const rest = sorted.slice(8);
 		if (rest.length) {
 			const count = rest.reduce((s, x) => s + x.count, 0);
 			top.push({ lang: '__other', name: `${rest.length} others`, clade: null, count });
 		}
+		if (unetym) top.push(unetym);
 		return top;
 	});
 	const total = $derived(grouped.reduce((s, x) => s + x.count, 0));
@@ -30,7 +39,12 @@
 				count: s.count,
 				pct,
 				offset: -cum,
-				color: s.lang === '__other' ? OTHER : cladeColor(s.clade)
+				color:
+					s.lang === '__other'
+						? OTHER
+						: s.lang === '__unetym'
+							? UNETYM
+							: (s.color ?? cladeColor(s.clade))
 			};
 			cum += pct;
 			return a;
@@ -46,7 +60,7 @@
 			height={size}
 			class="donut"
 			role="img"
-			aria-label="Distribution of origin languages"
+			aria-label={label}
 		>
 			<circle cx="18" cy="18" r={R} fill="none" stroke="var(--border)" stroke-width="4" />
 			{#each arcs as a (a.name)}
@@ -63,7 +77,7 @@
 				>
 			{/each}
 			<text x="18" y="17.4" class="d-total">{total.toLocaleString()}</text>
-			<text x="18" y="21.4" class="d-sub">reflexes</text>
+			<text x="18" y="21.4" class="d-sub">{unit}</text>
 		</svg>
 		<ul class="legend">
 			{#each arcs as a (a.name)}

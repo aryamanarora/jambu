@@ -15,6 +15,7 @@ export function paramsFromUrl(sp: URLSearchParams): ListParams {
 		origin_lang: g('origin_lang'),
 		origin: g('origin'),
 		etymon_lang: g('etymon_lang'),
+		dialect: g('dialect'),
 		clade: g('clade'),
 		tags: g('tags'),
 		rootsOnly: sp.get('roots') === '1',

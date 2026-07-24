@@ -1,7 +1,6 @@
 <script lang="ts">
-	// Renders the structured `tags` string (gender + grammatical + attestation source, extracted
-	// in ../data) as small pills, coloured by category.
-	import { tagCategory, TAG_NAMES } from '$lib/tags';
+	// Renders structured tags (including DB-generated dialect tags) as category-coloured pills.
+	import { tagCategory, tagLabel } from '$lib/tags';
 	let { tags }: { tags?: string | null } = $props();
 	const list = $derived((tags ?? '').split(/\s+/).filter(Boolean));
 </script>
@@ -9,7 +8,7 @@
 {#if list.length}
 	<span class="tags">
 		{#each list as t (t)}
-			<span class="tag {tagCategory(t)}" title={TAG_NAMES[t] ?? t}>{t}</span>
+			<span class="tag {tagCategory(t)}" title={tagLabel(t)}>{tagLabel(t)}</span>
 		{/each}
 	</span>
 {/if}
@@ -43,5 +42,8 @@
 	}
 	.tag.era {
 		color: var(--tag-era);
+	}
+	.tag.dialect {
+		color: var(--accent);
 	}
 </style>

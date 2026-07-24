@@ -7,6 +7,7 @@
 		getEntryVariants,
 		getAncestryChain,
 		getDerivedTree,
+		getAllDialects,
 		getReflexAlignment,
 		type EntryAlignment,
 		type AlignedReflex,
@@ -26,7 +27,7 @@
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
-	import type { Language, MapMarker, Lemma } from '$lib/types';
+	import type { Dialect, Language, MapMarker, Lemma } from '$lib/types';
 
 	let { data } = $props();
 	const entry = $derived(data.entry);
@@ -55,6 +56,7 @@
 	let ancestryChain = $state<AncestorRef[][]>([]);
 	let derivedTree = $state<DerivedNode[]>([]);
 	let ownSegs = $state<AlignSeg[]>([]);
+	let dialects = $state<Dialect[]>([]);
 	let loading = $state(true);
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
@@ -77,6 +79,7 @@
 		getEntryVariants(id).then((v) => (variants = v));
 		getAncestryChain(id).then((c) => (ancestryChain = c));
 		getDerivedTree(id).then((t) => (derivedTree = t));
+		getAllDialects().then((d) => (dialects = d));
 		// a non-etymon node (reflex / section-form) also shows how it itself aligns to its parent
 		getReflexAlignment(id).then((s) => (ownSegs = s));
 		getEntryAlignment(id).then((a) => {
@@ -212,14 +215,34 @@
 
 	const markers = $derived.by<MapMarker[]>(() => {
 		if (!ea) return [];
-		const byLang = new Map<string, { lang: Language; reflexes: AlignedReflex[] }>();
+		interface Location {
+			lang: Language;
+			name: string;
+			lat: number;
+			long: number;
+			reflexes: AlignedReflex[];
+		}
+		const dialectByToken = new Map(dialects.map((d) => [d.token, d]));
+		const byLocation = new Map<string, Location>();
 		for (const r of ea.reflexes) {
 			const l = r.lemma.language;
-			if (!l || l.lat == null) continue;
-			if (!byLang.has(l.id)) byLang.set(l.id, { lang: l, reflexes: [] });
-			byLang.get(l.id)!.reflexes.push(r);
+			if (!l) continue;
+			const tagged = (r.lemma.tags ?? '')
+				.split(/\s+/)
+				.map((t) => dialectByToken.get(t))
+				.filter((d): d is Dialect => !!d && d.lat != null && d.long != null);
+			const locations = tagged.length
+				? tagged.map((d) => ({ key: d.token, name: `${l.name}: ${d.name}`, lat: d.lat!, long: d.long! }))
+				: l.lat != null && l.long != null
+					? [{ key: `language:${l.id}`, name: l.name, lat: l.lat, long: l.long }]
+					: [];
+			for (const location of locations) {
+				if (!byLocation.has(location.key))
+					byLocation.set(location.key, { ...location, lang: l, reflexes: [] });
+				byLocation.get(location.key)!.reflexes.push(r);
+			}
 		}
-		return [...byLang.values()].map(({ lang, reflexes }) => {
+		return [...byLocation.values()].map(({ lang, name, lat, long, reflexes }) => {
 			let color = cladeColor(lang.clade);
 			let extra = '';
 			let dim = false;
@@ -234,13 +257,13 @@
 			const words = reflexes.map((r) => striptags(r.lemma.word));
 			const ids = reflexes.map((r) => r.lemma.id);
 			return {
-				lat: lang.lat,
-				long: lang.long,
+				lat,
+				long,
 				svg: lang.map_marker,
 				color,
 				dim,
-				tooltip: `${lang.name}${extra ? ` · <span class="phon">${extra.slice(3)}</span>` : ''}`,
-				popupHtml: `<h3>${striptags(lang.name)}</h3><ul>${words
+				tooltip: `${name}${extra ? ` · <span class="phon">${extra.slice(3)}</span>` : ''}`,
+				popupHtml: `<h3>${striptags(name)}</h3><ul>${words
 					.map(
 						(w, i) =>
 							`<li><a class="lemma-word" href="${base}/reflexes/${ids[i]}">${w}</a></li>`
@@ -257,8 +280,7 @@
 	];
 
 	const plainGloss = $derived(striptags(entry.gloss) || shortGloss(entry.etymology ?? ''));
-	const langCount = $derived(markers.length);
-
+	const langCount = $derived(new Set(ea?.reflexes.map((r) => r.lemma.language_id) ?? []).size);
 	function rowClick(e: MouseEvent, id: string) {
 		if ((e.target as HTMLElement).closest('a')) return;
 		toggleExp(id);

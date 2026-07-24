@@ -59,6 +59,13 @@ export function allLanguageIds(): { lang1: string }[] {
 	return limit(rows.map((r) => ({ lang1: String(r.id) })));
 }
 
+export function allDialectIds(): { lang1: string }[] {
+	const rows = getDb().prepare(`SELECT id FROM dialects ORDER BY language_id, name, id`).all() as {
+		id: string;
+	}[];
+	return limit(rows.map((r) => ({ lang1: String(r.id) })));
+}
+
 export function allReferenceIds(): { ref: string }[] {
 	const rows = getDb().prepare(`SELECT id FROM "references" ORDER BY short`).all() as {
 		id: string;
@@ -117,6 +124,13 @@ function tableExists(dbh: Database.Database, name: string): boolean {
 
 export function getLanguageRow(id: string): Language | null {
 	return (getDb().prepare('SELECT * FROM languages WHERE id = ?').get(id) ?? null) as Language | null;
+}
+
+export function getDialectLanguageId(id: string): string | null {
+	const row = getDb().prepare('SELECT language_id FROM dialects WHERE id = ?').get(id) as
+		| { language_id: string }
+		| undefined;
+	return row?.language_id ?? null;
 }
 
 export function allLanguages(): Language[] {

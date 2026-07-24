@@ -9,7 +9,8 @@
 		zoom = 4,
 		height = '500px',
 		showAllTooltips = false,
-		bounds
+		bounds,
+		fitOnce = false
 	}: {
 		markers: MapMarker[];
 		center?: [number, number];
@@ -17,6 +18,7 @@
 		height?: string;
 		showAllTooltips?: boolean;
 		bounds?: [[number, number], [number, number]]; // fixed initial framing (overrides auto-fit)
+		fitOnce?: boolean; // auto-fit only the first draw, never re-adjust the view on later updates
 	} = $props();
 
 	let el: HTMLDivElement;
@@ -26,6 +28,8 @@
 	let L: any = null;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let layer: any = null;
+	let lastFitSig = ''; // coord signature of the last auto-fit (skip refit on colour-only redraws)
+	let hasFit = false; // whether the view has been auto-fit at least once (for fitOnce)
 
 	function iconUrl(svg: string): string {
 		return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
@@ -46,15 +50,16 @@
 				const icon = L.icon({ iconUrl: iconUrl(svg), iconSize: [16, 16] });
 				marker = L.marker([m.lat, m.long], { icon, opacity: m.dim ? 0.4 : 1 }).addTo(layer);
 			} else if (m.color) {
-				// filled circle — recolourable (used for correspondence overlays)
+				// filled circle — recolourable (used for correspondence + isogloss overlays)
 				marker = L.circleMarker([m.lat, m.long], {
 					radius: m.radius ?? 7,
 					fillColor: m.color,
-					color: 'rgba(0,0,0,0.55)',
-					weight: 1,
+					color: m.ring ? '#ffffff' : 'rgba(0,0,0,0.55)',
+					weight: m.ring ? 3.5 : 1,
 					fillOpacity: m.dim ? 0.25 : 0.92,
 					opacity: m.dim ? 0.35 : 1
 				}).addTo(layer);
+				if (m.ring) marker.bringToFront();
 			} else {
 				const icon = L.icon({ iconUrl: iconUrl(m.svg), iconSize: [16, 16] });
 				marker = L.marker([m.lat, m.long], { icon }).addTo(layer);
@@ -64,8 +69,15 @@
 			if (m.onClick) marker.on('click', m.onClick);
 			pts.push([m.lat, m.long]);
 		}
-		if (!center && !bounds && pts.length) {
+		// auto-fit the view. With fitOnce, only the first draw fits — later redraws (recolouring on
+		// selection, re-jittering) leave the user's pan/zoom untouched. Otherwise re-fit only when the
+		// set of point coordinates actually changes, so a colour-only redraw won't reset the view.
+		const sig = pts.map((p) => p.join()).join('|');
+		const shouldFit = fitOnce ? !hasFit : sig !== lastFitSig;
+		if (!center && !bounds && pts.length && shouldFit) {
 			map.fitBounds(pts, { padding: [30, 30], maxZoom: 7 });
+			lastFitSig = sig;
+			hasFit = true;
 		}
 		if (showAllTooltips) layer.eachLayer((lyr: any) => lyr.openTooltip?.());
 		updateOffscreen();

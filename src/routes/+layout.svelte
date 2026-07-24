@@ -39,6 +39,7 @@
 		{ href: '/reflexes', label: 'Reflexes' },
 		{ href: '/languages', label: 'Languages' },
 		{ href: '/correspondences', label: 'Sounds' },
+		{ href: '/isoglosses', label: 'Isoglosses' },
 		{ href: '/references', label: 'References' }
 	];
 

@@ -5,7 +5,7 @@
  * Design notes for HTTP Range efficiency:
  *  - Text search scans the compact local lemma table with `instr`; it is gated at MIN_SEARCH_CHARS
  *    so 1–2 character partials never trigger a scan.
- *  - The 615-row `languages` and 194-row `references` tables are loaded/queried cheaply and
+ *  - The small `languages` and `references` tables are loaded/queried cheaply and
  *    cached; we attach relations in JS rather than doing wide joins over 313k lemma rows.
  *  - The unfiltered list paths avoid the languages join and lean on the order indexes
  *    (idx_lemmas_order / partial idx_entries_order) so only the needed pages are fetched.
@@ -16,6 +16,7 @@ import {
 	PAGE_SIZE,
 	MIN_SEARCH_CHARS,
 	type Language,
+	type Dialect,
 	type Lemma,
 	type Reference,
 	type ListParams,
@@ -60,6 +61,15 @@ export async function getAllLanguages(): Promise<Language[]> {
 	return list;
 }
 
+let dialectsCache: Dialect[] | null = null;
+export async function getAllDialects(): Promise<Dialect[]> {
+	if (dialectsCache) return dialectsCache;
+	dialectsCache = await query<Dialect>(
+		'SELECT * FROM dialects WHERE lemma_count > 0 ORDER BY name, id'
+	);
+	return dialectsCache;
+}
+
 async function languageMap(): Promise<Map<string, Language>> {
 	if (languagesCache) return languagesCache;
 	await getAllLanguages();
@@ -76,7 +86,7 @@ export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<
 	// reflexes → every language (the reflexes list is the whole lexicon, so any node's language works).
 	const where =
 		mode === 'entries'
-			? "WHERE origin_lemma_id IS NULL OR EXISTS (SELECT 1 FROM lemmas b " +
+			? "WHERE (origin_lemma_id IS NULL AND relation IS NOT 'local') OR EXISTS (SELECT 1 FROM lemmas b " +
 				"WHERE b.origin_lemma_id = lemmas.id AND b.relation = 'borrowed')"
 			: '';
 	const rows = await query<{ language_id: string }>(
@@ -88,6 +98,15 @@ export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<
 		.filter((l): l is Language => !!l)
 		.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
 	filterLangsCache.set(mode, out);
+	return out;
+}
+
+const filterDialectsCache = new Map<string, Dialect[]>();
+/** Dialects actually present in a list mode, for inclusion beside base languages in its picker. */
+export async function getFilterDialects(mode: 'entries' | 'reflexes'): Promise<Dialect[]> {
+	if (filterDialectsCache.has(mode)) return filterDialectsCache.get(mode)!;
+	const out = (await getAllDialects()).filter((d) => mode === 'reflexes' || d.entry_count > 0);
+	filterDialectsCache.set(mode, out);
 	return out;
 }
 
@@ -119,7 +138,8 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	const ids = lemmas.map((l) => l.id);
 	const rows = await inChunks<Reference & { lemma_id: string }>(ids, (chunk) =>
 		query<Reference & { lemma_id: string }>(
-			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress
+			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress, r.provenance, r.editor,
+			        r.lemma_count, r.unetymologised_count
 			 FROM lemma_reference lr
 			 JOIN lemmas l ON l.rowid = lr.lemma_rid
 			 JOIN "references" r ON r.rowid = lr.reference_rid
@@ -130,7 +150,16 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	);
 	const map = new Map<string, Reference[]>();
 	for (const row of rows) {
-		const ref: Reference = { id: row.id, short: row.short, source: row.source, progress: row.progress };
+		const ref: Reference = {
+			id: row.id,
+			short: row.short,
+			source: row.source,
+			progress: row.progress,
+			provenance: row.provenance,
+			editor: row.editor,
+			lemma_count: row.lemma_count,
+			unetymologised_count: row.unetymologised_count
+		};
 		const arr = map.get(row.lemma_id);
 		if (arr) arr.push(ref);
 		else map.set(row.lemma_id, [ref]);
@@ -229,12 +258,35 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 		needsLangJoin = true;
 	}
 	if (p.origin_lang?.trim()) {
-		conds.push({ sql: 'l.language_id = ?', params: [p.origin_lang.trim()] });
+		const selected = p.origin_lang.trim();
+		conds.push(
+			selected.startsWith('dialect:')
+				? {
+						sql: "(' ' || COALESCE(l.tags, '') || ' ') LIKE ?",
+						params: [`% ${selected} %`]
+					}
+				: { sql: 'l.language_id = ?', params: [selected] }
+		);
 	}
 	if (p.etymon_lang?.trim()) {
+		const selected = p.etymon_lang.trim();
+		conds.push(
+			selected.startsWith('dialect:')
+				? {
+						sql: `l.origin_lemma_id IN (SELECT id FROM lemmas
+						      WHERE (' ' || COALESCE(tags, '') || ' ') LIKE ?)`,
+						params: [`% ${selected} %`]
+					}
+				: {
+						sql: 'l.origin_lemma_id IN (SELECT id FROM lemmas WHERE language_id = ?)',
+						params: [selected]
+					}
+		);
+	}
+	if (p.dialect?.trim()) {
 		conds.push({
-			sql: 'l.origin_lemma_id IN (SELECT id FROM lemmas WHERE language_id = ?)',
-			params: [p.etymon_lang.trim()]
+			sql: "(' ' || COALESCE(l.tags, '') || ' ') LIKE ?",
+			params: [`% ${p.dialect.trim()} %`]
 		});
 	}
 	if ((p.origin ?? '').trim().length >= MIN_SEARCH_CHARS) {
@@ -305,12 +357,13 @@ export interface ListResult {
 interface ListOpts {
 	mode: 'reflexes' | 'entries' | 'lexicon';
 	languageId?: string;
+	referenceId?: string;
 	params: ListParams;
 	withOrigin?: boolean; // attach origin_lemma (reflexes/lexicon show it)
 }
 
 export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
-	const { mode, languageId, params } = opts;
+	const { mode, languageId, referenceId, params } = opts;
 	const page = Math.max(1, params.page ?? 1);
 	const { conds, needsLangJoin } = lemmaConditions(params);
 
@@ -326,10 +379,17 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 				sql: "EXISTS (SELECT 1 FROM lemmas b WHERE b.origin_lemma_id = l.id AND b.relation = 'borrowed')",
 				params: []
 			});
-		else modeConds.push({ sql: 'l.origin_lemma_id IS NULL', params: [] });
+		else modeConds.push({ sql: "l.origin_lemma_id IS NULL AND l.relation IS NOT 'local'", params: [] });
 	}
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.language_id = ?', params: [languageId] });
+	if (referenceId)
+		modeConds.push({
+			sql: `EXISTS (SELECT 1 FROM lemma_reference lr
+			       JOIN "references" rr ON rr.rowid = lr.reference_rid
+			       WHERE lr.lemma_rid = l.rowid AND rr.id = ?)`,
+			params: [referenceId]
+		});
 
 	const all = [...modeConds, ...conds];
 	const whereParams = all.flatMap((c) => c.params);
@@ -340,6 +400,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	// Fast path: entries list with no filters/sort → partial index, no join, no temp sort.
 	const isDefaultEntries =
 		mode === 'entries' &&
+		!referenceId &&
 		!needsLangJoin &&
 		conds.length === 0 &&
 		!params.loanSourcesOnly &&
@@ -351,7 +412,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	// count — use precomputed totals for the unfiltered case (a full COUNT(*) is a whole-index
 	// scan = a large sequential read over the wire); only COUNT the (bounded) filtered set.
-	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly;
+	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly || !!referenceId;
 	let count: number;
 	if (!hasFilters && mode === 'entries') {
 		count = await metaCount('total_entries');
@@ -384,7 +445,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 			: '';
 	const fetchSql = isDefaultEntries
 		? `SELECT l.*${derivedCol} FROM lemmas l INDEXED BY idx_entries_order
-		   WHERE l.origin_lemma_id IS NULL AND l.redirect_to IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
+		   WHERE l.origin_lemma_id IS NULL AND l.relation IS NOT 'local' AND l.redirect_to IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
 		: `SELECT l.*${derivedCol} FROM lemmas l ${join} ${whereSql}
 		   ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
 	const rows = await query<Lemma>(fetchSql, isDefaultEntries ? [] : whereParams);
@@ -537,11 +598,59 @@ export async function getLanguage(id: string): Promise<Language | null> {
 	return queryOne<Language>('SELECT * FROM languages WHERE id = ?', [id]);
 }
 
+/** Structured tags attested by at least one row in a language. */
+export async function getLanguageTags(languageId: string): Promise<string[]> {
+	const rows = await query<{ tags: string }>(
+		`SELECT DISTINCT tags FROM lemmas
+		 WHERE language_id = ? AND tags IS NOT NULL AND tags <> ''`,
+		[languageId]
+	);
+	return [...new Set(rows.flatMap((r) => r.tags.split(/\s+/).filter(Boolean)))];
+}
+
+/** Dialect-tag definitions retain the geography and Glottolog metadata removed from languages. */
+export async function getLanguageDialects(languageId: string): Promise<Dialect[]> {
+	return query<Dialect>(
+		`SELECT * FROM dialects WHERE language_id = ? AND lemma_count > 0
+		 ORDER BY name, id`,
+		[languageId]
+	);
+}
+
 export interface OriginSlice {
 	lang: string;
 	name: string;
 	clade: string | null;
 	count: number;
+	color?: string; // explicit slice colour (used by the references donut; else clade-derived)
+}
+
+/** Deterministic distinct colour for a reference slice (no clade to key off). */
+function refColor(s: string): string {
+	let h = 0;
+	for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) >>> 0;
+	return `hsl(${h % 360} 52% 58%)`;
+}
+
+/** For one language, the distribution of its reflexes across the references that cite them — for a
+ *  donut. A reflex cited by several references contributes to each (so counts are citations). */
+export async function getReferenceDistribution(languageId: string): Promise<OriginSlice[]> {
+	const rows = await query<{ id: string; short: string; c: number }>(
+		`SELECT ref.id AS id, ref.short AS short, COUNT(*) AS c
+		 FROM lemmas l
+		 JOIN lemma_reference lr ON lr.lemma_rid = l.rowid
+		 JOIN "references" ref ON ref.rowid = lr.reference_rid
+		 WHERE l.language_id = ?
+		 GROUP BY ref.id ORDER BY c DESC`,
+		[languageId]
+	);
+	return rows.map((r) => ({
+		lang: r.id,
+		name: r.short || r.id,
+		clade: null,
+		count: r.c,
+		color: refColor(r.short || r.id)
+	}));
 }
 
 /** For one language, the distribution of its reflexes by the language of their immediate origin
@@ -555,10 +664,17 @@ export async function getOriginLangDistribution(languageId: string): Promise<Ori
 		[languageId]
 	);
 	const langs = await languageMap();
-	return rows.map((r) => {
+	const slices: OriginSlice[] = rows.map((r) => {
 		const l = langs.get(r.lang);
 		return { lang: r.lang, name: l?.name ?? r.lang, clade: l?.clade ?? null, count: r.c };
 	});
+	// lone (unetymologised) forms have no origin — surface them as their own "origin unknown" slice
+	const un = await queryOne<{ c: number }>(
+		"SELECT COUNT(*) AS c FROM lemmas WHERE language_id = ? AND relation = 'local'",
+		[languageId]
+	);
+	if (un?.c) slices.push({ lang: '__unetym', name: 'unetymologised', clade: null, count: un.c });
+	return slices;
 }
 
 export async function getReference(id: string): Promise<Reference | null> {
@@ -567,6 +683,22 @@ export async function getReference(id: string): Promise<Reference | null> {
 
 export async function listReferences(): Promise<Reference[]> {
 	return query<Reference>('SELECT * FROM "references" ORDER BY short');
+}
+
+/** Distribution of every lemma cited by one reference over its attested languages. */
+export async function getReferenceLanguageDistribution(referenceId: string): Promise<OriginSlice[]> {
+	const rows = await query<{ lang: string; name: string; clade: string | null; c: number }>(
+		`SELECT l.language_id AS lang, lang.name, lang.clade, COUNT(*) AS c
+		 FROM lemma_reference lr
+		 JOIN "references" r ON r.rowid = lr.reference_rid
+		 JOIN lemmas l ON l.rowid = lr.lemma_rid
+		 JOIN languages lang ON lang.id = l.language_id
+		 WHERE r.id = ?
+		 GROUP BY l.language_id, lang.name, lang.clade
+		 ORDER BY c DESC, lang.name`,
+		[referenceId]
+	);
+	return rows.map((r) => ({ lang: r.lang, name: r.name, clade: r.clade, count: r.c }));
 }
 
 // ---- entry page (headword + grouped reflexes + map dots) -----------------
@@ -1109,3 +1241,360 @@ export async function compareLanguages(
 }
 
 export { CLADE_ORDER };
+
+
+// ---- isoglosses: pairwise coupling between clades / languages -----------------------------------
+//
+// The data are binary presence variables: for each etymon, which clades (or languages) reflect it.
+// Two related reads of the pairwise "Ising" coupling over these variables, each picked for its job:
+//
+//   • couplingModel   — a cheap Gaussian graphical model (partial correlations from the shrunk
+//                       inverse covariance). Recomputed on every filter change to colour the map,
+//                       where we only need similar units to land near each other in colour space.
+//   • conditionalOdds — the exact pairwise-maximum-entropy conditional P(x_i = 1 | the rest), fit by
+//                       logistic pseudo-likelihood. Run once per click for the quantitative J / odds
+//                       shown in the affinity table.
+
+/** Gauss-Jordan inverse of a small square matrix (item count is at most a couple hundred). */
+function invert(A: number[][]): number[][] {
+	const n = A.length;
+	const M = A.map((row, i) => [...row, ...Array.from({ length: n }, (_, j) => (i === j ? 1 : 0))]);
+	for (let col = 0; col < n; col++) {
+		let piv = col;
+		for (let r = col + 1; r < n; r++) if (Math.abs(M[r][col]) > Math.abs(M[piv][col])) piv = r;
+		[M[col], M[piv]] = [M[piv], M[col]];
+		const d = M[col][col];
+		if (Math.abs(d) < 1e-12) continue;
+		for (let j = 0; j < 2 * n; j++) M[col][j] /= d;
+		for (let r = 0; r < n; r++)
+			if (r !== col) {
+				const f = M[r][col];
+				for (let j = 0; j < 2 * n; j++) M[r][j] -= f * M[col][j];
+			}
+	}
+	return M.map((row) => row.slice(n));
+}
+
+/** Cyclic Jacobi eigen-decomposition of a symmetric matrix (Numerical-Recipes rotations). Returns
+ *  eigenvalues and their eigenvectors as the COLUMNS of `vectors`. n is at most a couple hundred, so
+ *  the O(n^3) sweeps are cheap. */
+function jacobiEigen(Ain: number[][]): { values: number[]; vectors: number[][] } {
+	const n = Ain.length;
+	const a = Ain.map((r) => r.slice());
+	const v = Array.from({ length: n }, (_, i) =>
+		Array.from({ length: n }, (_, j): number => (i === j ? 1 : 0))
+	);
+	for (let iter = 0; iter < 100; iter++) {
+		let off = 0;
+		for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) off += a[p][q] * a[p][q];
+		if (off < 1e-16) break;
+		for (let p = 0; p < n; p++)
+			for (let q = p + 1; q < n; q++) {
+				const apq = a[p][q];
+				if (Math.abs(apq) < 1e-18) continue;
+				const theta = (a[q][q] - a[p][p]) / (2 * apq);
+				const t = Math.sign(theta || 1) / (Math.abs(theta) + Math.sqrt(theta * theta + 1));
+				const c = 1 / Math.sqrt(t * t + 1);
+				const s = t * c;
+				const tau = s / (1 + c);
+				a[p][p] -= t * apq;
+				a[q][q] += t * apq;
+				a[p][q] = a[q][p] = 0;
+				for (let k = 0; k < n; k++)
+					if (k !== p && k !== q) {
+						const akp = a[k][p];
+						const akq = a[k][q];
+						a[k][p] = a[p][k] = akp - s * (akq + tau * akp);
+						a[k][q] = a[q][k] = akq + s * (akp - tau * akq);
+					}
+				for (let k = 0; k < n; k++) {
+					const vkp = v[k][p];
+					const vkq = v[k][q];
+					v[k][p] = vkp - s * (vkq + tau * vkp);
+					v[k][q] = vkq + s * (vkp - tau * vkq);
+				}
+			}
+	}
+	return { values: a.map((row, i) => row[i]), vectors: v };
+}
+
+/** Spectral embedding of an affinity/coupling matrix: the eigenvectors of the `dims` largest
+ *  eigenvalues, each scaled by sqrt(eigenvalue) so the leading axes dominate — i.e. the principal
+ *  components of the affinity matrix. Returns one `dims`-vector per item (item order preserved).
+ *  Signs are fixed deterministically (largest-magnitude entry made positive) so colours are stable. */
+export function spectralEmbedding(coupling: number[][], dims = 3): number[][] {
+	const n = coupling.length;
+	if (n === 0) return [];
+	const { values, vectors } = jacobiEigen(coupling);
+	const top = [...values.keys()].sort((i, j) => values[j] - values[i]).slice(0, dims);
+	// deterministic sign per component
+	const sign = top.map((j) => {
+		let m = 0;
+		let sg = 1;
+		for (let i = 0; i < n; i++) {
+			const val = vectors[i][j];
+			if (Math.abs(val) > m) {
+				m = Math.abs(val);
+				sg = val >= 0 ? 1 : -1;
+			}
+		}
+		return sg;
+	});
+	return Array.from({ length: n }, (_, i) =>
+		top.map((j, d) => sign[d] * vectors[i][j] * Math.sqrt(Math.max(values[j], 0)))
+	);
+}
+
+/** Pairwise coupling matrix for a set of binary presence variables — the Gaussian graphical model
+ *  used to colour the map. Covariance of the indicators over `sets` → fixed-intensity shrinkage of
+ *  the off-diagonals toward zero (keeps the matrix well-conditioned for inversion) → precision →
+ *  partial correlation rho_ij = -P_ij / sqrt(P_ii P_jj), with rho_ii = 1. */
+export function couplingModel(sets: string[][], items: string[]): number[][] {
+	const n = items.length;
+	if (n === 0) return [];
+	const idx = new Map(items.map((it, i) => [it, i]));
+	const N = sets.length || 1;
+	const co = Array.from({ length: n }, () => new Array<number>(n).fill(0));
+	const cnt = new Array<number>(n).fill(0);
+	for (const s of sets) {
+		const ii: number[] = [];
+		for (const it of s) {
+			const k = idx.get(it);
+			if (k !== undefined) ii.push(k);
+		}
+		for (let a = 0; a < ii.length; a++) {
+			cnt[ii[a]]++;
+			for (let b = a + 1; b < ii.length; b++) {
+				co[ii[a]][ii[b]]++;
+				co[ii[b]][ii[a]]++;
+			}
+		}
+	}
+	const cov = Array.from({ length: n }, () => new Array<number>(n).fill(0));
+	for (let a = 0; a < n; a++)
+		for (let b = 0; b < n; b++) {
+			const pa = cnt[a] / N,
+				pb = cnt[b] / N;
+			const pab = a === b ? pa : co[a][b] / N;
+			cov[a][b] = pab - pa * pb;
+		}
+	const shrink = 0.1;
+	for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) if (a !== b) cov[a][b] *= 1 - shrink;
+	for (let a = 0; a < n; a++) if (cov[a][a] < 1e-9) cov[a][a] = 1e-9;
+	const prec = invert(cov);
+	const coupling = Array.from({ length: n }, () => new Array<number>(n).fill(0));
+	for (let a = 0; a < n; a++)
+		for (let b = 0; b < n; b++) {
+			if (a === b) coupling[a][b] = 1;
+			else {
+				const den = Math.sqrt(prec[a][a] * prec[b][b]);
+				coupling[a][b] = den ? -prec[a][b] / den : 0;
+			}
+		}
+	return coupling;
+}
+
+/** Exact pairwise-maximum-entropy conditional: fit P(x_target = 1 | all other units) by
+ *  L2-regularised logistic pseudo-likelihood and return each other unit's log-odds effect bⱼ.
+ *  e^{bⱼ} is the multiplier on the target's presence odds when unit j is present vs absent, holding
+ *  every other unit fixed — the tangible "odds of a shared reflex" read of the Ising coupling.
+ *  Solved by Newton/IRLS on the mean logistic loss, which reaches the optimum in a handful of steps
+ *  (a couple hundred units, one fit per click). Returns log-odds aligned to `items`; target's own
+ *  entry is 0. */
+export function conditionalOdds(sets: string[][], items: string[], target: string): number[] {
+	const n = items.length;
+	const idx = new Map(items.map((it, i) => [it, i]));
+	const ti = idx.get(target);
+	if (ti === undefined || n < 2) return new Array<number>(n).fill(0);
+	// parameter layout: column 0 is the intercept, then one column per non-target unit (so m = n)
+	const col = new Array<number>(n).fill(-1);
+	let m = 1;
+	for (let k = 0; k < n; k++) if (k !== ti) col[k] = m++;
+	// each etymon → the columns of its present non-target units + whether the target is present (y)
+	const rows: { cols: number[]; y: number }[] = [];
+	let yc = 0;
+	for (const s of sets) {
+		const cols: number[] = [];
+		let y = 0;
+		for (const it of s) {
+			const k = idx.get(it);
+			if (k === undefined) continue;
+			if (k === ti) y = 1;
+			else cols.push(col[k]);
+		}
+		rows.push({ cols, y });
+		yc += y;
+	}
+	const N = rows.length || 1;
+	const lambda = 1 / N; // mild L2 on the couplings (the intercept is left unpenalised)
+	const theta = new Array<number>(m).fill(0);
+	theta[0] = Math.log((yc + 1) / (N - yc + 1)); // init at the target's marginal log-odds
+
+	// mean logistic loss + ridge, evaluated at an arbitrary parameter vector (for the line search)
+	const loss = (th: number[]): number => {
+		let nll = 0;
+		for (const { cols, y } of rows) {
+			let z = th[0];
+			for (const c of cols) z += th[c];
+			// softplus(z) − y·z, in the numerically stable branch
+			nll += (z > 0 ? z + Math.log1p(Math.exp(-z)) : Math.log1p(Math.exp(z))) - y * z;
+		}
+		let pen = 0;
+		for (let c = 1; c < m; c++) pen += th[c] * th[c];
+		return nll / N + 0.5 * lambda * pen;
+	};
+
+	// Newton / IRLS with a backtracking line search. The raw Newton step can overshoot into the
+	// region where the sigmoid saturates (the fit becomes separable for sparse units), so we only
+	// accept a step that actually decreases the loss — this keeps the fast convergence while
+	// guaranteeing the couplings stay at the finite regularised optimum.
+	const cand = new Array<number>(m).fill(0);
+	for (let iter = 0; iter < 50; iter++) {
+		const g = new Array<number>(m).fill(0);
+		const H = Array.from({ length: m }, () => new Array<number>(m).fill(0));
+		for (const { cols, y } of rows) {
+			let z = theta[0];
+			for (const c of cols) z += theta[c];
+			const p = 1 / (1 + Math.exp(-z));
+			const w = p * (1 - p);
+			const e = p - y;
+			g[0] += e;
+			H[0][0] += w;
+			for (const c of cols) {
+				g[c] += e;
+				H[0][c] += w;
+				H[c][0] += w;
+			}
+			for (let x = 0; x < cols.length; x++) {
+				const ca = cols[x];
+				H[ca][ca] += w;
+				for (let z2 = x + 1; z2 < cols.length; z2++) {
+					const cb = cols[z2];
+					H[ca][cb] += w;
+					H[cb][ca] += w;
+				}
+			}
+		}
+		for (let i = 0; i < m; i++) {
+			g[i] /= N;
+			for (let j = 0; j < m; j++) H[i][j] /= N;
+		}
+		for (let c = 1; c < m; c++) {
+			g[c] += lambda * theta[c]; // ridge keeps H positive-definite even under collinearity
+			H[c][c] += lambda;
+		}
+		const Hinv = invert(H);
+		const delta = new Array<number>(m).fill(0);
+		for (let i = 0; i < m; i++) {
+			let d = 0;
+			for (let j = 0; j < m; j++) d += Hinv[i][j] * g[j];
+			delta[i] = d;
+		}
+		// backtracking: halve the step until the loss decreases
+		const cur = loss(theta);
+		let s = 1;
+		for (let bt = 0; bt < 40; bt++) {
+			for (let i = 0; i < m; i++) cand[i] = theta[i] - s * delta[i];
+			if (loss(cand) <= cur) break;
+			s *= 0.5;
+		}
+		let step = 0;
+		for (let i = 0; i < m; i++) {
+			const d = s * delta[i];
+			theta[i] -= d;
+			if (Math.abs(d) > step) step = Math.abs(d);
+		}
+		if (step < 1e-9) break; // converged
+	}
+	const b = new Array<number>(n).fill(0);
+	for (let k = 0; k < n; k++) if (k !== ti) b[k] = theta[col[k]];
+	return b;
+}
+
+export interface IsoglossData {
+	family: string;
+	entryCount: number;
+	cladeSets: string[][]; // per-etymon clade lists (models built client-side so filters can apply)
+	// raw per-etymon language sets + per-language etyma counts, so the language model can be
+	// thresholded / filtered and recomputed client-side without another query
+	langSets: string[][];
+	langCount: [string, number][];
+	langName: Record<string, string>;
+	langClade: Record<string, string>;
+}
+
+/** Fetch the reflex clade/language incidence for a proto-family's etyma and build the clade-level
+ *  Ising coupling; language-level coupling is built on demand (thresholded) via couplingModel. */
+export async function getIsoglossData(family: string): Promise<IsoglossData> {
+	const rows = await query<{ entry: string; clade: string; lang: string; lname: string }>(
+		`SELECT DISTINCT l.origin_lemma_id AS entry, lang.clade AS clade, lang.id AS lang, lang.name AS lname
+		 FROM lemmas l JOIN languages lang ON lang.id = l.language_id
+		 WHERE l.relation = 'reflex' AND lang.clade IS NOT NULL AND lang.clade != ''
+		   AND l.origin_lemma_id IN (SELECT id FROM lemmas WHERE origin_lemma_id IS NULL AND language_id = ?)`,
+		[family]
+	);
+	const cladeByEntry = new Map<string, Set<string>>();
+	const langByEntry = new Map<string, Set<string>>();
+	const langName: Record<string, string> = {};
+	const langClade: Record<string, string> = {};
+	for (const r of rows) {
+		let cs = cladeByEntry.get(r.entry);
+		if (!cs) cladeByEntry.set(r.entry, (cs = new Set()));
+		cs.add(r.clade);
+		let ls = langByEntry.get(r.entry);
+		if (!ls) langByEntry.set(r.entry, (ls = new Set()));
+		ls.add(r.lang);
+		langName[r.lang] = r.lname;
+		langClade[r.lang] = r.clade;
+	}
+	const cladeSets = [...cladeByEntry.values()].map((s) => [...s]);
+	const langSets = [...langByEntry.values()].map((s) => [...s]);
+	const langCount = new Map<string, number>();
+	for (const s of langSets) for (const l of s) langCount.set(l, (langCount.get(l) ?? 0) + 1);
+	return {
+		family,
+		entryCount: cladeByEntry.size,
+		cladeSets,
+		langSets,
+		langCount: [...langCount.entries()],
+		langName,
+		langClade
+	};
+}
+
+/** Presence-invariant sound-change isogloss model. For each proto-slot (etymon x aligned position)
+ *  every clade/language *present* has an outcome (its reflex segment); two units "agree" at a slot
+ *  when both are present with the same outcome. Returns, per unit pair, the number of jointly-
+ *  attested slots (both) and how many of those agree (agree), computed in SQL so only the small pair
+ *  matrix crosses the wire. Absence is pairwise-deleted, so a pair's agreement rate agree/both
+ *  depends only on how the two behave where both have the word -- invariant to lexical presence
+ *  (which the reflex-coupling model already captures). Keyed "a|b" with a < b. */
+export interface SoundAgreement {
+	pair: Map<string, { both: number; agree: number }>;
+}
+export async function getIsoglossSoundChangeData(
+	family: string,
+	level: 'clade' | 'lang'
+): Promise<SoundAgreement> {
+	const unit = level === 'clade' ? 'clade' : 'id'; // controlled column, not user input
+	const rows = await query<{ i: string; j: string; both: number; agree: number }>(
+		`WITH base AS (
+		   SELECT l.origin_lemma_id AS e, a.pos AS p, lang.${unit} AS u, ap.reflex_sid AS o
+		   FROM alignment a JOIN lemmas l ON l.rowid = a.form_rid
+		   JOIN languages lang ON lang.id = l.language_id JOIN align_pair ap ON ap.id = a.pair_id
+		   WHERE l.relation = 'reflex' AND lang.clade IS NOT NULL AND lang.clade != ''
+		     AND l.origin_lemma_id IN (SELECT id FROM lemmas WHERE origin_lemma_id IS NULL AND language_id = ?)),
+		 present AS (SELECT DISTINCT e, p, u FROM base),
+		 shared  AS (SELECT DISTINCT e, p, u, o FROM base),
+		 both AS (SELECT pa.u i, pb.u j, COUNT(*) n FROM present pa JOIN present pb
+		            ON pa.e = pb.e AND pa.p = pb.p AND pa.u < pb.u GROUP BY pa.u, pb.u),
+		 agr  AS (SELECT sa.u i, sb.u j, COUNT(*) n FROM shared sa JOIN shared sb
+		            ON sa.e = sb.e AND sa.p = sb.p AND sa.o = sb.o AND sa.u < sb.u GROUP BY sa.u, sb.u)
+		 SELECT b.i AS i, b.j AS j, b.n AS both, COALESCE(a.n, 0) AS agree
+		 FROM both b LEFT JOIN agr a ON a.i = b.i AND a.j = b.j`,
+		[family]
+	);
+	const pair = new Map<string, { both: number; agree: number }>();
+	for (const r of rows) pair.set(`${r.i}|${r.j}`, { both: r.both, agree: r.agree });
+	return { pair };
+}

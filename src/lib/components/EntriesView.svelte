@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { createListState } from '$lib/listState.svelte';
-	import { getFilterLanguages } from '$lib/query';
+	import { getFilterDialects, getFilterLanguages } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
 	import { safe } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
@@ -21,13 +21,22 @@
 
 	let langOptions = $state<SelectOption[]>([]);
 	$effect(() => {
-		getFilterLanguages('entries').then((ls) => {
-			langOptions = ls.map((l) => ({
+		Promise.all([getFilterLanguages('entries'), getFilterDialects('entries')]).then(([ls, ds]) => {
+			const byId = new Map(ls.map((l) => [l.id, l]));
+			langOptions = [...ls.map((l) => ({
 				value: l.id,
 				label: l.name,
 				sub: l.clade ?? '',
 				swatch: cladeColor(l.clade)
-			}));
+			})), ...ds.map((d) => {
+				const parent = byId.get(d.language_id);
+				return {
+					value: d.token,
+					label: `${parent?.name ?? d.language_id}: ${d.name}`,
+					sub: `dialect · ${parent?.clade ?? ''}`,
+					swatch: cladeColor(parent?.clade ?? '')
+				};
+			})];
 		});
 	});
 </script>

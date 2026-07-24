@@ -2,7 +2,7 @@
  * tags.ts — client-side classification of the structured `tags` tokens (mirrors ../data/tags.py).
  * Used to colour tag pills by category and to build the tag filter.
  */
-export type TagCategory = 'gender' | 'grammatical' | 'source' | 'era';
+export type TagCategory = 'gender' | 'grammatical' | 'source' | 'era' | 'dialect';
 
 export const GENDER_TAGS = ['m', 'f', 'n'];
 export const GRAMMATICAL_TAGS = [
@@ -10,7 +10,8 @@ export const GRAMMATICAL_TAGS = [
 	'adj', 'adv', 'pron', 'num', 'postp', 'prep', 'conj', 'interj', 'part', 'indecl', 'ord',
 	'nom', 'acc', 'dat', 'gen', 'loc', 'abl', 'instr', 'voc', 'obl',
 	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger',
-	'verb', 'weak', 'middle', 'strong',
+	'verb', 'poss', 'conditional', 'suffix', 'emph', 'interr', 'dir', '3sg',
+	'weak', 'middle', 'strong',
 	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
 	'Tamil-class-6', 'Tamil-class-7'
 ];
@@ -29,10 +30,24 @@ const ERA_SET = new Set(ERA_TAGS);
 
 /** A tag's category — anything not gender/grammatical/era is treated as an attestation source. */
 export function tagCategory(tag: string): TagCategory {
+	if (tag.startsWith('dialect:')) return 'dialect';
 	if (GENDER_SET.has(tag)) return 'gender';
 	if (GRAMMATICAL_SET.has(tag)) return 'grammatical';
 	if (ERA_SET.has(tag)) return 'era';
 	return 'source';
+}
+
+/** Human-readable pill text. Dialect tokens carry their label after the final colon. */
+export function tagLabel(tag: string): string {
+	if (tag.startsWith('dialect:')) {
+		const encoded = tag.slice(tag.lastIndexOf(':') + 1);
+		try {
+			return decodeURIComponent(encoded);
+		} catch {
+			return encoded;
+		}
+	}
+	return TAG_NAMES[tag] ?? tag;
 }
 
 export const TAG_NAMES: Record<string, string> = {
@@ -46,7 +61,9 @@ export const TAG_NAMES: Record<string, string> = {
 	tr: 'transitive', intr: 'intransitive', caus: 'causative', pass: 'passive',
 	pp: 'past participle', ppp: 'past passive participle', pres: 'present', fut: 'future',
 	inf: 'infinitive', ger: 'gerund',
-	verb: 'verb', weak: 'weak verb', middle: 'middle verb', strong: 'strong verb',
+	verb: 'verb', poss: 'possessive', conditional: 'conditional', suffix: 'suffix',
+	emph: 'emphatic', interr: 'interrogative', dir: 'direct case', '3sg': 'third-person singular',
+	weak: 'weak verb', middle: 'middle verb', strong: 'strong verb',
 	'Tamil-class-1': 'Tamil verb class 1', 'Tamil-class-2': 'Tamil verb class 2',
 	'Tamil-class-3': 'Tamil verb class 3', 'Tamil-class-4': 'Tamil verb class 4',
 	'Tamil-class-5': 'Tamil verb class 5',
