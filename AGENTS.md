@@ -80,6 +80,21 @@ These mirror data-side categories; if the pipeline adds/renames one, update here
 - `FilterCell.svelte` supports an optional picker (pickerKey/pickerOptions/…) rendered first in a
   50/50 split header — used for the split Origin-lang/Origin column.
 
+## Homepage changelog (required for every push)
+
+- **Every push to this repository must update `src/lib/changelog.ts`** with a concise,
+  user-facing account of what changed. If an entry for the same date already exists, extend that
+  entry instead of adding a second entry with the same date (the homepage keys entries by date).
+- Keep entries newest-first, keep the ISO `date` and human-readable `label` in sync, and describe
+  outcomes rather than commit mechanics or internal implementation details.
+- Whenever a push ingests lexical data, populate the entry's `ingested.languages` and
+  `ingested.sources` arrays. Use real IDs that resolve at `/languages/{id}` and
+  `/references/{id}`; verify them against the staged/static DB or the sibling `../data/cldf`
+  tables. Do not guess IDs or claim an ingestion that is not present in the data.
+- Group dialect-heavy surveys under useful parent-language links where appropriate, while linking
+  the exact bibliographic source. Keep chip labels short enough to scan in the homepage's bounded
+  scroll panel.
+
 ## Shipping to prod (only when the user asks)
 
 1. Rebuild data in `../data` (see its AGENTS.md), then `npm run db:transform` here.

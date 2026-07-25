@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { etymonSlotColor } from '$lib/etyma';
 	import type { ConceptRow } from '$lib/types';
 
 	let { data } = $props();
@@ -27,15 +28,9 @@
 		return rows;
 	});
 
-	// stable colour per etymon (matches the map on the per-concept page)
-	function etymonColor(etymon: string): string {
-		let h = 0;
-		for (let i = 0; i < etymon.length; i++) h = (h * 31 + etymon.charCodeAt(i)) >>> 0;
-		return `hsl(${h % 360} 62% 55%)`;
-	}
-	// total forms behind a concept's shown bar (segments + remainder), for segment widths
+	// total forms behind a concept's shown bar (segments + remainder + unetymologised), for widths
 	const barTotal = (c: ConceptRow) =>
-		Math.max(1, (c.bars ?? []).reduce((s, b) => s + b.n, 0) + (c.rest ?? 0));
+		Math.max(1, (c.bars ?? []).reduce((s, b) => s + b.n, 0) + (c.rest ?? 0) + (c.unetym_count ?? 0));
 </script>
 
 <svelte:head>
@@ -76,7 +71,7 @@
 				<th>Category</th>
 				<th class="numeric">Etyma</th>
 				<th class="numeric">Langs</th>
-				<th class="dist-col">Distribution of etyma</th>
+				<th class="dist-col">Distribution of forms</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -90,12 +85,12 @@
 						{#if c.bars?.length}
 							{@const total = barTotal(c)}
 							<div class="cbar">
-								{#each c.bars as b (b.etymon)}
+								{#each c.bars as b, i (b.etymon)}
 									<a
 										class="eref cseg"
 										data-eref={b.etymon}
 										href="{base}/entries/{b.etymon}"
-										style="width: {(100 * b.n) / total}%; background: {etymonColor(b.etymon)}"
+										style="width: {(100 * b.n) / total}%; background: {etymonSlotColor(i)}"
 										aria-label="{b.etymon} ({b.n})"
 									></a>
 								{/each}
@@ -104,6 +99,13 @@
 										class="cseg rest"
 										style="width: {(100 * c.rest) / total}%"
 										title="{c.rest} more"
+									></span>
+								{/if}
+								{#if c.unetym_count}
+									<span
+										class="cseg unetym"
+										style="width: {(100 * c.unetym_count) / total}%"
+										title="{c.unetym_count} unetymologised"
 									></span>
 								{/if}
 							</div>
@@ -183,5 +185,10 @@
 			transparent 3px,
 			transparent 6px
 		);
+	}
+	/* forms with this meaning that aren't linked to an etymon — solid neutral, matching the
+	   unetymologised markers on the per-concept map */
+	.cseg.unetym {
+		background: #9a958c;
 	}
 </style>

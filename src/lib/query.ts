@@ -7,8 +7,8 @@
  *    so 1–2 character partials never trigger a scan.
  *  - The small `languages` and `references` tables are loaded/queried cheaply and
  *    cached; we attach relations in JS rather than doing wide joins over 313k lemma rows.
- *  - The unfiltered list paths avoid the languages join and lean on the order indexes
- *    (idx_lemmas_order / partial idx_entries_order) so only the needed pages are fetched.
+ *  - The unfiltered entries path avoids the languages join and leans on the partial
+ *    idx_entries_order index so only the needed pages are fetched.
  */
 import { query, queryOne } from './db.svelte';
 import { CLADE_ORDER } from './clades';

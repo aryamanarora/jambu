@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { changelog } from '$lib/changelog';
 </script>
 
 <svelte:head>
@@ -50,6 +51,59 @@
 	</li>
 	<li><a href="{base}/references">References</a> is a list of sources.</li>
 </ul>
+
+<section class="changelog" aria-labelledby="changelog-heading">
+	<div class="changelog-heading">
+		<div>
+			<p class="changelog-eyebrow">Project updates</p>
+			<h2 id="changelog-heading">What’s new</h2>
+		</div>
+	</div>
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex (the overflow region must be keyboard-scrollable) -->
+	<div class="changelog-scroll" role="region" tabindex="0" aria-label="Jambu changelog, newest first">
+		<ol>
+			{#each changelog as entry, index (entry.date)}
+				<li class:latest={index === 0}>
+					<div class="changelog-date">
+						<time datetime={entry.date}>{entry.label}</time>
+						{#if index === 0}<span>Latest</span>{/if}
+					</div>
+					<h3>{entry.title}</h3>
+					<ul>
+						{#each entry.changes as change}
+							<li>{change}</li>
+						{/each}
+					</ul>
+					{#if entry.ingested}
+						<div class="changelog-ingested" aria-label="Newly ingested data">
+							<p class="ingested-title">Newly ingested</p>
+							<div>
+								<span class="ingested-label">Languages</span>
+								<div class="ingested-links">
+									{#each entry.ingested.languages as language (language.id)}
+										<a class="ingested-link language-link" href="{base}/languages/{language.id}">
+											<span aria-hidden="true">A</span>{language.label}
+										</a>
+									{/each}
+								</div>
+							</div>
+							<div>
+								<span class="ingested-label">Sources</span>
+								<div class="ingested-links">
+									{#each entry.ingested.sources as source (source.id)}
+										<a class="ingested-link source-link" href="{base}/references/{source.id}">
+											<span aria-hidden="true">§</span>{source.label}
+										</a>
+									{/each}
+								</div>
+							</div>
+						</div>
+					{/if}
+				</li>
+			{/each}
+		</ol>
+	</div>
+</section>
 
 <p>
 	<em>Jambu</em> is named for the Indian blackberry, i.e.

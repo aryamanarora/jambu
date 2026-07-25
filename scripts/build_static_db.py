@@ -6,12 +6,9 @@ The raw data.db (published as a GitHub release asset on moli-mandala/data) is op
 server with an ORM. For the static GitHub Pages site we query it directly in the browser via
 sql.js-httpvfs, so we bake in everything the client needs:
 
-  1. Drop the empty/unused `concepts` and `lemma_concept` tables.
-  2. Add the indexes the client query layer relies on (the release DB already has the four
-     `idx_lemmas_*` ones; we add the citation-join indexes).
-  3. Build an FTS5 **trigram** index over the lemma text columns so substring search
-     (the old `LIKE '%x%'`) is fast and, crucially, page-local under HTTP Range fetching.
-  4. ANALYZE + VACUUM so the B-trees and FTS shadow tables are laid out contiguously.
+  1. Build compact browser tables directly from the unified CLDF data.
+  2. Add the compact set of indexes the client query layer relies on.
+  3. ANALYZE + VACUUM so the B-trees are laid out contiguously.
 
 Tiny lookup tables (languages: 615 rows, references: 194 rows) are searched with plain LIKE on
 the client — no index needed — so we do not build FTS for them.
@@ -47,7 +44,9 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-MAX_OUTPUT_BYTES = 100_000_000
+# The expanded 2026 survey imports bring the compact DB just above 100 MB.
+# Keep a tight regression guard while allowing that intentional corpus growth.
+MAX_OUTPUT_BYTES = 105_000_000
 
 # Printed dialect prefixes which differ from the canonical language name in languages.csv.
 BASE_LANGUAGE_OVERRIDES = {
@@ -84,8 +83,10 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             editor TEXT, lemma_count INTEGER DEFAULT 0,
             unetymologised_count INTEGER DEFAULT 0
         );
+        -- CLDF Original is an import-time transliteration source; no display/query path reads it.
+        -- The rendered form is word, so omitting Original avoids shipping ~2.1M dead characters.
         CREATE TABLE lemmas (
-            id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT, original TEXT,
+            id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT,
             notes TEXT, clades TEXT, cognateset TEXT, "order" INTEGER, language_id TEXT,
             origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER,
             etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT, borrowed_from TEXT
@@ -321,7 +322,7 @@ def load_lemmas(
         # has no origin but carries Relation="local" so it stays out of the entries listing.
         lemmas.append(
             (r["ID"], r["Form"], r["Gloss"], r["Native"] or None, r["Phonemic"] or None,
-             r["Original"] or None, r["Description"] or "", None, None, i * 1000,
+             r["Description"] or "", None, None, i * 1000,
              r["Language_ID"], None, (r["Tags"] or None), (r["Etymology"] or None),
              ("local" if r.get("Relation") == "local" else None),
              (r.get("Redirect") or None), None, None)
@@ -350,7 +351,7 @@ def load_lemmas(
         order = node_order.get(pid, 0) + param_cts[pid]
         node_order[r["ID"]] = order
         lemmas.append(
-            (r["ID"], r["Form"], r["Gloss"], r["Native"], r["Phonemic"], r["Original"],
+            (r["ID"], r["Form"], r["Gloss"], r["Native"], r["Phonemic"],
              r["Description"] or "", None, r["Cognateset"], order,
              r["Language_ID"], pid, (r["Tags"] or None), (r["Etymology"] or None),
              (r["Relation"] or None), None,
@@ -362,11 +363,21 @@ def load_lemmas(
         for ref in _parse_ref(r["Source"]):
             lemma_refs.add((r["ID"], ref))
 
+    seen_lemma_ids: set[str] = set()
+    duplicate_lemma_ids: set[str] = set()
+    for lemma in lemmas:
+        if lemma[0] in seen_lemma_ids:
+            duplicate_lemma_ids.add(lemma[0])
+        seen_lemma_ids.add(lemma[0])
+    if duplicate_lemma_ids:
+        sample = ", ".join(sorted(duplicate_lemma_ids)[:10])
+        raise ValueError(f"duplicate lemma IDs after dialect collapsing: {sample}")
+
     con.executemany(
-        'INSERT INTO lemmas (id,word,gloss,native,phonemic,original,notes,clades,cognateset,'
+        'INSERT INTO lemmas (id,word,gloss,native,phonemic,notes,clades,cognateset,'
         '"order",language_id,origin_lemma_id,tags,etymology,relation,redirect_to,variant_of,'
         'borrowed_from) '
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         lemmas,
     )
     con.executemany(
@@ -493,12 +504,6 @@ def load_derivation(con: sqlite3.Connection, deriv_csv: Path, aliases: dict[str,
             "INSERT INTO derivation (child_id, parent_id) VALUES (?, ?)",
             ((canon(r["Child_ID"]), canon(r["Parent_ID"])) for r in reader),
         )
-    con.executescript(
-        """
-        CREATE INDEX idx_derivation_parent ON derivation(parent_id);
-        CREATE INDEX idx_derivation_child ON derivation(child_id);
-        """
-    )
     con.commit()
     n = con.execute("SELECT COUNT(*) FROM derivation").fetchone()[0]
     log(f"loaded derivation graph: {n} edges from {deriv_csv}")
@@ -706,21 +711,23 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         con, cldf / "forms.csv", clade_of, canonical_of, dialect_tag_of
     )
 
-    # 2. Indexes: citation joins and list/filter ordering. The composite language/order index also
-    # serves language-only lookups through its leftmost prefix, so a separate language index would
-    # duplicate the same keys.
+    # 2. Indexes: keep the lookup and hot-path ordering indexes. Deliberately omit broad secondary
+    # indexes for global lemma order, reverse citation lookup, derivation edges, and the two entry
+    # count sorts. Their queries retain explicit WHERE / ORDER BY clauses and therefore return the
+    # same rows without these indexes; SQLite scans only a compact link table or sorts the small
+    # entry set for those less common views. The omitted indexes save ~9 MB in the shipped DB.
+    # The composite language/order index also serves language-only lookups through its leftmost
+    # prefix, so a separate language index would duplicate the same keys.
     con.executescript(
         """
         CREATE INDEX idx_lemmas_origin_lemma_id ON lemmas(origin_lemma_id);
-        CREATE INDEX idx_lemmas_order           ON lemmas("order");
-        CREATE INDEX idx_lemma_reference_reference ON lemma_reference(reference_rid, lemma_rid);
         CREATE INDEX idx_lemmas_language_order   ON lemmas(language_id, "order");
         -- partial index for the Entries list (headwords): ORDER BY "order" with no temp sort.
         -- Lone (unetymologised) nodes have an empty origin but Relation='local'; keep them out.
         CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
         """
     )
-    log("created lemma + citation-join + ordering indexes")
+    log("created compact lemma lookup + hot-path ordering indexes")
 
     # 3. Derivation graph (derived-term → ancestor etymon).
     deriv = cldf / "derivation.csv"
@@ -759,8 +766,6 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
             lang_count   = (SELECT COUNT(DISTINCT r.language_id) FROM lemmas r
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex')
         WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
-        CREATE INDEX idx_entries_reflex_count ON lemmas(reflex_count) WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
-        CREATE INDEX idx_entries_lang_count   ON lemmas(lang_count)   WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
         """
     )
     con.commit()

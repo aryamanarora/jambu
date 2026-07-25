@@ -13,6 +13,7 @@ import Database from 'better-sqlite3';
 import { statSync } from 'node:fs';
 import { dev } from '$app/environment';
 import type {
+	AttestationPlace,
 	ConceptAttestation,
 	ConceptDetail,
 	ConceptEtymon,
@@ -187,6 +188,43 @@ function toRoot(id: string): string {
 	return rootEtymonMap().get(id) ?? id;
 }
 
+// Dialect tokens that carry coordinates, keyed by the token as it appears in lemmas.tags.
+// Built once, memoised (443 of 585 dialects are located).
+let _dialectPoints: Map<string, { name: string; lat: number; long: number }> | null = null;
+function dialectPoints() {
+	if (_dialectPoints) return _dialectPoints;
+	const rows = getDb()
+		.prepare('SELECT token, name, lat, long FROM dialects WHERE lat IS NOT NULL AND long IS NOT NULL')
+		.all() as { token: string; name: string; lat: number; long: number }[];
+	_dialectPoints = new Map(rows.map((r) => [r.token, { name: r.name, lat: r.lat, long: r.long }]));
+	return _dialectPoints;
+}
+
+/**
+ * Where a form should be plotted: one point per located dialect it is tagged with, falling back
+ * to the language's own point when it carries no located dialect tag. Mirrors the entry-page map,
+ * so a dialectally-tagged form lands on the dialect rather than the language centroid.
+ */
+function placesFor(
+	tags: string | null,
+	language: string | null,
+	lat: number | null,
+	long: number | null
+): AttestationPlace[] {
+	const points = dialectPoints();
+	const tagged = (tags ?? '')
+		.split(/\s+/)
+		.map((t) => {
+			const d = points.get(t);
+			return d && { key: t, name: `${language ?? '—'}: ${d.name}`, lat: d.lat, long: d.long };
+		})
+		.filter((p): p is AttestationPlace => !!p);
+	if (tagged.length) return tagged;
+	if (language && lat != null && long != null)
+		return [{ key: `language:${language}`, name: language, lat, long }];
+	return [];
+}
+
 export function getConceptDetail(id: string): ConceptDetail | null {
 	const dbh = getDb();
 	const concept = dbh
@@ -199,7 +237,7 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 
 	const linked = dbh
 		.prepare(
-			`SELECT l.id AS form_id, l.word, l.gloss, l.relation,
+			`SELECT l.id AS form_id, l.word, l.gloss, l.relation, l.tags,
 			        COALESCE(NULLIF(l.origin_lemma_id, ''), l.id) AS etymon,
 			        lang.name AS language, lang.clade AS clade, lang.color AS color,
 			        lang.lat AS lat, lang.long AS long, lang."order" AS lorder
@@ -210,20 +248,20 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 			 ORDER BY etymon, lorder, l.word`
 		)
 		.all(id) as Array<
-		ConceptAttestation & { etymon: string; relation: string | null }
+		ConceptAttestation & { etymon: string; relation: string | null; tags: string | null }
 	>;
 
 	// group by the most-ancestral (root) etymon so the map colours by deep etymological family
 	// (the per-concept table keeps immediate etyma; this only feeds the map)
 	const rootOf = (r: { etymon: string }) => toRoot(r.etymon);
 	const etymonIds = [...new Set(linked.filter((r) => r.relation !== 'local').map(rootOf))];
-	const heads = new Map<string, string>();
+	const heads = new Map<string, { word: string; gloss: string }>();
 	if (etymonIds.length) {
 		const qs = etymonIds.map(() => '?').join(',');
 		for (const r of dbh
-			.prepare(`SELECT id, gloss FROM lemmas WHERE id IN (${qs})`)
-			.all(...etymonIds) as { id: string; gloss: string }[]) {
-			heads.set(r.id, r.gloss);
+			.prepare(`SELECT id, word, gloss FROM lemmas WHERE id IN (${qs})`)
+			.all(...etymonIds) as { id: string; word: string; gloss: string }[]) {
+			heads.set(r.id, { word: r.word, gloss: r.gloss });
 		}
 	}
 
@@ -238,7 +276,8 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 			clade: r.clade,
 			color: r.color,
 			lat: r.lat,
-			long: r.long
+			long: r.long,
+			places: placesFor(r.tags, r.language, r.lat, r.long)
 		};
 		if (r.relation === 'local') {
 			unetym.push(att);
@@ -247,9 +286,11 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 		const root = rootOf(r);
 		let e = byEtymon.get(root);
 		if (!e) {
+			const head = heads.get(root);
 			e = {
 				etymon: root,
-				gloss: heads.get(root) ?? '',
+				word: head?.word || root,
+				gloss: head?.gloss ?? '',
 				source: etymonSource(root),
 				languages: [],
 				forms: []

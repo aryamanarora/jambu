@@ -12,6 +12,7 @@ export const GRAMMATICAL_TAGS = [
 	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger',
 	'verb', 'poss', 'conditional', 'suffix', 'emph', 'interr', 'dir', '3sg',
 	'weak', 'middle', 'strong', 'reduplicated', 'uncertain', 'sound-variant',
+	'derived', 'inherited', 'loanword', 'diminutive', 'intensive', 'compound',
 	'pret', 'impv', 'opt', 'alternate', 'replaced', 'sound-variant',
 	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
 	'Tamil-class-6', 'Tamil-class-7'
@@ -69,6 +70,8 @@ export const TAG_NAMES: Record<string, string> = {
 	verb: 'verb', poss: 'possessive', conditional: 'conditional', suffix: 'suffix',
 	emph: 'emphatic', interr: 'interrogative', dir: 'direct case', '3sg': 'third-person singular',
 	weak: 'weak verb', middle: 'middle verb', strong: 'strong verb',
+	derived: 'synchronically derived', inherited: 'inherited from OIA', loanword: 'loanword',
+	diminutive: 'diminutive', intensive: 'intensive', compound: 'compound',
 	'Tamil-class-1': 'Tamil verb class 1', 'Tamil-class-2': 'Tamil verb class 2',
 	'Tamil-class-3': 'Tamil verb class 3', 'Tamil-class-4': 'Tamil verb class 4',
 	'Tamil-class-5': 'Tamil verb class 5',

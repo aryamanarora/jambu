@@ -55,7 +55,6 @@ export interface Lemma {
 	gloss: string;
 	native: string;
 	phonemic: string;
-	original: string;
 	notes: string;
 	tags: string; // structured source, grammar, era, and dialect tokens; space-separated
 	clades: string;
@@ -146,6 +145,14 @@ export interface ConceptRow {
 	rest?: number; // forms from etyma beyond the shown segments
 }
 
+/** A point a form is plotted at: a located dialect it is tagged with, else its language. */
+export interface AttestationPlace {
+	key: string; // dialect token, or `language:<name>`
+	name: string; // "Marathi: Konkani", or just "Marathi" for the language fallback
+	lat: number;
+	long: number;
+}
+
 export interface ConceptAttestation {
 	form_id: string;
 	word: string;
@@ -155,10 +162,12 @@ export interface ConceptAttestation {
 	color: string | null;
 	lat: number | null;
 	long: number | null;
+	places: AttestationPlace[];
 }
 
 export interface ConceptEtymon {
 	etymon: string;
+	word: string; // headword of the root etymon (falls back to the id)
 	gloss: string;
 	source: string;
 	languages: string[];
