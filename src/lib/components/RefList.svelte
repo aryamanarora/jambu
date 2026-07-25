@@ -10,6 +10,6 @@
 {#if refs.length}
 	{#each refs as r, i (r.id)}{#if i > 0}, {/if}<a
 			href="{base}/references/{r.id}"
-			title={r.short}>{r.short}</a
+			title={r.short || r.id}>{r.short || r.id}</a
 		>{/each}
 {:else}<span class="faint">—</span>{/if}

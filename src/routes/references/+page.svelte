@@ -23,7 +23,7 @@
 				const field = ({ reference: 'short', citation: 'source' }[key] ?? key) as keyof Reference;
 				comparison = text(a, field).localeCompare(text(b, field));
 			}
-			return sign * comparison || a.short.localeCompare(b.short);
+			return sign * comparison || (a.short || a.id).localeCompare(b.short || b.id);
 		});
 	});
 	function setSort(value: string) {
@@ -31,7 +31,7 @@
 	}
 
 	// progress → badge class + border colour (mirrors the old references.html)
-	function badge(progress: string): 'ok' | 'warn' | 'bad' {
+	function badge(progress: string | null): 'ok' | 'warn' | 'bad' {
 		if (progress === 'Yes') return 'ok';
 		if (progress === 'Partial') return 'warn';
 		return 'bad';
@@ -73,7 +73,7 @@
 				{@const b = badge(r.progress)}
 				<tr>
 					<td class="lang-cell ref-cell" style="border-left-color: {borderColor[b]}">
-						<a href="{base}/references/{r.id}">{r.short}</a>
+						<a href="{base}/references/{r.id}">{r.short || r.id}</a>
 						<span class="id-tag">[{r.id}]</span>
 					</td>
 					<td class="markdown">{@html md(r.source)}</td>

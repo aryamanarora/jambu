@@ -23,7 +23,7 @@ export interface ListState {
 
 export function createListState(
 	mode: 'reflexes' | 'entries' | 'lexicon',
-	opts: { languageId?: string; referenceId?: string; withOrigin?: boolean } = {}
+	opts: { languageId?: string; referenceId?: string; conceptId?: string; withOrigin?: boolean } = {}
 ): ListState {
 	let result = $state<ListResult | null>(null);
 	let loading = $state(true);
@@ -42,6 +42,7 @@ export function createListState(
 			mode,
 			languageId: opts.languageId,
 			referenceId: opts.referenceId,
+			conceptId: opts.conceptId,
 			params: p,
 			withOrigin: opts.withOrigin
 		})

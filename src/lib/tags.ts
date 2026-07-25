@@ -11,7 +11,8 @@ export const GRAMMATICAL_TAGS = [
 	'nom', 'acc', 'dat', 'gen', 'loc', 'abl', 'instr', 'voc', 'obl',
 	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger',
 	'verb', 'poss', 'conditional', 'suffix', 'emph', 'interr', 'dir', '3sg',
-	'weak', 'middle', 'strong',
+	'weak', 'middle', 'strong', 'reduplicated', 'uncertain', 'sound-variant',
+	'pret', 'impv', 'opt', 'alternate', 'replaced', 'sound-variant',
 	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
 	'Tamil-class-6', 'Tamil-class-7'
 ];
@@ -31,6 +32,10 @@ const ERA_SET = new Set(ERA_TAGS);
 /** A tag's category — anything not gender/grammatical/era is treated as an attestation source. */
 export function tagCategory(tag: string): TagCategory {
 	if (tag.startsWith('dialect:')) return 'dialect';
+	// CDIAL derived-form markers: extension morphemes (ext:kk), the shared morpheme entries
+	// (morpheme:extension) — all morphological
+	if (tag.startsWith('ext:') || tag.startsWith('morpheme:')) return 'grammatical';
+	if (tag.startsWith('loan:')) return 'source';
 	if (GENDER_SET.has(tag)) return 'gender';
 	if (GRAMMATICAL_SET.has(tag)) return 'grammatical';
 	if (ERA_SET.has(tag)) return 'era';

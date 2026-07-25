@@ -16,7 +16,7 @@
 		}
 	});
 
-	function badge(progress: string): 'ok' | 'warn' | 'bad' {
+	function badge(progress: string | null): 'ok' | 'warn' | 'bad' {
 		if (progress === 'Yes') return 'ok';
 		if (progress === 'Partial') return 'warn';
 		return 'bad';
@@ -29,15 +29,17 @@
 </script>
 
 <svelte:head>
-	<title>{ref.short} [{ref.id}] — Jambu</title>
+	<title>{ref.short || ref.id} [{ref.id}] — Jambu</title>
 </svelte:head>
 
 <h1 class="headword">
-	{ref.short} <span class="id-tag">[{ref.id}]</span>
-	<span class="badge {badge(ref.progress)}">{ref.progress}</span>
+	{ref.short || ref.id} <span class="id-tag">[{ref.id}]</span>
+	<span class="badge {badge(ref.progress)}">{ref.progress || 'No'}</span>
 </h1>
 
-<div class="card markdown source">{@html md(ref.source)}</div>
+<div class="card markdown source">
+	{@html md(ref.source || `Reference abbreviation ${ref.id}; full citation not yet catalogued.`)}
+</div>
 
 <dl class="props card provenance">
 	<div class="prop"><dt>Provenance</dt><dd>{ref.provenance || 'Not recorded'}</dd></div>

@@ -40,6 +40,7 @@
 		{ href: '/languages', label: 'Languages' },
 		{ href: '/correspondences', label: 'Sounds' },
 		{ href: '/isoglosses', label: 'Isoglosses' },
+		{ href: '/concepts', label: 'Concepts' },
 		{ href: '/references', label: 'References' }
 	];
 

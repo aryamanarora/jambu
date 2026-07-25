@@ -117,6 +117,22 @@ async function attachLanguages(lemmas: Lemma[]): Promise<void> {
 	for (const l of lemmas) l.language = langs.get(l.language_id);
 }
 
+/** Reflexes of one etymon that match a given concept — the inline expansion on the concepts view.
+ *  Same shape/columns as the reflex table, but narrowed to the concept-matching forms. */
+export async function getConceptReflexes(entryId: string, conceptId: string): Promise<Lemma[]> {
+	const rows = await query<Lemma>(
+		`SELECT l.* FROM lemmas l
+		 WHERE COALESCE(NULLIF(l.origin_lemma_id, ''), l.id) = ? AND l.relation IS NOT 'local'
+		   AND l.redirect_to IS NULL
+		   AND l.rowid IN (SELECT lemma_rid FROM lemma_concept WHERE concept_id = ?)
+		 ORDER BY l."order"`,
+		[entryId, conceptId]
+	);
+	await attachLanguages(rows);
+	await attachReferences(rows);
+	return rows;
+}
+
 async function attachOrigin(lemmas: Lemma[]): Promise<void> {
 	const langs = await languageMap();
 	const ids = [...new Set(lemmas.map((l) => l.origin_lemma_id).filter((x): x is string => !!x))];
@@ -218,7 +234,8 @@ const SORT_COLUMNS: Record<string, string> = {
 	reflexes: 'lang.lemma_count',
 	nreflex: 'l.reflex_count',
 	nlang: 'l.lang_count',
-	nderived: '(SELECT COUNT(*) FROM derivation WHERE parent_id = l.id)'
+	nderived:
+		'(SELECT COUNT(*) FROM derivation d JOIN lemmas c ON c.id=d.child_id WHERE d.parent_id = l.id AND c.origin_lemma_id IS NULL)'
 };
 // columns whose sort/filter forces the languages join
 const NEEDS_LANG_JOIN = new Set(['lang', 'clade', 'reflexes']);
@@ -358,12 +375,13 @@ interface ListOpts {
 	mode: 'reflexes' | 'entries' | 'lexicon';
 	languageId?: string;
 	referenceId?: string;
+	conceptId?: string; // restrict to entries expressing this Concepticon concept
 	params: ListParams;
 	withOrigin?: boolean; // attach origin_lemma (reflexes/lexicon show it)
 }
 
 export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
-	const { mode, languageId, referenceId, params } = opts;
+	const { mode, languageId, referenceId, conceptId, params } = opts;
 	const page = Math.max(1, params.page ?? 1);
 	const { conds, needsLangJoin } = lemmaConditions(params);
 
@@ -390,6 +408,14 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 			       WHERE lr.lemma_rid = l.rowid AND rr.id = ?)`,
 			params: [referenceId]
 		});
+	// entries that are the immediate etymon of some form mapped to this concept (lone nodes excluded)
+	if (conceptId)
+		modeConds.push({
+			sql: `l.id IN (SELECT DISTINCT COALESCE(NULLIF(r.origin_lemma_id, ''), r.id)
+			       FROM lemma_concept lc JOIN lemmas r ON r.rowid = lc.lemma_rid
+			       WHERE lc.concept_id = ? AND r.relation IS NOT 'local')`,
+			params: [conceptId]
+		});
 
 	const all = [...modeConds, ...conds];
 	const whereParams = all.flatMap((c) => c.params);
@@ -401,18 +427,20 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	const isDefaultEntries =
 		mode === 'entries' &&
 		!referenceId &&
+		!conceptId &&
 		!needsLangJoin &&
 		conds.length === 0 &&
 		!params.loanSourcesOnly &&
 		!(params.sort ?? '').trim();
 
+	// in the concept view, default to the etyma with the most reflexes matching the concept first
 	const fallbackOrder =
-		mode === 'entries' || mode === 'lexicon' ? 'l."order"' : 'l."order"';
+		conceptId && !(params.sort ?? '').trim() ? 'concept_match DESC, l."order"' : 'l."order"';
 	const order = orderBy(params, fallbackOrder);
 
 	// count — use precomputed totals for the unfiltered case (a full COUNT(*) is a whole-index
 	// scan = a large sequential read over the wire); only COUNT the (bounded) filtered set.
-	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly || !!referenceId;
+	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly || !!referenceId || !!conceptId;
 	let count: number;
 	if (!hasFilters && mode === 'entries') {
 		count = await metaCount('total_entries');
@@ -439,16 +467,27 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	// (concatenated, ordered, unit-separated) so the Entry column can list them beside the headword
 	const derivedCol =
 		mode === 'entries'
-			? ', (SELECT COUNT(*) FROM derivation WHERE parent_id = l.id) AS derived_count' +
+			? ', (SELECT COUNT(*) FROM derivation d JOIN lemmas c ON c.id=d.child_id ' +
+				'WHERE d.parent_id = l.id AND c.origin_lemma_id IS NULL) AS derived_count' +
 				", (SELECT group_concat(word, char(31)) FROM (SELECT word FROM lemmas WHERE " +
 				"origin_lemma_id = l.id AND relation = 'variant' AND variant_of IS NULL ORDER BY \"order\")) AS variant_forms"
 			: '';
+	// count of this entry's reflexes that match the concept — the concept view sorts on it and shows it
+	const conceptCol = conceptId
+		? `, (SELECT COUNT(*) FROM lemma_concept lcx JOIN lemmas rx ON rx.rowid = lcx.lemma_rid
+		     WHERE lcx.concept_id = ? AND COALESCE(NULLIF(rx.origin_lemma_id, ''), rx.id) = l.id
+		       AND rx.relation IS NOT 'local') AS concept_match`
+		: '';
+	const conceptColParams = conceptId ? [conceptId] : [];
 	const fetchSql = isDefaultEntries
 		? `SELECT l.*${derivedCol} FROM lemmas l INDEXED BY idx_entries_order
 		   WHERE l.origin_lemma_id IS NULL AND l.relation IS NOT 'local' AND l.redirect_to IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
-		: `SELECT l.*${derivedCol} FROM lemmas l ${join} ${whereSql}
+		: `SELECT l.*${derivedCol}${conceptCol} FROM lemmas l ${join} ${whereSql}
 		   ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
-	const rows = await query<Lemma>(fetchSql, isDefaultEntries ? [] : whereParams);
+	const rows = await query<Lemma>(
+		fetchSql,
+		isDefaultEntries ? [] : [...conceptColParams, ...whereParams]
+	);
 
 	await attachLanguages(rows);
 	if (opts.withOrigin) await attachOrigin(rows);
@@ -544,10 +583,14 @@ export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<De
 	let frontier = [rootId];
 	let total = 0;
 	for (let depth = 0; depth < 12 && frontier.length && total < maxNodes; depth++) {
+		// derived TERMS are same-language derived etyma (headwords: origin_lemma_id IS NULL). A reflex
+		// child (origin set) is an alternate-etymology reflex — shown under the entry's reflexes, not here.
 		const edges = await inChunks<{ p: string; c: string }>(frontier, (chunk) =>
 			query<{ p: string; c: string }>(
-				`SELECT parent_id AS p, child_id AS c FROM derivation
-				 WHERE parent_id IN (${placeholders(chunk.length)}) ORDER BY child_id`,
+				`SELECT d.parent_id AS p, d.child_id AS c FROM derivation d
+				 JOIN lemmas l ON l.id = d.child_id
+				 WHERE d.parent_id IN (${placeholders(chunk.length)}) AND l.origin_lemma_id IS NULL
+				 ORDER BY d.child_id`,
 				chunk
 			)
 		);
@@ -606,6 +649,19 @@ export async function getLanguageTags(languageId: string): Promise<string[]> {
 		[languageId]
 	);
 	return [...new Set(rows.flatMap((r) => r.tags.split(/\s+/).filter(Boolean)))];
+}
+
+/** Every structured tag in the corpus with its row count — for the (auto-built) tag filter. */
+export async function getAllTags(): Promise<{ tag: string; count: number }[]> {
+	const rows = await query<{ tags: string; c: number }>(
+		`SELECT tags, COUNT(*) AS c FROM lemmas WHERE tags IS NOT NULL AND tags <> '' GROUP BY tags`
+	);
+	const counts = new Map<string, number>();
+	for (const r of rows)
+		for (const t of r.tags.split(/\s+/).filter(Boolean)) counts.set(t, (counts.get(t) ?? 0) + r.c);
+	return [...counts.entries()]
+		.map(([tag, count]) => ({ tag, count }))
+		.sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }
 
 /** Dialect-tag definitions retain the geography and Glottolog metadata removed from languages. */
@@ -733,10 +789,17 @@ export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
 }
 
 export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> {
+	// primary reflexes (origin_lemma_id = this entry) plus SECONDARY reflexes — daughter forms whose
+	// alternate etymology is this entry (a derivation edge), shown here but flagged distinctly.
 	const reflexes = await query<Lemma>(
-		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed') " +
-			'ORDER BY cognateset',
-		[entryId]
+		`SELECT *, 0 AS secondary FROM lemmas
+		   WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed')
+		 UNION ALL
+		 SELECT *, 1 AS secondary FROM lemmas
+		   WHERE origin_lemma_id IS NOT NULL AND relation IS NOT 'local'
+		     AND id IN (SELECT child_id FROM derivation WHERE parent_id = ?)
+		 ORDER BY cognateset`,
+		[entryId, entryId]
 	);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
@@ -806,11 +869,18 @@ export interface EntryAlignment {
 }
 
 export async function getEntryAlignment(entryId: string): Promise<EntryAlignment> {
-	// a node's children: an etymon/section-form's daughter reflexes, or a reflex's borrowed sub-reflexes
+	// a node's children: an etymon/section-form's daughter reflexes, or a reflex's borrowed sub-reflexes.
+	// Plus SECONDARY reflexes — daughter forms whose PRIMARY etymon is elsewhere but which also derive
+	// from this entry via a derivation edge (alternate etymology); flagged so we badge them "derived".
 	const reflexes = await query<Lemma>(
-		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed') " +
-			'ORDER BY "order"',
-		[entryId]
+		`SELECT *, 0 AS secondary FROM lemmas
+		   WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed')
+		 UNION ALL
+		 SELECT *, 1 AS secondary FROM lemmas
+		   WHERE origin_lemma_id IS NOT NULL AND relation IN ('reflex','borrowed')
+		     AND id IN (SELECT child_id FROM derivation WHERE parent_id = ?)
+		 ORDER BY "order"`,
+		[entryId, entryId]
 	);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);

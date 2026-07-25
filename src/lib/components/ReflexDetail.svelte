@@ -28,6 +28,7 @@
 			<span class="d-word">{@html safe(lemma.word)}</span>
 		{/if}
 		{#if lemma.phonemic}<span class="d-phon">/{lemma.phonemic}/</span>{/if}
+		{#if lemma.secondary}<span class="d-secondary" title="alternate etymology — primarily derived elsewhere">secondary</span>{/if}
 		{#if lemma.gloss}<span class="d-gloss">‘{@html safe(lemma.gloss)}’</span>{/if}
 		{#if lemma.tags}<Tags tags={lemma.tags} />{/if}
 		{#if lemma.cognateset}<span class="d-cog">§{lemma.cognateset}</span>{/if}
@@ -76,6 +77,15 @@
 	.d-src {
 		font-size: 0.8rem;
 		color: var(--muted);
+	}
+	.d-secondary {
+		font-size: 0.68rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--muted);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		padding: 0 0.45em;
 	}
 	.d-from {
 		margin-top: 0.35rem;

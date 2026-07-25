@@ -40,11 +40,11 @@ export interface Dialect {
 
 export interface Reference {
 	id: string;
-	short: string;
-	source: string;
-	progress: string;
-	provenance: string;
-	editor: string;
+	short: string | null;
+	source: string | null;
+	progress: string | null;
+	provenance: string | null;
+	editor: string | null;
 	lemma_count: number;
 	unetymologised_count: number;
 }
@@ -75,6 +75,8 @@ export interface Lemma {
 	reflex_count?: number;
 	lang_count?: number;
 	derived_count?: number; // # of derived-term etyma built on this headword (entries view)
+	concept_match?: number; // # of this entry's reflexes matching the active concept (concepts view)
+	secondary?: number; // 1 when shown under an etymon it reaches by an alternate (derivation) edge
 	variant_forms?: string | null; // same-language variant word forms, \x1f-separated (entries view)
 	// hydrated relations (optional)
 	language?: Language;
@@ -123,4 +125,48 @@ export interface MapMarker {
 	radius?: number;
 	dim?: boolean; // draw faded (e.g. languages with no reflex at the selected position)
 	ring?: boolean; // draw a bold outline (e.g. the selected point on the isogloss map)
+}
+
+// ---- concepts (Concepticon) -----------------------------------------------
+
+export interface ConceptBarSeg {
+	etymon: string;
+	n: number; // number of forms of this etymon expressing the concept (segment size)
+}
+
+export interface ConceptRow {
+	id: number;
+	name: string;
+	category: string;
+	etyma_count: number;
+	unetym_count: number;
+	lang_count: number;
+	form_count: number;
+	bars?: ConceptBarSeg[]; // top etyma for the stacked bar (index page)
+	rest?: number; // forms from etyma beyond the shown segments
+}
+
+export interface ConceptAttestation {
+	form_id: string;
+	word: string;
+	gloss: string;
+	language: string | null;
+	clade: string | null;
+	color: string | null;
+	lat: number | null;
+	long: number | null;
+}
+
+export interface ConceptEtymon {
+	etymon: string;
+	gloss: string;
+	source: string;
+	languages: string[];
+	forms: ConceptAttestation[];
+}
+
+export interface ConceptDetail {
+	concept: ConceptRow;
+	etyma: ConceptEtymon[];
+	unetym: ConceptAttestation[];
 }

@@ -1,25 +1,48 @@
 <script lang="ts">
-	// Header cell for the Reflexes table: a dropdown that filters by structured tags. Multi-select
-	// with AND semantics (a row must carry every picked tag). Renders a <th> so it drops into the
-	// header row alongside the FilterCell columns. Chips are coloured by category.
-	import { GENDER_TAGS, GRAMMATICAL_TAGS, COMMON_SOURCES, ERA_TAGS, TAG_NAMES } from '$lib/tags';
+	// Header cell: a searchable, multi-select tag filter. The tag list is built automatically from
+	// the DB (getAllTags) — no hand-maintained list — grouped by category and searchable, since the
+	// tag set is now large. Multi-select with AND semantics (a row must carry every picked tag).
+	import { getAllTags } from '$lib/query';
+	import { tagCategory, tagLabel, type TagCategory } from '$lib/tags';
 	import { floatingPanel } from '$lib/floatingPanel';
+
 	let {
 		value = '',
 		onFilter
 	}: { value?: string; onFilter: (key: string, value: string) => void } = $props();
 
-	const GROUPS = [
-		{ label: 'gender', cat: 'gender', tags: GENDER_TAGS },
-		{ label: 'grammatical', cat: 'grammatical', tags: GRAMMATICAL_TAGS },
-		{ label: 'source', cat: 'source', tags: COMMON_SOURCES },
-		{ label: 'era', cat: 'era', tags: ERA_TAGS }
-	] as const;
-
 	const selected = $derived(new Set(value.split(/\s+/).filter(Boolean)));
 	let open = $state(false);
+	let search = $state('');
 	let root: HTMLElement;
 	let triggerEl = $state<HTMLButtonElement | null>(null);
+
+	// fetched once, lazily on first open
+	let allTags = $state<{ tag: string; count: number }[]>([]);
+	let loaded = false;
+	$effect(() => {
+		if (open && !loaded) {
+			loaded = true;
+			getAllTags().then((t) => (allTags = t));
+		}
+	});
+
+	const CAT_ORDER: TagCategory[] = ['grammatical', 'gender', 'source', 'era', 'dialect'];
+	const groups = $derived.by(() => {
+		const q = search.trim().toLowerCase();
+		const byCat = new Map<TagCategory, { tag: string; count: number }[]>();
+		for (const t of allTags) {
+			if (q && !t.tag.toLowerCase().includes(q) && !tagLabel(t.tag).toLowerCase().includes(q))
+				continue;
+			const cat = tagCategory(t.tag);
+			const arr = byCat.get(cat);
+			if (arr) arr.push(t);
+			else byCat.set(cat, [t]);
+		}
+		return [...byCat.keys()]
+			.sort((a, b) => ((CAT_ORDER.indexOf(a) + 1 || 99) - (CAT_ORDER.indexOf(b) + 1 || 99)))
+			.map((cat) => ({ cat, tags: byCat.get(cat)! }));
+	});
 
 	function toggle(t: string) {
 		const next = new Set(selected);
@@ -58,26 +81,37 @@
 	</div>
 	{#if open}
 		<div class="panel" use:floatingPanel={triggerEl}>
-			{#each GROUPS as g (g.label)}
-				<div class="grp">
-					<div class="grp-lbl">
-						{g.label}
-						{#if g.label === 'gender' && selected.size}
-							<button class="clear" onclick={() => onFilter('tags', '')}>clear all</button>
-						{/if}
+			<div class="search-row">
+				<!-- svelte-ignore a11y_autofocus -->
+				<input class="tag-search" placeholder="Search tags…" bind:value={search} autofocus />
+				{#if selected.size}
+					<button class="clear" onclick={() => onFilter('tags', '')}>clear</button>
+				{/if}
+			</div>
+			<div class="scroll">
+				{#if !allTags.length}
+					<div class="hint">loading…</div>
+				{:else if !groups.length}
+					<div class="hint">no matching tags</div>
+				{/if}
+				{#each groups as g (g.cat)}
+					<div class="grp">
+						<div class="grp-lbl">{g.cat}</div>
+						<div class="chips {g.cat}">
+							{#each g.tags as t (t.tag)}
+								<button
+									class="chip"
+									class:on={selected.has(t.tag)}
+									title="{tagLabel(t.tag)} · {t.count.toLocaleString()}"
+									onclick={() => toggle(t.tag)}
+								>
+									{tagLabel(t.tag)}<span class="cnt">{t.count.toLocaleString()}</span>
+								</button>
+							{/each}
+						</div>
 					</div>
-					<div class="chips {g.cat}">
-						{#each g.tags as t (t)}
-							<button
-								class="chip"
-								class:on={selected.has(t)}
-								title={TAG_NAMES[t] ?? t}
-								onclick={() => toggle(t)}>{t}</button
-							>
-						{/each}
-					</div>
-				</div>
-			{/each}
+				{/each}
+			</div>
 		</div>
 	{/if}
 </th>
@@ -86,7 +120,6 @@
 	th {
 		position: relative;
 	}
-	/* match the sibling text-filter inputs (.search-box) so the header row reads uniformly */
 	.trigger {
 		display: inline-flex;
 		align-items: center;
@@ -107,96 +140,108 @@
 	.trigger.active {
 		border-color: var(--plum-2);
 	}
+	.count {
+		background: var(--plum-2);
+		color: #fff;
+		border-radius: 999px;
+		padding: 0 0.4em;
+		font-size: 0.75em;
+	}
 	.caret {
 		margin-left: auto;
-	}
-	.count {
-		font-size: 0.62rem;
-		font-weight: 700;
-		background: color-mix(in srgb, currentColor 22%, transparent);
-		border-radius: 999px;
-		padding: 0 5px;
-	}
-	.caret {
-		font-size: 0.6rem;
-		transition: transform 0.12s ease;
+		font-size: 0.7em;
+		transition: transform 0.12s;
 	}
 	.caret.up {
 		transform: rotate(180deg);
 	}
 	.panel {
-		position: absolute;
-		z-index: 40;
-		top: calc(100% + 4px);
-		left: 0;
-		width: 250px;
 		background: var(--surface);
-		color: var(--ink);
-		border: 1px solid var(--border-strong);
-		border-radius: 10px;
-		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-		padding: 9px 11px 11px;
-		text-align: left;
-		font-weight: 400;
-	}
-	.grp + .grp {
-		margin-top: 9px;
-	}
-	.grp-lbl {
+		border: 1.5px solid var(--border-strong);
+		border-radius: var(--radius-sm);
+		box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+		width: 20rem;
+		max-width: 90vw;
+		z-index: 50;
 		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		font-size: 0.65rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: var(--muted);
-		margin-bottom: 5px;
+		flex-direction: column;
+	}
+	.search-row {
+		display: flex;
+		gap: 0.4rem;
+		padding: 0.5rem;
+		border-bottom: 1px solid var(--border);
+	}
+	.tag-search {
+		flex: 1;
+		padding: 0.35rem 0.5rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius-sm);
+		background: var(--bg, var(--surface));
+		color: inherit;
+		font-size: 0.85rem;
 	}
 	.clear {
-		border: none;
+		font-size: 0.75rem;
 		background: none;
-		color: var(--berry);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		padding: 0 0.5rem;
 		cursor: pointer;
-		font-size: 0.68rem;
-		text-transform: none;
-		letter-spacing: 0;
-		padding: 0;
+		color: var(--muted);
+	}
+	.scroll {
+		max-height: 22rem;
+		overflow-y: auto;
+		padding: 0.4rem 0.5rem 0.6rem;
+	}
+	.hint {
+		color: var(--muted);
+		font-size: 0.8rem;
+		padding: 0.6rem;
+	}
+	.grp {
+		margin-bottom: 0.5rem;
+	}
+	.grp-lbl {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		color: var(--muted);
+		margin: 0.3rem 0;
 	}
 	.chips {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 4px;
 	}
-	/* per-category accent colour (used on hover + selected) */
-	.chips.gender {
-		--cat: var(--berry);
-	}
-	.chips.grammatical {
-		--cat: var(--tag-gram);
-	}
-	.chips.source {
-		--cat: var(--tag-source);
-	}
-	.chips.era {
-		--cat: var(--tag-era);
-	}
 	.chip {
-		font-size: 0.72rem;
-		padding: 1px 8px;
-		border-radius: 999px;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		font-size: 0.78rem;
+		padding: 0.15rem 0.45rem;
 		border: 1px solid var(--border-strong);
+		border-radius: 999px;
 		background: var(--surface);
 		color: var(--ink);
 		cursor: pointer;
-		font-variant: small-caps;
+		white-space: nowrap;
 	}
 	.chip:hover {
-		border-color: var(--cat);
-		color: var(--cat);
+		border-color: var(--plum-2);
 	}
 	.chip.on {
-		background: var(--cat);
-		border-color: var(--cat);
+		background: var(--plum-2);
 		color: #fff;
+		border-color: var(--plum-2);
+	}
+	.chip .cnt {
+		font-size: 0.72em;
+		opacity: 0.6;
+		font-variant-numeric: tabular-nums;
+	}
+	.chip.on .cnt {
+		opacity: 0.85;
 	}
 </style>

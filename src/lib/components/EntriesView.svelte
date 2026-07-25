@@ -3,7 +3,7 @@
 	import { createListState } from '$lib/listState.svelte';
 	import { getFilterDialects, getFilterLanguages } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
-	import { safe } from '$lib/render';
+	import { safe, md } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
 	import TagFilter from './TagFilter.svelte';
@@ -12,8 +12,27 @@
 	import CladeBars from './CladeBars.svelte';
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
+	import { getConceptReflexes } from '$lib/query';
+	import type { Lemma } from '$lib/types';
 
-	const list = createListState('entries');
+	// `concept` restricts the list to entries expressing that Concepticon concept; `expandable`
+	// lets each entry row expand to an inline reflex view (used on the concepts page).
+	let { concept, expandable = false }: { concept?: string; expandable?: boolean } = $props();
+
+	const list = createListState('entries', { conceptId: concept });
+
+	let expanded = $state<Set<string>>(new Set());
+	let reflexCache = $state<Record<string, Lemma[]>>({});
+	function toggleRow(id: string) {
+		const next = new Set(expanded);
+		if (next.has(id)) next.delete(id);
+		else {
+			next.add(id);
+			if (!reflexCache[id] && concept)
+				getConceptReflexes(id, concept).then((r) => (reflexCache = { ...reflexCache, [id]: r }));
+		}
+		expanded = next;
+	}
 	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
 	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
 	// variant word forms arrive \x1f-separated from group_concat (see query.ts)
@@ -121,16 +140,18 @@
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
-				<FilterCell
-					label="Etymology"
-					filterKey="etymology"
-					palette
-					value={list.params.etymology ?? ''}
-					activeSort={list.params.sort ?? ''}
-					onFilter={list.setFilter}
-					onSort={list.setSort}
-				/>
-				<TagFilter value={list.params.tags ?? ''} onFilter={list.setFilter} />
+				{#if !expandable}
+					<FilterCell
+						label="Etymology"
+						filterKey="etymology"
+						palette
+						value={list.params.etymology ?? ''}
+						activeSort={list.params.sort ?? ''}
+						onFilter={list.setFilter}
+						onSort={list.setSort}
+					/>
+					<TagFilter value={list.params.tags ?? ''} onFilter={list.setFilter} />
+				{/if}
 				<FilterCell
 					label="Langs"
 					sortKey="nlang"
@@ -147,14 +168,16 @@
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
-				<FilterCell
-					label="Derived"
-					sortKey="nderived"
-					numeric
-					activeSort={list.params.sort ?? ''}
-					onFilter={list.setFilter}
-					onSort={list.setSort}
-				/>
+				{#if !expandable}
+					<FilterCell
+						label="Derived"
+						sortKey="nderived"
+						numeric
+						activeSort={list.params.sort ?? ''}
+						onFilter={list.setFilter}
+						onSort={list.setSort}
+					/>
+				{/if}
 				<FilterCell
 					label="Source"
 					filterKey="source"
@@ -169,10 +192,11 @@
 		<tbody>
 			{#if list.result}
 				{#each list.result.rows as e (e.id)}
-					<tr>
+					<tr class:expandable-row={expandable} onclick={expandable ? () => toggleRow(e.id) : undefined}>
 						<td class="lang-cell entry-cell" style="border-left-color: {hashColor(e.language?.color)}">
 							<div class="entry-inner">
 								<span class="entry-word-line">
+									{#if expandable}<span class="row-caret">{expanded.has(e.id) ? '▾' : '▸'}</span>{/if}
 									{#if e.word?.trim()}
 										<a href="{base}/entries/{e.id}">{@html safe(e.word)}</a>
 										<span class="id-tag">[{e.id}]</span>
@@ -190,13 +214,52 @@
 								>{/if}
 						</td>
 						<td class="muted gloss-cell">{@html safe(e.gloss) || '—'}</td>
-						<td class="muted etym-cell">{@html safe(e.etymology) || '—'}</td>
-						<td><Tags tags={e.tags} /></td>
+						{#if !expandable}
+							<td class="muted etym-cell">{@html safe(e.etymology) || '—'}</td>
+							<td><Tags tags={e.tags} /></td>
+						{/if}
 						<td class="num">{e.lang_count?.toLocaleString() ?? ''}</td>
-						<td class="num">{e.reflex_count?.toLocaleString() ?? ''}</td>
-						<td class="num">{e.derived_count?.toLocaleString() ?? ''}</td>
+						<td class="num">{(expandable ? e.concept_match : e.reflex_count)?.toLocaleString() ?? ''}</td>
+						{#if !expandable}
+							<td class="num">{e.derived_count?.toLocaleString() ?? ''}</td>
+						{/if}
 						<td><RefList references={e.references} /></td>
 					</tr>
+					{#if expandable && expanded.has(e.id)}
+						<tr class="reflex-detail">
+							<td colspan="6">
+								{#if reflexCache[e.id]}
+									<table class="reflex-sub">
+										<tbody>
+											{#each reflexCache[e.id] as r (r.id)}
+												<tr>
+													<td class="rlang" style="border-left-color: {hashColor(r.language?.color)}">
+														<a href="{base}/languages/{r.language_id}"
+															>{r.language?.language}{#if r.language?.dialect}: <span class="font-thin"
+																	>{r.language.dialect}</span
+																>{/if}</a
+														>
+													</td>
+													<td class="rword"
+														><a href="{base}/reflexes/{r.id}">{@html safe(r.word)}</a>{#if r.phonemic}
+															<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}</td
+													>
+													<td class="muted">{@html safe(r.gloss) || '—'}</td>
+													<td class="muted markdown">{@html md(r.notes)}</td>
+													<td><RefList references={r.references} /></td>
+												</tr>
+											{/each}
+											{#if !reflexCache[e.id].length}
+												<tr><td class="muted">no matching reflexes</td></tr>
+											{/if}
+										</tbody>
+									</table>
+								{:else}
+									<span class="muted">loading reflexes…</span>
+								{/if}
+							</td>
+						</tr>
+					{/if}
 				{/each}
 			{/if}
 		</tbody>
@@ -302,5 +365,38 @@
 		white-space: nowrap;
 		font-variant-numeric: tabular-nums;
 		color: var(--muted);
+	}
+	.expandable-row {
+		cursor: pointer;
+	}
+	.expandable-row:hover {
+		background: var(--hover, rgba(0, 0, 0, 0.03));
+	}
+	.row-caret {
+		display: inline-block;
+		width: 1em;
+		color: var(--muted);
+		font-size: 0.8em;
+	}
+	.reflex-detail > td {
+		padding: 0.2rem 0.6rem 0.6rem 2rem;
+		background: var(--panel, rgba(0, 0, 0, 0.02));
+	}
+	table.reflex-sub {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+	}
+	table.reflex-sub td {
+		padding: 0.2rem 0.6rem;
+		border-top: 1px solid var(--border);
+	}
+	.reflex-sub .rlang {
+		border-left: 3px solid #ccc;
+		white-space: nowrap;
+		font-weight: 500;
+	}
+	.reflex-sub .rword {
+		font-family: 'Gentium', serif;
 	}
 </style>

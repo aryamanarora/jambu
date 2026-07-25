@@ -95,6 +95,20 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             reference_rid INTEGER NOT NULL,
             PRIMARY KEY (lemma_rid, reference_rid)
         ) WITHOUT ROWID;
+        -- Concepticon concept sets that glosses map to, plus per-concept rollups for the Concepts
+        -- tab: etyma_count counts distinct immediate etyma (lone/unetymologised nodes excluded and
+        -- counted in unetym_count instead), lang_count/form_count the attesting languages and forms.
+        CREATE TABLE concepts (
+            id INTEGER PRIMARY KEY, name TEXT, category TEXT,
+            etyma_count INTEGER DEFAULT 0, unetym_count INTEGER DEFAULT 0,
+            lang_count INTEGER DEFAULT 0, form_count INTEGER DEFAULT 0
+        );
+        -- link keyed by (concept_id, lemma rowid) as integers, WITHOUT ROWID so the PK is the only
+        -- copy of the data (per-concept lookup is the PK's leftmost prefix — no extra index needed).
+        CREATE TABLE lemma_concept (
+            concept_id INTEGER NOT NULL, lemma_rid INTEGER NOT NULL,
+            PRIMARY KEY (concept_id, lemma_rid)
+        ) WITHOUT ROWID;
         """
     )
 
@@ -359,11 +373,19 @@ def load_lemmas(
         "UPDATE lemmas SET clades=? WHERE id=?",
         [(",".join(sorted(cs)), pid) for pid, cs in param_clades.items()],
     )
-    # references cited by forms but absent from the bibliography → id-only rows
+    # References cited by forms but absent from the bibliography still need complete display-safe
+    # rows. This is a last-resort guard; make_refs.py normally supplies richer catalog metadata.
     ref_ids = {r[0] for r in con.execute('SELECT id FROM "references"')}
     con.executemany(
-        'INSERT OR IGNORE INTO "references" (id) VALUES (?)',
-        [(m,) for m in {ref for _, ref in lemma_refs if ref not in ref_ids}],
+        'INSERT OR IGNORE INTO "references" '
+        '(id,short,source,progress,provenance,editor) VALUES (?,?,?,?,?,?)',
+        [
+            (
+                m, m, f"Reference abbreviation `{m}`; full citation not yet catalogued.", "No",
+                "Automatically discovered in CLDF Source fields", "Aryaman Arora",
+            )
+            for m in {ref for _, ref in lemma_refs if ref not in ref_ids}
+        ],
     )
     lemma_rowids = {r[0]: r[1] for r in con.execute("SELECT id, rowid FROM lemmas")}
     reference_rowids = {r[0]: r[1] for r in con.execute('SELECT id, rowid FROM "references"')}
@@ -405,20 +427,71 @@ def load_lemmas(
     return aliases
 
 
-def load_derivation(con: sqlite3.Connection, deriv_csv: Path) -> None:
-    """Load the derivation graph (derived-term → ancestor etymon) from ../data/link_refs.py output
-    into a `derivation` table, indexed both directions for 'ancestors of X' and 'derived from X'."""
+def load_concepts(con: sqlite3.Connection, cldf: Path, aliases: dict[str, str]) -> None:
+    """Load Concepticon concepts (concepts.py output) and form→concept links, remapping form ids
+    through the cross-dialect alias map and rolling up per-concept counts. An 'etymon' of a linked
+    form is its immediate origin_lemma_id (or the entry itself); lone/unetymologised nodes
+    (relation='local') don't count as etyma — they're tallied in unetym_count instead."""
+    concepts_csv, links_csv = cldf / "concepts.csv", cldf / "form_concepts.csv"
+    if not concepts_csv.exists() or not links_csv.exists():
+        log(f"(no concepts.csv/form_concepts.csv at {cldf}; skipping concepts)")
+        return
+    with concepts_csv.open(encoding="utf-8") as f:
+        con.executemany(
+            "INSERT INTO concepts (id,name,category) VALUES (?,?,?)",
+            [(int(r["ID"]), r["Name"], r["Category"]) for r in csv.DictReader(f) if r["ID"].isdigit()],
+        )
+    rowid_of = {r[1]: r[0] for r in con.execute("SELECT rowid, id FROM lemmas")}
+    seen: set[tuple[int, int]] = set()
+    with links_csv.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            fid, cid = r["Form_ID"], r["Concept_ID"]
+            while fid in aliases:
+                fid = aliases[fid]
+            rid = rowid_of.get(fid)
+            if rid is not None and cid.isdigit():
+                seen.add((int(cid), rid))
+    con.executemany("INSERT INTO lemma_concept (concept_id,lemma_rid) VALUES (?,?)", sorted(seen))
+    con.execute(
+        """
+        UPDATE concepts SET
+          form_count  = (SELECT COUNT(*) FROM lemma_concept lc JOIN lemmas l ON l.rowid=lc.lemma_rid
+                           WHERE lc.concept_id=concepts.id),
+          lang_count  = (SELECT COUNT(DISTINCT l.language_id) FROM lemma_concept lc JOIN lemmas l ON l.rowid=lc.lemma_rid
+                           WHERE lc.concept_id=concepts.id),
+          etyma_count = (SELECT COUNT(DISTINCT COALESCE(NULLIF(l.origin_lemma_id,''), l.id))
+                           FROM lemma_concept lc JOIN lemmas l ON l.rowid=lc.lemma_rid
+                           WHERE lc.concept_id=concepts.id AND l.relation IS NOT 'local'),
+          unetym_count= (SELECT COUNT(*) FROM lemma_concept lc JOIN lemmas l ON l.rowid=lc.lemma_rid
+                           WHERE lc.concept_id=concepts.id AND l.relation = 'local')
+        """
+    )
+    con.commit()
+    log(f"loaded {len(seen)} concept links across "
+        f"{con.execute('SELECT COUNT(*) FROM concepts').fetchone()[0]} concepts")
+
+
+def load_derivation(con: sqlite3.Connection, deriv_csv: Path, aliases: dict[str, str]) -> None:
+    """Load the derivation graph (derived-term → ancestor etymon) into a `derivation` table, indexed
+    both directions. Child ids can be reflexes (alternate-etymology edges), so remap through the
+    cross-dialect alias map — promoted-form / etymon ids are untouched by it."""
     con.executescript(
         """
         DROP TABLE IF EXISTS derivation;
         CREATE TABLE derivation (child_id TEXT, parent_id TEXT);
         """
     )
+
+    def canon(i: str) -> str:
+        while i in aliases:
+            i = aliases[i]
+        return i
+
     with deriv_csv.open(encoding="utf-8") as f:
         reader = csv.DictReader(f)
         con.executemany(
             "INSERT INTO derivation (child_id, parent_id) VALUES (?, ?)",
-            ((r["Child_ID"], r["Parent_ID"]) for r in reader),
+            ((canon(r["Child_ID"]), canon(r["Parent_ID"])) for r in reader),
         )
     con.executescript(
         """
@@ -652,9 +725,12 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     # 3. Derivation graph (derived-term → ancestor etymon).
     deriv = cldf / "derivation.csv"
     if deriv.exists():
-        load_derivation(con, deriv)
+        load_derivation(con, deriv, aliases)
     else:
         log(f"(no derivation.csv at {deriv}; skipping derivation graph)")
+
+    # 3b. Concepticon concept sets mapped from glosses (../data/concepts.py output).
+    load_concepts(con, cldf, aliases)
 
 
     # 3. Precomputed totals so the client never issues a full-table COUNT(*) (a whole-index scan

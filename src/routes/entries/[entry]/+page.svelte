@@ -478,7 +478,10 @@
 						{/if}
 						<td class="c-gloss gloss-cell"
 							>{@html safe(row.r.lemma.gloss)}{#if row.r.lemma.tags}
-								<Tags tags={row.r.lemma.tags} />{/if}</td
+								<Tags tags={row.r.lemma.tags} />{/if}{#if row.r.lemma.secondary}<span
+									class="derived-badge"
+									title="alternate etymology — this form's primary etymon is another entry">derived</span
+								>{/if}</td
 						>
 						<td class="c-cog cog-cell" title={striptags(row.cogLabel)}>{row.cogCode}</td>
 					</tr>
@@ -684,6 +687,22 @@
 		background: transparent;
 		border: 1px solid color-mix(in srgb, var(--plum) 45%, transparent);
 		color: var(--plum);
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+	/* "derived" marker on a secondary reflex (reached via an alternate-etymology derivation edge) */
+	.derived-badge {
+		display: inline-block;
+		margin-left: 0.35rem;
+		padding: 0 0.4em;
+		border-radius: 999px;
+		font-size: 0.66rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		background: transparent;
+		border: 1px solid color-mix(in srgb, var(--berry) 50%, transparent);
+		color: var(--berry);
 		white-space: nowrap;
 		vertical-align: middle;
 	}
