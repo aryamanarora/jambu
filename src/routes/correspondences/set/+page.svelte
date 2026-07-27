@@ -7,6 +7,7 @@
 	import { hashColor } from '$lib/clades';
 	import { langFavRank } from '$lib/prefs.svelte';
 	import { safe } from '$lib/render';
+	import FormWord from '$lib/components/FormWord.svelte';
 
 	// ---- read the correspondence from the URL ------------------------------
 	const q = $derived<CorrQuery | null>(browser ? readQuery(page.url.searchParams) : null);
@@ -138,7 +139,7 @@
 								>
 							</td>
 							<td class="lemma-word">
-								<a href="{base}/reflexes/{r.id}">{@html safe(r.word)}</a>{#if r.phonemic}
+								<a href="{base}/reflexes/{r.id}"><FormWord word={r.word} ocr={r.ocr} /></a>{#if r.phonemic}
 									<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}
 							</td>
 							<td class="muted">{@html safe(r.gloss) || '—'}</td>

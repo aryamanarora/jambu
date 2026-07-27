@@ -4,8 +4,10 @@
 	import EntriesView from '$lib/components/EntriesView.svelte';
 	import { cladeColor } from '$lib/clades';
 	import { etymonSlotColor, ETYMON_PALETTE } from '$lib/etyma';
+	import { safe } from '$lib/render';
 	import type { MapMarker } from '$lib/types';
 	import type { ConceptDetail, ConceptAttestation } from '$lib/types';
+	import FormWord from '$lib/components/FormWord.svelte';
 
 	let { data } = $props();
 	const detail = $derived(data as ConceptDetail);
@@ -23,6 +25,7 @@
 			word: e.word,
 			gloss: e.gloss,
 			source: e.source,
+			ocr: e.ocr,
 			color: etymonSlotColor(i),
 			langs: e.languages.length
 		}))
@@ -171,7 +174,7 @@
 						onclick={() => toggle(l.etymon)}
 					>
 						<span class="dot"></span>
-						<span class="chip-word">{l.word}</span>
+						<span class="chip-word"><FormWord word={l.word} ocr={l.ocr} /></span>
 						<span class="chip-count">{l.langs}</span>
 					</button>
 				{/each}
@@ -198,9 +201,15 @@
 				<tbody>
 					{#each unetym as f (f.form_id)}
 						<tr>
-							<td class="rlang" style="border-left-color: {cladeColor(f.clade)}">{f.language ?? '—'}</td>
-							<td class="rword">{f.word}</td>
-							<td class="rgloss muted">{f.gloss}</td>
+							<td class="rlang" style="border-left-color: {cladeColor(f.clade)}">
+								{#if f.language_id}
+									<a href="{base}/languages/{f.language_id}">{f.language ?? '—'}</a>
+								{:else}
+									{f.language ?? '—'}
+								{/if}
+							</td>
+							<td class="rword"><a href="{base}/reflexes/{f.form_id}"><FormWord word={f.word} ocr={f.ocr} /></a></td>
+							<td class="rgloss muted">{@html safe(f.gloss) || '—'}</td>
 						</tr>
 					{/each}
 				</tbody>
@@ -281,7 +290,7 @@
 		flex: none;
 	}
 	.chip-word {
-		font-family: 'Gentium', serif;
+		font-family: var(--font-phon);
 	}
 	.chip-count {
 		color: var(--muted);
@@ -315,7 +324,7 @@
 		white-space: nowrap;
 	}
 	.rword {
-		font-family: 'Gentium', serif;
+		font-family: var(--font-phon);
 	}
 	.small {
 		font-size: 0.85rem;

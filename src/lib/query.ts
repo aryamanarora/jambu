@@ -139,7 +139,10 @@ async function attachOrigin(lemmas: Lemma[]): Promise<void> {
 	if (!ids.length) return;
 	const rows = await inChunks<Lemma>(ids, (chunk) =>
 		query<Lemma>(
-			`SELECT id, word, gloss, phonemic, "order", language_id, origin_lemma_id
+			`SELECT lemmas.*,
+			        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+			                ON r.rowid = lr.reference_rid
+			                WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
 			 FROM lemmas WHERE id IN (${placeholders(chunk.length)})`,
 			chunk
 		)
@@ -154,7 +157,7 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	const ids = lemmas.map((l) => l.id);
 	const rows = await inChunks<Reference & { lemma_id: string }>(ids, (chunk) =>
 		query<Reference & { lemma_id: string }>(
-			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress, r.provenance, r.editor,
+			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress, r.provenance, r.editor, r.ocr,
 			        r.lemma_count, r.unetymologised_count
 			 FROM lemma_reference lr
 			 JOIN lemmas l ON l.rowid = lr.lemma_rid
@@ -173,6 +176,7 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 			progress: row.progress,
 			provenance: row.provenance,
 			editor: row.editor,
+			ocr: row.ocr,
 			lemma_count: row.lemma_count,
 			unetymologised_count: row.unetymologised_count
 		};
@@ -470,7 +474,10 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 			? ', (SELECT COUNT(*) FROM derivation d JOIN lemmas c ON c.id=d.child_id ' +
 				'WHERE d.parent_id = l.id AND c.origin_lemma_id IS NULL) AS derived_count' +
 				", (SELECT group_concat(word, char(31)) FROM (SELECT word FROM lemmas WHERE " +
-				"origin_lemma_id = l.id AND relation = 'variant' AND variant_of IS NULL ORDER BY \"order\")) AS variant_forms"
+				"origin_lemma_id = l.id AND relation = 'variant' AND variant_of IS NULL ORDER BY \"order\")) AS variant_forms" +
+				", (SELECT group_concat(v.word, char(31)) FROM lemmas v WHERE v.origin_lemma_id = l.id " +
+				"AND v.relation = 'variant' AND v.variant_of IS NULL AND EXISTS (SELECT 1 FROM lemma_reference lr " +
+				"JOIN \"references\" rr ON rr.rowid = lr.reference_rid WHERE lr.lemma_rid = v.rowid AND rr.ocr = 1)) AS ocr_variant_forms"
 			: '';
 	// count of this entry's reflexes that match the concept — the concept view sorts on it and shows it
 	const conceptCol = conceptId
@@ -513,6 +520,7 @@ export interface AncestorRef {
 	word: string;
 	lang?: string | null;
 	kind: 'entry' | 'reflex'; // link target: /entries/ vs /reflexes/
+	ocr: boolean;
 }
 
 /** Walk up the etymology graph from a node: a reflex/variant → its etymon (origin_lemma_id); an
@@ -544,11 +552,21 @@ export async function getAncestryChain(startId: string): Promise<AncestorRef[][]
 		);
 		if (!pids.length) break;
 		pids.forEach((p) => seen.add(p));
-		const rows = await inChunks<{ id: string; word: string; language_id: string; olid: string | null }>(
+		const rows = await inChunks<{
+			id: string;
+			word: string;
+			language_id: string;
+			olid: string | null;
+			ocr: boolean;
+		}>(
 			pids,
 			(chunk) =>
 				query(
-					`SELECT id, word, language_id, origin_lemma_id AS olid FROM lemmas
+					`SELECT lemmas.id, lemmas.word, lemmas.language_id, lemmas.origin_lemma_id AS olid,
+					        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+					                ON r.rowid = lr.reference_rid
+					                WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
+					 FROM lemmas
 					 WHERE id IN (${placeholders(chunk.length)})`,
 					chunk
 				)
@@ -558,7 +576,8 @@ export async function getAncestryChain(startId: string): Promise<AncestorRef[][]
 				id: r.id,
 				word: r.word,
 				lang: langs.get(r.language_id)?.name,
-				kind: r.olid ? ('reflex' as const) : ('entry' as const)
+				kind: r.olid ? ('reflex' as const) : ('entry' as const),
+				ocr: r.ocr
 			}))
 		);
 		frontier = pids;
@@ -573,6 +592,7 @@ export interface DerivedNode {
 	reflex_count?: number;
 	lang_count?: number;
 	children: DerivedNode[];
+	ocr?: boolean | number;
 }
 
 /** The derived-term subtree of an entry: its derived terms, their derived terms, and so on down the
@@ -609,7 +629,10 @@ export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<De
 	const ids = [...seen].filter((id) => id !== rootId);
 	const rows = await inChunks<DerivedNode>(ids, (chunk) =>
 		query<DerivedNode>(
-			`SELECT id, word, gloss, reflex_count, lang_count, "order" FROM lemmas
+			`SELECT lemmas.id, lemmas.word, lemmas.gloss, lemmas.reflex_count, lemmas.lang_count,
+			        lemmas."order", EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+			        ON r.rowid = lr.reference_rid WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
+			 FROM lemmas
 			 WHERE id IN (${placeholders(chunk.length)})`,
 			chunk
 		)
@@ -634,6 +657,7 @@ export async function getReflexVariants(reflexId: string): Promise<Lemma[]> {
 		reflexId
 	]);
 	await attachLanguages(vs);
+	await attachReferences(vs);
 	return vs;
 }
 
@@ -892,6 +916,7 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 			'AND variant_of IS NOT NULL ORDER BY "order"',
 		[entryId]
 	);
+	await attachReferences(rvars);
 	const byMain = new Map<string, Lemma[]>();
 	for (const v of rvars) {
 		const arr = byMain.get(v.variant_of!);
@@ -1019,6 +1044,7 @@ export interface CorrReflex {
 	prev: string;
 	next: string;
 	entryId: string | null; // origin etymon id (link target; headword not fetched here)
+	ocr: boolean | number;
 }
 export interface CorrQuery {
 	proto: string;
@@ -1203,11 +1229,15 @@ export async function getCorrespondenceReflexes(
 		dialect: string;
 		color: string;
 		change: string;
+		ocr: boolean | number;
 		prev_seg: string;
 		next_seg: string;
 		entryId: string | null;
 	}>(
 		`SELECT rf.id, rf.word, rf.gloss, rf.phonemic,
+		        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" ocr_ref
+		                ON ocr_ref.rowid = lr.reference_rid
+		                WHERE lr.lemma_rid = rf.rowid AND ocr_ref.ocr = 1) AS ocr,
 		        rf.language_id AS lang, COALESCE(rl.name, rf.language_id) AS langName,
 		        rl.language AS language, rl.dialect AS dialect, rl.color AS color,
 		        cs.value AS change, ps.value AS prev_seg, ns.value AS next_seg,
@@ -1233,6 +1263,7 @@ export async function getCorrespondenceReflexes(
 		word: r.word,
 		gloss: r.gloss,
 		phonemic: r.phonemic,
+		ocr: r.ocr,
 		lang: r.lang,
 		langName: r.langName,
 		language: r.language,
@@ -1261,6 +1292,7 @@ export async function getCorrespondenceReflexes(
 export interface CompareRow {
 	entryId: string;
 	entryWord: string;
+	entryOcr: boolean | number;
 	left: Lemma[];
 	right: Lemma[];
 }
@@ -1272,7 +1304,11 @@ export async function compareLanguages(
 	const [lang1, lang2] = await Promise.all([getLanguage(id1), getLanguage(id2)]);
 	const load = (lid: string) =>
 		query<Lemma>(
-			`SELECT id, word, gloss, phonemic, "order", language_id, origin_lemma_id
+			`SELECT lemmas.id, lemmas.word, lemmas.gloss, lemmas.phonemic, lemmas."order",
+			        lemmas.language_id, lemmas.origin_lemma_id,
+			        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+			                ON r.rowid = lr.reference_rid
+			                WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
 			 FROM lemmas WHERE language_id = ? AND origin_lemma_id IS NOT NULL ORDER BY "order"`,
 			[lid]
 		);
@@ -1294,14 +1330,21 @@ export async function compareLanguages(
 
 	// fetch headwords for the shared entries
 	const heads = await inChunks<Lemma>(shared, (chunk) =>
-		query<Lemma>(`SELECT id, word FROM lemmas WHERE id IN (${placeholders(chunk.length)})`, chunk)
+		query<Lemma>(
+			`SELECT l.id, l.word, EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+			        ON r.rowid = lr.reference_rid
+			        WHERE lr.lemma_rid = l.rowid AND r.ocr = 1) AS ocr
+			 FROM lemmas l WHERE l.id IN (${placeholders(chunk.length)})`,
+			chunk
+		)
 	);
-	const headMap = new Map(heads.map((h) => [h.id, h.word]));
+	const headMap = new Map(heads.map((h) => [h.id, h]));
 
 	const rows: CompareRow[] = shared
 		.map((k) => ({
 			entryId: k,
-			entryWord: headMap.get(k) ?? k,
+			entryWord: headMap.get(k)?.word ?? k,
+			entryOcr: headMap.get(k)?.ocr ?? false,
 			left: d1.get(k)!,
 			right: d2.get(k)!
 		}))

@@ -14,6 +14,7 @@
 	import Pager from './Pager.svelte';
 	import { getConceptReflexes } from '$lib/query';
 	import type { Lemma } from '$lib/types';
+	import FormWord from './FormWord.svelte';
 
 	// `concept` restricts the list to entries expressing that Concepticon concept; `expandable`
 	// lets each entry row expand to an inline reflex view (used on the concepts page).
@@ -37,6 +38,7 @@
 	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
 	// variant word forms arrive \x1f-separated from group_concat (see query.ts)
 	const variantList = (s?: string | null): string[] => (s ? [...new Set(s.split(''))] : []);
+	const ocrVariants = (s?: string | null): Set<string> => new Set(variantList(s));
 
 	let langOptions = $state<SelectOption[]>([]);
 	$effect(() => {
@@ -198,13 +200,13 @@
 								<span class="entry-word-line">
 									{#if expandable}<span class="row-caret">{expanded.has(e.id) ? '▾' : '▸'}</span>{/if}
 									{#if e.word?.trim()}
-										<a href="{base}/entries/{e.id}">{@html safe(e.word)}</a>
+										<a href="{base}/entries/{e.id}"><FormWord word={e.word} references={e.references} /></a>
 										<span class="id-tag">[{e.id}]</span>
 									{:else}
 										<a href="{base}/entries/{e.id}" class="id-link">[{e.id}]</a>
 									{/if}
 											</span>
-								{#if e.variant_forms}{#each variantList(e.variant_forms) as vf (vf)}<span class="var-line"><span class="var-arrow">→</span>&nbsp;<span class="var-form">{@html safe(vf)}</span></span>{/each}{/if}
+								{#if e.variant_forms}{#each variantList(e.variant_forms) as vf (vf)}<span class="var-line"><span class="var-arrow">→</span>&nbsp;<span class="var-form"><FormWord word={vf} ocr={ocrVariants(e.ocr_variant_forms).has(vf)} /></span></span>{/each}{/if}
 						<CladeBars clades={e.clades} />
 							</div>
 						</td>
@@ -241,7 +243,7 @@
 														>
 													</td>
 													<td class="rword"
-														><a href="{base}/reflexes/{r.id}">{@html safe(r.word)}</a>{#if r.phonemic}
+														><a href="{base}/reflexes/{r.id}"><FormWord word={r.word} references={r.references} /></a>{#if r.phonemic}
 															<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}</td
 													>
 													<td class="muted">{@html safe(r.gloss) || '—'}</td>
@@ -397,6 +399,6 @@
 		font-weight: 500;
 	}
 	.reflex-sub .rword {
-		font-family: 'Gentium', serif;
+		font-family: var(--font-phon);
 	}
 </style>

@@ -237,7 +237,10 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 
 	const linked = dbh
 		.prepare(
-			`SELECT l.id AS form_id, l.word, l.gloss, l.relation, l.tags,
+			`SELECT l.id AS form_id, l.word, l.gloss, l.relation, l.tags, l.language_id,
+			        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" ocr_ref
+			                ON ocr_ref.rowid = lr.reference_rid
+			                WHERE lr.lemma_rid = l.rowid AND ocr_ref.ocr = 1) AS ocr,
 			        COALESCE(NULLIF(l.origin_lemma_id, ''), l.id) AS etymon,
 			        lang.name AS language, lang.clade AS clade, lang.color AS color,
 			        lang.lat AS lat, lang.long AS long, lang."order" AS lorder
@@ -255,13 +258,19 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 	// (the per-concept table keeps immediate etyma; this only feeds the map)
 	const rootOf = (r: { etymon: string }) => toRoot(r.etymon);
 	const etymonIds = [...new Set(linked.filter((r) => r.relation !== 'local').map(rootOf))];
-	const heads = new Map<string, { word: string; gloss: string }>();
+	const heads = new Map<string, { word: string; gloss: string; ocr: boolean | number }>();
 	if (etymonIds.length) {
 		const qs = etymonIds.map(() => '?').join(',');
 		for (const r of dbh
-			.prepare(`SELECT id, word, gloss FROM lemmas WHERE id IN (${qs})`)
-			.all(...etymonIds) as { id: string; word: string; gloss: string }[]) {
-			heads.set(r.id, { word: r.word, gloss: r.gloss });
+			.prepare(
+				`SELECT l.id, l.word, l.gloss,
+				        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+				                ON r.rowid = lr.reference_rid
+				                WHERE lr.lemma_rid = l.rowid AND r.ocr = 1) AS ocr
+				 FROM lemmas l WHERE l.id IN (${qs})`
+			)
+			.all(...etymonIds) as { id: string; word: string; gloss: string; ocr: boolean | number }[]) {
+			heads.set(r.id, { word: r.word, gloss: r.gloss, ocr: r.ocr });
 		}
 	}
 
@@ -272,12 +281,14 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 			form_id: r.form_id,
 			word: r.word,
 			gloss: r.gloss,
+			language_id: r.language_id,
 			language: r.language,
 			clade: r.clade,
 			color: r.color,
 			lat: r.lat,
 			long: r.long,
-			places: placesFor(r.tags, r.language, r.lat, r.long)
+			places: placesFor(r.tags, r.language, r.lat, r.long),
+			ocr: r.ocr
 		};
 		if (r.relation === 'local') {
 			unetym.push(att);
@@ -293,7 +304,8 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 				gloss: head?.gloss ?? '',
 				source: etymonSource(root),
 				languages: [],
-				forms: []
+				forms: [],
+				ocr: head?.ocr ?? false
 			};
 			byEtymon.set(root, e);
 		}
@@ -310,7 +322,12 @@ export type EntryMeta = Omit<Lemma, 'language'> & { language: Language | null };
 
 export function getEntryMeta(id: string): EntryMeta | null {
 	const dbh = getDb();
-	const e = dbh.prepare('SELECT * FROM lemmas WHERE id = ?').get(id) as Lemma | undefined;
+	const e = dbh.prepare(
+		`SELECT l.*, EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
+		        ON r.rowid = lr.reference_rid
+		        WHERE lr.lemma_rid = l.rowid AND r.ocr = 1) AS ocr
+		 FROM lemmas l WHERE l.id = ?`
+	).get(id) as Lemma | undefined;
 	if (!e) return null;
 	const language = (dbh.prepare('SELECT * FROM languages WHERE id = ?').get(e.language_id) ??
 		null) as Language | null;

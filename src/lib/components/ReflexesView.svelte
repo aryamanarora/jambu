@@ -10,6 +10,7 @@
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
 	import Tags from './Tags.svelte';
+	import FormWord from './FormWord.svelte';
 	import TagFilter from './TagFilter.svelte';
 
 	let {
@@ -183,7 +184,7 @@
 							</td>
 						{/if}
 						<td class="lemma-word">
-							<a href="{base}/entries/{r.id}">{@html safe(r.word)}</a>{#if r.phonemic}
+							<a href="{base}/entries/{r.id}"><FormWord word={r.word} references={r.references} /></a>{#if r.phonemic}
 								<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}{#if r.sub_count}
 								<a
 									class="subcount"
@@ -202,7 +203,7 @@
 								{#if r.origin_lemma.language}<span class="olang"
 										>{r.origin_lemma.language.name}</span
 									> {/if}<a class="origin" href="{base}/entries/{r.origin_lemma.id}"
-									>{@html safe(r.origin_lemma.word)} <span class="id-tag">[{r.origin_lemma.id}]</span
+									><FormWord word={r.origin_lemma.word} ocr={r.origin_lemma.ocr} /> <span class="id-tag">[{r.origin_lemma.id}]</span
 									></a
 								>
 							{:else}<span class="faint">—</span>{/if}

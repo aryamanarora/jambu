@@ -27,6 +27,7 @@
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
+	import FormWord from '$lib/components/FormWord.svelte';
 	import type { Dialect, Language, MapMarker, Lemma } from '$lib/types';
 
 	let { data } = $props();
@@ -256,6 +257,7 @@
 			}
 			const words = reflexes.map((r) => striptags(r.lemma.word));
 			const ids = reflexes.map((r) => r.lemma.id);
+			const ocr = reflexes.map((r) => r.lemma.references?.some((reference) => Boolean(reference.ocr)));
 			return {
 				lat,
 				long,
@@ -266,7 +268,7 @@
 				popupHtml: `<h3>${striptags(name)}</h3><ul>${words
 					.map(
 						(w, i) =>
-							`<li><a class="lemma-word" href="${base}/reflexes/${ids[i]}">${w}</a></li>`
+							`<li><a class="lemma-word" href="${base}/reflexes/${ids[i]}">${w}</a>${ocr[i] ? ' <span class="map-ocr" title="Parsed with optical character recognition; check the original source when accuracy matters">OCR</span>' : ''}</li>`
 					)
 					.join('')}</ul>`
 			};
@@ -312,7 +314,7 @@
 <div class="entry-head">
 	<h1 class="headword">
 		<a href="{base}/languages/{entry.language?.id}" class="faint">{entry.language?.name}</a>
-		<span class="lemma-word">{@html safe(entry.word)}</span>
+		<span class="lemma-word"><FormWord word={entry.word} ocr={entry.ocr} /></span>
 		<span class="id-tag">[{entry.id}]</span>
 	</h1>
 	<CladeBars clades={entry.clades} size="lg" />
@@ -330,7 +332,7 @@
 	<div class="variants">
 		<span class="v-label">Variant{variants.length === 1 ? '' : 's'}</span>
 		{#each variants as v (v.id)}<span class="v-one"
-				><a class="v-item phon" href="{base}/reflexes/{v.id}">{@html safe(v.word)}</a
+				><a class="v-item phon" href="{base}/reflexes/{v.id}"><FormWord word={v.word} references={v.references} /></a
 				>{#if v.gloss}<span class="v-gloss muted">&nbsp;‘{striptags(v.gloss)}’</span>{/if}</span
 			>{/each}
 	</div>
@@ -361,7 +363,7 @@
 {#snippet dnode(d: DerivedNode)}
 	<li>
 		<div class="drow">
-			<a class="d-word phon" href="{base}/entries/{d.id}">{@html safe(d.word)}</a>
+			<a class="d-word phon" href="{base}/entries/{d.id}"><FormWord word={d.word} ocr={d.ocr} /></a>
 			<span class="id-tag">[{d.id}]</span>
 			{#if shortGloss(d.gloss) || striptags(d.gloss)}<span class="d-gloss"
 					>‘{shortGloss(d.gloss) || striptags(d.gloss)}’</span
@@ -455,11 +457,11 @@
 						</td>
 						{#if view === 'normal'}
 							<td class="c-form formcell">
-								<span class="lemma-word">{@html safe(row.r.lemma.word)}</span>{#if row.r.lemma.phonemic}
+								<span class="lemma-word"><FormWord word={row.r.lemma.word} references={row.r.lemma.references} /></span>{#if row.r.lemma.phonemic}
 									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}{#if row.r.lemma.reflex_sub_count}&nbsp;<a class="refcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.reflex_sub_count} reflex(es) of this word">→&#8288;{row.r.lemma.reflex_sub_count}</a>{/if}{#if row.r.lemma.sub_count}&nbsp;<a class="subcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.sub_count} form(s) borrowed from this word">→&#8288;{row.r.lemma.sub_count}</a>{/if}
 								{#each row.r.lemma.variants ?? [] as v (v.id)}<span class="rvar-line"
 										><span class="rvar-arrow">→</span>&nbsp;<span class="rvar"
-											>{@html safe(v.word)}</span
+											><FormWord word={v.word} references={v.references} /></span
 										></span
 									>{/each}
 							</td>
@@ -473,7 +475,7 @@
 							{/each}
 						{:else}
 							<td class="c-seg plainform" colspan={ea.etymon.length}
-								>{@html safe(row.r.lemma.word)}</td
+								><FormWord word={row.r.lemma.word} references={row.r.lemma.references} /></td
 							>
 						{/if}
 						<td class="c-gloss gloss-cell"
@@ -511,6 +513,20 @@
 {/if}
 
 <style>
+	:global(.map-ocr) {
+		display: inline-block;
+		margin-left: 0.25rem;
+		padding: 0.02rem 0.28rem;
+		border: 1px solid color-mix(in srgb, #b97812 55%, transparent);
+		border-radius: 999px;
+		background: color-mix(in srgb, #e8a62a 16%, var(--surface));
+		color: color-mix(in srgb, #8b5708 88%, var(--ink));
+		font-family: var(--font-sans);
+		font-size: 0.56rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		vertical-align: middle;
+	}
 	.derived {
 		margin: 1rem 0 1.25rem;
 		border: 1px solid var(--border);

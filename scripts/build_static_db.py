@@ -80,7 +80,7 @@ def build_base_schema(con: sqlite3.Connection) -> None:
         );
         CREATE TABLE "references" (
             id TEXT PRIMARY KEY, short TEXT, source TEXT, progress TEXT, provenance TEXT,
-            editor TEXT, lemma_count INTEGER DEFAULT 0,
+            editor TEXT, ocr INTEGER NOT NULL DEFAULT 0, lemma_count INTEGER DEFAULT 0,
             unetymologised_count INTEGER DEFAULT 0
         );
         -- CLDF Original is an import-time transliteration source; no display/query path reads it.
@@ -218,11 +218,12 @@ def load_references(con: sqlite3.Connection, path: Path) -> None:
             (
                 r["ID"], r["Short"], r["Source"], r["Progress"],
                 r.get("Provenance", ""), r.get("Editor", ""),
+                int(r.get("OCR", "").strip().lower() in {"yes", "true", "1"}),
             )
             for r in csv.DictReader(f)
         ]
     con.executemany(
-        'INSERT INTO "references" (id,short,source,progress,provenance,editor) VALUES (?,?,?,?,?,?)',
+        'INSERT INTO "references" (id,short,source,progress,provenance,editor,ocr) VALUES (?,?,?,?,?,?,?)',
         rows,
     )
     con.commit()
@@ -389,11 +390,12 @@ def load_lemmas(
     ref_ids = {r[0] for r in con.execute('SELECT id FROM "references"')}
     con.executemany(
         'INSERT OR IGNORE INTO "references" '
-        '(id,short,source,progress,provenance,editor) VALUES (?,?,?,?,?,?)',
+        '(id,short,source,progress,provenance,editor,ocr) VALUES (?,?,?,?,?,?,?)',
         [
             (
                 m, m, f"Reference abbreviation `{m}`; full citation not yet catalogued.", "No",
                 "Automatically discovered in CLDF Source fields", "Aryaman Arora",
+                0,
             )
             for m in {ref for _, ref in lemma_refs if ref not in ref_ids}
         ],

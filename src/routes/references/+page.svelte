@@ -15,6 +15,7 @@
 		return rows.sort((a, b) => {
 			let comparison = 0;
 			if (key === 'forms') comparison = (a.lemma_count ?? 0) - (b.lemma_count ?? 0);
+			else if (key === 'extraction') comparison = Number(a.ocr) - Number(b.ocr);
 			else if (key === 'unetym') {
 				const ap = a.lemma_count ? a.unetymologised_count / a.lemma_count : -1;
 				const bp = b.lemma_count ? b.unetymologised_count / b.lemma_count : -1;
@@ -56,6 +57,7 @@
 			<col class="ref-col" />
 			<col class="citation-col" />
 			<col class="editor-col" />
+			<col class="extraction-col" />
 			<col class="forms-col" />
 			<col class="unetym-col" />
 		</colgroup>
@@ -64,6 +66,7 @@
 				<FilterCell label="Reference" sortKey="reference" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Citation" sortKey="citation" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Editor" sortKey="editor" {activeSort} onFilter={() => {}} onSort={setSort} />
+				<FilterCell label="Extraction" sortKey="extraction" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Forms" sortKey="forms" {activeSort} numeric onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Unetymologised" sortKey="unetym" {activeSort} numeric onFilter={() => {}} onSort={setSort} />
 			</tr>
@@ -78,6 +81,7 @@
 					</td>
 					<td class="markdown">{@html md(r.source)}</td>
 					<td>{r.editor || '—'}</td>
+					<td>{#if r.ocr}<span class="ocr-ref" title="Forms from this reference were parsed with optical character recognition">OCR</span>{:else}<span class="faint">—</span>{/if}</td>
 					<td class="pct">{(r.lemma_count ?? 0).toLocaleString()}</td>
 					<td class="pct" title="{(r.unetymologised_count ?? 0).toLocaleString()} of {(r.lemma_count ?? 0).toLocaleString()} forms">
 						{unetymologisedPct(r.lemma_count ?? 0, r.unetymologised_count ?? 0)}
@@ -107,6 +111,9 @@
 	.editor-col {
 		width: 13rem;
 	}
+	.extraction-col {
+		width: 6.5rem;
+	}
 	.forms-col {
 		width: 6.5rem;
 	}
@@ -120,5 +127,16 @@
 		text-align: right;
 		font-variant-numeric: tabular-nums;
 		font-weight: 600;
+	}
+	.ocr-ref {
+		display: inline-block;
+		padding: 0.08rem 0.42rem;
+		border: 1px solid color-mix(in srgb, #b97812 55%, transparent);
+		border-radius: 999px;
+		background: color-mix(in srgb, #e8a62a 16%, var(--surface));
+		color: color-mix(in srgb, #8b5708 88%, var(--ink));
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
 	}
 </style>

@@ -136,6 +136,10 @@
 	.map-frame :global(.map) {
 		height: 100%;
 	}
+	.map-frame :global(.leaflet-tooltip),
+	.map-frame :global(.leaflet-popup-content) {
+		font-family: var(--font-phon);
+	}
 	.offscreen {
 		position: absolute;
 		top: 8px;

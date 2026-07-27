@@ -6,6 +6,7 @@
 	import Alignment from './Alignment.svelte';
 	import type { Lemma } from '$lib/types';
 	import type { AlignSeg } from '$lib/query';
+	import FormWord from './FormWord.svelte';
 
 	let {
 		lemma,
@@ -23,9 +24,9 @@
 <div class="detail">
 	<div class="d-main">
 		{#if linkWord}
-			<a class="d-word" href="{base}/reflexes/{lemma.id}">{@html safe(lemma.word)}</a>
+			<a class="d-word" href="{base}/reflexes/{lemma.id}"><FormWord word={lemma.word} references={lemma.references} ocr={lemma.ocr} /></a>
 		{:else}
-			<span class="d-word">{@html safe(lemma.word)}</span>
+			<span class="d-word"><FormWord word={lemma.word} references={lemma.references} ocr={lemma.ocr} /></span>
 		{/if}
 		{#if lemma.phonemic}<span class="d-phon">/{lemma.phonemic}/</span>{/if}
 		{#if lemma.secondary}<span class="d-secondary" title="alternate etymology — primarily derived elsewhere">secondary</span>{/if}
@@ -38,7 +39,7 @@
 		<div class="d-from">
 			← from
 			<a href="{base}/entries/{lemma.origin_lemma.id}"
-				>{@html safe(lemma.origin_lemma.word)} <span class="id-tag">[{lemma.origin_lemma.id}]</span
+				><FormWord word={lemma.origin_lemma.word} ocr={lemma.origin_lemma.ocr} /> <span class="id-tag">[{lemma.origin_lemma.id}]</span
 				></a
 			>{#if lemma.origin_lemma.language}
 				<span class="muted">({lemma.origin_lemma.language.name})</span>{/if}

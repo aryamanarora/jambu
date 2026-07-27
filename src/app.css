@@ -186,7 +186,7 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-/* Display / headings in Gentium; phonemic forms & transcriptions in Charis SIL. */
+/* Display headings and phonemic forms use the self-hosted Charis SIL faces. */
 h1,
 h2,
 h3,

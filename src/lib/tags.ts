@@ -7,7 +7,7 @@ export type TagCategory = 'gender' | 'grammatical' | 'source' | 'era' | 'dialect
 export const GENDER_TAGS = ['m', 'f', 'n'];
 export const GRAMMATICAL_TAGS = [
 	'sg', 'pl', 'du',
-	'adj', 'adv', 'pron', 'num', 'postp', 'prep', 'conj', 'interj', 'part', 'indecl', 'ord',
+	'noun', 'adj', 'adv', 'pron', 'num', 'postp', 'prep', 'conj', 'interj', 'part', 'indecl', 'ord',
 	'nom', 'acc', 'dat', 'gen', 'loc', 'abl', 'instr', 'voc', 'obl',
 	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger',
 	'verb', 'poss', 'conditional', 'suffix', 'emph', 'interr', 'dir', '3sg',
@@ -15,7 +15,10 @@ export const GRAMMATICAL_TAGS = [
 	'derived', 'inherited', 'loanword', 'diminutive', 'intensive', 'compound',
 	'pret', 'impv', 'opt', 'alternate', 'replaced', 'sound-variant',
 	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
-	'Tamil-class-6', 'Tamil-class-7'
+	'Tamil-class-6', 'Tamil-class-7',
+	'Kalasha-class-1', 'Kalasha-class-2', 'Kalasha-class-3', 'Kalasha-class-4',
+	'Burushaski-class-H', 'Burushaski-class-HM', 'Burushaski-class-HF',
+	'Burushaski-class-X', 'Burushaski-class-Y', 'Burushaski-class-Z'
 ];
 // The most common attestation sources, offered in the filter (the full set is larger; see
 // ../data/tags.py). `lex` = "known only from lexicographers".
@@ -59,7 +62,7 @@ export function tagLabel(tag: string): string {
 export const TAG_NAMES: Record<string, string> = {
 	m: 'masculine', f: 'feminine', n: 'neuter',
 	sg: 'singular', pl: 'plural', du: 'dual',
-	adj: 'adjective', adv: 'adverb', pron: 'pronoun', num: 'numeral', postp: 'postposition',
+	noun: 'noun', adj: 'adjective', adv: 'adverb', pron: 'pronoun', num: 'numeral', postp: 'postposition',
 	prep: 'preposition', conj: 'conjunction', interj: 'interjection', part: 'particle',
 	indecl: 'indeclinable', ord: 'ordinal',
 	nom: 'nominative', acc: 'accusative', dat: 'dative', gen: 'genitive', loc: 'locative',
@@ -76,6 +79,14 @@ export const TAG_NAMES: Record<string, string> = {
 	'Tamil-class-3': 'Tamil verb class 3', 'Tamil-class-4': 'Tamil verb class 4',
 	'Tamil-class-5': 'Tamil verb class 5',
 	'Tamil-class-6': 'Tamil verb class 6', 'Tamil-class-7': 'Tamil verb class 7',
+	'Kalasha-class-1': 'Kalasha verb class 1', 'Kalasha-class-2': 'Kalasha verb class 2',
+	'Kalasha-class-3': 'Kalasha verb class 3', 'Kalasha-class-4': 'Kalasha verb class 4',
+	'Burushaski-class-H': 'Burushaski noun class H',
+	'Burushaski-class-HM': 'Burushaski noun class HM',
+	'Burushaski-class-HF': 'Burushaski noun class HF',
+	'Burushaski-class-X': 'Burushaski noun class X',
+	'Burushaski-class-Y': 'Burushaski noun class Y',
+	'Burushaski-class-Z': 'Burushaski noun class Z',
 	lex: 'lexicographers only', RV: 'Ṛgveda', AV: 'Atharvaveda', VS: 'Vājasaneyi Saṁhitā',
 	TS: 'Taittirīya Saṁhitā', 'ŚBr': 'Śatapatha Brāhmaṇa', Mn: 'Manu', MBh: 'Mahābhārata',
 	R: 'Rāmāyaṇa', 'Suśr': 'Suśruta', 'Pāṇ': 'Pāṇini', Dhātup: 'Dhātupāṭha', BhP: 'Bhāgavata Purāṇa',

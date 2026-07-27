@@ -5,6 +5,7 @@
 	import { safe } from '$lib/render';
 	import { base } from '$app/paths';
 	import type { Lemma } from '$lib/types';
+	import FormWord from './FormWord.svelte';
 
 	let visible = $state(false);
 	let x = $state(0);
@@ -77,7 +78,7 @@
 		{:else if current}
 			<a class="peek-head" href="{base}/entries/{current.id}">
 				<span class="peek-lang">{current.language?.name ?? current.language_id}</span>
-				<span class="peek-word">{@html safe(current.word)}</span>
+				<span class="peek-word"><FormWord word={current.word} references={current.references} /></span>
 				<span class="peek-id">[{current.id}]</span>
 			</a>
 			{#if current.gloss}<div class="peek-gloss">{@html safe(current.gloss)}</div>{/if}

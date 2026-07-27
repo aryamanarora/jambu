@@ -18,6 +18,27 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-07-26',
+		label: '26 July 2026',
+		title: 'Burushaski, Old Sinhalese, and source confidence',
+		changes: [
+			'Added new Burushaski and Old Sinhalese lexical sources.',
+			'Forms parsed with optical character recognition are now highlighted throughout Jambu, with an explanation that their spelling may need checking against the original source.',
+			'Added grammatical class labels for Burushaski nouns and Kalasha verbs.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Bur', label: 'Burushaski' },
+				{ id: 'OSi', label: 'Old Sinhalese' }
+			],
+			sources: [
+				{ id: 'berger-auto', label: 'Berger 1998 · OCR' },
+				{ id: 'yoshioka2012', label: 'Yoshioka 2012' },
+				{ id: 'paranavitana', label: 'Paranavitana 1956' }
+			]
+		}
+	},
+	{
 		date: '2026-07-25',
 		label: '25 July 2026',
 		title: 'Concept browsing and richer reflexes',

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { safe } from '$lib/render';
 	import type { AncestorRef } from '$lib/query';
+	import FormWord from './FormWord.svelte';
 
 	// A node's place in the etymon graph: the "from" chain shown under the headword on both entry and
 	// reflex pages. `chain` is the ancestry level by level (nearest first); the first level uses
@@ -33,7 +33,7 @@
 				{#each level as p, i (p.id)}{#if p.showLang}<span class="lang">{p.lang}</span> {/if}<a
 						class="anc"
 						href="{base}/entries/{p.id}"
-						>{@html safe(p.word)} <span class="id-tag">[{p.id}]</span></a
+						><FormWord word={p.word} ocr={p.ocr} /> <span class="id-tag">[{p.id}]</span></a
 					>{#if i < level.length - 1}<span class="sep">, </span>{/if}{/each}
 			</div>
 		{/each}

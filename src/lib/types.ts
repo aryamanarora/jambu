@@ -45,6 +45,7 @@ export interface Reference {
 	progress: string | null;
 	provenance: string | null;
 	editor: string | null;
+	ocr: boolean | number;
 	lemma_count: number;
 	unetymologised_count: number;
 }
@@ -77,10 +78,12 @@ export interface Lemma {
 	concept_match?: number; // # of this entry's reflexes matching the active concept (concepts view)
 	secondary?: number; // 1 when shown under an etymon it reaches by an alternate (derivation) edge
 	variant_forms?: string | null; // same-language variant word forms, \x1f-separated (entries view)
+	ocr_variant_forms?: string | null; // OCR-derived subset of variant_forms, same separator
 	// hydrated relations (optional)
 	language?: Language;
 	origin_lemma?: Lemma | null;
 	references?: Reference[];
+	ocr?: boolean | number; // reference-backed query flag for projections without hydrated references
 }
 
 /** Query params shared by the list views, mirroring the old URL keys (search.py). */
@@ -157,12 +160,14 @@ export interface ConceptAttestation {
 	form_id: string;
 	word: string;
 	gloss: string;
+	language_id: string | null;
 	language: string | null;
 	clade: string | null;
 	color: string | null;
 	lat: number | null;
 	long: number | null;
 	places: AttestationPlace[];
+	ocr?: boolean | number;
 }
 
 export interface ConceptEtymon {
@@ -172,6 +177,7 @@ export interface ConceptEtymon {
 	source: string;
 	languages: string[];
 	forms: ConceptAttestation[];
+	ocr?: boolean | number;
 }
 
 export interface ConceptDetail {

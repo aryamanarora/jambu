@@ -9,12 +9,13 @@
 		type AlignSeg,
 		type AncestorRef
 	} from '$lib/query';
-	import { striptags, safe } from '$lib/render';
+	import { striptags } from '$lib/render';
 	import type { Lemma, MapMarker } from '$lib/types';
 	import MapView from '$lib/components/Map.svelte';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
 	import Ancestry from '$lib/components/Ancestry.svelte';
 	import LangName from '$lib/components/LangName.svelte';
+	import FormWord from '$lib/components/FormWord.svelte';
 
 	let reflex = $state<Lemma | null>(null);
 	let segs = $state<AlignSeg[]>([]);
@@ -70,7 +71,7 @@
 {:else}
 	<h1 class="headword">
 		<span class="faint"><LangName lang={reflex.language} /></span>
-		<span class="lemma-word">{@html safe(reflex.word)}</span>
+		<span class="lemma-word"><FormWord word={reflex.word} references={reflex.references} /></span>
 		<span class="id-tag">[{reflex.id}]</span>
 	</h1>
 	<Ancestry label={relLabel} {chain} startLang={reflex.language?.name} />
@@ -79,7 +80,7 @@
 			<span class="rv-label">Variant{variants.length === 1 ? '' : 's'}</span>
 			{#each variants as v (v.id)}<span class="rv-line"><span class="rv-arrow">→</span>&nbsp;<a
 						class="rv phon"
-						href="{base}/reflexes/{v.id}">{@html safe(v.word)}</a
+						href="{base}/reflexes/{v.id}"><FormWord word={v.word} references={v.references} /></a
 					></span>{/each}
 		</div>
 	{/if}

@@ -44,6 +44,7 @@
 <dl class="props card provenance">
 	<div class="prop"><dt>Provenance</dt><dd>{ref.provenance || 'Not recorded'}</dd></div>
 	<div class="prop"><dt>Editor</dt><dd>{ref.editor || 'Not recorded'}</dd></div>
+	<div class="prop"><dt>Extraction</dt><dd>{ref.ocr ? 'Optical character recognition (OCR)' : 'Not marked as OCR'}</dd></div>
 	<div class="prop">
 		<dt>Unetymologised</dt>
 		<dd>{unetymologisedPct()} ({(ref.unetymologised_count ?? 0).toLocaleString()} of {(ref.lemma_count ?? 0).toLocaleString()} forms)</dd>

@@ -2,9 +2,10 @@
 	import { base } from '$app/paths';
 	import { page } from '$app/state';
 	import { compareLanguages, type CompareRow } from '$lib/query';
-	import { safe, striptags } from '$lib/render';
+	import { striptags } from '$lib/render';
 	import type { Language, MapMarker } from '$lib/types';
 	import Map from '$lib/components/Map.svelte';
+	import FormWord from '$lib/components/FormWord.svelte';
 
 	let lang1 = $state<Language | null>(null);
 	let lang2 = $state<Language | null>(null);
@@ -69,17 +70,17 @@
 				{#each rows as row (row.entryId)}
 					<tr>
 						<td class="lemma-word">
-							<a href="{base}/entries/{row.entryId}">{@html safe(row.entryWord)}</a>
+							<a href="{base}/entries/{row.entryId}"><FormWord word={row.entryWord} ocr={row.entryOcr} /></a>
 							<span class="id-tag">[{row.entryId}]</span>
 						</td>
 						<td class="lemma-word">
 							{#each row.left as r, i (r.id)}{#if i > 0}, {/if}<a href="{base}/reflexes/{r.id}"
-									>{@html safe(r.word)}</a
+									><FormWord word={r.word} ocr={r.ocr} /></a
 								>{#if r.gloss} <span class="muted">‘{striptags(r.gloss)}’</span>{/if}{/each}
 						</td>
 						<td class="lemma-word">
 							{#each row.right as r, i (r.id)}{#if i > 0}, {/if}<a href="{base}/reflexes/{r.id}"
-									>{@html safe(r.word)}</a
+									><FormWord word={r.word} ocr={r.ocr} /></a
 								>{#if r.gloss} <span class="muted">‘{striptags(r.gloss)}’</span>{/if}{/each}
 						</td>
 					</tr>
