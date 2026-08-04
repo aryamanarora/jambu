@@ -1,7 +1,9 @@
 <script lang="ts">
 	import '../app.css';
 	import { base } from '$app/paths';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
+	import { env } from '$env/dynamic/public';
 	import { onMount } from 'svelte';
 	import Favorites from '$lib/components/Favorites.svelte';
 	import DbBanner from '$lib/components/DbBanner.svelte';
@@ -13,11 +15,40 @@
 
 	type Theme = '' | 'light' | 'dark';
 	let theme = $state<Theme>('');
+	const gaMeasurementId = (env.PUBLIC_GA_MEASUREMENT_ID ?? '').trim();
+	const hasGoogleAnalytics = /^G-[A-Z0-9]+$/i.test(gaMeasurementId);
+	let trackPageView: (() => void) | undefined;
+
+	afterNavigate(() => {
+		trackPageView?.();
+	});
 
 	onMount(() => {
 		theme = (localStorage.getItem('jambu-theme') as Theme) || '';
 		loadFavorites();
 		preloadDb(); // init worker + check OPFS cache (auto-ready if already downloaded)
+
+		if (!hasGoogleAnalytics) return;
+
+		const analyticsWindow = window as Window & { dataLayer?: unknown[][] };
+		const dataLayer = (analyticsWindow.dataLayer ??= []);
+		const gtag = (...args: unknown[]) => dataLayer.push(args);
+		gtag('js', new Date());
+		gtag('config', gaMeasurementId, { send_page_view: false });
+
+		trackPageView = () => {
+			gtag('event', 'page_view', {
+				page_location: window.location.href,
+				page_path: window.location.pathname,
+				page_title: document.title
+			});
+		};
+		trackPageView();
+
+		const script = document.createElement('script');
+		script.async = true;
+		script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+		document.head.append(script);
 	});
 
 	function toggleTheme() {

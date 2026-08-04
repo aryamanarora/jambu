@@ -50,6 +50,13 @@ two env vars at the top of that workflow:
 
 Also enable **Settings → Pages → Source: GitHub Actions**.
 
+### Google Analytics
+
+The deployed site uses the existing Jambu/Home Google Analytics 4 property and tracks page views,
+including client-side navigation. The public Measurement ID is configured in the deploy workflow.
+For local development, copy `.env.example` to `.env` and set `PUBLIC_GA_MEASUREMENT_ID`; tracking
+is disabled when the variable is absent or invalid.
+
 ## Scripts / layout
 
 - `scripts/build_static_db.py` — dictionary-codes alignment/correspondence data, compacts indexes,

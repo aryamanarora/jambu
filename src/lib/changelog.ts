@@ -18,6 +18,12 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-03',
+		label: '3 August 2026',
+		title: 'Site analytics',
+		changes: ['Added Google Analytics page-view tracking across site navigation.']
+	},
+	{
 		date: '2026-07-26',
 		label: '26 July 2026',
 		title: 'Burushaski, Old Sinhalese, and source confidence',

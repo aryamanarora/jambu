@@ -17,6 +17,8 @@ env:
   BASE_PATH: '/jambu'
   SITE_URL: 'https://aryamanarora.github.io'
   STATIC_DB_URL: 'https://github.com/aryamanarora/jambu/releases/latest/download/jambu.db'
+  # Public GA4 measurement ID for the existing Jambu/Home property.
+  PUBLIC_GA_MEASUREMENT_ID: 'G-W6HV8VE5SV'
 
 permissions:
   contents: read
