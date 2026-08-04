@@ -21,6 +21,7 @@ type Pool = {
 	OpfsSAHPoolDb: new (path: string) => DbHandle;
 };
 type DbHandle = {
+	close(): void;
 	exec(opts: {
 		sql: string;
 		bind?: unknown[];
@@ -121,6 +122,16 @@ export function load(url: string, onProgress: (received: number) => void): Promi
 		// allow a retry if it rejected
 		loadingPromise.catch(() => (loadingPromise = null));
 	}
+}
+
+/** Close and remove the current database so the user can reclaim its OPFS storage. */
+export async function deleteCached(): Promise<void> {
+	db?.close();
+	db = null;
+	loadingPromise = null;
+	if (DEV) return;
+	const p = await ensurePool();
+	if (p.getFileNames().includes(OPFS_DB_PATH)) p.unlink(OPFS_DB_PATH);
 }
 
 export function runQuery(sql: string, params: unknown[]): Record<string, unknown>[] {

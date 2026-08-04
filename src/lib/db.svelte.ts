@@ -67,6 +67,14 @@ function setReady() {
 	readyResolve?.();
 }
 
+function setNotReady() {
+	status = 'idle';
+	receivedBytes = 0;
+	errorMsg = null;
+	readyPromise = null;
+	readyResolve = null;
+}
+
 // worker RPC (leader ↔ its dedicated worker)
 let nextWid = 1;
 const wpending = new Map<number, { resolve: (v: WMsg) => void; reject: (e: Error) => void }>();
@@ -141,12 +149,17 @@ function applyRemoteStatus(s: DbStatus, received: number, error: string | null) 
 	receivedBytes = received;
 	errorMsg = error;
 	if (s === 'ready') setReady();
+	else if (s === 'idle') setNotReady();
 	else status = s; // idle / downloading / error / checking
 }
 
 async function serveRequest(rid: string, msg: Record<string, unknown>) {
 	try {
 		const data = await workerCall(msg);
+		if (msg.type === 'delete') {
+			setNotReady();
+			broadcastStatus();
+		}
 		post({ k: 'res', rid, ok: true, data });
 	} catch (err) {
 		post({ k: 'res', rid, ok: false, error: err instanceof Error ? err.message : String(err) });
@@ -231,6 +244,14 @@ export async function loadDatabase(): Promise<void> {
 	ensureReadyPromise();
 	if (role === 'leader') void doLoad();
 	else post({ k: 'loadRequest' });
+}
+
+/** Close the active connection and remove the versioned database from this browser. */
+export async function deleteDatabase(): Promise<void> {
+	if (!browser || status !== 'ready') return;
+	await run({ type: 'delete' });
+	setNotReady();
+	if (role === 'leader') broadcastStatus();
 }
 
 async function doLoad() {

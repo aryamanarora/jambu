@@ -7,6 +7,7 @@
 	import { onMount } from 'svelte';
 	import Favorites from '$lib/components/Favorites.svelte';
 	import DbBanner from '$lib/components/DbBanner.svelte';
+	import DbStatusMenu from '$lib/components/DbStatusMenu.svelte';
 	import EntryPeek from '$lib/components/EntryPeek.svelte';
 	import { loadFavorites } from '$lib/prefs.svelte';
 	import { preloadDb } from '$lib/db.svelte';
@@ -101,6 +102,7 @@
 			<a href="{base}{item.href}" class:active={isActive(item.href)}>{item.label}</a>
 		{/each}
 		<span class="spacer"></span>
+		<DbStatusMenu />
 		<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle light/dark theme">
 			{theme === 'dark' ? '☾' : theme === 'light' ? '☀' : '◐'}
 		</button>
