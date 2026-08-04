@@ -37,9 +37,18 @@
 		gtag('config', gaMeasurementId, { send_page_view: false });
 
 		trackPageView = () => {
+			const pathname = window.location.pathname;
+			const routePath =
+				base && (pathname === base || pathname.startsWith(`${base}/`))
+					? pathname.slice(base.length)
+					: pathname;
+			const analyticsPath = `/jambu${routePath.startsWith('/') ? routePath : `/${routePath}`}`;
+			const analyticsLocation = new URL(window.location.href);
+			analyticsLocation.pathname = analyticsPath;
+
 			gtag('event', 'page_view', {
-				page_location: window.location.href,
-				page_path: window.location.pathname,
+				page_location: analyticsLocation.href,
+				page_path: analyticsPath,
 				page_title: document.title
 			});
 		};
