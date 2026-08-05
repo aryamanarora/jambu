@@ -1,4 +1,3 @@
-import { browser } from '$app/environment';
 import { base } from '$app/paths';
 import { error, redirect } from '@sveltejs/kit';
 import { getEntryGraph, getLemma } from '$lib/query';
@@ -25,14 +24,18 @@ export async function entries() {
 }
 
 /** Native SQLite during prerender; browser SQLite for reflex IDs served by the SPA fallback. */
-export const load: PageLoad = async ({ fetch, params }) => {
-	if (!browser) {
-		const response = await fetch(`/internal/prerender-entry/${encodeURIComponent(params.entry)}`);
-		if (!response.ok) throw error(response.status, 'Entry not found');
-		const result = await response.json();
-		if (result.entry.id !== params.entry)
-			throw redirect(308, `${base}/entries/${result.entry.id}`);
-		return result;
+export const load: PageLoad = async ({ params }) => {
+	if (import.meta.env.SSR) {
+		const {
+			getEntryGraph: getServerEntryGraph,
+			getEntryMeta,
+			resolveEntryId
+		} = await import('$lib/server/db');
+		const id = resolveEntryId(params.entry);
+		const entry = getEntryMeta(id);
+		if (!entry) throw error(404, 'Entry not found');
+		if (entry.id !== params.entry) throw redirect(308, `${base}/entries/${entry.id}`);
+		return { entry, graph: getServerEntryGraph(id) };
 	}
 
 	const entry = await getLemma(params.entry);
