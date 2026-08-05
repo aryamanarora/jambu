@@ -5,8 +5,8 @@
  * for a whole-file fetch), stored in OPFS, and queried from there via a dedicated worker. OPFS's
  * synchronous access handles are exclusive to one tab, so we can't just open the pool in every tab.
  * Instead we elect a single **leader** tab (via the Web Locks API) that owns the one worker; other
- * tabs are **followers** that proxy their queries to the leader over a BroadcastChannel. If the
- * leader tab closes, the lock frees and a follower is promoted (it re-opens the already-cached DB).
+ * tabs are **followers** that proxy their queries to it over a BroadcastChannel. Leadership moves
+ * to the visible tab so a suspended background tab cannot leave active-page queries hanging.
  *
  * `dbUI` exposes reactive status for the load gate; `query`/`queryOne` are the same API the rest of
  * the app uses and wait until the DB is ready.
@@ -54,6 +54,10 @@ let started = false;
 let role: 'follower' | 'leader' = 'follower';
 let worker: Worker | null = null; // leader only
 let channel: BroadcastChannel | null = null;
+let lockManager: LockManager | null = null;
+let lockRequestActive = false;
+let releaseLeadership: (() => void) | null = null;
+let leadershipYieldRequested = false;
 const tabId = browser ? crypto.randomUUID() : '';
 
 let readyResolve: (() => void) | null = null;
@@ -105,7 +109,8 @@ function onWorkerMessage(m: WMsg) {
 // ---- broadcast protocol (followers ⇄ leader) ------------------------------
 
 type Chan =
-	| { k: 'hello' }
+	| { k: 'hello'; visible: boolean }
+	| { k: 'leaderReleased' }
 	| { k: 'status'; status: DbStatus; received: number; error: string | null }
 	| { k: 'loadRequest' }
 	| { k: 'req'; rid: string; msg: Record<string, unknown> }
@@ -123,7 +128,14 @@ const cpending = new Map<string, { resolve: (v: WMsg) => void; reject: (e: Error
 function onChannelMessage(m: Chan) {
 	switch (m.k) {
 		case 'hello':
-			if (role === 'leader') broadcastStatus();
+			if (role === 'leader' && m.visible && document.hidden) yieldLeadership();
+			else if (role === 'leader') broadcastStatus();
+			break;
+		case 'leaderReleased':
+			if (role !== 'leader') {
+				for (const pending of cpending.values()) pending.reject(new Error('database leader changed'));
+				cpending.clear();
+			}
 			break;
 		case 'status':
 			if (role !== 'leader') applyRemoteStatus(m.status, m.received, m.error);
@@ -206,19 +218,55 @@ async function becomeLeader() {
 	broadcastStatus();
 }
 
+function yieldLeadership() {
+	if (role !== 'leader') return;
+	leadershipYieldRequested = true;
+	post({ k: 'leaderReleased' });
+	worker?.terminate();
+	worker = null;
+	for (const pending of wpending.values()) pending.reject(new Error('database leadership released'));
+	wpending.clear();
+	role = 'follower';
+	releaseLeadership?.();
+	releaseLeadership = null;
+}
+
+function requestLeadership() {
+	if (!lockManager || lockRequestActive || document.hidden || role === 'leader') return;
+	lockRequestActive = true;
+	void lockManager
+		.request(LOCK, { mode: 'exclusive' }, async () => {
+			if (document.hidden) return;
+			leadershipYieldRequested = false;
+			await becomeLeader();
+			if (document.hidden || leadershipYieldRequested || role !== 'leader') {
+				if (role === 'leader') yieldLeadership();
+				return;
+			}
+			await new Promise<void>((resolve) => (releaseLeadership = resolve));
+		})
+		.finally(() => {
+			lockRequestActive = false;
+			releaseLeadership = null;
+			if (!document.hidden && role !== 'leader') requestLeadership();
+		});
+}
+
 function startEngine() {
 	if (started || !browser) return;
 	started = true;
 	channel = new BroadcastChannel(CHANNEL);
 	channel.onmessage = (e: MessageEvent<Chan>) => onChannelMessage(e.data);
-	const locks = (navigator as unknown as { locks?: LockManager }).locks;
+	lockManager = (navigator as unknown as { locks?: LockManager }).locks ?? null;
 	// In dev the DB is a per-tab in-memory copy (no OPFS exclusivity), so every tab is its own
 	// leader — this avoids proxying to a stale leader tab and lets each reload auto-load fresh.
-	if (locks && !DEV) {
-		// hold the lock (→ leadership) until this tab unloads; then a follower is promoted
-		void locks.request(LOCK, { mode: 'exclusive' }, () => {
-			void becomeLeader();
-			return new Promise<void>(() => {});
+	if (lockManager && !DEV) {
+		requestLeadership();
+		document.addEventListener('visibilitychange', () => {
+			if (!document.hidden) {
+				requestLeadership();
+				post({ k: 'hello', visible: true });
+			}
 		});
 	} else {
 		void becomeLeader(); // dev, or no Web Locks → single-tab leader
@@ -233,7 +281,7 @@ export async function initDatabase(): Promise<void> {
 	ensureReadyPromise();
 	startEngine();
 	// if we didn't immediately become the leader, ask the current leader for its status
-	if (role !== 'leader') post({ k: 'hello' });
+	if (role !== 'leader') post({ k: 'hello', visible: !document.hidden });
 }
 
 export async function loadDatabase(): Promise<void> {
