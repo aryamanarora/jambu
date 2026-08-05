@@ -26,6 +26,14 @@
 			? `${(((ref.unetymologised_count ?? 0) / ref.lemma_count) * 100).toFixed(1)}%`
 			: '—';
 	}
+	function provenanceFiles(provenance: string | null): string[] {
+		return provenance?.split(';').map((file) => file.trim()).filter(Boolean) ?? [];
+	}
+	function provenanceUrl(file: string): string | null {
+		return file.startsWith('data/')
+			? `https://github.com/moli-mandala/data/blob/main/${file}`
+			: null;
+	}
 </script>
 
 <svelte:head>
@@ -41,8 +49,19 @@
 	{@html md(ref.source || `Reference abbreviation ${ref.id}; full citation not yet catalogued.`)}
 </div>
 
-<dl class="props card provenance">
-	<div class="prop"><dt>Provenance</dt><dd>{ref.provenance || 'Not recorded'}</dd></div>
+<dl class="props card reference-metadata">
+	<div class="prop">
+		<dt>Provenance</dt>
+		<dd>
+			{#each provenanceFiles(ref.provenance) as file, index}
+				{@const url = provenanceUrl(file)}
+				{#if index > 0}; {/if}
+				{#if url}<a href={url} rel="noreferrer">{file}</a>{:else}{file}{/if}
+			{:else}
+				Not recorded
+			{/each}
+		</dd>
+	</div>
 	<div class="prop"><dt>Editor</dt><dd>{ref.editor || 'Not recorded'}</dd></div>
 	<div class="prop"><dt>Extraction</dt><dd>{ref.ocr ? 'Optical character recognition (OCR)' : 'Not marked as OCR'}</dd></div>
 	<div class="prop">
@@ -68,28 +87,31 @@
 		margin-top: 1rem;
 		font-size: 1.05rem;
 	}
-	.provenance {
-		margin-top: 0.75rem;
-		padding: 0.7rem 1rem;
+	.reference-metadata {
+		margin: 1rem 0 0;
+		padding: 0.4rem 1.15rem;
 	}
-	.provenance .prop {
-		display: grid;
-		grid-template-columns: 7rem minmax(0, 1fr);
-		gap: 1rem;
+	.prop {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1.5rem;
+		padding: 0.55rem 0;
+		border-bottom: 1px solid var(--border);
 	}
-	.provenance .prop + .prop {
-		margin-top: 0.55rem;
-		padding-top: 0.55rem;
-		border-top: 1px solid var(--border);
+	.prop:last-child {
+		border-bottom: none;
 	}
-	.provenance dt {
+	.prop dt {
 		color: var(--muted);
+		font-size: 0.85rem;
 		font-weight: 600;
 	}
-	.provenance dd {
+	.prop dd {
 		margin: 0;
-		font-family: var(--font-mono);
-		font-size: 0.88rem;
+		font-weight: 500;
+		text-align: right;
+		font-variant-numeric: tabular-nums;
 		overflow-wrap: anywhere;
 	}
 	section {

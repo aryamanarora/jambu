@@ -3,13 +3,13 @@
 	import type { Reference } from '$lib/types';
 
 	let { references = [] }: { references?: Reference[] } = $props();
-	// dedupe by id — an entry can end up citing the same reference twice (e.g. after an addenda merge)
+	// attachReferences already combines repeated locators for one source; retain a defensive dedupe.
 	const refs = $derived([...new Map(references.map((r) => [r.id, r])).values()]);
 </script>
 
 {#if refs.length}
-	{#each refs as r, i (r.id)}{#if i > 0}, {/if}<a
+		{#each refs as r, i (r.id)}{#if i > 0}, {/if}<a
 			href="{base}/references/{r.id}"
-			title={r.ocr ? `${r.short || r.id} · OCR-derived` : r.short || r.id}>{r.short || r.id}</a
+			title={`${r.short || r.id}${r.locator ? `, ${r.locator}` : ''}${r.ocr ? ' · OCR-derived' : ''}`}>{r.short || r.id}{#if r.locator}, {r.locator}{/if}</a
 		>{/each}
 {:else}<span class="faint">—</span>{/if}

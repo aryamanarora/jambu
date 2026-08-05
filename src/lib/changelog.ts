@@ -18,6 +18,35 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-05',
+		label: '5 August 2026',
+		title: 'Gāndhārī, Aśokan Prakrit, and etymology tooling',
+		changes: [
+			'Added the online Gāndhārī dictionary and Andersen’s edition of the Minor Rock Edicts of Aśoka.',
+			'Source citations can now identify the exact page, column, dictionary article, or survey item for a form.',
+			'Added a local etymology lab with concept, sound, and cognate-based candidate ranking for curating previously unetymologised forms.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Dhp', label: 'Gāndhārī' },
+				{ id: 'As', label: 'Aśokan Prakrit' }
+			],
+			sources: [
+				{ id: 'gandhari', label: 'Baums & Glass 2002–' },
+				{ id: 'andersen1990', label: 'Andersen 1990 · OCR' }
+			]
+		}
+	},
+	{
+		date: '2026-08-04',
+		label: '4 August 2026',
+		title: 'Durable form links',
+		changes: [
+			'Form links now remain stable when source files are reordered, transcription profiles change, or an etymology is corrected.',
+			'Existing form links continue to resolve through permanent aliases.'
+		]
+	},
+	{
 		date: '2026-08-03',
 		label: '3 August 2026',
 		title: 'Site analytics',

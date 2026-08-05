@@ -5,6 +5,7 @@
 	import { page } from '$app/state';
 	import { env } from '$env/dynamic/public';
 	import { onMount } from 'svelte';
+	import { dev } from '$app/environment';
 	import Favorites from '$lib/components/Favorites.svelte';
 	import DbBanner from '$lib/components/DbBanner.svelte';
 	import DbStatusMenu from '$lib/components/DbStatusMenu.svelte';
@@ -84,6 +85,7 @@
 		{ href: '/concepts', label: 'Concepts' },
 		{ href: '/references', label: 'References' }
 	];
+	if (dev) nav.push({ href: '/dev/etymologies', label: 'Etymology lab' });
 
 	function isActive(href: string): boolean {
 		const p = page.url.pathname;

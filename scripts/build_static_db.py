@@ -44,9 +44,10 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-# The expanded 2026 survey imports bring the compact DB just above 100 MB.
-# Keep a tight regression guard while allowing that intentional corpus growth.
-MAX_OUTPUT_BYTES = 105_000_000
+# The durable-form-ID migration adds a compact 392k-row legacy redirect table (~6.2 MiB), while
+# longer opaque IDs add several MiB to graph indexes. Keep a tight guard around that intentional
+# compatibility cost rather than letting future schema growth pass unnoticed.
+MAX_OUTPUT_BYTES = 120_000_000
 
 # Printed dialect prefixes which differ from the canonical language name in languages.csv.
 BASE_LANGUAGE_OVERRIDES = {
@@ -91,10 +92,17 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER,
             etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT, borrowed_from TEXT
         );
+        -- Permanent redirects from pre-migration/order-dependent form IDs and build-time duplicate
+        -- IDs to the retained durable lemma ID.
+        CREATE TABLE lemma_aliases (
+            alias TEXT PRIMARY KEY,
+            lemma_rid INTEGER NOT NULL
+        ) WITHOUT ROWID;
         CREATE TABLE lemma_reference (
             lemma_rid INTEGER NOT NULL,
             reference_rid INTEGER NOT NULL,
-            PRIMARY KEY (lemma_rid, reference_rid)
+            locator TEXT NOT NULL DEFAULT '',
+            PRIMARY KEY (lemma_rid, reference_rid, locator)
         ) WITHOUT ROWID;
         -- Concepticon concept sets that glosses map to, plus per-concept rollups for the Concepts
         -- tab: etyma_count counts distinct immediate etyma (lone/unetymologised nodes excluded and
@@ -230,11 +238,39 @@ def load_references(con: sqlite3.Connection, path: Path) -> None:
     log(f"loaded {len(rows)} references")
 
 
-def _parse_ref(src: str) -> list[str]:
-    """"ref1:page;ref2" → ['ref1','ref2'] (ports make_database.parse_ref)."""
+def _parse_ref(src: str) -> list[tuple[str, str]]:
+    """``ref1[p. 12];ref2`` → ``[(ref1, p. 12), (ref2, '')]``.
+
+    The bracket is CLDF's source locator. Keep it on the citation edge rather than flattening page
+    numbers into Notes. Semicolons inside brackets are treated as locator text, not ref separators.
+    """
     if not src:
         return []
-    return list({r.split("[")[0] for r in src.split(";") if r.split("[")[0]})
+    chunks, current, depth = [], [], 0
+    for char in src:
+        if char == "[":
+            depth += 1
+        elif char == "]" and depth:
+            depth -= 1
+        if char == ";" and depth == 0:
+            chunks.append("".join(current))
+            current = []
+        else:
+            current.append(char)
+    chunks.append("".join(current))
+    parsed = set()
+    for chunk in chunks:
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        if "[" in chunk and chunk.endswith("]"):
+            reference, locator = chunk.split("[", 1)
+            locator = locator[:-1]
+        else:
+            reference, locator = chunk, ""
+        if reference.strip():
+            parsed.add((reference.strip(), locator.strip()))
+    return sorted(parsed)
 
 
 def load_lemmas(
@@ -328,8 +364,8 @@ def load_lemmas(
              ("local" if r.get("Relation") == "local" else None),
              (r.get("Redirect") or None), None, None)
         )
-        for ref in _parse_ref(r["Source"]):
-            lemma_refs.add((r["ID"], ref))
+        for ref, locator in _parse_ref(r["Source"]):
+            lemma_refs.add((r["ID"], ref, locator))
         i += 1
 
     # pass 2: reflexes, variants, and borrowed entries — origin from Origin_ID (strip
@@ -361,8 +397,8 @@ def load_lemmas(
         cl = clade_of.get(r["Language_ID"])
         if cl and r["Relation"] not in ("variant", "borrowed"):
             param_clades[pid].add(cl)
-        for ref in _parse_ref(r["Source"]):
-            lemma_refs.add((r["ID"], ref))
+        for ref, locator in _parse_ref(r["Source"]):
+            lemma_refs.add((r["ID"], ref, locator))
 
     seen_lemma_ids: set[str] = set()
     duplicate_lemma_ids: set[str] = set()
@@ -397,20 +433,23 @@ def load_lemmas(
                 "Automatically discovered in CLDF Source fields", "Aryaman Arora",
                 0,
             )
-            for m in {ref for _, ref in lemma_refs if ref not in ref_ids}
+            for m in {ref for _, ref, _ in lemma_refs if ref not in ref_ids}
         ],
     )
     lemma_rowids = {r[0]: r[1] for r in con.execute("SELECT id, rowid FROM lemmas")}
     reference_rowids = {r[0]: r[1] for r in con.execute('SELECT id, rowid FROM "references"')}
     con.executemany(
-        "INSERT INTO lemma_reference (lemma_rid,reference_rid) VALUES (?,?)",
-        ((lemma_rowids[lemma], reference_rowids[ref]) for lemma, ref in lemma_refs),
+        "INSERT INTO lemma_reference (lemma_rid,reference_rid,locator) VALUES (?,?,?)",
+        (
+            (lemma_rowids[lemma], reference_rowids[ref], locator)
+            for lemma, ref, locator in lemma_refs
+        ),
     )
     con.execute(
         '''UPDATE "references" SET
-           lemma_count = (SELECT COUNT(*) FROM lemma_reference lr
+           lemma_count = (SELECT COUNT(DISTINCT lemma_rid) FROM lemma_reference lr
                           WHERE lr.reference_rid = "references".rowid),
-           unetymologised_count = (SELECT COUNT(*) FROM lemma_reference lr
+           unetymologised_count = (SELECT COUNT(DISTINCT l.rowid) FROM lemma_reference lr
                                    JOIN lemmas l ON l.rowid = lr.lemma_rid
                                    WHERE lr.reference_rid = "references".rowid
                                      AND l.relation = 'local')'''
@@ -438,6 +477,38 @@ def load_lemmas(
     con.commit()
     log(f"loaded {len(lemmas)} lemmas, {len(lemma_refs)} lemma↔reference links")
     return aliases
+
+
+def load_lemma_aliases(
+    con: sqlite3.Connection, cldf: Path, build_aliases: dict[str, str]
+) -> dict[str, str]:
+    """Merge durable migration aliases with aliases created by dialect deduplication."""
+    aliases: dict[str, str] = {}
+    path = cldf / "form-id-aliases.csv"
+    if path.exists():
+        with path.open(encoding="utf-8") as handle:
+            aliases.update(
+                (row["Legacy_ID"], row["Form_ID"])
+                for row in csv.DictReader(handle)
+                if row.get("Legacy_ID") and row.get("Form_ID")
+            )
+    aliases.update(build_aliases)
+    lemma_rowids = {row[0]: row[1] for row in con.execute("SELECT id,rowid FROM lemmas")}
+    resolved: list[tuple[str, str]] = []
+    for alias, target in aliases.items():
+        seen = {alias}
+        while target in aliases and target not in seen:
+            seen.add(target)
+            target = aliases[target]
+        if alias != target and target in lemma_rowids:
+            resolved.append((alias, target))
+    con.executemany(
+        "INSERT OR REPLACE INTO lemma_aliases (alias,lemma_rid) VALUES (?,?)",
+        ((alias, lemma_rowids[target]) for alias, target in resolved),
+    )
+    con.commit()
+    log(f"loaded {len(resolved):,} permanent lemma ID aliases")
+    return {alias: target for alias, target in resolved}
 
 
 def load_concepts(con: sqlite3.Connection, cldf: Path, aliases: dict[str, str]) -> None:
@@ -709,9 +780,10 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     build_base_schema(con)
     clade_of, canonical_of, dialect_tag_of = load_languages(con, cldf / "languages.csv")
     load_references(con, cldf / "references.csv")
-    aliases = load_lemmas(
+    build_aliases = load_lemmas(
         con, cldf / "forms.csv", clade_of, canonical_of, dialect_tag_of
     )
+    aliases = load_lemma_aliases(con, cldf, build_aliases)
 
     # 2. Indexes: keep the lookup and hot-path ordering indexes. Deliberately omit broad secondary
     # indexes for global lemma order, reverse citation lookup, derivation edges, and the two entry

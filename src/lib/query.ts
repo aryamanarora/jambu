@@ -158,6 +158,7 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	const rows = await inChunks<Reference & { lemma_id: string }>(ids, (chunk) =>
 		query<Reference & { lemma_id: string }>(
 			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress, r.provenance, r.editor, r.ocr,
+			        lr.locator,
 			        r.lemma_count, r.unetymologised_count
 			 FROM lemma_reference lr
 			 JOIN lemmas l ON l.rowid = lr.lemma_rid
@@ -169,6 +170,12 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 	);
 	const map = new Map<string, Reference[]>();
 	for (const row of rows) {
+		const existing = map.get(row.lemma_id)?.find((reference) => reference.id === row.id);
+		if (existing) {
+			if (row.locator && !existing.locator?.split('; ').includes(row.locator))
+				existing.locator = [existing.locator, row.locator].filter(Boolean).join('; ');
+			continue;
+		}
 		const ref: Reference = {
 			id: row.id,
 			short: row.short,
@@ -178,7 +185,8 @@ async function attachReferences(lemmas: Lemma[]): Promise<void> {
 			editor: row.editor,
 			ocr: row.ocr,
 			lemma_count: row.lemma_count,
-			unetymologised_count: row.unetymologised_count
+			unetymologised_count: row.unetymologised_count,
+			locator: row.locator || undefined
 		};
 		const arr = map.get(row.lemma_id);
 		if (arr) arr.push(ref);
@@ -506,13 +514,56 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 // ---- single-record lookups ------------------------------------------------
 
+let lemmaAliasesAvailable: boolean | null = null;
+
+async function canonicalLemmaId(id: string): Promise<string> {
+	if (lemmaAliasesAvailable === null) {
+		lemmaAliasesAvailable = !!(await queryOne<{ ok: number }>(
+			"SELECT 1 AS ok FROM sqlite_master WHERE type = 'table' AND name = 'lemma_aliases'"
+		));
+	}
+	if (!lemmaAliasesAvailable) return id;
+	return (
+		(
+			await queryOne<{ lemma_id: string }>(
+				'SELECT l.id AS lemma_id FROM lemma_aliases a JOIN lemmas l ON l.rowid=a.lemma_rid WHERE a.alias = ?',
+				[id]
+			)
+		)?.lemma_id ?? id
+	);
+}
+
 export async function getLemma(id: string): Promise<Lemma | null> {
-	const l = await queryOne<Lemma>('SELECT * FROM lemmas WHERE id = ?', [id]);
+	const l = await queryOne<Lemma>('SELECT * FROM lemmas WHERE id = ?', [await canonicalLemmaId(id)]);
 	if (!l) return null;
 	await attachLanguages([l]);
 	await attachOrigin([l]);
 	await attachReferences([l]);
 	return l;
+}
+
+export interface EntryGraph {
+	ancestors: { id: string; word: string }[];
+	derived: { id: string; word: string; gloss: string; reflex_count: number; lang_count: number }[];
+}
+
+/** Client-side counterpart of the prerender query, used when a reflex entry was not emitted as HTML. */
+export async function getEntryGraph(id: string): Promise<EntryGraph> {
+	const canonicalId = await canonicalLemmaId(id);
+	const [ancestors, derived] = await Promise.all([
+		query<{ id: string; word: string }>(
+			`SELECT l.id, l.word FROM derivation d JOIN lemmas l ON l.id = d.parent_id
+			 WHERE d.child_id = ? ORDER BY d.rowid`,
+			[canonicalId]
+		),
+		query<{ id: string; word: string; gloss: string; reflex_count: number; lang_count: number }>(
+			`SELECT l.id, l.word, l.gloss, l.reflex_count, l.lang_count
+			 FROM derivation d JOIN lemmas l ON l.id = d.child_id
+			 WHERE d.parent_id = ? AND l.origin_lemma_id IS NULL ORDER BY l."order"`,
+			[canonicalId]
+		)
+	]);
+	return { ancestors, derived };
 }
 
 export interface AncestorRef {
@@ -713,10 +764,10 @@ function refColor(s: string): string {
 }
 
 /** For one language, the distribution of its reflexes across the references that cite them — for a
- *  donut. A reflex cited by several references contributes to each (so counts are citations). */
+ *  donut. Multiple locators in the same reference still count as one cited reflex. */
 export async function getReferenceDistribution(languageId: string): Promise<OriginSlice[]> {
 	const rows = await query<{ id: string; short: string; c: number }>(
-		`SELECT ref.id AS id, ref.short AS short, COUNT(*) AS c
+		`SELECT ref.id AS id, ref.short AS short, COUNT(DISTINCT l.rowid) AS c
 		 FROM lemmas l
 		 JOIN lemma_reference lr ON lr.lemma_rid = l.rowid
 		 JOIN "references" ref ON ref.rowid = lr.reference_rid

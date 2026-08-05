@@ -48,6 +48,7 @@ export interface Reference {
 	ocr: boolean | number;
 	lemma_count: number;
 	unetymologised_count: number;
+	locator?: string; // page, entry, or other source-local locator for this lemma's citation
 }
 
 export interface Lemma {

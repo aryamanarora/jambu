@@ -6,10 +6,13 @@ export type TagCategory = 'gender' | 'grammatical' | 'source' | 'era' | 'dialect
 
 export const GENDER_TAGS = ['m', 'f', 'n'];
 export const GRAMMATICAL_TAGS = [
-	'sg', 'pl', 'du',
+	'sg', 'pl', 'du', 'double-plural',
 	'noun', 'adj', 'adv', 'pron', 'num', 'postp', 'prep', 'conj', 'interj', 'part', 'indecl', 'ord',
 	'nom', 'acc', 'dat', 'gen', 'loc', 'abl', 'instr', 'voc', 'obl',
 	'tr', 'intr', 'caus', 'pass', 'pp', 'ppp', 'pres', 'fut', 'inf', 'ger',
+	'ipfv', 'pfv', 'neg', 'participle', 'conjunctive-participle',
+	'subj', 'obj', 'direct-object', 'indirect-object',
+	'abs', 'erg', 'ade', 'ine', 'ess', 'prox', 'dist', 'indef', 'finalis',
 	'verb', 'poss', 'conditional', 'suffix', 'emph', 'interr', 'dir', '3sg',
 	'weak', 'middle', 'strong', 'reduplicated', 'uncertain', 'sound-variant',
 	'derived', 'inherited', 'loanword', 'diminutive', 'intensive', 'compound',
@@ -61,7 +64,7 @@ export function tagLabel(tag: string): string {
 
 export const TAG_NAMES: Record<string, string> = {
 	m: 'masculine', f: 'feminine', n: 'neuter',
-	sg: 'singular', pl: 'plural', du: 'dual',
+	sg: 'singular', pl: 'plural', du: 'dual', 'double-plural': 'double plural',
 	noun: 'noun', adj: 'adjective', adv: 'adverb', pron: 'pronoun', num: 'numeral', postp: 'postposition',
 	prep: 'preposition', conj: 'conjunction', interj: 'interjection', part: 'particle',
 	indecl: 'indeclinable', ord: 'ordinal',
@@ -69,7 +72,12 @@ export const TAG_NAMES: Record<string, string> = {
 	abl: 'ablative', instr: 'instrumental', voc: 'vocative', obl: 'oblique',
 	tr: 'transitive', intr: 'intransitive', caus: 'causative', pass: 'passive',
 	pp: 'past participle', ppp: 'past passive participle', pres: 'present', fut: 'future',
-	inf: 'infinitive', ger: 'gerund',
+	inf: 'infinitive', ger: 'gerund', impv: 'imperative', ipfv: 'imperfective', pfv: 'perfective', neg: 'negative',
+	participle: 'participle',
+	'conjunctive-participle': 'conjunctive participle', subj: 'subject', obj: 'object',
+	'direct-object': 'direct object', 'indirect-object': 'indirect object',
+	abs: 'absolutive', erg: 'ergative', ade: 'adessive', ine: 'inessive', ess: 'essive',
+	prox: 'proximal', dist: 'distal', indef: 'indefinite', finalis: 'finalis',
 	verb: 'verb', poss: 'possessive', conditional: 'conditional', suffix: 'suffix',
 	emph: 'emphatic', interr: 'interrogative', dir: 'direct case', '3sg': 'third-person singular',
 	weak: 'weak verb', middle: 'middle verb', strong: 'strong verb',

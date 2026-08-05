@@ -320,8 +320,19 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 
 export type EntryMeta = Omit<Lemma, 'language'> & { language: Language | null };
 
+export function resolveEntryId(id: string): string {
+	const dbh = getDb();
+	if (!tableExists(dbh, 'lemma_aliases')) return id;
+	return (
+		(dbh.prepare('SELECT l.id AS lemma_id FROM lemma_aliases a JOIN lemmas l ON l.rowid=a.lemma_rid WHERE a.alias = ?').get(id) as
+			| { lemma_id: string }
+			| undefined)?.lemma_id ?? id
+	);
+}
+
 export function getEntryMeta(id: string): EntryMeta | null {
 	const dbh = getDb();
+	id = resolveEntryId(id);
 	const e = dbh.prepare(
 		`SELECT l.*, EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
 		        ON r.rowid = lr.reference_rid
