@@ -26,7 +26,7 @@ import {
 	aliasLookup,
 	makeVinAny,
 	FLAG_OCR,
-	REL_LOCAL,
+	REL_UNLINKED,
 	type RawLem,
 	type HydrateCtx
 } from '$lib/dbShared';
@@ -201,7 +201,12 @@ const isIA = (id: string) => /^(\d|r\d)/.test(id);
 function rootEtymonMap(): Map<number, number> {
 	if (_rootMap) return _rootMap;
 	const idx = ids();
-	const edges = getDb().prepare('SELECT child_rid, parent_rid FROM derivation').all() as {
+	const edges = getDb()
+		.prepare(
+			`SELECT child_rid, parent_rid FROM edges
+			 WHERE kind IN (5, 6) AND rank = 1 ORDER BY COALESCE(pos, 0), rowid`
+		)
+		.all() as {
 		child_rid: number;
 		parent_rid: number;
 	}[];
@@ -265,7 +270,7 @@ export function allConcepts(): ConceptRow[] {
 		const byImm = new Map<number, number>();
 		for (const rid of readDeltas(c.rids ? new Uint8Array(c.rids) : null)) {
 			const info = lemInfo.get(rid);
-			if (!info || (info.flags & 7) === REL_LOCAL) continue;
+			if (!info || (info.flags & 7) === REL_UNLINKED) continue;
 			byImm.set(info.origin_rid ?? rid, (byImm.get(info.origin_rid ?? rid) ?? 0) + 1);
 		}
 		const byRoot = new Map<number, number>();
@@ -380,7 +385,7 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 
 	const rootRids = [
 		...new Set(
-			linked.filter((r) => (r.flags & 7) !== REL_LOCAL).map((r) => toRoot(r.origin_rid ?? r.rid))
+			linked.filter((r) => (r.flags & 7) !== REL_UNLINKED).map((r) => toRoot(r.origin_rid ?? r.rid))
 		)
 	];
 	const heads = new Map<number, { word: string; gloss: string; ocr: boolean | number }>();
@@ -411,7 +416,7 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 			places: placesFor(r.tags, r.language, r.lat, r.long),
 			ocr: r.flags & FLAG_OCR ? 1 : 0
 		};
-		if ((r.flags & 7) === REL_LOCAL) {
+		if ((r.flags & 7) === REL_UNLINKED) {
 			unetym.push(att);
 			continue;
 		}
@@ -506,15 +511,17 @@ export function getEntryGraph(id: string): EntryGraph {
 	if (rid == null) return { ancestors: [], derived: [] };
 	const ancestors = (dbh
 		.prepare(
-			`SELECT l.rowid AS rid, l.word FROM derivation d JOIN lem l ON l.rowid = d.parent_rid
-			 WHERE d.child_rid = ? ORDER BY d.rowid`
+			`SELECT l.rowid AS rid, l.word FROM edges d JOIN lem l ON l.rowid = d.parent_rid
+			 WHERE d.child_rid = ? AND d.kind IN (5, 6) AND d.rank = 1
+			 ORDER BY COALESCE(d.pos, 0), d.rowid`
 		)
 		.all(rid) as { rid: number; word: string }[]).map((r) => ({ id: idx.idOf(r.rid), word: r.word }));
 	const derived = (dbh
 		.prepare(
 			`SELECT l.rowid AS rid, l.word, l.gloss, l.counts
-			 FROM derivation d JOIN lem l ON l.rowid = d.child_rid
-			 WHERE d.parent_rid = ? AND l.origin_rid IS NULL ORDER BY l.ord`
+			 FROM edges d JOIN lem l ON l.rowid = d.child_rid
+			 WHERE d.parent_rid = ? AND d.kind IN (5, 6) AND d.rank = 1
+			   AND l.origin_rid IS NULL ORDER BY l.ord`
 		)
 		.all(rid) as { rid: number; word: string; gloss: string; counts: number | null }[]).map((r) => ({
 		id: idx.idOf(r.rid),

@@ -9,7 +9,7 @@
 		type AlignSeg,
 		type AncestorRef
 	} from '$lib/query';
-	import { striptags } from '$lib/render';
+	import { relationLabel, striptags } from '$lib/render';
 	import type { Lemma, MapMarker } from '$lib/types';
 	import MapView from '$lib/components/Map.svelte';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
@@ -42,8 +42,8 @@
 		});
 	});
 
-	// the "from" line's label depends on how this node relates to its etymon
-	const relLabel = $derived(reflex?.relation === 'variant' ? 'Variant of' : 'Reflex of');
+	// the "from" line's label depends on how this node relates to its parent
+	const relLabel = $derived(reflex ? relationLabel(reflex) : 'Reflex of');
 
 	const markers = $derived<MapMarker[]>(
 		reflex?.language && reflex.language.lat != null

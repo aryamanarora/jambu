@@ -45,3 +45,21 @@ export function cognatesetParts(key: string | null | undefined): { code: string 
 	if (i === -1) return { code: null, label: key };
 	return { code: key.slice(0, i), label: key.slice(i + 1) };
 }
+
+
+/** Ancestry-line label for a node, keyed on its accepted (rank-1) edge kind. */
+export function relationLabel(l: {
+	relation?: string | null;
+	origin_lemma_id?: string | null;
+}): string {
+	switch (l.relation) {
+		case 'borrowed':
+			return 'Borrowed from';
+		case 'variant':
+			return 'Variant of';
+		case 'reflex':
+			return 'Reflex of';
+		default:
+			return l.origin_lemma_id ? 'Reflex of' : 'Derived from';
+	}
+}

@@ -31,11 +31,18 @@ v2 schema (mirrored by src/lib/dbShared.ts — the two codecs MUST stay in sync)
   concepts.rids  varint-delta blob of linked lemma rowids (replaces lemma_concept).
   languages.lex  per-language lemma rowids in display ("order") order (replaces the
                  (language_id, "order") index).
-  derivation     same edges, integer child_rid/parent_rid.
+  edges          typed non-attestation graph: (child_rid, parent_rid, kind, rank, pos, note)
+                 with kind codes 5=component / 6=derived plus rank>=2 alternate hypotheses
+                 (kind 1-3); replaces the v2 `derivation` table.
 
-lem.flags bit layout: bits 0-2 relation (0 etymon/none, 1 reflex, 2 variant, 3 borrowed,
-4 local); bit 3 cites an OCR source; bit 4 CDIAL section-form id; bit 5 loan source (has a
-borrowed child).
+lem.flags bit layout: bits 0-2 rank-1 edge kind (0 none, 1 reflex, 2 variant, 3 borrowed,
+4 unlinked); bit 3 cites an OCR source; bit 4 CDIAL section-form id; bit 5 loan source (has a
+borrowed child); bit 6 has rank>=2 alternate-etymology edges.
+
+v3 (edge model): origin_rid is the rank-1 edge target (a variant's actual target, not its
+etymon); etymon_rid materialises the attestation-tree root; link_rid carries ONLY redirects;
+the `edges` table ships the typed non-attestation graph (component/derived + ranked
+alternates) in place of the old `derivation` table.
 """
 from __future__ import annotations
 
@@ -48,10 +55,12 @@ F_INDEX = {c: i for i, c in enumerate(F_ALPHABET)}
 
 TAG_NUM, TAG_NM, TAG_NUML, TAG_D, TAG_F, TAG_MISC = 1, 2, 3, 4, 5, 6
 
-RELATION_CODE = {None: 0, "": 0, "reflex": 1, "variant": 2, "borrowed": 3, "local": 4}
+RELATION_CODE = {None: 0, "": 0, "reflex": 1, "variant": 2, "borrowed": 3, "unlinked": 4}
+KIND_CODE = {"reflex": 1, "variant": 2, "borrowed": 3, "component": 5, "derived": 6}
 FLAG_OCR = 8
 FLAG_SECTION = 16
 FLAG_LOAN_SOURCE = 32
+FLAG_HAS_ALT = 64
 
 _NUM = re.compile(r"0|[1-9]\d*")
 
@@ -196,8 +205,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     # 1. id codec: encode every lemma id, sort, rank → new rowid.
     old = con.execute(
         'SELECT rowid, id, word, gloss, native, phonemic, notes, clades, cognateset, "order", '
-        "language_id, origin_lemma_id, tags, reflex_count, lang_count, etymology, relation, "
-        "redirect_to, variant_of FROM lemmas"
+        "language_id, origin_lemma_id, etymon_id, tags, reflex_count, lang_count, etymology, "
+        "relation, redirect_to FROM lemmas"
     ).fetchall()
     misc_index: dict[str, int] = {}
     encoded = [(encode_id(r[1], misc_index), r) for r in old]
@@ -246,6 +255,9 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     for v in cites_of.values():
         v.sort()
     ocr_refs = {r[0] for r in con.execute('SELECT rowid FROM "references" WHERE ocr = 1')}
+    has_alt_ids = {
+        r[0] for r in con.execute("SELECT DISTINCT child_id FROM edges WHERE rank >= 2")
+    }
     ocr_cites = {cite_rid[k] for k in cite_keys if k[0] in ocr_refs}
 
     # 3. relationship prep on old rowids.
@@ -272,8 +284,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     unresolved_refs = 0
     for rec, r in encoded:
         (old_rowid, id_, word, gloss, native, phonemic, notes, clades, cognateset, _order,
-         language_id, origin_id, tags, reflex_count, lang_count, etymology, relation,
-         redirect_to, variant_of) = r
+         language_id, origin_id, etymon_id, tags, reflex_count, lang_count, etymology,
+         relation, redirect_to) = r
         flags = RELATION_CODE.get(relation, 0)
         cites = cites_of.get(old_rowid)
         if cites and any(c in ocr_cites for c in cites):
@@ -282,6 +294,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
             flags |= FLAG_SECTION
         if id_ in loan_sources:
             flags |= FLAG_LOAN_SOURCE
+        if id_ in has_alt_ids:
+            flags |= FLAG_HAS_ALT
         mask = 0
         if clades:
             for c in clades.split(","):
@@ -292,12 +306,12 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
             kids.sort()
             kids_blob = varints(k[2] for k in kids)
         origin_rid = new_rowid_of_id.get(origin_id) if origin_id else None
-        # redirect_to occurs only on relation-none rows, variant_of only on variant/borrowed
-        # rows (verified), so one link column disambiguated by the relation code suffices.
-        link_id = variant_of or redirect_to
-        assert not (variant_of and redirect_to), f"row {id_} has both variant_of and redirect_to"
-        link_rid = new_rowid_of_id.get(link_id) if link_id else None
-        if (origin_id and origin_rid is None) or (link_id and link_rid is None):
+        etymon_rid = new_rowid_of_id.get(etymon_id) if etymon_id else None
+        # v3: link_rid carries redirects only (variant targets live in origin_rid now)
+        link_rid = new_rowid_of_id.get(redirect_to) if redirect_to else None
+        if (origin_id and origin_rid is None) or (redirect_to and link_rid is None) or (
+            etymon_id and etymon_rid is None
+        ):
             unresolved_refs += 1
         counts = None
         if reflex_count is not None or lang_count is not None:
@@ -307,7 +321,7 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
             (
                 new_rowid_of_old[old_rowid], word, gloss, native, phonemic, notes or None,
                 etymology, order_rank[old_rowid], lang_rowid.get(language_id), origin_rid,
-                link_rid,
+                etymon_rid, link_rid,
                 tagset_rid.get(tags) if tags else None,
                 cogset_rid.get(cognateset) if cognateset else None,
                 mask or None, counts, flags,
@@ -325,8 +339,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         """
         CREATE TABLE lem (
             word TEXT, gloss TEXT, native TEXT, phonemic TEXT, notes TEXT, etymology TEXT,
-            ord INTEGER, lang_rid INTEGER, origin_rid INTEGER, link_rid INTEGER,
-            tagset_rid INTEGER, cogset_rid INTEGER, clades_mask INTEGER,
+            ord INTEGER, lang_rid INTEGER, origin_rid INTEGER, etymon_rid INTEGER,
+            link_rid INTEGER, tagset_rid INTEGER, cogset_rid INTEGER, clades_mask INTEGER,
             counts INTEGER, flags INTEGER NOT NULL,
             cites BLOB, children BLOB
         );
@@ -342,8 +356,9 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     )
     con.executemany(
         "INSERT INTO lem (rowid, word, gloss, native, phonemic, notes, etymology, ord, lang_rid,"
-        " origin_rid, link_rid, tagset_rid, cogset_rid, clades_mask, counts, flags, cites, children)"
-        " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        " origin_rid, etymon_rid, link_rid, tagset_rid, cogset_rid, clades_mask, counts, flags,"
+        " cites, children)"
+        " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         lem_rows,
     )
     con.execute("INSERT INTO ids (data) VALUES (?)", (b"".join(recs),))
@@ -425,20 +440,27 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         updates.append((bytes(out), cid))
     con.executemany("UPDATE concepts SET rids = ? WHERE id = ?", updates)
 
-    # 9. derivation → integer edges (row order preserved: getEntryGraph orders by rowid).
-    deriv = [
-        (new_rowid_of_id.get(c), new_rowid_of_id.get(p))
-        for c, p in con.execute("SELECT child_id, parent_id FROM derivation ORDER BY rowid")
-    ]
-    dropped = sum(1 for c, p in deriv if c is None or p is None)
-    con.execute("DROP TABLE derivation")
-    con.execute("CREATE TABLE derivation (child_rid INTEGER NOT NULL, parent_rid INTEGER NOT NULL)")
-    con.executemany(
-        "INSERT INTO derivation (child_rid, parent_rid) VALUES (?,?)",
-        [e for e in deriv if e[0] is not None and e[1] is not None],
+    # 9. typed non-attestation edges → integer rids + kind codes (order: child, kind, rank, pos).
+    typed = []
+    dropped = 0
+    for c, p, kind, rank, pos, note in con.execute(
+        "SELECT child_id, parent_id, kind, rank, pos, note FROM edges ORDER BY rowid"
+    ):
+        crid, prid = new_rowid_of_id.get(c), new_rowid_of_id.get(p)
+        if crid is None or prid is None:
+            dropped += 1
+            continue
+        typed.append((crid, prid, KIND_CODE[kind], rank, pos, note))
+    con.execute("DROP TABLE edges")
+    con.execute(
+        """CREATE TABLE edges (
+             child_rid INTEGER NOT NULL, parent_rid INTEGER NOT NULL, kind INTEGER NOT NULL,
+             rank INTEGER NOT NULL, pos INTEGER, note TEXT
+           )"""
     )
+    con.executemany("INSERT INTO edges VALUES (?,?,?,?,?,?)", typed)
     if dropped:
-        log(f"WARNING: dropped {dropped} derivation edges with unresolvable endpoints")
+        log(f"WARNING: dropped {dropped} typed edges with unresolvable endpoints")
 
     # 10. alignment → per-form cell blobs.
     if con.execute("SELECT 1 FROM sqlite_master WHERE name='alignment'").fetchone():

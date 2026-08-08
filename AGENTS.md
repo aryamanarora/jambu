@@ -16,10 +16,12 @@ SvelteKit 2 + **Svelte 5 runes** (`$state`/`$derived`/`$effect`/`$props`, `{#sni
 `src/lib/query.ts` is the **single source of query truth** for both paths — a port of the old
 Flask `search.py` plus the entry/cognate grouping. Change query semantics there, once.
 
-The DB ships the **compact v2 schema** (see below): no text ids or tag/relation strings in `lem`;
-`src/lib/dbShared.ts` decodes rows back to the legacy `Lemma` shape, so components never see the
-difference. Both SQLite layers register the `vin_any` varint-blob UDF used for citation/alignment
-membership filters.
+The DB ships the **compact v3 edge-model schema** (see below): no text ids or tag/relation
+strings in `lem`; `src/lib/dbShared.ts` decodes rows back to the legacy `Lemma` shape. v3 key
+facts: `origin_rid` is the rank-1 (accepted) edge target — a variant's actual target, not its
+etymon; `etymon_rid` materialises the attestation-tree root; `link_rid` carries only redirects;
+the `edges` table holds the typed non-attestation graph (component/derived + rank≥2 alternate
+hypotheses with review notes). Both SQLite layers register the `vin_any` varint-blob UDF.
 
 ## The DB, end to end
 
@@ -31,13 +33,15 @@ membership filters.
 - `npm run db:transform` = `python3 scripts/build_static_db.py .dbwork/jambu.db --cldf ../data/cldf`.
   It reads the sibling data repo's `cldf/` **directly** (the README's mention of a `.dbwork/data.db`
   input is stale — the current script takes `--cldf`). It first builds the legacy ("v1") schema in
-  full, then `scripts/compact_db.py` rewrites it into the **compact v2 schema** that ships
-  (~49.5 MB, guarded at 52 MB): binary-ranked lemma ids (`lem` rowid = id rank; the `ids` blob is
+  full, then `scripts/compact_db.py` rewrites it into the **compact v3 schema** that ships
+  (~50.6 MB, guarded at 52 MB): binary-ranked lemma ids (`lem` rowid = id rank; the `ids` blob is
   the only id index), interned tags/cognatesets/citations, bit-flag relations, varint blobs for
   children/citations/alignments/corr summaries, and grouped alias blobs. The codecs live in
   `src/lib/dbShared.ts` and MUST stay in sync with `compact_db.py`. After any change to either,
-  run `node scripts/parity_check.mjs OLD.db NEW.db` (OLD = a v1 build with the compact() call
-  disabled) — it verifies the transformation end to end.
+  run `node scripts/parity_check.mjs OLD.db NEW.db` (OLD = a v1 build via
+  `JAMBU_SKIP_COMPACT=1`) — it verifies the compaction end to end. For schema-semantics changes,
+  `scripts/semantic_parity.mjs` + `scripts/semantic_compare.mjs` prove parity across schema
+  generations with enumerated waivers.
 - `npm run db:stage` copies it to `static/db/jambu.db`, served at `/db/jambu.db`.
 - In **CI** the DB is NOT built — it's downloaded from a release asset (`STATIC_DB_URL` in
   `.github/workflows/deploy.yml`). So a data change only reaches prod after you rebuild `jambu.db`
@@ -67,8 +71,9 @@ own 404 for unknown paths, so 404.html is the only shell it returns for client-r
   section form, a reflex, or a borrowed form (ancestry chain + its own alignment + its children).
   `/reflexes/[id]` is a **308 redirect** to `/entries/[id]`; don't add logic to the reflex route.
 - Children of a node = `origin_lemma_id = ? AND relation IN ('reflex','borrowed')`.
-- Ancestry recurses via `COALESCE(variant_of, origin_lemma_id)`. Borrowed forms have
-  `origin_lemma_id` = their **source reflex** (a real node), so the same recursion works for loans.
+- Ancestry recurses via plain `origin_rid` (the rank-1 edge target) — uniform for reflexes,
+  variants, and loans. Rank≥2 alternate etymologies are excluded from the chain and surfaced
+  as the "also proposed" line (`getAlternates`).
 - **Known prod caveat**: the unified entry page relies on dev/build SSR for arbitrary reflex IDs.
   Non-prerendered reflex IDs need a **client-fetch fallback** wired up before deploy — verify this
   is in place if you touch that route or ship.

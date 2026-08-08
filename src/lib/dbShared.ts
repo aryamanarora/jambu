@@ -195,13 +195,17 @@ export class IdIndex {
 export const FLAG_OCR = 8;
 export const FLAG_SECTION = 16;
 export const FLAG_LOAN_SOURCE = 32;
+export const FLAG_HAS_ALT = 64;
 export const REL_NONE = 0,
 	REL_REFLEX = 1,
 	REL_VARIANT = 2,
 	REL_BORROWED = 3,
-	REL_LOCAL = 4;
+	REL_UNLINKED = 4;
+/** Typed-edge kind codes in the shipped `edges` table (attestation kinds reuse 1-3). */
+export const KIND_COMPONENT = 5,
+	KIND_DERIVED = 6;
 
-const RELATION_NAME: (string | null)[] = [null, 'reflex', 'variant', 'borrowed', 'local'];
+const RELATION_NAME: (string | null)[] = [null, 'reflex', 'variant', 'borrowed', 'unlinked'];
 
 export function relationName(flags: number): string | null {
 	return RELATION_NAME[flags & 7] ?? null;
@@ -223,7 +227,7 @@ export function decodeCladeMask(mask: number | null, names: string[]): string | 
 /** Column list reconstructing the legacy lemma row shape (aliases `ord` back to "order").
  *  Use with `FROM lem l ${LEM_JOINS}`. */
 export const LEM_COLS = `l.rowid AS rid, l.word, l.gloss, l.native, l.phonemic, l.notes,
-	l.etymology, l.ord AS ord, l.lang_rid, l.origin_rid, l.link_rid,
+	l.etymology, l.ord AS ord, l.lang_rid, l.origin_rid, l.etymon_rid, l.link_rid,
 	ts.txt AS tags, cs.txt AS cognateset, l.clades_mask, l.counts, l.flags,
 	l.cites, l.children`;
 export const LEM_JOINS = `LEFT JOIN tagsets ts ON ts.rowid = l.tagset_rid
@@ -240,6 +244,7 @@ export interface RawLem {
 	ord: number;
 	lang_rid: number | null;
 	origin_rid: number | null;
+	etymon_rid: number | null;
 	link_rid: number | null;
 	tags: string | null;
 	cognateset: string | null;
@@ -267,10 +272,8 @@ export interface LemInternal {
 
 export function hydrateLem(row: RawLem, ctx: HydrateCtx): Record<string, unknown> & LemInternal {
 	const relation = relationName(row.flags);
+	// v3: origin_rid IS the rank-1 edge target (a variant's actual target); link_rid = redirect
 	const origin = row.origin_rid ? ctx.ids.idOf(row.origin_rid) : null;
-	// link_rid = variant_of on variant/borrowed rows, redirect_to on relation-none rows
-	const link = row.link_rid ? ctx.ids.idOf(row.link_rid) : null;
-	const isVariantLink = relation === 'variant' || relation === 'borrowed';
 	return {
 		rid: row.rid,
 		citeIds: readVarints(row.cites),
@@ -285,17 +288,19 @@ export function hydrateLem(row: RawLem, ctx: HydrateCtx): Record<string, unknown
 		order: row.ord,
 		language_id: row.lang_rid != null ? ctx.langIdOf(row.lang_rid) : (null as unknown as string),
 		origin_lemma_id: origin,
-		variant_of: isVariantLink ? link : null,
-		redirect_to: isVariantLink ? null : link,
+		etymon_id: row.etymon_rid ? ctx.ids.idOf(row.etymon_rid) : null,
+		variant_of: relation === 'variant' ? origin : null,
+		redirect_to: row.link_rid ? ctx.ids.idOf(row.link_rid) : null,
 		borrowed_from: relation === 'borrowed' ? origin : null,
 		tags: row.tags,
-		// legacy shape: child rows (built from CLDF pass 2) stored '' rather than NULL
+		// legacy shape: attested rows (CLDF pass 2) stored '' rather than NULL
 		cognateset: row.cognateset ?? (row.origin_rid ? '' : null),
 		clades: decodeCladeMask(row.clades_mask, ctx.cladeNames),
 		reflex_count: row.counts != null ? row.counts >> 10 : undefined,
 		lang_count: row.counts != null ? row.counts & 1023 : undefined,
 		relation,
-		ocr: row.flags & FLAG_OCR ? 1 : 0
+		ocr: row.flags & FLAG_OCR ? 1 : 0,
+		hasAlternates: row.flags & FLAG_HAS_ALT ? 1 : 0
 	};
 }
 

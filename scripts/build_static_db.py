@@ -88,11 +88,14 @@ def build_base_schema(con: sqlite3.Connection) -> None:
         );
         -- CLDF Original is an import-time transliteration source; no display/query path reads it.
         -- The rendered form is word, so omitting Original avoids shipping ~2.1M dead characters.
+        -- origin_lemma_id = the rank-1 (accepted) edge target: the actual variant target for
+        -- variants, the loan source for borrowed forms. etymon_id = the attestation-tree root.
+        -- relation = the rank-1 edge kind, or 'unlinked' for unetymologised imports.
         CREATE TABLE lemmas (
             id TEXT PRIMARY KEY, word TEXT, gloss TEXT, native TEXT, phonemic TEXT,
             notes TEXT, clades TEXT, cognateset TEXT, "order" INTEGER, language_id TEXT,
-            origin_lemma_id TEXT, tags TEXT, reflex_count INTEGER, lang_count INTEGER,
-            etymology TEXT, relation TEXT, redirect_to TEXT, variant_of TEXT, borrowed_from TEXT
+            origin_lemma_id TEXT, etymon_id TEXT, tags TEXT, reflex_count INTEGER,
+            lang_count INTEGER, etymology TEXT, relation TEXT, redirect_to TEXT
         );
         -- Permanent redirects from pre-migration/order-dependent form IDs and build-time duplicate
         -- IDs to the retained durable lemma ID.
@@ -275,23 +278,38 @@ def _parse_ref(src: str) -> list[tuple[str, str]]:
     return sorted(parsed)
 
 
+def load_edge_rows(cldf: Path) -> list[dict]:
+    with (cldf / "edges.csv").open(encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
 def load_lemmas(
     con: sqlite3.Connection,
     forms_csv: Path,
+    edge_rows: list[dict],
     clade_of: dict[str, str],
     canonical_of: dict[str, str],
     dialect_tag_of: dict[str, str],
 ) -> dict[str, str]:
-    """Build the unified lemmas table from the one CLDF forms.csv (etyma + reflexes). Etyma have an
-    empty Origin_ID; reflexes point at their etymon. Sets the self-referential origin_lemma_id, the
-    etymon-anchored `order`, tags, per-etymon clade set, and the lemma↔reference links."""
+    """Build the unified lemmas table from the edge-model CLDF: forms.csv carries node content
+    (+ Status ∈ {entry, unlinked, ''}) and cldf/edges.csv carries the typed graph. Each node's
+    accepted parent is its rank-1 reflex/variant/borrowed edge (`origin_lemma_id` — for a
+    variant this is its actual target, not the etymon); `etymon_id` is the attestation-tree
+    root above it. Sets the parent-anchored `order`, tags, per-etymon clade set, and the
+    lemma↔reference links."""
     with forms_csv.open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
+    rank1: dict[str, tuple[str, str]] = {}
+    for e in edge_rows:
+        if e["Rank"] == "1" and e["Kind"] in ("reflex", "variant", "borrowed"):
+            rank1[e["Child_ID"]] = (e["Parent_ID"], e["Kind"])
+
     # Canonicalise language IDs, attach the dialect tag, then collapse exact cross-dialect copies.
-    # References to an earlier duplicate (variants and borrowings) follow the retained row ID.
+    # The rank-1 edge is part of the dedup identity (identical text under different parents must
+    # never merge). References to an earlier duplicate follow the retained row ID.
     aliases: dict[str, str] = {}
-    unique: dict[tuple[str, ...], dict[str, str]] = {}
+    unique: dict[tuple, dict[str, str]] = {}
     deduped = []
     ignored = {"ID", "Language_ID", "Tags"}
     for r in rows:
@@ -303,18 +321,14 @@ def load_lemmas(
         if dialect_tag and dialect_tag not in tags:
             tags.append(dialect_tag)
         r["Tags"] = " ".join(tags)
-        for field in ("Origin_ID", "Variant_Of", "Borrowed_From"):
-            if r.get(field) in aliases:
-                r[field] = aliases[r[field]]
-        # Etyma are identified by their ID, never merged. Many proto-etyma (e.g. unreconstructed
-        # DED / Proto-Indo-Iranian headwords) have a blank Form/Gloss in the source; deduping them
-        # on content would collapse thousands into one node and repoint all their reflexes onto it.
-        if not r["Origin_ID"]:
+        # Parentless nodes (etyma + unlinked) are identified by their ID, never merged (blank
+        # proto heads would otherwise collapse). Attested rows dedup on content + accepted edge.
+        if r["ID"] not in rank1:
             deduped.append(r)
             continue
         key = (r["Language_ID"],) + tuple(
             r.get(k, "") for k in r.keys() if k not in ignored
-        ) + tuple(base_tags)
+        ) + tuple(base_tags) + rank1[r["ID"]]
         original = unique.get(key)
         if original is None:
             unique[key] = r
@@ -325,19 +339,30 @@ def load_lemmas(
         original["Tags"] = " ".join(merged_tags)
     rows = deduped
     if aliases:
-        for r in rows:
-            for field in ("Origin_ID", "Variant_Of", "Borrowed_From"):
-                while r.get(field) in aliases:
-                    r[field] = aliases[r[field]]
+        # re-point every edge endpoint through the collapse map; a collapsed child's own edges
+        # drop out (the retained row carries the identical edge — guaranteed by the dedup key)
+        def canon(i: str) -> str:
+            while i in aliases:
+                i = aliases[i]
+            return i
+
+        rank1 = {
+            child: (canon(parent), kind)
+            for child, (parent, kind) in rank1.items()
+            if child not in aliases
+        }
+        for e in edge_rows:
+            e["Child_ID"] = canon(e["Child_ID"])
+            e["Parent_ID"] = canon(e["Parent_ID"])
         log(f"collapsed {len(aliases)} identical cross-dialect lemma rows")
 
-    # A canonical-language entry may be represented only by dialect attestations (for example a
-    # locally created lemma with forms from three survey sites).  Carry those dialect tokens onto
-    # the entry when parent and child are in the same canonical language, so entries-mode dialect
-    # filters and the per-language tag inventory describe where the lemma is actually attested.
+    # A canonical-language entry may be represented only by dialect attestations.  Carry those
+    # dialect tokens onto the parent when parent and child share the canonical language, so
+    # entries-mode dialect filters describe where the lemma is actually attested.
     by_id = {r["ID"]: r for r in rows}
     for r in rows:
-        parent = by_id.get(r.get("Origin_ID") or "")
+        e = rank1.get(r["ID"])
+        parent = by_id.get(e[0]) if e else None
         if not parent or parent["Language_ID"] != r["Language_ID"]:
             continue
         dialect_tags = [t for t in (r.get("Tags") or "").split() if t.startswith("dialect:")]
@@ -346,58 +371,55 @@ def load_lemmas(
         parent_tags = (parent.get("Tags") or "").split()
         parent["Tags"] = " ".join(dict.fromkeys(parent_tags + dialect_tags))
 
+    def etymon_of(node: str) -> str | None:
+        seen = set()
+        cur = node
+        while cur in rank1 and cur not in seen:
+            seen.add(cur)
+            cur = rank1[cur][0]
+        return None if cur == node else cur
+
     lemmas = []
     etymon_order: dict[str, int] = {}
     lemma_refs = set()
-    # pass 1: etyma (Origin_ID empty) — word=headword, gloss=parsed meaning + tags/native/phonemic
-    # folded up from the (dropped) self-reflex, etymology=free-text CDIAL header, notes=Description
-    # (Etyma). `order` is sequential in file order (× 1000). Refs come from the folded self-reflex.
+    # pass 1: parentless nodes (etyma + unlinked) — order sequential in file order (× 1000).
     i = 0
     for r in rows:
-        if r["Origin_ID"]:
+        if r["ID"] in rank1:
             continue
         etymon_order[r["ID"]] = i * 1000
-        # A blank Origin_ID is normally an etymon (relation NULL); a lone (unetymologised) node also
-        # has no origin but carries Relation="local" so it stays out of the entries listing.
         lemmas.append(
             (r["ID"], r["Form"], r["Gloss"], r["Native"] or None, r["Phonemic"] or None,
              r["Description"] or "", None, None, i * 1000,
-             r["Language_ID"], None, (r["Tags"] or None), (r["Etymology"] or None),
-             ("local" if r.get("Relation") == "local" else None),
-             (r.get("Redirect") or None), None, None)
+             r["Language_ID"], None, None, (r["Tags"] or None), (r["Etymology"] or None),
+             ("unlinked" if r.get("Status") == "unlinked" else None),
+             (r.get("Redirect") or None))
         )
         for ref, locator in _parse_ref(r["Source"]):
             lemma_refs.add((r["ID"], ref, locator))
         i += 1
 
-    # pass 2: reflexes, variants, and borrowed entries — origin from Origin_ID (strip
-    # borrowing/semi-tatsama markers), order anchored just after their etymon. `relation`
-    # distinguishes daughter reflexes from same-language variants; only reflexes feed the entry's
-    # clade bar (variants and borrowings are excluded). Borrowed dictionary head entries may still
-    # carry their source dictionary's full etymological snippet, so preserve Etymology here too.
+    # pass 2: attested nodes — order anchored just after their accepted parent (a variant now
+    # sorts right after the sibling/parent it varies, a borrowed form after its source).
     param_cts: dict[str, int] = defaultdict(int)
     param_clades: dict[str, set] = defaultdict(set)
-    # etyma orders, extended with each reflex's order as we go, so a borrowed form (whose origin is
-    # a source reflex, listed earlier) sorts right after that source rather than at order 0.
     node_order: dict[str, int] = dict(etymon_order)
     for r in rows:
-        pid = r["Origin_ID"]
-        if not pid:
+        e = rank1.get(r["ID"])
+        if e is None:
             continue
-        if pid[0] in ">~":
-            pid = pid[1:]
+        pid, kind = e
         param_cts[pid] += 1
         order = node_order.get(pid, 0) + param_cts[pid]
         node_order[r["ID"]] = order
         lemmas.append(
             (r["ID"], r["Form"], r["Gloss"], r["Native"], r["Phonemic"],
              r["Description"] or "", None, r["Cognateset"], order,
-             r["Language_ID"], pid, (r["Tags"] or None), (r["Etymology"] or None),
-             (r["Relation"] or None), None,
-             (r.get("Variant_Of") or None), (r.get("Borrowed_From") or None))
+             r["Language_ID"], pid, etymon_of(r["ID"]), (r["Tags"] or None),
+             (r["Etymology"] or None), kind, None)
         )
         cl = clade_of.get(r["Language_ID"])
-        if cl and r["Relation"] not in ("variant", "borrowed"):
+        if cl and kind == "reflex":
             param_clades[pid].add(cl)
         for ref, locator in _parse_ref(r["Source"]):
             lemma_refs.add((r["ID"], ref, locator))
@@ -414,9 +436,8 @@ def load_lemmas(
 
     con.executemany(
         'INSERT INTO lemmas (id,word,gloss,native,phonemic,notes,clades,cognateset,'
-        '"order",language_id,origin_lemma_id,tags,etymology,relation,redirect_to,variant_of,'
-        'borrowed_from) '
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        '"order",language_id,origin_lemma_id,etymon_id,tags,etymology,relation,redirect_to) '
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         lemmas,
     )
     con.executemany(
@@ -448,13 +469,12 @@ def load_lemmas(
         ),
     )
     con.execute(
-        '''UPDATE "references" SET
-           lemma_count = (SELECT COUNT(DISTINCT lemma_rid) FROM lemma_reference lr
-                          WHERE lr.reference_rid = "references".rowid),
-           unetymologised_count = (SELECT COUNT(DISTINCT l.rowid) FROM lemma_reference lr
-                                   JOIN lemmas l ON l.rowid = lr.lemma_rid
-                                   WHERE lr.reference_rid = "references".rowid
-                                     AND l.relation = 'local')'''
+        'UPDATE "references" SET '
+        'lemma_count = (SELECT COUNT(DISTINCT lemma_rid) FROM lemma_reference lr '
+        ' WHERE lr.reference_rid = "references".rowid), '
+        'unetymologised_count = (SELECT COUNT(DISTINCT l.rowid) FROM lemma_reference lr '
+        ' JOIN lemmas l ON l.rowid = lr.lemma_rid '
+        " WHERE lr.reference_rid = \"references\".rowid AND l.relation = 'unlinked')"
     )
     con.execute(
         "UPDATE languages SET lemma_count = "
@@ -462,12 +482,12 @@ def load_lemmas(
     )
     dialect_counts: dict[str, int] = defaultdict(int)
     dialect_entry_counts: dict[str, int] = defaultdict(int)
-    loan_sources = {r["Origin_ID"] for r in rows if r.get("Relation") == "borrowed"}
+    loan_sources = {e[0] for e in rank1.values() if e[1] == "borrowed"}
     for r in rows:
         for tag in (r.get("Tags") or "").split():
             if tag.startswith("dialect:"):
                 dialect_counts[tag] += 1
-                if not r["Origin_ID"] or r["ID"] in loan_sources:
+                if r["ID"] not in rank1 or r["ID"] in loan_sources:
                     dialect_entry_counts[tag] += 1
     con.executemany(
         "UPDATE dialects SET lemma_count=?, entry_count=? WHERE token=?",
@@ -547,9 +567,9 @@ def load_concepts(con: sqlite3.Connection, cldf: Path, aliases: dict[str, str]) 
                            WHERE lc.concept_id=concepts.id),
           etyma_count = (SELECT COUNT(DISTINCT COALESCE(NULLIF(l.origin_lemma_id,''), l.id))
                            FROM lemma_concept lc JOIN lemmas l ON l.rowid=lc.lemma_rid
-                           WHERE lc.concept_id=concepts.id AND l.relation IS NOT 'local'),
+                           WHERE lc.concept_id=concepts.id AND l.relation IS NOT 'unlinked'),
           unetym_count= (SELECT COUNT(*) FROM lemma_concept lc JOIN lemmas l ON l.rowid=lc.lemma_rid
-                           WHERE lc.concept_id=concepts.id AND l.relation = 'local')
+                           WHERE lc.concept_id=concepts.id AND l.relation = 'unlinked')
         """
     )
     con.commit()
@@ -557,31 +577,39 @@ def load_concepts(con: sqlite3.Connection, cldf: Path, aliases: dict[str, str]) 
         f"{con.execute('SELECT COUNT(*) FROM concepts').fetchone()[0]} concepts")
 
 
-def load_derivation(con: sqlite3.Connection, deriv_csv: Path, aliases: dict[str, str]) -> None:
-    """Load the derivation graph (derived-term → ancestor etymon) into a `derivation` table, indexed
-    both directions. Child ids can be reflexes (alternate-etymology edges), so remap through the
-    cross-dialect alias map — promoted-form / etymon ids are untouched by it."""
+def load_graph_edges(con: sqlite3.Connection, edge_rows: list[dict]) -> None:
+    """Ship the non-attestation graph: component/derived edges (the old derivation graph, now
+    typed and ordered) plus rank>=2 alternate-etymology hypotheses. Rank-1 attestation edges are
+    already materialised on the lemmas rows. Endpoints were canonicalised by load_lemmas."""
     con.executescript(
         """
-        DROP TABLE IF EXISTS derivation;
-        CREATE TABLE derivation (child_id TEXT, parent_id TEXT);
+        DROP TABLE IF EXISTS edges;
+        CREATE TABLE edges (
+            child_id TEXT NOT NULL, parent_id TEXT NOT NULL, kind TEXT NOT NULL,
+            rank INTEGER NOT NULL, pos INTEGER, note TEXT
+        );
         """
     )
-
-    def canon(i: str) -> str:
-        while i in aliases:
-            i = aliases[i]
-        return i
-
-    with deriv_csv.open(encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        con.executemany(
-            "INSERT INTO derivation (child_id, parent_id) VALUES (?, ?)",
-            ((canon(r["Child_ID"]), canon(r["Parent_ID"])) for r in reader),
-        )
+    known = {r[0] for r in con.execute("SELECT id FROM lemmas")}
+    rows = []
+    dropped = 0
+    for e in edge_rows:
+        if e["Kind"] not in ("component", "derived") and e["Rank"] == "1":
+            continue  # attestation edges live on the lemma rows
+        if e["Child_ID"] not in known or e["Parent_ID"] not in known:
+            dropped += 1
+            continue
+        rows.append((
+            e["Child_ID"], e["Parent_ID"], e["Kind"], int(e["Rank"]),
+            int(e["Pos"]) if e["Pos"] else None,
+            e["Note"] or (e["Source"] or None),
+        ))
+    con.executemany(
+        "INSERT INTO edges (child_id, parent_id, kind, rank, pos, note) VALUES (?,?,?,?,?,?)",
+        rows,
+    )
     con.commit()
-    n = con.execute("SELECT COUNT(*) FROM derivation").fetchone()[0]
-    log(f"loaded derivation graph: {n} edges from {deriv_csv}")
+    log(f"loaded typed graph edges: {len(rows)} shipped ({dropped} with unknown endpoints dropped)")
 
 
 def table_exists(con: sqlite3.Connection, name: str) -> bool:
@@ -603,6 +631,7 @@ def load_alignments(con: sqlite3.Connection, path: Path, aliases: dict[str, str]
     symbols: dict[str, int] = {}
     pairs: dict[tuple[int, int, int], int] = {}
     contexts: dict[tuple[int, int], int] = {}
+    align_origin: dict[int, int] = {}  # form_rid → aligned-origin rowid (corr build only)
 
     def intern(mapping, value):
         if value not in mapping:
@@ -645,6 +674,9 @@ def load_alignments(con: sqlite3.Connection, path: Path, aliases: dict[str, str]
                 if len(r) < 9 or form_id not in lemma_rowids:
                     skipped += 1
                     continue
+                origin_id = aliases.get(r[1], r[1])
+                if origin_id in lemma_rowids:
+                    align_origin[lemma_rowids[form_id]] = lemma_rowids[origin_id]
                 etymon_sid = intern(symbols, r[4])
                 reflex_sid = intern(symbols, r[5])
                 change_sid = intern(symbols, r[6])
@@ -673,6 +705,9 @@ def load_alignments(con: sqlite3.Connection, path: Path, aliases: dict[str, str]
         "INSERT INTO align_context(id,prev_sid,next_sid) VALUES (?,?,?)",
         ((cid, *value) for value, cid in contexts.items()),
     )
+    con.execute("DROP TABLE IF EXISTS align_origin")
+    con.execute("CREATE TABLE align_origin (form_rid INTEGER PRIMARY KEY, origin_rid INTEGER NOT NULL)")
+    con.executemany("INSERT INTO align_origin VALUES (?,?)", align_origin.items())
     con.commit()
     n = con.execute("SELECT COUNT(*) FROM alignment").fetchone()[0]
     log(f"loaded alignment table: {n} aligned segments from {path}"
@@ -706,7 +741,8 @@ def load_alignments(con: sqlite3.Connection, path: Path, aliases: dict[str, str]
             JOIN align_pair p  ON p.id = a.pair_id
             JOIN symbols es    ON es.id = p.etymon_sid
             JOIN lemmas rf     ON rf.rowid = a.form_rid
-            JOIN lemmas e      ON e.id = rf.origin_lemma_id
+            JOIN align_origin ao ON ao.form_rid = a.form_rid
+            JOIN lemmas e      ON e.rowid = ao.origin_rid
             JOIN languages pl  ON pl.id = e.language_id
             JOIN languages rl  ON rl.id = rf.language_id
             WHERE es.value <> ''
@@ -747,6 +783,8 @@ def load_alignments(con: sqlite3.Connection, path: Path, aliases: dict[str, str]
                g.n, ex.rowid
         FROM grouped g JOIN lemmas ex ON ex.id = g.example_id;
 
+        DROP TABLE align_origin;
+
         -- tiny per-segment totals (for the segment picker; avoids scanning the big tables)
         DROP TABLE IF EXISTS corr_seg;
         CREATE TABLE corr_seg (
@@ -782,8 +820,9 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     build_base_schema(con)
     clade_of, canonical_of, dialect_tag_of = load_languages(con, cldf / "languages.csv")
     load_references(con, cldf / "references.csv")
+    edge_rows = load_edge_rows(cldf)
     build_aliases = load_lemmas(
-        con, cldf / "forms.csv", clade_of, canonical_of, dialect_tag_of
+        con, cldf / "forms.csv", edge_rows, clade_of, canonical_of, dialect_tag_of
     )
     aliases = load_lemma_aliases(con, cldf, build_aliases)
 
@@ -800,17 +839,13 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         CREATE INDEX idx_lemmas_language_order   ON lemmas(language_id, "order");
         -- partial index for the Entries list (headwords): ORDER BY "order" with no temp sort.
         -- Lone (unetymologised) nodes have an empty origin but Relation='local'; keep them out.
-        CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
+        CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL AND relation IS NOT 'unlinked';
         """
     )
     log("created compact lemma lookup + hot-path ordering indexes")
 
     # 3. Derivation graph (derived-term → ancestor etymon).
-    deriv = cldf / "derivation.csv"
-    if deriv.exists():
-        load_derivation(con, deriv, aliases)
-    else:
-        log(f"(no derivation.csv at {deriv}; skipping derivation graph)")
+    load_graph_edges(con, edge_rows)
 
     # 3b. Concepticon concept sets mapped from glosses (../data/concepts.py output).
     load_concepts(con, cldf, aliases)
@@ -825,7 +860,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         INSERT INTO meta VALUES
             ('total_lemmas',   (SELECT COUNT(*) FROM lemmas)),
             ('total_lexicon',  (SELECT COUNT(*) FROM lemmas WHERE redirect_to IS NULL)),
-            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL AND redirect_to IS NULL AND relation IS NOT 'local')),
+            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL AND redirect_to IS NULL AND relation IS NOT 'unlinked')),
             ('total_reflexes', (SELECT COUNT(*) FROM lemmas WHERE relation = 'reflex')),
             ('total_variants', (SELECT COUNT(*) FROM lemmas WHERE relation = 'variant'));
         """
@@ -841,7 +876,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex'),
             lang_count   = (SELECT COUNT(DISTINCT r.language_id) FROM lemmas r
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex')
-        WHERE origin_lemma_id IS NULL AND relation IS NOT 'local';
+        WHERE origin_lemma_id IS NULL AND relation IS NOT 'unlinked';
         """
     )
     con.commit()
@@ -856,8 +891,14 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     else:
         log(f"(no alignments file at {alignments}; skipping sound-change table)")
 
-    # 4. Rewrite the v1 schema into the compact v2 schema that actually ships (see compact_db.py).
-    compact_db.compact(con, CLADE_ORDER)
+    # 4. Rewrite the v1 schema into the compact schema that actually ships (see compact_db.py).
+    #    JAMBU_SKIP_COMPACT=1 keeps the intermediate v1 schema — used only to produce the OLD.db
+    #    side for scripts/parity_check.mjs.
+    import os
+    if os.environ.get("JAMBU_SKIP_COMPACT"):
+        log("JAMBU_SKIP_COMPACT set — emitting the v1 intermediate schema")
+    else:
+        compact_db.compact(con, CLADE_ORDER)
 
     # 5. Analyse and compact the file for range-friendly layout.
     con.execute("ANALYZE")
@@ -868,14 +909,15 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     con.commit()
 
     # Sanity: the scan-based substring search must return rows.
+    probe_table = "lemmas" if os.environ.get("JAMBU_SKIP_COMPACT") else "lem"
     probe = con.execute(
-        "SELECT COUNT(*) FROM lem WHERE instr(lower(word), ?) > 0", ("amb",)
+        f"SELECT COUNT(*) FROM {probe_table} WHERE instr(lower(word), ?) > 0", ("amb",)
     ).fetchone()[0]
     log(f"sanity: substring 'word:amb' -> {probe} lemmas")
 
     con.close()
     output_bytes = out.stat().st_size
-    if output_bytes >= MAX_OUTPUT_BYTES:
+    if output_bytes >= MAX_OUTPUT_BYTES and not os.environ.get("JAMBU_SKIP_COMPACT"):
         raise RuntimeError(
             f"database size regression: {output_bytes / 1e6:.1f} MB "
             f"(must remain below {MAX_OUTPUT_BYTES / 1e6:.0f} MB)"

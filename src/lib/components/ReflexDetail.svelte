@@ -29,7 +29,7 @@
 			<span class="d-word"><FormWord word={lemma.word} references={lemma.references} ocr={lemma.ocr} /></span>
 		{/if}
 		{#if lemma.phonemic}<span class="d-phon">/{lemma.phonemic}/</span>{/if}
-		{#if lemma.secondary}<span class="d-secondary" title="alternate etymology — primarily derived elsewhere">secondary</span>{/if}
+		{#if lemma.secondary}<span class="d-secondary" title="alternate etymology — this form's accepted etymon is another entry">alternate</span>{/if}
 		{#if lemma.gloss}<span class="d-gloss">‘{@html safe(lemma.gloss)}’</span>{/if}
 		{#if lemma.tags}<Tags tags={lemma.tags} />{/if}
 		{#if lemma.cognateset}<span class="d-cog">§{lemma.cognateset}</span>{/if}

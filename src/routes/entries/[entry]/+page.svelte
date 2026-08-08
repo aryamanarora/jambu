@@ -13,13 +13,15 @@
 		type AlignedReflex,
 		type AlignSeg,
 		type AncestorRef,
+		type AlternateEtymon,
+		getAlternates,
 		type DerivedNode
 	} from '$lib/query';
 	import { changeInfo, changeLabel } from '$lib/soundChange';
 	import { cladeRank } from '$lib/cladeTree';
 	import { cladeColor } from '$lib/clades';
 	import { cladeFavRank, langFavRank } from '$lib/prefs.svelte';
-	import { safe, md, striptags } from '$lib/render';
+	import { safe, md, relationLabel, striptags } from '$lib/render';
 	import CladeBars from '$lib/components/CladeBars.svelte';
 	import Ancestry from '$lib/components/Ancestry.svelte';
 	import Alignment from '$lib/components/Alignment.svelte';
@@ -34,15 +36,7 @@
 	const entry = $derived(data.entry);
 	const graph = $derived(data.graph);
 	// the ancestry line's label depends on how this node hangs off its parent
-	const relLabel = $derived(
-		entry.borrowed_from
-			? 'Borrowed from'
-			: entry.relation === 'variant'
-				? 'Variant of'
-				: entry.origin_lemma_id
-					? 'Reflex of'
-					: 'Derived from'
-	);
+	const relLabel = $derived(relationLabel(entry));
 	// a CDIAL "Add. N" stub is a redirect — forward to the real addendum entry
 	$effect(() => {
 		if (entry.redirect_to) goto(`${base}/entries/${entry.redirect_to}`, { replaceState: true });
@@ -55,6 +49,7 @@
 	let ea = $state<EntryAlignment | null>(null);
 	let variants = $state<Lemma[]>([]);
 	let ancestryChain = $state<AncestorRef[][]>([]);
+	let alternates = $state<AlternateEtymon[]>([]);
 	let derivedTree = $state<DerivedNode[]>([]);
 	let ownSegs = $state<AlignSeg[]>([]);
 	let dialects = $state<Dialect[]>([]);
@@ -75,10 +70,12 @@
 		expanded = new Set();
 		variants = [];
 		ancestryChain = [];
+		alternates = [];
 		derivedTree = [];
 		ownSegs = [];
 		getEntryVariants(id).then((v) => (variants = v));
 		getAncestryChain(id).then((c) => (ancestryChain = c));
+		getAlternates(id).then((a) => (alternates = a));
 		getDerivedTree(id).then((t) => (derivedTree = t));
 		getAllDialects().then((d) => (dialects = d));
 		// a non-etymon node (reflex / section-form) also shows how it itself aligns to its parent
@@ -321,6 +318,15 @@
 </div>
 {#if ancestryChain.length}
 	<Ancestry label={relLabel} chain={ancestryChain} startLang={entry.language?.name} />
+	{#if alternates.length}
+		<p class="alternates">
+			<span class="alt-label">also proposed</span>
+			{#each alternates as a, i (a.id + i)}{#if i > 0}, {/if}from
+				<a class="phon" href="{base}/{a.isEntry ? 'entries' : 'reflexes'}/{a.id}">{a.word || a.id}</a
+				>{#if a.lang}&nbsp;<span class="muted">({a.lang})</span>{/if}{#if a.note?.startsWith('review:')}
+				<span class="alt-review" title="auto-classified during the edge-model migration — pending curation">?</span>{/if}{/each}
+		</p>
+	{/if}
 {/if}
 {#if entry.gloss || entry.tags}
 	<p class="gloss serif">
@@ -482,7 +488,7 @@
 							>{@html safe(row.r.lemma.gloss)}{#if row.r.lemma.tags}
 								<Tags tags={row.r.lemma.tags} />{/if}{#if row.r.lemma.secondary}<span
 									class="derived-badge"
-									title="alternate etymology — this form's primary etymon is another entry">derived</span
+									title="alternate etymology — this form's accepted etymon is another entry">alternate</span
 								>{/if}</td
 						>
 						<td class="c-cog cog-cell" title={striptags(row.cogLabel)}>{row.cogCode}</td>
@@ -1009,5 +1015,27 @@
 			flex-wrap: wrap;
 			margin-top: 0.4rem;
 		}
+	}
+	/* "also proposed" alternate-etymology line under the ancestry chain */
+	.alternates {
+		margin: 0.15rem 0 0;
+		font-size: 0.9rem;
+		color: var(--ink-muted);
+	}
+	.alt-label {
+		font-variant: small-caps;
+		letter-spacing: 0.04em;
+		margin-right: 0.4rem;
+	}
+	.alt-review {
+		display: inline-block;
+		border: 1px solid var(--ink-faint);
+		border-radius: 50%;
+		width: 1em;
+		height: 1em;
+		line-height: 1em;
+		text-align: center;
+		font-size: 0.75em;
+		vertical-align: super;
 	}
 </style>

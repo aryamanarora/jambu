@@ -31,10 +31,13 @@ import {
 	FLAG_OCR,
 	FLAG_SECTION,
 	FLAG_LOAN_SOURCE,
+	FLAG_HAS_ALT,
 	REL_REFLEX,
 	REL_VARIANT,
 	REL_BORROWED,
-	REL_LOCAL,
+	REL_UNLINKED,
+	KIND_COMPONENT,
+	KIND_DERIVED,
 	type RawLem
 } from './dbShared';
 import {
@@ -81,9 +84,8 @@ function jsonList(rids: number[]): string {
 }
 const IN_JSON = '(SELECT value FROM json_each(?))';
 
-/** SQL fragment equivalent to the legacy `redirect_to IS NULL` (link_rid holds variant_of on
- *  variant/borrowed rows, redirect_to only on relation-none rows). */
-const NOT_REDIRECT = '(l.link_rid IS NULL OR (l.flags & 7) IN (2, 3))';
+/** v3: link_rid carries only redirects, so this is a plain null check. */
+const NOT_REDIRECT = 'l.link_rid IS NULL';
 
 // ---- precomputed counts (meta table) -------------------------------------
 
@@ -328,7 +330,7 @@ export async function getConceptReflexes(entryId: string, conceptId: string): Pr
 	const rows = await query<RawLem>(
 		`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON}
 		   AND (l.origin_rid = ? OR (l.origin_rid IS NULL AND l.rowid = ?))
-		   AND (l.flags & 7) != ${REL_LOCAL} AND ${NOT_REDIRECT}
+		   AND (l.flags & 7) != ${REL_UNLINKED} AND ${NOT_REDIRECT}
 		 ORDER BY l.ord`,
 		[jsonList(linked), entryRid, entryRid]
 	);
@@ -351,7 +353,7 @@ const SORT_COLUMNS: Record<string, string> = {
 	nreflex: '(l.counts / 1024)',
 	nlang: '(l.counts % 1024)',
 	nderived:
-		'(SELECT COUNT(*) FROM derivation d JOIN lem c ON c.rowid = d.child_rid WHERE d.parent_rid = l.rowid AND c.origin_rid IS NULL)'
+		`(SELECT COUNT(*) FROM edges d JOIN lem c ON c.rowid = d.child_rid WHERE d.parent_rid = l.rowid AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1 AND c.origin_rid IS NULL)`
 };
 // columns whose sort/filter forces the languages join
 const NEEDS_LANG_JOIN = new Set(['lang', 'clade', 'reflexes']);
@@ -435,7 +437,10 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 
 	// root nodes only: entries not derived from any other etymon (no incoming derivation edge)
 	if (p.rootsOnly) {
-		conds.push({ sql: 'NOT EXISTS (SELECT 1 FROM derivation WHERE child_rid = l.rowid)', params: [] });
+		conds.push({
+			sql: `NOT EXISTS (SELECT 1 FROM edges WHERE child_rid = l.rowid AND kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND rank = 1)`,
+			params: []
+		});
 	}
 
 	// CDIAL section-forms only (precomputed flag; ids like `<etymon>-<n>`)
@@ -485,9 +490,10 @@ async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 	if (!rows.length) return;
 	const rids = rows.map((r) => r.rid);
 	const derived = await query<{ p: number; c: number }>(
-		`SELECT d.parent_rid AS p, COUNT(*) AS c FROM derivation d
+		`SELECT d.parent_rid AS p, COUNT(*) AS c FROM edges d
 		 JOIN lem c2 ON c2.rowid = d.child_rid
-		 WHERE d.parent_rid IN ${IN_JSON} AND c2.origin_rid IS NULL GROUP BY d.parent_rid`,
+		 WHERE d.parent_rid IN ${IN_JSON} AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+		   AND c2.origin_rid IS NULL GROUP BY d.parent_rid`,
 		[jsonList(rids)]
 	);
 	const dMap = new Map(derived.map((r) => [r.p, r.c]));
@@ -529,7 +535,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	if (mode === 'entries') {
 		if (params.loanSourcesOnly)
 			modeConds.push({ sql: `(l.flags & ${FLAG_LOAN_SOURCE}) != 0`, params: [] });
-		else modeConds.push({ sql: `l.origin_rid IS NULL AND (l.flags & 7) != ${REL_LOCAL}`, params: [] });
+		else modeConds.push({ sql: `l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED}`, params: [] });
 	}
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(languageId) ?? -1] });
@@ -554,7 +560,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 				[jsonList(linked)]
 			);
 			for (const r of rows) {
-				if ((r.flags & 7) === REL_LOCAL) continue;
+				if ((r.flags & 7) === REL_UNLINKED) continue;
 				const entry = r.origin_rid ?? r.rid;
 				conceptMatch.set(entry, (conceptMatch.get(entry) ?? 0) + 1);
 			}
@@ -622,7 +628,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	} else if (isDefaultEntries) {
 		const raw = await query<RawLem>(
 			`SELECT ${LEM_COLS} FROM lem l INDEXED BY idx_entries_ord ${LEM_JOINS}
-			 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_LOCAL} AND l.link_rid IS NULL
+			 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED} AND l.link_rid IS NULL
 			 ORDER BY l.ord LIMIT ${PAGE_SIZE} OFFSET ${offset}`
 		);
 		rows = raw.map(hydrate);
@@ -707,14 +713,16 @@ export async function getEntryGraph(id: string): Promise<EntryGraph> {
 	if (!rid) return { ancestors: [], derived: [] };
 	const [ancestors, derived] = await Promise.all([
 		query<{ rid: number; word: string }>(
-			`SELECT l.rowid AS rid, l.word FROM derivation d JOIN lem l ON l.rowid = d.parent_rid
-			 WHERE d.child_rid = ? ORDER BY d.rowid`,
+			`SELECT l.rowid AS rid, l.word FROM edges d JOIN lem l ON l.rowid = d.parent_rid
+			 WHERE d.child_rid = ? AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+			 ORDER BY COALESCE(d.pos, 0), d.rowid`,
 			[rid]
 		),
 		query<{ rid: number; word: string; gloss: string; counts: number | null }>(
 			`SELECT l.rowid AS rid, l.word, l.gloss, l.counts
-			 FROM derivation d JOIN lem l ON l.rowid = d.child_rid
-			 WHERE d.parent_rid = ? AND l.origin_rid IS NULL ORDER BY l.ord`,
+			 FROM edges d JOIN lem l ON l.rowid = d.child_rid
+			 WHERE d.parent_rid = ? AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+			   AND l.origin_rid IS NULL ORDER BY l.ord`,
 			[rid]
 		)
 	]);
@@ -747,15 +755,16 @@ export async function getAncestryChain(startId: string): Promise<AncestorRef[][]
 	const seen = new Set<number>([startRid]);
 	let frontier = [startRid];
 	for (let depth = 0; depth < 16 && frontier.length; depth++) {
-		// one step up: a variant → its main reflex (link), anything else → origin
+		// one step up: the rank-1 attestation edge target (uniform for all kinds), plus
+		// rank-1 component/derived parents; rank>=2 alternates stay out of the chain and are
+		// surfaced at the node via getAlternates instead
 		const viaOrigin = await query<{ pid: number }>(
-			`SELECT CASE WHEN (flags & 7) IN (2, 3) AND link_rid IS NOT NULL THEN link_rid
-			             ELSE origin_rid END AS pid
-			 FROM lem WHERE rowid IN ${IN_JSON} AND COALESCE(CASE WHEN (flags & 7) IN (2, 3) THEN link_rid END, origin_rid) IS NOT NULL`,
+			`SELECT origin_rid AS pid FROM lem WHERE rowid IN ${IN_JSON} AND origin_rid IS NOT NULL`,
 			[jsonList(frontier)]
 		);
 		const viaDeriv = await query<{ pid: number }>(
-			`SELECT parent_rid AS pid FROM derivation WHERE child_rid IN ${IN_JSON}`,
+			`SELECT parent_rid AS pid FROM edges
+			 WHERE child_rid IN ${IN_JSON} AND kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND rank = 1`,
 			[jsonList(frontier)]
 		);
 		const pids = [...new Set([...viaOrigin, ...viaDeriv].map((r) => r.pid))].filter(
@@ -808,9 +817,10 @@ export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<De
 	let total = 0;
 	for (let depth = 0; depth < 12 && frontier.length && total < maxNodes; depth++) {
 		const edges = await query<{ p: number; c: number }>(
-			`SELECT d.parent_rid AS p, d.child_rid AS c FROM derivation d
+			`SELECT d.parent_rid AS p, d.child_rid AS c FROM edges d
 			 JOIN lem l ON l.rowid = d.child_rid
-			 WHERE d.parent_rid IN ${IN_JSON} AND l.origin_rid IS NULL
+			 WHERE d.parent_rid IN ${IN_JSON} AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+			   AND l.origin_rid IS NULL
 			 ORDER BY d.child_rid`,
 			[jsonList(frontier)]
 		);
@@ -864,9 +874,11 @@ export async function getReflexVariants(reflexId: string): Promise<Lemma[]> {
 	const idx = await ensureCore();
 	const rid = idx.ridOf(reflexId);
 	if (!rid) return [];
+	const kids = await childRidsOf(rid);
+	if (!kids.length) return [];
 	const rows = await query<RawLem>(
-		`${LEM_SELECT} WHERE l.link_rid = ? AND (l.flags & 7) IN (2, 3) ORDER BY l.ord`,
-		[rid]
+		`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON} AND (l.flags & 7) = ${REL_VARIANT} ORDER BY l.ord`,
+		[jsonList(kids)]
 	);
 	const vs = rows.map(hydrate);
 	await attachLanguages(vs);
@@ -968,7 +980,7 @@ export async function getOriginLangDistribution(languageId: string): Promise<Ori
 		return { lang: l?.id ?? String(r.lrid), name: l?.name ?? String(r.lrid), clade: l?.clade ?? null, count: r.c };
 	});
 	const un = await queryOne<{ c: number }>(
-		`SELECT COUNT(*) AS c FROM lem WHERE lang_rid = ? AND (flags & 7) = ${REL_LOCAL}`,
+		`SELECT COUNT(*) AS c FROM lem WHERE lang_rid = ? AND (flags & 7) = ${REL_UNLINKED}`,
 		[langRidOf(languageId) ?? -1]
 	);
 	if (un?.c) slices.push({ lang: '__unetym', name: 'unetymologised', clade: null, count: un.c });
@@ -1016,7 +1028,8 @@ export function parseCognateset(key: string | null): { code: string | null; labe
 	return { code: key.slice(0, idx), label: key.slice(idx + 1) };
 }
 
-/** Same-language variant forms of an etymon (head variants only). */
+/** Variant forms of a node = its variant-kind children (in v3 a variant's edge points at its
+ *  true target, so head variants of an entry and alternates of a reflex are one shape). */
 export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
 	const idx = await ensureCore();
 	const rid = idx.ridOf(entryId);
@@ -1025,7 +1038,7 @@ export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
 	if (!kids.length) return [];
 	const rows = await query<RawLem>(
 		`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON} AND (l.flags & 7) = ${REL_VARIANT}
-		 AND l.link_rid IS NULL ORDER BY l.ord`,
+		 ORDER BY l.ord`,
 		[jsonList(kids)]
 	);
 	const variants = rows.map(hydrate);
@@ -1034,7 +1047,8 @@ export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
 	return variants;
 }
 
-/** The reflexes of an entry: its children plus SECONDARY reflexes reached by derivation edges. */
+/** The reflexes of an entry: its rank-1 children plus SECONDARY reflexes — forms whose accepted
+ *  etymon is elsewhere but which carry a rank>=2 alternate-etymology edge into this entry. */
 async function entryChildRows(entryRid: number, relations: number[]): Promise<HLemma[]> {
 	const kids = await childRidsOf(entryRid);
 	const relList = relations.join(', ');
@@ -1044,7 +1058,7 @@ async function entryChildRows(entryRid: number, relations: number[]): Promise<HL
 		 UNION ALL
 		 SELECT ${LEM_COLS}, 1 AS secondary FROM lem l ${LEM_JOINS}
 		   WHERE l.origin_rid IS NOT NULL AND (l.flags & 7) IN (${relList})
-		     AND l.rowid IN (SELECT child_rid FROM derivation WHERE parent_rid = ?)
+		     AND l.rowid IN (SELECT child_rid FROM edges WHERE parent_rid = ? AND rank >= 2)
 		 ORDER BY l.ord`,
 		[jsonList(kids), entryRid]
 	);
@@ -1194,13 +1208,13 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 	await attachReferences(reflexes);
 	await attachSubCounts(reflexes);
 
-	// attach each main reflex's comma-listed alternates (reflex-variants) for inline display
-	const kids = await childRidsOf(entryRid);
-	const rvarRows = kids.length
+	// attach each main reflex's comma-listed alternates: its own variant-kind children
+	const reflexKids = [...new Set(reflexes.flatMap((r) => r.childRids))];
+	const rvarRows = reflexKids.length
 		? await query<RawLem>(
 				`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON} AND (l.flags & 7) = ${REL_VARIANT}
-				 AND l.link_rid IS NOT NULL ORDER BY l.ord`,
-				[jsonList(kids)]
+				 ORDER BY l.ord`,
+				[jsonList(reflexKids)]
 			)
 		: [];
 	const rvars = rvarRows.map(hydrate);
@@ -1244,6 +1258,51 @@ export async function getReflexAlignment(formId: string): Promise<AlignSeg[]> {
 		[rid]
 	);
 	return row ? decodeSegs(meta, row.segs) : [];
+}
+
+export interface AlternateEtymon {
+	id: string; // proposed parent id
+	word: string;
+	gloss: string;
+	kind: string; // reflex | borrowed | variant
+	rank: number;
+	note: string | null; // review marker or source attribution
+	lang?: string | null;
+	isEntry: boolean; // link to /entries vs /reflexes
+}
+
+/** Rank>=2 alternate-etymology hypotheses of one node ("also proposed: from X"). */
+export async function getAlternates(id: string): Promise<AlternateEtymon[]> {
+	const idx = await ensureCore();
+	const rid = idx.ridOf(id);
+	if (!rid) return [];
+	const rows = await query<{
+		prid: number;
+		kind: number;
+		rank: number;
+		note: string | null;
+		word: string;
+		gloss: string;
+		lang_rid: number | null;
+		origin_rid: number | null;
+	}>(
+		`SELECT e.parent_rid AS prid, e.kind AS kind, e.rank AS rank, e.note AS note,
+		        l.word, l.gloss, l.lang_rid, l.origin_rid
+		 FROM edges e JOIN lem l ON l.rowid = e.parent_rid
+		 WHERE e.child_rid = ? AND e.rank >= 2 ORDER BY e.rank, e.rowid`,
+		[rid]
+	);
+	const KINDS: Record<number, string> = { 1: 'reflex', 2: 'variant', 3: 'borrowed', 5: 'component', 6: 'derived' };
+	return rows.map((r) => ({
+		id: idx.idOf(r.prid),
+		word: r.word,
+		gloss: r.gloss,
+		kind: KINDS[r.kind] ?? String(r.kind),
+		rank: r.rank,
+		note: r.note,
+		lang: r.lang_rid != null ? langByRid(r.lang_rid)?.name : null,
+		isEntry: r.origin_rid == null
+	}));
 }
 
 // ---- sound correspondence explorer ---------------------------------------
@@ -1619,7 +1678,7 @@ export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<
 	// entries → languages with an etymon OR a loan-source reflex; reflexes → every language.
 	const where =
 		mode === 'entries'
-			? `WHERE (origin_rid IS NULL AND (flags & 7) != ${REL_LOCAL}) OR (flags & ${FLAG_LOAN_SOURCE}) != 0`
+			? `WHERE (origin_rid IS NULL AND (flags & 7) != ${REL_UNLINKED}) OR (flags & ${FLAG_LOAN_SOURCE}) != 0`
 			: '';
 	const rows = await query<{ lang_rid: number }>(`SELECT DISTINCT lang_rid FROM lem ${where}`);
 	const out = rows

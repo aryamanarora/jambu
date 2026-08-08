@@ -18,6 +18,17 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-08',
+		label: '8 August 2026',
+		title: 'Etymology graph rework',
+		changes: [
+			'Competing etymologies are now first-class: forms with more than one proposed source show an "also proposed" line with the alternative etyma, instead of a bare "derived" badge.',
+			'Compound entries list their members in the right order, and variant forms now link to the exact form they vary (the etymon is reached through it).',
+			'Borrowed forms are labelled "Borrowed from" consistently, including on form pages.',
+			'Under the hood, all etymological relations moved to a single typed edge table with a curation queue for auto-classified hypotheses.'
+		]
+	},
+	{
 		date: '2026-08-07',
 		label: '7 August 2026',
 		title: 'Much smaller database',

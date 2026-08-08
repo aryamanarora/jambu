@@ -54,6 +54,49 @@
 	const api = `${base}/dev/etymologies/api`;
 	let candidateRequest = 0;
 
+	// ---- edge-model review queue (auto-classified alternate-etymology hypotheses) ----
+	type ReviewRow = {
+		form_id: string;
+		form_word: string;
+		form_gloss: string;
+		form_lang: string | null;
+		etymon_id: string;
+		etymon_word: string;
+		etymon_gloss: string;
+		etymon_lang: string | null;
+		etymon_is_entry: boolean;
+		kind: string;
+		rank: number;
+		note: string;
+	};
+	let reviewRows = $state<ReviewRow[]>([]);
+	let reviewTotal = $state(0);
+	let showReview = $state(false);
+	async function loadReview() {
+		const response = await fetch(`${api}?mode=review`);
+		if (!response.ok) return;
+		const data = await response.json();
+		reviewRows = data.rows;
+		reviewTotal = data.total;
+	}
+	async function resolveReview(row: ReviewRow, accept: boolean) {
+		await fetch(api, {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({
+				Form_ID: row.form_id,
+				Etymon_ID: row.etymon_id,
+				Kind: row.kind === 'borrowed' ? 'borrowed' : 'reflex',
+				Rank: String(Math.max(2, row.rank)),
+				reject: !accept
+			})
+		});
+		reviewRows = reviewRows.filter((r) => r !== row);
+		message = accept
+			? `Accepted alternate ${row.form_word} < ${row.etymon_word}`
+			: `Rejected alternate ${row.form_word} < ${row.etymon_word}`;
+	}
+
 	async function loadQueue(nextPage = 1) {
 		busy = true;
 		loadError = '';
@@ -193,6 +236,37 @@
 			<label>Source<select bind:value={source}><option value="">All sources</option>{#each sources as option}<option value={option.id}>{option.short}</option>{/each}</select></label>
 			<button type="submit" disabled={busy}>{busy ? 'Searching…' : 'Search queue'}</button>
 		</form>
+	</section>
+
+	<section class="filters" aria-label="Migration review queue">
+		<button
+			type="button"
+			onclick={() => {
+				showReview = !showReview;
+				if (showReview && !reviewRows.length) void loadReview();
+			}}>{showReview ? 'Hide' : 'Show'} hypothesis review queue</button
+		>
+		{#if showReview}
+			<p class="muted">
+				{reviewRows.length} auto-classified alternate-etymology edges awaiting curation
+				(accept keeps the hypothesis, reject removes it on the next data build).
+			</p>
+			<ul class="review-list">
+				{#each reviewRows.slice(0, 50) as row (row.form_id + row.etymon_id)}
+					<li>
+						<a href="{base}/reflexes/{row.form_id}" target="_blank">{row.form_word}</a>
+						<span class="muted">({row.form_lang ?? '—'})</span>
+						&lt; proposed
+						<a href="{base}/{row.etymon_is_entry ? 'entries' : 'reflexes'}/{row.etymon_id}" target="_blank"
+							>{row.etymon_word}</a
+						>
+						<span class="muted">({row.etymon_lang ?? '—'}) · {row.note.replace('review:', '')}</span>
+						<button type="button" onclick={() => void resolveReview(row, true)}>accept</button>
+						<button type="button" onclick={() => void resolveReview(row, false)}>reject</button>
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</section>
 
 	<div class="workspace">
@@ -371,4 +445,16 @@
 	.error p { margin:.4rem 0 0; }
 	.empty { color:var(--muted); padding:1rem; } .empty.large { text-align:center; margin-top:20vh; }
 	@media (max-width:850px) { .filters form { grid-template-columns:1fr 1fr; } .workspace { grid-template-columns:1fr; } .queue { border-right:0; border-bottom:1px solid var(--border); } .rows { max-height:35vh; } }
+	.review-list {
+		list-style: none;
+		margin: 0.5rem 0 0;
+		padding: 0;
+		display: grid;
+		gap: 0.3rem;
+		font-size: 0.9rem;
+	}
+	.review-list button {
+		margin-left: 0.35rem;
+		padding: 0.05rem 0.5rem;
+	}
 </style>

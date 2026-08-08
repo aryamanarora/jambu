@@ -3,7 +3,7 @@ import { error, json } from '@sveltejs/kit';
 import { readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { getDb, ids } from '$lib/server/db';
-import { readDeltas, readVarints, FLAG_SECTION, REL_LOCAL } from '$lib/dbShared';
+import { readDeltas, readVarints, FLAG_SECTION, REL_UNLINKED } from '$lib/dbShared';
 import type { RequestHandler } from './$types';
 
 // ---- v2-schema helpers (dev-only tool, so simple full-scan caches are fine) ----
@@ -87,7 +87,7 @@ function conceptIndex() {
 			for (const rid of readDeltas(new Uint8Array(c.rids))) {
 				(byLemma.get(rid) ?? byLemma.set(rid, new Set()).get(rid)!).add(c.id);
 				const info = originOf.get(rid);
-				if (!info || (info.flags & 7) === REL_LOCAL) continue;
+				if (!info || (info.flags & 7) === REL_UNLINKED) continue;
 				const entry = info.origin_rid ?? rid;
 				(byEntry.get(entry) ?? byEntry.set(entry, new Set()).get(entry)!).add(c.id);
 			}
@@ -100,7 +100,7 @@ function conceptIndex() {
 export const prerender = false;
 
 const ASSIGNMENTS = resolve(process.cwd(), '../data/data/etymology-assignments.csv');
-const FIELDS = ['Form_ID', 'Etymon_ID', 'Relation', 'Status', 'Notes'] as const;
+const FIELDS = ['Form_ID', 'Etymon_ID', 'Kind', 'Rank', 'Status', 'Source', 'Notes'] as const;
 
 function localOnly(request: Request) {
 	if (!dev) error(404, 'Not found');
@@ -200,7 +200,7 @@ async function writeAssignments(rows: Assignment[]): Promise<void> {
 	const text = [
 		FIELDS.join(','),
 		...rows
-			.sort((a, b) => a.Form_ID.localeCompare(b.Form_ID))
+			.sort((a, b) => a.Form_ID.localeCompare(b.Form_ID) || (a.Etymon_ID ?? '').localeCompare(b.Etymon_ID ?? ''))
 			.map((row) => FIELDS.map((field) => csvCell(row[field] ?? '')).join(','))
 	].join('\n') + '\n';
 	const temporary = `${ASSIGNMENTS}.tmp`;
@@ -214,6 +214,47 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	const mode = url.searchParams.get('mode') ?? 'queue';
 	const q = (url.searchParams.get('q') ?? '').trim().toLocaleLowerCase();
 	const like = `%${q}%`;
+
+	if (mode === 'review') {
+		const idx = ids();
+		const flagged = db
+			.prepare(
+				`SELECT e.child_rid, e.parent_rid, e.kind, e.rank, e.note,
+				        c.word AS child_word, c.gloss AS child_gloss, cl.name AS child_lang,
+				        p.word AS parent_word, p.gloss AS parent_gloss, pl.name AS parent_lang,
+				        p.origin_rid IS NULL AS parent_is_entry
+				 FROM edges e
+				 JOIN lem c ON c.rowid = e.child_rid
+				 JOIN lem p ON p.rowid = e.parent_rid
+				 LEFT JOIN languages cl ON cl.rowid = c.lang_rid
+				 LEFT JOIN languages pl ON pl.rowid = p.lang_rid
+				 WHERE e.note LIKE 'review:%' ORDER BY e.note, c.word`
+			)
+			.all() as Array<Record<string, unknown>>;
+		const KINDS: Record<number, string> = { 1: 'reflex', 2: 'variant', 3: 'borrowed', 5: 'component', 6: 'derived' };
+		const assignments = await readAssignments();
+		const resolved = new Set(
+			assignments.map((a) => `${a.Form_ID}|${a.Etymon_ID}`)
+		);
+		const rows = flagged.map((e) => ({
+			form_id: idx.idOf(e.child_rid as number),
+			form_word: e.child_word,
+			form_gloss: e.child_gloss,
+			form_lang: e.child_lang,
+			etymon_id: idx.idOf(e.parent_rid as number),
+			etymon_word: e.parent_word,
+			etymon_gloss: e.parent_gloss,
+			etymon_lang: e.parent_lang,
+			etymon_is_entry: !!e.parent_is_entry,
+			kind: KINDS[e.kind as number] ?? String(e.kind),
+			rank: e.rank,
+			note: e.note
+		}));
+		return json({
+			rows: rows.filter((r) => !resolved.has(`${r.form_id}|${r.etymon_id}`)),
+			total: rows.length
+		});
+	}
 
 	if (mode === 'candidates') {
 		const idx = ids();
@@ -251,7 +292,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				        lang.id AS language_id, lang.name AS language
 				 FROM lem l
 				 LEFT JOIN languages lang ON lang.rowid = l.lang_rid
-				 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_LOCAL}
+				 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED}
 				   AND (? = '' OR l.rowid = ? OR instr(lower(l.word), ?) > 0
 				        OR instr(lower(l.gloss), ?) > 0 OR instr(lower(lang.name), ?) > 0
 				        OR l.rowid IN (SELECT value FROM json_each(?)))
@@ -294,7 +335,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				        lang.id AS language_id, lang.name AS language
 				 FROM lem att LEFT JOIN languages lang ON lang.rowid = att.lang_rid
 				 WHERE att.origin_rid IN (SELECT value FROM json_each(?))
-				   AND (att.link_rid IS NULL OR (att.flags & 7) IN (2, 3))`
+				   AND att.link_rid IS NULL`
 			)
 			.all(JSON.stringify(candidateRids)) as {
 			origin_rid: number;
@@ -345,7 +386,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	const page = Math.max(1, Number(url.searchParams.get('page') ?? 1));
 	const offset = (page - 1) * 50;
 	const sourceCites = source ? citeIdsOfRef(source) : [];
-	const where = `(l.flags & 7) = ${REL_LOCAL}
+	const where = `(l.flags & 7) = ${REL_UNLINKED}
 		AND (? = '' OR instr(lower(l.word), ?) > 0 OR instr(lower(l.gloss), ?) > 0
 		     OR instr(lower(COALESCE(l.notes, '')), ?) > 0 OR instr(lower(lang.name), ?) > 0)
 		AND (? = '' OR lang.id = ?)
@@ -380,7 +421,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	}));
 	const count = (db.prepare(`SELECT COUNT(*) AS n FROM lem l JOIN languages lang ON lang.rowid=l.lang_rid WHERE ${where}`).get(...params) as { n: number }).n;
 	const languages = db
-		.prepare(`SELECT id, name FROM languages WHERE rowid IN (SELECT DISTINCT lang_rid FROM lem WHERE (flags & 7) = ${REL_LOCAL}) ORDER BY "order", name`)
+		.prepare(`SELECT id, name FROM languages WHERE rowid IN (SELECT DISTINCT lang_rid FROM lem WHERE (flags & 7) = ${REL_UNLINKED}) ORDER BY "order", name`)
 		.all();
 	const sources = db
 		.prepare(`SELECT id, short FROM "references" WHERE unetymologised_count > 0 ORDER BY short`)
@@ -391,34 +432,64 @@ export const GET: RequestHandler = async ({ request, url }) => {
 
 export const POST: RequestHandler = async ({ request }) => {
 	localOnly(request);
-	const body = (await request.json()) as Partial<Assignment> & { remove?: boolean };
+	const body = (await request.json()) as Partial<Assignment> & {
+		remove?: boolean;
+		reject?: boolean; // review queue: reject a generated rank>=2 hypothesis edge
+		Relation?: string; // legacy client field name for Kind
+	};
 	const formId = body.Form_ID?.trim() ?? '';
 	if (!/^f_[a-z2-7]{13}$/.test(formId)) error(400, 'A persistent form ID is required; rebuild the data first');
 	const db = getDb();
 	if (ids().ridOf(formId) == null) error(400, 'Unknown form ID');
 
+	const rank = /^[1-9]\d*$/.test(body.Rank ?? '') ? (body.Rank as string) : '1';
 	let rows = await readAssignments();
-	rows = rows.filter((row) => row.Form_ID !== formId);
-	if (!body.remove) {
+	if (body.reject) {
+		// a rejection is a durable overlay row: apply_assignments deletes the generated edge
 		const etymonId = body.Etymon_ID?.trim() ?? '';
-		const etymonRid = etymonId ? ids().ridOf(etymonId) : null;
-		if (
-			etymonRid == null ||
-			!db
-				.prepare(`SELECT 1 FROM lem WHERE rowid = ? AND origin_rid IS NULL AND (flags & 7) != ${REL_LOCAL}`)
-				.get(etymonRid)
-		) {
-			error(400, 'Choose a valid etymon');
-		}
-		const relation = body.Relation === 'borrowed' ? 'borrowed' : 'reflex';
+		if (!etymonId) error(400, 'Rejection needs the proposed etymon');
+		rows = rows.filter((row) => !(row.Form_ID === formId && row.Etymon_ID === etymonId));
 		rows.push({
 			Form_ID: formId,
 			Etymon_ID: etymonId,
-			Relation: relation,
-			Status: 'accepted',
+			Kind: (body.Kind === 'borrowed' ? 'borrowed' : 'reflex') as string,
+			Rank: rank,
+			Status: 'rejected',
+			Source: body.Source?.trim() ?? '',
 			Notes: body.Notes?.trim() ?? ''
 		});
+		await writeAssignments(rows);
+		return json({ ok: true });
 	}
+	if (body.remove) {
+		rows = rows.filter((row) => row.Form_ID !== formId);
+		await writeAssignments(rows);
+		return json({ ok: true });
+	}
+	const etymonId = body.Etymon_ID?.trim() ?? '';
+	const etymonRid = etymonId ? ids().ridOf(etymonId) : null;
+	if (
+		etymonRid == null ||
+		!db
+			.prepare(`SELECT 1 FROM lem WHERE rowid = ? AND (flags & 7) != ${REL_UNLINKED}`)
+			.get(etymonRid)
+	) {
+		error(400, 'Choose a valid etymon');
+	}
+	// rank-1 rows are unique per form; rank>=2 rows are keyed (form, etymon)
+	rows = rows.filter(
+		(row) =>
+			!(row.Form_ID === formId && (rank === '1' ? row.Rank === '1' || !row.Rank : row.Etymon_ID === etymonId))
+	);
+	rows.push({
+		Form_ID: formId,
+		Etymon_ID: etymonId,
+		Kind: (body.Kind ?? body.Relation) === 'borrowed' ? 'borrowed' : 'reflex',
+		Rank: rank,
+		Status: 'accepted',
+		Source: body.Source?.trim() ?? '',
+		Notes: body.Notes?.trim() ?? ''
+	});
 	await writeAssignments(rows);
 	return json({ ok: true });
 };
