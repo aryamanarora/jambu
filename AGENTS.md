@@ -16,6 +16,11 @@ SvelteKit 2 + **Svelte 5 runes** (`$state`/`$derived`/`$effect`/`$props`, `{#sni
 `src/lib/query.ts` is the **single source of query truth** for both paths — a port of the old
 Flask `search.py` plus the entry/cognate grouping. Change query semantics there, once.
 
+The DB ships the **compact v2 schema** (see below): no text ids or tag/relation strings in `lem`;
+`src/lib/dbShared.ts` decodes rows back to the legacy `Lemma` shape, so components never see the
+difference. Both SQLite layers register the `vin_any` varint-blob UDF used for citation/alignment
+membership filters.
+
 ## The DB, end to end
 
 ```
@@ -25,9 +30,14 @@ Flask `search.py` plus the entry/cognate grouping. Change query semantics there,
 
 - `npm run db:transform` = `python3 scripts/build_static_db.py .dbwork/jambu.db --cldf ../data/cldf`.
   It reads the sibling data repo's `cldf/` **directly** (the README's mention of a `.dbwork/data.db`
-  input is stale — the current script takes `--cldf`). It dictionary-codes alignment and
-  correspondence rows, stores citation links as rowids, uses direct substring scans, precomputes
-  `meta` counts, and `VACUUM`s.
+  input is stale — the current script takes `--cldf`). It first builds the legacy ("v1") schema in
+  full, then `scripts/compact_db.py` rewrites it into the **compact v2 schema** that ships
+  (~49.5 MB, guarded at 52 MB): binary-ranked lemma ids (`lem` rowid = id rank; the `ids` blob is
+  the only id index), interned tags/cognatesets/citations, bit-flag relations, varint blobs for
+  children/citations/alignments/corr summaries, and grouped alias blobs. The codecs live in
+  `src/lib/dbShared.ts` and MUST stay in sync with `compact_db.py`. After any change to either,
+  run `node scripts/parity_check.mjs OLD.db NEW.db` (OLD = a v1 build with the compact() call
+  disabled) — it verifies the transformation end to end.
 - `npm run db:stage` copies it to `static/db/jambu.db`, served at `/db/jambu.db`.
 - In **CI** the DB is NOT built — it's downloaded from a release asset (`STATIC_DB_URL` in
   `.github/workflows/deploy.yml`). So a data change only reaches prod after you rebuild `jambu.db`

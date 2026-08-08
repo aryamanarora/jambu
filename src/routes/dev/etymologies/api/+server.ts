@@ -2,8 +2,100 @@ import { dev } from '$app/environment';
 import { error, json } from '@sveltejs/kit';
 import { readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { getDb } from '$lib/server/db';
+import { getDb, ids } from '$lib/server/db';
+import { readDeltas, readVarints, FLAG_SECTION, REL_LOCAL } from '$lib/dbShared';
 import type { RequestHandler } from './$types';
+
+// ---- v2-schema helpers (dev-only tool, so simple full-scan caches are fine) ----
+
+type CiteInfo = { short: string; refId: string };
+let _citeInfo: Map<number, CiteInfo & { locator: string; refRid: number }> | null = null;
+function citeInfo() {
+	if (!_citeInfo) {
+		const db = getDb();
+		const refs = new Map(
+			(db.prepare('SELECT rowid AS rid, id, short FROM "references"').all() as {
+				rid: number;
+				id: string;
+				short: string | null;
+			}[]).map((r) => [r.rid, r])
+		);
+		_citeInfo = new Map(
+			(db.prepare('SELECT rowid AS rid, ref_rid, locator FROM cites').all() as {
+				rid: number;
+				ref_rid: number;
+				locator: string;
+			}[]).map((c) => {
+				const ref = refs.get(c.ref_rid);
+				return [
+					c.rid,
+					{
+						short: ref?.short || ref?.id || String(c.ref_rid),
+						refId: ref?.id ?? String(c.ref_rid),
+						locator: c.locator,
+						refRid: c.ref_rid
+					}
+				];
+			})
+		);
+	}
+	return _citeInfo;
+}
+
+function sourcesOf(cites: Buffer | null): { source_ids: string | null; sources: string | null } {
+	if (!cites) return { source_ids: null, sources: null };
+	const info = citeInfo();
+	const ids_ = new Set<string>();
+	const labels = new Set<string>();
+	for (const cid of readVarints(new Uint8Array(cites))) {
+		const c = info.get(cid);
+		if (!c) continue;
+		ids_.add(c.refId);
+		labels.add(c.locator !== '' ? `${c.short}, ${c.locator}` : c.short);
+	}
+	return {
+		source_ids: ids_.size ? [...ids_].join(',') : null,
+		sources: labels.size ? [...labels].join(',') : null
+	};
+}
+
+function citeIdsOfRef(refId: string): number[] {
+	const out: number[] = [];
+	for (const [cid, c] of citeInfo()) if (c.refId === refId) out.push(cid);
+	return out;
+}
+
+// entry rid → concept ids, and lemma rid → concept ids (decoded once from concepts.rids)
+let _conceptIndex: { byLemma: Map<number, Set<number>>; byEntry: Map<number, Set<number>> } | null =
+	null;
+function conceptIndex() {
+	if (!_conceptIndex) {
+		const db = getDb();
+		const originOf = new Map(
+			(db.prepare('SELECT rowid AS rid, origin_rid, flags FROM lem').all() as {
+				rid: number;
+				origin_rid: number | null;
+				flags: number;
+			}[]).map((r) => [r.rid, r])
+		);
+		const byLemma = new Map<number, Set<number>>();
+		const byEntry = new Map<number, Set<number>>();
+		for (const c of db.prepare('SELECT id, rids FROM concepts WHERE rids IS NOT NULL').all() as {
+			id: number;
+			rids: Buffer;
+		}[]) {
+			for (const rid of readDeltas(new Uint8Array(c.rids))) {
+				(byLemma.get(rid) ?? byLemma.set(rid, new Set()).get(rid)!).add(c.id);
+				const info = originOf.get(rid);
+				if (!info || (info.flags & 7) === REL_LOCAL) continue;
+				const entry = info.origin_rid ?? rid;
+				(byEntry.get(entry) ?? byEntry.set(entry, new Set()).get(entry)!).add(c.id);
+			}
+		}
+		_conceptIndex = { byLemma, byEntry };
+	}
+	return _conceptIndex;
+}
 
 export const prerender = false;
 
@@ -124,81 +216,99 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	const like = `%${q}%`;
 
 	if (mode === 'candidates') {
+		const idx = ids();
 		const formId = url.searchParams.get('form') ?? '';
-		const selected = db
-			.prepare('SELECT rowid, word, phonemic, language_id FROM lemmas WHERE id = ?')
-			.get(formId) as
-			| { rowid: number; word: string; phonemic: string | null; language_id: string }
-			| undefined;
+		const formRid = idx.ridOf(formId);
+		const selected = formRid
+			? (db
+					.prepare(
+						`SELECT l.rowid AS rowid, l.word, l.phonemic, lang.id AS language_id
+						 FROM lem l LEFT JOIN languages lang ON lang.rowid = l.lang_rid WHERE l.rowid = ?`
+					)
+					.get(formRid) as
+					| { rowid: number; word: string; phonemic: string | null; language_id: string }
+					| undefined)
+			: undefined;
 		const selectedConcepts = selected
-			? (db.prepare('SELECT concept_id FROM lemma_concept WHERE lemma_rid = ?').all(selected.rowid) as { concept_id: number }[]).map(
-					(row) => row.concept_id
-				)
+			? [...(conceptIndex().byLemma.get(selected.rowid) ?? [])]
 			: [];
-		const conceptPlaceholders = selectedConcepts.map(() => '?').join(',');
-		const conceptPrefilter = selectedConcepts.length
-			? `EXISTS (
-			     SELECT 1 FROM lemmas att JOIN lemma_concept lc ON lc.lemma_rid = att.rowid
-			     WHERE COALESCE(NULLIF(att.origin_lemma_id, ''), att.id) = l.id
-			       AND lc.concept_id IN (${conceptPlaceholders})
-			   )`
-			: '0';
-		const rows = db
+		// candidate entries carrying any of the selected concepts (via any attestation)
+		const conceptEntryRids: number[] = [];
+		if (selectedConcepts.length) {
+			const wanted = new Set(selectedConcepts);
+			for (const [entry, cids] of conceptIndex().byEntry) {
+				for (const c of cids)
+					if (wanted.has(c)) {
+						conceptEntryRids.push(entry);
+						break;
+					}
+			}
+		}
+		const exactRid = idx.ridOf(q) ?? -1;
+		const rows = (db
 			.prepare(
-				`SELECT l.id, l.word, l.gloss, l.language_id, lang.name AS language,
-				        l.reflex_count, l.lang_count,
-				        group_concat(DISTINCT CASE
-				          WHEN lr.locator != '' THEN coalesce(r.short, r.id) || ', ' || lr.locator
-				          ELSE coalesce(r.short, r.id)
-				        END) AS sources
-				 FROM lemmas l
-				 LEFT JOIN languages lang ON lang.id = l.language_id
-				 LEFT JOIN lemma_reference lr ON lr.lemma_rid = l.rowid
-				 LEFT JOIN "references" r ON r.rowid = lr.reference_rid
-				 WHERE l.origin_lemma_id IS NULL AND l.relation IS NOT 'local'
-				   AND (? = '' OR lower(l.id) = ? OR instr(lower(l.word), ?) > 0
+				`SELECT l.rowid AS rid, l.word, l.gloss, l.counts, l.cites,
+				        lang.id AS language_id, lang.name AS language
+				 FROM lem l
+				 LEFT JOIN languages lang ON lang.rowid = l.lang_rid
+				 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_LOCAL}
+				   AND (? = '' OR l.rowid = ? OR instr(lower(l.word), ?) > 0
 				        OR instr(lower(l.gloss), ?) > 0 OR instr(lower(lang.name), ?) > 0
-				        OR ${conceptPrefilter})
-				 GROUP BY l.rowid
-				 ORDER BY CASE WHEN lower(l.id) = ? THEN 0 WHEN lower(l.word) = ? THEN 1
+				        OR l.rowid IN (SELECT value FROM json_each(?)))
+				 ORDER BY CASE WHEN l.rowid = ? THEN 0 WHEN lower(l.word) = ? THEN 1
 				               WHEN lower(l.gloss) = ? THEN 2 ELSE 3 END,
-				          l.reflex_count DESC, l."order"
+				          (l.counts / 1024) DESC, l.ord
 				 LIMIT 400`
 			)
-			.all(q, q, q, q, q, ...selectedConcepts, q, q, q) as CandidateRow[];
+			.all(q, exactRid, q, q, q, JSON.stringify(conceptEntryRids), exactRid, q, q) as {
+			rid: number;
+			word: string;
+			gloss: string;
+			counts: number | null;
+			cites: Buffer | null;
+			language_id: string;
+			language: string;
+		}[]).map((r) => ({
+			id: idx.idOf(r.rid),
+			rid: r.rid,
+			word: r.word,
+			gloss: r.gloss,
+			language_id: r.language_id,
+			language: r.language,
+			reflex_count: r.counts != null ? r.counts >> 10 : 0,
+			lang_count: r.counts != null ? r.counts % 1024 : 0,
+			sources: sourcesOf(r.cites).sources
+		})) as (CandidateRow & { rid: number })[];
 
 		if (!selected || !rows.length) return json({ rows: rows.slice(0, 80) });
-		const ids = rows.map((row) => row.id);
-		const placeholders = ids.map(() => '?').join(',');
-		const conceptRows = db
-			.prepare(
-				`SELECT COALESCE(NULLIF(att.origin_lemma_id, ''), att.id) AS candidate_id,
-				        lc.concept_id
-				 FROM lemma_concept lc JOIN lemmas att ON att.rowid = lc.lemma_rid
-				 WHERE COALESCE(NULLIF(att.origin_lemma_id, ''), att.id) IN (${placeholders})`
-			)
-			.all(...ids) as { candidate_id: string; concept_id: number }[];
+		const candidateRids = rows.map((row) => row.rid);
 		const conceptsByCandidate = new Map<string, Set<number>>();
-		for (const row of conceptRows) {
-			const concepts = conceptsByCandidate.get(row.candidate_id) ?? new Set<number>();
-			concepts.add(row.concept_id);
-			conceptsByCandidate.set(row.candidate_id, concepts);
+		for (const row of rows) {
+			const set = conceptIndex().byEntry.get(row.rid);
+			if (set) conceptsByCandidate.set(row.id, set);
 		}
 
-		const reflexRows = db
+		const reflexRows = (db
 			.prepare(
-				`SELECT att.origin_lemma_id AS candidate_id, att.word, att.phonemic,
-				        att.language_id, lang.name AS language
-				 FROM lemmas att LEFT JOIN languages lang ON lang.id = att.language_id
-				 WHERE att.origin_lemma_id IN (${placeholders}) AND att.redirect_to IS NULL`
+				`SELECT att.origin_rid AS origin_rid, att.word, att.phonemic,
+				        lang.id AS language_id, lang.name AS language
+				 FROM lem att LEFT JOIN languages lang ON lang.rowid = att.lang_rid
+				 WHERE att.origin_rid IN (SELECT value FROM json_each(?))
+				   AND (att.link_rid IS NULL OR (att.flags & 7) IN (2, 3))`
 			)
-			.all(...ids) as {
-			candidate_id: string;
+			.all(JSON.stringify(candidateRids)) as {
+			origin_rid: number;
 			word: string;
 			phonemic: string | null;
 			language_id: string;
 			language: string;
-		}[];
+		}[]).map((r) => ({
+			candidate_id: idx.idOf(r.origin_rid),
+			word: r.word,
+			phonemic: r.phonemic,
+			language_id: r.language_id,
+			language: r.language
+		}));
 		const selectedSound = selected.phonemic || selected.word;
 		const bestReflex = new Map<string, { score: number; word: string; language: string }>();
 		for (const reflex of reflexRows) {
@@ -229,37 +339,48 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		return json({ rows: scored.slice(0, 80) });
 	}
 
+	const idx = ids();
 	const language = url.searchParams.get('language') ?? '';
 	const source = url.searchParams.get('source') ?? '';
 	const page = Math.max(1, Number(url.searchParams.get('page') ?? 1));
 	const offset = (page - 1) * 50;
-	const where = `l.relation = 'local'
+	const sourceCites = source ? citeIdsOfRef(source) : [];
+	const where = `(l.flags & 7) = ${REL_LOCAL}
 		AND (? = '' OR instr(lower(l.word), ?) > 0 OR instr(lower(l.gloss), ?) > 0
-		     OR instr(lower(l.notes), ?) > 0 OR instr(lower(lang.name), ?) > 0)
-		AND (? = '' OR l.language_id = ?)
-		AND (? = '' OR EXISTS (
-			SELECT 1 FROM lemma_reference slr JOIN "references" sr ON sr.rowid = slr.reference_rid
-			WHERE slr.lemma_rid = l.rowid AND sr.id = ?
-		))`;
-	const params = [q, q, q, q, q, language, language, source, source];
-	const rows = db
+		     OR instr(lower(COALESCE(l.notes, '')), ?) > 0 OR instr(lower(lang.name), ?) > 0)
+		AND (? = '' OR lang.id = ?)
+		AND (? = '' OR vin_any(l.cites, ?) = 1)`;
+	const params = [q, q, q, q, q, language, language, source, JSON.stringify(sourceCites)];
+	const rows = (db
 		.prepare(
-			`SELECT l.id, l.word, l.gloss, l.phonemic, l.notes, l.language_id,
-			        lang.name AS language, group_concat(DISTINCT r.id) AS source_ids,
-			        group_concat(DISTINCT CASE
-			          WHEN lr.locator != '' THEN coalesce(r.short, r.id) || ', ' || lr.locator
-			          ELSE coalesce(r.short, r.id)
-			        END) AS sources
-			 FROM lemmas l JOIN languages lang ON lang.id = l.language_id
-			 LEFT JOIN lemma_reference lr ON lr.lemma_rid = l.rowid
-			 LEFT JOIN "references" r ON r.rowid = lr.reference_rid
+			`SELECT l.rowid AS rid, l.word, l.gloss, l.phonemic, l.notes, l.cites,
+			        lang.id AS language_id, lang.name AS language
+			 FROM lem l JOIN languages lang ON lang.rowid = l.lang_rid
 			 WHERE ${where}
-			 GROUP BY l.rowid ORDER BY lang."order", lang.name, l."order" LIMIT 50 OFFSET ?`
+			 ORDER BY lang."order", lang.name, l.ord LIMIT 50 OFFSET ?`
 		)
-		.all(...params, offset);
-	const count = (db.prepare(`SELECT COUNT(*) AS n FROM lemmas l JOIN languages lang ON lang.id=l.language_id WHERE ${where}`).get(...params) as { n: number }).n;
+		.all(...params, offset) as {
+		rid: number;
+		word: string;
+		gloss: string;
+		phonemic: string | null;
+		notes: string | null;
+		cites: Buffer | null;
+		language_id: string;
+		language: string;
+	}[]).map((r) => ({
+		id: idx.idOf(r.rid),
+		word: r.word,
+		gloss: r.gloss,
+		phonemic: r.phonemic,
+		notes: r.notes ?? '',
+		language_id: r.language_id,
+		language: r.language,
+		...sourcesOf(r.cites)
+	}));
+	const count = (db.prepare(`SELECT COUNT(*) AS n FROM lem l JOIN languages lang ON lang.rowid=l.lang_rid WHERE ${where}`).get(...params) as { n: number }).n;
 	const languages = db
-		.prepare(`SELECT id, name FROM languages WHERE EXISTS (SELECT 1 FROM lemmas l WHERE l.language_id=languages.id AND l.relation='local') ORDER BY "order", name`)
+		.prepare(`SELECT id, name FROM languages WHERE rowid IN (SELECT DISTINCT lang_rid FROM lem WHERE (flags & 7) = ${REL_LOCAL}) ORDER BY "order", name`)
 		.all();
 	const sources = db
 		.prepare(`SELECT id, short FROM "references" WHERE unetymologised_count > 0 ORDER BY short`)
@@ -274,13 +395,19 @@ export const POST: RequestHandler = async ({ request }) => {
 	const formId = body.Form_ID?.trim() ?? '';
 	if (!/^f_[a-z2-7]{13}$/.test(formId)) error(400, 'A persistent form ID is required; rebuild the data first');
 	const db = getDb();
-	if (!db.prepare('SELECT 1 FROM lemmas WHERE id=?').get(formId)) error(400, 'Unknown form ID');
+	if (ids().ridOf(formId) == null) error(400, 'Unknown form ID');
 
 	let rows = await readAssignments();
 	rows = rows.filter((row) => row.Form_ID !== formId);
 	if (!body.remove) {
 		const etymonId = body.Etymon_ID?.trim() ?? '';
-		if (!etymonId || !db.prepare(`SELECT 1 FROM lemmas WHERE id=? AND origin_lemma_id IS NULL AND relation IS NOT 'local'`).get(etymonId)) {
+		const etymonRid = etymonId ? ids().ridOf(etymonId) : null;
+		if (
+			etymonRid == null ||
+			!db
+				.prepare(`SELECT 1 FROM lem WHERE rowid = ? AND origin_rid IS NULL AND (flags & 7) != ${REL_LOCAL}`)
+				.get(etymonRid)
+		) {
 			error(400, 'Choose a valid etymon');
 		}
 		const relation = body.Relation === 'borrowed' ? 'borrowed' : 'reflex';

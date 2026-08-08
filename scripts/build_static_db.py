@@ -29,6 +29,9 @@ from collections import defaultdict
 from pathlib import Path
 from urllib.parse import quote
 
+sys.path.insert(0, str(Path(__file__).parent))
+import compact_db
+
 
 # Clade → colour + canonical order (== ../data clade scheme, ported from the old make_database.py).
 CLADE_COLORS = {
@@ -44,10 +47,9 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-# The durable-form-ID migration adds a compact 392k-row legacy redirect table (~6.2 MiB), while
-# longer opaque IDs add several MiB to graph indexes. Keep a tight guard around that intentional
-# compatibility cost rather than letting future schema growth pass unnoticed.
-MAX_OUTPUT_BYTES = 120_000_000
+# The compact v2 schema (compact_db.py) ships at ~49.5 MB. Keep a tight guard so future data or
+# schema growth past ~52 MB fails the build loudly instead of silently regressing the download.
+MAX_OUTPUT_BYTES = 52_000_000
 
 # Printed dialect prefixes which differ from the canonical language name in languages.csv.
 BASE_LANGUAGE_OVERRIDES = {
@@ -854,7 +856,10 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     else:
         log(f"(no alignments file at {alignments}; skipping sound-change table)")
 
-    # 4. Analyse and compact the file for range-friendly layout.
+    # 4. Rewrite the v1 schema into the compact v2 schema that actually ships (see compact_db.py).
+    compact_db.compact(con, CLADE_ORDER)
+
+    # 5. Analyse and compact the file for range-friendly layout.
     con.execute("ANALYZE")
     con.commit()
     log(f"setting page_size={page_size} and VACUUMing (this rewrites the file)…")
@@ -864,7 +869,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
 
     # Sanity: the scan-based substring search must return rows.
     probe = con.execute(
-        "SELECT COUNT(*) FROM lemmas WHERE instr(lower(word), ?) > 0", ("amb",)
+        "SELECT COUNT(*) FROM lem WHERE instr(lower(word), ?) > 0", ("amb",)
     ).fetchone()[0]
     log(f"sanity: substring 'word:amb' -> {probe} lemmas")
 

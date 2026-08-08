@@ -11,16 +11,22 @@ export const prerender = 'auto';
 export async function entries() {
 	if (!import.meta.env.SSR) return [];
 	const { default: Database } = await import('better-sqlite3');
+	const { IdIndex } = await import('$lib/dbShared');
 	const database = new Database(process.env.JAMBU_DB ?? '.dbwork/jambu.db', {
 		readonly: true,
 		fileMustExist: true
 	});
+	const data = (database.prepare('SELECT data FROM ids').get() as { data: Buffer }).data;
+	const misc = (database.prepare('SELECT id FROM ids_misc ORDER BY rank').all() as {
+		id: string;
+	}[]).map((r) => r.id);
+	const idx = new IdIndex(new Uint8Array(data), misc);
 	const rows = database
-		.prepare(`SELECT id FROM lemmas WHERE origin_lemma_id IS NULL ORDER BY "order"`)
-		.all() as { id: string }[];
+		.prepare('SELECT rowid AS rid FROM lem WHERE origin_rid IS NULL ORDER BY ord')
+		.all() as { rid: number }[];
 	database.close();
 	const limit = process.env.PRERENDER_LIMIT ? parseInt(process.env.PRERENDER_LIMIT, 10) : rows.length;
-	return rows.slice(0, limit).map((row) => ({ entry: String(row.id) }));
+	return rows.slice(0, limit).map((row) => ({ entry: idx.idOf(row.rid) }));
 }
 
 /** Native SQLite during prerender; browser SQLite for reflex IDs served by the SPA fallback. */

@@ -1,17 +1,42 @@
 /**
  * query.ts — client-side query layer, the port of neojambu's `search.py` + the entry-page
- * grouping in `app.py`. All queries run in the browser against the chunked SQLite via db.ts.
+ * grouping in `app.py`. All queries run in the browser against the compact ("v2") SQLite
+ * schema via db.ts; scripts/compact_db.py documents that schema and src/lib/dbShared.ts
+ * holds the codecs shared with the build/prerender layer.
  *
- * Design notes for HTTP Range efficiency:
- *  - Text search scans the compact local lemma table with `instr`; it is gated at MIN_SEARCH_CHARS
- *    so 1–2 character partials never trigger a scan.
- *  - The small `languages` and `references` tables are loaded/queried cheaply and
- *    cached; we attach relations in JS rather than doing wide joins over 313k lemma rows.
- *  - The unfiltered entries path avoids the languages join and leans on the partial
- *    idx_entries_order index so only the needed pages are fetched.
+ * Design notes:
+ *  - The whole DB is local (OPFS) after a one-time download, so full-column scans are cheap;
+ *    what we avoid is per-row work proportional to the whole table on hot paths. Lookups go
+ *    through rowids: the sorted binary id table (loaded once into this thread) maps public
+ *    text ids ↔ lem rowids with no SQL index at all.
+ *  - Filters run against the compact base columns (ints, interned tag/cognateset refs, varint
+ *    citation blobs via the vin_any() UDF); display rows are rebuilt to the legacy Lemma shape
+ *    by hydrateLem so components are unchanged.
+ *  - The entries default listing keeps its partial index; the per-language default listing
+ *    reads the language's precomputed `lex` rowid list instead of an index.
  */
 import { query, queryOne } from './db.svelte';
 import { CLADE_ORDER } from './clades';
+import {
+	IdIndex,
+	hydrateLem,
+	LEM_COLS,
+	LEM_JOINS,
+	readVarints,
+	readDeltas,
+	readCorrCells,
+	readCellDict,
+	aliasGroupKey,
+	aliasLookup,
+	FLAG_OCR,
+	FLAG_SECTION,
+	FLAG_LOAN_SOURCE,
+	REL_REFLEX,
+	REL_VARIANT,
+	REL_BORROWED,
+	REL_LOCAL,
+	type RawLem
+} from './dbShared';
 import {
 	PAGE_SIZE,
 	MIN_SEARCH_CHARS,
@@ -23,20 +48,42 @@ import {
 	type CognateGroup
 } from './types';
 
-// ---- small helpers --------------------------------------------------------
+// ---- core caches (id table, clade mask alphabet, languages) ---------------
 
-function placeholders(n: number): string {
-	return new Array(n).fill('?').join(',');
-}
+let ids: IdIndex | null = null;
+let cladeNames: string[] = [];
+let corePromise: Promise<void> | null = null;
 
-/** Run an `IN (...)` query in <900-id chunks to stay under SQLite's parameter limit. */
-async function inChunks<T>(ids: string[], fn: (chunk: string[]) => Promise<T[]>): Promise<T[]> {
-	const out: T[] = [];
-	for (let i = 0; i < ids.length; i += 900) {
-		out.push(...(await fn(ids.slice(i, i + 900))));
+async function ensureCore(): Promise<IdIndex> {
+	if (ids) return ids;
+	if (!corePromise) {
+		corePromise = (async () => {
+			const [idsRow, misc, clades] = await Promise.all([
+				queryOne<{ data: Uint8Array }>('SELECT data FROM ids'),
+				query<{ id: string }>('SELECT id FROM ids_misc ORDER BY rank'),
+				query<{ name: string }>('SELECT name FROM mask_clades ORDER BY rowid'),
+				getAllLanguages()
+			]);
+			cladeNames = clades.map((r) => r.name);
+			ids = new IdIndex(
+				idsRow!.data,
+				misc.map((r) => r.id)
+			);
+		})();
 	}
-	return out;
+	await corePromise;
+	return ids!;
 }
+
+/** JSON rowid-list parameter for `IN (SELECT value FROM json_each(?))` predicates. */
+function jsonList(rids: number[]): string {
+	return JSON.stringify(rids);
+}
+const IN_JSON = '(SELECT value FROM json_each(?))';
+
+/** SQL fragment equivalent to the legacy `redirect_to IS NULL` (link_rid holds variant_of on
+ *  variant/borrowed rows, redirect_to only on relation-none rows). */
+const NOT_REDIRECT = '(l.link_rid IS NULL OR (l.flags & 7) IN (2, 3))';
 
 // ---- precomputed counts (meta table) -------------------------------------
 
@@ -52,11 +99,18 @@ async function metaCount(key: string): Promise<number> {
 // ---- languages cache (615 rows) ------------------------------------------
 
 let languagesCache: Map<string, Language> | null = null;
+let languagesByRid: Map<number, Language> | null = null;
+
+const LANGUAGE_COLS =
+	'rowid AS rid, id, name, language, dialect, glottocode, long, lat, clade, color, ' +
+	'lemma_count, "order", map_marker';
 
 export async function getAllLanguages(): Promise<Language[]> {
-	const list = await query<Language>('SELECT * FROM languages');
+	if (languagesCache) return [...languagesCache.values()];
+	const list = await query<Language & { rid: number }>(`SELECT ${LANGUAGE_COLS} FROM languages`);
 	if (!languagesCache) {
 		languagesCache = new Map(list.map((l) => [l.id, l]));
+		languagesByRid = new Map(list.map((l) => [l.rid, l]));
 	}
 	return list;
 }
@@ -76,37 +130,91 @@ async function languageMap(): Promise<Map<string, Language>> {
 	return languagesCache!;
 }
 
-// Languages that actually carry rows in a given list view — for the Language column's
-// dropdown. Distinct scan over the (indexed) language_id column, cached per mode; the whole
-// DB is local (OPFS) so this is a cheap one-off (~20 langs for entries, ~585 for reflexes).
-const filterLangsCache = new Map<string, Language[]>();
-export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<Language[]> {
-	if (filterLangsCache.has(mode)) return filterLangsCache.get(mode)!;
-	// entries → languages with an etymon OR a loan-source reflex (both are listable under /entries);
-	// reflexes → every language (the reflexes list is the whole lexicon, so any node's language works).
-	const where =
-		mode === 'entries'
-			? "WHERE (origin_lemma_id IS NULL AND relation IS NOT 'local') OR EXISTS (SELECT 1 FROM lemmas b " +
-				"WHERE b.origin_lemma_id = lemmas.id AND b.relation = 'borrowed')"
-			: '';
-	const rows = await query<{ language_id: string }>(
-		`SELECT DISTINCT language_id FROM lemmas ${where}`
-	);
-	const langs = await languageMap();
-	const out = rows
-		.map((r) => langs.get(r.language_id))
-		.filter((l): l is Language => !!l)
-		.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
-	filterLangsCache.set(mode, out);
-	return out;
+function langByRid(rid: number): Language | undefined {
+	return languagesByRid?.get(rid);
 }
 
-const filterDialectsCache = new Map<string, Dialect[]>();
-/** Dialects actually present in a list mode, for inclusion beside base languages in its picker. */
-export async function getFilterDialects(mode: 'entries' | 'reflexes'): Promise<Dialect[]> {
-	if (filterDialectsCache.has(mode)) return filterDialectsCache.get(mode)!;
-	const out = (await getAllDialects()).filter((d) => mode === 'reflexes' || d.entry_count > 0);
-	filterDialectsCache.set(mode, out);
+function langRidOf(id: string): number | null {
+	const l = languagesCache?.get(id) as (Language & { rid: number }) | undefined;
+	return l?.rid ?? null;
+}
+
+// ---- lemma row hydration --------------------------------------------------
+
+/** Lemma plus the internal v2 fields every hydrated row carries. */
+type HLemma = Lemma & { rid: number; citeIds: number[]; childRids: number[] };
+
+function hydrate(row: RawLem): HLemma {
+	const l = hydrateLem(row, {
+		ids: ids!,
+		langIdOf: (rid) => langByRid(rid)?.id ?? '',
+		cladeNames
+	}) as unknown as HLemma;
+	// carry through any computed extras (e.g. `secondary` from UNION queries)
+	const raw = row as unknown as Record<string, unknown>;
+	for (const k of Object.keys(raw)) {
+		if (!(k in l) && k !== 'cites' && k !== 'children' && k !== 'clades_mask' && k !== 'counts')
+			(l as unknown as Record<string, unknown>)[k] = raw[k];
+	}
+	return l;
+}
+
+const LEM_SELECT = `SELECT ${LEM_COLS} FROM lem l ${LEM_JOINS}`;
+
+/** Fetch + hydrate rows for an explicit rowid list, preserving the list's order. */
+async function lemmasByRids(rids: number[]): Promise<HLemma[]> {
+	if (!rids.length) return [];
+	await ensureCore();
+	const rows = await query<RawLem>(`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON}`, [jsonList(rids)]);
+	const byRid = new Map(rows.map((r) => [r.rid, hydrate(r)]));
+	return rids.map((r) => byRid.get(r)).filter((l): l is HLemma => !!l);
+}
+
+/** The children blob of one node (its reflexes/variants/borrowed forms, in display order). */
+async function childRidsOf(rid: number): Promise<number[]> {
+	const r = await queryOne<{ children: Uint8Array | null }>(
+		'SELECT children FROM lem WHERE rowid = ?',
+		[rid]
+	);
+	return readVarints(r?.children);
+}
+
+// ---- citation cache (15.5k distinct citation edges) -----------------------
+
+interface CiteRow {
+	ref: number;
+	locator: string;
+}
+let citesCache: Map<number, CiteRow> | null = null;
+let referencesByRid: Map<number, Reference> | null = null;
+let citesPromise: Promise<void> | null = null;
+
+async function ensureCites(): Promise<void> {
+	if (citesCache) return;
+	if (!citesPromise) {
+		citesPromise = (async () => {
+			const [cites, refs] = await Promise.all([
+				query<{ rid: number; ref_rid: number; locator: string }>(
+					'SELECT rowid AS rid, ref_rid, locator FROM cites'
+				),
+				query<Reference & { rid: number }>('SELECT rowid AS rid, * FROM "references"')
+			]);
+			citesCache = new Map(cites.map((c) => [c.rid, { ref: c.ref_rid, locator: c.locator }]));
+			referencesByRid = new Map(refs.map((r) => [r.rid, r]));
+		})();
+	}
+	await citesPromise;
+}
+
+/** Cite ids whose reference matches a predicate (for source / reference filters). */
+async function citeIdsWhere(refPred: (r: Reference & { rid: number }) => boolean): Promise<number[]> {
+	await ensureCites();
+	const wanted = new Set<number>();
+	for (const r of referencesByRid!.values()) {
+		if (refPred(r as Reference & { rid: number })) wanted.add((r as Reference & { rid: number }).rid);
+	}
+	const out: number[] = [];
+	for (const [cid, c] of citesCache!) if (wanted.has(c.ref)) out.push(cid);
 	return out;
 }
 
@@ -117,121 +225,117 @@ async function attachLanguages(lemmas: Lemma[]): Promise<void> {
 	for (const l of lemmas) l.language = langs.get(l.language_id);
 }
 
-/** Reflexes of one etymon that match a given concept — the inline expansion on the concepts view.
- *  Same shape/columns as the reflex table, but narrowed to the concept-matching forms. */
-export async function getConceptReflexes(entryId: string, conceptId: string): Promise<Lemma[]> {
-	const rows = await query<Lemma>(
-		`SELECT l.* FROM lemmas l
-		 WHERE COALESCE(NULLIF(l.origin_lemma_id, ''), l.id) = ? AND l.relation IS NOT 'local'
-		   AND l.redirect_to IS NULL
-		   AND l.rowid IN (SELECT lemma_rid FROM lemma_concept WHERE concept_id = ?)
-		 ORDER BY l."order"`,
-		[entryId, conceptId]
-	);
-	await attachLanguages(rows);
-	await attachReferences(rows);
-	return rows;
-}
-
-async function attachOrigin(lemmas: Lemma[]): Promise<void> {
-	const langs = await languageMap();
-	const ids = [...new Set(lemmas.map((l) => l.origin_lemma_id).filter((x): x is string => !!x))];
-	if (!ids.length) return;
-	const rows = await inChunks<Lemma>(ids, (chunk) =>
-		query<Lemma>(
-			`SELECT lemmas.*,
-			        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
-			                ON r.rowid = lr.reference_rid
-			                WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
-			 FROM lemmas WHERE id IN (${placeholders(chunk.length)})`,
-			chunk
+async function attachOrigin(lemmas: HLemma[]): Promise<void> {
+	const idx = await ensureCore();
+	const rids = [
+		...new Set(
+			lemmas
+				.map((l) => (l.origin_lemma_id ? idx.ridOf(l.origin_lemma_id) : null))
+				.filter((r): r is number => r != null)
 		)
-	);
+	];
+	if (!rids.length) return;
+	const rows = await lemmasByRids(rids);
+	await attachLanguages(rows);
 	const map = new Map(rows.map((r) => [r.id, r]));
-	for (const r of rows) r.language = langs.get(r.language_id);
 	for (const l of lemmas) l.origin_lemma = l.origin_lemma_id ? (map.get(l.origin_lemma_id) ?? null) : null;
 }
 
-async function attachReferences(lemmas: Lemma[]): Promise<void> {
+async function attachReferences(lemmas: HLemma[]): Promise<void> {
 	if (!lemmas.length) return;
-	const ids = lemmas.map((l) => l.id);
-	const rows = await inChunks<Reference & { lemma_id: string }>(ids, (chunk) =>
-		query<Reference & { lemma_id: string }>(
-			`SELECT l.id AS lemma_id, r.id, r.short, r.source, r.progress, r.provenance, r.editor, r.ocr,
-			        lr.locator,
-			        r.lemma_count, r.unetymologised_count
-			 FROM lemma_reference lr
-			 JOIN lemmas l ON l.rowid = lr.lemma_rid
-			 JOIN "references" r ON r.rowid = lr.reference_rid
-			 WHERE l.id IN (${placeholders(chunk.length)})
-			 ORDER BY r.short`,
-			chunk
-		)
-	);
-	const map = new Map<string, Reference[]>();
-	for (const row of rows) {
-		const existing = map.get(row.lemma_id)?.find((reference) => reference.id === row.id);
-		if (existing) {
-			if (row.locator && !existing.locator?.split('; ').includes(row.locator))
-				existing.locator = [existing.locator, row.locator].filter(Boolean).join('; ');
-			continue;
+	await ensureCites();
+	for (const l of lemmas) {
+		const perRef = new Map<number, Reference>();
+		for (const cid of l.citeIds) {
+			const cite = citesCache!.get(cid);
+			if (!cite) continue;
+			const refRow = referencesByRid!.get(cite.ref);
+			if (!refRow) continue;
+			const existing = perRef.get(cite.ref);
+			if (existing) {
+				if (cite.locator && !existing.locator?.split('; ').includes(cite.locator))
+					existing.locator = [existing.locator, cite.locator].filter(Boolean).join('; ');
+				continue;
+			}
+			perRef.set(cite.ref, {
+				id: refRow.id,
+				short: refRow.short,
+				source: refRow.source,
+				progress: refRow.progress,
+				provenance: refRow.provenance,
+				editor: refRow.editor,
+				ocr: refRow.ocr,
+				lemma_count: refRow.lemma_count,
+				unetymologised_count: refRow.unetymologised_count,
+				locator: cite.locator || undefined
+			});
 		}
-		const ref: Reference = {
-			id: row.id,
-			short: row.short,
-			source: row.source,
-			progress: row.progress,
-			provenance: row.provenance,
-			editor: row.editor,
-			ocr: row.ocr,
-			lemma_count: row.lemma_count,
-			unetymologised_count: row.unetymologised_count,
-			locator: row.locator || undefined
-		};
-		const arr = map.get(row.lemma_id);
-		if (arr) arr.push(ref);
-		else map.set(row.lemma_id, [ref]);
+		l.references = [...perRef.values()].sort((a, b) =>
+			(a.short ?? '').localeCompare(b.short ?? '')
+		);
 	}
-	for (const l of lemmas) l.references = map.get(l.id) ?? [];
 }
 
 /** For each given reflex, count the sub-nodes hanging off it: borrowed forms sourced from it
- *  (`sub_count`, the "→n" borrowed badge) and its own daughter reflexes (`reflex_sub_count`, shown
- *  when the reflex is itself an etymon with descendants — e.g. an IA head under a proto entry). */
-async function attachSubCounts(lemmas: Lemma[]): Promise<void> {
+ *  (`sub_count`) and its own daughter reflexes (`reflex_sub_count`). Children rowids are already
+ *  on the hydrated rows, so one flags lookup covers both counts. */
+async function attachSubCounts(lemmas: HLemma[]): Promise<void> {
 	if (!lemmas.length) return;
-	const ids = lemmas.map((l) => l.id);
-	const borrowed = await inChunks<{ borrowed_from: string; c: number }>(ids, (chunk) =>
-		query<{ borrowed_from: string; c: number }>(
-			`SELECT borrowed_from, COUNT(*) AS c FROM lemmas
-			 WHERE borrowed_from IN (${placeholders(chunk.length)}) GROUP BY borrowed_from`,
-			chunk
-		)
-	);
-	const bMap = new Map(borrowed.map((r) => [r.borrowed_from, r.c]));
-	const reflexes = await inChunks<{ origin_lemma_id: string; c: number }>(ids, (chunk) =>
-		query<{ origin_lemma_id: string; c: number }>(
-			`SELECT origin_lemma_id, COUNT(*) AS c FROM lemmas
-			 WHERE origin_lemma_id IN (${placeholders(chunk.length)}) AND relation = 'reflex'
-			 GROUP BY origin_lemma_id`,
-			chunk
-		)
-	);
-	const rMap = new Map(reflexes.map((r) => [r.origin_lemma_id, r.c]));
+	const allKids = [...new Set(lemmas.flatMap((l) => l.childRids))];
+	const flagsOf = new Map<number, number>();
+	if (allKids.length) {
+		const rows = await query<{ rid: number; flags: number }>(
+			`SELECT rowid AS rid, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+			[jsonList(allKids)]
+		);
+		for (const r of rows) flagsOf.set(r.rid, r.flags);
+	}
 	for (const l of lemmas) {
-		l.sub_count = bMap.get(l.id) ?? 0;
-		l.reflex_sub_count = rMap.get(l.id) ?? 0;
+		let borrowed = 0;
+		let reflexes = 0;
+		for (const k of l.childRids) {
+			const rel = (flagsOf.get(k) ?? 0) & 7;
+			if (rel === REL_BORROWED) borrowed++;
+			else if (rel === REL_REFLEX) reflexes++;
+		}
+		l.sub_count = borrowed;
+		l.reflex_sub_count = reflexes;
 	}
 }
 
 /** The borrowed sub-reflexes of a reflex (forms it was the source of), for its page. */
 export async function getBorrowedReflexes(reflexId: string): Promise<Lemma[]> {
-	const rows = await query<Lemma>(
-		'SELECT * FROM lemmas WHERE borrowed_from = ? ORDER BY "order"',
-		[reflexId]
+	const idx = await ensureCore();
+	const rid = idx.ridOf(reflexId);
+	if (!rid) return [];
+	const rows = (await lemmasByRids(await childRidsOf(rid))).filter(
+		(l) => l.relation === 'borrowed'
 	);
 	await attachLanguages(rows);
 	return rows;
+}
+
+/** Reflexes of one etymon that match a given concept — the inline expansion on the concepts view. */
+export async function getConceptReflexes(entryId: string, conceptId: string): Promise<Lemma[]> {
+	const idx = await ensureCore();
+	const entryRid = idx.ridOf(entryId);
+	const blob = await queryOne<{ rids: Uint8Array | null }>(
+		'SELECT rids FROM concepts WHERE id = ?',
+		[conceptId]
+	);
+	if (!entryRid || !blob?.rids) return [];
+	const linked = readDeltas(blob.rids);
+	const rows = await query<RawLem>(
+		`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON}
+		   AND (l.origin_rid = ? OR (l.origin_rid IS NULL AND l.rowid = ?))
+		   AND (l.flags & 7) != ${REL_LOCAL} AND ${NOT_REDIRECT}
+		 ORDER BY l.ord`,
+		[jsonList(linked), entryRid, entryRid]
+	);
+	const out = rows.map(hydrate);
+	await attachLanguages(out);
+	await attachReferences(out);
+	return out;
 }
 
 // ---- filter / sort construction (port of search.py) ----------------------
@@ -241,13 +345,13 @@ const SORT_COLUMNS: Record<string, string> = {
 	word: 'l.word',
 	gloss: 'l.gloss',
 	notes: 'l.notes',
-	origin: 'l."order"',
+	origin: 'l.ord',
 	clade: 'lang.clade',
 	reflexes: 'lang.lemma_count',
-	nreflex: 'l.reflex_count',
-	nlang: 'l.lang_count',
+	nreflex: '(l.counts / 1024)',
+	nlang: '(l.counts % 1024)',
 	nderived:
-		'(SELECT COUNT(*) FROM derivation d JOIN lemmas c ON c.id=d.child_id WHERE d.parent_id = l.id AND c.origin_lemma_id IS NULL)'
+		'(SELECT COUNT(*) FROM derivation d JOIN lem c ON c.rowid = d.child_rid WHERE d.parent_rid = l.rowid AND c.origin_rid IS NULL)'
 };
 // columns whose sort/filter forces the languages join
 const NEEDS_LANG_JOIN = new Set(['lang', 'clade', 'reflexes']);
@@ -257,12 +361,19 @@ interface Cond {
 	params: unknown[];
 }
 
-function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean } {
+/** Whole-token tagset match: rows whose interned tag string contains the token. */
+function tagCond(token: string): Cond {
+	return {
+		sql: `l.tagset_rid IN (SELECT rowid FROM tagsets WHERE (' ' || txt || ' ') LIKE ?)`,
+		params: [`% ${token} %`]
+	};
+}
+
+async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLangJoin: boolean }> {
 	const conds: Cond[] = [];
 	let needsLangJoin = false;
 
-	// Case-insensitive substring terms. Normalising the input in JS supplies Unicode lower-casing;
-	// SQLite's lower() handles the ASCII capitals present in prose and markup.
+	// Case-insensitive substring terms over the base text columns.
 	for (const [key, col] of [
 		['word', 'word'],
 		['gloss', 'gloss'],
@@ -288,72 +399,48 @@ function lemmaConditions(p: ListParams): { conds: Cond[]; needsLangJoin: boolean
 	}
 	if (p.origin_lang?.trim()) {
 		const selected = p.origin_lang.trim();
-		conds.push(
-			selected.startsWith('dialect:')
-				? {
-						sql: "(' ' || COALESCE(l.tags, '') || ' ') LIKE ?",
-						params: [`% ${selected} %`]
-					}
-				: { sql: 'l.language_id = ?', params: [selected] }
-		);
+		if (selected.startsWith('dialect:')) conds.push(tagCond(selected));
+		else conds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(selected) ?? -1] });
 	}
 	if (p.etymon_lang?.trim()) {
 		const selected = p.etymon_lang.trim();
 		conds.push(
 			selected.startsWith('dialect:')
 				? {
-						sql: `l.origin_lemma_id IN (SELECT id FROM lemmas
-						      WHERE (' ' || COALESCE(tags, '') || ' ') LIKE ?)`,
+						sql: `l.origin_rid IN (SELECT rowid FROM lem
+						      WHERE tagset_rid IN (SELECT rowid FROM tagsets WHERE (' ' || txt || ' ') LIKE ?))`,
 						params: [`% ${selected} %`]
 					}
-				: {
-						sql: 'l.origin_lemma_id IN (SELECT id FROM lemmas WHERE language_id = ?)',
-						params: [selected]
-					}
+				: { sql: 'l.origin_rid IN (SELECT rowid FROM lem WHERE lang_rid = ?)', params: [langRidOf(selected) ?? -1] }
 		);
 	}
 	if (p.dialect?.trim()) {
-		conds.push({
-			sql: "(' ' || COALESCE(l.tags, '') || ' ') LIKE ?",
-			params: [`% ${p.dialect.trim()} %`]
-		});
+		conds.push(tagCond(p.dialect.trim()));
 	}
 	if ((p.origin ?? '').trim().length >= MIN_SEARCH_CHARS) {
 		conds.push({
-			sql: `l.origin_lemma_id IN
-			        (SELECT id FROM lemmas WHERE instr(lower(COALESCE(word, '')), ?) > 0)`,
+			sql: `l.origin_rid IN (SELECT rowid FROM lem WHERE instr(lower(COALESCE(word, '')), ?) > 0)`,
 			params: [p.origin!.trim().toLocaleLowerCase()]
 		});
 	}
 	if (p.source?.trim()) {
-		conds.push({
-			sql: `EXISTS (SELECT 1 FROM lemma_reference lr
-			         JOIN "references" r ON r.rowid = lr.reference_rid
-			         WHERE lr.lemma_rid = l.rowid AND r.short LIKE ?)`,
-			params: [`%${p.source.trim()}%`]
-		});
+		const needle = p.source.trim().toLowerCase();
+		const cids = await citeIdsWhere((r) => (r.short ?? '').toLowerCase().includes(needle));
+		conds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
 	}
-	// tags: space-separated whole-token match on the `tags` column (AND across the selected tags)
+	// tags: whole-token match (AND across the selected tags)
 	if (p.tags?.trim()) {
-		for (const t of p.tags.trim().split(/\s+/)) {
-			conds.push({
-				sql: "(' ' || COALESCE(l.tags, '') || ' ') LIKE ?",
-				params: [`% ${t} %`]
-			});
-		}
+		for (const t of p.tags.trim().split(/\s+/)) conds.push(tagCond(t));
 	}
 
 	// root nodes only: entries not derived from any other etymon (no incoming derivation edge)
 	if (p.rootsOnly) {
-		conds.push({
-			sql: 'NOT EXISTS (SELECT 1 FROM derivation WHERE child_id = l.id)',
-			params: []
-		});
+		conds.push({ sql: 'NOT EXISTS (SELECT 1 FROM derivation WHERE child_rid = l.rowid)', params: [] });
 	}
 
-	// CDIAL section-forms only: the promoted numbered head-forms, whose ids look like `<etymon>-<n>`
+	// CDIAL section-forms only (precomputed flag; ids like `<etymon>-<n>`)
 	if (p.sectionsOnly) {
-		conds.push({ sql: "l.id GLOB '[0-9]*-[0-9]*'", params: [] });
+		conds.push({ sql: `(l.flags & ${FLAG_SECTION}) != 0`, params: [] });
 	}
 
 	// a sort on a language column also needs the join
@@ -369,7 +456,7 @@ function orderBy(p: ListParams, fallback: string): string {
 		const [dir, col] = s.split('-');
 		const sqlCol = SORT_COLUMNS[col];
 		if (sqlCol && (dir === 'asc' || dir === 'desc')) {
-			return `${sqlCol} ${dir === 'desc' ? 'DESC' : 'ASC'}, l."order"`;
+			return `${sqlCol} ${dir === 'desc' ? 'DESC' : 'ASC'}, l.ord`;
 		}
 	}
 	return fallback;
@@ -392,50 +479,95 @@ interface ListOpts {
 	withOrigin?: boolean; // attach origin_lemma (reflexes/lexicon show it)
 }
 
+/** Per-entry extras for the entries view: derived-term counts + variant word lists, computed
+ *  from the page's rows (the legacy correlated group_concat subqueries can't see blobs). */
+async function attachEntryExtras(rows: HLemma[]): Promise<void> {
+	if (!rows.length) return;
+	const rids = rows.map((r) => r.rid);
+	const derived = await query<{ p: number; c: number }>(
+		`SELECT d.parent_rid AS p, COUNT(*) AS c FROM derivation d
+		 JOIN lem c2 ON c2.rowid = d.child_rid
+		 WHERE d.parent_rid IN ${IN_JSON} AND c2.origin_rid IS NULL GROUP BY d.parent_rid`,
+		[jsonList(rids)]
+	);
+	const dMap = new Map(derived.map((r) => [r.p, r.c]));
+	const parentOf = new Map<number, HLemma>();
+	for (const r of rows) for (const k of r.childRids) parentOf.set(k, r);
+	const allKids = [...parentOf.keys()];
+	const variants = allKids.length
+		? await query<{ rid: number; word: string; flags: number }>(
+				`SELECT rowid AS rid, word, flags FROM lem
+				 WHERE rowid IN ${IN_JSON} AND (flags & 7) = ${REL_VARIANT} AND link_rid IS NULL
+				 ORDER BY ord`,
+				[jsonList(allKids)]
+			)
+		: [];
+	const vf = new Map<number, string[]>();
+	const ovf = new Map<number, string[]>();
+	for (const v of variants) {
+		const parent = parentOf.get(v.rid);
+		if (!parent) continue;
+		(vf.get(parent.rid) ?? vf.set(parent.rid, []).get(parent.rid)!).push(v.word);
+		if (v.flags & FLAG_OCR)
+			(ovf.get(parent.rid) ?? ovf.set(parent.rid, []).get(parent.rid)!).push(v.word);
+	}
+	for (const r of rows) {
+		r.derived_count = dMap.get(r.rid) ?? 0;
+		r.variant_forms = vf.get(r.rid)?.join('\x1f') ?? null;
+		r.ocr_variant_forms = ovf.get(r.rid)?.join('\x1f') ?? null;
+	}
+}
+
 export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	const { mode, languageId, referenceId, conceptId, params } = opts;
+	await ensureCore();
 	const page = Math.max(1, params.page ?? 1);
-	const { conds, needsLangJoin } = lemmaConditions(params);
+	const { conds, needsLangJoin } = await lemmaConditions(params);
 
-	// base mode condition. The reflexes list is the whole lexicon (every node — etyma, reflexes,
-	// and variants); only the per-entry reflex_count/lang_count aggregates treat variants separately.
-	// Redirect stubs (CDIAL "Add. N" pointers) are never listed.
-	const modeConds: Cond[] = [{ sql: 'l.redirect_to IS NULL', params: [] }];
+	// base mode condition (see the v1 layer for semantics; redirect stubs are never listed)
+	const modeConds: Cond[] = [{ sql: NOT_REDIRECT, params: [] }];
 	if (mode === 'entries') {
-		// normally headwords (no parent); the loan-sources view instead lists reflexes that are
-		// themselves the source of borrowings into other languages (they head a borrowing sub-tree).
 		if (params.loanSourcesOnly)
-			modeConds.push({
-				sql: "EXISTS (SELECT 1 FROM lemmas b WHERE b.origin_lemma_id = l.id AND b.relation = 'borrowed')",
-				params: []
-			});
-		else modeConds.push({ sql: "l.origin_lemma_id IS NULL AND l.relation IS NOT 'local'", params: [] });
+			modeConds.push({ sql: `(l.flags & ${FLAG_LOAN_SOURCE}) != 0`, params: [] });
+		else modeConds.push({ sql: `l.origin_rid IS NULL AND (l.flags & 7) != ${REL_LOCAL}`, params: [] });
 	}
 	if (mode === 'lexicon' && languageId)
-		modeConds.push({ sql: 'l.language_id = ?', params: [languageId] });
-	if (referenceId)
-		modeConds.push({
-			sql: `EXISTS (SELECT 1 FROM lemma_reference lr
-			       JOIN "references" rr ON rr.rowid = lr.reference_rid
-			       WHERE lr.lemma_rid = l.rowid AND rr.id = ?)`,
-			params: [referenceId]
-		});
-	// entries that are the immediate etymon of some form mapped to this concept (lone nodes excluded)
-	if (conceptId)
-		modeConds.push({
-			sql: `l.id IN (SELECT DISTINCT COALESCE(NULLIF(r.origin_lemma_id, ''), r.id)
-			       FROM lemma_concept lc JOIN lemmas r ON r.rowid = lc.lemma_rid
-			       WHERE lc.concept_id = ? AND r.relation IS NOT 'local')`,
-			params: [conceptId]
-		});
+		modeConds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(languageId) ?? -1] });
+	if (referenceId) {
+		const cids = await citeIdsWhere((r) => r.id === referenceId);
+		modeConds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
+	}
+
+	// concept restriction: entries that are the immediate etymon of a form mapped to the concept.
+	// The matching entry set is small, so it is resolved in JS (also yielding concept_match).
+	let conceptMatch: Map<number, number> | null = null;
+	if (conceptId) {
+		const blob = await queryOne<{ rids: Uint8Array | null }>(
+			'SELECT rids FROM concepts WHERE id = ?',
+			[conceptId]
+		);
+		conceptMatch = new Map();
+		const linked = blob?.rids ? readDeltas(blob.rids) : [];
+		if (linked.length) {
+			const rows = await query<{ rid: number; origin_rid: number | null; flags: number }>(
+				`SELECT rowid AS rid, origin_rid, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+				[jsonList(linked)]
+			);
+			for (const r of rows) {
+				if ((r.flags & 7) === REL_LOCAL) continue;
+				const entry = r.origin_rid ?? r.rid;
+				conceptMatch.set(entry, (conceptMatch.get(entry) ?? 0) + 1);
+			}
+		}
+		modeConds.push({ sql: `l.rowid IN ${IN_JSON}`, params: [jsonList([...conceptMatch.keys()])] });
+	}
 
 	const all = [...modeConds, ...conds];
 	const whereParams = all.flatMap((c) => c.params);
 	const whereSql = all.length ? 'WHERE ' + all.map((c) => c.sql).join(' AND ') : '';
+	const join = needsLangJoin ? 'JOIN languages lang ON lang.rowid = l.lang_rid' : '';
 
-	const join = needsLangJoin ? 'JOIN languages lang ON lang.id = l.language_id' : '';
-
-	// Fast path: entries list with no filters/sort → partial index, no join, no temp sort.
+	// Fast path 1: entries list with no filters/sort → partial index, no join, no temp sort.
 	const isDefaultEntries =
 		mode === 'entries' &&
 		!referenceId &&
@@ -444,97 +576,118 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 		conds.length === 0 &&
 		!params.loanSourcesOnly &&
 		!(params.sort ?? '').trim();
+	// Fast path 2: per-language lexicon with no filters/sort → the language's `lex` rowid list.
+	const isDefaultLexicon =
+		mode === 'lexicon' &&
+		!!languageId &&
+		!referenceId &&
+		!conceptId &&
+		!needsLangJoin &&
+		conds.length === 0 &&
+		!(params.sort ?? '').trim();
 
-	// in the concept view, default to the etyma with the most reflexes matching the concept first
-	const fallbackOrder =
-		conceptId && !(params.sort ?? '').trim() ? 'concept_match DESC, l."order"' : 'l."order"';
-	const order = orderBy(params, fallbackOrder);
-
-	// count — use precomputed totals for the unfiltered case (a full COUNT(*) is a whole-index
-	// scan = a large sequential read over the wire); only COUNT the (bounded) filtered set.
 	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly || !!referenceId || !!conceptId;
 	let count: number;
 	if (!hasFilters && mode === 'entries') {
 		count = await metaCount('total_entries');
 	} else if (!hasFilters && mode === 'reflexes') {
-		// the reflexes list is the whole lexicon (etyma + reflexes + variants), minus redirect stubs
 		count = await metaCount('total_lexicon');
 	} else if (!hasFilters && mode === 'lexicon' && languageId) {
-		// languages.lemma_count is exactly the per-language lemma count (verified)
 		const r = await queryOne<{ c: number }>('SELECT lemma_count AS c FROM languages WHERE id = ?', [
 			languageId
 		]);
 		count = r?.c ?? 0;
+	} else if (conceptId) {
+		count = -1; // resolved below from the full matching set
 	} else {
 		const countRow = await queryOne<{ c: number }>(
-			`SELECT COUNT(*) AS c FROM lemmas l ${join} ${whereSql}`,
+			`SELECT COUNT(*) AS c FROM lem l ${join} ${whereSql}`,
 			whereParams
 		);
 		count = countRow?.c ?? 0;
 	}
 
-	// page
 	const offset = (page - 1) * PAGE_SIZE;
-	// per-entry extras (entries view only): derived-term count and the same-language variant forms
-	// (concatenated, ordered, unit-separated) so the Entry column can list them beside the headword
-	const derivedCol =
-		mode === 'entries'
-			? ', (SELECT COUNT(*) FROM derivation d JOIN lemmas c ON c.id=d.child_id ' +
-				'WHERE d.parent_id = l.id AND c.origin_lemma_id IS NULL) AS derived_count' +
-				", (SELECT group_concat(word, char(31)) FROM (SELECT word FROM lemmas WHERE " +
-				"origin_lemma_id = l.id AND relation = 'variant' AND variant_of IS NULL ORDER BY \"order\")) AS variant_forms" +
-				", (SELECT group_concat(v.word, char(31)) FROM lemmas v WHERE v.origin_lemma_id = l.id " +
-				"AND v.relation = 'variant' AND v.variant_of IS NULL AND EXISTS (SELECT 1 FROM lemma_reference lr " +
-				"JOIN \"references\" rr ON rr.rowid = lr.reference_rid WHERE lr.lemma_rid = v.rowid AND rr.ocr = 1)) AS ocr_variant_forms"
-			: '';
-	// count of this entry's reflexes that match the concept — the concept view sorts on it and shows it
-	const conceptCol = conceptId
-		? `, (SELECT COUNT(*) FROM lemma_concept lcx JOIN lemmas rx ON rx.rowid = lcx.lemma_rid
-		     WHERE lcx.concept_id = ? AND COALESCE(NULLIF(rx.origin_lemma_id, ''), rx.id) = l.id
-		       AND rx.relation IS NOT 'local') AS concept_match`
-		: '';
-	const conceptColParams = conceptId ? [conceptId] : [];
-	const fetchSql = isDefaultEntries
-		? `SELECT l.*${derivedCol} FROM lemmas l INDEXED BY idx_entries_order
-		   WHERE l.origin_lemma_id IS NULL AND l.relation IS NOT 'local' AND l.redirect_to IS NULL ORDER BY l."order" LIMIT ${PAGE_SIZE} OFFSET ${offset}`
-		: `SELECT l.*${derivedCol}${conceptCol} FROM lemmas l ${join} ${whereSql}
-		   ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
-	const rows = await query<Lemma>(
-		fetchSql,
-		isDefaultEntries ? [] : [...conceptColParams, ...whereParams]
-	);
+	const fallbackOrder = 'l.ord';
+	const order = orderBy(params, fallbackOrder);
+
+	let rows: HLemma[];
+	if (isDefaultLexicon) {
+		const lex = await queryOne<{ lex: Uint8Array | null }>(
+			'SELECT lex FROM languages WHERE id = ?',
+			[languageId]
+		);
+		const rids = readVarints(lex?.lex);
+		rows = await lemmasByRids(rids.slice(offset, offset + PAGE_SIZE));
+	} else if (isDefaultEntries) {
+		const raw = await query<RawLem>(
+			`SELECT ${LEM_COLS} FROM lem l INDEXED BY idx_entries_ord ${LEM_JOINS}
+			 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_LOCAL} AND l.link_rid IS NULL
+			 ORDER BY l.ord LIMIT ${PAGE_SIZE} OFFSET ${offset}`
+		);
+		rows = raw.map(hydrate);
+	} else if (conceptId && conceptMatch) {
+		// bounded set: fetch all matches, order + paginate here so concept_match can sort
+		const raw = await query<RawLem>(
+			`${LEM_SELECT} ${join} ${whereSql} ORDER BY ${order}`,
+			whereParams
+		);
+		let full = raw.map(hydrate);
+		for (const r of full) r.concept_match = conceptMatch.get(r.rid) ?? 0;
+		if (!(params.sort ?? '').trim())
+			full = full.sort((a, b) => (b.concept_match! - a.concept_match!) || a.order - b.order);
+		count = full.length;
+		rows = full.slice(offset, offset + PAGE_SIZE);
+	} else {
+		const raw = await query<RawLem>(
+			`${LEM_SELECT} ${join} ${whereSql} ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`,
+			whereParams
+		);
+		rows = raw.map(hydrate);
+	}
 
 	await attachLanguages(rows);
 	if (opts.withOrigin) await attachOrigin(rows);
 	await attachReferences(rows);
 	if (mode !== 'entries') await attachSubCounts(rows);
+	if (mode === 'entries') await attachEntryExtras(rows);
 
 	return { rows, count, page };
 }
 
 // ---- single-record lookups ------------------------------------------------
 
-let lemmaAliasesAvailable: boolean | null = null;
+const aliasGroupCache = new Map<string, Uint8Array | null>();
 
-async function canonicalLemmaId(id: string): Promise<string> {
-	if (lemmaAliasesAvailable === null) {
-		lemmaAliasesAvailable = !!(await queryOne<{ ok: number }>(
-			"SELECT 1 AS ok FROM sqlite_master WHERE type = 'table' AND name = 'lemma_aliases'"
-		));
+/** Resolve a public id to its lem rowid, following legacy-id aliases first (they shadow). */
+async function canonicalRid(id: string): Promise<number | null> {
+	const idx = await ensureCore();
+	const key = aliasGroupKey(id);
+	if (key) {
+		if (!aliasGroupCache.has(key.prefix)) {
+			const g = await queryOne<{ data: Uint8Array }>('SELECT data FROM aliases WHERE prefix = ?', [
+				key.prefix
+			]);
+			aliasGroupCache.set(key.prefix, g?.data ?? null);
+		}
+		const g = aliasGroupCache.get(key.prefix);
+		if (g) {
+			const rid = aliasLookup(g, key.m);
+			if (rid != null) return rid;
+		}
 	}
-	if (!lemmaAliasesAvailable) return id;
-	return (
-		(
-			await queryOne<{ lemma_id: string }>(
-				'SELECT l.id AS lemma_id FROM lemma_aliases a JOIN lemmas l ON l.rowid=a.lemma_rid WHERE a.alias = ?',
-				[id]
-			)
-		)?.lemma_id ?? id
+	const miscAlias = await queryOne<{ lemma_rid: number }>(
+		'SELECT lemma_rid FROM aliases_misc WHERE alias = ?',
+		[id]
 	);
+	if (miscAlias) return miscAlias.lemma_rid;
+	return idx.ridOf(id);
 }
 
 export async function getLemma(id: string): Promise<Lemma | null> {
-	const l = await queryOne<Lemma>('SELECT * FROM lemmas WHERE id = ?', [await canonicalLemmaId(id)]);
+	const rid = await canonicalRid(id);
+	if (!rid) return null;
+	const [l] = await lemmasByRids([rid]);
 	if (!l) return null;
 	await attachLanguages([l]);
 	await attachOrigin([l]);
@@ -549,21 +702,32 @@ export interface EntryGraph {
 
 /** Client-side counterpart of the prerender query, used when a reflex entry was not emitted as HTML. */
 export async function getEntryGraph(id: string): Promise<EntryGraph> {
-	const canonicalId = await canonicalLemmaId(id);
+	const idx = await ensureCore();
+	const rid = await canonicalRid(id);
+	if (!rid) return { ancestors: [], derived: [] };
 	const [ancestors, derived] = await Promise.all([
-		query<{ id: string; word: string }>(
-			`SELECT l.id, l.word FROM derivation d JOIN lemmas l ON l.id = d.parent_id
-			 WHERE d.child_id = ? ORDER BY d.rowid`,
-			[canonicalId]
+		query<{ rid: number; word: string }>(
+			`SELECT l.rowid AS rid, l.word FROM derivation d JOIN lem l ON l.rowid = d.parent_rid
+			 WHERE d.child_rid = ? ORDER BY d.rowid`,
+			[rid]
 		),
-		query<{ id: string; word: string; gloss: string; reflex_count: number; lang_count: number }>(
-			`SELECT l.id, l.word, l.gloss, l.reflex_count, l.lang_count
-			 FROM derivation d JOIN lemmas l ON l.id = d.child_id
-			 WHERE d.parent_id = ? AND l.origin_lemma_id IS NULL ORDER BY l."order"`,
-			[canonicalId]
+		query<{ rid: number; word: string; gloss: string; counts: number | null }>(
+			`SELECT l.rowid AS rid, l.word, l.gloss, l.counts
+			 FROM derivation d JOIN lem l ON l.rowid = d.child_rid
+			 WHERE d.parent_rid = ? AND l.origin_rid IS NULL ORDER BY l.ord`,
+			[rid]
 		)
 	]);
-	return { ancestors, derived };
+	return {
+		ancestors: ancestors.map((r) => ({ id: idx.idOf(r.rid), word: r.word })),
+		derived: derived.map((r) => ({
+			id: idx.idOf(r.rid),
+			word: r.word,
+			gloss: r.gloss,
+			reflex_count: r.counts != null ? r.counts >> 10 : 0,
+			lang_count: r.counts != null ? r.counts % 1024 : 0
+		}))
+	};
 }
 
 export interface AncestorRef {
@@ -574,61 +738,48 @@ export interface AncestorRef {
 	ocr: boolean;
 }
 
-/** Walk up the etymology graph from a node: a reflex/variant → its etymon (origin_lemma_id); an
- *  etymon → its derivation ancestors (and so on up to the roots). Returns the ancestors level by
- *  level, nearest first. */
+/** Walk up the etymology graph from a node, level by level, nearest first. */
 export async function getAncestryChain(startId: string): Promise<AncestorRef[][]> {
-	const langs = await languageMap();
+	const idx = await ensureCore();
+	const startRid = idx.ridOf(startId);
+	if (!startRid) return [];
 	const levels: AncestorRef[][] = [];
-	const seen = new Set<string>([startId]);
-	let frontier = [startId];
+	const seen = new Set<number>([startRid]);
+	let frontier = [startRid];
 	for (let depth = 0; depth < 16 && frontier.length; depth++) {
-		// step up one link: a variant → its main reflex (variant_of); anything else (reflex, borrowed
-		// form, section-form's reflex) → its immediate parent via origin_lemma_id.
-		const viaOrigin = await inChunks<{ pid: string }>(frontier, (chunk) =>
-			query<{ pid: string }>(
-				`SELECT COALESCE(variant_of, origin_lemma_id) AS pid FROM lemmas
-				 WHERE id IN (${placeholders(chunk.length)}) AND COALESCE(variant_of, origin_lemma_id) IS NOT NULL`,
-				chunk
-			)
+		// one step up: a variant → its main reflex (link), anything else → origin
+		const viaOrigin = await query<{ pid: number }>(
+			`SELECT CASE WHEN (flags & 7) IN (2, 3) AND link_rid IS NOT NULL THEN link_rid
+			             ELSE origin_rid END AS pid
+			 FROM lem WHERE rowid IN ${IN_JSON} AND COALESCE(CASE WHEN (flags & 7) IN (2, 3) THEN link_rid END, origin_rid) IS NOT NULL`,
+			[jsonList(frontier)]
 		);
-		const viaDeriv = await inChunks<{ pid: string }>(frontier, (chunk) =>
-			query<{ pid: string }>(
-				`SELECT parent_id AS pid FROM derivation WHERE child_id IN (${placeholders(chunk.length)})`,
-				chunk
-			)
+		const viaDeriv = await query<{ pid: number }>(
+			`SELECT parent_rid AS pid FROM derivation WHERE child_rid IN ${IN_JSON}`,
+			[jsonList(frontier)]
 		);
 		const pids = [...new Set([...viaOrigin, ...viaDeriv].map((r) => r.pid))].filter(
 			(p) => p && !seen.has(p)
 		);
 		if (!pids.length) break;
 		pids.forEach((p) => seen.add(p));
-		const rows = await inChunks<{
-			id: string;
+		const rows = await query<{
+			rid: number;
 			word: string;
-			language_id: string;
-			olid: string | null;
-			ocr: boolean;
+			lang_rid: number | null;
+			olid: number | null;
+			flags: number;
 		}>(
-			pids,
-			(chunk) =>
-				query(
-					`SELECT lemmas.id, lemmas.word, lemmas.language_id, lemmas.origin_lemma_id AS olid,
-					        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
-					                ON r.rowid = lr.reference_rid
-					                WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
-					 FROM lemmas
-					 WHERE id IN (${placeholders(chunk.length)})`,
-					chunk
-				)
+			`SELECT rowid AS rid, word, lang_rid, origin_rid AS olid, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+			[jsonList(pids)]
 		);
 		levels.push(
 			rows.map((r) => ({
-				id: r.id,
+				id: idx.idOf(r.rid),
 				word: r.word,
-				lang: langs.get(r.language_id)?.name,
+				lang: r.lang_rid != null ? langByRid(r.lang_rid)?.name : null,
 				kind: r.olid ? ('reflex' as const) : ('entry' as const),
-				ocr: r.ocr
+				ocr: !!(r.flags & FLAG_OCR)
 			}))
 		);
 		frontier = pids;
@@ -646,26 +797,24 @@ export interface DerivedNode {
 	ocr?: boolean | number;
 }
 
-/** The derived-term subtree of an entry: its derived terms, their derived terms, and so on down the
- *  derivation graph (breadth-first, deduped against cycles/diamonds, bounded for safety). */
+/** The derived-term subtree of an entry (breadth-first, deduped, bounded). */
 export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<DerivedNode[]> {
-	const childrenOf = new Map<string, string[]>();
-	const seen = new Set<string>([rootId]);
-	let frontier = [rootId];
+	const idx = await ensureCore();
+	const rootRid = idx.ridOf(rootId);
+	if (!rootRid) return [];
+	const childrenOf = new Map<number, number[]>();
+	const seen = new Set<number>([rootRid]);
+	let frontier = [rootRid];
 	let total = 0;
 	for (let depth = 0; depth < 12 && frontier.length && total < maxNodes; depth++) {
-		// derived TERMS are same-language derived etyma (headwords: origin_lemma_id IS NULL). A reflex
-		// child (origin set) is an alternate-etymology reflex — shown under the entry's reflexes, not here.
-		const edges = await inChunks<{ p: string; c: string }>(frontier, (chunk) =>
-			query<{ p: string; c: string }>(
-				`SELECT d.parent_id AS p, d.child_id AS c FROM derivation d
-				 JOIN lemmas l ON l.id = d.child_id
-				 WHERE d.parent_id IN (${placeholders(chunk.length)}) AND l.origin_lemma_id IS NULL
-				 ORDER BY d.child_id`,
-				chunk
-			)
+		const edges = await query<{ p: number; c: number }>(
+			`SELECT d.parent_rid AS p, d.child_rid AS c FROM derivation d
+			 JOIN lem l ON l.rowid = d.child_rid
+			 WHERE d.parent_rid IN ${IN_JSON} AND l.origin_rid IS NULL
+			 ORDER BY d.child_rid`,
+			[jsonList(frontier)]
 		);
-		const next: string[] = [];
+		const next: number[] = [];
 		for (const { p, c } of edges) {
 			if (seen.has(c) || total >= maxNodes) continue;
 			seen.add(c);
@@ -677,59 +826,74 @@ export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<De
 		}
 		frontier = next;
 	}
-	const ids = [...seen].filter((id) => id !== rootId);
-	const rows = await inChunks<DerivedNode>(ids, (chunk) =>
-		query<DerivedNode>(
-			`SELECT lemmas.id, lemmas.word, lemmas.gloss, lemmas.reflex_count, lemmas.lang_count,
-			        lemmas."order", EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
-			        ON r.rowid = lr.reference_rid WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
-			 FROM lemmas
-			 WHERE id IN (${placeholders(chunk.length)})`,
-			chunk
-		)
+	const nodeRids = [...seen].filter((r) => r !== rootRid);
+	const rows = nodeRids.length
+		? await query<{ rid: number; word: string; gloss: string; counts: number | null; ord: number; flags: number }>(
+				`SELECT rowid AS rid, word, gloss, counts, ord, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+				[jsonList(nodeRids)]
+			)
+		: [];
+	const info = new Map(
+		rows.map((r) => [
+			r.rid,
+			{
+				id: idx.idOf(r.rid),
+				word: r.word,
+				gloss: r.gloss,
+				reflex_count: r.counts != null ? r.counts >> 10 : undefined,
+				lang_count: r.counts != null ? r.counts % 1024 : undefined,
+				ocr: !!(r.flags & FLAG_OCR)
+			}
+		])
 	);
-	const info = new Map(rows.map((r) => [r.id, r]));
-	const orderOf = new Map(rows.map((r) => [r.id, (r as unknown as { order: number }).order]));
-	const build = (id: string): DerivedNode => {
-		const r = info.get(id)!;
-		const kids = (childrenOf.get(id) ?? []).sort(
+	const orderOf = new Map(rows.map((r) => [r.rid, r.ord]));
+	const build = (rid: number): DerivedNode => {
+		const r = info.get(rid)!;
+		const kids = (childrenOf.get(rid) ?? []).sort(
 			(a, b) => (orderOf.get(a) ?? 0) - (orderOf.get(b) ?? 0)
 		);
 		return { ...r, children: kids.map(build) };
 	};
-	return (childrenOf.get(rootId) ?? [])
+	return (childrenOf.get(rootRid) ?? [])
 		.sort((a, b) => (orderOf.get(a) ?? 0) - (orderOf.get(b) ?? 0))
 		.map(build);
 }
 
 /** Comma-listed alternates of a reflex (its reflex-variants), for the reflex page. */
 export async function getReflexVariants(reflexId: string): Promise<Lemma[]> {
-	const vs = await query<Lemma>('SELECT * FROM lemmas WHERE variant_of = ? ORDER BY "order"', [
-		reflexId
-	]);
+	const idx = await ensureCore();
+	const rid = idx.ridOf(reflexId);
+	if (!rid) return [];
+	const rows = await query<RawLem>(
+		`${LEM_SELECT} WHERE l.link_rid = ? AND (l.flags & 7) IN (2, 3) ORDER BY l.ord`,
+		[rid]
+	);
+	const vs = rows.map(hydrate);
 	await attachLanguages(vs);
 	await attachReferences(vs);
 	return vs;
 }
 
 export async function getLanguage(id: string): Promise<Language | null> {
-	return queryOne<Language>('SELECT * FROM languages WHERE id = ?', [id]);
+	return queryOne<Language>(`SELECT ${LANGUAGE_COLS} FROM languages WHERE id = ?`, [id]);
 }
 
 /** Structured tags attested by at least one row in a language. */
 export async function getLanguageTags(languageId: string): Promise<string[]> {
-	const rows = await query<{ tags: string }>(
-		`SELECT DISTINCT tags FROM lemmas
-		 WHERE language_id = ? AND tags IS NOT NULL AND tags <> ''`,
-		[languageId]
+	await ensureCore();
+	const rows = await query<{ txt: string }>(
+		`SELECT DISTINCT ts.txt AS txt FROM lem l JOIN tagsets ts ON ts.rowid = l.tagset_rid
+		 WHERE l.lang_rid = ?`,
+		[langRidOf(languageId) ?? -1]
 	);
-	return [...new Set(rows.flatMap((r) => r.tags.split(/\s+/).filter(Boolean)))];
+	return [...new Set(rows.flatMap((r) => r.txt.split(/\s+/).filter(Boolean)))];
 }
 
 /** Every structured tag in the corpus with its row count — for the (auto-built) tag filter. */
 export async function getAllTags(): Promise<{ tag: string; count: number }[]> {
 	const rows = await query<{ tags: string; c: number }>(
-		`SELECT tags, COUNT(*) AS c FROM lemmas WHERE tags IS NOT NULL AND tags <> '' GROUP BY tags`
+		`SELECT ts.txt AS tags, COUNT(*) AS c FROM lem l JOIN tagsets ts ON ts.rowid = l.tagset_rid
+		 GROUP BY l.tagset_rid`
 	);
 	const counts = new Map<string, number>();
 	for (const r of rows)
@@ -763,46 +927,49 @@ function refColor(s: string): string {
 	return `hsl(${h % 360} 52% 58%)`;
 }
 
-/** For one language, the distribution of its reflexes across the references that cite them — for a
- *  donut. Multiple locators in the same reference still count as one cited reflex. */
+/** For one language, the distribution of its reflexes across the references that cite them. */
 export async function getReferenceDistribution(languageId: string): Promise<OriginSlice[]> {
-	const rows = await query<{ id: string; short: string; c: number }>(
-		`SELECT ref.id AS id, ref.short AS short, COUNT(DISTINCT l.rowid) AS c
-		 FROM lemmas l
-		 JOIN lemma_reference lr ON lr.lemma_rid = l.rowid
-		 JOIN "references" ref ON ref.rowid = lr.reference_rid
-		 WHERE l.language_id = ?
-		 GROUP BY ref.id ORDER BY c DESC`,
-		[languageId]
+	await ensureCore();
+	await ensureCites();
+	const rows = await query<{ cites: Uint8Array }>(
+		'SELECT cites FROM lem WHERE lang_rid = ? AND cites IS NOT NULL',
+		[langRidOf(languageId) ?? -1]
 	);
-	return rows.map((r) => ({
-		lang: r.id,
-		name: r.short || r.id,
-		clade: null,
-		count: r.c,
-		color: refColor(r.short || r.id)
-	}));
+	const perRef = new Map<number, number>(); // ref rowid → cited-lemma count
+	for (const r of rows) {
+		const refs = new Set<number>();
+		for (const cid of readVarints(r.cites)) {
+			const c = citesCache!.get(cid);
+			if (c) refs.add(c.ref);
+		}
+		for (const ref of refs) perRef.set(ref, (perRef.get(ref) ?? 0) + 1);
+	}
+	return [...perRef.entries()]
+		.map(([refRid, c]) => {
+			const ref = referencesByRid!.get(refRid);
+			const short = ref?.short || ref?.id || String(refRid);
+			return { lang: ref?.id ?? String(refRid), name: short, clade: null, count: c, color: refColor(short) };
+		})
+		.sort((a, b) => b.count - a.count);
 }
 
-/** For one language, the distribution of its reflexes by the language of their immediate origin
- *  (the etymon they descend from, or the reflex they were borrowed from) — for a donut chart. */
+/** For one language, the distribution of its reflexes by the language of their immediate origin. */
 export async function getOriginLangDistribution(languageId: string): Promise<OriginSlice[]> {
-	const rows = await query<{ lang: string; c: number }>(
-		`SELECT o.language_id AS lang, COUNT(*) AS c
-		 FROM lemmas r JOIN lemmas o ON o.id = r.origin_lemma_id
-		 WHERE r.language_id = ? AND r.relation IN ('reflex','borrowed')
-		 GROUP BY o.language_id ORDER BY c DESC`,
-		[languageId]
+	await ensureCore();
+	const rows = await query<{ lrid: number; c: number }>(
+		`SELECT o.lang_rid AS lrid, COUNT(*) AS c
+		 FROM lem r JOIN lem o ON o.rowid = r.origin_rid
+		 WHERE r.lang_rid = ? AND (r.flags & 7) IN (${REL_REFLEX}, ${REL_BORROWED})
+		 GROUP BY o.lang_rid ORDER BY c DESC`,
+		[langRidOf(languageId) ?? -1]
 	);
-	const langs = await languageMap();
 	const slices: OriginSlice[] = rows.map((r) => {
-		const l = langs.get(r.lang);
-		return { lang: r.lang, name: l?.name ?? r.lang, clade: l?.clade ?? null, count: r.c };
+		const l = langByRid(r.lrid);
+		return { lang: l?.id ?? String(r.lrid), name: l?.name ?? String(r.lrid), clade: l?.clade ?? null, count: r.c };
 	});
-	// lone (unetymologised) forms have no origin — surface them as their own "origin unknown" slice
 	const un = await queryOne<{ c: number }>(
-		"SELECT COUNT(*) AS c FROM lemmas WHERE language_id = ? AND relation = 'local'",
-		[languageId]
+		`SELECT COUNT(*) AS c FROM lem WHERE lang_rid = ? AND (flags & 7) = ${REL_LOCAL}`,
+		[langRidOf(languageId) ?? -1]
 	);
 	if (un?.c) slices.push({ lang: '__unetym', name: 'unetymologised', clade: null, count: un.c });
 	return slices;
@@ -818,18 +985,19 @@ export async function listReferences(): Promise<Reference[]> {
 
 /** Distribution of every lemma cited by one reference over its attested languages. */
 export async function getReferenceLanguageDistribution(referenceId: string): Promise<OriginSlice[]> {
-	const rows = await query<{ lang: string; name: string; clade: string | null; c: number }>(
-		`SELECT l.language_id AS lang, lang.name, lang.clade, COUNT(*) AS c
-		 FROM lemma_reference lr
-		 JOIN "references" r ON r.rowid = lr.reference_rid
-		 JOIN lemmas l ON l.rowid = lr.lemma_rid
-		 JOIN languages lang ON lang.id = l.language_id
-		 WHERE r.id = ?
-		 GROUP BY l.language_id, lang.name, lang.clade
-		 ORDER BY c DESC, lang.name`,
-		[referenceId]
+	await ensureCore();
+	const cids = await citeIdsWhere((r) => r.id === referenceId);
+	const rows = await query<{ lrid: number; c: number }>(
+		`SELECT l.lang_rid AS lrid, COUNT(*) AS c FROM lem l
+		 WHERE vin_any(l.cites, ?) = 1 GROUP BY l.lang_rid`,
+		[jsonList(cids)]
 	);
-	return rows.map((r) => ({ lang: r.lang, name: r.name, clade: r.clade, count: r.c }));
+	return rows
+		.map((r) => {
+			const l = langByRid(r.lrid);
+			return { lang: l?.id ?? String(r.lrid), name: l?.name ?? String(r.lrid), clade: l?.clade ?? null, count: r.c };
+		})
+		.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
 
 // ---- entry page (headword + grouped reflexes + map dots) -----------------
@@ -848,40 +1016,52 @@ export function parseCognateset(key: string | null): { code: string | null; labe
 	return { code: key.slice(0, idx), label: key.slice(idx + 1) };
 }
 
-/** Same-language variant forms of an etymon (alternate spellings / reconstructions), shown apart
- *  from the daughter-language reflexes. */
+/** Same-language variant forms of an etymon (head variants only). */
 export async function getEntryVariants(entryId: string): Promise<Lemma[]> {
-	// head variants only (same-language alternates of the etymon head); reflex-variants (variant_of
-	// set) are shown grouped under their main reflex instead.
-	const variants = await query<Lemma>(
-		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'variant' " +
-			'AND variant_of IS NULL ORDER BY "order"',
-		[entryId]
+	const idx = await ensureCore();
+	const rid = idx.ridOf(entryId);
+	if (!rid) return [];
+	const kids = await childRidsOf(rid);
+	if (!kids.length) return [];
+	const rows = await query<RawLem>(
+		`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON} AND (l.flags & 7) = ${REL_VARIANT}
+		 AND l.link_rid IS NULL ORDER BY l.ord`,
+		[jsonList(kids)]
 	);
+	const variants = rows.map(hydrate);
 	await attachLanguages(variants);
 	await attachReferences(variants);
 	return variants;
 }
 
-export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> {
-	// primary reflexes (origin_lemma_id = this entry) plus SECONDARY reflexes — daughter forms whose
-	// alternate etymology is this entry (a derivation edge), shown here but flagged distinctly.
-	const reflexes = await query<Lemma>(
-		`SELECT *, 0 AS secondary FROM lemmas
-		   WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed')
+/** The reflexes of an entry: its children plus SECONDARY reflexes reached by derivation edges. */
+async function entryChildRows(entryRid: number, relations: number[]): Promise<HLemma[]> {
+	const kids = await childRidsOf(entryRid);
+	const relList = relations.join(', ');
+	const rows = await query<RawLem & { secondary: number }>(
+		`SELECT ${LEM_COLS}, 0 AS secondary FROM lem l ${LEM_JOINS}
+		   WHERE l.rowid IN ${IN_JSON} AND (l.flags & 7) IN (${relList})
 		 UNION ALL
-		 SELECT *, 1 AS secondary FROM lemmas
-		   WHERE origin_lemma_id IS NOT NULL AND relation IS NOT 'local'
-		     AND id IN (SELECT child_id FROM derivation WHERE parent_id = ?)
-		 ORDER BY cognateset`,
-		[entryId, entryId]
+		 SELECT ${LEM_COLS}, 1 AS secondary FROM lem l ${LEM_JOINS}
+		   WHERE l.origin_rid IS NOT NULL AND (l.flags & 7) IN (${relList})
+		     AND l.rowid IN (SELECT child_rid FROM derivation WHERE parent_rid = ?)
+		 ORDER BY l.ord`,
+		[jsonList(kids), entryRid]
 	);
+	return rows.map(hydrate);
+}
+
+export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> {
+	const idx = await ensureCore();
+	const entryRid = idx.ridOf(entryId);
+	if (!entryRid) return { groups: [], langGroups: [], total: 0 };
+	const reflexes = await entryChildRows(entryRid, [REL_REFLEX, REL_BORROWED]);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
 	await attachSubCounts(reflexes);
 	const total = reflexes.length;
 
-	// group by cognateset, then by language (mirrors app.py:336-381, defaulting to grouped view)
+	// group by cognateset, then by language (mirrors app.py:336-381)
 	const byCog = new Map<string | null, Lemma[]>();
 	for (const r of reflexes) {
 		const key = r.cognateset || null;
@@ -890,7 +1070,6 @@ export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> 
 		else byCog.set(key, [r]);
 	}
 	const groups: CognateGroup[] = [];
-	// non-null cognatesets first (sorted by first member id), then the Unclassified bucket
 	const keys = [...byCog.keys()].sort((a, b) => {
 		if (a === null) return 1;
 		if (b === null) return -1;
@@ -911,7 +1090,6 @@ export async function getEntryReflexes(entryId: string): Promise<EntryReflexes> 
 		groups.push([key, byLang]);
 	}
 
-	// map dots: one per language, ordered by (order, name)
 	const langSorted = reflexes.slice().sort(langComparator);
 	const langGroups: Array<[Language, Lemma[]]> = [];
 	let curL: [Language, Lemma[]] | null = null;
@@ -943,30 +1121,89 @@ export interface EntryAlignment {
 	reflexes: AlignedReflex[];
 }
 
+// alignment metadata caches (symbols / pairs / contexts / the cell dictionary)
+interface AlignMeta {
+	symbol: Map<number, string>;
+	symbolIdOf: Map<string, number>;
+	pair: Map<number, { e: number; r: number; c: number }>;
+	context: Map<number, { p: number; n: number }>;
+	cells: { pairId: number; ctxId: number }[];
+}
+let alignMeta: AlignMeta | null = null;
+let alignMetaPromise: Promise<AlignMeta> | null = null;
+
+async function ensureAlignMeta(): Promise<AlignMeta> {
+	if (alignMeta) return alignMeta;
+	if (!alignMetaPromise) {
+		alignMetaPromise = (async () => {
+			const [symbols, pairs, contexts, cellsRow] = await Promise.all([
+				query<{ id: number; value: string }>('SELECT id, value FROM symbols'),
+				query<{ id: number; etymon_sid: number; reflex_sid: number; change_sid: number }>(
+					'SELECT id, etymon_sid, reflex_sid, change_sid FROM align_pair'
+				),
+				query<{ id: number; prev_sid: number; next_sid: number }>(
+					'SELECT id, prev_sid, next_sid FROM align_context'
+				),
+				queryOne<{ data: Uint8Array }>('SELECT data FROM cells')
+			]);
+			alignMeta = {
+				symbol: new Map(symbols.map((s) => [s.id, s.value])),
+				symbolIdOf: new Map(symbols.map((s) => [s.value, s.id])),
+				pair: new Map(pairs.map((p) => [p.id, { e: p.etymon_sid, r: p.reflex_sid, c: p.change_sid }])),
+				context: new Map(contexts.map((c) => [c.id, { p: c.prev_sid, n: c.next_sid }])),
+				cells: cellsRow ? readCellDict(cellsRow.data) : []
+			};
+			return alignMeta;
+		})();
+	}
+	return alignMetaPromise;
+}
+
+/** Decode one form's segs blob into AlignSeg[] (etymonIdx = running non-gap count). */
+function decodeSegs(meta: AlignMeta, blob: Uint8Array | null): AlignSeg[] {
+	const cellIds = readVarints(blob);
+	const out: AlignSeg[] = [];
+	let idxCount = 0;
+	for (let pos = 0; pos < cellIds.length; pos++) {
+		const cell = meta.cells[cellIds[pos] - 1];
+		const pair = meta.pair.get(cell.pairId)!;
+		const etymonSeg = meta.symbol.get(pair.e) ?? '';
+		let etymonIdx = -1;
+		if (etymonSeg !== '') {
+			etymonIdx = idxCount;
+			idxCount++;
+		}
+		out.push({
+			pos,
+			etymonIdx,
+			etymonSeg,
+			reflexSeg: meta.symbol.get(pair.r) ?? '',
+			change: meta.symbol.get(pair.c) ?? ''
+		});
+	}
+	return out;
+}
+
 export async function getEntryAlignment(entryId: string): Promise<EntryAlignment> {
-	// a node's children: an etymon/section-form's daughter reflexes, or a reflex's borrowed sub-reflexes.
-	// Plus SECONDARY reflexes — daughter forms whose PRIMARY etymon is elsewhere but which also derive
-	// from this entry via a derivation edge (alternate etymology); flagged so we badge them "derived".
-	const reflexes = await query<Lemma>(
-		`SELECT *, 0 AS secondary FROM lemmas
-		   WHERE origin_lemma_id = ? AND relation IN ('reflex','borrowed')
-		 UNION ALL
-		 SELECT *, 1 AS secondary FROM lemmas
-		   WHERE origin_lemma_id IS NOT NULL AND relation IN ('reflex','borrowed')
-		     AND id IN (SELECT child_id FROM derivation WHERE parent_id = ?)
-		 ORDER BY "order"`,
-		[entryId, entryId]
-	);
+	const idx = await ensureCore();
+	const meta = await ensureAlignMeta();
+	const entryRid = idx.ridOf(entryId);
+	if (!entryRid) return { etymon: [], reflexes: [] };
+	const reflexes = await entryChildRows(entryRid, [REL_REFLEX, REL_BORROWED]);
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
 	await attachSubCounts(reflexes);
 
 	// attach each main reflex's comma-listed alternates (reflex-variants) for inline display
-	const rvars = await query<Lemma>(
-		"SELECT * FROM lemmas WHERE origin_lemma_id = ? AND relation = 'variant' " +
-			'AND variant_of IS NOT NULL ORDER BY "order"',
-		[entryId]
-	);
+	const kids = await childRidsOf(entryRid);
+	const rvarRows = kids.length
+		? await query<RawLem>(
+				`${LEM_SELECT} WHERE l.rowid IN ${IN_JSON} AND (l.flags & 7) = ${REL_VARIANT}
+				 AND l.link_rid IS NOT NULL ORDER BY l.ord`,
+				[jsonList(kids)]
+			)
+		: [];
+	const rvars = rvarRows.map(hydrate);
 	await attachReferences(rvars);
 	const byMain = new Map<string, Lemma[]>();
 	for (const v of rvars) {
@@ -976,83 +1213,37 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 	}
 	for (const r of reflexes) r.variants = byMain.get(r.id) ?? [];
 
-	const rows = await query<{
-		form_id: string;
-		pos: number;
-		etymon_idx: number;
-		etymon_seg: string;
-		reflex_seg: string;
-		change: string;
-	}>(
-		`SELECT rf.id AS form_id, a.pos,
-		        CASE WHEN es.value = '' THEN -1 ELSE
-		          SUM(es.value <> '') OVER
-		            (PARTITION BY a.form_rid ORDER BY a.pos ROWS UNBOUNDED PRECEDING) - 1
-		        END AS etymon_idx,
-		        es.value AS etymon_seg, rs.value AS reflex_seg, cs.value AS change
-		 FROM lemmas rf
-		 JOIN alignment a ON a.form_rid = rf.rowid
-		 JOIN align_pair p ON p.id = a.pair_id
-		 JOIN symbols es ON es.id = p.etymon_sid
-		 JOIN symbols rs ON rs.id = p.reflex_sid
-		 JOIN symbols cs ON cs.id = p.change_sid
-		 WHERE rf.origin_lemma_id = ?
-		 ORDER BY rf.id, a.pos`,
-		[entryId]
-	);
-
-	const byForm = new Map<string, AlignSeg[]>();
+	// alignment blobs for all shown reflexes
+	const rids = reflexes.map((r) => r.rid);
+	const blobs = rids.length
+		? await query<{ form_rid: number; segs: Uint8Array }>(
+				`SELECT form_rid, segs FROM alignment WHERE form_rid IN ${IN_JSON}`,
+				[jsonList(rids)]
+			)
+		: [];
+	const segsByRid = new Map(blobs.map((b) => [b.form_rid, decodeSegs(meta, b.segs)]));
 	const etymonMap = new Map<number, string>();
-	for (const r of rows) {
-		const seg: AlignSeg = {
-			pos: r.pos,
-			etymonIdx: r.etymon_idx,
-			etymonSeg: r.etymon_seg,
-			reflexSeg: r.reflex_seg,
-			change: r.change
-		};
-		const arr = byForm.get(r.form_id);
-		if (arr) arr.push(seg);
-		else byForm.set(r.form_id, [seg]);
-		if (r.etymon_idx >= 0 && !etymonMap.has(r.etymon_idx)) etymonMap.set(r.etymon_idx, r.etymon_seg);
+	for (const segs of segsByRid.values()) {
+		for (const s of segs) if (s.etymonIdx >= 0 && !etymonMap.has(s.etymonIdx)) etymonMap.set(s.etymonIdx, s.etymonSeg);
 	}
 	const etymon = [...etymonMap.entries()]
 		.sort((a, b) => a[0] - b[0])
-		.map(([idx, seg]) => ({ idx, seg }));
-	// keep ALL reflexes (those without a materialised alignment render plain)
-	const aligned = reflexes.map((l) => ({ lemma: l, segs: byForm.get(l.id) ?? [] }));
+		.map(([i, seg]) => ({ idx: i, seg }));
+	const aligned = reflexes.map((l) => ({ lemma: l as Lemma, segs: segsByRid.get(l.rid) ?? [] }));
 	return { etymon, reflexes: aligned };
 }
 
 /** The materialised alignment (etymon→reflex sound-change steps) for a single reflex. */
 export async function getReflexAlignment(formId: string): Promise<AlignSeg[]> {
-	const rows = await query<{
-		pos: number;
-		etymon_idx: number;
-		etymon_seg: string;
-		reflex_seg: string;
-		change: string;
-	}>(
-		`SELECT a.pos,
-		        CASE WHEN es.value = '' THEN -1 ELSE
-		          SUM(es.value <> '') OVER (ORDER BY a.pos ROWS UNBOUNDED PRECEDING) - 1
-		        END AS etymon_idx,
-		        es.value AS etymon_seg, rs.value AS reflex_seg, cs.value AS change
-		 FROM alignment a
-		 JOIN align_pair p ON p.id = a.pair_id
-		 JOIN symbols es ON es.id = p.etymon_sid
-		 JOIN symbols rs ON rs.id = p.reflex_sid
-		 JOIN symbols cs ON cs.id = p.change_sid
-		 WHERE a.form_rid = (SELECT rowid FROM lemmas WHERE id = ?) ORDER BY a.pos`,
-		[formId]
+	const idx = await ensureCore();
+	const meta = await ensureAlignMeta();
+	const rid = idx.ridOf(formId);
+	if (!rid) return [];
+	const row = await queryOne<{ segs: Uint8Array }>(
+		'SELECT segs FROM alignment WHERE form_rid = ?',
+		[rid]
 	);
-	return rows.map((r) => ({
-		pos: r.pos,
-		etymonIdx: r.etymon_idx,
-		etymonSeg: r.etymon_seg,
-		reflexSeg: r.reflex_seg,
-		change: r.change
-	}));
+	return row ? decodeSegs(meta, row.segs) : [];
 }
 
 // ---- sound correspondence explorer ---------------------------------------
@@ -1065,7 +1256,7 @@ export interface ProtoSeg {
 	seg: string;
 	total: number;
 }
-/** A clade-level, environment-conditioned correspondence cell (from `corr`). */
+/** A clade-level, environment-conditioned correspondence cell. */
 export interface CorrCtx {
 	clade: string;
 	prev: string;
@@ -1075,7 +1266,7 @@ export interface CorrCtx {
 	n: number;
 	example: string;
 }
-/** A language-level correspondence cell (from `corr_lang`, for branch expansion). */
+/** A language-level correspondence cell (for branch expansion). */
 export interface LangCtx extends CorrCtx {
 	lang: string;
 	langName: string;
@@ -1113,8 +1304,6 @@ export interface CorrReflexResult {
 }
 
 export async function getProtoFamilies(): Promise<ProtoFamily[]> {
-	// only the four reconstructed proto-families make sense as correspondence sets; the alignment
-	// table also carries daughter-language "protos" (e.g. from borrowings), which we exclude here.
 	return query<ProtoFamily>(
 		`SELECT p.id, p.name FROM (SELECT DISTINCT proto_rid FROM corr_seg) s
 		 JOIN languages p ON p.rowid = s.proto_rid
@@ -1131,42 +1320,57 @@ export async function getProtoSegments(proto: string): Promise<ProtoSeg[]> {
 	);
 }
 
-/** All clade-level context rows for one proto-segment (processed client-side for any environment). */
-export async function getSegRows(proto: string, seg: string): Promise<CorrCtx[]> {
-	const rows = await query<{
-		clade: string;
-		prev_seg: string;
-		next_seg: string;
-		reflex_seg: string;
-		change: string;
-		n: number;
-		example: string;
-	}>(
-		`SELECT d.name AS clade, ps.value AS prev_seg, ns.value AS next_seg,
-		        rs.value AS reflex_seg, cs.value AS change, c.n,
-		        ex.id AS example
-		 FROM corr c
-		 JOIN clades d ON d.id = c.clade_rid
-		 JOIN align_pair p ON p.id = c.pair_id
-		 JOIN align_context x ON x.id = c.context_id
-		 JOIN symbols rs ON rs.id = p.reflex_sid
-		 JOIN symbols cs ON cs.id = p.change_sid
-		 JOIN symbols ps ON ps.id = x.prev_sid
-		 JOIN symbols ns ON ns.id = x.next_sid
-		 JOIN lemmas ex ON ex.rowid = c.example_rid
-		 WHERE c.proto_rid = (SELECT rowid FROM languages WHERE id = ?)
-		   AND c.etymon_sid = (SELECT id FROM symbols WHERE value = ?)`,
-		[proto, seg]
+/** Fetch + decode the corr_lang2 groups for one (proto, segment). */
+async function corrGroups(
+	proto: string,
+	seg: string
+): Promise<{ langRid: number; cells: { cellId: number; n: number; exampleRid: number }[] }[]> {
+	await ensureCore();
+	const meta = await ensureAlignMeta();
+	const sid = meta.symbolIdOf.get(seg);
+	const protoRid = langRidOf(proto);
+	if (sid == null || protoRid == null) return [];
+	const rows = await query<{ lang_rid: number; data: Uint8Array }>(
+		'SELECT lang_rid, data FROM corr_lang2 WHERE proto_rid = ? AND etymon_sid = ?',
+		[protoRid, sid]
 	);
-	return rows.map((r) => ({
-		clade: r.clade,
-		prev: r.prev_seg,
-		next: r.next_seg,
-		reflexSeg: r.reflex_seg,
-		change: r.change,
-		n: r.n,
-		example: r.example
-	}));
+	return rows.map((r) => ({ langRid: r.lang_rid, cells: readCorrCells(r.data) }));
+}
+
+/** All clade-level context rows for one proto-segment — the clade rollup formerly precomputed
+ *  in `corr`, aggregated here from corr_lang2 (identical cells: n summed, example = min id). */
+export async function getSegRows(proto: string, seg: string): Promise<CorrCtx[]> {
+	const idx = await ensureCore();
+	const meta = await ensureAlignMeta();
+	const groups = await corrGroups(proto, seg);
+	const agg = new Map<string, { clade: string; cellId: number; n: number; example: string }>();
+	for (const g of groups) {
+		const clade = langByRid(g.langRid)?.clade ?? '';
+		for (const c of g.cells) {
+			const key = `${clade}|${c.cellId}`;
+			const example = idx.idOf(c.exampleRid);
+			const cur = agg.get(key);
+			if (!cur) agg.set(key, { clade, cellId: c.cellId, n: c.n, example });
+			else {
+				cur.n += c.n;
+				if (example < cur.example) cur.example = example;
+			}
+		}
+	}
+	return [...agg.values()].map((a) => {
+		const cell = meta.cells[a.cellId - 1];
+		const pair = meta.pair.get(cell.pairId)!;
+		const ctx = meta.context.get(cell.ctxId)!;
+		return {
+			clade: a.clade,
+			prev: meta.symbol.get(ctx.p) ?? '',
+			next: meta.symbol.get(ctx.n) ?? '',
+			reflexSeg: meta.symbol.get(pair.r) ?? '',
+			change: meta.symbol.get(pair.c) ?? '',
+			n: a.n,
+			example: a.example
+		};
+	});
 }
 
 /** Per-language context rows for one clade (loaded when a branch is expanded). */
@@ -1175,167 +1379,151 @@ export async function getCladeLangRows(
 	seg: string,
 	clade: string
 ): Promise<LangCtx[]> {
-	const rows = await query<{
-		lang: string;
-		langName: string;
-		prev_seg: string;
-		next_seg: string;
-		reflex_seg: string;
-		change: string;
-		n: number;
-		example: string;
-	}>(
-		`SELECT l.id AS lang, l.name AS langName, ps.value AS prev_seg,
-		        ns.value AS next_seg, rs.value AS reflex_seg, cs.value AS change,
-		        cl.n, ex.id AS example
-		 FROM corr_lang cl
-		 JOIN languages l ON l.rowid = cl.lang_rid
-		 JOIN align_pair p ON p.id = cl.pair_id
-		 JOIN align_context x ON x.id = cl.context_id
-		 JOIN symbols rs ON rs.id = p.reflex_sid
-		 JOIN symbols cs ON cs.id = p.change_sid
-		 JOIN symbols ps ON ps.id = x.prev_sid
-		 JOIN symbols ns ON ns.id = x.next_sid
-		 JOIN lemmas ex ON ex.rowid = cl.example_rid
-		 WHERE cl.proto_rid = (SELECT rowid FROM languages WHERE id = ?)
-		   AND cl.etymon_sid = (SELECT id FROM symbols WHERE value = ?) AND l.clade = ?`,
-		[proto, seg, clade]
-	);
-	return rows.map((r) => ({
-		lang: r.lang,
-		langName: r.langName,
-		clade,
-		prev: r.prev_seg,
-		next: r.next_seg,
-		reflexSeg: r.reflex_seg,
-		change: r.change,
-		n: r.n,
-		example: r.example
-	}));
+	const idx = await ensureCore();
+	const meta = await ensureAlignMeta();
+	const groups = await corrGroups(proto, seg);
+	const out: LangCtx[] = [];
+	for (const g of groups) {
+		const lang = langByRid(g.langRid);
+		if (!lang || lang.clade !== clade) continue;
+		for (const c of g.cells) {
+			const cell = meta.cells[c.cellId - 1];
+			const pair = meta.pair.get(cell.pairId)!;
+			const ctx = meta.context.get(cell.ctxId)!;
+			out.push({
+				lang: lang.id,
+				langName: lang.name,
+				clade,
+				prev: meta.symbol.get(ctx.p) ?? '',
+				next: meta.symbol.get(ctx.n) ?? '',
+				reflexSeg: meta.symbol.get(pair.r) ?? '',
+				change: meta.symbol.get(pair.c) ?? '',
+				n: c.n,
+				example: idx.idOf(c.exampleRid)
+			});
+		}
+	}
+	return out;
 }
 
-/** Build the WHERE fragment for the `corr_lang` summary (used for the true total). */
-function corrLangFilter(q: CorrQuery): { where: string; params: unknown[] } {
-	const conds = [
-		'cl.proto_rid = (SELECT rowid FROM languages WHERE id = ?)',
-		'cl.etymon_sid = (SELECT id FROM symbols WHERE value = ?)',
-		`cl.pair_id IN (SELECT p.id FROM align_pair p
-		                  JOIN symbols s ON s.id = p.reflex_sid WHERE s.value = ?)`
-	];
-	const params: unknown[] = [q.proto, q.seg, q.reflexSeg];
-	if (q.clade) {
-		conds.push('cl.lang_rid IN (SELECT rowid FROM languages WHERE clade = ?)');
-		params.push(q.clade);
+/** True match count for a correspondence query, from the compact summary blobs. */
+async function corrLangTotal(q: CorrQuery): Promise<number> {
+	const meta = await ensureAlignMeta();
+	const groups = await corrGroups(q.proto, q.seg);
+	const rSid = meta.symbolIdOf.get(q.reflexSeg);
+	const pSid = q.prev ? meta.symbolIdOf.get(q.prev) : null;
+	const nSid = q.next ? meta.symbolIdOf.get(q.next) : null;
+	let total = 0;
+	for (const g of groups) {
+		const lang = langByRid(g.langRid);
+		if (q.clade && lang?.clade !== q.clade) continue;
+		if (q.lang && lang?.id !== q.lang) continue;
+		for (const c of g.cells) {
+			const cell = meta.cells[c.cellId - 1];
+			const pair = meta.pair.get(cell.pairId)!;
+			if (pair.r !== rSid) continue;
+			const ctx = meta.context.get(cell.ctxId)!;
+			if (pSid != null && ctx.p !== pSid) continue;
+			if (nSid != null && ctx.n !== nSid) continue;
+			total += c.n;
+		}
 	}
-	if (q.lang) {
-		conds.push('cl.lang_rid = (SELECT rowid FROM languages WHERE id = ?)');
-		params.push(q.lang);
-	}
-	if (q.prev) {
-		conds.push(`cl.context_id IN (SELECT x.id FROM align_context x
-		                            JOIN symbols s ON s.id = x.prev_sid WHERE s.value = ?)`);
-		params.push(q.prev);
-	}
-	if (q.next) {
-		conds.push(`cl.context_id IN (SELECT x.id FROM align_context x
-		                            JOIN symbols s ON s.id = x.next_sid WHERE s.value = ?)`);
-		params.push(q.next);
-	}
-	return { where: conds.join(' AND '), params };
+	return total;
 }
 
-/** Every reflex exhibiting a given correspondence (etymon segment → reflex segment), for the
- *  drill-down page. Scans the compact integer-coded alignment rows, then joins lemmas/languages
- *  for the proto/clade filters and display columns. The true total comes from `corr_lang`. */
+/** Every reflex exhibiting a given correspondence, for the drill-down page. Candidate cells are
+ *  resolved in JS from the cell dictionary; matching forms come from a vin_any() scan of the
+ *  per-form alignment blobs, then each matching position becomes one row. */
 export async function getCorrespondenceReflexes(
 	q: CorrQuery,
 	limit = 300
 ): Promise<CorrReflexResult> {
-	const conds = ['es.value = ?', 'rs.value = ?', 'e.language_id = ?'];
-	const params: unknown[] = [q.seg, q.reflexSeg, q.proto];
+	const idx = await ensureCore();
+	const meta = await ensureAlignMeta();
+	const eSid = meta.symbolIdOf.get(q.seg);
+	const rSid = meta.symbolIdOf.get(q.reflexSeg);
+	const protoRid = langRidOf(q.proto);
+	if (eSid == null || rSid == null || protoRid == null)
+		return { rows: [], total: 0, truncated: false };
+	const pSid = q.prev ? meta.symbolIdOf.get(q.prev) : null;
+	const nSid = q.next ? meta.symbolIdOf.get(q.next) : null;
+	const candidates = new Set<number>();
+	for (let cellId = 1; cellId <= meta.cells.length; cellId++) {
+		const cell = meta.cells[cellId - 1];
+		const pair = meta.pair.get(cell.pairId)!;
+		if (pair.e !== eSid || pair.r !== rSid) continue;
+		const ctx = meta.context.get(cell.ctxId)!;
+		if (pSid != null && ctx.p !== pSid) continue;
+		if (nSid != null && ctx.n !== nSid) continue;
+		candidates.add(cellId);
+	}
+	if (!candidates.size) return { rows: [], total: 0, truncated: false };
+
+	const conds = ['vin_any(a.segs, ?) = 1', 'e.lang_rid = ?'];
+	const params: unknown[] = [jsonList([...candidates]), protoRid];
 	if (q.clade) {
 		conds.push('rl.clade = ?');
 		params.push(q.clade);
 	}
 	if (q.lang) {
-		conds.push('rf.language_id = ?');
+		conds.push('rl.id = ?');
 		params.push(q.lang);
 	}
-	if (q.prev) {
-		conds.push('ps.value = ?');
-		params.push(q.prev);
-	}
-	if (q.next) {
-		conds.push('ns.value = ?');
-		params.push(q.next);
-	}
-	const rows = await query<{
-		id: string;
+	const forms = await query<{
+		rid: number;
 		word: string;
 		gloss: string;
 		phonemic: string;
+		flags: number;
 		lang: string;
 		langName: string;
 		language: string;
 		dialect: string;
 		color: string;
-		change: string;
-		ocr: boolean | number;
-		prev_seg: string;
-		next_seg: string;
-		entryId: string | null;
+		origin_rid: number;
+		segs: Uint8Array;
 	}>(
-		`SELECT rf.id, rf.word, rf.gloss, rf.phonemic,
-		        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" ocr_ref
-		                ON ocr_ref.rowid = lr.reference_rid
-		                WHERE lr.lemma_rid = rf.rowid AND ocr_ref.ocr = 1) AS ocr,
-		        rf.language_id AS lang, COALESCE(rl.name, rf.language_id) AS langName,
+		`SELECT rf.rowid AS rid, rf.word, rf.gloss, rf.phonemic, rf.flags,
+		        rl.id AS lang, COALESCE(rl.name, rl.id) AS langName,
 		        rl.language AS language, rl.dialect AS dialect, rl.color AS color,
-		        cs.value AS change, ps.value AS prev_seg, ns.value AS next_seg,
-		        e.id AS entryId
+		        rf.origin_rid AS origin_rid, a.segs AS segs
 		 FROM alignment a
-		 JOIN align_pair p ON p.id = a.pair_id
-		 JOIN align_context x ON x.id = a.context_id
-		 JOIN symbols es ON es.id = p.etymon_sid
-		 JOIN symbols rs ON rs.id = p.reflex_sid
-		 JOIN symbols cs ON cs.id = p.change_sid
-		 JOIN symbols ps ON ps.id = x.prev_sid
-		 JOIN symbols ns ON ns.id = x.next_sid
-		 JOIN lemmas rf    ON rf.rowid = a.form_rid
-		 JOIN lemmas e     ON e.id = rf.origin_lemma_id
-		 JOIN languages rl ON rl.id = rf.language_id
+		 JOIN lem rf ON rf.rowid = a.form_rid
+		 JOIN lem e ON e.rowid = rf.origin_rid
+		 JOIN languages rl ON rl.rowid = rf.lang_rid
 		 WHERE ${conds.join(' AND ')}
-		 ORDER BY rl."order", rf.language_id, rf."order"
+		 ORDER BY rl."order", rl.id, rf.ord
 		 LIMIT ?`,
 		[...params, limit]
 	);
-	const mapped = rows.map((r) => ({
-		id: r.id,
-		word: r.word,
-		gloss: r.gloss,
-		phonemic: r.phonemic,
-		ocr: r.ocr,
-		lang: r.lang,
-		langName: r.langName,
-		language: r.language,
-		dialect: r.dialect,
-		color: r.color,
-		change: r.change,
-		prev: r.prev_seg,
-		next: r.next_seg,
-		entryId: r.entryId
-	}));
-	// True total from the compact summary table — cheap indexed lookup, no big-table COUNT.
-	let total = mapped.length;
-	if (mapped.length >= limit) {
-		const f = corrLangFilter(q);
-		const c = await queryOne<{ n: number }>(
-			`SELECT COALESCE(SUM(cl.n), 0) AS n FROM corr_lang cl WHERE ${f.where}`,
-			f.params
-		);
-		total = c?.n ?? mapped.length;
+	const rows: CorrReflex[] = [];
+	for (const f of forms) {
+		for (const cellId of readVarints(f.segs)) {
+			if (!candidates.has(cellId)) continue;
+			const cell = meta.cells[cellId - 1];
+			const pair = meta.pair.get(cell.pairId)!;
+			const ctx = meta.context.get(cell.ctxId)!;
+			rows.push({
+				id: idx.idOf(f.rid),
+				word: f.word,
+				gloss: f.gloss,
+				phonemic: f.phonemic,
+				ocr: f.flags & FLAG_OCR ? 1 : 0,
+				lang: f.lang,
+				langName: f.langName,
+				language: f.language,
+				dialect: f.dialect,
+				color: f.color,
+				change: meta.symbol.get(pair.c) ?? '',
+				prev: meta.symbol.get(ctx.p) ?? '',
+				next: meta.symbol.get(ctx.n) ?? '',
+				entryId: f.origin_rid ? idx.idOf(f.origin_rid) : null
+			});
+		}
 	}
-	return { rows: mapped, total, truncated: mapped.length < total };
+	let total = rows.length;
+	if (forms.length >= limit) total = await corrLangTotal(q);
+	return { rows, total, truncated: rows.length < total };
 }
 
 // ---- compare two languages ------------------------------------------------
@@ -1352,17 +1540,37 @@ export async function compareLanguages(
 	id1: string,
 	id2: string
 ): Promise<{ lang1: Language | null; lang2: Language | null; rows: CompareRow[] }> {
+	const idx = await ensureCore();
 	const [lang1, lang2] = await Promise.all([getLanguage(id1), getLanguage(id2)]);
-	const load = (lid: string) =>
-		query<Lemma>(
-			`SELECT lemmas.id, lemmas.word, lemmas.gloss, lemmas.phonemic, lemmas."order",
-			        lemmas.language_id, lemmas.origin_lemma_id,
-			        EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
-			                ON r.rowid = lr.reference_rid
-			                WHERE lr.lemma_rid = lemmas.rowid AND r.ocr = 1) AS ocr
-			 FROM lemmas WHERE language_id = ? AND origin_lemma_id IS NOT NULL ORDER BY "order"`,
-			[lid]
+	const load = async (lid: string) => {
+		const rows = await query<{
+			rid: number;
+			word: string;
+			gloss: string;
+			phonemic: string;
+			ord: number;
+			lang_rid: number;
+			origin_rid: number;
+			flags: number;
+		}>(
+			`SELECT rowid AS rid, word, gloss, phonemic, ord, lang_rid, origin_rid, flags
+			 FROM lem WHERE lang_rid = ? AND origin_rid IS NOT NULL ORDER BY ord`,
+			[langRidOf(lid) ?? -1]
 		);
+		return rows.map(
+			(r) =>
+				({
+					id: idx.idOf(r.rid),
+					word: r.word,
+					gloss: r.gloss,
+					phonemic: r.phonemic,
+					order: r.ord,
+					language_id: langByRid(r.lang_rid)?.id ?? '',
+					origin_lemma_id: idx.idOf(r.origin_rid),
+					ocr: r.flags & FLAG_OCR ? 1 : 0
+				}) as Lemma
+		);
+	};
 	const [r1, r2] = await Promise.all([load(id1), load(id2)]);
 
 	const dict = (rows: Lemma[]) => {
@@ -1379,23 +1587,20 @@ export async function compareLanguages(
 	const d2 = dict(r2);
 	const shared = [...d1.keys()].filter((k) => d2.has(k));
 
-	// fetch headwords for the shared entries
-	const heads = await inChunks<Lemma>(shared, (chunk) =>
-		query<Lemma>(
-			`SELECT l.id, l.word, EXISTS (SELECT 1 FROM lemma_reference lr JOIN "references" r
-			        ON r.rowid = lr.reference_rid
-			        WHERE lr.lemma_rid = l.rowid AND r.ocr = 1) AS ocr
-			 FROM lemmas l WHERE l.id IN (${placeholders(chunk.length)})`,
-			chunk
-		)
-	);
-	const headMap = new Map(heads.map((h) => [h.id, h]));
+	const headRids = shared.map((k) => idx.ridOf(k)).filter((r): r is number => r != null);
+	const heads = headRids.length
+		? await query<{ rid: number; word: string; flags: number }>(
+				`SELECT rowid AS rid, word, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+				[jsonList(headRids)]
+			)
+		: [];
+	const headMap = new Map(heads.map((h) => [idx.idOf(h.rid), h]));
 
 	const rows: CompareRow[] = shared
 		.map((k) => ({
 			entryId: k,
 			entryWord: headMap.get(k)?.word ?? k,
-			entryOcr: headMap.get(k)?.ocr ?? false,
+			entryOcr: (headMap.get(k)?.flags ?? 0) & FLAG_OCR ? 1 : 0,
 			left: d1.get(k)!,
 			right: d2.get(k)!
 		}))
@@ -1406,7 +1611,33 @@ export async function compareLanguages(
 
 export { CLADE_ORDER };
 
+// Languages that actually carry rows in a given list view — for the Language column's dropdown.
+const filterLangsCache = new Map<string, Language[]>();
+export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<Language[]> {
+	if (filterLangsCache.has(mode)) return filterLangsCache.get(mode)!;
+	await ensureCore();
+	// entries → languages with an etymon OR a loan-source reflex; reflexes → every language.
+	const where =
+		mode === 'entries'
+			? `WHERE (origin_rid IS NULL AND (flags & 7) != ${REL_LOCAL}) OR (flags & ${FLAG_LOAN_SOURCE}) != 0`
+			: '';
+	const rows = await query<{ lang_rid: number }>(`SELECT DISTINCT lang_rid FROM lem ${where}`);
+	const out = rows
+		.map((r) => langByRid(r.lang_rid))
+		.filter((l): l is Language => !!l)
+		.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
+	filterLangsCache.set(mode, out);
+	return out;
+}
 
+const filterDialectsCache = new Map<string, Dialect[]>();
+/** Dialects actually present in a list mode, for inclusion beside base languages in its picker. */
+export async function getFilterDialects(mode: 'entries' | 'reflexes'): Promise<Dialect[]> {
+	if (filterDialectsCache.has(mode)) return filterDialectsCache.get(mode)!;
+	const out = (await getAllDialects()).filter((d) => mode === 'reflexes' || d.entry_count > 0);
+	filterDialectsCache.set(mode, out);
+	return out;
+}
 // ---- isoglosses: pairwise coupling between clades / languages -----------------------------------
 //
 // The data are binary presence variables: for each etymon, which clades (or languages) reflect it.
@@ -1690,26 +1921,29 @@ export interface IsoglossData {
 /** Fetch the reflex clade/language incidence for a proto-family's etyma and build the clade-level
  *  Ising coupling; language-level coupling is built on demand (thresholded) via couplingModel. */
 export async function getIsoglossData(family: string): Promise<IsoglossData> {
-	const rows = await query<{ entry: string; clade: string; lang: string; lname: string }>(
-		`SELECT DISTINCT l.origin_lemma_id AS entry, lang.clade AS clade, lang.id AS lang, lang.name AS lname
-		 FROM lemmas l JOIN languages lang ON lang.id = l.language_id
-		 WHERE l.relation = 'reflex' AND lang.clade IS NOT NULL AND lang.clade != ''
-		   AND l.origin_lemma_id IN (SELECT id FROM lemmas WHERE origin_lemma_id IS NULL AND language_id = ?)`,
-		[family]
+	await ensureCore();
+	const rows = await query<{ entry: number; lrid: number }>(
+		`SELECT DISTINCT l.origin_rid AS entry, l.lang_rid AS lrid
+		 FROM lem l JOIN languages lang ON lang.rowid = l.lang_rid
+		 WHERE (l.flags & 7) = ${REL_REFLEX} AND lang.clade IS NOT NULL AND lang.clade != ''
+		   AND l.origin_rid IN (SELECT rowid FROM lem WHERE origin_rid IS NULL AND lang_rid = ?)`,
+		[langRidOf(family) ?? -1]
 	);
-	const cladeByEntry = new Map<string, Set<string>>();
-	const langByEntry = new Map<string, Set<string>>();
+	const cladeByEntry = new Map<number, Set<string>>();
+	const langByEntry = new Map<number, Set<string>>();
 	const langName: Record<string, string> = {};
 	const langClade: Record<string, string> = {};
 	for (const r of rows) {
+		const lang = langByRid(r.lrid);
+		if (!lang?.clade) continue;
 		let cs = cladeByEntry.get(r.entry);
 		if (!cs) cladeByEntry.set(r.entry, (cs = new Set()));
-		cs.add(r.clade);
+		cs.add(lang.clade);
 		let ls = langByEntry.get(r.entry);
 		if (!ls) langByEntry.set(r.entry, (ls = new Set()));
-		ls.add(r.lang);
-		langName[r.lang] = r.lname;
-		langClade[r.lang] = r.clade;
+		ls.add(lang.id);
+		langName[lang.id] = lang.name;
+		langClade[lang.id] = lang.clade;
 	}
 	const cladeSets = [...cladeByEntry.values()].map((s) => [...s]);
 	const langSets = [...langByEntry.values()].map((s) => [...s]);
@@ -1726,13 +1960,10 @@ export async function getIsoglossData(family: string): Promise<IsoglossData> {
 	};
 }
 
-/** Presence-invariant sound-change isogloss model. For each proto-slot (etymon x aligned position)
- *  every clade/language *present* has an outcome (its reflex segment); two units "agree" at a slot
- *  when both are present with the same outcome. Returns, per unit pair, the number of jointly-
- *  attested slots (both) and how many of those agree (agree), computed in SQL so only the small pair
- *  matrix crosses the wire. Absence is pairwise-deleted, so a pair's agreement rate agree/both
- *  depends only on how the two behave where both have the word -- invariant to lexical presence
- *  (which the reflex-coupling model already captures). Keyed "a|b" with a < b. */
+/** Presence-invariant sound-change isogloss model (see the v1 layer for the definition). For each
+ *  proto-slot (etymon × aligned position) every clade/language *present* has an outcome (its
+ *  reflex segment); a pair of units both present at a slot contributes 1 to `both`, and one per
+ *  shared distinct outcome to `agree`. Decoded from the per-form alignment blobs in JS. */
 export interface SoundAgreement {
 	pair: Map<string, { both: number; agree: number }>;
 }
@@ -1740,25 +1971,48 @@ export async function getIsoglossSoundChangeData(
 	family: string,
 	level: 'clade' | 'lang'
 ): Promise<SoundAgreement> {
-	const unit = level === 'clade' ? 'clade' : 'id'; // controlled column, not user input
-	const rows = await query<{ i: string; j: string; both: number; agree: number }>(
-		`WITH base AS (
-		   SELECT l.origin_lemma_id AS e, a.pos AS p, lang.${unit} AS u, ap.reflex_sid AS o
-		   FROM alignment a JOIN lemmas l ON l.rowid = a.form_rid
-		   JOIN languages lang ON lang.id = l.language_id JOIN align_pair ap ON ap.id = a.pair_id
-		   WHERE l.relation = 'reflex' AND lang.clade IS NOT NULL AND lang.clade != ''
-		     AND l.origin_lemma_id IN (SELECT id FROM lemmas WHERE origin_lemma_id IS NULL AND language_id = ?)),
-		 present AS (SELECT DISTINCT e, p, u FROM base),
-		 shared  AS (SELECT DISTINCT e, p, u, o FROM base),
-		 both AS (SELECT pa.u i, pb.u j, COUNT(*) n FROM present pa JOIN present pb
-		            ON pa.e = pb.e AND pa.p = pb.p AND pa.u < pb.u GROUP BY pa.u, pb.u),
-		 agr  AS (SELECT sa.u i, sb.u j, COUNT(*) n FROM shared sa JOIN shared sb
-		            ON sa.e = sb.e AND sa.p = sb.p AND sa.o = sb.o AND sa.u < sb.u GROUP BY sa.u, sb.u)
-		 SELECT b.i AS i, b.j AS j, b.n AS both, COALESCE(a.n, 0) AS agree
-		 FROM both b LEFT JOIN agr a ON a.i = b.i AND a.j = b.j`,
-		[family]
+	await ensureCore();
+	const meta = await ensureAlignMeta();
+	const rows = await query<{ e: number; lrid: number; segs: Uint8Array }>(
+		`SELECT l.origin_rid AS e, l.lang_rid AS lrid, a.segs AS segs
+		 FROM alignment a JOIN lem l ON l.rowid = a.form_rid
+		 JOIN languages lang ON lang.rowid = l.lang_rid
+		 WHERE (l.flags & 7) = ${REL_REFLEX} AND lang.clade IS NOT NULL AND lang.clade != ''
+		   AND l.origin_rid IN (SELECT rowid FROM lem WHERE origin_rid IS NULL AND lang_rid = ?)`,
+		[langRidOf(family) ?? -1]
 	);
+	// per (etymon, pos): unit → set of outcomes (reflex symbol ids)
+	const slots = new Map<string, Map<string, Set<number>>>();
+	for (const r of rows) {
+		const lang = langByRid(r.lrid);
+		if (!lang) continue;
+		const unit = level === 'clade' ? lang.clade : lang.id;
+		const cellIds = readVarints(r.segs);
+		for (let pos = 0; pos < cellIds.length; pos++) {
+			const cell = meta.cells[cellIds[pos] - 1];
+			const outcome = meta.pair.get(cell.pairId)!.r;
+			const key = `${r.e}|${pos}`;
+			let units = slots.get(key);
+			if (!units) slots.set(key, (units = new Map()));
+			let outcomes = units.get(unit);
+			if (!outcomes) units.set(unit, (outcomes = new Set()));
+			outcomes.add(outcome);
+		}
+	}
 	const pair = new Map<string, { both: number; agree: number }>();
-	for (const r of rows) pair.set(`${r.i}|${r.j}`, { both: r.both, agree: r.agree });
+	for (const units of slots.values()) {
+		const names = [...units.keys()].sort();
+		for (let i = 0; i < names.length; i++) {
+			for (let j = i + 1; j < names.length; j++) {
+				const key = `${names[i]}|${names[j]}`;
+				let p = pair.get(key);
+				if (!p) pair.set(key, (p = { both: 0, agree: 0 }));
+				p.both += 1;
+				const a = units.get(names[i])!;
+				const b = units.get(names[j])!;
+				for (const o of a) if (b.has(o)) p.agree += 1;
+			}
+		}
+	}
 	return { pair };
 }

@@ -8,6 +8,7 @@
  */
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 import { OPFS_DB_PATH } from './dbMeta';
+import { makeVinAny } from './dbShared';
 
 // In dev we skip the versioned OPFS cache and load the current local DB straight into an in-memory
 // SQLite, so a rebuilt db.db is picked up on reload with no DB_VERSION bump / re-download dance.
@@ -28,7 +29,24 @@ type DbHandle = {
 		rowMode?: string;
 		returnValue?: string;
 	}): Record<string, unknown>[];
+	createFunction(
+		name: string,
+		xFunc: (ctx: number, ...args: unknown[]) => unknown,
+		opts?: { arity?: number; deterministic?: boolean }
+	): void;
 };
+
+/** Register the custom SQL functions the compact-schema query layer relies on. */
+function registerFunctions(h: DbHandle): DbHandle {
+	const vinAny = makeVinAny();
+	h.createFunction(
+		'vin_any',
+		(_ctx: number, blob: unknown, json: unknown) =>
+			vinAny(blob as Uint8Array | null, String(json)),
+		{ arity: 2, deterministic: true }
+	);
+	return h;
+}
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Sqlite3 = any;
 
@@ -57,7 +75,8 @@ async function ensurePool(): Promise<Pool> {
 export async function openCached(): Promise<boolean> {
 	if (DEV) return !!db; // dev: nothing cached; ready only after an in-memory load
 	const p = await ensurePool();
-	if (!db && p.getFileNames().includes(OPFS_DB_PATH)) db = new p.OpfsSAHPoolDb(OPFS_DB_PATH);
+	if (!db && p.getFileNames().includes(OPFS_DB_PATH))
+		db = registerFunctions(new p.OpfsSAHPoolDb(OPFS_DB_PATH));
 	return !!db;
 }
 
@@ -108,12 +127,12 @@ export function load(url: string, onProgress: (received: number) => void): Promi
 					s.capi.SQLITE_DESERIALIZE_FREEONCLOSE | s.capi.SQLITE_DESERIALIZE_RESIZEABLE
 				)
 			);
-			db = h as DbHandle;
+			db = registerFunctions(h as DbHandle);
 		} else {
 			const p = await ensurePool();
 			for (const name of p.getFileNames()) if (name !== OPFS_DB_PATH) p.unlink(name);
 			p.importDb(OPFS_DB_PATH, bytes);
-			db = new p.OpfsSAHPoolDb(OPFS_DB_PATH);
+			db = registerFunctions(new p.OpfsSAHPoolDb(OPFS_DB_PATH));
 		}
 	})();
 	try {

@@ -18,6 +18,16 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-07',
+		label: '7 August 2026',
+		title: 'Much smaller database',
+		changes: [
+			'The in-browser database was restructured and is now 49.5 MB — less than half its previous size — so the one-time download is much faster on slow connections.',
+			'Page-number provenance on OCR-derived dictionary entries (e.g. Shackle 1995) now appears with the source citation instead of cluttering the notes.',
+			'Stray page-navigation markup scraped from digitised dictionaries no longer appears in notes.'
+		]
+	},
+	{
 		date: '2026-08-05',
 		label: '5 August 2026',
 		title: 'Gāndhārī, Aśokan Prakrit, and etymology tooling',
