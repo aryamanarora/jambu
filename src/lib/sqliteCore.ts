@@ -54,6 +54,7 @@ let sqlite3: Sqlite3 = null;
 let pool: Pool | null = null;
 let db: DbHandle | null = null;
 let loadingPromise: Promise<void> | null = null;
+let loadedVersion: string | null = null;
 
 export function isReady(): boolean {
 	return !!db;
@@ -82,7 +83,7 @@ export async function openCached(): Promise<boolean> {
 
 /** Fetch the whole DB file into one Uint8Array, reporting bytes received. */
 async function fetchBytes(url: string, onProgress: (received: number) => void): Promise<Uint8Array> {
-	const resp = await fetch(url);
+	const resp = await fetch(url, DEV ? { cache: 'no-store' } : undefined);
 	if (!resp.ok || !resp.body) throw new Error(`download failed: HTTP ${resp.status}`);
 	const reader = resp.body.getReader();
 	const chunks: Uint8Array[] = [];
@@ -103,15 +104,28 @@ async function fetchBytes(url: string, onProgress: (received: number) => void): 
 	return bytes;
 }
 
+/** A cheap dev-server identity for the currently served database. */
+async function fetchVersion(url: string): Promise<string> {
+	const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+	if (!response.ok) throw new Error(`database freshness check failed: HTTP ${response.status}`);
+	return [
+		response.headers.get('etag') ?? '',
+		response.headers.get('last-modified') ?? '',
+		response.headers.get('content-length') ?? ''
+	].join('|');
+}
+
 /**
  * Load the DB and open it. In dev this deserialises the bytes into an in-memory DB (always the
  * current local file); in prod it imports into OPFS and opens from there. Concurrent calls share
  * one load (important for the SharedWorker: many tabs may ask at once).
  */
 export function load(url: string, onProgress: (received: number) => void): Promise<void> {
-	if (db) return Promise.resolve();
+	if (!DEV && db) return Promise.resolve();
 	if (loadingPromise) return loadingPromise;
 	loadingPromise = (async () => {
+		const version = DEV ? await fetchVersion(url) : null;
+		if (db && version === loadedVersion) return;
 		const bytes = await fetchBytes(url, onProgress);
 		if (DEV) {
 			const s = await ensureSqlite();
@@ -127,7 +141,10 @@ export function load(url: string, onProgress: (received: number) => void): Promi
 					s.capi.SQLITE_DESERIALIZE_FREEONCLOSE | s.capi.SQLITE_DESERIALIZE_RESIZEABLE
 				)
 			);
+			const previous = db;
 			db = registerFunctions(h as DbHandle);
+			loadedVersion = version;
+			previous?.close();
 		} else {
 			const p = await ensurePool();
 			for (const name of p.getFileNames()) if (name !== OPFS_DB_PATH) p.unlink(name);
@@ -135,12 +152,10 @@ export function load(url: string, onProgress: (received: number) => void): Promi
 			db = registerFunctions(new p.OpfsSAHPoolDb(OPFS_DB_PATH));
 		}
 	})();
-	try {
-		return loadingPromise;
-	} finally {
-		// allow a retry if it rejected
-		loadingPromise.catch(() => (loadingPromise = null));
-	}
+	return loadingPromise.finally(() => {
+		// Shared dev workers check freshness again whenever a new tab connects or reloads.
+		loadingPromise = null;
+	});
 }
 
 /** Close and remove the current database so the user can reclaim its OPFS storage. */
@@ -148,6 +163,7 @@ export async function deleteCached(): Promise<void> {
 	db?.close();
 	db = null;
 	loadingPromise = null;
+	loadedVersion = null;
 	if (DEV) return;
 	const p = await ensurePool();
 	if (p.getFileNames().includes(OPFS_DB_PATH)) p.unlink(OPFS_DB_PATH);

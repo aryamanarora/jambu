@@ -51,8 +51,13 @@ const CHANNEL = 'jambu-db';
 const DB_URL = () => `${base}/db/jambu.db`;
 
 let started = false;
+// A route load can query the database before the root layout mounts (notably on a direct
+// /entries/:id or /reflexes/:id visit). Remember that demand so initialization can load an
+// uncached database instead of leaving SvelteKit hydration waiting for onMount forever.
+let loadDemanded = false;
 let role: 'follower' | 'leader' = 'follower';
-let worker: Worker | null = null; // leader only
+let worker: Worker | MessagePort | null = null; // dedicated worker, or the shared dev worker's port
+let stopWorker: (() => void) | null = null;
 let channel: BroadcastChannel | null = null;
 let lockManager: LockManager | null = null;
 let lockRequestActive = false;
@@ -67,6 +72,7 @@ function ensureReadyPromise() {
 }
 function setReady() {
 	status = 'ready';
+	loadDemanded = false;
 	ensureReadyPromise();
 	readyResolve?.();
 }
@@ -161,7 +167,11 @@ function applyRemoteStatus(s: DbStatus, received: number, error: string | null) 
 	receivedBytes = received;
 	errorMsg = error;
 	if (s === 'ready') setReady();
-	else if (s === 'idle') setNotReady();
+	else if (s === 'idle' && loadDemanded) {
+		// Keep the promise currently awaited by the route load, then ask the leader to satisfy it.
+		status = 'idle';
+		void loadDatabase();
+	} else if (s === 'idle') setNotReady();
 	else status = s; // idle / downloading / error / checking
 }
 
@@ -204,13 +214,34 @@ function channelCall(msg: Record<string, unknown>, timeout = 6000): Promise<WMsg
 
 async function becomeLeader() {
 	role = 'leader';
-	worker = new Worker(new URL('./sqlite.worker.ts', import.meta.url), { type: 'module' });
+	const sharedDevWorker = DEV && typeof SharedWorker !== 'undefined';
+	if (sharedDevWorker) {
+		const shared = new SharedWorker(new URL('./sqlite.shared.worker.ts', import.meta.url), {
+			type: 'module',
+			name: 'jambu-dev-db'
+		});
+		worker = shared.port;
+		shared.port.start();
+		stopWorker = () => shared.port.close();
+	} else {
+		const dedicated = new Worker(new URL('./sqlite.worker.ts', import.meta.url), { type: 'module' });
+		worker = dedicated;
+		stopWorker = () => dedicated.terminate();
+	}
 	worker.onmessage = (e: MessageEvent) => onWorkerMessage(e.data);
 	try {
-		const res = await workerCall({ type: 'init' });
-		if (res.cached) setReady();
-		else if (DEV) void loadDatabase(); // dev: auto-load the current local DB, no manual gate
-		else if (status === 'checking') status = 'idle';
+		// A named SharedWorker is one process for every dev tab on this origin. Its init performs a
+		// cheap HEAD freshness check and downloads only when .dbwork/jambu.db has changed.
+		if (sharedDevWorker) {
+			status = 'downloading';
+			await workerCall({ type: 'init', url: DB_URL() });
+			setReady();
+		} else {
+			const res = await workerCall({ type: 'init' });
+			if (res.cached) setReady();
+			else if (DEV || loadDemanded) void loadDatabase(); // query-driven direct load, or dev fallback
+			else if (status === 'checking') status = 'idle';
+		}
 	} catch (err) {
 		status = 'error';
 		errorMsg = err instanceof Error ? err.message : String(err);
@@ -222,8 +253,9 @@ function yieldLeadership() {
 	if (role !== 'leader') return;
 	leadershipYieldRequested = true;
 	post({ k: 'leaderReleased' });
-	worker?.terminate();
+	stopWorker?.();
 	worker = null;
+	stopWorker = null;
 	for (const pending of wpending.values()) pending.reject(new Error('database leadership released'));
 	wpending.clear();
 	role = 'follower';
@@ -258,8 +290,9 @@ function startEngine() {
 	channel = new BroadcastChannel(CHANNEL);
 	channel.onmessage = (e: MessageEvent<Chan>) => onChannelMessage(e.data);
 	lockManager = (navigator as unknown as { locks?: LockManager }).locks ?? null;
-	// In dev the DB is a per-tab in-memory copy (no OPFS exclusivity), so every tab is its own
-	// leader — this avoids proxying to a stale leader tab and lets each reload auto-load fresh.
+	// In dev every tab talks directly to one named SharedWorker (or gets an independent dedicated
+	// worker on browsers without SharedWorker). Production retains the Web-Locks leader/follower
+	// protocol because its persistent OPFS database has exclusive connection semantics.
 	if (lockManager && !DEV) {
 		requestLeadership();
 		document.addEventListener('visibilitychange', () => {
@@ -317,7 +350,12 @@ async function doLoad() {
 
 async function whenReady(): Promise<void> {
 	if (status === 'ready') return;
+	loadDemanded = true;
 	ensureReadyPromise();
+	// Usually the root layout preloads the engine. During a direct route visit, however, the
+	// universal page load runs before layout onMount; starting here breaks that hydration cycle.
+	if (!started) await initDatabase();
+	else if (status === 'idle') await loadDatabase();
 	await readyPromise;
 }
 

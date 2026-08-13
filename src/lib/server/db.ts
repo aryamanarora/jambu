@@ -15,6 +15,7 @@
 import Database from 'better-sqlite3';
 import { statSync } from 'node:fs';
 import { dev } from '$app/environment';
+import { cladeFamily } from '$lib/cladeTree';
 import {
 	IdIndex,
 	hydrateLem,
@@ -33,6 +34,7 @@ import {
 import type {
 	AttestationPlace,
 	ConceptAttestation,
+	ConceptBarGroup,
 	ConceptDetail,
 	ConceptEtymon,
 	ConceptRow,
@@ -182,6 +184,52 @@ export function allConceptIds(): { id: string }[] {
 // ---- concepts -------------------------------------------------------------
 
 const BAR_SEGMENTS = 16;
+const REFLEX_FAMILIES = ['Indo-Iranian', 'Dravidian', 'Other'] as const;
+
+// Iranian languages currently have the generic `Other` clade in languages.csv. Keep this
+// explicit until the source data has a first-class Iranian clade, so they are not lost from the
+// Indo-Iranian reflex rollup.
+const IRANIAN_LANGUAGE_IDS = new Set([
+	'Av',
+	'Bal',
+	'Chvar',
+	'Ir',
+	'Ishk',
+	'Khot',
+	'Kurd',
+	'Mj',
+	'MPrs',
+	'OPers',
+	'Orm',
+	'Oss',
+	'Pahl',
+	'Par',
+	'Parth',
+	'Pers',
+	'Psht',
+	'Rosh',
+	'Sang',
+	'Sar',
+	'Shgh',
+	'Sogd',
+	'Wj',
+	'Wkh',
+	'X',
+	'Yazgh',
+	'Yghn',
+	'Yid',
+	'HKAT-prs_d',
+	'HKAT-isk',
+	'HKAT-sgh_r'
+]);
+
+function reflexFamily(id: string, clade: string | null): (typeof REFLEX_FAMILIES)[number] {
+	if (IRANIAN_LANGUAGE_IDS.has(id)) return 'Indo-Iranian';
+	const family = clade ? cladeFamily(clade) : 'Other';
+	if (family === 'Indo-Aryan') return 'Indo-Iranian';
+	if (family === 'Dravidian') return 'Dravidian';
+	return 'Other';
+}
 
 /** The dictionary a numeric/prefixed etymon id comes from. */
 function etymonSource(id: string): string {
@@ -256,11 +304,19 @@ export function allConcepts(): ConceptRow[] {
 			 FROM concepts WHERE form_count > 0 ORDER BY etyma_count DESC, name`
 		)
 		.all() as (ConceptRow & { rids: Buffer | null })[];
-	// per-form (origin, relation) for every concept-linked lemma, fetched once
+	const langFamilies = new Map(
+		(dbh.prepare('SELECT rowid AS rid, id, clade FROM languages').all() as {
+			rid: number;
+			id: string;
+			clade: string | null;
+		}[]).map((r) => [r.rid, reflexFamily(r.id, r.clade)])
+	);
+	// Per-form origin, relation, and reflex language for every concept-linked lemma, fetched once.
 	const lemInfo = new Map(
-		(dbh.prepare('SELECT rowid AS rid, origin_rid, flags FROM lem').all() as {
+		(dbh.prepare('SELECT rowid AS rid, origin_rid, lang_rid, flags FROM lem').all() as {
 			rid: number;
 			origin_rid: number | null;
+			lang_rid: number | null;
 			flags: number;
 		}[]).map((r) => [r.rid, r])
 	);
@@ -268,10 +324,20 @@ export function allConcepts(): ConceptRow[] {
 		// per-immediate-etymon counts first, accumulated into roots in ascending etymon-id order —
 		// this reproduces the v1 GROUP BY output order, which decides bar order among tied counts
 		const byImm = new Map<number, number>();
+		const byFamilyImm = new Map(REFLEX_FAMILIES.map((family) => [family, new Map<number, number>()]));
+		const familyUnetym = new Map(REFLEX_FAMILIES.map((family) => [family, 0]));
 		for (const rid of readDeltas(c.rids ? new Uint8Array(c.rids) : null)) {
 			const info = lemInfo.get(rid);
-			if (!info || (info.flags & 7) === REL_UNLINKED) continue;
-			byImm.set(info.origin_rid ?? rid, (byImm.get(info.origin_rid ?? rid) ?? 0) + 1);
+			if (!info) continue;
+			const family = info.lang_rid == null ? 'Other' : (langFamilies.get(info.lang_rid) ?? 'Other');
+			if ((info.flags & 7) === REL_UNLINKED) {
+				familyUnetym.set(family, (familyUnetym.get(family) ?? 0) + 1);
+				continue;
+			}
+			const imm = info.origin_rid ?? rid;
+			byImm.set(imm, (byImm.get(imm) ?? 0) + 1);
+			const familyCounts = byFamilyImm.get(family)!;
+			familyCounts.set(imm, (familyCounts.get(imm) ?? 0) + 1);
 		}
 		const byRoot = new Map<number, number>();
 		for (const [imm, n] of [...byImm.entries()]
@@ -286,6 +352,22 @@ export function allConcepts(): ConceptRow[] {
 			.sort((a, b) => b.n - a.n);
 		c.bars = list.slice(0, BAR_SEGMENTS);
 		c.rest = list.slice(BAR_SEGMENTS).reduce((s, b) => s + b.n, 0);
+		c.reflex_family_bars = REFLEX_FAMILIES.map((family): ConceptBarGroup => {
+			const byFamilyRoot = new Map<number, number>();
+			for (const [imm, n] of byFamilyImm.get(family)!) {
+				const root = toRoot(imm);
+				byFamilyRoot.set(root, (byFamilyRoot.get(root) ?? 0) + n);
+			}
+			const familyList = [...byFamilyRoot.entries()]
+				.map(([root, n]) => ({ etymon: idx.idOf(root), n }))
+				.sort((a, b) => b.n - a.n || a.etymon.localeCompare(b.etymon));
+			return {
+				family,
+				bars: familyList.slice(0, BAR_SEGMENTS),
+				rest: familyList.slice(BAR_SEGMENTS).reduce((sum, b) => sum + b.n, 0),
+				unetym_count: familyUnetym.get(family) ?? 0
+			};
+		});
 		delete (c as unknown as Record<string, unknown>).rids;
 	}
 	return concepts;

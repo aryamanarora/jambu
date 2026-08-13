@@ -34,7 +34,7 @@ hypotheses with review notes). Both SQLite layers register the `vin_any` varint-
   It reads the sibling data repo's `cldf/` **directly** (the README's mention of a `.dbwork/data.db`
   input is stale — the current script takes `--cldf`). It first builds the legacy ("v1") schema in
   full, then `scripts/compact_db.py` rewrites it into the **compact v3 schema** that ships
-  (~50.6 MB, guarded at 52 MB): binary-ranked lemma ids (`lem` rowid = id rank; the `ids` blob is
+  (~53.3 MB, guarded at 55 MB): binary-ranked lemma ids (`lem` rowid = id rank; the `ids` blob is
   the only id index), interned tags/cognatesets/citations, bit-flag relations, varint blobs for
   children/citations/alignments/corr summaries, and grouped alias blobs. The codecs live in
   `src/lib/dbShared.ts` and MUST stay in sync with `compact_db.py`. After any change to either,
