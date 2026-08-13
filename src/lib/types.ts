@@ -137,6 +137,15 @@ export interface ConceptBarSeg {
 	n: number; // number of forms of this etymon expressing the concept (segment size)
 }
 
+export type ConceptReflexFamily = 'Indo-Iranian' | 'Dravidian' | 'Other';
+
+export interface ConceptBarGroup {
+	family: ConceptReflexFamily;
+	bars: ConceptBarSeg[];
+	rest: number;
+	unetym_count: number;
+}
+
 export interface ConceptRow {
 	id: number;
 	name: string;
@@ -147,6 +156,7 @@ export interface ConceptRow {
 	form_count: number;
 	bars?: ConceptBarSeg[]; // top etyma for the stacked bar (index page)
 	rest?: number; // forms from etyma beyond the shown segments
+	reflex_family_bars?: ConceptBarGroup[]; // same distribution, grouped by reflex language family
 }
 
 /** A point a form is plotted at: a located dialect it is tagged with, else its language. */

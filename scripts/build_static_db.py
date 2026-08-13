@@ -10,11 +10,11 @@ sql.js-httpvfs, so we bake in everything the client needs:
   2. Add the compact set of indexes the client query layer relies on.
   3. ANALYZE + VACUUM so the B-trees are laid out contiguously.
 
-Tiny lookup tables (languages: 615 rows, references: 194 rows) are searched with plain LIKE on
+Tiny lookup tables (languages and references) are searched with plain LIKE on
 the client — no index needed — so we do not build FTS for them.
 
 Usage:
-    python build_static_db.py INPUT.db OUTPUT.db [--page-size 8192]
+    python build_static_db.py OUTPUT.db [--cldf ../data/cldf] [--page-size 16384]
 
 The script never mutates INPUT.db; it copies it to OUTPUT.db first.
 """
@@ -27,7 +27,6 @@ import sys
 import time
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import quote
 
 sys.path.insert(0, str(Path(__file__).parent))
 import compact_db
@@ -47,14 +46,9 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-# The compact v2 schema (compact_db.py) ships at ~49.5 MB. Keep a tight guard so future data or
-# schema growth past ~52 MB fails the build loudly instead of silently regressing the download.
-MAX_OUTPUT_BYTES = 52_000_000
-
-# Printed dialect prefixes which differ from the canonical language name in languages.csv.
-BASE_LANGUAGE_OVERRIDES = {
-    "Hindi": "Hindi-Urdu",
-}
+# The compact v3 schema (compact_db.py) ships at ~53.3 MB with the 2026-08-10 corpus. Keep a tight
+# guard so future schema growth past ~55 MB fails loudly instead of silently regressing download.
+MAX_OUTPUT_BYTES = 55_000_000
 
 def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
@@ -141,75 +135,49 @@ def _marker_svg(clade: str, name: str) -> str:
 
 
 def load_languages(
-    con: sqlite3.Connection, path: Path
-) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
-    """Load canonical languages plus dialect-tag metadata.
-
-    A ``Language: Dialect`` CLDF row is no longer a language in the browser DB. Its full metadata
-    is retained in ``dialects`` and its forms are remapped to the base-language row. The return
-    values are (canonical-language→clade, source-id→canonical-id, source-id→dialect-token).
-    """
-    source_rows = []
+    con: sqlite3.Connection, path: Path, dialect_path: Path
+) -> dict[str, str]:
+    """Load explicit base languages and their separately catalogued dialect tags."""
     with path.open(encoding="utf-8") as f:
-        source_rows = list(csv.DictReader(f))
+        language_rows = list(csv.DictReader(f))
+    with dialect_path.open(encoding="utf-8") as f:
+        source_dialects = list(csv.DictReader(f))
 
-    by_base: dict[str, list[dict[str, str]]] = defaultdict(list)
-    exact: dict[str, dict[str, str]] = {}
-    for r in source_rows:
-        printed_base = r["Name"].split(": ", 1)[0]
-        base = BASE_LANGUAGE_OVERRIDES.get(printed_base, printed_base)
-        by_base[base].append(r)
-        if ": " not in r["Name"]:
-            exact.setdefault(base, r)
-
-    rows, dialect_rows = [], []
-    clade_of: dict[str, str] = {}
-    canonical_of: dict[str, str] = {}
-    dialect_tag_of: dict[str, str] = {}
-    for base, members in by_base.items():
-        representative = exact.get(base, members[0])
-        canonical_id = representative["ID"]
-        clade = representative["Clade"]
-        # A synthesized parent has no single geographic point. Preserve every point below in the
-        # dialect table; only an independently listed base language keeps base coordinates.
-        has_base_row = base in exact
-        glottocodes = {r.get("Glottocode") or "" for r in members} - {""}
-        glottocode = representative.get("Glottocode") or ""
-        if not glottocode and len(glottocodes) == 1:
-            glottocode = next(iter(glottocodes))
+    rows = []
+    clade_of = {}
+    names = {}
+    for r in language_rows:
+        if ": " in r["Name"]:
+            raise ValueError(f"Colon dialect remains in languages.csv: {r['ID']} {r['Name']}")
+        language_id, name, clade = r["ID"], r["Name"], r["Clade"]
         rows.append(
             (
-                canonical_id, base, base, "", glottocode,
-                (representative["Longitude"] or None) if has_base_row else None,
-                (representative["Latitude"] or None) if has_base_row else None,
+                language_id, name, name, "", r.get("Glottocode") or "",
+                r.get("Longitude") or None, r.get("Latitude") or None,
                 clade, CLADE_COLORS.get(clade),
                 CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
-                _marker_svg(clade, base),
+                _marker_svg(clade, name),
             )
         )
-        clade_of[canonical_id] = clade
-        for r in members:
-            canonical_of[r["ID"]] = canonical_id
-            if ": " not in r["Name"]:
-                continue
-            dialect = r["Name"].split(": ", 1)[1]
-            # Include the source ID because the CLDF can contain two geographically distinct rows
-            # with the same printed dialect name (e.g. the two Kausambi records).
-            token = (
-                f"dialect:{quote(canonical_id, safe='')}:{quote(r['ID'], safe='')}:"
-                f"{quote(dialect, safe='')}"
+        clade_of[language_id] = clade
+        names[language_id] = name
+
+    dialect_rows = []
+    for r in source_dialects:
+        language_id = r["Language_ID"]
+        if language_id not in clade_of:
+            raise ValueError(f"Unknown dialect parent {language_id!r} for {r['Tag']}")
+        clade = r.get("Clade") or clade_of[language_id]
+        dialect_rows.append(
+            (
+                r["Tag"], language_id, r["ID"], r["Name"], names[language_id], r["Name"],
+                r.get("Glottocode") or "", r.get("Longitude") or None,
+                r.get("Latitude") or None, clade, CLADE_COLORS.get(clade),
+                r.get("Location") or "", r.get("Quality") or "",
+                CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
+                _marker_svg(clade, names[language_id]),
             )
-            dialect_tag_of[r["ID"]] = token
-            dialect_rows.append(
-                (
-                    token, canonical_id, r["ID"], dialect, base, dialect,
-                    r.get("Glottocode") or "", r["Longitude"] or None, r["Latitude"] or None,
-                    clade, CLADE_COLORS.get(clade),
-                    r.get("Location") or "", r.get("Quality") or "",
-                    CLADE_ORDER.index(clade) if clade in CLADE_ORDER else 999,
-                    _marker_svg(clade, base),
-                )
-            )
+        )
     con.executemany(
         'INSERT INTO languages (id,name,language,dialect,glottocode,long,lat,clade,color,"order",map_marker)'
         " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
@@ -221,8 +189,8 @@ def load_languages(
         dialect_rows,
     )
     con.commit()
-    log(f"loaded {len(rows)} canonical languages and {len(dialect_rows)} dialect tags")
-    return clade_of, canonical_of, dialect_tag_of
+    log(f"loaded {len(rows)} languages and {len(dialect_rows)} explicit dialect tags")
+    return clade_of
 
 
 def load_references(con: sqlite3.Connection, path: Path) -> None:
@@ -288,8 +256,6 @@ def load_lemmas(
     forms_csv: Path,
     edge_rows: list[dict],
     clade_of: dict[str, str],
-    canonical_of: dict[str, str],
-    dialect_tag_of: dict[str, str],
 ) -> dict[str, str]:
     """Build the unified lemmas table from the edge-model CLDF: forms.csv carries node content
     (+ Status ∈ {entry, unlinked, ''}) and cldf/edges.csv carries the typed graph. Each node's
@@ -305,42 +271,68 @@ def load_lemmas(
         if e["Rank"] == "1" and e["Kind"] in ("reflex", "variant", "borrowed"):
             rank1[e["Child_ID"]] = (e["Parent_ID"], e["Kind"])
 
-    # Canonicalise language IDs, attach the dialect tag, then collapse exact cross-dialect copies.
-    # The rank-1 edge is part of the dedup identity (identical text under different parents must
-    # never merge). References to an earlier duplicate follow the retained row ID.
+    # Dialects are already tags in CLDF. Collapse exact cross-dialect copies while retaining every
+    # attested dialect tag on the surviving row.
+    # The rank-1 edge is part of a linked row's identity (identical text under different parents
+    # must never merge). Unlinked attestations use their lexical content as the identity instead;
+    # Source is provenance, so merge its citations onto the retained row rather than using it to
+    # distinguish otherwise identical forms. Etyma/entries remain identified by ID and never merge.
     aliases: dict[str, str] = {}
     unique: dict[tuple, dict[str, str]] = {}
+    unlinked_unique: dict[tuple, list[tuple[dict[str, str], set[str]]]] = defaultdict(list)
     deduped = []
     ignored = {"ID", "Language_ID", "Tags"}
     for r in rows:
-        source_language = r["Language_ID"]
-        r["Language_ID"] = canonical_of.get(source_language, source_language)
-        dialect_tag = dialect_tag_of.get(source_language)
         base_tags = (r.get("Tags") or "").split()
         tags = list(base_tags)
-        if dialect_tag and dialect_tag not in tags:
-            tags.append(dialect_tag)
-        r["Tags"] = " ".join(tags)
-        # Parentless nodes (etyma + unlinked) are identified by their ID, never merged (blank
-        # proto heads would otherwise collapse). Attested rows dedup on content + accepted edge.
-        if r["ID"] not in rank1:
+        content_tags = [tag for tag in base_tags if not tag.startswith("dialect:")]
+        dialect_identity = tuple(sorted(tag for tag in base_tags if tag.startswith("dialect:")))
+        source_lect = dialect_identity or (r["Language_ID"],)
+        # Parentless etyma/entries stay distinct (blank proto heads would otherwise collapse).
+        # Unlinked rows are attestations too, despite having no accepted edge.
+        is_unlinked = r.get("Status") == "unlinked"
+        if r["ID"] not in rank1 and not is_unlinked:
             deduped.append(r)
             continue
+        identity_ignored = ignored | ({"Source"} if is_unlinked else set())
         key = (r["Language_ID"],) + tuple(
-            r.get(k, "") for k in r.keys() if k not in ignored
-        ) + tuple(base_tags) + rank1[r["ID"]]
-        original = unique.get(key)
+            r.get(k, "") for k in r.keys() if k not in identity_ignored
+        ) + tuple(content_tags) + (("unlinked",) if is_unlinked else rank1[r["ID"]])
+        if is_unlinked:
+            # A repeated spelling within one lect may be a genuine homonym or separate lexical
+            # record. Merge only when a different source lect normalises to the same language.
+            candidates = unlinked_unique[key]
+            match = next(
+                ((candidate, lects) for candidate, lects in candidates
+                 if source_lect not in lects),
+                None,
+            )
+            original, merged_lects = match if match else (None, None)
+        else:
+            original = unique.get(key)
+            merged_lects = None
         if original is None:
-            unique[key] = r
+            if is_unlinked:
+                unlinked_unique[key].append((r, {source_lect}))
+            else:
+                unique[key] = r
             deduped.append(r)
             continue
+        if merged_lects is not None:
+            merged_lects.add(source_lect)
         aliases[r["ID"]] = original["ID"]
         merged_tags = list(dict.fromkeys((original.get("Tags") or "").split() + tags))
         original["Tags"] = " ".join(merged_tags)
+        # Preserve every source locator on the retained lexical record. _parse_ref understands
+        # top-level semicolon separation and keeps semicolons inside CLDF locator brackets intact.
+        if r.get("Source"):
+            original["Source"] = ";".join(
+                part for part in (original.get("Source", ""), r["Source"]) if part
+            )
     rows = deduped
     if aliases:
-        # re-point every edge endpoint through the collapse map; a collapsed child's own edges
-        # drop out (the retained row carries the identical edge — guaranteed by the dedup key)
+        # Re-point every edge endpoint through the collapse map; a collapsed linked child's own
+        # edges drop out (the retained row carries the identical edge, guaranteed by the key).
         def canon(i: str) -> str:
             while i in aliases:
                 i = aliases[i]
@@ -818,12 +810,10 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     # 1. Build the base tables directly from the CLDF dataset (../data) — the frozen data.db and
     #    neojambu's builder are no longer in the loop; ../data is the single source of truth.
     build_base_schema(con)
-    clade_of, canonical_of, dialect_tag_of = load_languages(con, cldf / "languages.csv")
+    clade_of = load_languages(con, cldf / "languages.csv", cldf / "dialects.csv")
     load_references(con, cldf / "references.csv")
     edge_rows = load_edge_rows(cldf)
-    build_aliases = load_lemmas(
-        con, cldf / "forms.csv", edge_rows, clade_of, canonical_of, dialect_tag_of
-    )
+    build_aliases = load_lemmas(con, cldf / "forms.csv", edge_rows, clade_of)
     aliases = load_lemma_aliases(con, cldf, build_aliases)
 
     # 2. Indexes: keep the lookup and hot-path ordering indexes. Deliberately omit broad secondary
@@ -931,10 +921,10 @@ def main() -> None:
     )
     ap.add_argument("output", type=Path, help="output DB path (e.g. .dbwork/jambu.db)")
     ap.add_argument("--cldf", type=Path, default=Path("../data/cldf"),
-                    help="CLDF directory (forms.csv, parameters.csv, languages.csv, references.csv, "
-                         "alignments.csv, derivation.csv)")
-    ap.add_argument("--page-size", type=int, default=8192,
-                    help="SQLite page size for the output (default 8192, range-fetch friendly)")
+                    help="CLDF directory (forms.csv, languages.csv, dialects.csv, references.csv, "
+                         "alignments.csv, edges.csv)")
+    ap.add_argument("--page-size", type=int, default=16384,
+                    help="SQLite page size for the output (default 16384, range-fetch friendly)")
     args = ap.parse_args()
 
     t0 = time.time()

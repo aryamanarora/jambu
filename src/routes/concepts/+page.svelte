@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { etymonSlotColor } from '$lib/etyma';
-	import type { ConceptRow } from '$lib/types';
+	import type { ConceptBarGroup, ConceptRow } from '$lib/types';
 
 	let { data } = $props();
 	const concepts = data.concepts as ConceptRow[];
@@ -9,6 +9,7 @@
 	let search = $state('');
 	let category = $state('all');
 	let sort = $state('etyma');
+	let splitByReflexFamily = $state(false);
 
 	const categories = $derived(['all', ...new Set(concepts.map((c) => c.category).filter(Boolean))]);
 
@@ -31,6 +32,8 @@
 	// total forms behind a concept's shown bar (segments + remainder + unetymologised), for widths
 	const barTotal = (c: ConceptRow) =>
 		Math.max(1, (c.bars ?? []).reduce((s, b) => s + b.n, 0) + (c.rest ?? 0) + (c.unetym_count ?? 0));
+	const groupTotal = (group: ConceptBarGroup) =>
+		group.bars.reduce((sum, bar) => sum + bar.n, 0) + group.rest + group.unetym_count;
 </script>
 
 <svelte:head>
@@ -60,6 +63,10 @@
 		<option value="form">Sort: forms</option>
 		<option value="name">Sort: name</option>
 	</select>
+	<label class="toggle">
+		<input type="checkbox" bind:checked={splitByReflexFamily} />
+		Split by reflex family
+	</label>
 	<span class="count">{filtered.length.toLocaleString()} shown</span>
 </div>
 
@@ -71,7 +78,14 @@
 				<th>Category</th>
 				<th class="numeric">Etyma</th>
 				<th class="numeric">Langs</th>
-				<th class="dist-col">Distribution of forms</th>
+				<th class="dist-col">
+					Distribution of forms
+					{#if splitByReflexFamily}
+						<span class="family-headings" aria-hidden="true">
+							<span>Indo-Iranian</span><span>Dravidian</span><span>Other</span>
+						</span>
+					{/if}
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -82,7 +96,45 @@
 					<td class="numeric">{c.etyma_count.toLocaleString()}</td>
 					<td class="numeric">{c.lang_count.toLocaleString()}</td>
 					<td class="dist-col">
-						{#if c.bars?.length}
+						{#if splitByReflexFamily && c.reflex_family_bars}
+							<div class="family-bars">
+								{#each c.reflex_family_bars as group (group.family)}
+									{@const total = groupTotal(group)}
+									<div
+										class="cbar family-track"
+										title="{group.family}: {total.toLocaleString()} reflex forms"
+									>
+										{#if total}
+											<div class="family-fill">
+												{#each group.bars as b, i (b.etymon)}
+													<a
+														class="eref cseg"
+														data-eref={b.etymon}
+														href="{base}/entries/{b.etymon}"
+														style="width: {(100 * b.n) / total}%; background: {etymonSlotColor(i)}"
+														aria-label="{b.etymon}: {b.n} {group.family} reflex forms"
+													></a>
+												{/each}
+												{#if group.rest}
+													<span
+														class="cseg rest"
+														style="width: {(100 * group.rest) / total}%"
+														title="{group.rest} more"
+													></span>
+												{/if}
+												{#if group.unetym_count}
+													<span
+														class="cseg unetym"
+														style="width: {(100 * group.unetym_count) / total}%"
+														title="{group.unetym_count} unetymologised"
+													></span>
+												{/if}
+											</div>
+										{/if}
+									</div>
+								{/each}
+							</div>
+						{:else if c.bars?.length}
 							{@const total = barTotal(c)}
 							<div class="cbar">
 								{#each c.bars as b, i (b.etymon)}
@@ -146,6 +198,16 @@
 		background: var(--bg);
 		color: inherit;
 	}
+	.toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		white-space: nowrap;
+		font-size: 0.9rem;
+	}
+	.toggle input {
+		margin: 0;
+	}
 	.count {
 		color: var(--muted);
 		font-size: 0.85rem;
@@ -160,12 +222,34 @@
 		width: 40%;
 		min-width: 14rem;
 	}
+	.family-headings,
+	.family-bars {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 5px;
+	}
+	.family-headings {
+		margin-top: 0.3rem;
+		font-size: 0.68rem;
+		font-weight: 500;
+		color: var(--muted);
+		text-align: center;
+	}
 	.cbar {
 		display: flex;
 		height: 15px;
 		border-radius: 3px;
 		overflow: hidden;
 		background: var(--border);
+	}
+	.family-track {
+		min-width: 0;
+	}
+	.family-fill {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
 	}
 	.cseg {
 		display: block;
