@@ -18,6 +18,56 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-13',
+		label: '13 August 2026',
+		title: 'Kullui, Old Marathi, and deeper comparisons',
+		changes: [
+			'Added all 2,003 entries from the live Kullui-English-Russian dictionary, preserving grammatical and etymological detail and linking exact Old Indo-Aryan matches into the etymology graph.',
+			'Added 4,718 Old Marathi forms from Tulpule and Feldhaus, with stable dictionary-entry citations.',
+			'Connected 706 Burushaski dialect attestations into reconstructed Proto-Burushaski cognate sets.',
+			'Improved CDIAL and DEDR parsing, dialect mapping, source metadata, and concept distributions across Indo-Iranian, Dravidian, and other reflexes.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'kul', label: 'Kullui' },
+				{ id: 'OM', label: 'Old Marathi' },
+				{ id: 'Bur', label: 'Burushaski' }
+			],
+			sources: [
+				{ id: 'kullui-org', label: 'Krylova & Ioannissiani 2026' },
+				{ id: 'tulpule1999', label: 'Tulpule & Feldhaus 1999' }
+			]
+		}
+	},
+	{
+		date: '2026-08-10',
+		label: '10 August 2026',
+		title: 'Vaagri, Palula, and the Hindu Kush',
+		changes: [
+			'Expanded Vaagri Boli from a small etymological sample to the complete 2,456-item dictionary, with page and item citations for every form.',
+			'Expanded Palula to the complete 3,493-form dictionary, including Biori forms and structured grammatical information.',
+			'Added 11,600 forms from the Hindu Kush areal-typology survey, covering 59 language varieties from Ladakh to Afghanistan.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'VB', label: 'Vaagri Boli' },
+				{ id: 'Phal', label: 'Palula' },
+				{ id: 'HKAT-ask', label: 'Ashkun' },
+				{ id: 'HKAT-bsk_h', label: 'Burushaski' },
+				{ id: 'HKAT-khw', label: 'Khowar' },
+				{ id: 'HKAT-mvy', label: 'Indus Kohistani' },
+				{ id: 'HKAT-aee_at', label: 'Pashai' },
+				{ id: 'HKAT-scl_p', label: 'Shina' },
+				{ id: 'HKAT-wbl_a', label: 'Wakhi' }
+			],
+			sources: [
+				{ id: 'srinivasa', label: 'Srinivasa Varma 1970 · OCR' },
+				{ id: 'liljegren', label: 'Liljegren 2019' },
+				{ id: 'liljegren-hindukush', label: 'Liljegren et al. 2026' }
+			]
+		}
+	},
+	{
 		date: '2026-08-08',
 		label: '8 August 2026',
 		title: 'Etymology graph rework',
