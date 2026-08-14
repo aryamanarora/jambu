@@ -24,7 +24,8 @@ export const changelog: ChangelogEntry[] = [
 		changes: [
 			'Added 119,687 forms across 536 language varieties, including the Linguistic Survey of India comparative vocabulary and 31 modern dictionaries and dialect surveys.',
 			'Added detailed coverage for Brahui, Toda, Kota, Domaaki, Magar, Tamang, Rai, Tharu, Santali, and many languages of Nepal and Northeast India.',
-			'Entry pages now preserve structured source text, concept views distinguish immediate etymologies more clearly, and tables and maps have improved loading and empty states.'
+			'Entry pages now preserve structured source text, concept views distinguish immediate etymologies more clearly, and tables and maps have improved loading and empty states.',
+			'Returning visitors now receive the current dictionary release instead of continuing to use an older cached database.'
 		],
 		ingested: {
 			languages: [

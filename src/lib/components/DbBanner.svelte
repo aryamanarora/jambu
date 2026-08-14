@@ -1,5 +1,5 @@
 <script lang="ts">
-	// A slim banner that gates the in-browser database. The dictionary data lives in a ~90 MB
+	// A slim banner that gates the in-browser database. The dictionary data lives in a ~76 MB
 	// download; rather than pull it automatically, we ask the user once. After loading it's cached
 	// on their device (OPFS), so this only appears on the first visit (or after a data update).
 	import { dbUI, loadDatabase } from '$lib/db.svelte';
