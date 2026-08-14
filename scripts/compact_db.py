@@ -376,6 +376,21 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         "INSERT INTO cites (rowid, ref_rid, locator) VALUES (?,?,?)",
         [(i + 1, k[0], k[1]) for i, k in enumerate(cite_keys)],
     )
+    # Independently ordered/attributed entry prose.  Keep kind and format as readable strings:
+    # their cardinality is tiny and this makes future block types schema-compatible.
+    text_rows = [
+        (new_rowid_of_old[lemma_rid], pos, kind, fmt, content, ref_rid, locator)
+        for lemma_rid, pos, kind, fmt, content, ref_rid, locator in con.execute(
+            "SELECT lemma_rid,pos,kind,format,content,reference_rid,locator "
+            "FROM lemma_text ORDER BY lemma_rid,pos"
+        )
+    ]
+    con.execute(
+        "CREATE TABLE texts (lemma_rid INTEGER NOT NULL, pos INTEGER NOT NULL, "
+        "kind TEXT NOT NULL, format TEXT NOT NULL, content TEXT NOT NULL, "
+        "ref_rid INTEGER, locator TEXT, PRIMARY KEY (lemma_rid,pos)) WITHOUT ROWID"
+    )
+    con.executemany("INSERT INTO texts VALUES (?,?,?,?,?,?,?)", text_rows)
     log(f"built lem ({len(lem_rows)} rows), {len(tag_texts)} tagsets, {len(cog_texts)} cogsets, "
         f"{len(cite_keys)} citation edges")
 
@@ -530,6 +545,7 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         """
         DROP TABLE lemmas;
         DROP TABLE lemma_reference;
+        DROP TABLE lemma_text;
         DROP TABLE lemma_aliases;
         DROP TABLE lemma_concept;
         CREATE INDEX idx_entries_ord ON lem(ord) WHERE origin_rid IS NULL AND (flags & 7) != 4;

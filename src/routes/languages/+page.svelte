@@ -135,4 +135,9 @@
 		font-size: 0.9rem;
 		color: var(--muted);
 	}
+	@media (max-width: 640px) {
+		:global(.map) {
+			height: 360px !important;
+		}
+	}
 </style>

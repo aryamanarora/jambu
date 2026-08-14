@@ -145,4 +145,21 @@
 		font-variant-numeric: tabular-nums;
 		white-space: nowrap;
 	}
+	@media (max-width: 640px) {
+		.donut-wrap {
+			justify-content: center;
+			gap: 1rem;
+		}
+		.legend {
+			width: 100%;
+			min-width: 0;
+		}
+		.legend li {
+			min-width: 0;
+		}
+		.nm {
+			min-width: 0;
+			overflow-wrap: anywhere;
+		}
+	}
 </style>

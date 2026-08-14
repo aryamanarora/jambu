@@ -18,6 +18,60 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-14',
+		label: '14 August 2026',
+		title: 'The Linguistic Survey of India and 31 modern surveys',
+		changes: [
+			'Added 119,687 forms across 536 language varieties, including the Linguistic Survey of India comparative vocabulary and 31 modern dictionaries and dialect surveys.',
+			'Added detailed coverage for Brahui, Toda, Kota, Domaaki, Magar, Tamang, Rai, Tharu, Santali, and many languages of Nepal and Northeast India.',
+			'Entry pages now preserve structured source text, concept views distinguish immediate etymologies more clearly, and tables and maps have improved loading and empty states.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Brahui', label: 'Brahui' },
+				{ id: 'Toda', label: 'Toda' },
+				{ id: 'Kota', label: 'Kota' },
+				{ id: 'D', label: 'Domaaki' },
+				{ id: 'Humla', label: 'Humla Tibetan' },
+				{ id: 'KochilaTharu', label: 'Kochila Tharu' },
+				{ id: 'Dotyali', label: 'Dotyali' },
+				{ id: 'EasternMagar', label: 'Eastern Magar' },
+				{ id: 'WesternMagar', label: 'Western Magar' },
+				{ id: 'Gurung', label: 'Gurung' },
+				{ id: 'Hajong', label: 'Hajong' },
+				{ id: 'Loy', label: 'Loke' },
+				{ id: 'Kurux', label: 'Kurux' },
+				{ id: 'Kjl', label: 'Western Parbate Kham' },
+				{ id: 'Majhi', label: 'Majhi' },
+				{ id: 'Bote', label: 'Bote' },
+				{ id: 'Chhulung', label: 'Chhulung' },
+				{ id: 'EasternMewahang', label: 'Eastern Mewahang' },
+				{ id: 'Sampang', label: 'Sampang' },
+				{ id: 'Rabha', label: 'Rabha' },
+				{ id: 'sa', label: 'Santali' },
+				{ id: 'Tagin', label: 'Tagin' },
+				{ id: 'Puroik', label: 'Puroik' },
+				{ id: 'Ths', label: 'Thakali' },
+				{ id: 'Yamphu', label: 'Yamphu' },
+				{ id: 'LSI-SANSKRIT', label: 'LSI comparative vocabulary' }
+			],
+			sources: [
+				{ id: 'grierson-lsi1928', label: 'Grierson 1928' },
+				{ id: 'ali-kobayashi2024', label: 'Ali & Kobayashi 2024' },
+				{ id: 'bhaskararao-toda2025', label: 'Bhaskararao & Kobayashi 2025' },
+				{ id: 'wolf-kota', label: 'Wolf 2023' },
+				{ id: 'weinreich2008', label: 'Weinreich 2008' },
+				{ id: 'webster2022north-gorkha', label: 'Webster 2022' },
+				{ id: 'swenson2024magar', label: 'Swenson 2024' },
+				{ id: 'abraham-sako2021', label: 'Abraham & Sako 2021' },
+				{ id: 'kim-kim-ahmad-sangma2010santali-cluster', label: 'Kim et al. 2010' },
+				{ id: 'hilty-mitchell2014', label: 'Hilty & Mitchell 2014' },
+				{ id: 'rai-rai-thokar2014chhulung', label: 'Rai et al. 2014' },
+				{ id: 'rai-rai-thokar2015sampang', label: 'Rai et al. 2015' }
+			]
+		}
+	},
+	{
 		date: '2026-08-13',
 		label: '13 August 2026',
 		title: 'Kullui, Old Marathi, and deeper comparisons',

@@ -275,4 +275,21 @@
 	.cseg.unetym {
 		background: #9a958c;
 	}
+	@media (max-width: 640px) {
+		.controls > .search,
+		.controls > select {
+			width: 100%;
+			flex: 1 0 100%;
+		}
+		.controls > .toggle {
+			min-height: 42px;
+			white-space: normal;
+		}
+		.cbar {
+			height: 28px;
+		}
+		.family-bars {
+			gap: 8px;
+		}
+	}
 </style>

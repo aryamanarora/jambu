@@ -281,17 +281,27 @@
 		color: var(--bad);
 	}
 
-	@media (max-width: 640px) {
+	@media (max-width: 780px) {
 		.summary-label {
 			display: none;
 		}
 		summary {
-			width: 34px;
+			width: 42px;
+			height: 42px;
 			justify-content: center;
 			padding: 0;
 		}
 		.chevron {
 			display: none;
+		}
+		.panel {
+			position: fixed;
+			top: 58px;
+			left: 0.75rem;
+			right: 0.75rem;
+			width: auto;
+			max-height: calc(100dvh - 4.5rem);
+			overflow-y: auto;
 		}
 	}
 </style>

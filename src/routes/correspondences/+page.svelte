@@ -494,9 +494,16 @@
 		.pseg {
 			font-size: 0.98rem;
 			padding: 2px 7px;
+			min-height: 42px;
 		}
 		.c-clade {
 			width: 130px;
+		}
+		.bar {
+			height: 28px;
+		}
+		.bar.small {
+			height: 22px;
 		}
 	}
 </style>

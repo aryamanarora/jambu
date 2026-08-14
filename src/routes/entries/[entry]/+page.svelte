@@ -343,9 +343,25 @@
 			>{/each}
 	</div>
 {/if}
-{#if entry.etymology}
-	<!-- a main entry and its merged addenda each keep their own CDIAL snippet, joined in the DB by
-	     an addendum-delimiter comment; render one accented block per snippet so none is dropped. -->
+{#if entry.text_blocks?.length}
+	{#each entry.text_blocks as block (block.position)}
+		<section class="etymology serif" data-kind={block.kind}>
+			{#if block.format === 'markdown'}
+				<div class="markdown">{@html md(block.content)}</div>
+			{:else if block.format === 'text'}
+				<p>{block.content}</p>
+			{:else}
+				{@html safe(block.content)}
+			{/if}
+			{#if block.source_id}
+				<a class="block-source" href="{base}/references/{block.source_id}">
+					{block.source_label || block.source_id}{block.locator ? `, ${block.locator}` : ''}
+				</a>
+			{/if}
+		</section>
+	{/each}
+{:else if entry.etymology}
+	<!-- Compatibility for databases built before structured text blocks were introduced. -->
 	{#each entry.etymology.split('<!--addendum-->') as block, i (i)}
 		{#if block.trim()}<div class="etymology serif">{@html safe(block)}</div>{/if}
 	{/each}
@@ -618,6 +634,15 @@
 		border-left: 3px solid var(--berry);
 		border-radius: 0 8px 8px 0;
 	}
+	.block-source {
+		display: block;
+		margin-top: 0.45rem;
+		font-family: var(--font-sans);
+		font-size: 0.72rem;
+		color: var(--muted);
+		text-decoration: none;
+	}
+	.block-source:hover { text-decoration: underline; }
 	.etymology :global(a[data-entry]) {
 		color: var(--plum-2);
 	}
@@ -1012,6 +1037,7 @@
 			flex-wrap: wrap;
 		}
 		.entry-head :global(.clades) {
+			width: 100%;
 			flex-wrap: wrap;
 			margin-top: 0.4rem;
 		}

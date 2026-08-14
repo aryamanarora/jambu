@@ -65,6 +65,7 @@ export interface Lemma {
 	language_id: string;
 	origin_lemma_id: string | null;
 	etymology?: string; // free-text etymological header (the CDIAL entry HTML); entries only
+	text_blocks?: EntryTextBlock[]; // ordered, typed, independently attributed source prose
 	relation?: string | null; // '' for etyma, 'reflex' | 'variant' | 'borrowed' for children
 	variant_of?: string | null; // a reflex-variant points at its main reflex (null ⇒ head variant)
 	variants?: Lemma[]; // hydrated: same-form alternates of a main reflex (entry page)
@@ -85,6 +86,16 @@ export interface Lemma {
 	origin_lemma?: Lemma | null;
 	references?: Reference[];
 	ocr?: boolean | number; // reference-backed query flag for projections without hydrated references
+}
+
+export interface EntryTextBlock {
+	position: number;
+	kind: string;
+	format: 'html' | 'markdown' | 'text';
+	content: string;
+	source_id: string | null;
+	source_label: string | null;
+	locator: string | null;
 }
 
 /** Query params shared by the list views, mirroring the old URL keys (search.py). */
@@ -183,7 +194,7 @@ export interface ConceptAttestation {
 
 export interface ConceptEtymon {
 	etymon: string;
-	word: string; // headword of the root etymon (falls back to the id)
+	word: string; // headword of the immediate entry (falls back to the id)
 	gloss: string;
 	source: string;
 	languages: string[];

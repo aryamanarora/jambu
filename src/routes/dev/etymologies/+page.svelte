@@ -445,6 +445,16 @@
 	.error p { margin:.4rem 0 0; }
 	.empty { color:var(--muted); padding:1rem; } .empty.large { text-align:center; margin-top:20vh; }
 	@media (max-width:850px) { .filters form { grid-template-columns:1fr 1fr; } .workspace { grid-template-columns:1fr; } .queue { border-right:0; border-bottom:1px solid var(--border); } .rows { max-height:35vh; } }
+	@media (max-width:560px) {
+		.workbench-head { align-items:flex-start; flex-direction:column; gap:.75rem; }
+		.counter { width:100%; text-align:left; }
+		.filters form { grid-template-columns:1fr; }
+		.editor { padding:.8rem; }
+		.selected-form { flex-direction:column; }
+		dl div { grid-template-columns:1fr; gap:.1rem; }
+		.candidate-search { grid-template-columns:1fr; }
+		.candidate-search button { min-height:42px; }
+	}
 	.review-list {
 		list-style: none;
 		margin: 0.5rem 0 0;

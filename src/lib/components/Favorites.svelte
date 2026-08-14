@@ -339,4 +339,19 @@
 		color: var(--muted);
 		padding: 6px 4px;
 	}
+
+	@media (max-width: 780px) {
+		.fav-btn {
+			width: 42px;
+			height: 42px;
+			justify-content: center;
+			padding: 0;
+		}
+		.modal {
+			top: 58px;
+			left: 0.75rem;
+			width: calc(100vw - 1.5rem);
+			max-height: calc(100dvh - 4.5rem);
+		}
+	}
 </style>

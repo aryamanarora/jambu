@@ -244,4 +244,17 @@
 	.chip.on .cnt {
 		opacity: 0.85;
 	}
+	@media (max-width: 640px) {
+		.trigger {
+			min-height: 42px;
+		}
+		.panel {
+			width: calc(100vw - 1rem);
+			max-width: none;
+		}
+		.chip {
+			min-height: 38px;
+			padding-inline: 0.65rem;
+		}
+	}
 </style>

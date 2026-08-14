@@ -661,4 +661,24 @@
 	.clear:hover {
 		background: var(--surface-2);
 	}
+	@media (max-width: 640px) {
+		.fam button,
+		.seg button,
+		.clear {
+			min-height: 42px;
+		}
+		.seg {
+			width: 100%;
+		}
+		.seg button {
+			flex: 1 1 0;
+			padding-inline: 0.55rem;
+		}
+		.thresh input[type='range'] {
+			width: 100%;
+		}
+		.statusbar .clear {
+			width: 100%;
+		}
+	}
 </style>

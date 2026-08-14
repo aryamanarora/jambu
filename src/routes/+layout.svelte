@@ -17,11 +17,13 @@
 
 	type Theme = '' | 'light' | 'dark';
 	let theme = $state<Theme>('');
+	let mobileNavOpen = $state(false);
 	const gaMeasurementId = (env.PUBLIC_GA_MEASUREMENT_ID ?? '').trim();
 	const hasGoogleAnalytics = /^G-[A-Z0-9]+$/i.test(gaMeasurementId);
 	let trackPageView: (() => void) | undefined;
 
 	afterNavigate(() => {
+		mobileNavOpen = false;
 		trackPageView?.();
 	});
 
@@ -93,27 +95,47 @@
 	}
 </script>
 
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header class="nav">
-	<nav class="nav-inner">
-		<a class="brand" href="{base}/">
+	<nav class="nav-inner" aria-label="Primary navigation">
+		<a class="brand" href="{base}/" onclick={() => (mobileNavOpen = false)}>
 			<img src="{base}/favicon.svg" alt="" width="24" height="24" />
 			Jambu
 		</a>
-		<Favorites />
-		{#each nav as item (item.href)}
-			<a href="{base}{item.href}" class:active={isActive(item.href)}>{item.label}</a>
-		{/each}
+		<div class="nav-favorites"><Favorites /></div>
+		<div class="nav-links" class:open={mobileNavOpen} id="primary-nav-links">
+			{#each nav as item (item.href)}
+				<a
+					href="{base}{item.href}"
+					class:active={isActive(item.href)}
+					onclick={() => (mobileNavOpen = false)}>{item.label}</a
+				>
+			{/each}
+		</div>
 		<span class="spacer"></span>
 		<DbStatusMenu />
 		<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle light/dark theme">
 			{theme === 'dark' ? '☾' : theme === 'light' ? '☀' : '◐'}
+		</button>
+		<button
+			class="nav-menu-toggle"
+			class:open={mobileNavOpen}
+			type="button"
+			aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+			aria-expanded={mobileNavOpen}
+			aria-controls="primary-nav-links"
+			onclick={() => (mobileNavOpen = !mobileNavOpen)}
+		>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
 		</button>
 	</nav>
 </header>
 
 <DbBanner />
 
-<main class="content">
+<main class="content" id="main-content">
 	{@render children()}
 </main>
 

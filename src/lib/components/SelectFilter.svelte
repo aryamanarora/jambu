@@ -34,7 +34,9 @@
 	function place() {
 		if (!triggerEl) return;
 		const r = triggerEl.getBoundingClientRect();
-		menuStyle = `top:${r.bottom + 5}px; left:${r.left}px; width:${Math.max(r.width, 230)}px;`;
+		const width = Math.min(Math.max(r.width, 230), window.innerWidth - 16);
+		const left = Math.min(Math.max(8, r.left), window.innerWidth - width - 8);
+		menuStyle = `top:${r.bottom + 5}px; left:${left}px; width:${width}px;`;
 	}
 
 	const valueOpt = $derived(options.find((o) => o.value === value) ?? null);
@@ -246,5 +248,11 @@
 		text-align: center;
 		font-size: 0.8rem;
 		color: var(--muted);
+	}
+	@media (max-width: 640px) {
+		.trigger,
+		.opt {
+			min-height: 42px;
+		}
 	}
 </style>

@@ -170,4 +170,21 @@
 		color: var(--muted);
 		white-space: nowrap;
 	}
+	@media (max-width: 640px) {
+		.map-frame {
+			max-height: min(56vh, 360px);
+		}
+		.map-frame :global(.leaflet-control-zoom a) {
+			width: 40px;
+			height: 40px;
+			font-size: 1.35rem;
+			line-height: 40px;
+		}
+		.map-frame :global(.leaflet-control-attribution) {
+			max-width: calc(100% - 4px);
+			font-size: 9px;
+			white-space: normal;
+			text-align: right;
+		}
+	}
 </style>

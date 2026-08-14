@@ -329,4 +329,18 @@
 	.small {
 		font-size: 0.85rem;
 	}
+	@media (max-width: 640px) {
+		.stats {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.8rem 1rem;
+		}
+		.chip,
+		.clear {
+			min-height: 40px;
+		}
+		.legend-head {
+			align-items: flex-start;
+		}
+	}
 </style>

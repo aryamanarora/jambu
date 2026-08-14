@@ -47,6 +47,7 @@ import {
 	type Dialect,
 	type Lemma,
 	type Reference,
+	type EntryTextBlock,
 	type ListParams,
 	type CognateGroup
 } from './types';
@@ -547,22 +548,29 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	// concept restriction: entries that are the immediate etymon of a form mapped to the concept.
 	// The matching entry set is small, so it is resolved in JS (also yielding concept_match).
 	let conceptMatch: Map<number, number> | null = null;
+	let conceptLangMatch: Map<number, Set<number>> | null = null;
 	if (conceptId) {
 		const blob = await queryOne<{ rids: Uint8Array | null }>(
 			'SELECT rids FROM concepts WHERE id = ?',
 			[conceptId]
 		);
 		conceptMatch = new Map();
+		conceptLangMatch = new Map();
 		const linked = blob?.rids ? readDeltas(blob.rids) : [];
 		if (linked.length) {
-			const rows = await query<{ rid: number; origin_rid: number | null; flags: number }>(
-				`SELECT rowid AS rid, origin_rid, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+			const rows = await query<{ rid: number; origin_rid: number | null; lang_rid: number | null; flags: number }>(
+				`SELECT rowid AS rid, origin_rid, lang_rid, flags FROM lem WHERE rowid IN ${IN_JSON}`,
 				[jsonList(linked)]
 			);
 			for (const r of rows) {
 				if ((r.flags & 7) === REL_UNLINKED) continue;
 				const entry = r.origin_rid ?? r.rid;
 				conceptMatch.set(entry, (conceptMatch.get(entry) ?? 0) + 1);
+				if (r.lang_rid != null) {
+					const langs = conceptLangMatch.get(entry) ?? new Set<number>();
+					langs.add(r.lang_rid);
+					conceptLangMatch.set(entry, langs);
+				}
 			}
 		}
 		modeConds.push({ sql: `l.rowid IN ${IN_JSON}`, params: [jsonList([...conceptMatch.keys()])] });
@@ -639,7 +647,10 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 			whereParams
 		);
 		let full = raw.map(hydrate);
-		for (const r of full) r.concept_match = conceptMatch.get(r.rid) ?? 0;
+		for (const r of full) {
+			r.concept_match = conceptMatch.get(r.rid) ?? 0;
+			r.lang_count = conceptLangMatch?.get(r.rid)?.size ?? 0;
+		}
 		if (!(params.sort ?? '').trim())
 			full = full.sort((a, b) => (b.concept_match! - a.concept_match!) || a.order - b.order);
 		count = full.length;
@@ -697,8 +708,18 @@ export async function getLemma(id: string): Promise<Lemma | null> {
 	if (!l) return null;
 	await attachLanguages([l]);
 	await attachOrigin([l]);
-	await attachReferences([l]);
+	await Promise.all([attachReferences([l]), attachTextBlocks(l)]);
 	return l;
+}
+
+async function attachTextBlocks(lemma: HLemma): Promise<void> {
+	lemma.text_blocks = await query<EntryTextBlock>(
+		`SELECT t.pos AS position, t.kind, t.format, t.content,
+		        r.id AS source_id, r.short AS source_label, t.locator
+		 FROM texts t LEFT JOIN "references" r ON r.rowid = t.ref_rid
+		 WHERE t.lemma_rid = ? ORDER BY t.pos`,
+		[lemma.rid]
+	);
 }
 
 export interface EntryGraph {

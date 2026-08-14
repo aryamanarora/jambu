@@ -401,4 +401,23 @@
 	.reflex-sub .rword {
 		font-family: var(--font-phon);
 	}
+	@media (max-width: 640px) {
+		.showing-row {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 0.45rem;
+		}
+		.showing-row p {
+			margin: 0;
+		}
+		.toggle-group {
+			width: 100%;
+			overflow-x: auto;
+			padding-bottom: 0.2rem;
+		}
+		.roots-toggle {
+			min-height: 40px;
+			padding-inline: 12px;
+		}
+	}
 </style>

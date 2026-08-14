@@ -56,14 +56,12 @@ let openedMtime = 0;
 let _ids: IdIndex | null = null;
 let _cladeNames: string[] | null = null;
 let _langById: Map<number, string> | null = null;
-let _rootMap: Map<number, number> | null = null;
 let _dialectPoints: Map<string, { name: string; lat: number; long: number }> | null = null;
 
 function resetCaches(): void {
 	_ids = null;
 	_cladeNames = null;
 	_langById = null;
-	_rootMap = null;
 	_dialectPoints = null;
 }
 
@@ -240,61 +238,6 @@ function etymonSource(id: string): string {
 	return 'other';
 }
 
-// IA etyma are CDIAL entries (numeric ids) and Sanskrit roots (r-prefixed) — both are Indo-Aryan;
-// used to prefer the Indo-Aryan branch when the derivation graph forks.
-const isIA = (id: string) => /^(\d|r\d)/.test(id);
-
-// Resolve each entry to its most-ancestral etymon by walking the derivation graph (child → parent)
-// to a root (no parent). On branching, the branch leading to an IA root wins. Built once, memoised.
-function rootEtymonMap(): Map<number, number> {
-	if (_rootMap) return _rootMap;
-	const idx = ids();
-	const edges = getDb()
-		.prepare(
-			`SELECT child_rid, parent_rid FROM edges
-			 WHERE kind IN (5, 6) AND rank = 1 ORDER BY COALESCE(pos, 0), rowid`
-		)
-		.all() as {
-		child_rid: number;
-		parent_rid: number;
-	}[];
-	const parents = new Map<number, number[]>();
-	for (const e of edges) {
-		const arr = parents.get(e.child_rid);
-		if (arr) arr.push(e.parent_rid);
-		else parents.set(e.child_rid, [e.parent_rid]);
-	}
-	const memo = new Map<number, number>();
-	function resolve(rid: number, seen: Set<number>): number {
-		const cached = memo.get(rid);
-		if (cached) return cached;
-		const ps = parents.get(rid);
-		if (!ps || seen.has(rid)) return rid; // a root, or a cycle — stop here
-		seen.add(rid);
-		let best: number | null = null;
-		for (const p of ps) {
-			const r = resolve(p, seen);
-			if (isIA(idx.idOf(r))) {
-				best = r;
-				break;
-			}
-			if (best === null) best = r;
-		}
-		seen.delete(rid);
-		const root = best ?? rid;
-		memo.set(rid, root);
-		return root;
-	}
-	for (const c of parents.keys()) resolve(c, new Set());
-	_rootMap = memo;
-	return _rootMap;
-}
-
-/** The most-ancestral etymon for an immediate etymon rowid (itself if it heads no edge). */
-function toRoot(rid: number): number {
-	return rootEtymonMap().get(rid) ?? rid;
-}
-
 export function allConcepts(): ConceptRow[] {
 	const dbh = getDb();
 	const idx = ids();
@@ -321,8 +264,7 @@ export function allConcepts(): ConceptRow[] {
 		}[]).map((r) => [r.rid, r])
 	);
 	for (const c of concepts) {
-		// per-immediate-etymon counts first, accumulated into roots in ascending etymon-id order —
-		// this reproduces the v1 GROUP BY output order, which decides bar order among tied counts
+		// Count each concept-linked form under the immediate entry it belongs to.
 		const byImm = new Map<number, number>();
 		const byFamilyImm = new Map(REFLEX_FAMILIES.map((family) => [family, new Map<number, number>()]));
 		const familyUnetym = new Map(REFLEX_FAMILIES.map((family) => [family, 0]));
@@ -339,27 +281,14 @@ export function allConcepts(): ConceptRow[] {
 			const familyCounts = byFamilyImm.get(family)!;
 			familyCounts.set(imm, (familyCounts.get(imm) ?? 0) + 1);
 		}
-		const byRoot = new Map<number, number>();
-		for (const [imm, n] of [...byImm.entries()]
-			.map(([r, n]) => [idx.idOf(r), r, n] as const)
-			.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
-			.map(([, r, n]) => [r, n] as const)) {
-			const root = toRoot(imm);
-			byRoot.set(root, (byRoot.get(root) ?? 0) + n);
-		}
-		const list = [...byRoot.entries()]
-			.map(([root, n]) => ({ etymon: idx.idOf(root), n }))
-			.sort((a, b) => b.n - a.n);
+		const list = [...byImm.entries()]
+			.map(([entry, n]) => ({ etymon: idx.idOf(entry), n }))
+			.sort((a, b) => b.n - a.n || a.etymon.localeCompare(b.etymon));
 		c.bars = list.slice(0, BAR_SEGMENTS);
 		c.rest = list.slice(BAR_SEGMENTS).reduce((s, b) => s + b.n, 0);
 		c.reflex_family_bars = REFLEX_FAMILIES.map((family): ConceptBarGroup => {
-			const byFamilyRoot = new Map<number, number>();
-			for (const [imm, n] of byFamilyImm.get(family)!) {
-				const root = toRoot(imm);
-				byFamilyRoot.set(root, (byFamilyRoot.get(root) ?? 0) + n);
-			}
-			const familyList = [...byFamilyRoot.entries()]
-				.map(([root, n]) => ({ etymon: idx.idOf(root), n }))
+			const familyList = [...byFamilyImm.get(family)!]
+				.map(([entry, n]) => ({ etymon: idx.idOf(entry), n }))
 				.sort((a, b) => b.n - a.n || a.etymon.localeCompare(b.etymon));
 			return {
 				family,
@@ -465,19 +394,19 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 		return a.ord - b.ord;
 	});
 
-	const rootRids = [
+	const entryRids = [
 		...new Set(
-			linked.filter((r) => (r.flags & 7) !== REL_UNLINKED).map((r) => toRoot(r.origin_rid ?? r.rid))
+			linked.filter((r) => (r.flags & 7) !== REL_UNLINKED).map((r) => r.origin_rid ?? r.rid)
 		)
 	];
 	const heads = new Map<number, { word: string; gloss: string; ocr: boolean | number }>();
-	if (rootRids.length) {
+	if (entryRids.length) {
 		for (const r of dbh
 			.prepare(
 				`SELECT rowid AS rid, word, gloss, flags FROM lem
 				 WHERE rowid IN (SELECT value FROM json_each(?))`
 			)
-			.all(JSON.stringify(rootRids)) as { rid: number; word: string; gloss: string; flags: number }[]) {
+			.all(JSON.stringify(entryRids)) as { rid: number; word: string; gloss: string; flags: number }[]) {
 			heads.set(r.rid, { word: r.word, gloss: r.gloss, ocr: r.flags & FLAG_OCR ? 1 : 0 });
 		}
 	}
@@ -502,21 +431,21 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 			unetym.push(att);
 			continue;
 		}
-		const root = toRoot(r.origin_rid ?? r.rid);
-		let e = byEtymon.get(root);
+		const entry = r.origin_rid ?? r.rid;
+		let e = byEtymon.get(entry);
 		if (!e) {
-			const rootId = idx.idOf(root);
-			const head = heads.get(root);
+			const entryId = idx.idOf(entry);
+			const head = heads.get(entry);
 			e = {
-				etymon: rootId,
-				word: head?.word || rootId,
+				etymon: entryId,
+				word: head?.word || entryId,
 				gloss: head?.gloss ?? '',
-				source: etymonSource(rootId),
+				source: etymonSource(entryId),
 				languages: [],
 				forms: [],
 				ocr: head?.ocr ?? false
 			};
-			byEtymon.set(root, e);
+			byEtymon.set(entry, e);
 		}
 		e.forms.push(att);
 		if (att.language && !e.languages.includes(att.language)) e.languages.push(att.language);
@@ -563,6 +492,7 @@ export function getEntryMeta(id: string): EntryMeta | null {
 		.get(rid) as Record<string, unknown> | undefined;
 	if (!row) return null;
 	const e = hydrate(row);
+	e.text_blocks = getTextBlocks(rid);
 	const language = (dbh
 		.prepare(`SELECT ${LANGUAGE_COLS} FROM languages WHERE id = ?`)
 		.get(e.language_id) ?? null) as Language | null;
@@ -571,6 +501,17 @@ export function getEntryMeta(id: string): EntryMeta | null {
 	delete eRec.childRids;
 	delete eRec.rid;
 	return { ...e, language };
+}
+
+function getTextBlocks(rid: number): Lemma['text_blocks'] {
+	return getDb()
+		.prepare(
+			`SELECT t.pos AS position, t.kind, t.format, t.content,
+			        r.id AS source_id, r.short AS source_label, t.locator
+			 FROM texts t LEFT JOIN "references" r ON r.rowid = t.ref_rid
+			 WHERE t.lemma_rid = ? ORDER BY t.pos`
+		)
+		.all(rid) as Lemma['text_blocks'];
 }
 
 export interface DerivedTerm {

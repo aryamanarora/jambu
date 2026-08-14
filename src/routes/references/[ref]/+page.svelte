@@ -121,4 +121,21 @@
 		vertical-align: middle;
 		margin-left: 0.5rem;
 	}
+	@media (max-width: 640px) {
+		h1 {
+			overflow-wrap: anywhere;
+		}
+		.reference-metadata {
+			padding-inline: 1rem;
+		}
+		.prop {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 0.2rem;
+		}
+		.prop dd {
+			max-width: 100%;
+			text-align: left;
+		}
+	}
 </style>

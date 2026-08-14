@@ -46,9 +46,10 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-# The compact v3 schema (compact_db.py) ships at ~53.3 MB with the 2026-08-10 corpus. Keep a tight
-# guard so future schema growth past ~55 MB fails loudly instead of silently regressing download.
-MAX_OUTPUT_BYTES = 55_000_000
+# The compact v3 schema (compact_db.py) ships at ~76.0 MB with the 2026-08-14 corpus (482k lemmas,
+# including the LSI comparative vocabulary). Keep a tight guard above that corpus baseline so
+# future schema growth past ~80 MB fails loudly instead of silently regressing download.
+MAX_OUTPUT_BYTES = 80_000_000
 
 def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
@@ -102,6 +103,14 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             reference_rid INTEGER NOT NULL,
             locator TEXT NOT NULL DEFAULT '',
             PRIMARY KEY (lemma_rid, reference_rid, locator)
+        ) WITHOUT ROWID;
+        -- Ordered, independently attributable prose attached to a lexical node.  Etymology remains
+        -- on lemmas as a migration/search cache; entry pages read these blocks instead of parsing
+        -- source-specific delimiters out of that scalar field.
+        CREATE TABLE lemma_text (
+            lemma_rid INTEGER NOT NULL, pos INTEGER NOT NULL, kind TEXT NOT NULL,
+            format TEXT NOT NULL, content TEXT NOT NULL, reference_rid INTEGER, locator TEXT,
+            PRIMARY KEY (lemma_rid, pos)
         ) WITHOUT ROWID;
         -- Concepticon concept sets that glosses map to, plus per-concept rollups for the Concepts
         -- tab: etyma_count counts distinct immediate etyma (lone/unetymologised nodes excluded and
@@ -271,8 +280,8 @@ def load_lemmas(
         if e["Rank"] == "1" and e["Kind"] in ("reflex", "variant", "borrowed"):
             rank1[e["Child_ID"]] = (e["Parent_ID"], e["Kind"])
 
-    # Dialects are already tags in CLDF. Collapse exact cross-dialect copies while retaining every
-    # attested dialect tag on the surviving row.
+    # Dialects are already tags in CLDF. Collapse exact attested copies while retaining every
+    # dialect tag and citation on the surviving row.
     # The rank-1 edge is part of a linked row's identity (identical text under different parents
     # must never merge). Unlinked attestations use their lexical content as the identity instead;
     # Source is provenance, so merge its citations onto the retained row rather than using it to
@@ -281,7 +290,10 @@ def load_lemmas(
     unique: dict[tuple, dict[str, str]] = {}
     unlinked_unique: dict[tuple, list[tuple[dict[str, str], set[str]]]] = defaultdict(list)
     deduped = []
-    ignored = {"ID", "Language_ID", "Tags"}
+    # Citations describe where an attestation was found; they are not lexical content. Exclude
+    # Source from every attested-form identity and union it below when otherwise identical rows
+    # collapse. (Parentless entries never reach this deduper.)
+    ignored = {"ID", "Language_ID", "Tags", "Source"}
     for r in rows:
         base_tags = (r.get("Tags") or "").split()
         tags = list(base_tags)
@@ -294,9 +306,8 @@ def load_lemmas(
         if r["ID"] not in rank1 and not is_unlinked:
             deduped.append(r)
             continue
-        identity_ignored = ignored | ({"Source"} if is_unlinked else set())
         key = (r["Language_ID"],) + tuple(
-            r.get(k, "") for k in r.keys() if k not in identity_ignored
+            r.get(k, "") for k in r.keys() if k not in ignored
         ) + tuple(content_tags) + (("unlinked",) if is_unlinked else rank1[r["ID"]])
         if is_unlinked:
             # A repeated spelling within one lect may be a genuine homonym or separate lexical
@@ -346,7 +357,12 @@ def load_lemmas(
         for e in edge_rows:
             e["Child_ID"] = canon(e["Child_ID"])
             e["Parent_ID"] = canon(e["Parent_ID"])
-        log(f"collapsed {len(aliases)} identical cross-dialect lemma rows")
+        log(f"collapsed {len(aliases)} identical attested lemma rows")
+
+    def canonical_id(node_id: str) -> str:
+        while node_id in aliases:
+            node_id = aliases[node_id]
+        return node_id
 
     # A canonical-language entry may be represented only by dialect attestations.  Carry those
     # dialect tokens onto the parent when parent and child share the canonical language, so
@@ -436,7 +452,26 @@ def load_lemmas(
         "UPDATE lemmas SET clades=? WHERE id=?",
         [(",".join(sorted(cs)), pid) for pid, cs in param_clades.items()],
     )
-    # References cited by forms but absent from the bibliography still need complete display-safe
+    # A richer importer may provide several independently typed/attributed blocks per node in an
+    # optional CLDF sidecar.  Its final public Form_IDs are used directly; absent sidecar rows fall
+    # back to the legacy Etymology scalar below.
+    explicit_texts: list[dict[str, str]] = []
+    texts_path = forms_csv.parent / "entry-texts.csv"
+    if texts_path.exists():
+        with texts_path.open(encoding="utf-8") as handle:
+            explicit_texts = list(csv.DictReader(handle))
+        known_lemma_ids = {lemma[0] for lemma in lemmas}
+        for block in explicit_texts:
+            block["Form_ID"] = canonical_id(block.get("Form_ID", ""))
+            if block["Form_ID"] not in known_lemma_ids:
+                raise ValueError(
+                    f"entry-texts.csv references unknown Form_ID {block['Form_ID']!r}"
+                )
+            for ref, locator in _parse_ref(block.get("Source", "")):
+                lemma_refs.add((block["Form_ID"], ref, locator))
+
+    # References cited by forms or prose blocks but absent from the bibliography still need
+    # complete display-safe rows.
     # rows. This is a last-resort guard; make_refs.py normally supplies richer catalog metadata.
     ref_ids = {r[0] for r in con.execute('SELECT id FROM "references"')}
     con.executemany(
@@ -459,6 +494,52 @@ def load_lemmas(
             (lemma_rowids[lemma], reference_rowids[ref], locator)
             for lemma, ref, locator in lemma_refs
         ),
+    )
+    source_by_id = {r["ID"]: r.get("Source", "") for r in rows}
+    text_rows = []
+    explicit_owners = {block["Form_ID"] for block in explicit_texts}
+    for sequence, block in enumerate(explicit_texts):
+        lemma_id = block["Form_ID"]
+        if lemma_id not in lemma_rowids:
+            raise ValueError(f"entry-texts.csv references unknown Form_ID {lemma_id!r}")
+        citations = _parse_ref(block.get("Source", ""))
+        ref, locator = citations[0] if citations else (None, "")
+        position = int(block.get("Position", "") or sequence)
+        kind = (block.get("Kind") or "etymology").strip()
+        fmt = (block.get("Format") or "text").strip()
+        if fmt not in {"html", "markdown", "text"}:
+            raise ValueError(f"unsupported entry-text format {fmt!r} for {lemma_id}")
+        content = block.get("Content", "").strip()
+        if content:
+            text_rows.append(
+                (
+                    lemma_rowids[lemma_id], position, kind, fmt, content,
+                    reference_rowids.get(ref) if ref else None, locator or None,
+                )
+            )
+    for lemma_id, old_rid, etymology in con.execute(
+        "SELECT id, rowid, etymology FROM lemmas WHERE etymology IS NOT NULL AND etymology != ''"
+    ):
+        if lemma_id in explicit_owners:
+            continue
+        citations = _parse_ref(source_by_id.get(lemma_id, ""))
+        ref, locator = citations[0] if citations else (None, "")
+        ref_rid = reference_rowids.get(ref) if ref else None
+        # CDIAL addenda historically shared one scalar field with an HTML-comment delimiter.
+        # Materialise each snippet as a real block; all other sources naturally produce one block.
+        blocks = [b.strip() for b in etymology.split("<!--addendum-->") if b.strip()]
+        text_rows.extend(
+            (
+                old_rid, pos, "etymology",
+                "html" if content.lstrip().startswith("<") else "text",
+                content, ref_rid, locator or None,
+            )
+            for pos, content in enumerate(blocks)
+        )
+    con.executemany(
+        "INSERT INTO lemma_text (lemma_rid,pos,kind,format,content,reference_rid,locator) "
+        "VALUES (?,?,?,?,?,?,?)",
+        text_rows,
     )
     con.execute(
         'UPDATE "references" SET '
@@ -489,7 +570,10 @@ def load_lemmas(
         ),
     )
     con.commit()
-    log(f"loaded {len(lemmas)} lemmas, {len(lemma_refs)} lemma↔reference links")
+    log(
+        f"loaded {len(lemmas)} lemmas, {len(lemma_refs)} lemma↔reference links, "
+        f"{len(text_rows)} structured text blocks"
+    )
     return aliases
 
 

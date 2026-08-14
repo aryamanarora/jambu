@@ -120,6 +120,69 @@ class UnlinkedDialectDedupTest(unittest.TestCase):
         ).fetchall()
         self.assertEqual(citations, [("form a-1",), ("form b-1",)])
 
+    def test_linked_copies_merge_and_union_reference_locators(self):
+        con = sqlite3.connect(":memory:")
+        build_static_db.build_base_schema(con)
+        con.executemany(
+            'INSERT INTO "references" (id,short,source,progress,provenance,editor,ocr) '
+            "VALUES (?,?,?,'Full','','',0)",
+            [
+                ("dictionary", "Dictionary", "Dictionary"),
+                ("survey", "Survey", "Survey"),
+            ],
+        )
+        rows = [
+            {
+                "ID": "entry", "Language_ID": "language", "Form": "*aka", "Gloss": "one",
+                "Native": "", "Phonemic": "", "Original": "", "Cognateset": "",
+                "Description": "", "Tags": "", "Source": "", "Etymology": "",
+                "Redirect": "", "Status": "entry",
+            },
+            {
+                "ID": "form-a", "Language_ID": "language", "Form": "aka", "Gloss": "one",
+                "Native": "", "Phonemic": "aka", "Original": "", "Cognateset": "",
+                "Description": "", "Tags": "", "Source": "dictionary[p. 10]", "Etymology": "",
+                "Redirect": "", "Status": "",
+            },
+            {
+                "ID": "form-b", "Language_ID": "language", "Form": "aka", "Gloss": "one",
+                "Native": "", "Phonemic": "aka", "Original": "", "Cognateset": "",
+                "Description": "", "Tags": "", "Source": "dictionary[p. 12];survey[p. 9]", "Etymology": "",
+                "Redirect": "", "Status": "",
+            },
+        ]
+        edges = [
+            {
+                "Child_ID": form_id, "Parent_ID": "entry", "Kind": "reflex", "Rank": "1",
+                "Pos": "", "Source": "", "Note": "",
+            }
+            for form_id in ("form-a", "form-b")
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            forms = Path(directory) / "forms.csv"
+            with forms.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=FIELDS)
+                writer.writeheader()
+                writer.writerows(rows)
+            aliases = build_static_db.load_lemmas(
+                con,
+                forms,
+                edges,
+                {"language": "Other"},
+            )
+
+        self.assertEqual(aliases, {"form-b": "form-a"})
+        self.assertEqual(con.execute("SELECT COUNT(*) FROM lemmas").fetchone()[0], 2)
+        citations = con.execute(
+            'SELECT "references".id, locator FROM lemma_reference JOIN "references" '
+            'ON reference_rid="references".rowid WHERE lemma_rid='
+            "(SELECT rowid FROM lemmas WHERE id='form-a') ORDER BY \"references\".id, locator"
+        ).fetchall()
+        self.assertEqual(
+            citations,
+            [("dictionary", "p. 10"), ("dictionary", "p. 12"), ("survey", "p. 9")],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -215,4 +215,13 @@
 		font-size: 0.8rem;
 		color: var(--muted);
 	}
+	@media (max-width: 640px) {
+		.trigger,
+		.opt {
+			min-height: 42px;
+		}
+		.panel {
+			width: min(240px, calc(100vw - 2rem));
+		}
+	}
 </style>

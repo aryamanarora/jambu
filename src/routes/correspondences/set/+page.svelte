@@ -222,4 +222,10 @@
 	.ety {
 		font-family: var(--font-phon);
 	}
+	@media (max-width: 640px) {
+		.corr-head {
+			flex-wrap: wrap;
+			font-size: 1.6rem;
+		}
+	}
 </style>

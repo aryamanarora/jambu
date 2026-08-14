@@ -31,7 +31,7 @@ export const GRAMMATICAL_TAGS = [
 	'determiner', 'discourse-marker', 'auxiliary', 'negator', 'mood-marker', 'honorific',
 	'proper-noun', 'multiword-expression', 'demonstrative', 'personal', 'reciprocal',
 	'copula', 'modal', 'conjunct-verb', 'incorporating', 'non-incorporating',
-	'temporal', 'spatial', 'manner', 'degree', 'sentential'
+	'temporal', 'spatial', 'manner', 'degree', 'sentential', 'onomatopoeia'
 ];
 // The most common attestation sources, offered in the filter (the full set is larger; see
 // ../data/tags.py). `lex` = "known only from lexicographers".
@@ -132,7 +132,7 @@ export const TAG_NAMES: Record<string, string> = {
 	copula: 'copula', modal: 'modal verb', 'conjunct-verb': 'conjunct verb',
 	incorporating: 'incorporating', 'non-incorporating': 'non-incorporating',
 	temporal: 'temporal', spatial: 'spatial', manner: 'manner', degree: 'degree',
-	sentential: 'sentential',
+	sentential: 'sentential', onomatopoeia: 'onomatopoeia',
 	lex: 'lexicographers only', RV: 'Ṛgveda', AV: 'Atharvaveda', VS: 'Vājasaneyi Saṁhitā',
 	TS: 'Taittirīya Saṁhitā', 'ŚBr': 'Śatapatha Brāhmaṇa', Mn: 'Manu', MBh: 'Mahābhārata',
 	R: 'Rāmāyaṇa', 'Suśr': 'Suśruta', 'Pāṇ': 'Pāṇini', Dhātup: 'Dhātupāṭha', BhP: 'Bhāgavata Purāṇa',
