@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import type { MapMarker } from '$lib/types';
+	import { goto } from '$app/navigation';
+	import type { Dialect, Language, MapMarker } from '$lib/types';
 	import Map from '$lib/components/Map.svelte';
 	import ReflexesView from '$lib/components/ReflexesView.svelte';
 	import Donut from '$lib/components/Donut.svelte';
@@ -8,13 +9,13 @@
 	import {
 		getLanguageDialects,
 		getLanguageTags,
+		getAllLanguages,
 		getOriginLangDistribution,
 		getReferenceDistribution,
 		type OriginSlice
 	} from '$lib/query';
 	import { tagCategory, type TagCategory } from '$lib/tags';
 	import { hashColor } from '$lib/clades';
-	import type { Dialect } from '$lib/types';
 
 	let { data } = $props();
 	const lang = $derived(data.language);
@@ -24,6 +25,8 @@
 	let references = $state<OriginSlice[]>([]);
 	let languageTags = $state<string[]>([]);
 	let dialects = $state<Dialect[]>([]);
+	let languages = $state<Language[]>([]);
+	let comparisonLanguage = $state('');
 	let curLang = '';
 	$effect(() => {
 		if (lang.id !== curLang) {
@@ -32,12 +35,24 @@
 			references = [];
 			languageTags = [];
 			dialects = [];
+			comparisonLanguage = '';
 			getOriginLangDistribution(lang.id).then((o) => (origins = o));
 			getReferenceDistribution(lang.id).then((r) => (references = r));
 			getLanguageTags(lang.id).then((t) => (languageTags = t));
 			getLanguageDialects(lang.id).then((d) => (dialects = d));
+			getAllLanguages().then((list) => (languages = list));
 		}
 	});
+	const comparisonLanguages = $derived(
+		languages
+			.filter((language) => language.id !== lang.id)
+			.sort((a, b) => a.name.localeCompare(b.name))
+	);
+
+	function openComparison(event: SubmitEvent) {
+		event.preventDefault();
+		if (comparisonLanguage) goto(`${base}/languages/${lang.id}/${comparisonLanguage}`);
+	}
 	const tagGroups: Array<{ category: TagCategory; label: string }> = [
 		{ category: 'dialect', label: 'Dialects' },
 		{ category: 'gender', label: 'Gender' },
@@ -99,6 +114,20 @@
 	{/if}
 </div>
 
+<form class="compare-picker card" onsubmit={openComparison}>
+	<div>
+		<label for="comparison-language">Compare {lang.name} with another language</label>
+		<p class="muted">View their shared etymological entries side by side.</p>
+	</div>
+	<select id="comparison-language" class="search-box" bind:value={comparisonLanguage}>
+		<option value="">Choose a language…</option>
+		{#each comparisonLanguages as language (language.id)}
+			<option value={language.id}>{language.name} [{language.id}]</option>
+		{/each}
+	</select>
+	<button class="btn" type="submit" disabled={!comparisonLanguage}>Compare</button>
+</form>
+
 {#if languageTags.length}
 	<section class="tag-summary">
 		<h2>Tags</h2>
@@ -135,9 +164,14 @@
 				<tbody>
 					{#each dialects as dialect (dialect.token)}
 						<tr>
-							<td class="lang-cell" style="border-left-color: {hashColor(dialect.color)}"
-								>{dialect.name}</td
-							>
+							<td class="lang-cell" style="border-left-color: {hashColor(dialect.color)}">
+								<a
+									class="dialect-filter"
+									href="{base}/languages/{lang.id}?dialect={encodeURIComponent(dialect.token)}#lexicon"
+									title="Show reflexes from the {dialect.name} dialect"
+									>{dialect.name}</a
+								>
+							</td>
 							<td>{dialect.clade ?? ''}</td>
 							<td>
 								{#if dialect.glottocode}
@@ -180,10 +214,28 @@
 	</div>
 {/if}
 
-<h2>Lexicon</h2>
+<h2 id="lexicon">Lexicon</h2>
 <ReflexesView mode="lexicon" languageId={lang.id} />
 
 <style>
+	.compare-picker {
+		display: grid;
+		grid-template-columns: minmax(13rem, 1fr) minmax(12rem, 1fr) auto;
+		gap: 1rem;
+		align-items: center;
+		margin: 1.2rem 0 1.6rem;
+		padding: 0.85rem 1.15rem;
+	}
+	.compare-picker label {
+		font-weight: 600;
+	}
+	.compare-picker p {
+		margin: 0.15rem 0 0;
+		font-size: 0.85rem;
+	}
+	.compare-picker .btn {
+		white-space: nowrap;
+	}
 	.donut-row {
 		display: flex;
 		gap: 2.5rem;
@@ -247,7 +299,13 @@
 		text-align: right;
 		font-variant-numeric: tabular-nums;
 	}
+	.dialect-filter {
+		font-weight: 600;
+	}
 	@media (max-width: 720px) {
+		.compare-picker {
+			grid-template-columns: 1fr;
+		}
 		.lang-header {
 			grid-template-columns: 1fr;
 		}
