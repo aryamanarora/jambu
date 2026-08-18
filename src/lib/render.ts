@@ -24,7 +24,10 @@ function linkEntries(h: string): string {
 /** Markdown → HTML, replicating the app's `\n` → paragraph-break preprocessing. */
 export function md(text: string | null | undefined): string {
 	if (!text) return '';
-	return linkEntries(marked.parse(text.replace(/\\n/g, '\n\n'), { async: false }) as string);
+	// Pybtex's Markdown backend writes a literal LaTeX command for `~` in URLs. Normalise it
+	// before parsing so author-homepage links remain valid even in an already-built database.
+	const normalized = text.replace(/\\+textasciitilde\s*/g, '~');
+	return linkEntries(marked.parse(normalized.replace(/\\n/g, '\n\n'), { async: false }) as string);
 }
 
 /** Pass-through for fields that already contain trusted HTML (the old `| safe`). */

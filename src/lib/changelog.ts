@@ -25,7 +25,8 @@ export const changelog: ChangelogEntry[] = [
 			'Added all 16,706 rows from Hockings and Pilot-Raichoor’s Badaga-English dictionary, with exact page and column citations, preserved source spellings, and reviewed DEDR links.',
 			'Added Ghatage’s Marati of Kasargod vocabulary and four curated Nihali lexicons from Mundlay, Nagaraja, Bhattacharya, and Konow, preserving their source-specific forms, notes, and locators.',
 			'Added Southworth’s Marathi and Old Marathi comparison with Dravidian, keeping the printed evidence, corrections, and uncertain borrowing analyses visible.',
-			'Source links and filters now work consistently across entries, reflex lists, references, and language comparisons; a new local review workspace supports scan-backed correction of OCR-derived records.'
+			'Source links and filters now work consistently across entries, reflex lists, references, and language comparisons; a new local review workspace supports scan-backed correction of OCR-derived records.',
+			'Author-hosted bibliography links now open reliably when their URLs contain special characters.'
 		],
 		ingested: {
 			languages: [
@@ -91,7 +92,7 @@ export const changelog: ChangelogEntry[] = [
 				{ id: 'Puroik', label: 'Puroik' },
 				{ id: 'Ths', label: 'Thakali' },
 				{ id: 'Yamphu', label: 'Yamphu' },
-				{ id: 'LSI-SANSKRIT', label: 'LSI comparative vocabulary' }
+				{ id: 'Sk', label: 'LSI comparative vocabulary' }
 			],
 			sources: [
 				{ id: 'grierson-lsi1928', label: 'Grierson 1928' },
