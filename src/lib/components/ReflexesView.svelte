@@ -12,6 +12,7 @@
 	import Tags from './Tags.svelte';
 	import FormWord from './FormWord.svelte';
 	import TagFilter from './TagFilter.svelte';
+	import SourceFilter from './SourceFilter.svelte';
 
 	let {
 		mode = 'reflexes',
@@ -159,10 +160,7 @@
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
-				<FilterCell
-					label="Source"
-					filterKey="source"
-					sortKey="source"
+				<SourceFilter
 					value={list.params.source ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}

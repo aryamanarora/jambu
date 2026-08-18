@@ -8,16 +8,33 @@ import type { RequestHandler } from './$types';
 
 // ---- v2-schema helpers (dev-only tool, so simple full-scan caches are fine) ----
 
-type CiteInfo = { short: string; refId: string };
+type CiteInfo = {
+	short: string;
+	refId: string;
+	source: string | null;
+	progress: string | null;
+	provenance: string | null;
+	editor: string | null;
+	ocr: number;
+	lemma_count: number;
+	unetymologised_count: number;
+};
 let _citeInfo: Map<number, CiteInfo & { locator: string; refRid: number }> | null = null;
 function citeInfo() {
 	if (!_citeInfo) {
 		const db = getDb();
 		const refs = new Map(
-			(db.prepare('SELECT rowid AS rid, id, short FROM "references"').all() as {
+			(db.prepare('SELECT rowid AS rid, * FROM "references"').all() as {
 				rid: number;
 				id: string;
 				short: string | null;
+				source: string | null;
+				progress: string | null;
+				provenance: string | null;
+				editor: string | null;
+				ocr: number;
+				lemma_count: number;
+				unetymologised_count: number;
 			}[]).map((r) => [r.rid, r])
 		);
 		_citeInfo = new Map(
@@ -32,6 +49,13 @@ function citeInfo() {
 					{
 						short: ref?.short || ref?.id || String(c.ref_rid),
 						refId: ref?.id ?? String(c.ref_rid),
+						source: ref?.source ?? null,
+						progress: ref?.progress ?? null,
+						provenance: ref?.provenance ?? null,
+						editor: ref?.editor ?? null,
+						ocr: ref?.ocr ?? 0,
+						lemma_count: ref?.lemma_count ?? 0,
+						unetymologised_count: ref?.unetymologised_count ?? 0,
 						locator: c.locator,
 						refRid: c.ref_rid
 					}
@@ -42,20 +66,44 @@ function citeInfo() {
 	return _citeInfo;
 }
 
-function sourcesOf(cites: Buffer | null): { source_ids: string | null; sources: string | null } {
-	if (!cites) return { source_ids: null, sources: null };
+function sourcesOf(cites: Buffer | null) {
+	if (!cites) return { source_ids: null, sources: null, references: [] };
 	const info = citeInfo();
 	const ids_ = new Set<string>();
 	const labels = new Set<string>();
+	const references = new Map<string, {
+		id: string; short: string; source: string | null; progress: string | null;
+		provenance: string | null; editor: string | null; ocr: number;
+		lemma_count: number; unetymologised_count: number; locator?: string;
+	}>();
 	for (const cid of readVarints(new Uint8Array(cites))) {
 		const c = info.get(cid);
 		if (!c) continue;
 		ids_.add(c.refId);
 		labels.add(c.locator !== '' ? `${c.short}, ${c.locator}` : c.short);
+		const existing = references.get(c.refId);
+		if (existing) {
+			if (c.locator && !existing.locator?.split('; ').includes(c.locator))
+				existing.locator = [existing.locator, c.locator].filter(Boolean).join('; ');
+		} else {
+			references.set(c.refId, {
+				id: c.refId,
+				short: c.short,
+				source: c.source,
+				progress: c.progress,
+				provenance: c.provenance,
+				editor: c.editor,
+				ocr: c.ocr,
+				lemma_count: c.lemma_count,
+				unetymologised_count: c.unetymologised_count,
+				locator: c.locator || undefined
+			});
+		}
 	}
 	return {
 		source_ids: ids_.size ? [...ids_].join(',') : null,
-		sources: labels.size ? [...labels].join(',') : null
+		sources: labels.size ? [...labels].join(',') : null,
+		references: [...references.values()]
 	};
 }
 
@@ -66,33 +114,39 @@ function citeIdsOfRef(refId: string): number[] {
 }
 
 // entry rid → concept ids, and lemma rid → concept ids (decoded once from concepts.rids)
-let _conceptIndex: { byLemma: Map<number, Set<number>>; byEntry: Map<number, Set<number>> } | null =
-	null;
+let _conceptIndex: {
+	byLemma: Map<number, Set<number>>;
+	byEntry: Map<number, Set<number>>;
+	byConcept: Map<number, Set<number>>;
+} | null = null;
 function conceptIndex() {
 	if (!_conceptIndex) {
 		const db = getDb();
 		const originOf = new Map(
-			(db.prepare('SELECT rowid AS rid, origin_rid, flags FROM lem').all() as {
+			(db.prepare('SELECT rowid AS rid, origin_rid, etymon_rid, flags FROM lem').all() as {
 				rid: number;
 				origin_rid: number | null;
+				etymon_rid: number | null;
 				flags: number;
 			}[]).map((r) => [r.rid, r])
 		);
 		const byLemma = new Map<number, Set<number>>();
 		const byEntry = new Map<number, Set<number>>();
+		const byConcept = new Map<number, Set<number>>();
 		for (const c of db.prepare('SELECT id, rids FROM concepts WHERE rids IS NOT NULL').all() as {
 			id: number;
 			rids: Buffer;
 		}[]) {
 			for (const rid of readDeltas(new Uint8Array(c.rids))) {
 				(byLemma.get(rid) ?? byLemma.set(rid, new Set()).get(rid)!).add(c.id);
+				(byConcept.get(c.id) ?? byConcept.set(c.id, new Set()).get(c.id)!).add(rid);
 				const info = originOf.get(rid);
 				if (!info || (info.flags & 7) === REL_UNLINKED) continue;
-				const entry = info.origin_rid ?? rid;
+				const entry = info.etymon_rid ?? info.origin_rid ?? rid;
 				(byEntry.get(entry) ?? byEntry.set(entry, new Set()).get(entry)!).add(c.id);
 			}
 		}
-		_conceptIndex = { byLemma, byEntry };
+		_conceptIndex = { byLemma, byEntry, byConcept };
 	}
 	return _conceptIndex;
 }
@@ -154,6 +208,16 @@ type CandidateRow = {
 	reflex_count: number;
 	lang_count: number;
 	sources: string | null;
+};
+
+type SelectedFormRow = {
+	rid: number;
+	id: string;
+	word: string;
+	gloss: string;
+	phonemic: string | null;
+	language_id: string;
+	language: string;
 };
 
 function soundKey(value: string): string[] {
@@ -256,34 +320,165 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		});
 	}
 
-	if (mode === 'candidates') {
+	if (mode === 'related') {
 		const idx = ids();
 		const formId = url.searchParams.get('form') ?? '';
 		const formRid = idx.ridOf(formId);
-		const selected = formRid
-			? (db
+		if (formRid == null) error(400, 'Choose a valid seed form');
+		const selected = db
+			.prepare(
+				`SELECT l.rowid AS rid, l.word, l.gloss, l.phonemic,
+				        lang.id AS language_id, lang.name AS language
+				 FROM lem l JOIN languages lang ON lang.rowid = l.lang_rid
+				 WHERE l.rowid = ? AND (l.flags & 7) = ${REL_UNLINKED}`
+			)
+			.get(formRid) as Omit<SelectedFormRow, 'id'> | undefined;
+		if (!selected) error(400, 'Choose an unetymologised seed form');
+
+		const concepts = conceptIndex();
+		const selectedConcepts = concepts.byLemma.get(selected.rid) ?? new Set<number>();
+		const pool = new Set<number>();
+		for (const concept of selectedConcepts)
+			for (const rid of concepts.byConcept.get(concept) ?? []) pool.add(rid);
+		pool.delete(selected.rid);
+
+		// A few imported forms carry their concept label only as a gloss. Always union exact
+		// gloss matches so those rows can join forms that do have a concepts.rids mapping.
+		if (selected.gloss.trim()) {
+			for (const row of db
+				.prepare(
+					`SELECT rowid AS rid FROM lem
+					 WHERE (flags & 7) = ${REL_UNLINKED} AND rowid != ?
+					   AND lower(trim(gloss)) = lower(trim(?)) LIMIT 500`
+				)
+				.all(selected.rid, selected.gloss) as { rid: number }[]) pool.add(row.rid);
+		}
+
+		if (!pool.size) return json({ rows: [] });
+		const saved = new Set(
+			(await readAssignments())
+				.filter((row) => row.Status !== 'rejected' && (!row.Rank || row.Rank === '1'))
+				.map((row) => row.Form_ID)
+		);
+		const related = (db
+			.prepare(
+				`SELECT l.rowid AS rid, l.word, l.gloss, l.phonemic, l.notes, l.cites,
+				        lang.id AS language_id, lang.name AS language, lang.color AS language_color
+				 FROM lem l JOIN languages lang ON lang.rowid = l.lang_rid
+				 WHERE l.rowid IN (SELECT value FROM json_each(?))
+				   AND (l.flags & 7) = ${REL_UNLINKED}`
+			)
+			.all(JSON.stringify([...pool])) as {
+			rid: number;
+			word: string;
+			gloss: string;
+			phonemic: string | null;
+			notes: string | null;
+			cites: Buffer | null;
+			language_id: string;
+			language: string;
+			language_color: string | null;
+		}[])
+			.map((row) => {
+				const id = idx.idOf(row.rid);
+				const rowConcepts = concepts.byLemma.get(row.rid) ?? new Set<number>();
+				const shared = [...selectedConcepts].filter((concept) => rowConcepts.has(concept)).length;
+				const exactGloss =
+					row.gloss.trim().toLocaleLowerCase() === selected.gloss.trim().toLocaleLowerCase();
+				const conceptScore = Math.max(
+					selectedConcepts.size
+						? (2 * shared) / Math.max(1, selectedConcepts.size + rowConcepts.size)
+						: 0,
+					exactGloss ? 1 : 0
+				);
+				const soundScore = soundSimilarity(
+					selected.phonemic || selected.word,
+					row.phonemic || row.word
+				);
+				const confidence = Math.round(100 * (0.58 * conceptScore + 0.42 * soundScore));
+				return {
+					id,
+					word: row.word,
+					gloss: row.gloss,
+					phonemic: row.phonemic ?? '',
+					notes: row.notes ?? '',
+					language_id: row.language_id,
+					language: row.language,
+					...sourcesOf(row.cites),
+					confidence,
+					concept_score: Math.round(conceptScore * 100),
+					sound_score: Math.round(soundScore * 100),
+					suggested: conceptScore > 0 && soundScore >= 0.32 && confidence >= 70,
+					assigned: saved.has(id)
+				};
+			})
+			.filter((row) => !row.assigned)
+			.sort(
+				(a, b) =>
+					b.confidence - a.confidence ||
+					b.sound_score - a.sound_score ||
+					a.language.localeCompare(b.language) ||
+					a.word.localeCompare(b.word)
+			)
+			.slice(0, 60);
+		return json({ rows: related });
+	}
+
+	if (mode === 'candidates') {
+		const idx = ids();
+		const requestedIds = (url.searchParams.get('forms') || url.searchParams.get('form') || '')
+			.split(',')
+			.map((id) => id.trim())
+			.filter(Boolean)
+			.slice(0, 100);
+		const requestedRids = requestedIds
+			.map((id) => idx.ridOf(id))
+			.filter((rid): rid is number => rid != null);
+		const selectedForms = requestedRids.length
+			? ((db
 					.prepare(
-						`SELECT l.rowid AS rowid, l.word, l.phonemic, lang.id AS language_id
-						 FROM lem l LEFT JOIN languages lang ON lang.rowid = l.lang_rid WHERE l.rowid = ?`
+						`SELECT l.rowid AS rid, l.word, l.gloss, l.phonemic,
+						        lang.id AS language_id, lang.name AS language
+						 FROM lem l LEFT JOIN languages lang ON lang.rowid = l.lang_rid
+						 WHERE l.rowid IN (SELECT value FROM json_each(?))`
 					)
-					.get(formRid) as
-					| { rowid: number; word: string; phonemic: string | null; language_id: string }
-					| undefined)
-			: undefined;
-		const selectedConcepts = selected
-			? [...(conceptIndex().byLemma.get(selected.rowid) ?? [])]
+					.all(JSON.stringify(requestedRids)) as Omit<SelectedFormRow, 'id'>[]).map((row) => ({
+					...row,
+					id: idx.idOf(row.rid)
+				})) as SelectedFormRow[])
 			: [];
+		const selectedConcepts = new Set<number>();
+		for (const form of selectedForms)
+			for (const concept of conceptIndex().byLemma.get(form.rid) ?? []) selectedConcepts.add(concept);
 		// candidate entries carrying any of the selected concepts (via any attestation)
-		const conceptEntryRids: number[] = [];
-		if (selectedConcepts.length) {
-			const wanted = new Set(selectedConcepts);
+		const candidateEntryRids = new Set<number>();
+		if (selectedConcepts.size) {
 			for (const [entry, cids] of conceptIndex().byEntry) {
 				for (const c of cids)
-					if (wanted.has(c)) {
-						conceptEntryRids.push(entry);
+					if (selectedConcepts.has(c)) {
+						candidateEntryRids.add(entry);
 						break;
 					}
 			}
+		}
+		// Imported comparative vocabularies often preserve their concept label in the
+		// gloss/source metadata without contributing a concepts.rids mapping. Exact gloss
+		// matches on already-linked attestations recover their materialised etymon roots.
+		const selectedGlosses = [
+			...new Set(
+				selectedForms
+					.map((form) => form.gloss.trim().toLocaleLowerCase())
+					.filter(Boolean)
+			)
+		];
+		if (selectedGlosses.length) {
+			for (const row of db
+				.prepare(
+					`SELECT DISTINCT etymon_rid AS rid FROM lem
+					 WHERE etymon_rid IS NOT NULL AND (flags & 7) != ${REL_UNLINKED}
+					   AND lower(trim(gloss)) IN (SELECT value FROM json_each(?))`
+				)
+				.all(JSON.stringify(selectedGlosses)) as { rid: number }[]) candidateEntryRids.add(row.rid);
 		}
 		const exactRid = idx.ridOf(q) ?? -1;
 		const rows = (db
@@ -301,7 +496,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				          (l.counts / 1024) DESC, l.ord
 				 LIMIT 400`
 			)
-			.all(q, exactRid, q, q, q, JSON.stringify(conceptEntryRids), exactRid, q, q) as {
+			.all(q, exactRid, q, q, q, JSON.stringify([...candidateEntryRids]), exactRid, q, q) as {
 			rid: number;
 			word: string;
 			gloss: string;
@@ -321,7 +516,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 			sources: sourcesOf(r.cites).sources
 		})) as (CandidateRow & { rid: number })[];
 
-		if (!selected || !rows.length) return json({ rows: rows.slice(0, 80) });
+		if (!selectedForms.length || !rows.length) return json({ rows: rows.slice(0, 80) });
 		const candidateRids = rows.map((row) => row.rid);
 		const conceptsByCandidate = new Map<string, Set<number>>();
 		for (const row of rows) {
@@ -331,49 +526,83 @@ export const GET: RequestHandler = async ({ request, url }) => {
 
 		const reflexRows = (db
 			.prepare(
-				`SELECT att.origin_rid AS origin_rid, att.word, att.phonemic,
+				`SELECT att.etymon_rid AS origin_rid, att.word, att.gloss, att.phonemic,
 				        lang.id AS language_id, lang.name AS language
 				 FROM lem att LEFT JOIN languages lang ON lang.rowid = att.lang_rid
-				 WHERE att.origin_rid IN (SELECT value FROM json_each(?))
+				 WHERE att.etymon_rid IN (SELECT value FROM json_each(?))
 				   AND att.link_rid IS NULL`
 			)
 			.all(JSON.stringify(candidateRids)) as {
 			origin_rid: number;
 			word: string;
+			gloss: string;
 			phonemic: string | null;
 			language_id: string;
 			language: string;
 		}[]).map((r) => ({
 			candidate_id: idx.idOf(r.origin_rid),
 			word: r.word,
+			gloss: r.gloss,
 			phonemic: r.phonemic,
 			language_id: r.language_id,
 			language: r.language
 		}));
-		const selectedSound = selected.phonemic || selected.word;
-		const bestReflex = new Map<string, { score: number; word: string; language: string }>();
-		for (const reflex of reflexRows) {
-			const raw = soundSimilarity(selectedSound, reflex.phonemic || reflex.word);
-			const score = raw * (reflex.language_id === selected.language_id ? 1 : 0.82);
-			if (score > (bestReflex.get(reflex.candidate_id)?.score ?? -1))
-				bestReflex.set(reflex.candidate_id, { score, word: reflex.word, language: reflex.language });
-		}
-		const selectedConceptSet = new Set(selectedConcepts);
+		const reflexesByCandidate = new Map<string, typeof reflexRows>();
+		for (const reflex of reflexRows)
+			(reflexesByCandidate.get(reflex.candidate_id) ??
+				reflexesByCandidate.set(reflex.candidate_id, []).get(reflex.candidate_id)!).push(reflex);
 		const scored = rows.map((row) => {
 			const candidateConcepts = conceptsByCandidate.get(row.id) ?? new Set<number>();
-			const conceptMatches = [...selectedConceptSet].filter((concept) => candidateConcepts.has(concept)).length;
-			const concept_score = selectedConceptSet.size ? conceptMatches / selectedConceptSet.size : 0;
-			const sound_score = soundSimilarity(selectedSound, row.word);
-			const cognate = bestReflex.get(row.id);
-			const cognate_score = cognate?.score ?? 0;
+			const candidateGlosses = new Set(
+				(reflexesByCandidate.get(row.id) ?? [])
+					.map((reflex) => reflex.gloss.trim().toLocaleLowerCase())
+					.filter(Boolean)
+			);
+			const conceptScores: number[] = [];
+			const soundScores: number[] = [];
+			const cognateScores: number[] = [];
+			let supportedForms = 0;
+			let cognate: { score: number; word: string; language: string; form: string } | undefined;
+			for (const form of selectedForms) {
+				const formConcepts = conceptIndex().byLemma.get(form.rid) ?? new Set<number>();
+				const conceptMatches = [...formConcepts].filter((concept) => candidateConcepts.has(concept)).length;
+				const glossMatch = candidateGlosses.has(form.gloss.trim().toLocaleLowerCase()) ? 1 : 0;
+				const formConceptScore = formConcepts.size
+					? Math.max(conceptMatches / formConcepts.size, glossMatch)
+					: glossMatch;
+				conceptScores.push(formConceptScore);
+				const formSound = form.phonemic || form.word;
+				const headSoundScore = soundSimilarity(formSound, row.word);
+				soundScores.push(headSoundScore);
+				let best: { score: number; word: string; language: string; form: string } | undefined;
+				for (const reflex of reflexesByCandidate.get(row.id) ?? []) {
+					const raw = soundSimilarity(formSound, reflex.phonemic || reflex.word);
+					const score = raw * (reflex.language_id === form.language_id ? 1 : 0.82);
+					if (!best || score > best.score)
+						best = { score, word: reflex.word, language: reflex.language, form: form.word };
+				}
+				const bestScore = best?.score ?? 0;
+				cognateScores.push(bestScore);
+				if (formConceptScore > 0 && Math.max(headSoundScore, bestScore) >= 0.28) supportedForms++;
+				if (best && (!cognate || best.score > cognate.score)) cognate = best;
+			}
+			const average = (values: number[]) =>
+				values.length ? values.reduce((total, value) => total + value, 0) / values.length : 0;
+			const concept_score = average(conceptScores);
+			const sound_score = average(soundScores);
+			const cognate_score = average(cognateScores);
 			const confidence = Math.round(100 * (0.45 * concept_score + 0.2 * sound_score + 0.35 * cognate_score));
 			return {
 				...row,
+				word: row.word || cognate?.word || '',
+				gloss: row.gloss || selectedForms[0]?.gloss || '',
 				confidence,
 				concept_score: Math.round(concept_score * 100),
 				sound_score: Math.round(sound_score * 100),
 				cognate_score: Math.round(cognate_score * 100),
-				best_cognate: cognate ? `${cognate.word} · ${cognate.language}` : null
+				best_cognate: cognate ? `${cognate.word} · ${cognate.language} ↔ ${cognate.form}` : null,
+				supported_forms: supportedForms,
+				group_size: selectedForms.length
 			};
 		});
 		scored.sort((a, b) => b.confidence - a.confidence || b.reflex_count - a.reflex_count || a.id.localeCompare(b.id));
@@ -395,7 +624,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	const rows = (db
 		.prepare(
 			`SELECT l.rowid AS rid, l.word, l.gloss, l.phonemic, l.notes, l.cites,
-			        lang.id AS language_id, lang.name AS language
+			        lang.id AS language_id, lang.name AS language, lang.color AS language_color
 			 FROM lem l JOIN languages lang ON lang.rowid = l.lang_rid
 			 WHERE ${where}
 			 ORDER BY lang."order", lang.name, l.ord LIMIT 50 OFFSET ?`
@@ -409,6 +638,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		cites: Buffer | null;
 		language_id: string;
 		language: string;
+		language_color: string | null;
 	}[]).map((r) => ({
 		id: idx.idOf(r.rid),
 		word: r.word,
@@ -424,7 +654,9 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		.prepare(`SELECT id, name FROM languages WHERE rowid IN (SELECT DISTINCT lang_rid FROM lem WHERE (flags & 7) = ${REL_UNLINKED}) ORDER BY "order", name`)
 		.all();
 	const sources = db
-		.prepare(`SELECT id, short FROM "references" WHERE unetymologised_count > 0 ORDER BY short`)
+		.prepare(`SELECT id, short, source, progress, provenance, editor, ocr,
+		                 lemma_count, unetymologised_count
+		          FROM "references" WHERE unetymologised_count > 0 ORDER BY short`)
 		.all();
 	const assignments = await readAssignments();
 	return json({ rows, count, page, languages, sources, assignments });
@@ -436,10 +668,62 @@ export const POST: RequestHandler = async ({ request }) => {
 		remove?: boolean;
 		reject?: boolean; // review queue: reject a generated rank>=2 hypothesis edge
 		Relation?: string; // legacy client field name for Kind
+		assignments?: Array<Partial<Assignment> & { Relation?: string }>;
 	};
+	const db = getDb();
+	const validatedAssignment = (
+		input: Partial<Assignment> & { Relation?: string }
+	): Assignment => {
+		const formId = input.Form_ID?.trim() ?? '';
+		if (!/^f_[a-z2-7]{13}$/.test(formId))
+			error(400, 'A persistent form ID is required; rebuild the data first');
+		if (ids().ridOf(formId) == null) error(400, `Unknown form ID: ${formId}`);
+		const etymonId = input.Etymon_ID?.trim() ?? '';
+		const etymonRid = etymonId ? ids().ridOf(etymonId) : null;
+		if (
+			etymonRid == null ||
+			!db
+				.prepare(`SELECT 1 FROM lem WHERE rowid = ? AND (flags & 7) != ${REL_UNLINKED}`)
+				.get(etymonRid)
+		)
+			error(400, `Choose a valid etymon for ${formId}`);
+		const rank = /^[1-9]\d*$/.test(input.Rank ?? '') ? (input.Rank as string) : '1';
+		return {
+			Form_ID: formId,
+			Etymon_ID: etymonId,
+			Kind: (input.Kind ?? input.Relation) === 'borrowed' ? 'borrowed' : 'reflex',
+			Rank: rank,
+			Status: 'accepted',
+			Source: input.Source?.trim() ?? '',
+			Notes: input.Notes?.trim() ?? ''
+		};
+	};
+
+	if (body.assignments) {
+		if (!body.assignments.length || body.assignments.length > 100)
+			error(400, 'A group must contain between 1 and 100 forms');
+		const additions = body.assignments.map(validatedAssignment);
+		const uniqueForms = new Set(additions.map((row) => row.Form_ID));
+		if (uniqueForms.size !== additions.length) error(400, 'A form can only occur once in a group');
+		let rows = await readAssignments();
+		for (const addition of additions) {
+			rows = rows.filter(
+				(row) =>
+					!(
+						row.Form_ID === addition.Form_ID &&
+						(addition.Rank === '1'
+							? row.Rank === '1' || !row.Rank
+							: row.Etymon_ID === addition.Etymon_ID)
+					)
+			);
+			rows.push(addition);
+		}
+		await writeAssignments(rows);
+		return json({ ok: true, count: additions.length });
+	}
+
 	const formId = body.Form_ID?.trim() ?? '';
 	if (!/^f_[a-z2-7]{13}$/.test(formId)) error(400, 'A persistent form ID is required; rebuild the data first');
-	const db = getDb();
 	if (ids().ridOf(formId) == null) error(400, 'Unknown form ID');
 
 	const rank = /^[1-9]\d*$/.test(body.Rank ?? '') ? (body.Rank as string) : '1';
@@ -466,30 +750,14 @@ export const POST: RequestHandler = async ({ request }) => {
 		await writeAssignments(rows);
 		return json({ ok: true });
 	}
-	const etymonId = body.Etymon_ID?.trim() ?? '';
-	const etymonRid = etymonId ? ids().ridOf(etymonId) : null;
-	if (
-		etymonRid == null ||
-		!db
-			.prepare(`SELECT 1 FROM lem WHERE rowid = ? AND (flags & 7) != ${REL_UNLINKED}`)
-			.get(etymonRid)
-	) {
-		error(400, 'Choose a valid etymon');
-	}
+	const addition = validatedAssignment(body);
+	const etymonId = addition.Etymon_ID;
 	// rank-1 rows are unique per form; rank>=2 rows are keyed (form, etymon)
 	rows = rows.filter(
 		(row) =>
 			!(row.Form_ID === formId && (rank === '1' ? row.Rank === '1' || !row.Rank : row.Etymon_ID === etymonId))
 	);
-	rows.push({
-		Form_ID: formId,
-		Etymon_ID: etymonId,
-		Kind: (body.Kind ?? body.Relation) === 'borrowed' ? 'borrowed' : 'reflex',
-		Rank: rank,
-		Status: 'accepted',
-		Source: body.Source?.trim() ?? '',
-		Notes: body.Notes?.trim() ?? ''
-	});
+	rows.push(addition);
 	await writeAssignments(rows);
 	return json({ ok: true });
 };

@@ -10,8 +10,9 @@
 	let {
 		label,
 		chain,
-		startLang
-	}: { label: string; chain: AncestorRef[][]; startLang?: string | null } = $props();
+		startLang,
+		compact = false
+	}: { label: string; chain: AncestorRef[][]; startLang?: string | null; compact?: boolean } = $props();
 
 	const rendered = $derived.by(() => {
 		let running = startLang ?? null;
@@ -26,14 +27,15 @@
 </script>
 
 {#if rendered.length && rendered[0].length}
-	<div class="ancestry">
+	<div class="ancestry" class:compact>
 		{#each rendered as level, li (li)}
 			<div class="anc-line">
 				<span class="kind">{li === 0 ? label : '↳ from'}</span>
 				{#each level as p, i (p.id)}{#if p.showLang}<span class="lang">{p.lang}</span> {/if}<a
 						class="anc"
 						href="{base}/entries/{p.id}"
-						><FormWord word={p.word} ocr={p.ocr} /> <span class="id-tag">[{p.id}]</span></a
+						><FormWord word={p.word} ocr={p.ocr} />{#if !compact}
+							<span class="id-tag"> [{p.id}]</span>{/if}</a
 					>{#if i < level.length - 1}<span class="sep">, </span>{/if}{/each}
 			</div>
 		{/each}
@@ -43,6 +45,13 @@
 <style>
 	.ancestry {
 		margin: 0.1rem 0 0.9rem;
+	}
+	.ancestry.compact {
+		margin: 0;
+	}
+	.compact .anc-line {
+		font-size: 0.88rem;
+		margin: 0;
 	}
 	.anc-line {
 		display: flex;

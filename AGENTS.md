@@ -16,6 +16,14 @@ SvelteKit 2 + **Svelte 5 runes** (`$state`/`$derived`/`$effect`/`$props`, `{#sni
 `src/lib/query.ts` is the **single source of query truth** for both paths — a port of the old
 Flask `search.py` plus the entry/cognate grouping. Change query semantics there, once.
 
+## Cross-repository source-ingestion requests
+
+If a request opened from this repository asks to ingest, import, add, OCR, snapshot, re-ingest, or
+substantially reparse a lexical/linguistic source, read
+`../data/SOURCE_INGESTION_CHECKLIST.md` completely before taking ingestion actions. Follow its
+standing editorial policy, definition of done, and relevant source-type addendum. The data-side
+pipeline comes first; this repository supplies the browser-database build and visual QA gates.
+
 The DB ships the **compact v3 edge-model schema** (see below): no text ids or tag/relation
 strings in `lem`; `src/lib/dbShared.ts` decodes rows back to the legacy `Lemma` shape. v3 key
 facts: `origin_rid` is the rank-1 (accepted) edge target — a variant's actual target, not its
@@ -34,7 +42,8 @@ hypotheses with review notes). Both SQLite layers register the `vin_any` varint-
   It reads the sibling data repo's `cldf/` **directly** (the README's mention of a `.dbwork/data.db`
   input is stale — the current script takes `--cldf`). It first builds the legacy ("v1") schema in
   full, then `scripts/compact_db.py` rewrites it into the **compact v3 schema** that ships
-  (~53.3 MB, guarded at 55 MB): binary-ranked lemma ids (`lem` rowid = id rank; the `ids` blob is
+  (~78.4 MB for the 2026-08-18 corpus, guarded at 80 MB): binary-ranked lemma ids
+  (`lem` rowid = id rank; the `ids` blob is
   the only id index), interned tags/cognatesets/citations, bit-flag relations, varint blobs for
   children/citations/alignments/corr summaries, and grouped alias blobs. The codecs live in
   `src/lib/dbShared.ts` and MUST stay in sync with `compact_db.py`. After any change to either,

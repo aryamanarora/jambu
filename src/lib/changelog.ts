@@ -18,6 +18,43 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-18',
+		label: '18 August 2026',
+		title: 'Badaga, Nihali, and source-rich comparisons',
+		changes: [
+			'Added all 16,706 rows from Hockings and Pilot-Raichoor’s Badaga-English dictionary, with exact page and column citations, preserved source spellings, and reviewed DEDR links.',
+			'Added Ghatage’s Marati of Kasargod vocabulary and four curated Nihali lexicons from Mundlay, Nagaraja, Bhattacharya, and Konow, preserving their source-specific forms, notes, and locators.',
+			'Added Southworth’s Marathi and Old Marathi comparison with Dravidian, keeping the printed evidence, corrections, and uncertain borrowing analyses visible.',
+			'Source links and filters now work consistently across entries, reflex lists, references, and language comparisons; a new local review workspace supports scan-backed correction of OCR-derived records.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Badaga', label: 'Badaga' },
+				{ id: 'M', label: 'Marathi' },
+				{ id: 'OM', label: 'Old Marathi' },
+				{ id: 'Ni', label: 'Nihali' }
+			],
+			sources: [
+				{ id: 'hockings-pilotraichoor1992', label: 'Hockings & Pilot-Raichoor 1992 · OCR' },
+				{ id: 'ghatage-kasargod1970', label: 'Ghatage 1970 · OCR' },
+				{ id: 'mundlay1996', label: 'Mundlay 1996' },
+				{ id: 'nagaraja2014', label: 'Nagaraja 2014' },
+				{ id: 'bhattacharya1957', label: 'Bhattacharya 1957' },
+				{ id: 'konow1906', label: 'Konow 1906' },
+				{ id: 'nihali-database2026', label: 'Nihali Database 2026' },
+				{ id: 'southworth2005m', label: 'Southworth 2005 · OCR' }
+			]
+		}
+	},
+	{
+		date: '2026-08-17',
+		label: '17 August 2026',
+		title: 'Faster comparative etymology work',
+		changes: [
+			'The local etymology lab now finds semantic-and-phonological groups of unetymologised forms, ranks etyma against the whole group, supports inherited or borrowed decisions per form, and saves reviewed groups together.'
+		]
+	},
+	{
 		date: '2026-08-14',
 		label: '14 August 2026',
 		title: 'The Linguistic Survey of India and 31 modern surveys',

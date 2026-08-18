@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import type { Dialect, Language, MapMarker } from '$lib/types';
 	import Map from '$lib/components/Map.svelte';
 	import ReflexesView from '$lib/components/ReflexesView.svelte';
@@ -16,6 +17,7 @@
 	} from '$lib/query';
 	import { tagCategory, type TagCategory } from '$lib/tags';
 	import { hashColor } from '$lib/clades';
+	import { buildQuery } from '$lib/urlParams';
 
 	let { data } = $props();
 	const lang = $derived(data.language);
@@ -62,6 +64,42 @@
 	];
 	function tagsFor(category: TagCategory): string[] {
 		return languageTags.filter((tag) => tagCategory(tag) === category);
+	}
+
+	const selectedOrigins = $derived(
+		page.url.searchParams.get('unetym') === '1'
+			? ['__unetym']
+			: (page.url.searchParams.get('etymon_langs')?.split(',').filter(Boolean) ??
+				(page.url.searchParams.get('etymon_lang') ? [page.url.searchParams.get('etymon_lang')!] : []))
+	);
+	const selectedReferences = $derived(
+		page.url.searchParams.get('source_ids')?.split(',').filter(Boolean) ?? []
+	);
+
+	function filterOrigins(selected: OriginSlice[]) {
+		const ids = selected.map((slice) => slice.lang);
+		const active = ids.length === selectedOrigins.length && ids.every((id) => selectedOrigins.includes(id));
+		const unetym = ids.length === 1 && ids[0] === '__unetym';
+		goto(
+			buildQuery(page.url.searchParams, {
+				etymon_lang: !active && ids.length === 1 && !unetym ? ids[0] : '',
+				etymon_langs: !active && ids.length > 1 ? ids.join(',') : '',
+				unetym: !active && unetym ? '1' : ''
+			}),
+			{ keepFocus: true, noScroll: true }
+		);
+	}
+
+	function filterReferences(selected: OriginSlice[]) {
+		const ids = selected.map((slice) => slice.lang);
+		const active = ids.length === selectedReferences.length && ids.every((id) => selectedReferences.includes(id));
+		goto(
+			buildQuery(page.url.searchParams, {
+				source: '',
+				source_ids: active ? '' : ids.join(',')
+			}),
+			{ keepFocus: true, noScroll: true }
+		);
 	}
 
 	const markers = $derived<MapMarker[]>(
@@ -202,13 +240,19 @@
 		{#if origins.length}
 			<section class="origins">
 				<h2>Origins</h2>
-				<Donut slices={origins} />
+				<Donut slices={origins} selected={selectedOrigins} onselect={filterOrigins} />
 			</section>
 		{/if}
 		{#if references.length}
 			<section class="origins">
 				<h2>References</h2>
-				<Donut slices={references} unit="citations" label="Distribution of references" />
+				<Donut
+					slices={references}
+					unit="citations"
+					label="Distribution of references"
+					selected={selectedReferences}
+					onselect={filterReferences}
+				/>
 			</section>
 		{/if}
 	</div>

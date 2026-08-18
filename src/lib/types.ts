@@ -81,11 +81,21 @@ export interface Lemma {
 	secondary?: number; // 1 when shown under an etymon it reaches by an alternate (derivation) edge
 	variant_forms?: string | null; // same-language variant word forms, \x1f-separated (entries view)
 	ocr_variant_forms?: string | null; // OCR-derived subset of variant_forms, same separator
+	ancestry?: AncestorRef[][]; // parsed accepted etymology, nearest ancestors first (entries view)
 	// hydrated relations (optional)
 	language?: Language;
 	origin_lemma?: Lemma | null;
 	references?: Reference[];
 	ocr?: boolean | number; // reference-backed query flag for projections without hydrated references
+}
+
+/** One parsed ancestor in the accepted etymology graph. */
+export interface AncestorRef {
+	id: string;
+	word: string;
+	lang?: string | null;
+	kind: 'entry' | 'reflex';
+	ocr: boolean;
 }
 
 export interface EntryTextBlock {
@@ -109,6 +119,9 @@ export interface ListParams {
 	origin_lang?: string;
 	origin?: string;
 	etymon_lang?: string; // filter reflexes by the language of their origin (etymon/source)
+	etymon_langs?: string; // comma-separated exact origin-language ids (grouped donut slice)
+	source_ids?: string; // comma-separated exact reference ids (grouped donut slice)
+	unetymologised?: boolean; // forms with no linked etymon (unetymologised donut slice)
 	dialect?: string; // exact dialect tag, used by the per-language lexicon picker
 	clade?: string;
 	tags?: string; // space-separated tags; a row must carry ALL of them

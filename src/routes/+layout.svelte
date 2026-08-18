@@ -87,7 +87,10 @@
 		{ href: '/concepts', label: 'Concepts' },
 		{ href: '/references', label: 'References' }
 	];
-	if (dev) nav.push({ href: '/dev/etymologies', label: 'Etymology lab' });
+	if (dev) {
+		nav.push({ href: '/dev/etymologies', label: 'Etymology lab' });
+		nav.push({ href: '/dev/ocr', label: 'OCR lab' });
+	}
 
 	function isActive(href: string): boolean {
 		const p = page.url.pathname;

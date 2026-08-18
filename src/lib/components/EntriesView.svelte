@@ -15,6 +15,8 @@
 	import { getConceptReflexes } from '$lib/query';
 	import type { Lemma } from '$lib/types';
 	import FormWord from './FormWord.svelte';
+	import SourceFilter from './SourceFilter.svelte';
+	import Ancestry from './Ancestry.svelte';
 
 	// `concept` restricts the list to entries expressing that Concepticon concept; `expandable`
 	// lets each entry row expand to an inline reflex view (used on the concepts page).
@@ -180,10 +182,7 @@
 						onSort={list.setSort}
 					/>
 				{/if}
-				<FilterCell
-					label="Source"
-					filterKey="source"
-					sortKey="source"
+				<SourceFilter
 					value={list.params.source ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
@@ -217,7 +216,18 @@
 						</td>
 						<td class="muted gloss-cell">{@html safe(e.gloss) || '—'}</td>
 						{#if !expandable}
-							<td class="muted etym-cell">{@html safe(e.etymology) || '—'}</td>
+							<td class="muted etym-cell">
+								{#if e.ancestry?.length}
+									<Ancestry
+										label="<"
+										chain={e.ancestry}
+										startLang={e.language?.name}
+										compact
+									/>
+								{:else}
+									—
+								{/if}
+							</td>
 							<td><Tags tags={e.tags} /></td>
 						{/if}
 						<td class="num">{e.lang_count?.toLocaleString() ?? ''}</td>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import type { Reference } from '$lib/types';
+	import ReferenceLink from './ReferenceLink.svelte';
 
 	let { references = [] }: { references?: Reference[] } = $props();
 	// attachReferences already combines repeated locators for one source; retain a defensive dedupe.
@@ -8,8 +8,9 @@
 </script>
 
 {#if refs.length}
-		{#each refs as r, i (r.id)}{#if i > 0}, {/if}<a
-			href="{base}/references/{r.id}"
-			title={`${r.short || r.id}${r.locator ? `, ${r.locator}` : ''}${r.ocr ? ' · OCR-derived' : ''}`}>{r.short || r.id}{#if r.locator}, {r.locator}{/if}</a
-		>{/each}
+	<span class="references">{#each refs as reference (reference.id)}<ReferenceLink {reference} />{/each}</span>
 {:else}<span class="faint">—</span>{/if}
+
+<style>
+	.references { display: inline-flex; flex-wrap: wrap; gap: 0.28rem; max-width: 100%; }
+</style>

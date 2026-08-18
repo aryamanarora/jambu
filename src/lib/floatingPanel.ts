@@ -10,9 +10,11 @@ export const floatingPanel: Action<HTMLElement, HTMLElement | null> = (node, anc
 	function place() {
 		if (!anchor) return;
 		const r = anchor.getBoundingClientRect();
+		const panelWidth = node.getBoundingClientRect().width;
+		const left = Math.max(8, Math.min(r.left, window.innerWidth - panelWidth - 8));
 		node.style.position = 'fixed';
 		node.style.top = `${r.bottom + 5}px`;
-		node.style.left = `${r.left}px`;
+		node.style.left = `${left}px`;
 	}
 	place();
 	window.addEventListener('scroll', place, true);

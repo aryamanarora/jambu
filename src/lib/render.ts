@@ -38,6 +38,45 @@ export function striptags(text: string | null | undefined): string {
 	return text.replace(/<[^>]*>/g, '');
 }
 
+/** Turn an internal bibliography abbreviation such as `T1962—1966` into the compact
+ * author–date form readers expect in running text (`Turner 1962–1966`). */
+export function referenceLabel(reference: {
+	id: string;
+	short: string | null;
+	source: string | null;
+}): string {
+	const source = (reference.source ?? '')
+		.replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, '$1')
+		.replace(/<[^>]*>/g, '')
+		.trim();
+	const sourceLines = source.split(/\n|\\n/);
+	const authorLine = /^Reference abbreviation\b/i.test(source)
+		? ''
+		: ((sourceLines.length > 1 ? sourceLines[0] : source.split(',')[0])
+			?.replace(/[.*_`]+$/g, '')
+			.trim() ?? '');
+	const people = authorLine
+		.replace(/,?\s+and\s+/gi, '|')
+		.split(/\s*\|\s*|,\s*/)
+		.map((name) => name.trim())
+		.filter(Boolean);
+	const surname = (name: string) => {
+		const parts = name.replace(/[.,]+$/g, '').split(/\s+/).filter(Boolean);
+		while (parts.length > 1 && /^[A-Z]$/.test(parts.at(-1)!)) parts.pop();
+		return parts.at(-1) ?? '';
+	};
+	let authors = '';
+	if (people.length === 1) authors = surname(people[0]);
+	else if (people.length === 2) authors = `${surname(people[0])} & ${surname(people[1])}`;
+	else if (people.length > 2) authors = `${surname(people[0])} et al.`;
+
+	const shortYear = reference.short?.match(/(?:^|\D)((?:1[5-9]|20)\d{2})/)?.[1];
+	const citationLead = source.split(/\n(?:URL|ISBN|DOI):?/i)[0] ?? source;
+	const sourceYears = [...citationLead.matchAll(/\b(?:1[5-9]|20)\d{2}(?:[–—-](?:\d{2}|\d{4}))?\b/g)];
+	const year = shortYear || sourceYears.at(-1)?.[0]?.slice(0, 4) || '';
+	return [authors, year].filter(Boolean).join(' ') || reference.short || reference.id;
+}
+
 /** Parse a cognateset key "CODE:label" into display parts (mirrors the template logic). */
 export function cognatesetParts(key: string | null | undefined): { code: string | null; label: string } {
 	if (!key) return { code: null, label: '' };

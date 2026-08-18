@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
+	import SelectFilter from '$lib/components/SelectFilter.svelte';
+	import SourcePicker from '$lib/components/SourcePicker.svelte';
+	import type { Reference } from '$lib/types';
+	import FormWord from '$lib/components/FormWord.svelte';
+	import { hashColor } from '$lib/clades';
+	import { safe } from '$lib/render';
+	import RefList from '$lib/components/RefList.svelte';
 
 	type QueueForm = {
 		id: string;
@@ -10,7 +17,9 @@
 		notes: string;
 		language_id: string;
 		language: string;
+		language_color: string | null;
 		sources: string | null;
+		references?: Reference[];
 	};
 	type Candidate = {
 		id: string;
@@ -25,17 +34,34 @@
 		sound_score?: number;
 		cognate_score?: number;
 		best_cognate?: string | null;
+		supported_forms?: number;
+		group_size?: number;
+	};
+	type RelatedForm = QueueForm & {
+		confidence: number;
+		concept_score: number;
+		sound_score: number;
+		suggested: boolean;
 	};
 	type Option = { id: string; name?: string; short?: string };
-	type Assignment = { Form_ID: string; Etymon_ID: string; Relation: string; Notes: string };
+	type Assignment = {
+		Form_ID: string;
+		Etymon_ID: string;
+		Kind?: string;
+		Relation?: string;
+		Notes: string;
+	};
 
 	let queue = $state<QueueForm[]>([]);
 	let candidates = $state<Candidate[]>([]);
 	let languages = $state<Option[]>([]);
-	let sources = $state<Option[]>([]);
+	let sources = $state<Reference[]>([]);
 	let assignments = $state<Record<string, Assignment>>({});
 	let selected = $state<QueueForm | null>(null);
 	let selectedCandidate = $state<Candidate | null>(null);
+	let relatedForms = $state<RelatedForm[]>([]);
+	let includedRelated = $state<Record<string, boolean>>({});
+	let relationOverrides = $state<Record<string, 'reflex' | 'borrowed'>>({});
 	let queueQuery = $state('');
 	let candidateQuery = $state('');
 	let language = $state('');
@@ -47,12 +73,25 @@
 	let busy = $state(false);
 	let candidateBusy = $state(false);
 	let candidateError = $state('');
+	let relatedBusy = $state(false);
+	let relatedError = $state('');
 	let saving = $state(false);
 	let message = $state('');
 	let loadError = $state('');
 
 	const api = `${base}/dev/etymologies/api`;
 	let candidateRequest = 0;
+	let relatedRequest = 0;
+	const workingSet = $derived.by(() =>
+		selected
+			? [selected, ...relatedForms.filter((form) => includedRelated[form.id])]
+			: []
+	);
+	const workingLanguages = $derived(new Set(workingSet.map((form) => form.language_id)).size);
+	const strongMatchCount = $derived(relatedForms.filter((form) => form.suggested).length);
+	const languageOptions = $derived(
+		languages.map((option) => ({ value: option.id, label: option.name || option.id }))
+	);
 
 	// ---- edge-model review queue (auto-classified alternate-etymology hypotheses) ----
 	type ReviewRow = {
@@ -127,7 +166,7 @@
 		const params = new URLSearchParams({
 			mode: 'candidates',
 			q: candidateQuery,
-			form: selected?.id ?? ''
+			forms: workingSet.map((form) => form.id).join(',')
 		});
 		try {
 			const response = await fetch(`${api}?${params}`);
@@ -145,22 +184,71 @@
 		}
 	}
 
+	async function loadRelated(form: QueueForm): Promise<void> {
+		const request = ++relatedRequest;
+		relatedBusy = true;
+		relatedError = '';
+		relatedForms = [];
+		includedRelated = {};
+		relationOverrides = {};
+		try {
+			const params = new URLSearchParams({ mode: 'related', form: form.id });
+			const response = await fetch(`${api}?${params}`);
+			if (!response.ok) throw new Error(await response.text());
+			const rows = (await response.json()).rows as RelatedForm[];
+			if (request !== relatedRequest || selected?.id !== form.id) return;
+			relatedForms = rows;
+			includedRelated = Object.fromEntries(rows.map((row) => [row.id, row.suggested]));
+		} catch (cause) {
+			if (request === relatedRequest)
+				relatedError = cause instanceof Error ? cause.message : String(cause);
+		} finally {
+			if (request === relatedRequest) relatedBusy = false;
+		}
+	}
+
+	function setRelated(id: string, include: boolean) {
+		includedRelated[id] = include;
+		selectedCandidate = null;
+		candidates = [];
+		candidateError = '';
+	}
+
+	function setRelatedRelation(id: string, value: string) {
+		relationOverrides[id] = value === 'borrowed' ? 'borrowed' : 'reflex';
+	}
+
+	function setGroup(mode: 'strong' | 'all' | 'seed') {
+		for (const form of relatedForms)
+			includedRelated[form.id] = mode === 'all' || (mode === 'strong' && form.suggested);
+		selectedCandidate = null;
+		candidates = [];
+		candidateError = '';
+	}
+
 	function selectForm(form: QueueForm | null) {
+		relatedRequest++;
 		selected = form;
 		selectedCandidate = null;
+		relatedForms = [];
+		includedRelated = {};
+		relationOverrides = {};
 		message = '';
 		const saved = form ? assignments[form.id] : undefined;
-		relation = saved?.Relation === 'borrowed' ? 'borrowed' : 'reflex';
+		relation = (saved?.Kind ?? saved?.Relation) === 'borrowed' ? 'borrowed' : 'reflex';
 		notes = saved?.Notes ?? '';
 		candidateQuery = saved?.Etymon_ID ?? form?.gloss ?? '';
-		void searchCandidates().then((rows) => {
-			if (saved && rows && selected?.id === form?.id)
-				selectedCandidate = rows.find((candidate) => candidate.id === saved.Etymon_ID) ?? null;
-		});
+		if (form)
+			void loadRelated(form).then(() =>
+				searchCandidates().then((rows) => {
+					if (saved && rows && selected?.id === form.id)
+						selectedCandidate = rows.find((candidate) => candidate.id === saved.Etymon_ID) ?? null;
+				})
+			);
 	}
 
 	async function saveAndNext() {
-		if (!selected || !selectedCandidate) return;
+		if (!selected || !selectedCandidate || !workingSet.length) return;
 		saving = true;
 		message = '';
 		try {
@@ -168,22 +256,34 @@
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
 				body: JSON.stringify({
-					Form_ID: selected.id,
-					Etymon_ID: selectedCandidate.id,
-					Relation: relation,
-					Notes: notes
+					assignments: workingSet.map((form) => ({
+						Form_ID: form.id,
+						Etymon_ID: selectedCandidate?.id,
+						Relation:
+							form.id === selected?.id ? relation : (relationOverrides[form.id] ?? relation),
+						Notes: notes
+					}))
 				})
 			});
 			if (!response.ok) throw new Error(await response.text());
-			assignments[selected.id] = {
-				Form_ID: selected.id,
-				Etymon_ID: selectedCandidate.id,
-				Relation: relation,
-				Notes: notes
-			};
+			const savedForms = [...workingSet];
+			const etymonId = selectedCandidate.id;
+			for (const form of savedForms)
+				assignments[form.id] = {
+					Form_ID: form.id,
+					Etymon_ID: etymonId,
+					Kind:
+						form.id === selected?.id ? relation : (relationOverrides[form.id] ?? relation),
+					Notes: notes
+				};
 			const index = queue.findIndex((row) => row.id === selected?.id);
-			message = `Saved ${selected.id} → ${selectedCandidate.id}`;
-			selectForm(queue[index + 1] ?? queue[index] ?? null);
+			const savedIds = new Set(savedForms.map((form) => form.id));
+			const next =
+				queue.slice(index + 1).find((row) => !savedIds.has(row.id)) ??
+				queue.find((row) => !savedIds.has(row.id)) ??
+				null;
+			selectForm(next);
+			message = `Saved ${savedForms.length} ${savedForms.length === 1 ? 'form' : 'forms'} → ${etymonId}`;
 		} catch (cause) {
 			message = cause instanceof Error ? cause.message : String(cause);
 		} finally {
@@ -231,9 +331,9 @@
 {:else}
 	<section class="filters" aria-label="Queue filters">
 		<form onsubmit={(event) => { event.preventDefault(); void loadQueue(1); }}>
-			<label>Search<input bind:value={queueQuery} placeholder="form, gloss, notes, or language" /></label>
-			<label>Language<select bind:value={language}><option value="">All languages</option>{#each languages as option}<option value={option.id}>{option.name}</option>{/each}</select></label>
-			<label>Source<select bind:value={source}><option value="">All sources</option>{#each sources as option}<option value={option.id}>{option.short}</option>{/each}</select></label>
+			<label>Search<input class="search-box" bind:value={queueQuery} placeholder="Form, gloss, notes, or language" autocomplete="off" /></label>
+			<div class="filter-control"><span class="control-label">Language</span><SelectFilter placeholder="Language" options={languageOptions} value={language} onSelect={(value) => (language = value)} /></div>
+			<div class="filter-control"><span class="control-label">Source</span><SourcePicker value={source} options={sources} onSelect={(value) => (source = value)} /></div>
 			<button type="submit" disabled={busy}>{busy ? 'Searching…' : 'Search queue'}</button>
 		</form>
 	</section>
@@ -299,9 +399,53 @@
 					<div><dt>Persistent ID</dt><dd><code>{selected.id}</code></dd></div>
 				</dl>
 
+				<section class="cluster" aria-label="Related unetymologised forms">
+					<div class="cluster-head">
+						<div>
+							<p class="section-kicker">Working set</p>
+							<h3>{workingSet.length} {workingSet.length === 1 ? 'form' : 'forms'} across {workingLanguages} {workingLanguages === 1 ? 'language' : 'languages'}</h3>
+							<p>Forms with matching concepts are ranked by phonological similarity. Strong matches are preselected for review.</p>
+						</div>
+						<div class="cluster-actions" aria-label="Working set selection controls">
+							<button type="button" onclick={() => setGroup('strong')} disabled={relatedBusy || !strongMatchCount}>Strong matches ({strongMatchCount})</button>
+							<button type="button" onclick={() => setGroup('all')} disabled={relatedBusy || !relatedForms.length}>All visible</button>
+							<button type="button" onclick={() => setGroup('seed')} disabled={relatedBusy || workingSet.length === 1}>Seed only</button>
+						</div>
+					</div>
+					<div class="table-wrap working-table-wrap" aria-busy={relatedBusy}>
+						<table class="data working-table">
+							<thead><tr><th><span class="sr-only">Include</span></th><th>Language</th><th>Word</th><th>Gloss</th><th>Source</th><th>Confidence</th><th>Relationship</th></tr></thead>
+							<tbody>
+								<tr class="seed-table-row">
+									<td class="include-cell"><span class="locked" title="Seed form is always included" aria-label="Seed form is always included">✓</span></td>
+									<td class="lang-cell working-language" style={`border-left-color:${hashColor(selected.language_color)}`}><a href={`${base}/languages/${selected.language_id}`} target="_blank">{selected.language}</a></td>
+									<td class="lemma-word"><a href={`${base}/entries/${selected.id}`} target="_blank"><FormWord word={selected.word || '—'} /></a>{#if selected.phonemic && selected.phonemic !== selected.word}<span class="phonemic">/&#8288;{selected.phonemic}&#8288;/</span>{/if}</td>
+									<td class="muted">{@html safe(selected.gloss) || '—'}</td>
+									<td class="working-source"><RefList references={selected.references} /></td>
+									<td class="confidence-cell"><span class="seed-confidence">seed</span></td>
+									<td><select class="row-relation" aria-label={`Relationship for ${selected.word || selected.id}`} bind:value={relation}><option value="reflex">Inherited</option><option value="borrowed">Borrowed</option></select></td>
+								</tr>
+								{#each relatedForms as form (form.id)}
+									<tr class:included={includedRelated[form.id]} class:excluded={!includedRelated[form.id]}>
+										<td class="include-cell"><input type="checkbox" checked={includedRelated[form.id]} aria-label={`Include ${form.word || form.id} in the working set`} onchange={(event) => setRelated(form.id, event.currentTarget.checked)} /></td>
+										<td class="lang-cell working-language" style={`border-left-color:${hashColor(form.language_color)}`}><a href={`${base}/languages/${form.language_id}`} target="_blank">{form.language}</a></td>
+										<td class="lemma-word"><a href={`${base}/entries/${form.id}`} target="_blank"><FormWord word={form.word || '—'} /></a>{#if form.phonemic && form.phonemic !== form.word}<span class="phonemic">/&#8288;{form.phonemic}&#8288;/</span>{/if}</td>
+										<td class="muted">{@html safe(form.gloss) || '—'}</td>
+										<td class="working-source"><RefList references={form.references} /></td>
+										<td class="confidence-cell"><strong>{form.confidence}%</strong></td>
+										<td><select class="row-relation" aria-label={`Relationship for ${form.word || form.id}`} disabled={!includedRelated[form.id]} value={relationOverrides[form.id] ?? relation} onchange={(event) => setRelatedRelation(form.id, event.currentTarget.value)}><option value="reflex">Inherited</option><option value="borrowed">Borrowed</option></select></td>
+									</tr>
+								{/each}
+								{#if relatedBusy}<tr><td colspan="7" class="related-loading" aria-live="polite">Finding related unetymologised forms…</td></tr>{/if}
+							</tbody>
+						</table>
+					</div>
+					{#if relatedError}<p class="candidate-error">Could not load related forms: {relatedError}</p>{:else if !relatedBusy && !relatedForms.length}<p class="cluster-empty">No other unlinked forms share this form’s mapped concept or exact gloss.</p>{/if}
+				</section>
+
 				<form class="candidate-search" onsubmit={(event) => { event.preventDefault(); void searchCandidates(); }}>
-					<label>Find an etymon<input bind:value={candidateQuery} placeholder="headword, gloss, language, or ID" /></label>
-					<button type="submit" disabled={candidateBusy}>{candidateBusy ? 'Searching…' : 'Search'}</button>
+					<label>Find an etymon for this working set<input bind:value={candidateQuery} placeholder="headword, gloss, language, or ID" /></label>
+					<button type="submit" disabled={candidateBusy}>{candidateBusy ? 'Ranking…' : `Rank etyma for ${workingSet.length}`}</button>
 				</form>
 				{#if candidateError}<p class="candidate-error">Could not load suggestions: {candidateError}</p>{/if}
 				<div class="table-wrap candidate-table-wrap" aria-busy={candidateBusy}>
@@ -337,8 +481,8 @@
 										<td class="candidate-gloss">{candidate.gloss || '—'}</td>
 										<td>
 											{#if candidate.confidence !== undefined}
-												<div class="confidence-viz" title="45% concept match + 20% headword sound match + 35% cognate similarity">
-													<div class="confidence-heading"><strong>{candidate.confidence}%</strong><span>{candidate.confidence >= 70 ? 'strong' : candidate.confidence >= 45 ? 'possible' : 'weak'}</span></div>
+												<div class="confidence-viz" title="Average across the working set: 45% concept match + 20% headword sound match + 35% closest known reflex">
+													<div class="confidence-heading"><strong>{candidate.confidence}%</strong><span>{candidate.supported_forms ?? 0}/{candidate.group_size ?? workingSet.length} supported</span></div>
 													<div class="confidence-track"><span style={`width:${candidate.confidence}%`}></span></div>
 													<div class="evidence-pips">
 														<span class="concept">C {candidate.concept_score}%</span><span class="sound">S {candidate.sound_score}%</span><span class="cognate">R {candidate.cognate_score}%</span>
@@ -358,10 +502,10 @@
 				</div>
 
 				<div class="decision">
-					<label>Relationship<select bind:value={relation}><option value="reflex">Inherited/reflex</option><option value="borrowed">Borrowed</option></select></label>
-					<label>Evidence notes<textarea bind:value={notes} rows="3" placeholder="Why this analysis is credible; citations or uncertainty"></textarea></label>
+					<label>Default relationship<select bind:value={relation}><option value="reflex">Inherited/reflex</option><option value="borrowed">Borrowed</option></select><small>Used for the seed and any related form not overridden in the working set.</small></label>
+					<label>Shared evidence notes<textarea bind:value={notes} rows="3" placeholder="Why this group analysis is credible; citations or uncertainty"></textarea></label>
 					<div class="actions">
-						<button class="primary" disabled={!selectedCandidate || saving || !selected.id.startsWith('f_')} onclick={saveAndNext}>{saving ? 'Saving…' : 'Save and next'}</button>
+						<button class="primary" disabled={!selectedCandidate || saving || workingSet.some((form) => !form.id.startsWith('f_'))} onclick={saveAndNext}>{saving ? 'Saving group…' : `Save ${workingSet.length} ${workingSet.length === 1 ? 'form' : 'forms'} and next`}</button>
 						{#if assignments[selected.id]}<button onclick={removeAssignment}>Remove saved link</button>{/if}
 						{#if message}<span class="message">{message}</span>{/if}
 					</div>
@@ -385,6 +529,9 @@
 	.filters { border:1px solid var(--border); background:var(--surface); padding:.8rem; border-radius:.7rem; margin-bottom:1rem; }
 	.filters form { display:grid; grid-template-columns:minmax(15rem,2fr) 1fr 1fr auto; gap:.7rem; align-items:end; }
 	label { display:flex; flex-direction:column; gap:.28rem; color:var(--muted); font-size:.78rem; font-weight:650; }
+	.filter-control { display:flex; flex-direction:column; gap:.28rem; min-width:0; }
+	.control-label { color:var(--muted); font-size:.78rem; font-weight:650; }
+	.filters input.search-box { min-width:0; font-family:var(--font-serif); font-size:.9rem; padding:.38rem .5rem; background:var(--surface); border:1.5px solid var(--border-strong); border-radius:var(--radius-sm); }
 	input,select,textarea { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:.42rem; padding:.55rem .65rem; background:var(--paper); color:var(--ink); font:inherit; }
 	button { border:1px solid var(--border); background:var(--surface); color:var(--ink); border-radius:.42rem; padding:.58rem .75rem; cursor:pointer; }
 	button:disabled { opacity:.5; cursor:not-allowed; }
@@ -408,6 +555,40 @@
 	dl { display:grid; gap:.35rem; margin:1rem 0; }
 	dl div { display:grid; grid-template-columns:6rem 1fr; gap:.6rem; }
 	dt { color:var(--muted); font-size:.78rem; } dd { margin:0; font-size:.88rem; }
+	.cluster { margin:1rem 0 1.2rem; border:1px solid var(--border); border-radius:.65rem; background:var(--surface); overflow:hidden; }
+	.cluster-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; padding:.8rem; }
+	.cluster-head h3 { margin:.08rem 0 .2rem; font-size:1rem; }
+	.cluster-head p { margin:0; color:var(--muted); font-size:.76rem; max-width:42rem; }
+	.section-kicker { text-transform:uppercase; letter-spacing:.08em; font-weight:750; font-size:.65rem !important; }
+	.cluster-actions { display:flex; gap:.35rem; flex-wrap:wrap; justify-content:flex-end; }
+	.cluster-actions button { padding:.38rem .55rem; font-size:.72rem; white-space:nowrap; }
+	.locked { display:grid; place-items:center; width:1.05rem; height:1.05rem; color:white; background:var(--plum); border-radius:.2rem; font-size:.72rem; }
+	.working-table-wrap { max-height:22rem; margin:0; border-width:1px 0 0; border-radius:0; box-shadow:none; }
+	.working-table { min-width:48rem; table-layout:fixed; font-size:.82rem; }
+	.working-table th { padding:.45rem .55rem; }
+	.working-table th:nth-child(1) { width:2rem; }
+	.working-table th:nth-child(2) { width:8.5rem; }
+	.working-table th:nth-child(3) { width:8.5rem; }
+	.working-table th:nth-child(4) { width:5rem; }
+	.working-table th:nth-child(6) { width:7.5rem; }
+	.working-table th:nth-child(7) { width:7rem; }
+	.working-table td { vertical-align:middle; }
+	.working-table tr.seed-table-row td { background:color-mix(in srgb,var(--plum) 6%,var(--surface)); }
+	.working-table tr.included td { background:color-mix(in srgb,var(--plum) 6%,var(--surface)); }
+	.working-table tr.included:hover td { background:color-mix(in srgb,var(--plum) 10%,var(--surface)); }
+	.working-table tr.excluded { opacity:.48; }
+	.working-table tr.excluded:hover { opacity:.72; }
+	.include-cell { width:2rem; text-align:center; }
+	.include-cell input { width:1rem; height:1rem; margin:0; accent-color:var(--plum); }
+	.working-language { white-space:normal; min-width:8rem; }
+	.working-table .lemma-word { min-width:8rem; }
+	.working-table .lemma-word > a { font-family:var(--font-serif); font-size:1.05rem; font-weight:600; }
+	.working-source { color:var(--muted); font-size:.74rem; overflow-wrap:anywhere; }
+	.confidence-cell { min-width:7.5rem; font-variant-numeric:tabular-nums; }
+	.confidence-cell strong { display:block; color:var(--plum-2); font-size:.88rem; }
+	.seed-confidence { color:var(--muted); font-size:.68rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+	.row-relation { padding:.34rem .42rem; font-size:.7rem; }
+	.related-loading,.cluster-empty { margin:0; padding:.75rem .8rem; color:var(--muted); font-size:.78rem; }
 	.candidate-search { display:grid; grid-template-columns:1fr auto; align-items:end; gap:.6rem; margin-top:1.2rem; }
 	.candidate-table-wrap { max-height:34vh; overflow:auto; margin-top:.55rem; }
 	.candidate-table { min-width:68rem; font-size:.82rem; }
@@ -439,12 +620,13 @@
 	@keyframes shimmer { from { background-position:200% 0; } to { background-position:-20% 0; } }
 	@media (prefers-reduced-motion:reduce) { .skeleton { animation:none; } }
 	.decision { border-top:1px solid var(--border); margin-top:.5rem; padding-top:1rem; display:grid; gap:.75rem; }
+	.decision label > small { font-size:.68rem; font-weight:400; color:var(--muted); }
 	.actions { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
 	.message { font-size:.8rem; color:var(--muted); }
 	.warning,.error { border:1px solid #b87922; background:#b8792215; border-radius:.6rem; padding:.75rem; }
 	.error p { margin:.4rem 0 0; }
 	.empty { color:var(--muted); padding:1rem; } .empty.large { text-align:center; margin-top:20vh; }
-	@media (max-width:850px) { .filters form { grid-template-columns:1fr 1fr; } .workspace { grid-template-columns:1fr; } .queue { border-right:0; border-bottom:1px solid var(--border); } .rows { max-height:35vh; } }
+	@media (max-width:850px) { .filters form { grid-template-columns:1fr 1fr; } .workspace { grid-template-columns:1fr; } .queue { border-right:0; border-bottom:1px solid var(--border); } .rows { max-height:35vh; } .cluster-head { flex-direction:column; } .cluster-actions { justify-content:flex-start; } }
 	@media (max-width:560px) {
 		.workbench-head { align-items:flex-start; flex-direction:column; gap:.75rem; }
 		.counter { width:100%; text-align:left; }

@@ -49,8 +49,11 @@ import {
 	type Reference,
 	type EntryTextBlock,
 	type ListParams,
-	type CognateGroup
+	type CognateGroup,
+	type AncestorRef
 } from './types';
+
+export type { AncestorRef } from './types';
 
 // ---- core caches (id table, clade mask alphabet, languages) ---------------
 
@@ -417,6 +420,19 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 				: { sql: 'l.origin_rid IN (SELECT rowid FROM lem WHERE lang_rid = ?)', params: [langRidOf(selected) ?? -1] }
 		);
 	}
+	if (p.etymon_langs?.trim()) {
+		const langRids = p.etymon_langs
+			.split(',')
+			.map((id) => langRidOf(id))
+			.filter((rid): rid is number => rid != null);
+		conds.push({
+			sql: `l.origin_rid IN (SELECT rowid FROM lem WHERE lang_rid IN ${IN_JSON})`,
+			params: [jsonList(langRids)]
+		});
+	}
+	if (p.unetymologised) {
+		conds.push({ sql: `(l.flags & 7) = ${REL_UNLINKED}`, params: [] });
+	}
 	if (p.dialect?.trim()) {
 		conds.push(tagCond(p.dialect.trim()));
 	}
@@ -428,7 +444,16 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 	}
 	if (p.source?.trim()) {
 		const needle = p.source.trim().toLowerCase();
-		const cids = await citeIdsWhere((r) => (r.short ?? '').toLowerCase().includes(needle));
+		const cids = await citeIdsWhere((r) =>
+			[r.id, r.short, r.source, r.editor].some((field) =>
+				(field ?? '').toLowerCase().includes(needle)
+			)
+		);
+		conds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
+	}
+	if (p.source_ids?.trim()) {
+		const ids = new Set(p.source_ids.split(',').filter(Boolean));
+		const cids = await citeIdsWhere((r) => ids.has(r.id));
 		conds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
 	}
 	// tags: whole-token match (AND across the selected tags)
@@ -485,19 +510,60 @@ interface ListOpts {
 	withOrigin?: boolean; // attach origin_lemma (reflexes/lexicon show it)
 }
 
-/** Per-entry extras for the entries view: derived-term counts + variant word lists, computed
- *  from the page's rows (the legacy correlated group_concat subqueries can't see blobs). */
+/** Per-entry extras for the entries view: parsed immediate ancestors, derived-term counts, and
+ * variant word lists, computed from the page's rows (legacy correlated subqueries can't see blobs). */
 async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 	if (!rows.length) return;
+	const idx = await ensureCore();
 	const rids = rows.map((r) => r.rid);
-	const derived = await query<{ p: number; c: number }>(
-		`SELECT d.parent_rid AS p, COUNT(*) AS c FROM edges d
-		 JOIN lem c2 ON c2.rowid = d.child_rid
-		 WHERE d.parent_rid IN ${IN_JSON} AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
-		   AND c2.origin_rid IS NULL GROUP BY d.parent_rid`,
-		[jsonList(rids)]
-	);
+	const [derived, parents] = await Promise.all([
+		query<{ p: number; c: number }>(
+			`SELECT d.parent_rid AS p, COUNT(*) AS c FROM edges d
+			 JOIN lem c2 ON c2.rowid = d.child_rid
+			 WHERE d.parent_rid IN ${IN_JSON} AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+			   AND c2.origin_rid IS NULL GROUP BY d.parent_rid`,
+			[jsonList(rids)]
+		),
+		query<{
+			child: number;
+			rid: number;
+			word: string;
+			lang_rid: number | null;
+			origin_rid: number | null;
+			flags: number;
+			pos: number;
+		}>(
+			`SELECT child, rid, word, lang_rid, origin_rid, flags, pos FROM (
+			   SELECT c.rowid AS child, p.rowid AS rid, p.word, p.lang_rid, p.origin_rid,
+			          p.flags, -1 AS pos
+			     FROM lem c JOIN lem p ON p.rowid = c.origin_rid
+			    WHERE c.rowid IN ${IN_JSON}
+			   UNION ALL
+			   SELECT d.child_rid AS child, p.rowid AS rid, p.word, p.lang_rid, p.origin_rid,
+			          p.flags, COALESCE(d.pos, 0) AS pos
+			     FROM edges d JOIN lem p ON p.rowid = d.parent_rid
+			    WHERE d.child_rid IN ${IN_JSON}
+			      AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+			 ) ORDER BY child, pos, rid`,
+			[jsonList(rids), jsonList(rids)]
+		)
+	]);
 	const dMap = new Map(derived.map((r) => [r.p, r.c]));
+	const ancestry = new Map<number, AncestorRef[]>();
+	for (const p of parents) {
+		const level = ancestry.get(p.child) ?? [];
+		const id = idx.idOf(p.rid);
+		if (!level.some((a) => a.id === id)) {
+			level.push({
+				id,
+				word: p.word,
+				lang: p.lang_rid != null ? langByRid(p.lang_rid)?.name : null,
+				kind: p.origin_rid ? 'reflex' : 'entry',
+				ocr: !!(p.flags & FLAG_OCR)
+			});
+			ancestry.set(p.child, level);
+		}
+	}
 	const parentOf = new Map<number, HLemma>();
 	for (const r of rows) for (const k of r.childRids) parentOf.set(k, r);
 	const allKids = [...parentOf.keys()];
@@ -522,6 +588,7 @@ async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 		r.derived_count = dMap.get(r.rid) ?? 0;
 		r.variant_forms = vf.get(r.rid)?.join('\x1f') ?? null;
 		r.ocr_variant_forms = ovf.get(r.rid)?.join('\x1f') ?? null;
+		r.ancestry = ancestry.has(r.rid) ? [ancestry.get(r.rid)!] : [];
 	}
 }
 
@@ -757,14 +824,6 @@ export async function getEntryGraph(id: string): Promise<EntryGraph> {
 			lang_count: r.counts != null ? r.counts % 1024 : 0
 		}))
 	};
-}
-
-export interface AncestorRef {
-	id: string;
-	word: string;
-	lang?: string | null;
-	kind: 'entry' | 'reflex'; // link target: /entries/ vs /reflexes/
-	ocr: boolean;
 }
 
 /** Walk up the etymology graph from a node, level by level, nearest first. */
@@ -1014,6 +1073,15 @@ export async function getReference(id: string): Promise<Reference | null> {
 
 export async function listReferences(): Promise<Reference[]> {
 	return query<Reference>('SELECT * FROM "references" ORDER BY short');
+}
+
+/** Reference choices for the Source column filters. Uses the citation cache already needed by
+ * list queries, avoiding a second copy of the bibliography in browser memory. */
+export async function getFilterReferences(): Promise<Reference[]> {
+	await ensureCites();
+	return [...referencesByRid!.values()].sort((a, b) =>
+		(a.short || a.id).localeCompare(b.short || b.id)
+	);
 }
 
 /** Distribution of every lemma cited by one reference over its attested languages. */

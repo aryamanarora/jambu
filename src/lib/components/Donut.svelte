@@ -8,8 +8,17 @@
 		slices,
 		size = 168,
 		label = 'Distribution of origin languages',
-		unit = 'forms'
-	}: { slices: OriginSlice[]; size?: number; label?: string; unit?: string } = $props();
+		unit = 'forms',
+		selected = [],
+		onselect
+	}: {
+		slices: OriginSlice[];
+		size?: number;
+		label?: string;
+		unit?: string;
+		selected?: string[];
+		onselect?: (slices: OriginSlice[]) => void;
+	} = $props();
 
 	const OTHER = '#c3bcc9';
 	const UNETYM = '#8a8276'; // warm grey for "origin unknown" (unetymologised), distinct from OTHER
@@ -22,12 +31,13 @@
 		const sorted = slices.filter((s) => s.lang !== '__unetym').sort((a, b) => b.count - a.count);
 		const top = sorted.slice(0, 8);
 		const rest = sorted.slice(8);
+		const withMembers = top.map((slice) => ({ ...slice, members: [slice] }));
 		if (rest.length) {
 			const count = rest.reduce((s, x) => s + x.count, 0);
-			top.push({ lang: '__other', name: `${rest.length} others`, clade: null, count });
+			withMembers.push({ lang: '__other', name: `${rest.length} others`, clade: null, count, members: rest });
 		}
-		if (unetym) top.push(unetym);
-		return top;
+		if (unetym) withMembers.push({ ...unetym, members: [unetym] });
+		return withMembers;
 	});
 	const total = $derived(grouped.reduce((s, x) => s + x.count, 0));
 	const arcs = $derived.by(() => {
@@ -44,12 +54,27 @@
 						? OTHER
 						: s.lang === '__unetym'
 							? UNETYM
-							: (s.color ?? cladeColor(s.clade))
+							: (s.color ?? cladeColor(s.clade)),
+				members: s.members,
+				selected:
+					selected.length === s.members.length &&
+					s.members.every((member) => selected.includes(member.lang))
 			};
 			cum += pct;
 			return a;
 		});
 	});
+
+	function activate(a: (typeof arcs)[number]) {
+		onselect?.(a.members);
+	}
+
+	function onArcKeydown(event: KeyboardEvent, a: (typeof arcs)[number]) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			activate(a);
+		}
+	}
 </script>
 
 {#if total}
@@ -59,12 +84,16 @@
 			width={size}
 			height={size}
 			class="donut"
-			role="img"
+			role="group"
 			aria-label={label}
 		>
 			<circle cx="18" cy="18" r={R} fill="none" stroke="var(--border)" stroke-width="4" />
 			{#each arcs as a (a.name)}
+				<!-- SVG circles can act as buttons here; the adjacent legend exposes native buttons too. -->
+				<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 				<circle
+					class:interactive={!!onselect}
+					class:selected={a.selected}
 					cx="18"
 					cy="18"
 					r={R}
@@ -73,7 +102,13 @@
 					stroke-width="4"
 					stroke-dasharray="{a.pct} {100 - a.pct}"
 					stroke-dashoffset={a.offset}
-					transform="rotate(-90 18 18)"><title>{a.name}: {a.count.toLocaleString()}</title></circle
+					transform="rotate(-90 18 18)"
+					role={onselect ? 'button' : undefined}
+					tabindex={onselect ? 0 : undefined}
+					aria-pressed={onselect ? a.selected : undefined}
+					aria-label={onselect ? `Filter by ${a.name}` : undefined}
+					onclick={() => activate(a)}
+					onkeydown={(event) => onArcKeydown(event, a)}><title>{a.name}: {a.count.toLocaleString()}</title></circle
 				>
 			{/each}
 			<text x="18" y="17.4" class="d-total">{total.toLocaleString()}</text>
@@ -81,10 +116,18 @@
 		</svg>
 		<ul class="legend">
 			{#each arcs as a (a.name)}
-				<li>
-					<span class="sw" style="background:{a.color}"></span>
-					<span class="nm">{a.name}</span>
-					<span class="ct">{a.count.toLocaleString()} · {a.pct.toFixed(a.pct < 1 ? 1 : 0)}%</span>
+				<li class:selected={a.selected}>
+					<button
+						type="button"
+						disabled={!onselect}
+						aria-pressed={onselect ? a.selected : undefined}
+						title={onselect ? `${a.selected ? 'Clear' : 'Apply'} ${a.name} filter` : undefined}
+						onclick={() => activate(a)}
+					>
+						<span class="sw" style="background:{a.color}"></span>
+						<span class="nm">{a.name}</span>
+						<span class="ct">{a.count.toLocaleString()} · {a.pct.toFixed(a.pct < 1 ? 1 : 0)}%</span>
+					</button>
 				</li>
 			{/each}
 		</ul>
@@ -100,6 +143,19 @@
 	}
 	.donut {
 		flex: none;
+	}
+	.donut circle.interactive {
+		cursor: pointer;
+		transition: opacity 120ms ease, stroke-width 120ms ease;
+	}
+	.donut:has(circle.selected) circle.interactive:not(.selected) {
+		opacity: 0.35;
+	}
+	.donut circle.interactive:hover,
+	.donut circle.interactive:focus,
+	.donut circle.selected {
+		stroke-width: 5;
+		outline: none;
 	}
 	.d-total {
 		font-family: var(--font-sans);
@@ -126,9 +182,30 @@
 		min-width: 12rem;
 	}
 	.legend li {
+		border-radius: var(--radius-sm);
+	}
+	.legend button {
 		display: flex;
 		align-items: baseline;
 		gap: 0.5rem;
+		width: 100%;
+		padding: 0.16rem 0.25rem;
+		border: 0;
+		border-radius: inherit;
+		font: inherit;
+		color: inherit;
+		background: transparent;
+		text-align: left;
+		cursor: pointer;
+	}
+	.legend button:disabled {
+		cursor: default;
+	}
+	.legend button:not(:disabled):hover,
+	.legend button:not(:disabled):focus-visible,
+	.legend li.selected button {
+		background: color-mix(in srgb, var(--berry) 10%, transparent);
+		outline: none;
 	}
 	.sw {
 		flex: none;
@@ -154,7 +231,7 @@
 			width: 100%;
 			min-width: 0;
 		}
-		.legend li {
+		.legend button {
 			min-width: 0;
 		}
 		.nm {
