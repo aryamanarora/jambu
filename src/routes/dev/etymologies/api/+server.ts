@@ -113,7 +113,9 @@ function citeIdsOfRef(refId: string): number[] {
 	return out;
 }
 
-// entry rid → concept ids, and lemma rid → concept ids (decoded once from concepts.rids)
+// immediate etymon rid → concept ids, and lemma rid → concept ids (decoded once from
+// concepts.rids). Immediate parents matter here because a section/derived form can itself be the
+// etymon that directly licenses an attestation.
 let _conceptIndex: {
 	byLemma: Map<number, Set<number>>;
 	byEntry: Map<number, Set<number>>;
@@ -123,10 +125,9 @@ function conceptIndex() {
 	if (!_conceptIndex) {
 		const db = getDb();
 		const originOf = new Map(
-			(db.prepare('SELECT rowid AS rid, origin_rid, etymon_rid, flags FROM lem').all() as {
+			(db.prepare('SELECT rowid AS rid, origin_rid, flags FROM lem').all() as {
 				rid: number;
 				origin_rid: number | null;
-				etymon_rid: number | null;
 				flags: number;
 			}[]).map((r) => [r.rid, r])
 		);
@@ -142,7 +143,7 @@ function conceptIndex() {
 				(byConcept.get(c.id) ?? byConcept.set(c.id, new Set()).get(c.id)!).add(rid);
 				const info = originOf.get(rid);
 				if (!info || (info.flags & 7) === REL_UNLINKED) continue;
-				const entry = info.etymon_rid ?? info.origin_rid ?? rid;
+				const entry = info.origin_rid ?? rid;
 				(byEntry.get(entry) ?? byEntry.set(entry, new Set()).get(entry)!).add(c.id);
 			}
 		}
@@ -463,7 +464,8 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		}
 		// Imported comparative vocabularies often preserve their concept label in the
 		// gloss/source metadata without contributing a concepts.rids mapping. Exact gloss
-		// matches on already-linked attestations recover their materialised etymon roots.
+		// matches on already-linked attestations recover their immediate etyma, including
+		// section/derived nodes that are not graph roots.
 		const selectedGlosses = [
 			...new Set(
 				selectedForms
@@ -474,8 +476,8 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		if (selectedGlosses.length) {
 			for (const row of db
 				.prepare(
-					`SELECT DISTINCT etymon_rid AS rid FROM lem
-					 WHERE etymon_rid IS NOT NULL AND (flags & 7) != ${REL_UNLINKED}
+					`SELECT DISTINCT origin_rid AS rid FROM lem
+					 WHERE origin_rid IS NOT NULL AND (flags & 7) != ${REL_UNLINKED}
 					   AND lower(trim(gloss)) IN (SELECT value FROM json_each(?))`
 				)
 				.all(JSON.stringify(selectedGlosses)) as { rid: number }[]) candidateEntryRids.add(row.rid);
@@ -487,16 +489,18 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				        lang.id AS language_id, lang.name AS language
 				 FROM lem l
 				 LEFT JOIN languages lang ON lang.rowid = l.lang_rid
-				 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED}
-				   AND (? = '' OR l.rowid = ? OR instr(lower(l.word), ?) > 0
-				        OR instr(lower(l.gloss), ?) > 0 OR instr(lower(lang.name), ?) > 0
-				        OR l.rowid IN (SELECT value FROM json_each(?)))
+				 WHERE (l.flags & 7) != ${REL_UNLINKED}
+				   AND (l.rowid = ? OR (
+				        (l.origin_rid IS NULL OR l.children IS NOT NULL)
+				        AND (? = '' OR instr(lower(l.word), ?) > 0
+				             OR instr(lower(l.gloss), ?) > 0 OR instr(lower(lang.name), ?) > 0
+				             OR l.rowid IN (SELECT value FROM json_each(?)))))
 				 ORDER BY CASE WHEN l.rowid = ? THEN 0 WHEN lower(l.word) = ? THEN 1
 				               WHEN lower(l.gloss) = ? THEN 2 ELSE 3 END,
 				          (l.counts / 1024) DESC, l.ord
 				 LIMIT 400`
 			)
-			.all(q, exactRid, q, q, q, JSON.stringify([...candidateEntryRids]), exactRid, q, q) as {
+			.all(exactRid, q, q, q, q, JSON.stringify([...candidateEntryRids]), exactRid, q, q) as {
 			rid: number;
 			word: string;
 			gloss: string;
@@ -526,10 +530,10 @@ export const GET: RequestHandler = async ({ request, url }) => {
 
 		const reflexRows = (db
 			.prepare(
-				`SELECT att.etymon_rid AS origin_rid, att.word, att.gloss, att.phonemic,
+				`SELECT att.origin_rid AS origin_rid, att.word, att.gloss, att.phonemic,
 				        lang.id AS language_id, lang.name AS language
 				 FROM lem att LEFT JOIN languages lang ON lang.rowid = att.lang_rid
-				 WHERE att.etymon_rid IN (SELECT value FROM json_each(?))
+				 WHERE att.origin_rid IN (SELECT value FROM json_each(?))
 				   AND att.link_rid IS NULL`
 			)
 			.all(JSON.stringify(candidateRids)) as {

@@ -24,6 +24,7 @@ export function paramsFromUrl(sp: URLSearchParams): ListParams {
 		rootsOnly: sp.get('roots') === '1',
 		sectionsOnly: sp.get('sections') === '1',
 		loanSourcesOnly: sp.get('loans') === '1',
+		crossFamilyOnly: sp.get('comparisons') === '1',
 		sort: g('sort'),
 		page: Number.isFinite(pageNum) && pageNum > 0 ? pageNum : 1
 	};

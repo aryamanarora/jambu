@@ -6,6 +6,8 @@
 	import { CLADE_ORDER, cladeColor } from '$lib/clades';
 	import type { Dialect, Language } from '$lib/types';
 
+	let { variant = 'nav' }: { variant?: 'nav' | 'menu' } = $props();
+
 	let open = $state(false);
 	let query = $state('');
 	let langs = $state<Language[]>([]);
@@ -65,8 +67,9 @@
 	});
 </script>
 
-<button class="fav-btn" onclick={show} aria-label="Favorite languages and clades" title="Favorites">
+<button class="fav-btn" class:menu={variant === 'menu'} onclick={show} aria-label="Favorite languages and clades" title="Favorites">
 	<span class="star">★</span>
+	{#if variant === 'menu'}<span class="menu-label">Favorite languages and clades</span>{/if}
 	{#if favorites.count}<span class="badge">{favorites.count}</span>{/if}
 </button>
 
@@ -164,6 +167,19 @@
 		font-size: 1.1rem;
 		line-height: 1;
 	}
+	.fav-btn.menu {
+		width: 100%;
+		min-height: 40px;
+		justify-content: flex-start;
+		gap: 0.55rem;
+		padding: 0.45rem 0.55rem;
+		border-radius: var(--radius-sm);
+		color: var(--ink);
+		font-size: 0.86rem;
+		text-align: left;
+	}
+	.fav-btn.menu:hover { background: var(--surface-2); color: var(--plum-2); }
+	.menu-label { flex: 1; }
 	.badge {
 		font-size: 0.62rem;
 		font-weight: 700;

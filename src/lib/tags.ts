@@ -16,7 +16,7 @@ export const GRAMMATICAL_TAGS = [
 	'verb', 'poss', 'conditional', 'prefix', 'suffix', 'emph', 'interr', 'dir',
 	'1sg', '2sg', '3sg', '1pl', '2pl', '3pl', 'pret', 'aor', 'opt', 'perfect', 'stem',
 	'weak', 'middle', 'strong', 'reduplicated', 'uncertain', 'sound-variant',
-	'derived', 'loanword', 'diminutive', 'intensive', 'compound',
+	'derived', 'loanword', 'diminutive', 'intensive', 'compound', 'not-reconstructed',
 	'impv', 'alternate', 'replaced',
 	'poetic', 'dialectal', 'archaic', 'modern', 'colloquial', 'vulgar',
 	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
@@ -29,9 +29,10 @@ export const GRAMMATICAL_TAGS = [
 	'Palula-verb-class-L-a', 'Palula-verb-class-L-e', 'Palula-verb-class-L-consonant',
 	'Palula-verb-class-L-minor', 'Palula-verb-class-T', 'Palula-verb-class-suppletive',
 	'determiner', 'discourse-marker', 'auxiliary', 'negator', 'mood-marker', 'relative', 'honorific',
+	'formal', 'informal', 'inclusive', 'exclusive', 'near-future',
 	'proper-noun', 'multiword-expression', 'demonstrative', 'personal', 'reciprocal',
 	'copula', 'modal', 'conjunct-verb', 'incorporating', 'non-incorporating',
-	'temporal', 'spatial', 'manner', 'degree', 'sentential', 'onomatopoeia'
+	'temporal', 'spatial', 'manner', 'degree', 'sentential', 'onomatopoeia', 'quantifier'
 ];
 // The most common attestation sources, offered in the filter (the full set is larger; see
 // ../data/tags.py). `lex` = "known only from lexicographers".
@@ -100,6 +101,7 @@ export const TAG_NAMES: Record<string, string> = {
 	poetic: 'poetic', dialectal: 'dialectal', archaic: 'archaic', modern: 'modern',
 	colloquial: 'colloquial', vulgar: 'vulgar',
 	derived: 'synchronically derived', loanword: 'loanword',
+	'not-reconstructed': 'not a reconstruction',
 	diminutive: 'diminutive', intensive: 'intensive', compound: 'compound',
 	'Tamil-class-1': 'Tamil verb class 1', 'Tamil-class-2': 'Tamil verb class 2',
 	'Tamil-class-3': 'Tamil verb class 3', 'Tamil-class-4': 'Tamil verb class 4',
@@ -127,6 +129,8 @@ export const TAG_NAMES: Record<string, string> = {
 	'Palula-verb-class-suppletive': 'Palula suppletive verb',
 	determiner: 'determiner', 'discourse-marker': 'discourse marker', auxiliary: 'auxiliary',
 	negator: 'negator', 'mood-marker': 'mood marker', relative: 'relative', honorific: 'honorific',
+	formal: 'formal', informal: 'informal', inclusive: 'inclusive', exclusive: 'exclusive',
+	'near-future': 'near future',
 	'proper-noun': 'proper noun', 'multiword-expression': 'multiword expression',
 	demonstrative: 'demonstrative', personal: 'personal', reciprocal: 'reciprocal',
 	copula: 'copula', modal: 'modal verb', 'conjunct-verb': 'conjunct verb',

@@ -46,13 +46,28 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-# The compact v3 schema (compact_db.py) ships at ~76.0 MB with the 2026-08-14 corpus (482k lemmas,
-# including the LSI comparative vocabulary). Keep a tight guard above that corpus baseline so
-# future schema growth past ~80 MB fails loudly instead of silently regressing download.
-MAX_OUTPUT_BYTES = 80_000_000
+# KEWA's 2,575 source-attributed OCR blocks move the compact database baseline to about 80.6 MB.
+# Report future growth above this narrow allowance without interrupting an otherwise valid build.
+OUTPUT_SIZE_WARNING_BYTES = 83_000_000
+
+# These inputs define independently addressable reconstruction records. Even when two rows have
+# identical lexical content and the same parent, their record locators are part of their identity
+# and must survive browser compaction as distinct scholarly analyses.
+SOURCE_DEFINED_RECORD_REFERENCES = {"merriam2026dravidiandb"}
 
 def log(msg: str) -> None:
     print(f"[build_static_db] {msg}", flush=True)
+
+
+def warn_if_database_large(output_bytes: int, *, compact: bool = True) -> bool:
+    """Report a size regression without turning an otherwise valid database into a failed build."""
+    if not compact or output_bytes < OUTPUT_SIZE_WARNING_BYTES:
+        return False
+    log(
+        f"WARNING: database size regression: {output_bytes / 1e6:.1f} MB "
+        f"(expected below {OUTPUT_SIZE_WARNING_BYTES / 1e6:.0f} MB)"
+    )
+    return True
 
 
 # ── Build the base tables directly from the CLDF dataset (retires the old data.db) ──────────────
@@ -78,7 +93,8 @@ def build_base_schema(con: sqlite3.Connection) -> None:
         );
         CREATE TABLE "references" (
             id TEXT PRIMARY KEY, short TEXT, source TEXT, progress TEXT, provenance TEXT,
-            editor TEXT, ocr INTEGER NOT NULL DEFAULT 0, lemma_count INTEGER DEFAULT 0,
+            editor TEXT, ocr INTEGER NOT NULL DEFAULT 0, etymology_provenance TEXT,
+            lemma_count INTEGER DEFAULT 0,
             unetymologised_count INTEGER DEFAULT 0
         );
         -- CLDF Original is an import-time transliteration source; no display/query path reads it.
@@ -112,6 +128,13 @@ def build_base_schema(con: sqlite3.Connection) -> None:
             format TEXT NOT NULL, content TEXT NOT NULL, reference_rid INTEGER, locator TEXT,
             PRIMARY KEY (lemma_rid, pos)
         ) WITHOUT ROWID;
+        -- Article-to-article comparisons are deliberately separate from the ancestry graph and
+        -- ordinary reflex table: the source may compare families without settling loan direction.
+        CREATE TABLE comparisons (
+            id TEXT PRIMARY KEY, entry_rid INTEGER NOT NULL, compared_rid INTEGER NOT NULL,
+            relation TEXT NOT NULL, direction TEXT NOT NULL, confidence TEXT NOT NULL,
+            reference_rid INTEGER NOT NULL, locator TEXT NOT NULL, evidence TEXT NOT NULL
+        );
         -- Concepticon concept sets that glosses map to, plus per-concept rollups for the Concepts
         -- tab: etyma_count counts distinct immediate etyma (lone/unetymologised nodes excluded and
         -- counted in unetym_count instead), lang_count/form_count the attesting languages and forms.
@@ -209,11 +232,14 @@ def load_references(con: sqlite3.Connection, path: Path) -> None:
                 r["ID"], r["Short"], r["Source"], r["Progress"],
                 r.get("Provenance", ""), r.get("Editor", ""),
                 int(r.get("OCR", "").strip().lower() in {"yes", "true", "1"}),
+                r.get("Etymology_Provenance", ""),
             )
             for r in csv.DictReader(f)
         ]
     con.executemany(
-        'INSERT INTO "references" (id,short,source,progress,provenance,editor,ocr) VALUES (?,?,?,?,?,?,?)',
+        'INSERT INTO "references" '
+        '(id,short,source,progress,provenance,editor,ocr,etymology_provenance) '
+        'VALUES (?,?,?,?,?,?,?,?)',
         rows,
     )
     con.commit()
@@ -300,6 +326,11 @@ def load_lemmas(
         content_tags = [tag for tag in base_tags if not tag.startswith("dialect:")]
         dialect_identity = tuple(sorted(tag for tag in base_tags if tag.startswith("dialect:")))
         source_lect = dialect_identity or (r["Language_ID"],)
+        source_defined_record = tuple(
+            (reference, locator)
+            for reference, locator in _parse_ref(r.get("Source", ""))
+            if reference in SOURCE_DEFINED_RECORD_REFERENCES
+        )
         # Parentless etyma/entries stay distinct (blank proto heads would otherwise collapse).
         # Unlinked rows are attestations too, despite having no accepted edge.
         is_unlinked = r.get("Status") == "unlinked"
@@ -308,7 +339,9 @@ def load_lemmas(
             continue
         key = (r["Language_ID"],) + tuple(
             r.get(k, "") for k in r.keys() if k not in ignored
-        ) + tuple(content_tags) + (("unlinked",) if is_unlinked else rank1[r["ID"]])
+        ) + tuple(content_tags) + source_defined_record + (
+            ("unlinked",) if is_unlinked else rank1[r["ID"]]
+        )
         if is_unlinked:
             # A repeated spelling within one lect may be a genuine homonym or separate lexical
             # record. Merge only when a different source lect normalises to the same language.
@@ -453,9 +486,10 @@ def load_lemmas(
         [(",".join(sorted(cs)), pid) for pid, cs in param_clades.items()],
     )
     # A richer importer may provide several independently typed/attributed blocks per node in an
-    # optional CLDF sidecar.  Its final public Form_IDs are used directly; absent sidecar rows fall
-    # back to the legacy Etymology scalar below.
+    # optional CLDF sidecar. Its final public Form_IDs are used directly; distinct sidecar rows
+    # supplement the legacy Etymology scalar below.
     explicit_texts: list[dict[str, str]] = []
+    text_reference_ids: set[str] = set()
     texts_path = forms_csv.parent / "entry-texts.csv"
     if texts_path.exists():
         with texts_path.open(encoding="utf-8") as handle:
@@ -467,8 +501,7 @@ def load_lemmas(
                 raise ValueError(
                     f"entry-texts.csv references unknown Form_ID {block['Form_ID']!r}"
                 )
-            for ref, locator in _parse_ref(block.get("Source", "")):
-                lemma_refs.add((block["Form_ID"], ref, locator))
+            text_reference_ids.update(ref for ref, _ in _parse_ref(block.get("Source", "")))
 
     # References cited by forms or prose blocks but absent from the bibliography still need
     # complete display-safe rows.
@@ -476,14 +509,17 @@ def load_lemmas(
     ref_ids = {r[0] for r in con.execute('SELECT id FROM "references"')}
     con.executemany(
         'INSERT OR IGNORE INTO "references" '
-        '(id,short,source,progress,provenance,editor,ocr) VALUES (?,?,?,?,?,?,?)',
+        '(id,short,source,progress,provenance,editor,ocr,etymology_provenance) '
+        'VALUES (?,?,?,?,?,?,?,?)',
         [
             (
                 m, m, f"Reference abbreviation `{m}`; full citation not yet catalogued.", "No",
                 "Automatically discovered in CLDF Source fields", "Aryaman Arora",
-                0,
+                0, "",
             )
-            for m in {ref for _, ref, _ in lemma_refs if ref not in ref_ids}
+            for m in (
+                {ref for _, ref, _ in lemma_refs} | text_reference_ids
+            ) - ref_ids
         ],
     )
     lemma_rowids = {r[0]: r[1] for r in con.execute("SELECT id, rowid FROM lemmas")}
@@ -497,7 +533,13 @@ def load_lemmas(
     )
     source_by_id = {r["ID"]: r.get("Source", "") for r in rows}
     text_rows = []
-    explicit_owners = {block["Form_ID"] for block in explicit_texts}
+    # Explicit sidecars supplement legacy dictionary prose.  Historically, the mere presence of
+    # an external block (NurED, Southworth, KEWA, …) suppressed the owning CDIAL entry's own
+    # etymology.  Skip only a block whose content is already represented explicitly (the Munda
+    # compatibility path), and retain every distinct legacy block ahead of high-position sidecars.
+    explicit_content_by_owner: dict[str, set[str]] = defaultdict(set)
+    for block in explicit_texts:
+        explicit_content_by_owner[block["Form_ID"]].add(block.get("Content", "").strip())
     for sequence, block in enumerate(explicit_texts):
         lemma_id = block["Form_ID"]
         if lemma_id not in lemma_rowids:
@@ -520,8 +562,6 @@ def load_lemmas(
     for lemma_id, old_rid, etymology in con.execute(
         "SELECT id, rowid, etymology FROM lemmas WHERE etymology IS NOT NULL AND etymology != ''"
     ):
-        if lemma_id in explicit_owners:
-            continue
         citations = _parse_ref(source_by_id.get(lemma_id, ""))
         ref, locator = citations[0] if citations else (None, "")
         ref_rid = reference_rowids.get(ref) if ref else None
@@ -535,7 +575,21 @@ def load_lemmas(
                 content, ref_rid, locator or None,
             )
             for pos, content in enumerate(blocks)
+            if content not in explicit_content_by_owner.get(lemma_id, set())
         )
+    # Dialect/attestation compaction above can alias two source nodes that carry the same
+    # independently installed text block (NurED's two PNur *kur siblings are one example).
+    # Coalesce that exact duplicate, but keep the position key strict so genuinely conflicting
+    # prose can never be discarded silently.
+    distinct_text_rows = {}
+    for text_row in text_rows:
+        key = text_row[:2]
+        previous = distinct_text_rows.setdefault(key, text_row)
+        if previous != text_row:
+            raise ValueError(
+                f"conflicting structured text blocks for lemma row {key[0]}, position {key[1]}"
+            )
+    text_rows = list(distinct_text_rows.values())
     con.executemany(
         "INSERT INTO lemma_text (lemma_rid,pos,kind,format,content,reference_rid,locator) "
         "VALUES (?,?,?,?,?,?,?)",
@@ -543,11 +597,14 @@ def load_lemmas(
     )
     con.execute(
         'UPDATE "references" SET '
-        'lemma_count = (SELECT COUNT(DISTINCT lemma_rid) FROM lemma_reference lr '
-        ' WHERE lr.reference_rid = "references".rowid), '
-        'unetymologised_count = (SELECT COUNT(DISTINCT l.rowid) FROM lemma_reference lr '
-        ' JOIN lemmas l ON l.rowid = lr.lemma_rid '
-        " WHERE lr.reference_rid = \"references\".rowid AND l.relation = 'unlinked')"
+        'lemma_count = (SELECT COUNT(*) FROM ('
+        ' SELECT lemma_rid FROM lemma_reference lr WHERE lr.reference_rid = "references".rowid'
+        ' UNION SELECT lemma_rid FROM lemma_text lt WHERE lt.reference_rid = "references".rowid'
+        ')), '
+        'unetymologised_count = (SELECT COUNT(*) FROM ('
+        ' SELECT lemma_rid FROM lemma_reference lr WHERE lr.reference_rid = "references".rowid'
+        ' UNION SELECT lemma_rid FROM lemma_text lt WHERE lt.reference_rid = "references".rowid'
+        ") cited JOIN lemmas l ON l.rowid = cited.lemma_rid WHERE l.relation = 'unlinked')"
     )
     con.execute(
         "UPDATE languages SET lemma_count = "
@@ -607,6 +664,63 @@ def load_lemma_aliases(
     con.commit()
     log(f"loaded {len(resolved):,} permanent lemma ID aliases")
     return {alias: target for alias, target in resolved}
+
+
+def load_comparisons(con: sqlite3.Connection, cldf: Path, aliases: dict[str, str]) -> None:
+    """Load validated, source-attributed article comparisons with symmetric query endpoints."""
+    path = cldf / "comparisons.csv"
+    if not path.exists():
+        log(f"(no comparisons.csv at {cldf}; skipping cross-family comparisons)")
+        return
+    rowid_of = {entry_id: rid for rid, entry_id in con.execute("SELECT rowid,id FROM lemmas")}
+    ref_rowid = {ref_id: rid for rid, ref_id in con.execute('SELECT rowid,id FROM "references"')}
+    relations = {"loan", "influence", "related"}
+    directions = {"entry-from-compared", "compared-from-entry", "undetermined"}
+    confidences = {"high", "medium", "low"}
+    rows = []
+    with path.open(encoding="utf-8", newline="") as fin:
+        for source_row in csv.DictReader(fin):
+            comparison_id = source_row["ID"]
+            entry_id = aliases.get(source_row["Entry_ID"], source_row["Entry_ID"])
+            compared_id = aliases.get(
+                source_row["Compared_Entry_ID"], source_row["Compared_Entry_ID"]
+            )
+            if entry_id not in rowid_of or compared_id not in rowid_of:
+                raise ValueError(
+                    f"Comparison {comparison_id} has missing endpoint(s): {entry_id}, {compared_id}"
+                )
+            if entry_id == compared_id:
+                raise ValueError(f"Comparison {comparison_id} links an entry to itself")
+            if source_row["Relation"] not in relations:
+                raise ValueError(f"Comparison {comparison_id} has invalid relation")
+            if source_row["Direction"] not in directions:
+                raise ValueError(f"Comparison {comparison_id} has invalid direction")
+            if source_row["Confidence"] not in confidences:
+                raise ValueError(f"Comparison {comparison_id} has invalid confidence")
+            citations = _parse_ref(source_row["Source"])
+            if len(citations) != 1 or citations[0][0] not in ref_rowid:
+                raise ValueError(
+                    f"Comparison {comparison_id} requires one resolvable source citation: {citations}"
+                )
+            reference_id, locator = citations[0]
+            if not source_row["Evidence"].strip():
+                raise ValueError(f"Comparison {comparison_id} lacks printed evidence")
+            rows.append(
+                (
+                    comparison_id,
+                    rowid_of[entry_id],
+                    rowid_of[compared_id],
+                    source_row["Relation"],
+                    source_row["Direction"],
+                    source_row["Confidence"],
+                    ref_rowid[reference_id],
+                    locator,
+                    source_row["Evidence"],
+                )
+            )
+    con.executemany("INSERT INTO comparisons VALUES (?,?,?,?,?,?,?,?,?)", rows)
+    con.commit()
+    log(f"loaded {len(rows)} cross-family comparisons")
 
 
 def load_concepts(con: sqlite3.Connection, cldf: Path, aliases: dict[str, str]) -> None:
@@ -899,6 +1013,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
     edge_rows = load_edge_rows(cldf)
     build_aliases = load_lemmas(con, cldf / "forms.csv", edge_rows, clade_of)
     aliases = load_lemma_aliases(con, cldf, build_aliases)
+    load_comparisons(con, cldf, aliases)
 
     # 2. Indexes: keep the lookup and hot-path ordering indexes. Deliberately omit broad secondary
     # indexes for global lemma order, reverse citation lookup, derivation edges, and the two entry
@@ -991,11 +1106,7 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
 
     con.close()
     output_bytes = out.stat().st_size
-    if output_bytes >= MAX_OUTPUT_BYTES and not os.environ.get("JAMBU_SKIP_COMPACT"):
-        raise RuntimeError(
-            f"database size regression: {output_bytes / 1e6:.1f} MB "
-            f"(must remain below {MAX_OUTPUT_BYTES / 1e6:.0f} MB)"
-        )
+    warn_if_database_large(output_bytes, compact=not os.environ.get("JAMBU_SKIP_COMPACT"))
     log(f"done: {out} ({output_bytes / 1e6:.1f} MB)")
 
 

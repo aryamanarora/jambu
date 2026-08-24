@@ -7,6 +7,7 @@
 	import ReflexesView from '$lib/components/ReflexesView.svelte';
 	import Donut from '$lib/components/Donut.svelte';
 	import Tags from '$lib/components/Tags.svelte';
+	import DialectExplorer from '$lib/components/DialectExplorer.svelte';
 	import {
 		getLanguageDialects,
 		getLanguageTags,
@@ -16,7 +17,6 @@
 		type OriginSlice
 	} from '$lib/query';
 	import { tagCategory, type TagCategory } from '$lib/tags';
-	import { hashColor } from '$lib/clades';
 	import { buildQuery } from '$lib/urlParams';
 
 	let { data } = $props();
@@ -29,7 +29,13 @@
 	let dialects = $state<Dialect[]>([]);
 	let languages = $state<Language[]>([]);
 	let comparisonLanguage = $state('');
+	let searchParams = $state(new URLSearchParams());
 	let curLang = '';
+	$effect(() => {
+		// Search parameters are interactive state. Reading them during prerender is forbidden,
+		// so hydrate a local copy once the page is running in the browser.
+		searchParams = new URLSearchParams(page.url.searchParams);
+	});
 	$effect(() => {
 		if (lang.id !== curLang) {
 			curLang = lang.id;
@@ -56,7 +62,6 @@
 		if (comparisonLanguage) goto(`${base}/languages/${lang.id}/${comparisonLanguage}`);
 	}
 	const tagGroups: Array<{ category: TagCategory; label: string }> = [
-		{ category: 'dialect', label: 'Dialects' },
 		{ category: 'gender', label: 'Gender' },
 		{ category: 'grammatical', label: 'Grammatical' },
 		{ category: 'source', label: 'Sources' },
@@ -65,15 +70,19 @@
 	function tagsFor(category: TagCategory): string[] {
 		return languageTags.filter((tag) => tagCategory(tag) === category);
 	}
+	const metadataTagCount = $derived(
+		tagGroups.reduce((count, group) => count + tagsFor(group.category).length, 0)
+	);
+	const selectedDialectToken = $derived(searchParams.get('dialect') ?? '');
 
 	const selectedOrigins = $derived(
-		page.url.searchParams.get('unetym') === '1'
+		searchParams.get('unetym') === '1'
 			? ['__unetym']
-			: (page.url.searchParams.get('etymon_langs')?.split(',').filter(Boolean) ??
-				(page.url.searchParams.get('etymon_lang') ? [page.url.searchParams.get('etymon_lang')!] : []))
+			: (searchParams.get('etymon_langs')?.split(',').filter(Boolean) ??
+				(searchParams.get('etymon_lang') ? [searchParams.get('etymon_lang')!] : []))
 	);
 	const selectedReferences = $derived(
-		page.url.searchParams.get('source_ids')?.split(',').filter(Boolean) ?? []
+		searchParams.get('source_ids')?.split(',').filter(Boolean) ?? []
 	);
 
 	function filterOrigins(selected: OriginSlice[]) {
@@ -81,7 +90,7 @@
 		const active = ids.length === selectedOrigins.length && ids.every((id) => selectedOrigins.includes(id));
 		const unetym = ids.length === 1 && ids[0] === '__unetym';
 		goto(
-			buildQuery(page.url.searchParams, {
+			buildQuery(searchParams, {
 				etymon_lang: !active && ids.length === 1 && !unetym ? ids[0] : '',
 				etymon_langs: !active && ids.length > 1 ? ids.join(',') : '',
 				unetym: !active && unetym ? '1' : ''
@@ -94,7 +103,7 @@
 		const ids = selected.map((slice) => slice.lang);
 		const active = ids.length === selectedReferences.length && ids.every((id) => selectedReferences.includes(id));
 		goto(
-			buildQuery(page.url.searchParams, {
+			buildQuery(searchParams, {
 				source: '',
 				source_ids: active ? '' : ids.join(',')
 			}),
@@ -124,152 +133,204 @@
 	<meta name="description" content="The lexicon of {lang.name} ({lang.clade}) in the Jambu etymological dictionary — {lang.lemma_count} reflexes." />
 </svelte:head>
 
-<h1 class="headword">{lang.name} <span class="id-tag">[{lang.id}]</span></h1>
+<div class="language-title">
+	<h1 class="headword">{lang.name} <span class="id-tag">[{lang.id}]</span></h1>
+	<a class="compare-action" href="#compare">Compare</a>
+</div>
 
 <div class="lang-header">
 	<dl class="props card">
 		<div class="prop"><dt>Family</dt><dd>{lang.clade}</dd></div>
-		{#if lang.glottocode}
-			<div class="prop">
-				<dt>Glottolog</dt>
-				<dd>
-					<a href="https://glottolog.org/resource/languoid/id/{lang.glottocode}" rel="noreferrer"
-						>{lang.glottocode}</a
-					>
-				</dd>
-			</div>
-		{/if}
-		{#if lang.lat != null}
-			<div class="prop">
-				<dt>Coordinates</dt>
-				<dd class="muted">{lang.lat?.toFixed(3)}, {lang.long?.toFixed(3)}</dd>
-			</div>
-		{/if}
-		<div class="prop"><dt>Reflexes</dt><dd>{lang.lemma_count.toLocaleString()}</dd></div>
+		<div class="prop"><dt>Forms</dt><dd>{lang.lemma_count.toLocaleString()}</dd></div>
+		{#if dialects.length}<div class="prop"><dt>Dialects</dt><dd>{dialects.length.toLocaleString()}</dd></div>{/if}
+		{#if references.length}<div class="prop"><dt>Sources</dt><dd>{references.length.toLocaleString()}</dd></div>{/if}
 	</dl>
 	{#if markers.length}
 		<div class="lang-map"><Map {markers} zoom={5} height="260px" /></div>
 	{/if}
 </div>
 
-<form class="compare-picker card" onsubmit={openComparison}>
-	<div>
-		<label for="comparison-language">Compare {lang.name} with another language</label>
-		<p class="muted">View their shared etymological entries side by side.</p>
-	</div>
-	<select id="comparison-language" class="search-box" bind:value={comparisonLanguage}>
-		<option value="">Choose a language…</option>
-		{#each comparisonLanguages as language (language.id)}
-			<option value={language.id}>{language.name} [{language.id}]</option>
-		{/each}
-	</select>
-	<button class="btn" type="submit" disabled={!comparisonLanguage}>Compare</button>
-</form>
-
-{#if languageTags.length}
-	<section class="tag-summary">
-		<h2>Tags</h2>
-		<div class="tag-groups card">
-			{#each tagGroups as group}
-				{@const found = tagsFor(group.category)}
-				{#if found.length}
-					<div class="tag-group">
-						<h3>{group.label}</h3>
-						<Tags tags={found.join(' ')} />
-					</div>
-				{/if}
-			{/each}
-		</div>
-	</section>
-{/if}
+<nav class="section-nav" aria-label={`${lang.name} sections`}>
+	{#if dialects.length}<a href="#dialects">Dialects <span>{dialects.length.toLocaleString()}</span></a>{/if}
+	<a href="#lexicon">Lexicon <span>{lang.lemma_count.toLocaleString()}</span></a>
+	{#if origins.length || references.length}<a href="#coverage">Coverage</a>{/if}
+	<a href="#metadata">More</a>
+	<a href="#compare">Compare</a>
+</nav>
 
 {#if dialects.length}
-	<section class="dialect-metadata">
-		<h2>Dialect metadata</h2>
-		<div class="table-wrap">
-			<table class="data accent-col">
-				<thead>
-					<tr>
-						<th>Dialect</th>
-						<th>Clade</th>
-						<th>Glottocode</th>
-						<th>Location</th>
-						<th>Survey quality</th>
-						<th>Coordinates</th>
-						<th class="numeric">Reflexes</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each dialects as dialect (dialect.token)}
-						<tr>
-							<td class="lang-cell" style="border-left-color: {hashColor(dialect.color)}">
-								<a
-									class="dialect-filter"
-									href="{base}/languages/{lang.id}?dialect={encodeURIComponent(dialect.token)}#lexicon"
-									title="Show reflexes from the {dialect.name} dialect"
-									>{dialect.name}</a
-								>
-							</td>
-							<td>{dialect.clade ?? ''}</td>
-							<td>
-								{#if dialect.glottocode}
-									<a
-										href="https://glottolog.org/resource/languoid/id/{dialect.glottocode}"
-										rel="noreferrer">{dialect.glottocode}</a
-									>
-								{/if}
-							</td>
-							<td>{dialect.location ?? ''}</td>
-							<td class="muted">{dialect.quality ?? ''}</td>
-							<td class="muted"
-								>{dialect.lat != null && dialect.long != null
-									? `${dialect.lat.toFixed(3)}, ${dialect.long.toFixed(3)}`
-									: ''}</td
-							>
-							<td class="numeric">{dialect.lemma_count.toLocaleString()}</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</div>
-	</section>
+	<DialectExplorer language={lang} {dialects} selectedToken={selectedDialectToken} />
 {/if}
+
+<section id="lexicon" class="lexicon-section" aria-labelledby="lexicon-heading">
+	<div class="section-heading">
+		<div>
+			<h2 id="lexicon-heading">Lexicon</h2>
+			<p>Search forms or narrow the lexicon by dialect, source, meaning, and origin.</p>
+		</div>
+		{#if selectedDialectToken}<a href={`${base}/languages/${lang.id}#lexicon`}>Clear dialect filter</a>{/if}
+	</div>
+	<ReflexesView mode="lexicon" languageId={lang.id} />
+</section>
 
 {#if origins.length || references.length}
-	<div class="donut-row">
-		{#if origins.length}
-			<section class="origins">
-				<h2>Origins</h2>
-				<Donut slices={origins} selected={selectedOrigins} onselect={filterOrigins} />
-			</section>
-		{/if}
-		{#if references.length}
-			<section class="origins">
-				<h2>References</h2>
-				<Donut
-					slices={references}
-					unit="citations"
-					label="Distribution of references"
-					selected={selectedReferences}
-					onselect={filterReferences}
-				/>
-			</section>
-		{/if}
-	</div>
+	<details id="coverage" class="page-disclosure secondary-section">
+		<summary>Origins and source coverage</summary>
+		<div class="donut-row">
+			{#if origins.length}
+				<section class="origins">
+					<h2>Origins</h2>
+					<Donut slices={origins} selected={selectedOrigins} onselect={filterOrigins} />
+				</section>
+			{/if}
+			{#if references.length}
+				<section class="origins">
+					<h2>Sources</h2>
+					<Donut
+						slices={references}
+						unit="citations"
+						label="Distribution of references"
+						selected={selectedReferences}
+						onselect={filterReferences}
+					/>
+				</section>
+			{/if}
+		</div>
+	</details>
 {/if}
 
-<h2 id="lexicon">Lexicon</h2>
-<ReflexesView mode="lexicon" languageId={lang.id} />
+<details id="metadata" class="page-disclosure secondary-section metadata-section">
+	<summary>More metadata{#if metadataTagCount}<span>{metadataTagCount.toLocaleString()} descriptive tags</span>{/if}</summary>
+	<div class="metadata-grid">
+		<dl class="props card technical-props">
+			<div class="prop"><dt>Jambu ID</dt><dd>{lang.id}</dd></div>
+			{#if lang.glottocode}
+				<div class="prop">
+					<dt>Glottolog</dt>
+					<dd><a href={`https://glottolog.org/resource/languoid/id/${lang.glottocode}`} rel="noreferrer">{lang.glottocode}</a></dd>
+				</div>
+			{/if}
+			{#if lang.lat != null}
+				<div class="prop"><dt>Coordinates</dt><dd>{lang.lat.toFixed(3)}, {lang.long?.toFixed(3)}</dd></div>
+			{/if}
+		</dl>
+		{#if metadataTagCount}
+			<div class="tag-groups card">
+				{#each tagGroups as group}
+					{@const found = tagsFor(group.category)}
+					{#if found.length}
+						<div class="tag-group">
+							<h3>{group.label}</h3>
+							<Tags tags={found.join(' ')} />
+						</div>
+					{/if}
+				{/each}
+			</div>
+		{/if}
+	</div>
+</details>
+
+<details id="compare" class="page-disclosure secondary-section">
+	<summary>Compare with another language</summary>
+	<form class="compare-picker" onsubmit={openComparison}>
+		<div>
+			<label for="comparison-language">Comparison language</label>
+			<p class="muted">View shared etymological entries side by side.</p>
+		</div>
+		<select id="comparison-language" class="search-box" bind:value={comparisonLanguage}>
+			<option value="">Choose a language…</option>
+			{#each comparisonLanguages as language (language.id)}
+				<option value={language.id}>{language.name} [{language.id}]</option>
+			{/each}
+		</select>
+		<button class="btn" type="submit" disabled={!comparisonLanguage}>Compare</button>
+	</form>
+</details>
 
 <style>
+	.language-title {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.language-title h1 { margin-bottom: 0; }
+	.compare-action {
+		padding: 0.38rem 0.7rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius-sm);
+		font-size: 0.8rem;
+		font-weight: 600;
+	}
+	.compare-action:hover { border-color: var(--plum-2); text-decoration: none; }
+	.section-nav {
+		position: sticky;
+		top: 3.95rem;
+		z-index: 25;
+		display: flex;
+		gap: 0.2rem;
+		margin: 1rem 0 1.25rem;
+		padding: 0.38rem;
+		overflow-x: auto;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		background: color-mix(in srgb, var(--surface) 94%, transparent);
+		box-shadow: 0 2px 10px color-mix(in srgb, var(--ink) 7%, transparent);
+		backdrop-filter: blur(8px);
+	}
+	.section-nav a {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.28rem;
+		padding: 0.35rem 0.62rem;
+		border-radius: var(--radius-sm);
+		color: var(--ink);
+		font-size: 0.8rem;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+	.section-nav a:hover { background: var(--surface-2); color: var(--plum-2); text-decoration: none; }
+	.section-nav span { color: var(--muted); font-size: 0.7rem; font-weight: 400; }
+	.lexicon-section,
+	.page-disclosure { scroll-margin-top: 7.25rem; }
+	.lexicon-section { margin: 1.8rem 0 1.25rem; }
+	.section-heading {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.4rem;
+	}
+	.section-heading h2 { margin: 0; }
+	.section-heading p { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.84rem; }
+	.section-heading > a { font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
 	.compare-picker {
 		display: grid;
 		grid-template-columns: minmax(13rem, 1fr) minmax(12rem, 1fr) auto;
 		gap: 1rem;
 		align-items: center;
-		margin: 1.2rem 0 1.6rem;
+		margin: 0;
 		padding: 0.85rem 1.15rem;
 	}
+	.page-disclosure {
+		margin: 0.75rem 0;
+		border-bottom: 1px solid var(--border);
+	}
+	.page-disclosure > summary {
+		display: flex;
+		align-items: baseline;
+		gap: 0.45rem;
+		padding: 0.65rem 0;
+		color: var(--plum-2);
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.page-disclosure > summary span {
+		color: var(--muted);
+		font-size: 0.8rem;
+		font-weight: 400;
+	}
+	.page-disclosure[open] { padding-bottom: 0.9rem; }
 	.compare-picker label {
 		font-weight: 600;
 	}
@@ -289,10 +350,13 @@
 	.origins {
 		margin: 1.6rem 0;
 	}
-	.tag-summary,
-	.dialect-metadata {
-		margin: 1.6rem 0;
+	.secondary-section { margin-top: 0.4rem; }
+	.metadata-grid {
+		display: grid;
+		grid-template-columns: minmax(15rem, 0.65fr) minmax(20rem, 1.35fr);
+		gap: 1rem;
 	}
+	.technical-props { margin: 0; padding: 0.4rem 1rem; }
 	.tag-groups {
 		display: grid;
 		gap: 0.8rem;
@@ -343,9 +407,6 @@
 		text-align: right;
 		font-variant-numeric: tabular-nums;
 	}
-	.dialect-filter {
-		font-weight: 600;
-	}
 	@media (max-width: 720px) {
 		.compare-picker {
 			grid-template-columns: 1fr;
@@ -353,6 +414,10 @@
 		.lang-header {
 			grid-template-columns: 1fr;
 		}
+		.section-nav { top: 3.55rem; margin-inline: -0.15rem; }
+		.section-heading { align-items: flex-start; }
+		.section-heading > a { display: none; }
+		.metadata-grid { grid-template-columns: 1fr; }
 		.tag-group {
 			grid-template-columns: 1fr;
 		}

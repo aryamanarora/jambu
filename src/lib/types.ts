@@ -38,6 +38,21 @@ export interface Dialect {
 	entry_count: number;
 }
 
+/** Compact dialect row embedded in the language index for search and navigation. */
+export type DialectIndexRow = Pick<
+	Dialect,
+	| 'token'
+	| 'id'
+	| 'name'
+	| 'language_id'
+	| 'location'
+	| 'quality'
+	| 'lemma_count'
+	| 'lat'
+	| 'long'
+	| 'color'
+>;
+
 export interface Reference {
 	id: string;
 	short: string | null;
@@ -46,6 +61,7 @@ export interface Reference {
 	provenance: string | null;
 	editor: string | null;
 	ocr: boolean | number;
+	etymology_provenance?: 'source' | 'source-mapped' | 'jambu' | 'mixed' | 'none' | null;
 	lemma_count: number;
 	unetymologised_count: number;
 	locator?: string; // page, entry, or other source-local locator for this lemma's citation
@@ -82,6 +98,7 @@ export interface Lemma {
 	variant_forms?: string | null; // same-language variant word forms, \x1f-separated (entries view)
 	ocr_variant_forms?: string | null; // OCR-derived subset of variant_forms, same separator
 	ancestry?: AncestorRef[][]; // parsed accepted etymology, nearest ancestors first (entries view)
+	comparisons?: CrossFamilyComparison[]; // source-attributed cross-family links (entries view)
 	// hydrated relations (optional)
 	language?: Language;
 	origin_lemma?: Lemma | null;
@@ -105,7 +122,31 @@ export interface EntryTextBlock {
 	content: string;
 	source_id: string | null;
 	source_label: string | null;
+	source_citation: string | null;
+	source_progress: string | null;
+	source_provenance: string | null;
+	source_editor: string | null;
+	source_ocr: boolean | number | null;
+	source_lemma_count: number | null;
+	source_unetymologised_count: number | null;
 	locator: string | null;
+}
+
+/** A source-attributed comparison between dictionary articles in different language families. */
+export interface CrossFamilyComparison {
+	id: string;
+	entry_id: string; // article in which the claim is printed
+	compared_entry_id: string;
+	other_id: string; // endpoint opposite the entry currently being viewed
+	other_word: string;
+	other_gloss: string;
+	other_language_id: string | null;
+	other_language: string | null;
+	relation: 'loan' | 'influence' | 'related';
+	direction: 'entry-from-compared' | 'compared-from-entry' | 'undetermined';
+	confidence: 'high' | 'medium' | 'low';
+	evidence: string;
+	reference: Reference;
 }
 
 /** Query params shared by the list views, mirroring the old URL keys (search.py). */
@@ -128,6 +169,7 @@ export interface ListParams {
 	rootsOnly?: boolean; // entries with no ancestor (not derived from any other etymon)
 	sectionsOnly?: boolean; // CDIAL promoted section-forms (ids like 3643-2)
 	loanSourcesOnly?: boolean; // reflexes that are the source of borrowings into other languages
+	crossFamilyOnly?: boolean; // entries participating in at least one cross-family comparison
 	sort?: string; // "asc-<col>" | "desc-<col>"
 	page?: number;
 }
@@ -152,6 +194,7 @@ export interface MapMarker {
 	radius?: number;
 	dim?: boolean; // draw faded (e.g. languages with no reflex at the selected position)
 	ring?: boolean; // draw a bold outline (e.g. the selected point on the isogloss map)
+	foreground?: boolean; // keep this marker above surrounding context points
 }
 
 // ---- concepts (Concepticon) -----------------------------------------------

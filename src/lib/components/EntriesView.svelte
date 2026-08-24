@@ -6,9 +6,12 @@
 	import { safe, md } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
+	import FilterField from './FilterField.svelte';
+	import ListToolbar from './ListToolbar.svelte';
+	import QueryError from './QueryError.svelte';
 	import TagFilter from './TagFilter.svelte';
 	import Tags from './Tags.svelte';
-	import type { SelectOption } from './SelectFilter.svelte';
+	import SelectFilter, { type SelectOption } from './SelectFilter.svelte';
 	import CladeBars from './CladeBars.svelte';
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
@@ -38,6 +41,24 @@
 	}
 	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
 	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
+	const resultLabel = $derived(
+		list.result
+			? `${from.toLocaleString()}–${to.toLocaleString()} of ${list.result.count.toLocaleString()} entries`
+			: ''
+	);
+	const activeFilterCount = $derived(
+		[
+			list.params.origin_lang,
+			list.params.gloss,
+			list.params.etymology,
+			list.params.tags,
+			list.params.source,
+			list.params.rootsOnly,
+			list.params.sectionsOnly,
+			list.params.loanSourcesOnly,
+			list.params.crossFamilyOnly
+		].filter(Boolean).length
+	);
 	// variant word forms arrive \x1f-separated from group_concat (see query.ts)
 	const variantList = (s?: string | null): string[] => (s ? [...new Set(s.split(''))] : []);
 	const ocrVariants = (s?: string | null): Set<string> => new Set(variantList(s));
@@ -64,15 +85,40 @@
 	});
 </script>
 
-<div class="showing-line">
-	<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
-	<div class="showing-row">
-		{#if list.result}
-			<p class="muted">
-				Showing {from.toLocaleString()}–{to.toLocaleString()} of
-				{list.result.count.toLocaleString()} entries.
-			</p>
-		{/if}
+{#snippet filters()}
+	<label class="filter-control">
+		<span>Language</span>
+		<SelectFilter
+			placeholder="Any language"
+			options={langOptions}
+			value={list.params.origin_lang ?? ''}
+			onSelect={(value) => list.setFilter('origin_lang', value)}
+		/>
+	</label>
+	<FilterField
+		label="Meaning"
+		placeholder="Filter meanings…"
+		palette
+		value={list.params.gloss ?? ''}
+		onValue={(value) => list.setFilter('gloss', value)}
+	/>
+	<FilterField
+		label="Etymology"
+		placeholder="Filter etymologies…"
+		palette
+		value={list.params.etymology ?? ''}
+		onValue={(value) => list.setFilter('etymology', value)}
+	/>
+	<TagFilter standalone value={list.params.tags ?? ''} onFilter={list.setFilter} />
+	<SourceFilter
+		standalone
+		value={list.params.source ?? ''}
+		activeSort={list.params.sort ?? ''}
+		onFilter={list.setFilter}
+		onSort={list.setSort}
+	/>
+	<div class="filter-control entry-types">
+		<span>Entry type</span>
 		<div class="toggle-group">
 			<button
 				class="roots-toggle"
@@ -101,45 +147,55 @@
 			>
 				Loan sources
 			</button>
+			<button
+				class="roots-toggle"
+				class:on={list.params.crossFamilyOnly}
+				aria-pressed={list.params.crossFamilyOnly}
+				title="Show only entries linked to another language family by a sourced DEDR or CDIAL comparison"
+				onclick={() => list.setFilter('comparisons', list.params.crossFamilyOnly ? '' : '1')}
+			>
+				Cross-family
+			</button>
 		</div>
 	</div>
-</div>
+{/snippet}
+
+<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
+<ListToolbar
+	value={list.params.word ?? ''}
+	placeholder="Search headwords…"
+	searchLabel="Search headwords"
+	{resultLabel}
+	filterCount={activeFilterCount}
+	onSearch={(value) => list.setFilter('word', value)}
+	{filters}
+/>
 
 {#if list.error}
-	<p style="color: var(--bad)">Query error: {list.error}</p>
+	<QueryError error={list.error} />
 {/if}
 
 <div class="table-wrap">
-	<table class="data accent-col">
+	<table class="data accent-col mobile-cards">
 		<thead>
 			<tr>
 				<FilterCell
 					label="Entry"
-					filterKey="word"
 					sortKey="word"
-					palette
-					value={list.params.word ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Language"
-					filterKey="origin_lang"
-					type="select"
-					options={langOptions}
 					sortKey="lang"
-					value={list.params.origin_lang ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Gloss"
-					filterKey="gloss"
 					sortKey="gloss"
-					palette
-					value={list.params.gloss ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -147,17 +203,14 @@
 				{#if !expandable}
 					<FilterCell
 						label="Etymology"
-						filterKey="etymology"
-						palette
-						value={list.params.etymology ?? ''}
 						activeSort={list.params.sort ?? ''}
 						onFilter={list.setFilter}
 						onSort={list.setSort}
 					/>
-					<TagFilter value={list.params.tags ?? ''} onFilter={list.setFilter} />
+					<FilterCell label="Tags" activeSort={list.params.sort ?? ''} onFilter={list.setFilter} onSort={list.setSort} />
 				{/if}
 				<FilterCell
-					label="Langs"
+					label="Lang."
 					sortKey="nlang"
 					numeric
 					activeSort={list.params.sort ?? ''}
@@ -165,7 +218,7 @@
 					onSort={list.setSort}
 				/>
 				<FilterCell
-					label="Reflexes"
+					label="Refl."
 					sortKey="nreflex"
 					numeric
 					activeSort={list.params.sort ?? ''}
@@ -174,7 +227,7 @@
 				/>
 				{#if !expandable}
 					<FilterCell
-						label="Derived"
+						label="Der."
 						sortKey="nderived"
 						numeric
 						activeSort={list.params.sort ?? ''}
@@ -182,8 +235,9 @@
 						onSort={list.setSort}
 					/>
 				{/if}
-				<SourceFilter
-					value={list.params.source ?? ''}
+				<FilterCell
+					label="Source"
+					sortKey="source"
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -209,33 +263,47 @@
 						<CladeBars clades={e.clades} />
 							</div>
 						</td>
-						<td class="lang-plain">
+						<td class="lang-plain" data-label="Language">
 							{e.language?.language}{#if e.language?.dialect}: <span class="font-thin"
 									>{e.language.dialect}</span
 								>{/if}
 						</td>
-						<td class="muted gloss-cell">{@html safe(e.gloss) || '—'}</td>
+						<td class="muted gloss-cell" data-label="Meaning">{@html safe(e.gloss) || '—'}</td>
 						{#if !expandable}
-							<td class="muted etym-cell">
-								{#if e.ancestry?.length}
-									<Ancestry
-										label="<"
-										chain={e.ancestry}
-										startLang={e.language?.name}
-										compact
-									/>
-								{:else}
-									—
-								{/if}
+							<td class="muted etym-cell" data-label="Etymology">
+								<div class="etym-stack">
+									{#if e.ancestry?.length}
+										<Ancestry
+											label="<"
+											chain={e.ancestry}
+											startLang={e.language?.name}
+											compact
+										/>
+									{/if}
+									{#if e.comparisons?.length}
+										<div class="cross-lines">
+											{#each e.comparisons as comparison (comparison.id)}
+												<div class="cross-line" title={comparison.evidence}>
+													<span class="cross-relation">cf.</span>
+													<a class="cross-word" href="{base}/entries/{comparison.other_id}"
+														><FormWord word={comparison.other_word || comparison.other_id} /></a
+													>
+													<span class="id-tag">[{comparison.other_id}]</span>
+												</div>
+											{/each}
+										</div>
+									{/if}
+									{#if !e.ancestry?.length && !e.comparisons?.length}—{/if}
+								</div>
 							</td>
-							<td><Tags tags={e.tags} /></td>
+							<td data-label="Tags"><Tags tags={e.tags} /></td>
 						{/if}
-						<td class="num">{e.lang_count?.toLocaleString() ?? ''}</td>
-						<td class="num">{(expandable ? e.concept_match : e.reflex_count)?.toLocaleString() ?? ''}</td>
+						<td class="num" data-label="Languages">{e.lang_count?.toLocaleString() ?? ''}</td>
+						<td class="num" data-label="Forms">{(expandable ? e.concept_match : e.reflex_count)?.toLocaleString() ?? ''}</td>
 						{#if !expandable}
-							<td class="num">{e.derived_count?.toLocaleString() ?? ''}</td>
+							<td class="num" data-label="Derived">{e.derived_count?.toLocaleString() ?? ''}</td>
 						{/if}
-						<td><RefList references={e.references} /></td>
+						<td data-label="Source"><RefList references={e.references} /></td>
 					</tr>
 					{#if expandable && expanded.has(e.id)}
 						<tr class="reflex-detail">
@@ -283,17 +351,18 @@
 {/if}
 
 <style>
-	.showing-line {
-		margin-top: 0.5rem;
+	.filter-control {
+		display: grid;
+		gap: 0.3rem;
+		min-width: 0;
+		color: var(--muted);
+		font-size: 0.76rem;
+		font-weight: 600;
 	}
-	.showing-row {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-	}
+	.entry-types { grid-column: 1 / -1; }
 	.toggle-group {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.4rem;
 	}
 	.roots-toggle {
@@ -372,11 +441,46 @@
 		line-height: 1.45;
 		font-family: var(--font-serif);
 	}
+	.etym-stack {
+		display: grid;
+		gap: 0.35rem;
+	}
+	.cross-lines {
+		display: grid;
+		gap: 0.12rem;
+	}
+	.cross-line {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25rem;
+		font-family: var(--font-sans);
+		font-size: 0.7rem;
+		line-height: 1.35;
+	}
+	.cross-relation { color: var(--muted); }
+	.cross-word {
+		font-family: var(--font-serif);
+		font-size: 0.82rem;
+		font-weight: 600;
+	}
 	.num {
+		width: 1%;
+		padding-inline: 0.35rem;
 		text-align: right;
 		white-space: nowrap;
 		font-variant-numeric: tabular-nums;
+		font-size: 0.84rem;
 		color: var(--muted);
+	}
+	/* Keep the three count columns content-sized instead of letting the table
+	   distribute spare width to them. FilterCell owns the header markup, so
+	   these header selectors need to cross the component boundary. */
+	:global(table.data th.numeric) {
+		width: 1%;
+		padding-inline: 0.35rem;
+		white-space: nowrap;
+		font-size: 0.82rem;
 	}
 	.expandable-row {
 		cursor: pointer;
@@ -412,22 +516,14 @@
 		font-family: var(--font-phon);
 	}
 	@media (max-width: 640px) {
-		.showing-row {
-			align-items: flex-start;
-			flex-direction: column;
-			gap: 0.45rem;
-		}
-		.showing-row p {
-			margin: 0;
-		}
 		.toggle-group {
-			width: 100%;
-			overflow-x: auto;
-			padding-bottom: 0.2rem;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 		.roots-toggle {
 			min-height: 40px;
 			padding-inline: 12px;
+			white-space: normal;
 		}
 	}
 </style>

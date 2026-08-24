@@ -15,6 +15,7 @@
 		type AncestorRef,
 		type AlternateEtymon,
 		getAlternates,
+		getCrossFamilyComparisons,
 		type DerivedNode
 	} from '$lib/query';
 	import { changeInfo, changeLabel } from '$lib/soundChange';
@@ -22,6 +23,7 @@
 	import { cladeColor } from '$lib/clades';
 	import { cladeFavRank, langFavRank } from '$lib/prefs.svelte';
 	import { safe, md, relationLabel, striptags } from '$lib/render';
+	import { comparisonLabel } from '$lib/comparisons';
 	import CladeBars from '$lib/components/CladeBars.svelte';
 	import Ancestry from '$lib/components/Ancestry.svelte';
 	import Alignment from '$lib/components/Alignment.svelte';
@@ -30,7 +32,18 @@
 	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
 	import FormWord from '$lib/components/FormWord.svelte';
-	import type { Dialect, Language, MapMarker, Lemma } from '$lib/types';
+	import ReferenceLink from '$lib/components/ReferenceLink.svelte';
+	import RefList from '$lib/components/RefList.svelte';
+	import CollapsibleSourceScan from '$lib/components/CollapsibleSourceScan.svelte';
+	import type {
+		CrossFamilyComparison,
+		Dialect,
+		EntryTextBlock,
+		Language,
+		MapMarker,
+		Lemma,
+		Reference
+	} from '$lib/types';
 
 	let { data } = $props();
 	const entry = $derived(data.entry);
@@ -45,11 +58,45 @@
 		const m = /['‘]([^'’]{1,60})['’]/.exec(striptags(g)); // first quoted sense
 		return m ? m[1] : '';
 	};
+	const blockReference = (block: EntryTextBlock): Reference | null =>
+		block.source_id
+			? {
+					id: block.source_id,
+					short: block.source_label,
+					source: block.source_citation,
+					progress: block.source_progress,
+					provenance: block.source_provenance,
+					editor: block.source_editor,
+					ocr: block.source_ocr ?? false,
+					lemma_count: block.source_lemma_count ?? 0,
+					unetymologised_count: block.source_unetymologised_count ?? 0,
+					locator: block.locator ?? undefined
+				}
+			: null;
+	const isKewaBlock = (block: EntryTextBlock) => block.source_id === 'mayrhofer-kewa';
+	function referenceSummary(references: Reference[]): Reference[] {
+		const byId = new Map<string, Reference>();
+		for (const reference of references) {
+			const existing = byId.get(reference.id);
+			if (!existing) {
+				byId.set(reference.id, { ...reference });
+			} else if (
+				reference.locator &&
+				!existing.locator?.split('; ').includes(reference.locator)
+			) {
+				existing.locator = [existing.locator, reference.locator].filter(Boolean).join('; ');
+			}
+		}
+		return [...byId.values()].sort((a, b) =>
+			(a.short ?? a.id).localeCompare(b.short ?? b.id)
+		);
+	}
 
 	let ea = $state<EntryAlignment | null>(null);
 	let variants = $state<Lemma[]>([]);
 	let ancestryChain = $state<AncestorRef[][]>([]);
 	let alternates = $state<AlternateEtymon[]>([]);
+	let comparisons = $state<CrossFamilyComparison[]>([]);
 	let derivedTree = $state<DerivedNode[]>([]);
 	let ownSegs = $state<AlignSeg[]>([]);
 	let dialects = $state<Dialect[]>([]);
@@ -57,6 +104,24 @@
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
 	let view = $state<'align' | 'normal'>('normal');
+	const entryReferences = $derived.by(() =>
+		referenceSummary(
+			[
+				...(entry.references ?? []),
+				...(entry.text_blocks ?? []).map(blockReference).filter((r): r is Reference => r != null),
+				...variants.flatMap((variant) => variant.references ?? []),
+				...comparisons.map((comparison) => comparison.reference)
+			]
+		)
+	);
+	const reflexReferences = $derived.by(() =>
+		referenceSummary(
+			(ea?.reflexes ?? []).flatMap(({ lemma }) => [
+				...(lemma.references ?? []),
+				...(lemma.variants ?? []).flatMap((variant) => variant.references ?? [])
+			])
+		)
+	);
 
 	onMount(() => reload(entry.id));
 	let curId = '';
@@ -71,11 +136,13 @@
 		variants = [];
 		ancestryChain = [];
 		alternates = [];
+		comparisons = [];
 		derivedTree = [];
 		ownSegs = [];
 		getEntryVariants(id).then((v) => (variants = v));
 		getAncestryChain(id).then((c) => (ancestryChain = c));
 		getAlternates(id).then((a) => (alternates = a));
+		getCrossFamilyComparisons(id).then((c) => (comparisons = c));
 		getDerivedTree(id).then((t) => (derivedTree = t));
 		getAllDialects().then((d) => (dialects = d));
 		// a non-etymon node (reflex / section-form) also shows how it itself aligns to its parent
@@ -308,14 +375,27 @@
 </svelte:head>
 
 <!-- header -->
-<div class="entry-head">
-	<h1 class="headword">
-		<a href="{base}/languages/{entry.language?.id}" class="faint">{entry.language?.name}</a>
-		<span class="lemma-word"><FormWord word={entry.word} ocr={entry.ocr} /></span>
-		<span class="id-tag">[{entry.id}]</span>
-	</h1>
-	<CladeBars clades={entry.clades} size="lg" />
-</div>
+<div class="entry-intro">
+	<div class="entry-summary">
+		<div class="entry-head">
+			<div class="entry-title">
+		<h1 class="headword">
+			<a href="{base}/languages/{entry.language?.id}" class="faint">{entry.language?.name}</a>
+			<span class="lemma-word"><FormWord word={entry.word} ocr={entry.ocr} /></span>
+			<span class="id-tag">[{entry.id}]</span>
+		</h1>
+		<div class="source-scopes" aria-label="Sources by information supplied">
+			<div class="source-scope" title="Sources for this headword, gloss, tags, and article text">
+				<span class="source-scope-label">Entry</span>
+				<RefList references={entryReferences} />
+			</div>
+			<div class="source-scope" title="Sources for the descendant and borrowed forms shown below">
+				<span class="source-scope-label">Forms</span>
+				{#if loading}<span class="source-loading">loading…</span>{:else}<RefList references={reflexReferences} />{/if}
+			</div>
+		</div>
+			</div>
+	</div>
 {#if ancestryChain.length}
 	<Ancestry label={relLabel} chain={ancestryChain} startLang={entry.language?.name} />
 	{#if alternates.length}
@@ -343,20 +423,65 @@
 			>{/each}
 	</div>
 {/if}
+{#if comparisons.length || entry.text_blocks?.length || entry.etymology || entry.notes}
+	<details class="entry-evidence">
+		<summary>Evidence and notes</summary>
+{#if comparisons.length}
+	<section class="cross-family" aria-labelledby="cross-family-title">
+		<h2 id="cross-family-title">Cross-family comparisons</h2>
+		<div class="comparison-list">
+			{#each comparisons as comparison (comparison.id)}
+				{@const comparisonRelation = comparisonLabel(comparison, entry.id)}
+				<details class="comparison-row">
+					<summary class="comparison-head">
+						<span class="comparison-main">
+							{#if comparisonRelation}<span class="comparison-relation">{comparisonRelation}</span>{/if}
+							<a class="comparison-word phon" href="{base}/entries/{comparison.other_id}"
+								><FormWord word={comparison.other_word || comparison.other_id} /></a
+							>
+							<span class="id-tag">[{comparison.other_id}]</span>
+							{#if comparison.other_language_id}
+								<a class="comparison-language" href="{base}/languages/{comparison.other_language_id}"
+									>{comparison.other_language}</a
+								>
+							{/if}
+							{#if comparison.other_gloss}
+								<span class="comparison-gloss">‘{striptags(comparison.other_gloss)}’</span>
+							{/if}
+						</span>
+						<span class="comparison-tail">
+							<span
+								class="confidence {comparison.confidence}"
+								title="Confidence in the source's printed comparison, not a new editorial borrowing claim"
+								>{comparison.confidence}</span
+							>
+							<span class="comparison-caret" aria-hidden="true">›</span>
+						</span>
+					</summary>
+					<div class="comparison-evidence etymology serif">
+						<p>{comparison.evidence}</p>
+						<span class="block-source"><ReferenceLink reference={comparison.reference} /></span>
+					</div>
+				</details>
+			{/each}
+		</div>
+	</section>
+{/if}
 {#if entry.text_blocks?.length}
 	{#each entry.text_blocks as block (block.position)}
+		{@const reference = blockReference(block)}
 		<section class="etymology serif" data-kind={block.kind}>
-			{#if block.format === 'markdown'}
+			{#if isKewaBlock(block) && block.format === 'html'}
+				<CollapsibleSourceScan content={block.content} scanId={`kewa-scan-${entry.id}-${block.position}`} />
+			{:else if block.format === 'markdown'}
 				<div class="markdown">{@html md(block.content)}</div>
 			{:else if block.format === 'text'}
 				<p>{block.content}</p>
 			{:else}
 				{@html safe(block.content)}
 			{/if}
-			{#if block.source_id}
-				<a class="block-source" href="{base}/references/{block.source_id}">
-					{block.source_label || block.source_id}{block.locator ? `, ${block.locator}` : ''}
-				</a>
+			{#if reference}
+				<span class="block-source"><ReferenceLink {reference} /></span>
 			{/if}
 		</section>
 	{/each}
@@ -372,6 +497,25 @@
 		<div class="markdown">{@html md(entry.notes)}</div>
 	</details>
 {/if}
+	</details>
+{/if}
+	</div>
+	<aside class="entry-context" aria-label="Entry clade and distribution">
+		<CladeBars clades={entry.clades} size="lg" />
+		{#if ea && view === 'normal' && markers.length}
+			<section class="entry-map-overview" aria-labelledby="distribution-title">
+				<div class="entry-map-heading">
+					<h2 id="distribution-title">Distribution</h2>
+					<p class="muted">
+						{markers.length} location{markers.length === 1 ? '' : 's'} · {langCount}
+						language{langCount === 1 ? '' : 's'}
+					</p>
+				</div>
+				<MapView {markers} height="190px" bounds={INDIA_BOUNDS} />
+			</section>
+		{/if}
+	</aside>
+</div>
 
 <!-- how this node itself aligns to its parent (only non-etyma have a segment alignment) -->
 {#if ownSegs.length}
@@ -415,8 +559,8 @@
 <!-- view toggle -->
 {#if ea}
 	<div class="toggle" role="tablist" aria-label="View">
-		<button role="tab" aria-selected={view === 'align'} class:on={view === 'align'} onclick={() => (view = 'align')}>Alignment</button>
-		<button role="tab" aria-selected={view === 'normal'} class:on={view === 'normal'} onclick={() => (view = 'normal')}>Normal</button>
+		<button role="tab" aria-selected={view === 'normal'} class:on={view === 'normal'} onclick={() => (view = 'normal')}>Forms</button>
+		<button role="tab" aria-selected={view === 'align'} class:on={view === 'align'} onclick={() => (view = 'align')}>Sound alignment</button>
 	</div>
 {/if}
 
@@ -441,7 +585,7 @@
 	<div class="loader-line" style="margin:1.5rem 0"></div>
 {:else if ea}
 	<p class="count muted">{ea.reflexes.length.toLocaleString()} reflexes · {langCount} languages</p>
-	<div class="entry-body">
+	<div class="entry-body" class:alignment-view={view === 'align'}>
 		<div class="matrix-col">
 			<div class="table-wrap aln-wrap">
 				<table class="aln">
@@ -524,17 +668,108 @@
 		</div>
 		</div>
 
-		<aside class="map-col">
-			{#if markers.length}<MapView {markers} height="64vh" bounds={INDIA_BOUNDS} />{/if}
-			<div class="map-cap muted">
-				{#if selected != null}marker colour = <b class="phon">*{selSeg}</b> outcome{:else}select a
-					column to map its outcomes{/if}
-			</div>
-		</aside>
+		{#if view === 'align'}
+			<aside class="map-col">
+				{#if markers.length}<MapView {markers} height="64vh" bounds={INDIA_BOUNDS} />{/if}
+				<div class="map-cap muted">
+					{#if selected != null}marker colour = <b class="phon">*{selSeg}</b> outcome{:else}select a
+						column to map its outcomes{/if}
+				</div>
+			</aside>
+		{/if}
 	</div>
 {/if}
 
 <style>
+	.cross-family {
+		margin: 0.8rem 0 1rem;
+		border: 1px solid color-mix(in srgb, var(--berry) 28%, var(--border));
+		border-radius: 9px;
+		background: color-mix(in srgb, var(--plum-2) 4%, var(--surface));
+		overflow: hidden;
+	}
+	.cross-family h2 {
+		margin: 0;
+		padding: 0.42rem 0.7rem;
+		border-bottom: 1px solid var(--border);
+		color: var(--muted);
+		font-family: var(--font-sans);
+		font-size: 0.72rem;
+		font-variant: small-caps;
+		letter-spacing: 0.07em;
+	}
+	.comparison-list { display: grid; }
+	.comparison-row {
+		padding: 0.55rem 0.7rem 0.65rem;
+	}
+	.comparison-row + .comparison-row { border-top: 1px solid var(--border); }
+	.comparison-head, .comparison-main {
+		display: flex;
+		align-items: baseline;
+		gap: 0.42rem;
+		min-width: 0;
+	}
+	.comparison-head {
+		justify-content: space-between;
+		cursor: pointer;
+		list-style: none;
+	}
+	.comparison-head::-webkit-details-marker { display: none; }
+	.comparison-main { flex-wrap: wrap; }
+	.comparison-tail {
+		display: inline-flex;
+		flex: 0 0 auto;
+		align-items: center;
+		gap: 0.38rem;
+	}
+	.comparison-caret {
+		display: inline-block;
+		color: var(--faint);
+		font-size: 1rem;
+		line-height: 1;
+		transform: rotate(0deg);
+		transition: transform 0.12s ease;
+	}
+	.comparison-row[open] .comparison-caret { transform: rotate(90deg); }
+	.comparison-relation, .comparison-language, .comparison-gloss {
+		color: var(--muted);
+		font-size: 0.82rem;
+	}
+	.comparison-word { font-size: 1.02rem; font-weight: 600; }
+	.confidence {
+		padding: 0.08rem 0.35rem;
+		border: 1px solid var(--border-strong);
+		border-radius: 999px;
+		color: var(--muted);
+		font-size: 0.65rem;
+		white-space: nowrap;
+	}
+	.confidence.high {
+		color: #23704a;
+		border-color: color-mix(in srgb, #23704a 45%, var(--border));
+		background: color-mix(in srgb, #23704a 9%, var(--surface));
+	}
+	.confidence.medium {
+		color: color-mix(in srgb, #a76b0d 90%, var(--ink));
+		border-color: color-mix(in srgb, #b97812 50%, var(--border));
+		background: color-mix(in srgb, #e8a62a 11%, var(--surface));
+	}
+	.confidence.low {
+		color: color-mix(in srgb, #a64955 88%, var(--ink));
+		border-color: color-mix(in srgb, #a64955 42%, var(--border));
+		background: color-mix(in srgb, #a64955 8%, var(--surface));
+	}
+	.cross-family .comparison-evidence {
+		margin: 0.42rem 0 0.05rem 0.85rem;
+		padding: 0.55rem 0.75rem;
+		font-size: 0.86rem;
+		line-height: 1.45;
+	}
+	.comparison-evidence p { margin: 0; }
+	@media (max-width: 760px) {
+		.comparison-head { align-items: flex-start; }
+		.cross-family .comparison-evidence { margin-left: 0.35rem; }
+	}
 	:global(.map-ocr) {
 		display: inline-block;
 		margin-left: 0.25rem;
@@ -596,16 +831,55 @@
 		white-space: nowrap;
 		margin-left: auto;
 	}
+	.entry-intro {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+		align-items: start;
+		gap: 1.5rem;
+		margin-top: 1rem;
+	}
+	.entry-summary,
+	.entry-context {
+		min-width: 0;
+	}
 	.entry-head {
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
 		gap: 1rem;
-		margin-top: 1rem;
+		margin-top: 0;
 	}
-	.entry-head :global(.clades) {
-		margin-top: 0.9rem;
-		flex-shrink: 0;
+	.entry-context :global(.clades) {
+		justify-content: flex-end;
+		margin: 0.25rem 0 0.65rem auto;
+	}
+	.entry-title {
+		min-width: 0;
+	}
+	.source-scopes {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: 0.35rem 1rem;
+		margin: -0.1rem 0 0.55rem;
+		font-family: var(--font-sans);
+	}
+	.source-scope {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.3rem;
+	}
+	.source-scope-label {
+		color: var(--muted);
+		font-size: 0.68rem;
+		font-variant: small-caps;
+		font-weight: 600;
+		letter-spacing: 0.055em;
+	}
+	.source-loading {
+		color: var(--faint);
+		font-size: 0.72rem;
 	}
 	.gloss {
 		font-size: 1.2rem;
@@ -640,9 +914,7 @@
 		font-family: var(--font-sans);
 		font-size: 0.72rem;
 		color: var(--muted);
-		text-decoration: none;
 	}
-	.block-source:hover { text-decoration: underline; }
 	.etymology :global(a[data-entry]) {
 		color: var(--plum-2);
 	}
@@ -664,6 +936,19 @@
 	.variants .v-item {
 		font-family: var(--font-phon);
 	}
+	.entry-evidence {
+		margin: 0.7rem 0;
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
+	}
+	.entry-evidence > summary {
+		padding: 0.65rem 0;
+		color: var(--plum-2);
+		font-size: 0.88rem;
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.entry-evidence[open] { padding-bottom: 0.8rem; }
 	.notes summary {
 		cursor: pointer;
 		font-size: 0.85rem;
@@ -673,6 +958,25 @@
 	.notes .markdown {
 		font-size: 0.92rem;
 		margin-top: 0.4rem;
+	}
+	.entry-map-overview {
+		margin: 0;
+	}
+	.entry-map-heading {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.45rem;
+	}
+	.entry-map-heading h2 {
+		margin: 0;
+		font-size: 1.05rem;
+	}
+	.entry-map-heading p {
+		margin: 0;
+		font-size: 0.82rem;
+		text-align: right;
 	}
 
 	/* view toggle */
@@ -1018,6 +1322,14 @@
 		margin-top: 0.45rem;
 	}
 	@media (max-width: 900px) {
+		.entry-intro {
+			grid-template-columns: 1fr;
+			gap: 0.7rem;
+		}
+		.entry-context :global(.clades) {
+			justify-content: flex-start;
+			margin-top: 0;
+		}
 		.entry-body {
 			flex-direction: column;
 			align-items: stretch; /* fill width so the matrix scrolls internally, not the page */
@@ -1032,14 +1344,16 @@
 		}
 	}
 	@media (max-width: 640px) {
-		/* let the clade strip drop below the headword instead of overflowing */
-		.entry-head {
-			flex-wrap: wrap;
+		.entry-map-heading {
+			display: block;
 		}
-		.entry-head :global(.clades) {
+		.entry-map-heading p {
+			margin-top: 0.15rem;
+			text-align: left;
+		}
+		.entry-context :global(.clades) {
 			width: 100%;
 			flex-wrap: wrap;
-			margin-top: 0.4rem;
 		}
 	}
 	/* "also proposed" alternate-etymology line under the ancestry chain */

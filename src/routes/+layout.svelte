@@ -18,12 +18,18 @@
 	type Theme = '' | 'light' | 'dark';
 	let theme = $state<Theme>('');
 	let mobileNavOpen = $state(false);
+	let dictionaryOpen = $state(false);
+	let researchOpen = $state(false);
+	let utilityOpen = $state(false);
 	const gaMeasurementId = (env.PUBLIC_GA_MEASUREMENT_ID ?? '').trim();
 	const hasGoogleAnalytics = /^G-[A-Z0-9]+$/i.test(gaMeasurementId);
 	let trackPageView: (() => void) | undefined;
 
 	afterNavigate(() => {
 		mobileNavOpen = false;
+		dictionaryOpen = false;
+		researchOpen = false;
+		utilityOpen = false;
 		trackPageView?.();
 	});
 
@@ -78,23 +84,26 @@
 		}
 	}
 
-	const nav = [
-		{ href: '/entries', label: 'Entries' },
-		{ href: '/reflexes', label: 'Reflexes' },
-		{ href: '/languages', label: 'Languages' },
-		{ href: '/correspondences', label: 'Sounds' },
-		{ href: '/isoglosses', label: 'Isoglosses' },
-		{ href: '/concepts', label: 'Concepts' },
-		{ href: '/references', label: 'References' }
+	const dictionaryNav = [
+		{ href: '/entries', label: 'Headwords' },
+		{ href: '/reflexes', label: 'All forms' }
 	];
-	if (dev) {
-		nav.push({ href: '/dev/etymologies', label: 'Etymology lab' });
-		nav.push({ href: '/dev/ocr', label: 'OCR lab' });
-	}
+	const nav = [
+		{ href: '/languages', label: 'Languages' },
+		{ href: '/concepts', label: 'Concepts' },
+		{ href: '/references', label: 'Sources' }
+	];
+	const researchNav = [
+		{ href: '/correspondences', label: 'Sound correspondences' },
+		{ href: '/isoglosses', label: 'Isoglosses' }
+	];
 
 	function isActive(href: string): boolean {
 		const p = page.url.pathname;
 		return p === base + href || p.startsWith(base + href + '/');
+	}
+	function anyActive(items: { href: string }[]): boolean {
+		return items.some((item) => isActive(item.href));
 	}
 </script>
 
@@ -105,8 +114,15 @@
 			<img src="{base}/favicon.svg" alt="" width="24" height="24" />
 			Jambu
 		</a>
-		<div class="nav-favorites"><Favorites /></div>
 		<div class="nav-links" class:open={mobileNavOpen} id="primary-nav-links">
+			<details class="nav-dropdown" bind:open={dictionaryOpen}>
+				<summary class:active={anyActive(dictionaryNav)} onclick={() => { researchOpen = false; utilityOpen = false; }}>Dictionary</summary>
+				<div class="nav-dropdown-panel">
+					{#each dictionaryNav as item (item.href)}
+						<a href="{base}{item.href}" class:active={isActive(item.href)}>{item.label}</a>
+					{/each}
+				</div>
+			</details>
 			{#each nav as item (item.href)}
 				<a
 					href="{base}{item.href}"
@@ -114,12 +130,33 @@
 					onclick={() => (mobileNavOpen = false)}>{item.label}</a
 				>
 			{/each}
+			<details class="nav-dropdown" bind:open={researchOpen}>
+				<summary class:active={anyActive(researchNav)} onclick={() => { dictionaryOpen = false; utilityOpen = false; }}>Research</summary>
+				<div class="nav-dropdown-panel">
+					{#each researchNav as item (item.href)}
+						<a href="{base}{item.href}" class:active={isActive(item.href)}>{item.label}</a>
+					{/each}
+				</div>
+			</details>
 		</div>
 		<span class="spacer"></span>
-		<DbStatusMenu />
-		<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle light/dark theme">
-			{theme === 'dark' ? '☾' : theme === 'light' ? '☀' : '◐'}
-		</button>
+		<details class="utility-menu" bind:open={utilityOpen}>
+			<summary aria-label="Open settings and favorites" title="Settings and favorites" onclick={() => { dictionaryOpen = false; researchOpen = false; }}>•••</summary>
+			<div class="utility-panel">
+				<Favorites variant="menu" />
+				<DbStatusMenu variant="menu" />
+				<button class="utility-row" onclick={toggleTheme}>
+					<span aria-hidden="true">{theme === 'dark' ? '☾' : theme === 'light' ? '☀' : '◐'}</span>
+					<span>Appearance</span>
+					<small>{theme || 'System'}</small>
+				</button>
+				{#if dev}
+					<div class="utility-divider">Development</div>
+					<a class="utility-row" href="{base}/dev/etymologies">Etymology lab</a>
+					<a class="utility-row" href="{base}/dev/ocr">OCR lab</a>
+				{/if}
+			</div>
+		</details>
 		<button
 			class="nav-menu-toggle"
 			class:open={mobileNavOpen}

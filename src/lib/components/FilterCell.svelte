@@ -56,10 +56,10 @@
 
 	const ascActive = $derived(sortKey ? activeSort === `asc-${sortKey}` : false);
 	const descActive = $derived(sortKey ? activeSort === `desc-${sortKey}` : false);
-	function clickSort(dir: 'asc' | 'desc') {
+	const sortState = $derived(ascActive ? 'ascending' : descActive ? 'descending' : 'unsorted');
+	function cycleSort() {
 		if (!sortKey) return;
-		const val = `${dir}-${sortKey}`;
-		onSort(activeSort === val ? '' : val);
+		onSort(ascActive ? `desc-${sortKey}` : descActive ? '' : `asc-${sortKey}`);
 	}
 </script>
 
@@ -102,20 +102,15 @@
 		{/if}
 
 		{#if sortKey}
-			<span class="sort">
-				<button
-					class="up"
-					class:active={ascActive}
-					aria-label="Sort {label} ascending"
-					onclick={() => clickSort('asc')}
-				></button>
-				<button
-					class="down"
-					class:active={descActive}
-					aria-label="Sort {label} descending"
-					onclick={() => clickSort('desc')}
-				></button>
-			</span>
+			<button
+				class="sort-cycle"
+				class:active={ascActive || descActive}
+				aria-label="Sort {label}; currently {sortState}"
+				title="Sort {label}"
+				onclick={cycleSort}
+			>
+				<span aria-hidden="true">{ascActive ? '↑' : descActive ? '↓' : '↕'}</span>
+			</button>
 		{/if}
 	</div>
 </th>
@@ -139,5 +134,23 @@
 	th.numeric {
 		text-align: right;
 		vertical-align: middle; /* line up with the input-bearing headers */
+	}
+	.sort-cycle {
+		flex: 0 0 auto;
+		width: 28px;
+		height: 32px;
+		padding: 0;
+		border: 0;
+		border-radius: 4px;
+		background: transparent;
+		color: var(--faint);
+		font: inherit;
+		font-size: 0.9rem;
+		cursor: pointer;
+	}
+	.sort-cycle:hover,
+	.sort-cycle.active {
+		background: color-mix(in srgb, var(--berry) 10%, transparent);
+		color: var(--berry);
 	}
 </style>

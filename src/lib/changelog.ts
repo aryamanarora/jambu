@@ -18,6 +18,39 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-23',
+		label: '23 August 2026',
+		title: 'Dravidian reconstructions, Torwali, and source-backed comparisons',
+		changes: [
+			'Added 6,672 Proto-Dravidian and subgroup reconstructions from Merriam and Fuls’s Dravidian Database, with Starostin and Krishnamurti attributions preserved and links to matching DEDR entries.',
+			'Added 1,943 forms from Torwali’s illustrated student dictionary, 320 manually collated Grangali, Ningalami, and Shumashti records, and 263 source-linked Nuristani forms.',
+			'Added reviewed evidence from Burrow and Emeneau’s Dravidian Etymological Notes and Emeneau’s new Brahui etymologies, plus 2,376 exact CDIAL links to Mayrhofer’s scanned KEWA articles.',
+			'Cross-family proposals now appear as source-attributed comparisons instead of asserted ancestry; language pages add a dialect explorer, richer family and map browsing, and clearer source evidence.',
+			'The homepage now has direct dictionary search, while lists, filters, favourites, errors, and mobile navigation are more consistent and easier to use.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'PDr', label: 'Proto-Dravidian' },
+				{ id: 'Tor', label: 'Torwali' },
+				{ id: 'Gng', label: 'Grangali' },
+				{ id: 'Ning', label: 'Ningalami' },
+				{ id: 'Shum', label: 'Shumashti' },
+				{ id: 'PNur', label: 'Proto-Nuristani' },
+				{ id: 'Brahui', label: 'Brahui' }
+			],
+			sources: [
+				{ id: 'merriam2026dravidiandb', label: 'Merriam & Fuls 2026' },
+				{ id: 'torwali2023student', label: 'Torwali 2023' },
+				{ id: 'buddruss-grangali1979', label: 'Buddruss 1979 · scan' },
+				{ id: 'nured', label: 'Nūristānī Etymological Dictionary' },
+				{ id: 'burrow-emeneau1972den1', label: 'Burrow & Emeneau 1972 I' },
+				{ id: 'burrow-emeneau1972den2', label: 'Burrow & Emeneau 1972 II' },
+				{ id: 'emeneau1997brahui', label: 'Emeneau 1997' },
+				{ id: 'mayrhofer-kewa', label: 'Mayrhofer 1953–1980 · scans' }
+			]
+		}
+	},
+	{
 		date: '2026-08-18',
 		label: '18 August 2026',
 		title: 'Badaga, Nihali, and source-rich comparisons',

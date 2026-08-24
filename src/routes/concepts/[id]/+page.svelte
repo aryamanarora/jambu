@@ -4,7 +4,7 @@
 	import EntriesView from '$lib/components/EntriesView.svelte';
 	import { cladeColor } from '$lib/clades';
 	import { etymonSlotColor, ETYMON_PALETTE } from '$lib/etyma';
-	import { safe } from '$lib/render';
+	import { safe, striptags } from '$lib/render';
 	import type { MapMarker } from '$lib/types';
 	import type { ConceptDetail, ConceptAttestation } from '$lib/types';
 	import FormWord from '$lib/components/FormWord.svelte';
@@ -68,6 +68,12 @@
 		return out;
 	});
 	const chipColor = (etymon: string, fallback: string) => activeColor.get(etymon) ?? fallback;
+	const tooltipText = (value: string) =>
+		striptags(value)
+			.replaceAll('&', '&amp;')
+			.replaceAll('<', '&lt;')
+			.replaceAll('>', '&gt;')
+			.replaceAll('"', '&quot;');
 
 	// a language attesting 2+ highlighted etyma gets a marker split between their colours
 	function pieSvg(colors: string[]): string {
@@ -83,7 +89,7 @@
 					`<path d="M${c} ${c} L${pt(i)} A${r} ${r} 0 0 1 ${pt(i + 1)} Z" fill="${col}"/>`
 			)
 			.join('');
-		return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">${wedges}<circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="#ffffff" stroke-width="1.8"/></svg>`;
+		return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">${wedges}<circle cx="${c}" cy="${c}" r="6.7" fill="none" stroke="rgba(48,35,47,.86)" stroke-width="1.7"/></svg>`;
 	}
 
 	// one uniform-size marker per attesting place — a dialect point where the form is tagged with a
@@ -92,34 +98,70 @@
 	const markers = $derived.by((): MapMarker[] => {
 		const byPlace = new Map<
 			string,
-			{ name: string; lat: number; long: number; counts: Map<string, number> }
+			{
+				name: string;
+				lat: number;
+				long: number;
+				counts: Map<string, number>;
+				forms: Map<string, ConceptAttestation[]>;
+				unetym: ConceptAttestation[];
+			}
 		>();
 		const bump = (f: ConceptAttestation, etymon: string | null) => {
 			for (const p of f.places) {
 				let m = byPlace.get(p.key);
 				if (!m)
-					byPlace.set(p.key, (m = { name: p.name, lat: p.lat, long: p.long, counts: new Map() }));
-				if (etymon) m.counts.set(etymon, (m.counts.get(etymon) ?? 0) + 1);
+					byPlace.set(
+						p.key,
+						(m = {
+							name: p.name,
+							lat: p.lat,
+							long: p.long,
+							counts: new Map(),
+							forms: new Map(),
+							unetym: []
+						})
+					);
+				if (etymon) {
+					m.counts.set(etymon, (m.counts.get(etymon) ?? 0) + 1);
+					const forms = m.forms.get(etymon) ?? [];
+					forms.push(f);
+					m.forms.set(etymon, forms);
+				} else m.unetym.push(f);
 			}
 		};
 		for (const e of etyma) for (const f of e.forms) bump(f, e.etymon);
 		for (const f of unetym) bump(f, null);
 		return [...byPlace.values()].map((m) => {
-			const breakdown = [...m.counts.entries()]
-				.sort((a, b) => b[1] - a[1])
-				.map(([e, n]) => `${wordOf.get(e) ?? e}×${n}`)
-				.join(', ');
+			const entries = [...m.counts.entries()].sort(
+				(a, b) => Number(active.includes(b[0])) - Number(active.includes(a[0])) || b[1] - a[1]
+			);
+			const total = entries.reduce((sum, [, n]) => sum + n, 0) + m.unetym.length;
+			const details = entries.slice(0, 6).map(([e, n]) => {
+				const words = [...new Set((m.forms.get(e) ?? []).map((f) => tooltipText(f.word || f.form_id)))];
+				const examples = words.slice(0, 3).join(', ');
+				const rest = words.length > 3 ? `, +${words.length - 3} more` : '';
+				return `<br><strong>${tooltipText(wordOf.get(e) ?? e)}</strong> (${n}): ${examples}${rest}`;
+			});
+			if (entries.length > 6) details.push(`<br>+${entries.length - 6} more etyma`);
+			if (m.unetym.length) {
+				const words = [...new Set(m.unetym.map((f) => tooltipText(f.word || f.form_id)))];
+				details.push(
+					`<br><strong>Unetymologised</strong> (${m.unetym.length}): ${words.slice(0, 3).join(', ')}${words.length > 3 ? `, +${words.length - 3} more` : ''}`
+				);
+			}
 			const base = {
 				lat: m.lat,
 				long: m.long,
 				svg: '',
-				tooltip: `${m.name} — ${breakdown || 'unetymologised'}`
+				tooltip: `<strong>${tooltipText(m.name)}</strong><br>${total} ${total === 1 ? 'attestation' : 'attestations'} · ${entries.length} ${entries.length === 1 ? 'etymon' : 'etyma'}${details.join('')}`
 			};
 			const matches = active.filter((e) => m.counts.has(e)).map((e) => activeColor.get(e)!);
-			if (!active.length) return { ...base, color: NEUTRAL };
-			if (!matches.length) return { ...base, color: NEUTRAL, dim: true };
-			if (matches.length === 1) return { ...base, color: matches[0], ring: true };
-			return { ...base, svg: pieSvg(matches) };
+			if (!active.length) return { ...base, color: NEUTRAL, radius: 4 };
+			if (!matches.length) return { ...base, color: NEUTRAL, radius: 2.5, dim: true };
+			if (matches.length === 1)
+				return { ...base, color: matches[0], radius: 5.5, ring: true, foreground: true };
+			return { ...base, svg: pieSvg(matches), foreground: true };
 		});
 	});
 
@@ -164,6 +206,7 @@
 					<button
 						class="chip"
 						class:pinned={pinned.includes(l.etymon)}
+						class:preview={hovered === l.etymon}
 						style="--c: {chipColor(l.etymon, l.color)}"
 						aria-pressed={pinned.includes(l.etymon)}
 						title="{l.source} {l.etymon}{l.gloss ? ` — ${l.gloss}` : ''}"
@@ -180,7 +223,7 @@
 				{/each}
 			</div>
 		{/if}
-		<GeoMap {markers} zoom={4} height="360px" fitOnce />
+		<GeoMap {markers} zoom={4} height="min(68vh, 560px)" fitOnce mutedTiles />
 	</section>
 {/if}
 
@@ -257,37 +300,52 @@
 	.legend {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.35rem;
-		max-height: 7.6rem;
+		gap: 0.5rem;
+		max-height: 10rem;
 		overflow-y: auto;
-		margin: 0.5rem 0 0.65rem;
+		margin: 0.65rem 0 0.8rem;
+		padding: 0.1rem 0.1rem 0.2rem;
+		scrollbar-width: thin;
+		scrollbar-color: var(--border-strong) transparent;
 	}
 	.chip {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.35rem;
-		padding: 0.15rem 0.6rem;
-		border: 1px solid var(--border);
+		gap: 0.5rem;
+		min-height: 2rem;
+		padding: 0.25rem 0.65rem;
+		border: 1.5px solid var(--border-strong);
 		border-radius: 999px;
-		background: none;
+		background: color-mix(in srgb, var(--surface) 88%, transparent);
 		font: inherit;
-		font-size: 0.82rem;
+		font-size: 0.86rem;
 		color: inherit;
 		cursor: pointer;
+		transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
 	}
-	.chip:hover {
+	.chip:hover,
+	.chip.preview {
 		border-color: var(--c);
+		background: color-mix(in srgb, var(--c) 13%, var(--surface));
+		transform: translateY(-1px);
+	}
+	.chip:focus-visible {
+		outline: 2px solid var(--c);
+		outline-offset: 2px;
 	}
 	.chip.pinned {
-		border-color: var(--c);
-		background: color-mix(in srgb, var(--c) 16%, transparent);
+		border: 2px solid var(--c);
+		padding: calc(0.25rem - 0.5px) calc(0.65rem - 0.5px);
+		background: color-mix(in srgb, var(--c) 24%, var(--surface));
+		box-shadow: 0 2px 8px color-mix(in srgb, var(--c) 24%, transparent);
 	}
 	.chip .dot {
-		width: 0.6rem;
-		height: 0.6rem;
+		width: 0.72rem;
+		height: 0.72rem;
 		border-radius: 50%;
 		background: var(--c);
 		flex: none;
+		box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--c);
 	}
 	.chip-word {
 		font-family: var(--font-phon);
@@ -296,6 +354,9 @@
 		color: var(--muted);
 		font-size: 0.75rem;
 		font-variant-numeric: tabular-nums;
+		padding: 0.05rem 0.35rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--surface-2) 78%, transparent);
 	}
 	.legend-head {
 		display: flex;
@@ -314,6 +375,11 @@
 		color: var(--muted);
 		white-space: nowrap;
 		cursor: pointer;
+	}
+	.clear:hover {
+		border-color: var(--border-strong);
+		background: var(--surface-2);
+		color: var(--ink);
 	}
 	.table-wrap {
 		overflow-x: auto;

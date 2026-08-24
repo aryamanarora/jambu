@@ -8,8 +8,9 @@
 
 	let {
 		value = '',
+		standalone = false,
 		onFilter
-	}: { value?: string; onFilter: (key: string, value: string) => void } = $props();
+	}: { value?: string; standalone?: boolean; onFilter: (key: string, value: string) => void } = $props();
 
 	const selected = $derived(new Set(value.split(/\s+/).filter(Boolean)));
 	let open = $state(false);
@@ -66,7 +67,7 @@
 	});
 </script>
 
-<th bind:this={root}>
+<svelte:element this={standalone ? 'div' : 'th'} bind:this={root} class:standalone>
 	<div class="field">
 		<button
 			class="trigger"
@@ -114,11 +115,17 @@
 			</div>
 		</div>
 	{/if}
-</th>
+</svelte:element>
 
 <style>
 	th {
 		position: relative;
+	}
+	.standalone {
+		position: relative;
+		display: grid;
+		align-content: end;
+		min-width: 0;
 	}
 	.trigger {
 		display: inline-flex;

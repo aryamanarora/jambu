@@ -21,6 +21,8 @@ v2 schema (mirrored by src/lib/dbShared.ts — the two codecs MUST stay in sync)
   tagsets        rowid → the distinct `tags` strings (lem.tagset_rid).
   cogsets        rowid → the distinct cognateset labels (lem.cogset_rid).
   cites          rowid → (reference_rid, locator): the distinct citation edges (lem.cites blob).
+  comparisons    source-attributed article comparisons with both endpoints remapped to lem rowids;
+                 relation/direction/confidence stay readable because this table is small.
   aliases        legacy-id redirects, grouped: prefix → blob of (ΔM varint, lemma rowid varint)
                  pairs sorted by M, where the alias is "<prefix>-<M>".
   aliases_misc   alias → lemma rowid for aliases that don't fit the "<prefix>-<M>" shape.
@@ -391,8 +393,49 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         "ref_rid INTEGER, locator TEXT, PRIMARY KEY (lemma_rid,pos)) WITHOUT ROWID"
     )
     con.executemany("INSERT INTO texts VALUES (?,?,?,?,?,?,?)", text_rows)
+
+    # Article-level comparisons are symmetric at query time, so remap both old lemma rowids and
+    # retain two narrow endpoint indexes.  This table is intentionally not folded into `edges`:
+    # its source can leave both genealogical relationship and loan direction undecided.
+    comparison_rows = [
+        (
+            comparison_id,
+            new_rowid_of_old[entry_rid],
+            new_rowid_of_old[compared_rid],
+            relation,
+            direction,
+            confidence,
+            reference_rid,
+            locator,
+            evidence,
+        )
+        for (
+            comparison_id,
+            entry_rid,
+            compared_rid,
+            relation,
+            direction,
+            confidence,
+            reference_rid,
+            locator,
+            evidence,
+        ) in con.execute(
+            "SELECT id,entry_rid,compared_rid,relation,direction,confidence,"
+            "reference_rid,locator,evidence FROM comparisons ORDER BY id"
+        )
+    ]
+    con.execute("DROP TABLE comparisons")
+    con.execute(
+        "CREATE TABLE comparisons (id TEXT PRIMARY KEY, entry_rid INTEGER NOT NULL, "
+        "compared_rid INTEGER NOT NULL, relation TEXT NOT NULL, direction TEXT NOT NULL, "
+        "confidence TEXT NOT NULL, reference_rid INTEGER NOT NULL, locator TEXT NOT NULL, "
+        "evidence TEXT NOT NULL)"
+    )
+    con.executemany("INSERT INTO comparisons VALUES (?,?,?,?,?,?,?,?,?)", comparison_rows)
+    con.execute("CREATE INDEX idx_comparisons_entry ON comparisons(entry_rid)")
+    con.execute("CREATE INDEX idx_comparisons_compared ON comparisons(compared_rid)")
     log(f"built lem ({len(lem_rows)} rows), {len(tag_texts)} tagsets, {len(cog_texts)} cogsets, "
-        f"{len(cite_keys)} citation edges")
+        f"{len(cite_keys)} citation edges, {len(comparison_rows)} comparisons")
 
     # 6. per-language display-order lists (replaces the (language_id, "order") index).
     lex_of: dict[int, list[tuple[int, int]]] = defaultdict(list)

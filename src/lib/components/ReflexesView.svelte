@@ -6,7 +6,10 @@
 	import { safe, md } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
-	import type { SelectOption } from './SelectFilter.svelte';
+	import FilterField from './FilterField.svelte';
+	import ListToolbar from './ListToolbar.svelte';
+	import QueryError from './QueryError.svelte';
+	import SelectFilter, { type SelectOption } from './SelectFilter.svelte';
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
 	import Tags from './Tags.svelte';
@@ -24,6 +27,23 @@
 	const list = createListState(mode, { languageId, referenceId, withOrigin: true });
 	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
 	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
+	const resultLabel = $derived(
+		list.result
+			? `${from.toLocaleString()}–${to.toLocaleString()} of ${list.result.count.toLocaleString()} forms`
+			: ''
+	);
+	const activeFilterCount = $derived(
+		[
+			showLangCol ? list.params.origin_lang : '',
+			list.params.dialect,
+			list.params.origin,
+			list.params.etymon_lang,
+			list.params.gloss,
+			list.params.tags,
+			list.params.notes,
+			list.params.source
+		].filter(Boolean).length
+	);
 
 	let langOptions = $state<SelectOption[]>([]);
 	$effect(() => {
@@ -82,30 +102,87 @@
 	});
 </script>
 
-<div class="showing-line">
-	<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
-	{#if list.result}
-		<p class="muted">
-			Showing {from.toLocaleString()}–{to.toLocaleString()} of
-			{list.result.count.toLocaleString()} reflexes.
-		</p>
+{#snippet filters()}
+	{#if showLangCol}
+		<label class="filter-control">
+			<span>Language</span>
+			<SelectFilter
+				placeholder="Any language"
+				options={langOptions}
+				value={list.params.origin_lang ?? ''}
+				onSelect={(value) => list.setFilter('origin_lang', value)}
+			/>
+		</label>
 	{/if}
-</div>
+	{#if mode === 'lexicon' && dialectOptions.length}
+		<label class="filter-control">
+			<span>Dialect</span>
+			<SelectFilter
+				placeholder="Any dialect"
+				options={dialectOptions}
+				value={list.params.dialect ?? ''}
+				onSelect={(value) => list.setFilter('dialect', value)}
+			/>
+		</label>
+	{/if}
+	<label class="filter-control">
+		<span>Origin language</span>
+		<SelectFilter
+			placeholder="Any origin language"
+			options={originLangOptions}
+			value={list.params.etymon_lang ?? ''}
+			onSelect={(value) => list.setFilter('etymon_lang', value)}
+		/>
+	</label>
+	<FilterField
+		label="Origin form"
+		palette
+		value={list.params.origin ?? ''}
+		onValue={(value) => list.setFilter('origin', value)}
+	/>
+	<FilterField
+		label="Meaning"
+		palette
+		value={list.params.gloss ?? ''}
+		onValue={(value) => list.setFilter('gloss', value)}
+	/>
+	<FilterField
+		label="Notes"
+		palette
+		value={list.params.notes ?? ''}
+		onValue={(value) => list.setFilter('notes', value)}
+	/>
+	<TagFilter standalone value={list.params.tags ?? ''} onFilter={list.setFilter} />
+	<SourceFilter
+		standalone
+		value={list.params.source ?? ''}
+		activeSort={list.params.sort ?? ''}
+		onFilter={list.setFilter}
+		onSort={list.setSort}
+	/>
+{/snippet}
 
-{#if list.error}<p style="color: var(--bad)">Query error: {list.error}</p>{/if}
+<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
+<ListToolbar
+	value={list.params.word ?? ''}
+	placeholder={mode === 'lexicon' ? 'Search this lexicon…' : 'Search all forms…'}
+	searchLabel={mode === 'lexicon' ? 'Search this lexicon' : 'Search all forms'}
+	{resultLabel}
+	filterCount={activeFilterCount}
+	onSearch={(value) => list.setFilter('word', value)}
+	{filters}
+/>
+
+{#if list.error}<QueryError error={list.error} />{/if}
 
 <div class="table-wrap">
-	<table class="data" class:accent-col={showLangCol}>
+	<table class="data mobile-cards" class:accent-col={showLangCol}>
 		<thead>
 			<tr>
 				{#if showLangCol}
 					<FilterCell
 						label="Language"
-						filterKey="origin_lang"
-						type="select"
-						options={langOptions}
 						sortKey="lang"
-						value={list.params.origin_lang ?? ''}
 						activeSort={list.params.sort ?? ''}
 						onFilter={list.setFilter}
 						onSort={list.setSort}
@@ -113,55 +190,36 @@
 				{/if}
 				<FilterCell
 					label="Word"
-					filterKey="word"
 					sortKey="word"
-					palette
-					value={list.params.word ?? ''}
-					pickerKey={mode === 'lexicon' && dialectOptions.length ? 'dialect' : null}
-					pickerOptions={dialectOptions}
-					pickerValue={list.params.dialect ?? ''}
-					pickerPlaceholder="Dialect"
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Origin"
-					filterKey="origin"
 					sortKey="origin"
-					palette
-					value={list.params.origin ?? ''}
-					pickerKey="etymon_lang"
-					pickerOptions={originLangOptions}
-					pickerValue={list.params.etymon_lang ?? ''}
-					pickerPlaceholder="Origin lang"
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
 				<FilterCell
 					label="Gloss"
-					filterKey="gloss"
 					sortKey="gloss"
-					palette
-					value={list.params.gloss ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
-				<TagFilter value={list.params.tags ?? ""} onFilter={list.setFilter} />
+				<FilterCell label="Tags" activeSort={list.params.sort ?? ''} onFilter={list.setFilter} onSort={list.setSort} />
 				<FilterCell
 					label="Notes"
-					filterKey="notes"
 					sortKey="notes"
-					palette
-					value={list.params.notes ?? ''}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
 				/>
-				<SourceFilter
-					value={list.params.source ?? ''}
+				<FilterCell
+					label="Source"
+					sortKey="source"
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -181,7 +239,7 @@
 								>
 							</td>
 						{/if}
-						<td class="lemma-word">
+						<td class="lemma-word" data-label="Form">
 							<a href="{base}/entries/{r.id}"><FormWord word={r.word} references={r.references} /></a>{#if r.phonemic}
 								<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}{#if r.sub_count}
 								<a
@@ -193,6 +251,7 @@
 						</td>
 						<td
 							class:lang-cell={!showLangCol}
+							data-label="Origin"
 							style={!showLangCol
 								? `border-left-color: ${hashColor(r.origin_lemma?.language?.color)}`
 								: ''}
@@ -206,10 +265,10 @@
 								>
 							{:else}<span class="faint">—</span>{/if}
 						</td>
-						<td class="muted">{@html safe(r.gloss) || '—'}</td>
-						<td><Tags tags={r.tags} /></td>
-						<td class="muted markdown">{@html md(r.notes)}</td>
-						<td><RefList references={r.references} /></td>
+						<td class="muted" data-label="Meaning">{@html safe(r.gloss) || '—'}</td>
+						<td data-label="Tags"><Tags tags={r.tags} /></td>
+						<td class="muted markdown" data-label="Notes">{@html md(r.notes)}</td>
+						<td data-label="Source"><RefList references={r.references} /></td>
 					</tr>
 				{/each}
 			{/if}
@@ -222,8 +281,13 @@
 {/if}
 
 <style>
-	.showing-line {
-		margin-top: 0.5rem;
+	.filter-control {
+		display: grid;
+		gap: 0.3rem;
+		min-width: 0;
+		color: var(--muted);
+		font-size: 0.76rem;
+		font-weight: 600;
 	}
 	/* headword/form is the focus of each row, matching the entries table */
 	.lemma-word a {

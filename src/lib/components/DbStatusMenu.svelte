@@ -2,6 +2,8 @@
 	import { dbUI, deleteDatabase, loadDatabase } from '$lib/db.svelte';
 	import { DB_APPROX_BYTES, DB_VERSION } from '$lib/dbMeta';
 
+	let { variant = 'nav' }: { variant?: 'nav' | 'menu' } = $props();
+
 	let menu: HTMLDetailsElement;
 	let confirmDelete = $state(false);
 	let deleting = $state(false);
@@ -36,6 +38,7 @@
 
 <details
 	class="db-menu"
+	class:menu={variant === 'menu'}
 	bind:this={menu}
 	ontoggle={() => {
 		if (!menu.open) {
@@ -46,7 +49,7 @@
 >
 	<summary aria-label="Database status: {statusLabel}" title="Database status">
 		<span class="status-dot" class:ready={dbUI.ready} class:error={dbUI.status === 'error'}></span>
-		<span class="summary-label">DB {statusLabel}</span>
+		<span class="summary-label">{variant === 'menu' ? 'Dictionary data' : 'DB'} <span>{statusLabel}</span></span>
 		<span class="chevron" aria-hidden="true">▾</span>
 	</summary>
 
@@ -281,19 +284,43 @@
 		color: var(--bad);
 	}
 
+	.summary-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+	.summary-label span {
+		font-weight: 500;
+		opacity: 0.75;
+	}
+	.db-menu.menu > summary {
+		width: 100%;
+		min-height: 40px;
+		justify-content: flex-start;
+		padding: 0.45rem 0.55rem;
+		border: 0;
+		border-radius: var(--radius-sm);
+		color: var(--ink);
+		font-size: 0.86rem;
+	}
+	.db-menu.menu > summary:hover,
+	.db-menu.menu[open] > summary { background: var(--surface-2); }
+	.db-menu.menu .chevron { margin-left: auto; color: var(--muted); }
+	.db-menu.menu .panel {
+		position: static;
+		width: 100%;
+		margin-top: 0.35rem;
+		box-shadow: none;
+	}
+
 	@media (max-width: 780px) {
-		.summary-label {
-			display: none;
-		}
 		summary {
 			width: 42px;
 			height: 42px;
 			justify-content: center;
 			padding: 0;
 		}
-		.chevron {
-			display: none;
-		}
+		.chevron { display: none; }
 		.panel {
 			position: fixed;
 			top: 58px;
@@ -302,6 +329,18 @@
 			width: auto;
 			max-height: calc(100dvh - 4.5rem);
 			overflow-y: auto;
+		}
+		.db-menu:not(.menu) .summary-label { display: none; }
+		.db-menu.menu > summary {
+			width: 100%;
+			height: auto;
+		}
+		.db-menu.menu .summary-label { display: inline-flex; }
+		.db-menu.menu .chevron { display: inline; }
+		.db-menu.menu .panel {
+			position: static;
+			width: 100%;
+			max-height: none;
 		}
 	}
 </style>

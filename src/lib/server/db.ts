@@ -492,6 +492,7 @@ export function getEntryMeta(id: string): EntryMeta | null {
 		.get(rid) as Record<string, unknown> | undefined;
 	if (!row) return null;
 	const e = hydrate(row);
+	e.references = referencesForCiteIds(e.citeIds);
 	e.text_blocks = getTextBlocks(rid);
 	const language = (dbh
 		.prepare(`SELECT ${LANGUAGE_COLS} FROM languages WHERE id = ?`)
@@ -503,11 +504,53 @@ export function getEntryMeta(id: string): EntryMeta | null {
 	return { ...e, language };
 }
 
+function referencesForCiteIds(citeIds: number[]): Reference[] {
+	if (!citeIds.length) return [];
+	const placeholders = citeIds.map(() => '?').join(',');
+	const rows = getDb()
+		.prepare(
+			`SELECT r.rowid AS reference_rid, r.id, r.short, r.source, r.progress,
+			        r.provenance, r.editor, r.ocr, r.etymology_provenance,
+			        r.lemma_count, r.unetymologised_count,
+			        c.locator
+			 FROM cites c JOIN "references" r ON r.rowid = c.ref_rid
+			 WHERE c.rowid IN (${placeholders}) ORDER BY r.short, c.rowid`
+		)
+		.all(...citeIds) as Array<Reference & { reference_rid: number }>;
+	const byReference = new Map<number, Reference>();
+	for (const row of rows) {
+		const existing = byReference.get(row.reference_rid);
+		if (existing) {
+			if (row.locator && !existing.locator?.split('; ').includes(row.locator))
+				existing.locator = [existing.locator, row.locator].filter(Boolean).join('; ');
+			continue;
+		}
+		byReference.set(row.reference_rid, {
+			id: row.id,
+			short: row.short,
+			source: row.source,
+			progress: row.progress,
+			provenance: row.provenance,
+			editor: row.editor,
+			ocr: row.ocr,
+			etymology_provenance: row.etymology_provenance,
+			lemma_count: row.lemma_count,
+			unetymologised_count: row.unetymologised_count,
+			locator: row.locator || undefined
+		});
+	}
+	return [...byReference.values()];
+}
+
 function getTextBlocks(rid: number): Lemma['text_blocks'] {
 	return getDb()
 		.prepare(
 			`SELECT t.pos AS position, t.kind, t.format, t.content,
-			        r.id AS source_id, r.short AS source_label, t.locator
+			        r.id AS source_id, r.short AS source_label, r.source AS source_citation,
+			        r.progress AS source_progress, r.provenance AS source_provenance,
+			        r.editor AS source_editor, r.ocr AS source_ocr,
+			        r.lemma_count AS source_lemma_count,
+			        r.unetymologised_count AS source_unetymologised_count, t.locator
 			 FROM texts t LEFT JOIN "references" r ON r.rowid = t.ref_rid
 			 WHERE t.lemma_rid = ? ORDER BY t.pos`
 		)

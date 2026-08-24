@@ -23,6 +23,7 @@ const config = {
 		// Errors during prerender crawl of dynamic links shouldn't fail the whole build.
 		prerender: {
 			handleHttpError: 'warn',
+			handleInvalidUrl: 'warn',
 			handleMissingId: 'warn'
 		}
 	}

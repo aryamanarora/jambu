@@ -7,11 +7,13 @@
 	let {
 		value = '',
 		activeSort = '',
+		standalone = false,
 		onFilter,
 		onSort
 	}: {
 		value?: string;
 		activeSort?: string;
+		standalone?: boolean;
 		onFilter: (key: string, value: string) => void;
 		onSort: (value: string) => void;
 	} = $props();
@@ -56,9 +58,14 @@
 		open = false;
 		search = '';
 	}
-	function clickSort(dir: 'asc' | 'desc') {
-		const next = `${dir}-source`;
-		onSort(activeSort === next ? '' : next);
+	function cycleSort() {
+		onSort(
+			activeSort === 'asc-source'
+				? 'desc-source'
+				: activeSort === 'desc-source'
+					? ''
+					: 'asc-source'
+		);
 	}
 
 	$effect(() => {
@@ -76,7 +83,7 @@
 	});
 </script>
 
-<th bind:this={root}>
+<svelte:element this={standalone ? 'div' : 'th'} bind:this={root} class:standalone>
 	<div class="field">
 		<button
 			class="trigger"
@@ -89,20 +96,14 @@
 			<span class:placeholder={!value}>{selected ? referenceLabel(selected) : value || 'Source'}</span>
 			<span class="caret" class:up={open}>▾</span>
 		</button>
-		<span class="sort">
+		{#if !standalone}
 			<button
-				class="up"
-				class:active={activeSort === 'asc-source'}
-				aria-label="Sort Source ascending"
-				onclick={() => clickSort('asc')}
-			></button>
-			<button
-				class="down"
-				class:active={activeSort === 'desc-source'}
-				aria-label="Sort Source descending"
-				onclick={() => clickSort('desc')}
-			></button>
-		</span>
+				class="sort-cycle"
+				class:active={activeSort === 'asc-source' || activeSort === 'desc-source'}
+				aria-label="Sort Source; currently {activeSort === 'asc-source' ? 'ascending' : activeSort === 'desc-source' ? 'descending' : 'unsorted'}"
+				onclick={cycleSort}
+			>{activeSort === 'asc-source' ? '↑' : activeSort === 'desc-source' ? '↓' : '↕'}</button>
+		{/if}
 	</div>
 	{#if open}
 		<div class="panel" use:floatingPanel={triggerEl}>
@@ -136,10 +137,33 @@
 			</div>
 		</div>
 	{/if}
-</th>
+</svelte:element>
 
 <style>
 	th { position: relative; }
+	.standalone {
+		position: relative;
+		display: grid;
+		align-content: end;
+		min-width: 0;
+	}
+	.sort-cycle {
+		flex: 0 0 auto;
+		width: 28px;
+		height: 32px;
+		padding: 0;
+		border: 0;
+		border-radius: 4px;
+		background: transparent;
+		color: var(--faint);
+		font: inherit;
+		cursor: pointer;
+	}
+	.sort-cycle:hover,
+	.sort-cycle.active {
+		background: color-mix(in srgb, var(--berry) 10%, transparent);
+		color: var(--berry);
+	}
 	.trigger {
 		display: inline-flex;
 		align-items: center;

@@ -1,15 +1,16 @@
 // Fixed categorical palette for etyma, assigned by rank (etyma sorted by form count, the
 // order both the concept-page legend and the index-page bars use) and cycled beyond 8.
-// The slot ordering maximises adjacent-pair colourblind separation — don't reshuffle it.
+// The first four are intentionally far apart in hue because they are the default comparison
+// set on concept maps. Later slots continue the colourblind-friendly categorical sequence.
 export const ETYMON_PALETTE = [
-	'#2a78d6', // blue
-	'#1baf7a', // aqua
-	'#eda100', // yellow
-	'#008300', // green
-	'#4a3aa7', // violet
-	'#e34948', // red
-	'#e87ba4', // magenta
-	'#eb6834' // orange
+	'#0072b2', // blue
+	'#d55e00', // vermillion
+	'#009e73', // bluish green
+	'#cc79a7', // reddish purple
+	'#e69f00', // orange
+	'#6f4c9b', // violet
+	'#1696a7', // teal
+	'#cf3f4d' // red
 ];
 
 /** Slot colour for the etymon ranked `i` within a concept. */

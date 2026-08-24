@@ -48,6 +48,7 @@ import {
 	type Lemma,
 	type Reference,
 	type EntryTextBlock,
+	type CrossFamilyComparison,
 	type ListParams,
 	type CognateGroup,
 	type AncestorRef
@@ -474,6 +475,17 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 		conds.push({ sql: `(l.flags & ${FLAG_SECTION}) != 0`, params: [] });
 	}
 
+	// Either endpoint can be the current entry: the claim may have been printed in DEDR or CDIAL.
+	if (p.crossFamilyOnly) {
+		conds.push({
+			sql: `l.rowid IN (
+				SELECT entry_rid FROM comparisons
+				UNION SELECT compared_rid FROM comparisons
+			)`,
+			params: []
+		});
+	}
+
 	// a sort on a language column also needs the join
 	const sortCol = p.sort?.split('-')[1];
 	if (sortCol && NEEDS_LANG_JOIN.has(sortCol)) needsLangJoin = true;
@@ -510,13 +522,13 @@ interface ListOpts {
 	withOrigin?: boolean; // attach origin_lemma (reflexes/lexicon show it)
 }
 
-/** Per-entry extras for the entries view: parsed immediate ancestors, derived-term counts, and
- * variant word lists, computed from the page's rows (legacy correlated subqueries can't see blobs). */
+/** Per-entry extras for the entries view: parsed immediate ancestors, derived-term counts,
+ * cross-family comparisons, and variant word lists, computed from the page's rows. */
 async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 	if (!rows.length) return;
 	const idx = await ensureCore();
 	const rids = rows.map((r) => r.rid);
-	const [derived, parents] = await Promise.all([
+	const [derived, parents, comparisons] = await Promise.all([
 		query<{ p: number; c: number }>(
 			`SELECT d.parent_rid AS p, COUNT(*) AS c FROM edges d
 			 JOIN lem c2 ON c2.rowid = d.child_rid
@@ -546,7 +558,8 @@ async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 			      AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
 			 ) ORDER BY child, pos, rid`,
 			[jsonList(rids), jsonList(rids)]
-		)
+		),
+		crossFamilyComparisonsByRid(rids)
 	]);
 	const dMap = new Map(derived.map((r) => [r.p, r.c]));
 	const ancestry = new Map<number, AncestorRef[]>();
@@ -589,6 +602,7 @@ async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 		r.variant_forms = vf.get(r.rid)?.join('\x1f') ?? null;
 		r.ocr_variant_forms = ovf.get(r.rid)?.join('\x1f') ?? null;
 		r.ancestry = ancestry.has(r.rid) ? [ancestry.get(r.rid)!] : [];
+		r.comparisons = comparisons.get(r.rid) ?? [];
 	}
 }
 
@@ -603,6 +617,11 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	if (mode === 'entries') {
 		if (params.loanSourcesOnly)
 			modeConds.push({ sql: `(l.flags & ${FLAG_LOAN_SOURCE}) != 0`, params: [] });
+		else if (conceptId)
+			// A concept's immediate etymon can itself be a reflex/derived node. The concept
+			// match below supplies the exact head set, so do not apply the global root-only
+			// entries restriction here (users can still request it with the Roots filter).
+			modeConds.push({ sql: `(l.flags & 7) != ${REL_UNLINKED}`, params: [] });
 		else modeConds.push({ sql: `l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED}`, params: [] });
 	}
 	if (mode === 'lexicon' && languageId)
@@ -779,10 +798,122 @@ export async function getLemma(id: string): Promise<Lemma | null> {
 	return l;
 }
 
+interface RawComparisonPair {
+	id: string;
+	entry_rid: number;
+	compared_rid: number;
+	entry_word: string;
+	entry_gloss: string;
+	entry_language_id: string | null;
+	entry_language: string | null;
+	compared_word: string;
+	compared_gloss: string;
+	compared_language_id: string | null;
+	compared_language: string | null;
+	relation: CrossFamilyComparison['relation'];
+	direction: CrossFamilyComparison['direction'];
+	confidence: CrossFamilyComparison['confidence'];
+	evidence: string;
+	ref_id: string;
+	ref_short: string | null;
+	ref_source: string | null;
+	ref_progress: string | null;
+	ref_provenance: string | null;
+	ref_editor: string | null;
+	ref_ocr: boolean | number;
+	ref_lemma_count: number;
+	ref_unetymologised_count: number;
+	locator: string;
+}
+
+/** Batch every comparison touching any requested entry, keyed from each endpoint's perspective. */
+async function crossFamilyComparisonsByRid(
+	rids: number[]
+): Promise<Map<number, CrossFamilyComparison[]>> {
+	const idx = await ensureCore();
+	const result = new Map<number, CrossFamilyComparison[]>();
+	if (!rids.length) return result;
+	const requested = new Set(rids);
+	const packed = jsonList(rids);
+	const rows = await query<RawComparisonPair>(
+		`SELECT c.id, c.entry_rid, c.compared_rid,
+		        source.word AS entry_word, source.gloss AS entry_gloss,
+		        source_lang.id AS entry_language_id, source_lang.name AS entry_language,
+		        compared.word AS compared_word, compared.gloss AS compared_gloss,
+		        compared_lang.id AS compared_language_id, compared_lang.name AS compared_language,
+		        c.relation, c.direction, c.confidence, c.evidence,
+		        r.id AS ref_id, r.short AS ref_short, r.source AS ref_source,
+		        r.progress AS ref_progress, r.provenance AS ref_provenance,
+		        r.editor AS ref_editor, r.ocr AS ref_ocr,
+		        r.lemma_count AS ref_lemma_count,
+		        r.unetymologised_count AS ref_unetymologised_count, c.locator
+		 FROM comparisons c
+		 JOIN lem source ON source.rowid = c.entry_rid
+		 JOIN lem compared ON compared.rowid = c.compared_rid
+		 LEFT JOIN languages source_lang ON source_lang.rowid = source.lang_rid
+		 LEFT JOIN languages compared_lang ON compared_lang.rowid = compared.lang_rid
+		 JOIN "references" r ON r.rowid = c.reference_rid
+		 WHERE c.entry_rid IN ${IN_JSON} OR c.compared_rid IN ${IN_JSON}
+		 ORDER BY CASE c.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+		          c.relation, c.id`,
+		[packed, packed]
+	);
+	for (const row of rows) {
+		for (const currentRid of [row.entry_rid, row.compared_rid]) {
+			if (!requested.has(currentRid)) continue;
+			const currentIsSource = currentRid === row.entry_rid;
+			const otherRid = currentIsSource ? row.compared_rid : row.entry_rid;
+			const comparison: CrossFamilyComparison = {
+				id: row.id,
+				entry_id: idx.idOf(row.entry_rid),
+				compared_entry_id: idx.idOf(row.compared_rid),
+				other_id: idx.idOf(otherRid),
+				other_word: currentIsSource ? row.compared_word : row.entry_word,
+				other_gloss: currentIsSource ? row.compared_gloss : row.entry_gloss,
+				other_language_id: currentIsSource
+					? row.compared_language_id
+					: row.entry_language_id,
+				other_language: currentIsSource ? row.compared_language : row.entry_language,
+				relation: row.relation,
+				direction: row.direction,
+				confidence: row.confidence,
+				evidence: row.evidence,
+				reference: {
+					id: row.ref_id,
+					short: row.ref_short,
+					source: row.ref_source,
+					progress: row.ref_progress,
+					provenance: row.ref_provenance,
+					editor: row.ref_editor,
+					ocr: row.ref_ocr,
+					lemma_count: row.ref_lemma_count,
+					unetymologised_count: row.ref_unetymologised_count,
+					locator: row.locator
+				}
+			};
+			const list = result.get(currentRid) ?? [];
+			list.push(comparison);
+			result.set(currentRid, list);
+		}
+	}
+	return result;
+}
+
+/** Every article comparison touching this entry, regardless of which dictionary printed it. */
+export async function getCrossFamilyComparisons(id: string): Promise<CrossFamilyComparison[]> {
+	const rid = await canonicalRid(id);
+	if (!rid) return [];
+	return (await crossFamilyComparisonsByRid([rid])).get(rid) ?? [];
+}
+
 async function attachTextBlocks(lemma: HLemma): Promise<void> {
 	lemma.text_blocks = await query<EntryTextBlock>(
 		`SELECT t.pos AS position, t.kind, t.format, t.content,
-		        r.id AS source_id, r.short AS source_label, t.locator
+		        r.id AS source_id, r.short AS source_label, r.source AS source_citation,
+		        r.progress AS source_progress, r.provenance AS source_provenance,
+		        r.editor AS source_editor, r.ocr AS source_ocr,
+		        r.lemma_count AS source_lemma_count,
+		        r.unetymologised_count AS source_unetymologised_count, t.locator
 		 FROM texts t LEFT JOIN "references" r ON r.rowid = t.ref_rid
 		 WHERE t.lemma_rid = ? ORDER BY t.pos`,
 		[lemma.rid]
@@ -1684,6 +1815,15 @@ export interface CompareRow {
 	right: Lemma[];
 }
 
+export interface ConceptCompareRow {
+	conceptId: number;
+	name: string;
+	category: string;
+	left: Lemma[];
+	right: Lemma[];
+	sharedEtyma: Array<{ id: string; word: string; ocr: boolean | number }>;
+}
+
 export async function compareLanguages(
 	id1: string,
 	id2: string
@@ -1755,6 +1895,95 @@ export async function compareLanguages(
 		.sort((a, b) => a.entryId.localeCompare(b.entryId, undefined, { numeric: true }));
 
 	return { lang1, lang2, rows };
+}
+
+/** Pair two language lexicons by their curated concept assignments rather than ancestry. */
+export async function compareLanguageConcepts(
+	id1: string,
+	id2: string
+): Promise<ConceptCompareRow[]> {
+	const idx = await ensureCore();
+	const load = async (languageId: string) => {
+		const rows = await query<{
+			rid: number;
+			word: string;
+			gloss: string;
+			phonemic: string;
+			ord: number;
+			lang_rid: number;
+			origin_rid: number | null;
+			flags: number;
+		}>(
+			`SELECT rowid AS rid, word, gloss, phonemic, ord, lang_rid, origin_rid, flags
+			 FROM lem WHERE lang_rid = ? ORDER BY ord`,
+			[langRidOf(languageId) ?? -1]
+		);
+		return new Map(
+			rows.map((row) => [
+				row.rid,
+				{
+					id: idx.idOf(row.rid),
+					word: row.word,
+					gloss: row.gloss,
+					phonemic: row.phonemic,
+					order: row.ord,
+					language_id: languageId,
+					origin_lemma_id: row.origin_rid == null ? undefined : idx.idOf(row.origin_rid),
+					ocr: row.flags & FLAG_OCR ? 1 : 0
+				} as Lemma
+			])
+		);
+	};
+	const [leftForms, rightForms] = await Promise.all([load(id1), load(id2)]);
+	const concepts = await query<{
+		id: number;
+		name: string;
+		category: string;
+		rids: Uint8Array | null;
+	}>(`SELECT id, name, category, rids FROM concepts WHERE form_count > 0 ORDER BY name`);
+
+	const pending: Array<Omit<ConceptCompareRow, 'sharedEtyma'> & { sharedIds: string[] }> = [];
+	for (const concept of concepts) {
+		const left: Lemma[] = [];
+		const right: Lemma[] = [];
+		for (const rid of readDeltas(concept.rids)) {
+			const leftForm = leftForms.get(rid);
+			if (leftForm) left.push(leftForm);
+			const rightForm = rightForms.get(rid);
+			if (rightForm) right.push(rightForm);
+		}
+		if (left.length && right.length) {
+			const leftOrigins = new Set(left.map((form) => form.origin_lemma_id).filter(Boolean));
+			const rightOrigins = new Set(right.map((form) => form.origin_lemma_id).filter(Boolean));
+			pending.push({
+				conceptId: concept.id,
+				name: concept.name,
+				category: concept.category,
+				left,
+				right,
+				sharedIds: [...leftOrigins].filter((id) => rightOrigins.has(id)) as string[]
+			});
+		}
+	}
+
+	const sharedIds = [...new Set(pending.flatMap((row) => row.sharedIds))];
+	const sharedRids = sharedIds.map((id) => idx.ridOf(id)).filter((rid): rid is number => rid != null);
+	const heads = sharedRids.length
+		? await query<{ rid: number; word: string; flags: number }>(
+				`SELECT rowid AS rid, word, flags FROM lem WHERE rowid IN ${IN_JSON}`,
+				[jsonList(sharedRids)]
+			)
+		: [];
+	const headById = new Map(
+		heads.map((head) => [
+			idx.idOf(head.rid),
+			{ id: idx.idOf(head.rid), word: head.word, ocr: head.flags & FLAG_OCR ? 1 : 0 }
+		])
+	);
+	return pending.map(({ sharedIds: ids, ...row }) => ({
+		...row,
+		sharedEtyma: ids.map((id) => headById.get(id) ?? { id, word: id, ocr: 0 })
+	}));
 }
 
 export { CLADE_ORDER };

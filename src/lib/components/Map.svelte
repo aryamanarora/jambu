@@ -10,7 +10,8 @@
 		height = '500px',
 		showAllTooltips = false,
 		bounds,
-		fitOnce = false
+		fitOnce = false,
+		mutedTiles = false
 	}: {
 		markers: MapMarker[];
 		center?: [number, number];
@@ -19,6 +20,7 @@
 		showAllTooltips?: boolean;
 		bounds?: [[number, number], [number, number]]; // fixed initial framing (overrides auto-fit)
 		fitOnce?: boolean; // auto-fit only the first draw, never re-adjust the view on later updates
+		mutedTiles?: boolean; // soften the basemap so dense data overlays remain dominant
 	} = $props();
 
 	let el: HTMLDivElement;
@@ -40,34 +42,54 @@
 		if (layer) layer.remove();
 		layer = L.layerGroup().addTo(map);
 		const pts: [number, number][] = [];
+		const foreground: any[] = [];
 		for (const m of markers) {
 			if (m.lat == null || m.long == null) continue;
 			let marker: any;
+			const iconSize = m.foreground ? 14 : 16;
 			if (m.color && m.svg?.includes('polygon')) {
 				// historical-language marker: keep the rhombus shape (as on the languages page)
 				// but recolour its fill to the overlay/clade colour instead of drawing a circle.
 				const svg = m.svg.replace(/fill="[^"]*"/, `fill="${m.color}"`);
-				const icon = L.icon({ iconUrl: iconUrl(svg), iconSize: [16, 16] });
+				const icon = L.icon({
+					iconUrl: iconUrl(svg),
+					iconSize: [iconSize, iconSize],
+					iconAnchor: [iconSize / 2, iconSize / 2],
+					className: m.foreground ? 'map-point-foreground' : ''
+				});
 				marker = L.marker([m.lat, m.long], { icon, opacity: m.dim ? 0.4 : 1 }).addTo(layer);
 			} else if (m.color) {
 				// filled circle — recolourable (used for correspondence + isogloss overlays)
 				marker = L.circleMarker([m.lat, m.long], {
 					radius: m.radius ?? 7,
 					fillColor: m.color,
-					color: m.ring ? '#ffffff' : 'rgba(0,0,0,0.55)',
-					weight: m.ring ? 3.5 : 1,
+					color: m.ring ? 'rgba(48,35,47,0.86)' : 'rgba(0,0,0,0.55)',
+					weight: m.ring ? 1.75 : 1,
 					fillOpacity: m.dim ? 0.25 : 0.92,
-					opacity: m.dim ? 0.35 : 1
+					opacity: m.dim ? 0.35 : 1,
+					className: m.foreground ? 'map-point-foreground' : ''
 				}).addTo(layer);
 				if (m.ring) marker.bringToFront();
 			} else {
-				const icon = L.icon({ iconUrl: iconUrl(m.svg), iconSize: [16, 16] });
+				const icon = L.icon({
+					iconUrl: iconUrl(m.svg),
+					iconSize: [iconSize, iconSize],
+					iconAnchor: [iconSize / 2, iconSize / 2],
+					className: m.foreground ? 'map-point-foreground' : ''
+				});
 				marker = L.marker([m.lat, m.long], { icon }).addTo(layer);
 			}
 			if (m.tooltip) marker.bindTooltip(m.tooltip);
 			if (m.popupHtml) marker.bindPopup(m.popupHtml);
 			if (m.onClick) marker.on('click', m.onClick);
+			if (m.foreground) foreground.push(marker);
 			pts.push([m.lat, m.long]);
+		}
+		// Raise emphasis markers only after every point exists. Calling bringToFront while drawing is
+		// not sufficient: a later context point can otherwise be appended above the highlight.
+		for (const marker of foreground) {
+			marker.bringToFront?.();
+			marker.setZIndexOffset?.(1000);
 		}
 		// auto-fit the view. With fitOnce, only the first draw fits — later redraws (recolouring on
 		// selection, re-jittering) leave the user's pan/zoom untouched. Otherwise re-fit only when the
@@ -98,7 +120,11 @@
 		map = L.map(el, { scrollWheelZoom: false }).setView(center ?? [20.5937, 78.9629], zoom);
 		L.tileLayer(
 			'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
-			{ attribution: 'Tiles © Esri — US National Park Service', maxZoom: 8 }
+			{
+				attribution: 'Tiles © Esri — US National Park Service',
+				maxZoom: 8,
+				className: mutedTiles ? 'map-tiles-muted' : ''
+			}
 		).addTo(map);
 		if (bounds) map.fitBounds(bounds);
 		map.on('moveend zoomend', updateOffscreen);
@@ -132,13 +158,51 @@
 <style>
 	.map-frame {
 		position: relative;
+		overflow: hidden;
+		border: 1px solid var(--border-strong);
+		border-radius: 0.8rem;
+		background: var(--surface-2);
+		box-shadow: 0 0.45rem 1.4rem rgba(45, 30, 24, 0.08);
 	}
 	.map-frame :global(.map) {
 		height: 100%;
 	}
+	.map-frame :global(.map-tiles-muted) {
+		filter: saturate(0.3) contrast(0.72) brightness(1.14);
+		opacity: 0.72 !important;
+	}
+	:global(:root[data-theme='dark']) .map-frame :global(.map-tiles-muted) {
+		filter: saturate(0.28) contrast(0.78) brightness(0.72);
+		opacity: 0.68 !important;
+	}
+	.map-frame :global(.map-point-foreground) {
+		filter: drop-shadow(0 1px 1px rgba(20, 14, 12, 0.9)) drop-shadow(0 0 3px rgba(20, 14, 12, 0.35));
+	}
+	.map-frame :global(.leaflet-control-zoom) {
+		overflow: hidden;
+		border: 0;
+		border-radius: 0.55rem;
+		box-shadow: 0 2px 10px rgba(35, 26, 22, 0.2);
+	}
+	.map-frame :global(.leaflet-control-zoom a) {
+		border-color: var(--border);
+		background: color-mix(in srgb, var(--surface) 94%, transparent);
+		color: var(--ink);
+	}
+	.map-frame :global(.leaflet-control-zoom a:hover) {
+		background: var(--surface-2);
+		color: var(--plum-2);
+	}
 	.map-frame :global(.leaflet-tooltip),
 	.map-frame :global(.leaflet-popup-content) {
 		font-family: var(--font-phon);
+	}
+	.map-frame :global(.leaflet-tooltip) {
+		border: 1px solid var(--border-strong);
+		border-radius: 0.45rem;
+		background: color-mix(in srgb, var(--surface) 96%, transparent);
+		color: var(--ink);
+		box-shadow: 0 3px 12px rgba(35, 26, 22, 0.18);
 	}
 	.offscreen {
 		position: absolute;
@@ -172,7 +236,7 @@
 	}
 	@media (max-width: 640px) {
 		.map-frame {
-			max-height: min(56vh, 360px);
+			max-height: min(68vh, 480px);
 		}
 		.map-frame :global(.leaflet-control-zoom a) {
 			width: 40px;

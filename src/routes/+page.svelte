@@ -24,6 +24,19 @@
 <p class="lead">
 	<em>Jambu</em> is a modern online etymological dictionary of the South Asian languages.
 </p>
+
+<form class="dictionary-search" action="{base}/reflexes" method="get">
+	<label for="home-search" class="visually-hidden">Search the dictionary</label>
+	<input
+		id="home-search"
+		type="search"
+		name="word"
+		placeholder="Search a word or form…"
+		autocomplete="off"
+	/>
+	<button type="submit">Search</button>
+</form>
+
 <p>
 	The <em>Jambu</em> project seeks to modernise and consolidate previous work on the historical and
 	comparative lexicography of the South Asian languages—including the Indo-Aryan, Dravidian, Munda,
@@ -111,3 +124,46 @@
 	or <em>Syzygium cumini</em>. India was historically referred to as
 	<a href="{base}/entries/5134"><em>jambudvīpa</em> <span class="id-tag">[5134]</span></a>.
 </p>
+
+<style>
+	.dictionary-search {
+		display: flex;
+		gap: 0.45rem;
+		max-width: 44rem;
+		margin: 1.15rem 0 1.5rem;
+	}
+
+	.dictionary-search input {
+		flex: 1;
+		min-width: 0;
+		padding: 0.62rem 0.75rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius-sm);
+		background: var(--surface);
+		color: var(--ink);
+		font: inherit;
+		font-family: var(--font-serif);
+	}
+
+	.dictionary-search input:focus {
+		outline: 3px solid color-mix(in srgb, var(--berry) 18%, transparent);
+		border-color: var(--plum-2);
+	}
+
+	.dictionary-search button {
+		padding: 0.62rem 1rem;
+		border: 1px solid var(--plum);
+		border-radius: var(--radius-sm);
+		background: var(--plum);
+		color: white;
+		font: inherit;
+		font-weight: 650;
+		cursor: pointer;
+	}
+
+	@media (max-width: 640px) {
+		.dictionary-search {
+			display: grid;
+		}
+	}
+</style>

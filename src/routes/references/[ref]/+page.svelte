@@ -34,6 +34,15 @@
 			? `https://github.com/moli-mandala/data/blob/main/${file}`
 			: null;
 	}
+	function etymologyProvenance(value: typeof ref.etymology_provenance): string {
+		return ({
+			source: 'Supplied by the cited source',
+			'source-mapped': 'Supplied by the source; mapped to Jambu entries by the editors',
+			jambu: 'Added by the Jambu editors',
+			mixed: 'Combination of source-supplied and Jambu editorial etymologies',
+			none: 'No etymologies represented'
+		} as Record<string, string>)[value ?? ''] ?? 'Not recorded';
+	}
 </script>
 
 <svelte:head>
@@ -64,6 +73,7 @@
 	</div>
 	<div class="prop"><dt>Editor</dt><dd>{ref.editor || 'Not recorded'}</dd></div>
 	<div class="prop"><dt>Extraction</dt><dd>{ref.ocr ? 'Optical character recognition (OCR)' : 'Not marked as OCR'}</dd></div>
+	<div class="prop"><dt>Etymologies</dt><dd>{etymologyProvenance(ref.etymology_provenance)}</dd></div>
 	<div class="prop">
 		<dt>Unetymologised</dt>
 		<dd>{unetymologisedPct()} ({(ref.unetymologised_count ?? 0).toLocaleString()} of {(ref.lemma_count ?? 0).toLocaleString()} forms)</dd>

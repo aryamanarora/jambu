@@ -2,6 +2,7 @@
 	import { base } from '$app/paths';
 	import { etymonSlotColor } from '$lib/etyma';
 	import type { ConceptBarGroup, ConceptRow } from '$lib/types';
+	import ListToolbar from '$lib/components/ListToolbar.svelte';
 
 	let { data } = $props();
 	const concepts = data.concepts as ConceptRow[];
@@ -50,28 +51,42 @@
 	— and their dictionary sources — used across the languages of Jambu to express it.
 </p>
 
-<div class="controls">
-	<input class="search" placeholder="Search concepts…" bind:value={search} />
-	<select bind:value={category}>
-		{#each categories as c}
-			<option value={c}>{c === 'all' ? 'All categories' : c}</option>
-		{/each}
-	</select>
-	<select bind:value={sort}>
-		<option value="etyma">Sort: etyma</option>
-		<option value="lang">Sort: languages</option>
-		<option value="form">Sort: forms</option>
-		<option value="name">Sort: name</option>
-	</select>
+{#snippet filters()}
+	<label class="filter-control">
+		<span>Category</span>
+		<select bind:value={category}>
+			{#each categories as c}
+				<option value={c}>{c === 'all' ? 'All categories' : c}</option>
+			{/each}
+		</select>
+	</label>
+	<label class="filter-control">
+		<span>Sort results</span>
+		<select bind:value={sort}>
+			<option value="etyma">Most etyma</option>
+			<option value="lang">Most languages</option>
+			<option value="form">Most forms</option>
+			<option value="name">Concept name</option>
+		</select>
+	</label>
 	<label class="toggle">
 		<input type="checkbox" bind:checked={splitByReflexFamily} />
-		Split by reflex family
+		Split distributions by language family
 	</label>
-	<span class="count">{filtered.length.toLocaleString()} shown</span>
-</div>
+{/snippet}
+
+<ListToolbar
+	value={search}
+	placeholder="Search concepts…"
+	searchLabel="Search concepts"
+	resultLabel={`${filtered.length.toLocaleString()} concepts`}
+	filterCount={(category !== 'all' ? 1 : 0) + (splitByReflexFamily ? 1 : 0)}
+	onSearch={(value) => (search = value)}
+	{filters}
+/>
 
 <div class="table-wrap">
-	<table class="data accent-col">
+	<table class="data accent-col mobile-cards">
 		<thead>
 			<tr>
 				<th>Concept</th>
@@ -92,10 +107,10 @@
 			{#each filtered as c (c.id)}
 				<tr>
 					<td class="name-cell"><a href="{base}/concepts/{c.id}">{c.name}</a></td>
-					<td class="muted">{c.category}</td>
-					<td class="numeric">{c.etyma_count.toLocaleString()}</td>
-					<td class="numeric">{c.lang_count.toLocaleString()}</td>
-					<td class="dist-col">
+					<td class="muted" data-label="Category">{c.category}</td>
+					<td class="numeric" data-label="Etyma">{c.etyma_count.toLocaleString()}</td>
+					<td class="numeric" data-label="Languages">{c.lang_count.toLocaleString()}</td>
+					<td class="dist-col" data-label="Distribution">
 						{#if splitByReflexFamily && c.reflex_family_bars}
 							<div class="family-bars">
 								{#each c.reflex_family_bars as group (group.family)}
@@ -175,23 +190,16 @@
 		max-width: 60ch;
 		margin: 0.4rem 0 1.2rem;
 	}
-	.controls {
-		display: flex;
-		gap: 0.6rem;
-		align-items: center;
-		flex-wrap: wrap;
-		margin-bottom: 1rem;
+	.filter-control {
+		display: grid;
+		gap: 0.3rem;
+		color: var(--muted);
+		font-size: 0.76rem;
+		font-weight: 600;
 	}
-	.search {
-		flex: 1;
-		min-width: 12rem;
-		padding: 0.45rem 0.7rem;
-		border: 1px solid var(--border);
-		border-radius: 6px;
-		background: var(--bg);
-		color: inherit;
-	}
-	.controls select {
+	.filter-control select {
+		width: 100%;
+		min-height: 38px;
 		padding: 0.45rem 0.6rem;
 		border: 1px solid var(--border);
 		border-radius: 6px;
@@ -207,10 +215,6 @@
 	}
 	.toggle input {
 		margin: 0;
-	}
-	.count {
-		color: var(--muted);
-		font-size: 0.85rem;
 	}
 	.table-wrap {
 		overflow-x: auto;
@@ -276,12 +280,7 @@
 		background: #9a958c;
 	}
 	@media (max-width: 640px) {
-		.controls > .search,
-		.controls > select {
-			width: 100%;
-			flex: 1 0 100%;
-		}
-		.controls > .toggle {
+		.toggle {
 			min-height: 42px;
 			white-space: normal;
 		}
