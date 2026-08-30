@@ -1,6 +1,21 @@
 <script lang="ts">
+	import ReferenceLink from '$lib/components/ReferenceLink.svelte';
 	import { base } from '$app/paths';
 	import { changelog } from '$lib/changelog';
+	import type { GlobalStats } from '$lib/types';
+
+	let { data } = $props();
+	const stats = $derived(data.stats as GlobalStats);
+
+	// The headline size of the corpus, each figure a way into the list it counts.
+	const figures = $derived([
+		{ href: '/entries', label: 'Headwords', value: stats.entries },
+		{ href: '/reflexes', label: 'Forms', value: stats.forms },
+		{ href: '/languages', label: 'Languages', value: stats.languages },
+		{ href: '/languages', label: 'Dialects', value: stats.dialects },
+		{ href: '/concepts', label: 'Concepts', value: stats.concepts },
+		{ href: '/references', label: 'Sources', value: stats.references }
+	]);
 </script>
 
 <svelte:head>
@@ -36,6 +51,18 @@
 	/>
 	<button type="submit">Search</button>
 </form>
+
+<dl class="corpus-stats" aria-label="Size of the Jambu corpus">
+	{#each figures as figure (figure.label)}
+		<div>
+			<dt>{figure.label}</dt>
+			<dd><a href="{base}{figure.href}">{figure.value.toLocaleString('en')}</a></dd>
+		</div>
+	{/each}
+</dl>
+<p class="corpus-note">
+	{stats.reflexes.toLocaleString('en')} of those forms are etymologised reflexes, linked to a headword.
+</p>
 
 <p>
 	The <em>Jambu</em> project seeks to modernise and consolidate previous work on the historical and
@@ -104,9 +131,7 @@
 								<span class="ingested-label">Sources</span>
 								<div class="ingested-links">
 									{#each entry.ingested.sources as source (source.id)}
-										<a class="ingested-link source-link" href="{base}/references/{source.id}">
-											<span aria-hidden="true">§</span>{source.label}
-										</a>
+										<ReferenceLink reference={{ id: source.id, short: source.label }} />
 									{/each}
 								</div>
 							</div>
@@ -161,9 +186,69 @@
 		cursor: pointer;
 	}
 
+	.corpus-stats {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 0.6rem;
+		margin: 0 0 0.5rem;
+		padding: 0.75rem 0.9rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--surface);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.corpus-stats div {
+		min-width: 0;
+	}
+
+	.corpus-stats dt {
+		color: var(--muted);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.corpus-stats dd {
+		margin: 0.1rem 0 0;
+		font-size: 1.25rem;
+		font-weight: 650;
+		font-variant-numeric: tabular-nums;
+		line-height: 1.15;
+	}
+
+	.corpus-stats dd a {
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.corpus-stats dd a:hover,
+	.corpus-stats dd a:focus-visible {
+		color: var(--berry);
+		text-decoration: underline;
+	}
+
+	.corpus-note {
+		margin: 0 0 1.5rem;
+		color: var(--muted);
+		font-size: 0.85rem;
+	}
+
+	@media (max-width: 860px) {
+		.corpus-stats {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.75rem 0.6rem;
+		}
+	}
+
 	@media (max-width: 640px) {
 		.dictionary-search {
 			display: grid;
+		}
+
+		.corpus-stats {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 </style>

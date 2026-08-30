@@ -1,0 +1,328 @@
+/*
+ * The atlas shell — the chrome shared by every full-bleed map page (the concept atlas, the
+ * language atlas). An edge-to-edge map with two panels floating over it, each foldable, and
+ * inside the panels a list whose rows are pickers that open out into detail.
+ *
+ * These rules are global rather than scoped because the markup they style is written by the page
+ * components while the frame around it comes from `AtlasShell.svelte`; scoped styles cannot reach
+ * across that boundary. Everything is nested under `.atlas` so the generic names (`.row`,
+ * `.list`, `.search`, `.detail`) cannot leak onto the rest of the app. A page that needs to
+ * differ overrides in its own `<style>` block, which wins on specificity.
+ */
+
+.atlas {
+	position: relative;
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 0;
+}
+.atlas .atlas-map {
+	position: absolute;
+	inset: 0;
+}
+
+/* ---- the floating panels ------------------------------------------------- */
+/* Both sit over the map rather than beside it, so the map keeps the whole viewport and each can
+   be folded away when you want the geography bare.
+   No backdrop-filter on either: it would make them containing blocks for position:fixed,
+   stranding a panel's dropdown off-screen. */
+.atlas .atlas-panel {
+	position: absolute;
+	z-index: 500; /* over leaflet's panes, under its popups */
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--border-strong);
+	border-radius: 0.9rem;
+	background: color-mix(in srgb, var(--surface) 95%, transparent);
+	box-shadow: 0 0.8rem 2.2rem rgba(20, 12, 18, 0.34);
+	overflow: hidden;
+}
+/* left: what you are looking at — the largest thing on the screen after the map */
+.atlas .atlas-panel.left {
+	top: 0.85rem;
+	left: 0.85rem;
+	width: min(24rem, 30vw);
+	padding-bottom: 0.2rem;
+}
+.atlas .atlas-panel.left h1 {
+	margin: 0;
+	padding: 0 0.7rem 0.5rem 0.95rem;
+	min-width: 0;
+	font-size: 1rem; /* the picker inside sets its own type; this only bounds the box */
+	font-weight: 400;
+}
+/* right: the list, full height so it can scroll */
+.atlas .atlas-panel.right {
+	top: 0.85rem;
+	right: 0.85rem;
+	bottom: 0.85rem;
+	width: min(26rem, 32vw);
+	min-height: 0;
+}
+.atlas .atlas-panel.right.collapsed {
+	bottom: auto;
+}
+
+/* the crumb row above the left panel's title */
+.atlas .crumb-head {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.6rem 0.7rem 0 0.95rem;
+}
+.atlas .crumbs {
+	font-size: 0.72rem;
+	color: var(--muted);
+}
+.atlas .crumb-head .crumbs {
+	margin-right: auto;
+	min-width: 0;
+}
+
+.atlas .panel-head {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.55rem 0.8rem;
+	border-bottom: 1px solid var(--border);
+}
+.atlas .panel-head h2 {
+	margin: 0;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--muted);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+.atlas .panel-toggle {
+	display: inline-grid;
+	place-items: center;
+	flex: none;
+	width: 1.7rem;
+	height: 1.7rem;
+	padding: 0;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--muted);
+	cursor: pointer;
+}
+.atlas .panel-toggle:hover {
+	background: color-mix(in srgb, var(--berry) 12%, transparent);
+	color: var(--berry);
+}
+
+/* ---- the headline figures ------------------------------------------------ */
+.atlas .stats {
+	display: flex;
+	gap: 1.4rem;
+	margin: 0;
+	padding: 0.6rem 0.95rem 0.7rem;
+	border-top: 1px solid var(--border);
+}
+.atlas .stats dt {
+	color: var(--muted);
+	font-size: 0.66rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+.atlas .stats dd {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ---- the list's controls ------------------------------------------------- */
+.atlas .controls {
+	display: flex;
+	gap: 0.4rem;
+	padding: 0.55rem 0.75rem 0.35rem;
+}
+.atlas .search {
+	flex: 1;
+	min-width: 0;
+	padding: 0.4rem 0.55rem;
+	border: 1.5px solid var(--border-strong);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+	color: var(--ink);
+	font: inherit;
+	font-size: 0.85rem;
+}
+.atlas .search:focus {
+	outline: none;
+	border-color: var(--plum-2);
+}
+.atlas .clear {
+	flex: none;
+	margin-left: auto;
+	padding: 0.15rem 0.6rem;
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	background: none;
+	font: inherit;
+	font-size: 0.75rem;
+	color: var(--muted);
+	white-space: nowrap;
+	cursor: pointer;
+}
+.atlas .clear:hover {
+	border-color: var(--border-strong);
+	color: var(--ink);
+}
+.atlas .hint {
+	margin: 0;
+	padding: 0 0.8rem 0.5rem;
+	color: var(--faint);
+	font-size: 0.72rem;
+	line-height: 1.4;
+}
+
+/* ---- the list ------------------------------------------------------------ */
+.atlas .list {
+	display: grid;
+	align-content: start;
+	gap: 0.15rem;
+	padding: 0 0.6rem 0.7rem;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border-strong) transparent;
+}
+.atlas .empty {
+	margin: 0;
+	padding: 0.9rem 0.85rem;
+	color: var(--muted);
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+/* A row carries its subject's colour as --c and wears it when hovered or picked. Picking is what
+   the map draws; opening is what you read — two jobs, two controls, side by side. */
+.atlas .row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: stretch;
+	border: 1.5px solid transparent;
+	border-radius: 8px;
+	transition: background 120ms ease, border-color 120ms ease;
+}
+.atlas .row:hover {
+	border-color: var(--c);
+	background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.atlas .row.pinned {
+	border-color: var(--c);
+	background: color-mix(in srgb, var(--c) 22%, transparent);
+}
+.atlas .row.open {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+/* the caller supplies grid-template-areas: the first line is always 'dot word count', the second
+   is whatever that atlas puts under the name */
+.atlas .pick {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 0.1rem 0.5rem;
+	min-width: 0;
+	padding: 0.35rem 0.2rem 0.4rem 0.5rem;
+	border: 0;
+	background: transparent;
+	font: inherit;
+	color: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+.atlas .pick:focus-visible,
+.atlas .disclose:focus-visible {
+	outline: 2px solid var(--c);
+	outline-offset: -2px;
+	border-radius: 6px;
+}
+.atlas .dot {
+	grid-area: dot;
+	flex: none;
+	width: 0.7rem;
+	height: 0.7rem;
+	border-radius: 50%;
+	background: var(--c);
+}
+.atlas .word {
+	grid-area: word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.atlas .count {
+	grid-area: count;
+	color: var(--muted);
+	font-size: 0.72rem;
+	font-variant-numeric: tabular-nums;
+}
+.atlas .disclose {
+	display: grid;
+	place-items: center;
+	flex: none;
+	width: 1.7rem;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--muted);
+	cursor: pointer;
+}
+.atlas .disclose:hover {
+	color: var(--berry);
+}
+
+/* ---- an opened row ------------------------------------------------------- */
+.atlas .detail {
+	margin: 0 0 0.25rem;
+	border: 1.5px solid var(--c);
+	border-top: 0;
+	border-radius: 0 0 8px 8px;
+	background: color-mix(in srgb, var(--surface) 62%, transparent);
+}
+.atlas .detail-head {
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+	padding: 0.35rem 0.6rem 0.1rem;
+}
+.atlas .detail-link {
+	font-size: 0.76rem;
+	color: var(--muted);
+}
+.atlas .detail-meta {
+	margin-left: auto;
+	flex: none;
+	color: var(--faint);
+	font-size: 0.7rem;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+/* ---- narrow screens: the panels stop floating and the page scrolls again --- */
+@media (max-width: 860px) {
+	.atlas {
+		display: grid;
+		gap: 0.7rem;
+		padding: 0.7rem;
+	}
+	.atlas .atlas-map {
+		position: relative;
+		inset: auto;
+		height: 45vh;
+		border-radius: 0.9rem;
+		overflow: hidden;
+	}
+	.atlas .atlas-panel {
+		position: relative;
+		inset: auto;
+		width: auto;
+	}
+	.atlas .list {
+		max-height: none;
+	}
+}

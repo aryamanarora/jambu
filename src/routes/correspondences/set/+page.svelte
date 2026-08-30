@@ -120,7 +120,7 @@
 			<table class="data">
 				<thead>
 					<tr>
-						<th>Language</th>
+						<th class="accent">Language</th>
 						<th>Word</th>
 						<th>Gloss</th>
 						<th>Change</th>

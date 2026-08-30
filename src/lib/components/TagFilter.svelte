@@ -77,7 +77,7 @@
 			onclick={() => (open = !open)}
 		>
 			Tags{#if selected.size}<span class="count">{selected.size}</span>{/if}
-			<span class="caret" class:up={open}>▾</span>
+			<span class="chev" class:open aria-hidden="true"></span>
 		</button>
 	</div>
 	{#if open}
@@ -154,13 +154,8 @@
 		padding: 0 0.4em;
 		font-size: 0.75em;
 	}
-	.caret {
+	.trigger :global(.chev) {
 		margin-left: auto;
-		font-size: 0.7em;
-		transition: transform 0.12s;
-	}
-	.caret.up {
-		transform: rotate(180deg);
 	}
 	.panel {
 		background: var(--surface);

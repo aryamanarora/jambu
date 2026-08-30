@@ -279,6 +279,29 @@ code {
 	padding: 1.25rem 1.5rem 4rem;
 	min-width: 0;
 }
+/* An edge-to-edge page: no centring, no padding, and exactly the height the header and any
+   banner leave behind, so the page can own the viewport instead of scrolling within it.
+   Only above the narrow breakpoint — on a phone there is no room to float panels over a map,
+   so the page falls back to an ordinary scrolling document. */
+.content.full-bleed {
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}
+@media (min-width: 861px) {
+	body:has(> div > .content.full-bleed),
+	body:has(> .content.full-bleed) {
+		display: flex;
+		flex-direction: column;
+		min-height: 100dvh;
+		overflow: hidden;
+	}
+	.content.full-bleed {
+		display: flex; /* so the page inside can claim the height by flexing, not by % */
+		flex: 1 1 auto;
+		min-height: 0;
+	}
+}
 
 .lead {
 	font-size: 1.2rem;
@@ -361,15 +384,6 @@ code {
 	border-bottom: 2px solid transparent;
 	cursor: pointer;
 	list-style: none;
-}
-.nav-dropdown > summary::-webkit-details-marker,
-.utility-menu > summary::-webkit-details-marker {
-	display: none;
-}
-.nav-dropdown > summary::after {
-	content: '⌄';
-	margin-left: 0.28rem;
-	font-size: 0.7em;
 }
 .nav-dropdown > summary:hover,
 .nav-dropdown > summary.active,
@@ -707,11 +721,6 @@ a.ingested-link span {
 	font-size: 0.68rem;
 	font-weight: 700;
 }
-a.source-link span {
-	color: var(--plum-2);
-	background: color-mix(in srgb, var(--plum-2) 13%, transparent);
-}
-
 /* ---- Tables (dense scholarly) ------------------------------------------ */
 .table-wrap {
 	overflow-x: auto;
@@ -736,17 +745,33 @@ table.data th {
 	font-size: 0.9rem;
 	color: var(--muted);
 	background: var(--surface-2);
-	padding: 0.45rem 0.3rem;
+	/* the inline padding must match table.data td so header labels sit on the same
+	   left (or right, for numeric columns) edge as the text in the column below */
+	padding: 0.45rem 0.6rem;
 	position: sticky;
 	top: 0; /* flush to the top of the (horizontally-scrollable) table wrapper */
 	z-index: 5;
 	border-bottom: 1px solid var(--border-strong);
-	vertical-align: top;
+	/* centred so a plain label lines up with the text inside a sibling filter input,
+	   whose box makes that header cell taller */
+	vertical-align: middle;
 }
 table.data td {
 	padding: 0.4rem 0.6rem;
 	vertical-align: top;
 	border-bottom: 1px solid var(--border);
+}
+/* Tags carries a lead-in margin for the case where it trails a gloss; in a column of its
+   own the pills belong on the column's text edge like every other cell. */
+table.data td.tag-cell .tags {
+	margin-left: 0;
+}
+/* count columns: header label and figures share the same right edge, digits in step */
+table.data th.numeric,
+table.data td.numeric {
+	text-align: right;
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
 }
 table.data tbody tr:hover td {
 	background: var(--surface-2);
@@ -759,9 +784,9 @@ table.data td p {
 	font-weight: 500;
 	white-space: nowrap;
 }
-/* header of a lang-accent column carries a matching 4px rail so it lines up with the coloured
-   clade accent on the cells below */
-table.data.accent-col th:first-child {
+/* header of a lang-accent column carries a matching 4px rail so its label lines up with the
+   text in the cells below, which are inset by their coloured clade accent */
+table.data th.accent {
 	border-left: 4px solid var(--border-strong);
 }
 .group-row td {
@@ -864,45 +889,137 @@ select.search-box:focus {
 	color: #fff;
 }
 
-/* ---- Sort arrows -------------------------------------------------------- */
-.sort {
-	display: inline-flex;
-	flex-direction: column;
-	gap: 0;
-	margin-left: 2px;
+/* ---- Chevrons ----------------------------------------------------------
+   One chevron for every menu, picker and disclosure. Previously these were set as
+   text — ▾ in some places, ⌄ in others — so their weight, size and baseline came
+   from whatever font happened to resolve the glyph, and the two characters never
+   matched each other. Drawing the shape from two borders fixes the stroke at one
+   weight, takes the colour from the surrounding text, and turns cleanly when the
+   thing it belongs to opens. */
+.chev {
+	display: inline-block;
+	box-sizing: border-box;
+	flex: none;
+	width: 0.44em;
+	height: 0.44em;
+	/* the rotated square's ink is centred on its box, so `middle` puts the chevron on the
+	   text's centre line in inline runs; in the flex triggers align-items does the same
+	   job, and either way there is no vertical margin to throw it off */
+	vertical-align: middle;
+	border: solid currentColor;
+	border-width: 0 1.5px 1.5px 0;
+	transform: rotate(45deg);
+	transition: transform 0.16s ease;
 }
-.sort button {
-	all: unset;
-	position: relative;
-	cursor: pointer;
-	width: 22px;
-	height: 17px;
-	opacity: 0.4;
+/* menu triggers flip down → up when their panel opens */
+.chev.open {
+	transform: rotate(225deg);
 }
-.sort button::before {
+/* disclosures turn right → down (the plain .chev) as their row expands */
+.chev.right {
+	transform: rotate(-45deg);
+}
+
+/* No <summary> keeps the browser's own disclosure triangle: it is a different shape and
+   weight on every platform, and it was the last thing still drawing its own arrow. */
+details > summary {
+	list-style: none;
+}
+details > summary::-webkit-details-marker {
+	display: none;
+}
+/* A plain disclosure takes the chevron on the left, where its triangle used to sit, and
+   turns right → down as it opens. The menu-style ones below carry theirs on the right,
+   and .comparison-head renders its own. */
+details:not(.nav-dropdown, .utility-menu, .filter-menu, .db-menu) > summary:not(.comparison-head)::before {
 	content: '';
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 0.4em;
+	height: 0.4em;
+	margin-right: 0.5em;
+	vertical-align: middle;
+	border: solid currentColor;
+	border-width: 0 1.5px 1.5px 0;
+	opacity: 0.75;
+	transform: rotate(-45deg);
+	transition: transform 0.16s ease;
 }
-.sort button.up::before {
-	top: 6px;
-	border-bottom: 6px solid var(--muted);
+details:not(.nav-dropdown, .utility-menu, .filter-menu, .db-menu)[open] > summary:not(.comparison-head)::before {
+	transform: rotate(45deg);
 }
-.sort button.down::before {
-	bottom: 6px;
-	border-top: 6px solid var(--muted);
+
+/* the same shape for the menu triggers, whose <summary> has no element to hang it on */
+.nav-dropdown > summary::after,
+.filter-menu > summary::after {
+	content: '';
+	display: inline-block;
+	box-sizing: border-box;
+	width: 0.42em;
+	height: 0.42em;
+	margin-left: 0.36em;
+	vertical-align: middle;
+	border: solid currentColor;
+	border-width: 0 1.5px 1.5px 0;
+	transform: rotate(45deg);
+	transition: transform 0.16s ease;
 }
-.sort button.active {
+.nav-dropdown[open] > summary::after,
+.filter-menu[open] > summary::after {
+	transform: rotate(225deg);
+}
+
+/* ---- Sort toggles ------------------------------------------------------
+   A stacked pair of carets: both faint when the column is unsorted (so the column
+   reads as sortable without shouting), the active half solid and the other dimmed
+   once it is. Replaces the ↕ ↑ ↓ glyphs, which changed width between states and so
+   nudged the header label every time you sorted. */
+.sort-cycle {
+	display: inline-grid;
+	place-items: center;
+	flex: 0 0 auto;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+	border-radius: 5px;
+	background: transparent;
+	color: var(--faint);
+	cursor: pointer;
+	transition: background 0.12s ease, color 0.12s ease;
+}
+.sort-cycle svg {
+	display: block;
+	width: 9px;
+	height: 13px;
+	fill: currentColor;
+}
+.sort-cycle svg path {
+	opacity: 0.42;
+	transition: opacity 0.12s ease;
+}
+.sort-cycle:hover {
+	background: color-mix(in srgb, var(--berry) 10%, transparent);
+	color: var(--berry);
+}
+.sort-cycle:hover svg path {
+	opacity: 0.6;
+}
+.sort-cycle:focus-visible {
+	outline: 2px solid var(--plum-2);
+	outline-offset: 1px;
+}
+.sort-cycle.asc,
+.sort-cycle.desc {
+	color: var(--berry);
+}
+.sort-cycle.asc svg .up,
+.sort-cycle.desc svg .down {
 	opacity: 1;
 }
-.sort button.up.active::before {
-	border-bottom-color: var(--berry);
-}
-.sort button.down.active::before {
-	border-top-color: var(--berry);
+.sort-cycle.asc svg .down,
+.sort-cycle.desc svg .up {
+	opacity: 0.2;
 }
 
 /* ---- Special-character palette ------------------------------------------ */
@@ -1129,20 +1246,10 @@ table.props td {
 	}
 	table.data th {
 		top: 0;
-		padding: 0.4rem 0.25rem;
+		padding: 0.4rem 0.45rem; /* keep in step with table.data td below */
 	}
 	table.data td {
 		padding: 0.35rem 0.45rem;
-	}
-	.sort button {
-		width: 28px;
-		height: 22px;
-	}
-	.sort button.up::before {
-		top: 8px;
-	}
-	.sort button.down::before {
-		bottom: 8px;
 	}
 	input.search-box,
 	select.search-box,
@@ -1293,9 +1400,9 @@ table.props td {
 	}
 }
 
-/* never let a dropdown/popover push the page wider than the viewport */
-.panel,
-.pop {
+/* never let a dropdown panel push the page wider than the viewport (hover cards handle their
+   own clamping in Tooltip.svelte) */
+.panel {
 	max-width: calc(100vw - 20px);
 }
 

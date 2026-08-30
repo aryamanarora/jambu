@@ -494,9 +494,39 @@ def load_lemmas(
     if texts_path.exists():
         with texts_path.open(encoding="utf-8") as handle:
             explicit_texts = list(csv.DictReader(handle))
+        # A source-side prose file can legitimately lag one durable-ID pass (for example when a
+        # generator re-emits its historical ``m1`` identifier after forms.csv has already been
+        # assigned ``f_…`` IDs). Resolve the public alias table here, before validating the prose
+        # owner, and then apply any same-build dialect-collapse alias. The normal alias loader runs
+        # after this function, too late to make the sidecar ownership check safe on its own.
+        durable_aliases: dict[str, str] = {}
+        durable_alias_path = forms_csv.parent / "form-id-aliases.csv"
+        if durable_alias_path.exists():
+            with durable_alias_path.open(encoding="utf-8") as handle:
+                durable_aliases = {
+                    row["Legacy_ID"]: row["Form_ID"]
+                    for row in csv.DictReader(handle)
+                    if row.get("Legacy_ID") and row.get("Form_ID")
+                }
+
+        def resolve_text_owner(form_id: str) -> str:
+            original = form_id
+            seen: set[str] = set()
+            while form_id in durable_aliases and form_id not in seen:
+                seen.add(form_id)
+                form_id = durable_aliases[form_id]
+            resolved = canonical_id(form_id)
+            active_original = canonical_id(original)
+            # Some dictionary-native identifiers are deliberately restored after an earlier
+            # migration assigned an opaque ID; the historical alias row remains for old URLs but
+            # its target is then retired. In that case the active original is the prose owner.
+            if resolved not in known_lemma_ids and active_original in known_lemma_ids:
+                return active_original
+            return resolved
+
         known_lemma_ids = {lemma[0] for lemma in lemmas}
         for block in explicit_texts:
-            block["Form_ID"] = canonical_id(block.get("Form_ID", ""))
+            block["Form_ID"] = resolve_text_owner(block.get("Form_ID", ""))
             if block["Form_ID"] not in known_lemma_ids:
                 raise ValueError(
                     f"entry-texts.csv references unknown Form_ID {block['Form_ID']!r}"

@@ -374,21 +374,26 @@ async function run(msg: Record<string, unknown>): Promise<WMsg> {
 	}
 }
 
+/** Candidate sets for `vin_in`, shipped with the query that uses them: [setId, members][]. */
+export type QuerySets = Array<[number, number[]]>;
+
 export async function query<T = Record<string, unknown>>(
 	sql: string,
-	params: unknown[] = []
+	params: unknown[] = [],
+	sets?: QuerySets
 ): Promise<T[]> {
 	if (!browser) throw new Error('db may only be used in the browser');
 	await whenReady();
-	const res = await run({ type: 'query', sql, params });
+	const res = await run({ type: 'query', sql, params, sets });
 	return (res.rows ?? []) as T[];
 }
 
 export async function queryOne<T = Record<string, unknown>>(
 	sql: string,
-	params: unknown[] = []
+	params: unknown[] = [],
+	sets?: QuerySets
 ): Promise<T | null> {
-	const rows = await query<T>(sql, params);
+	const rows = await query<T>(sql, params, sets);
 	return rows.length ? rows[0] : null;
 }
 

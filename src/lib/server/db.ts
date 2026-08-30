@@ -16,6 +16,7 @@ import Database from 'better-sqlite3';
 import { statSync } from 'node:fs';
 import { dev } from '$app/environment';
 import { cladeFamily } from '$lib/cladeTree';
+import { bestEtymologyGuess } from '$lib/etymologyGuess';
 import {
 	IdIndex,
 	hydrateLem,
@@ -28,6 +29,7 @@ import {
 	makeVinAny,
 	FLAG_OCR,
 	REL_UNLINKED,
+	REL_VARIANT,
 	type RawLem,
 	type HydrateCtx
 } from '$lib/dbShared';
@@ -38,6 +40,7 @@ import type {
 	ConceptDetail,
 	ConceptEtymon,
 	ConceptRow,
+	GlobalStats,
 	Language,
 	Lemma,
 	Reference
@@ -57,12 +60,17 @@ let _ids: IdIndex | null = null;
 let _cladeNames: string[] | null = null;
 let _langById: Map<number, string> | null = null;
 let _dialectPoints: Map<string, { name: string; lat: number; long: number }> | null = null;
+let _guessReflexes: Map<
+	number,
+	Array<{ word: string; phonemic: string | null; language_id: string | null }>
+> | null = null;
 
 function resetCaches(): void {
 	_ids = null;
 	_cladeNames = null;
 	_langById = null;
 	_dialectPoints = null;
+	_guessReflexes = null;
 }
 
 export function getDb(): Database.Database {
@@ -179,6 +187,14 @@ export function allConceptIds(): { id: string }[] {
 	return limit(rows.map((r) => ({ id: String(r.id) })));
 }
 
+/** The concept the atlas opens on when no id is given: the most widely attested one. */
+export function defaultConceptId(): string | null {
+	const row = getDb()
+		.prepare(`SELECT id FROM concepts WHERE form_count > 0 ORDER BY form_count DESC, name LIMIT 1`)
+		.get() as { id: number } | undefined;
+	return row ? String(row.id) : null;
+}
+
 // ---- concepts -------------------------------------------------------------
 
 const BAR_SEGMENTS = 16;
@@ -216,9 +232,7 @@ const IRANIAN_LANGUAGE_IDS = new Set([
 	'Yazgh',
 	'Yghn',
 	'Yid',
-	'HKAT-prs_d',
-	'HKAT-isk',
-	'HKAT-sgh_r'
+	'Darw'
 ]);
 
 function reflexFamily(id: string, clade: string | null): (typeof REFLEX_FAMILIES)[number] {
@@ -336,6 +350,30 @@ function placesFor(
 	return [];
 }
 
+/** All direct reflexes grouped once for concept-page guessing. The compact DB intentionally has
+ * no origin index, so one build-wide scan is far cheaper than rescanning `lem` for every concept. */
+function guessReflexes() {
+	if (_guessReflexes) return _guessReflexes;
+	_guessReflexes = new Map();
+	for (const reflex of getDb()
+		.prepare(
+			`SELECT att.origin_rid, att.word, att.phonemic, lang.id AS language_id
+			 FROM lem att LEFT JOIN languages lang ON lang.rowid = att.lang_rid
+			 WHERE att.origin_rid IS NOT NULL AND att.link_rid IS NULL`
+		)
+		.all() as Array<{
+		origin_rid: number;
+		word: string;
+		phonemic: string | null;
+		language_id: string | null;
+	}>) {
+		const rows = _guessReflexes.get(reflex.origin_rid) ?? [];
+		rows.push(reflex);
+		_guessReflexes.set(reflex.origin_rid, rows);
+	}
+	return _guessReflexes;
+}
+
 export function getConceptDetail(id: string): ConceptDetail | null {
 	const dbh = getDb();
 	const idx = ids();
@@ -352,11 +390,11 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 	const linked = linkedRids.length
 		? (dbh
 				.prepare(
-					`SELECT l.rowid AS rid, l.ord AS ord, l.word, l.gloss, l.flags, l.origin_rid,
+					`SELECT l.rowid AS rid, l.ord AS ord, l.word, l.gloss, l.phonemic, l.flags, l.origin_rid,
 					        ts.txt AS tags,
 					        lang.id AS language_id, lang.name AS language, lang.clade AS clade,
 					        lang.color AS color, lang.lat AS lat, lang.long AS long,
-					        lang."order" AS lorder
+					        lang."order" AS lorder, lang.map_marker AS map_marker
 					 FROM lem l
 					 LEFT JOIN tagsets ts ON ts.rowid = l.tagset_rid
 					 LEFT JOIN languages lang ON lang.rowid = l.lang_rid
@@ -368,6 +406,7 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 				ord: number;
 				word: string;
 				gloss: string;
+				phonemic: string | null;
 				flags: number;
 				origin_rid: number | null;
 				tags: string | null;
@@ -378,6 +417,7 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 				lat: number | null;
 				long: number | null;
 				lorder: number | null;
+				map_marker: string | null;
 			}>)
 		: [];
 	// legacy row order: immediate etymon id (binary), then language order (NULLs first), then word
@@ -394,28 +434,85 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 		return a.ord - b.ord;
 	});
 
-	const entryRids = [
+	// A variant's edge points at the form it varies, not at an etymon — so an alternate of a
+	// reflex would otherwise be grouped under that reflex, inventing an "etymon" that is really
+	// just another attestation. Resolve each variant through its target to the target's own
+	// etymon (and drop it into the unetymologised pile if the target has none).
+	const variantTargets = [
 		...new Set(
-			linked.filter((r) => (r.flags & 7) !== REL_UNLINKED).map((r) => r.origin_rid ?? r.rid)
+			linked
+				.filter((r) => (r.flags & 7) === REL_VARIANT && r.origin_rid != null)
+				.map((r) => r.origin_rid as number)
 		)
 	];
-	const heads = new Map<number, { word: string; gloss: string; ocr: boolean | number }>();
+	const targetOf = new Map<number, { flags: number; origin_rid: number | null }>();
+	if (variantTargets.length) {
+		for (const t of dbh
+			.prepare(
+				`SELECT rowid AS rid, flags, origin_rid FROM lem
+				 WHERE rowid IN (SELECT value FROM json_each(?))`
+			)
+			.all(JSON.stringify(variantTargets)) as {
+			rid: number;
+			flags: number;
+			origin_rid: number | null;
+		}[]) {
+			targetOf.set(t.rid, { flags: t.flags, origin_rid: t.origin_rid });
+		}
+	}
+	/** The etymon a concept-linked row belongs under, or null if it has none. */
+	const etymonRidFor = (r: { rid: number; flags: number; origin_rid: number | null }): number | null => {
+		const rel = r.flags & 7;
+		if (rel === REL_UNLINKED) return null;
+		if (rel !== REL_VARIANT) return r.origin_rid ?? r.rid;
+		if (r.origin_rid == null) return null;
+		const target = targetOf.get(r.origin_rid);
+		if (!target) return r.origin_rid;
+		// the target is itself an entry (no origin) → that entry is the etymon
+		return (target.flags & 7) === REL_UNLINKED ? null : (target.origin_rid ?? r.origin_rid);
+	};
+
+	const entryRids = [
+		...new Set(linked.map(etymonRidFor).filter((rid): rid is number => rid != null))
+	];
+	const heads = new Map<
+		number,
+		{ word: string; gloss: string; ocr: boolean | number; language: string | null; clade: string | null }
+	>();
 	if (entryRids.length) {
 		for (const r of dbh
 			.prepare(
-				`SELECT rowid AS rid, word, gloss, flags FROM lem
-				 WHERE rowid IN (SELECT value FROM json_each(?))`
+				`SELECT l.rowid AS rid, l.word, l.gloss, l.flags,
+				        lang.name AS language, lang.clade AS clade
+				 FROM lem l
+				 LEFT JOIN languages lang ON lang.rowid = l.lang_rid
+				 WHERE l.rowid IN (SELECT value FROM json_each(?))`
 			)
-			.all(JSON.stringify(entryRids)) as { rid: number; word: string; gloss: string; flags: number }[]) {
-			heads.set(r.rid, { word: r.word, gloss: r.gloss, ocr: r.flags & FLAG_OCR ? 1 : 0 });
+			.all(JSON.stringify(entryRids)) as {
+			rid: number;
+			word: string;
+			gloss: string;
+			flags: number;
+			language: string | null;
+			clade: string | null;
+		}[]) {
+			heads.set(r.rid, {
+				word: r.word,
+				gloss: r.gloss,
+				ocr: r.flags & FLAG_OCR ? 1 : 0,
+				language: r.language,
+				clade: r.clade
+			});
 		}
 	}
 
 	const byEtymon = new Map<number, ConceptEtymon>();
 	const unetym: ConceptAttestation[] = [];
+	const soundByForm = new Map<string, string>();
 	for (const r of linked) {
+		const formId = idx.idOf(r.rid);
 		const att: ConceptAttestation = {
-			form_id: idx.idOf(r.rid),
+			form_id: formId,
 			word: r.word,
 			gloss: r.gloss,
 			language_id: r.language_id,
@@ -425,13 +522,17 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 			lat: r.lat,
 			long: r.long,
 			places: placesFor(r.tags, r.language, r.lat, r.long),
-			ocr: r.flags & FLAG_OCR ? 1 : 0
+			ocr: r.flags & FLAG_OCR ? 1 : 0,
+			// the curated per-language marker is a rhombus for historical and reconstructed
+			// languages and a circle for living ones — the same distinction the atlas draws
+			historical: (r.map_marker ?? '').includes('polygon')
 		};
-		if ((r.flags & 7) === REL_UNLINKED) {
+		soundByForm.set(formId, r.phonemic || r.word);
+		const entry = etymonRidFor(r);
+		if (entry == null) {
 			unetym.push(att);
 			continue;
 		}
-		const entry = r.origin_rid ?? r.rid;
 		let e = byEtymon.get(entry);
 		if (!e) {
 			const entryId = idx.idOf(entry);
@@ -441,6 +542,8 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 				word: head?.word || entryId,
 				gloss: head?.gloss ?? '',
 				source: etymonSource(entryId),
+				language: head?.language ?? null,
+				clade: head?.clade ?? null,
 				languages: [],
 				forms: [],
 				ocr: head?.ocr ?? false
@@ -450,7 +553,38 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 		e.forms.push(att);
 		if (att.language && !e.languages.includes(att.language)) e.languages.push(att.language);
 	}
-	const etyma = [...byEtymon.values()].sort((a, b) => b.forms.length - a.forms.length);
+	// ranked by how many languages attest the etymon, not how many forms: a single language with
+	// a dozen variant spellings is not better evidence than a dozen languages with one each
+	const etyma = [...byEtymon.values()].sort(
+		(a, b) => b.languages.length - a.languages.length || b.forms.length - a.forms.length
+	);
+	// A concept page may preview unlinked forms under a best-guess etymon. The candidate pool is
+	// deliberately only these already-attested etyma; this never proposes an etymon on semantic
+	// evidence from some other concept, and it remains a display-only suggestion.
+	if (unetym.length && byEtymon.size) {
+		const reflexesByEtymon = guessReflexes();
+		const guessCandidates = [...byEtymon.entries()].map(([rid, etymon]) => ({
+			value: etymon.etymon,
+			headword: etymon.word,
+			reflexes: reflexesByEtymon.get(rid) ?? []
+		}));
+		for (const form of unetym) {
+			const guess = bestEtymologyGuess(
+				{
+					word: form.word,
+					phonemic: soundByForm.get(form.form_id),
+					language_id: form.language_id
+				},
+				guessCandidates
+			);
+			if (guess)
+				form.best_guess = {
+					etymon: guess.value,
+					similarity: guess.similarity,
+					matched_word: guess.matchedWord
+				};
+		}
+	}
 	return { concept, etyma, unetym };
 }
 
@@ -624,4 +758,30 @@ export function getReferenceRow(id: string): Reference | null {
 
 export function allReferences(): Reference[] {
 	return getDb().prepare('SELECT * FROM "references" ORDER BY short').all() as Reference[];
+}
+
+// ---- global corpus stats --------------------------------------------------
+
+/**
+ * The headline size of the corpus, for the homepage. Entry/form/reflex totals come from the
+ * precomputed `meta` table (built by build_static_db.py) so they match the counts the list
+ * pages show; the rest are cheap table counts.
+ */
+export function globalStats(): GlobalStats {
+	const dbh = getDb();
+	const meta = new Map(
+		(dbh.prepare('SELECT key, value FROM meta').all() as { key: string; value: number }[]).map(
+			(r) => [r.key, Number(r.value)]
+		)
+	);
+	const count = (sql: string) => (dbh.prepare(sql).get() as { n: number }).n;
+	return {
+		entries: meta.get('total_entries') ?? 0,
+		forms: meta.get('total_lexicon') ?? 0,
+		reflexes: meta.get('total_reflexes') ?? 0,
+		languages: count('SELECT COUNT(*) AS n FROM languages'),
+		dialects: count('SELECT COUNT(*) AS n FROM dialects WHERE lemma_count > 0'),
+		references: count('SELECT COUNT(*) AS n FROM "references"'),
+		concepts: count('SELECT COUNT(*) AS n FROM concepts WHERE form_count > 0')
+	};
 }

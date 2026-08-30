@@ -192,9 +192,12 @@ export interface MapMarker {
 	onClick?: () => void;
 	color?: string; // when set, drawn as a filled circle in this colour instead of the SVG icon
 	radius?: number;
+	size?: number; // px the SVG icon is drawn at (default 16, or 14 when raised to the foreground)
 	dim?: boolean; // draw faded (e.g. languages with no reflex at the selected position)
 	ring?: boolean; // draw a bold outline (e.g. the selected point on the isogloss map)
 	foreground?: boolean; // keep this marker above surrounding context points
+	tooltipOpen?: boolean; // show this marker's tooltip without waiting to be hovered
+	focus?: boolean; // the frame follows these points: when any are present the map fits them alone
 }
 
 // ---- concepts (Concepticon) -----------------------------------------------
@@ -246,13 +249,21 @@ export interface ConceptAttestation {
 	long: number | null;
 	places: AttestationPlace[];
 	ocr?: boolean | number;
+	historical?: boolean; // a historical/reconstructed language rather than a living one
+	best_guess?: {
+		etymon: string;
+		similarity: number; // normalized 0–1 phonological similarity
+		matched_word: string;
+	};
 }
 
 export interface ConceptEtymon {
 	etymon: string;
 	word: string; // headword of the immediate entry (falls back to the id)
 	gloss: string;
-	source: string;
+	source: string; // the dictionary it comes from (CDIAL, DEDR, …)
+	language: string | null; // the language the etymon itself is reconstructed/attested in
+	clade: string | null;
 	languages: string[];
 	forms: ConceptAttestation[];
 	ocr?: boolean | number;
@@ -262,4 +273,15 @@ export interface ConceptDetail {
 	concept: ConceptRow;
 	etyma: ConceptEtymon[];
 	unetym: ConceptAttestation[];
+}
+
+/** Headline corpus totals shown on the homepage (built by `globalStats()` at prerender time). */
+export interface GlobalStats {
+	entries: number;
+	forms: number;
+	reflexes: number;
+	languages: number;
+	dialects: number;
+	references: number;
+	concepts: number;
 }

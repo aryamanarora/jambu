@@ -125,8 +125,8 @@
 		list-style: none;
 	}
 	.filter-menu > summary::-webkit-details-marker { display: none; }
+	/* the chevron shape itself is the shared one in app.css */
 	.filter-menu > summary::after {
-		content: '⌄';
 		color: var(--muted);
 	}
 	.filter-menu > summary:hover,

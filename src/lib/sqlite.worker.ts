@@ -8,7 +8,7 @@ type InMsg =
 	| { type: 'init'; id: number }
 	| { type: 'load'; id: number; url: string }
 	| { type: 'delete'; id: number }
-	| { type: 'query'; id: number; sql: string; params: unknown[] };
+	| { type: 'query'; id: number; sql: string; params: unknown[]; sets?: Array<[number, number[]]> };
 
 function post(msg: Record<string, unknown>) {
 	(self as unknown as Worker).postMessage(msg);
@@ -27,7 +27,7 @@ self.onmessage = async (e: MessageEvent<InMsg>) => {
 			await deleteCached();
 			post({ type: 'done', id: msg.id });
 		} else if (msg.type === 'query') {
-			post({ type: 'result', id: msg.id, rows: runQuery(msg.sql, msg.params) });
+			post({ type: 'result', id: msg.id, rows: runQuery(msg.sql, msg.params, msg.sets) });
 		}
 	} catch (err) {
 		post({ type: 'error', id: msg.id, error: err instanceof Error ? err.message : String(err) });

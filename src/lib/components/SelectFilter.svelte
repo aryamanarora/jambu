@@ -88,7 +88,7 @@
 		}}
 	>
 		<span class="cur" class:placeholder={!valueOpt}>{valueOpt ? valueOpt.label : placeholder}</span>
-		<span class="caret">▾</span>
+		<span class="chev" class:open aria-hidden="true"></span>
 	</button>
 	{#if open}
 		<div class="panel" style={menuStyle}>
@@ -155,13 +155,6 @@
 	}
 	.cur.placeholder {
 		color: var(--muted);
-	}
-	.caret {
-		font-size: 0.62rem;
-		transition: transform 0.12s ease;
-	}
-	.trigger.active .caret {
-		transform: rotate(180deg);
 	}
 
 	/* open panel — matches the favourites list styling */

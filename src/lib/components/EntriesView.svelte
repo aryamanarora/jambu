@@ -176,12 +176,13 @@
 {/if}
 
 <div class="table-wrap">
-	<table class="data accent-col mobile-cards">
+	<table class="data mobile-cards">
 		<thead>
 			<tr>
 				<FilterCell
 					label="Entry"
 					sortKey="word"
+					accent
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -251,7 +252,7 @@
 						<td class="lang-cell entry-cell" style="border-left-color: {hashColor(e.language?.color)}">
 							<div class="entry-inner">
 								<span class="entry-word-line">
-									{#if expandable}<span class="row-caret">{expanded.has(e.id) ? '▾' : '▸'}</span>{/if}
+									{#if expandable}<span class="chev row-caret" class:right={!expanded.has(e.id)} aria-hidden="true"></span>{/if}
 									{#if e.word?.trim()}
 										<a href="{base}/entries/{e.id}"><FormWord word={e.word} references={e.references} /></a>
 										<span class="id-tag">[{e.id}]</span>
@@ -296,7 +297,7 @@
 									{#if !e.ancestry?.length && !e.comparisons?.length}—{/if}
 								</div>
 							</td>
-							<td data-label="Tags"><Tags tags={e.tags} /></td>
+							<td class="tag-cell" data-label="Tags"><Tags tags={e.tags} /></td>
 						{/if}
 						<td class="num" data-label="Languages">{e.lang_count?.toLocaleString() ?? ''}</td>
 						<td class="num" data-label="Forms">{(expandable ? e.concept_match : e.reflex_count)?.toLocaleString() ?? ''}</td>
@@ -489,10 +490,8 @@
 		background: var(--hover, rgba(0, 0, 0, 0.03));
 	}
 	.row-caret {
-		display: inline-block;
-		width: 1em;
+		margin-right: 0.3em;
 		color: var(--muted);
-		font-size: 0.8em;
 	}
 	.reflex-detail > td {
 		padding: 0.2rem 0.6rem 0.6rem 2rem;

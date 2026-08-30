@@ -4,6 +4,7 @@ import { readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { getDb, ids } from '$lib/server/db';
 import { readDeltas, readVarints, FLAG_SECTION, REL_UNLINKED } from '$lib/dbShared';
+import { ETYMOLOGY_GUESS_THRESHOLD, soundSimilarity } from '$lib/etymologyGuess';
 import type { RequestHandler } from './$types';
 
 // ---- v2-schema helpers (dev-only tool, so simple full-scan caches are fine) ----
@@ -220,32 +221,6 @@ type SelectedFormRow = {
 	language_id: string;
 	language: string;
 };
-
-function soundKey(value: string): string[] {
-	return [...(value ?? '')
-		.normalize('NFD')
-		.toLocaleLowerCase()
-		.replace(/[\p{M}\s*\-‐‑‒–—―'’ʔˀ.·|()[\]{}\/\\]/gu, '')];
-}
-
-function soundSimilarity(left: string, right: string): number {
-	const a = soundKey(left);
-	const b = soundKey(right);
-	if (!a.length || !b.length) return 0;
-	let previous = Array.from({ length: b.length + 1 }, (_, index) => index);
-	for (let i = 1; i <= a.length; i++) {
-		const current = [i];
-		for (let j = 1; j <= b.length; j++) {
-			current[j] = Math.min(
-				current[j - 1] + 1,
-				previous[j] + 1,
-				previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
-			);
-		}
-		previous = current;
-	}
-	return Math.max(0, 1 - previous[b.length] / Math.max(a.length, b.length));
-}
 
 async function readAssignments(): Promise<Assignment[]> {
 	let text = '';
@@ -587,7 +562,11 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				}
 				const bestScore = best?.score ?? 0;
 				cognateScores.push(bestScore);
-				if (formConceptScore > 0 && Math.max(headSoundScore, bestScore) >= 0.28) supportedForms++;
+				if (
+					formConceptScore > 0 &&
+					Math.max(headSoundScore, bestScore) >= ETYMOLOGY_GUESS_THRESHOLD
+				)
+					supportedForms++;
 				if (best && (!cognate || best.score > cognate.score)) cognate = best;
 			}
 			const average = (values: number[]) =>

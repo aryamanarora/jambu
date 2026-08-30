@@ -12,7 +12,10 @@
 	} from '$lib/query';
 	import { cladeColor, CLADE_ORDER } from '$lib/clades';
 	import type { Language, MapMarker } from '$lib/types';
-	import MapView from '$lib/components/Map.svelte';
+	import GeoMap from '$lib/components/Map.svelte';
+	import AtlasShell from '$lib/components/AtlasShell.svelte';
+	import PanelToggle from '$lib/components/PanelToggle.svelte';
+	import { activePoint, highlightPoint, livePoint, HISTORICAL_MARKER } from '$lib/atlas';
 
 	const FAMILIES = [
 		{ id: 'Indo-Aryan', name: 'Indo-Aryan' },
@@ -22,9 +25,6 @@
 	];
 	const LANG_CAP = 200;
 	const HIST_CLADES = new Set(['OIA', 'MIA']);
-	// rhombus marker for historical units; Map.svelte recolours the polygon fill to the point colour
-	const RHOMBUS =
-		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polygon points="8,0.5 15.5,8 8,15.5 0.5,8" fill="#000" stroke="rgba(0,0,0,0.55)" stroke-width="1"/></svg>';
 	const JITTER = 0.35; // degrees of stable positional jitter to separate co-located points
 
 	let family = $state('Indo-Aryan');
@@ -33,6 +33,18 @@
 	let includeHistorical = $state(true);
 	let minLemmas = $state(150);
 	let selected = $state<string | null>(null);
+	let scopeOpen = $state(true);
+	let listOpen = $state(true);
+	let hovered = $state<string | null>(null);
+	// every hover repaints the points, so let the pointer settle before it does
+	let hoverTimer: ReturnType<typeof setTimeout>;
+	function preview(it: string | null) {
+		clearTimeout(hoverTimer);
+		hoverTimer = setTimeout(() => (hovered = it), it ? 70 : 0);
+	}
+	function toggleSelected(it: string) {
+		selected = selected === it ? null : it;
+	}
 
 	let data = $state<IsoglossData | null>(null);
 	let coords = $state<Map<string, [number, number]> | null>(null); // langId → [lat, long]
@@ -218,6 +230,18 @@
 	}
 
 	// ---- markers ---------------------------------------------------------------
+	/** The colour a unit carries right now: its PCA identity, or its affinity to the selection. */
+	function colorOf(it: string, i: number): string {
+		if (selIdx < 0) return pcaColors.get(it) ?? '#888';
+		if (it === selected) return '#ffffff';
+		const v = selAffinity[i] ?? 0;
+		// map affinity to [-1,1] for the diverging colour: tanh(J) for reflex, 2·rate−1 for sound
+		return affinityColor(couplingBy === 'sound' ? 2 * v - 1 : Math.tanh(v));
+	}
+
+	// The point styles are the shared atlas ones; the colours are this page's own, because here
+	// colour *is* the finding. Nothing is ever muted: picking a unit recolours the rest by their
+	// affinity to it, which is the whole question the map is answering.
 	const markers = $derived.by<MapMarker[]>(() => {
 		const out: MapMarker[] = [];
 		active.items.forEach((it, i) => {
@@ -225,25 +249,22 @@
 			if (!xy) return;
 			const isSel = it === selected;
 			const v = selIdx >= 0 && !isSel ? (selAffinity[i] ?? 0) : 0;
-			// map affinity to [-1,1] for the diverging colour: tanh(J) for reflex, 2·rate−1 for sound
-			const t = couplingBy === 'sound' ? 2 * v - 1 : Math.tanh(v);
-			const color =
-				selIdx < 0 ? (pcaColors.get(it) ?? '#888') : isSel ? '#ffffff' : affinityColor(t);
+			const color = colorOf(it, i);
+			const pointedAt = hovered === it;
 			const [dlat, dlong] = jitter(it);
 			out.push({
 				lat: xy[0] + dlat,
 				long: xy[1] + dlong,
-				svg: active.isHist(it) ? RHOMBUS : '',
-				color,
-				radius: mode === 'clade' ? 9 : 6,
-				ring: isSel,
+				svg: active.isHist(it) ? HISTORICAL_MARKER : '',
+				...(pointedAt ? highlightPoint(color) : isSel ? activePoint(color) : livePoint(color)),
+				tooltipOpen: pointedAt,
 				tooltip:
 					selIdx >= 0 && !isSel
 						? couplingBy === 'sound'
 							? `${active.label(it)} · ${(v * 100).toFixed(0)}% shared change`
 							: `${active.label(it)} · J ${v >= 0 ? '+' : ''}${v.toFixed(3)} · odds ${fmtOdds(Math.exp(v))}`
 						: active.label(it),
-				onClick: () => (selected = selected === it ? null : it)
+				onClick: () => toggleSelected(it)
 			});
 		});
 		return out;
@@ -319,6 +340,34 @@
 			.sort((a, b) => b.v - a.v);
 	});
 
+	/**
+	 * The right panel's rows. With nothing picked it is simply the units in the model, in family
+	 * order, wearing their PCA colours — so the panel is a way in rather than an empty instruction.
+	 * Pick one and it becomes the affinity ranking against it.
+	 */
+	const rows = $derived.by(() => {
+		if (selIdx >= 0)
+			return affinityRanked.map((r) => ({
+				...r,
+				color: colorOf(r.it, active.items.indexOf(r.it))
+			}));
+		return active.items
+			.map((it, i) => ({
+				it,
+				label: active.label(it),
+				clade: active.cladeOf(it),
+				color: colorOf(it, i),
+				v: null as number | null,
+				odds: 0,
+				shared: 0
+			}))
+			.sort(
+				(a, b) =>
+					(CLADE_ORDER.indexOf(a.clade) + 1 || 999) - (CLADE_ORDER.indexOf(b.clade) + 1 || 999) ||
+					a.label.localeCompare(b.label)
+			);
+	});
+
 	// format an odds multiplier: ×2.43, ×0.412, or ≈×1 when negligible
 	function fmtOdds(m: number): string {
 		if (m >= 0.985 && m <= 1.015) return '≈×1';
@@ -328,166 +377,176 @@
 
 <svelte:head><title>Isoglosses — Jambu</title></svelte:head>
 
-<h1>Isoglosses</h1>
-<p class="muted">
-	A pairwise maximum-entropy (Ising) model over which {mode === 'clade' ? 'clades' : 'languages'}
-	reflect each etymon, mapped by their affinities — click a point to rank the rest.
-</p>
+{#snippet map()}
+	{#if data && active.items.length >= 2}
+		<GeoMap {markers} zoom={4} height="100%" mutedTiles flush scrollZoom zoomPosition="bottomleft" />
+	{/if}
+{/snippet}
 
-<div class="controls">
-	<div class="fam">
-		{#each FAMILIES as f (f.id)}
-			<button class:active={f.id === family} onclick={() => pick(f.id)}>{f.name}</button>
-		{/each}
+<!-- left: the model being fitted, and every knob that changes it -->
+{#snippet left()}
+	<div class="crumb-head">
+		<nav class="crumbs">Pairwise Ising model over shared {couplingBy === 'sound' ? 'sound changes' : 'reflexes'}</nav>
+		<PanelToggle open={scopeOpen} side="left" label="the model panel" onclick={() => (scopeOpen = !scopeOpen)} />
 	</div>
-	<div class="seg" role="group" aria-label="unit">
-		<button class:active={mode === 'clade'} onclick={() => setMode('clade')}>Clades</button>
-		<button class:active={mode === 'lang'} onclick={() => setMode('lang')}>Languages</button>
-	</div>
-	<div class="seg" role="group" aria-label="coupling">
-		<button class:active={couplingBy === 'reflex'} onclick={() => setCoupling('reflex')}
-			>Shared reflexes</button
-		>
-		<button class:active={couplingBy === 'sound'} onclick={() => setCoupling('sound')}
-			>Shared sound changes</button
-		>
-	</div>
-	<label class="hist">
-		<input type="checkbox" checked={includeHistorical} onchange={toggleHist} />
-		include historical (OIA/MIA, Old&nbsp;NIA)
-	</label>
-</div>
-
-{#if mode === 'lang' && data}
-	<div class="thresh">
-		<label for="thr">min lemmas per language</label>
-		<input id="thr" type="range" min="10" max={maxCount} step="10" bind:value={minLemmas} />
-		<span class="thr-val">≥ {minLemmas.toLocaleString()}</span>
-		<span class="thr-n">
-			{langModel.items.length}
-			{#if langModel.total > langModel.items.length}<span class="muted">of {langModel.total} (capped)</span>{/if}
-			languages
-		</span>
-	</div>
-{/if}
-
-{#if loading}
-	<p class="muted">Fitting the model…</p>
-{:else if couplingBy === 'sound' && !scData}
-	<p class="muted">Loading sound-change incidence (a heavier join over the alignment layer)…</p>
-{:else if data}
-	{#if active.items.length >= 2}
-		<div class="layout">
-			<div class="map-col">
-				<MapView {markers} height="560px" fitOnce />
-				<div class="statusbar">
-					{#if selected}
-						<span class="sel">
-							<span class="dot" style="background: {cladeColor(selClade)}"></span>
-							<b>{active.label(selected)}</b>
-							<span class="muted">· others coloured by affinity</span>
-						</span>
-						<button class="clear" onclick={() => (selected = null)}>← back to PCA colours</button>
-					{:else}
-						<span class="muted">
-							{active.items.length}
-							{mode === 'clade' ? 'clades' : 'languages'} · coloured by the top-3 principal components ·
-							click a point to see affinities
-						</span>
+	<h1><span class="model-name">{FAMILIES.find((f) => f.id === family)?.name ?? family}</span></h1>
+	{#if scopeOpen}
+		<dl class="stats">
+			<div><dt>{mode === 'clade' ? 'Clades' : 'Langs'}</dt><dd>{active.items.length.toLocaleString()}</dd></div>
+			<div><dt>Coupled by</dt><dd class="small">{couplingBy === 'sound' ? 'sound changes' : 'reflexes'}</dd></div>
+		</dl>
+		<div class="knobs">
+			<div class="fam" role="group" aria-label="family">
+				{#each FAMILIES as f (f.id)}
+					<button class:active={f.id === family} onclick={() => pick(f.id)}>{f.name}</button>
+				{/each}
+			</div>
+			<div class="seg" role="group" aria-label="unit">
+				<button class:active={mode === 'clade'} onclick={() => setMode('clade')}>Clades</button>
+				<button class:active={mode === 'lang'} onclick={() => setMode('lang')}>Languages</button>
+			</div>
+			<div class="seg" role="group" aria-label="coupling">
+				<button class:active={couplingBy === 'reflex'} onclick={() => setCoupling('reflex')}>Shared reflexes</button>
+				<button class:active={couplingBy === 'sound'} onclick={() => setCoupling('sound')}>Shared sound changes</button>
+			</div>
+			<label class="hist">
+				<input type="checkbox" checked={includeHistorical} onchange={toggleHist} />
+				include historical (OIA/MIA, Old&nbsp;NIA)
+			</label>
+			{#if mode === 'lang' && data}
+				<div class="thresh">
+					<label for="thr">min lemmas per language</label>
+					<input id="thr" type="range" min="10" max={maxCount} step="10" bind:value={minLemmas} />
+					<span class="thr-val">≥ {minLemmas.toLocaleString()}</span>
+					{#if langModel.total > langModel.items.length}
+						<span class="muted">{langModel.items.length} of {langModel.total} (capped)</span>
 					{/if}
 				</div>
-			</div>
-
-			<aside class="side">
-				{#if selected}
-					<div class="side-head">
-						<span class="dot" style="background: {cladeColor(selClade)}"></span>
-						<b>{active.label(selected)}</b>
-					</div>
-					<p class="side-sub muted">
-						{#if couplingBy === 'sound'}
-							<b>agree</b> = how often the two apply the same change where both have the word
-							(presence-invariant) · <b>shared</b> = # of those slots · click a row to pivot
-						{:else}
-							<b>J</b> = Ising coupling (log-odds) · <b>odds</b> = e<sup>J</sup> = ×multiplier on
-							shared-reflex odds · click a row to pivot
-						{/if}
-					</p>
-					<div class="table-wrap side-table">
-						<table class="data accent-col">
-							<thead>
-								<tr>
-									<th>{mode === 'clade' ? 'Clade' : 'Language'}</th>
-									{#if couplingBy === 'sound'}
-										<th class="num-col" title="same-change agreement rate over jointly-attested proto-slots">agree</th>
-										<th class="num-col" title="number of proto-slots where both are attested (support)">shared</th>
-									{:else}
-										<th class="num-col" title="Ising coupling J — conditional log-odds between the two units' presence">J</th>
-										<th class="num-col" title="e^J — multiplier on the odds of a shared reflex when this unit is present, all else fixed">odds</th>
-									{/if}
-								</tr>
-							</thead>
-							<tbody>
-								{#each affinityRanked as r (r.it)}
-									<tr onclick={() => (selected = r.it)}>
-										<td class="lang-cell" style="border-left-color: {cladeColor(r.clade)}">
-											{r.label}
-											{#if mode === 'lang'}<span class="id-tag">{r.clade}</span>{/if}
-										</td>
-										{#if couplingBy === 'sound'}
-											<td
-												class="num-cell"
-												style="color: {r.v > 0.5 ? 'var(--plum)' : r.v < 0.5 ? '#3b6ea5' : 'var(--muted)'}"
-											>
-												{(r.v * 100).toFixed(0)}%
-											</td>
-											<td class="num-cell odds-cell muted">{r.shared.toLocaleString()}</td>
-										{:else}
-											<td
-												class="num-cell"
-												style="color: {r.v > 0.02 ? 'var(--plum)' : r.v < -0.02 ? '#3b6ea5' : 'var(--muted)'}"
-											>
-												{r.v >= 0 ? '+' : ''}{r.v.toFixed(3)}
-											</td>
-											<td
-												class="num-cell odds-cell"
-												style="color: {r.odds > 1.03 ? 'var(--plum)' : r.odds < 0.97 ? '#3b6ea5' : 'var(--muted)'}"
-											>
-												{fmtOdds(r.odds)}
-											</td>
-										{/if}
-									</tr>
-								{/each}
-							</tbody>
-						</table>
-					</div>
-				{:else}
-					<div class="side-empty muted">
-						<p>Click a {mode === 'clade' ? 'clade' : 'language'} on the map to rank the others by their affinity to it.</p>
-					</div>
-				{/if}
-			</aside>
+			{/if}
 		</div>
-	{:else}
-		<p class="muted">
-			Fewer than two {mode === 'clade' ? 'clades' : 'languages'} to show{mode === 'lang'
-				? ' — lower the threshold'
-				: ''}.
-		</p>
 	{/if}
-{/if}
+{/snippet}
+
+<!-- right: the units, as a picker that turns into the affinity ranking once one is picked -->
+{#snippet right()}
+	<div class="panel-head">
+		<PanelToggle open={listOpen} side="right" label="the affinity panel" onclick={() => (listOpen = !listOpen)} />
+		<h2>
+			{#if selected}Affinity to {active.label(selected)}{:else}{active.items.length.toLocaleString()} {mode === 'clade' ? 'clades' : 'languages'}{/if}
+		</h2>
+		{#if selected}
+			<button class="clear" onclick={() => (selected = null)} title="Back to the model's own colours">clear</button>
+		{/if}
+	</div>
+
+	{#if listOpen}
+		{#if loading}
+			<p class="empty">Fitting the model…</p>
+		{:else if couplingBy === 'sound' && !scData}
+			<p class="empty">Loading sound-change incidence (a heavier join over the alignment layer)…</p>
+		{:else if active.items.length < 2}
+			<p class="empty">
+				Fewer than two {mode === 'clade' ? 'clades' : 'languages'} to show{mode === 'lang' ? ' — lower the threshold' : ''}.
+			</p>
+		{:else}
+			<p class="hint">
+				{#if selected}
+					{#if couplingBy === 'sound'}
+						<b>agree</b> = how often the two apply the same change where both have the word
+						(presence-invariant); <b>shared</b> = how many such slots. Pick a row to pivot.
+					{:else}
+						<b>J</b> = Ising coupling (log-odds); <b>odds</b> = e<sup>J</sup>, the multiplier on
+						shared-reflex odds. Pick a row to pivot.
+					{/if}
+				{:else}
+					Colour is the model's own shape — the top three principal components of the affinity
+					matrix. Pick a unit to recolour the rest by their affinity to it.
+				{/if}
+			</p>
+			<div class="list" role="group" aria-label="Units in the model">
+				{#each rows as r (r.it)}
+					<div class="row" class:pinned={r.it === selected} style="--c: {r.color}">
+						<button
+							class="pick"
+							aria-pressed={r.it === selected}
+							onmouseenter={() => preview(r.it)}
+							onmouseleave={() => preview(null)}
+							onfocus={() => preview(r.it)}
+							onblur={() => preview(null)}
+							onclick={() => toggleSelected(r.it)}
+						>
+							<span class="dot" class:proto={active.isHist(r.it)}></span>
+							<span class="word">{r.label}</span>
+							<span class="count">
+								{#if r.v != null}
+									{#if couplingBy === 'sound'}{(r.v * 100).toFixed(0)}%{:else}{r.v >= 0 ? '+' : ''}{r.v.toFixed(3)}{/if}
+								{/if}
+							</span>
+							<span class="meta">
+								{#if r.v != null}
+									{#if couplingBy === 'sound'}{r.shared.toLocaleString()} shared slots{:else}odds {fmtOdds(r.odds)}{/if}
+								{:else if mode === 'lang'}{r.clade}{/if}
+							</span>
+						</button>
+					</div>
+				{/each}
+			</div>
+		{/if}
+	{/if}
+{/snippet}
+
+<AtlasShell {map} {left} {right} leftOpen={scopeOpen} rightOpen={listOpen} />
 
 <style>
-	h1 {
-		margin-bottom: 0.3rem;
+	/* ---- the model panel ---- */
+	.model-name {
+		display: block;
+		font-family: var(--font-serif);
+		font-size: clamp(1.4rem, 2.2vw, 2rem);
+		font-weight: 700;
+		line-height: 1.1;
 	}
-	.controls {
+	.stats dd.small { font-size: 0.8rem; font-weight: 500; }
+	.knobs {
+		display: grid;
+		gap: 0.55rem;
+		padding: 0 0.95rem 0.85rem;
+	}
+	.hist {
 		display: flex;
-		gap: 0.7rem 1rem;
-		margin: 1rem 0 0.7rem;
-		flex-wrap: wrap;
 		align-items: center;
+		gap: 0.4rem;
+		color: var(--muted);
+		font-size: 0.76rem;
 	}
+	.thresh {
+		display: grid;
+		grid-template-columns: auto auto;
+		align-items: center;
+		gap: 0.2rem 0.5rem;
+		color: var(--muted);
+		font-size: 0.72rem;
+	}
+	.thresh input[type='range'] { grid-column: 1 / -1; width: 100%; }
+	.thr-val { color: var(--ink); font-variant-numeric: tabular-nums; }
+	/* the row grammar comes from atlas.css; only the second line is ours */
+	.pick {
+		grid-template-areas:
+			'dot word count'
+			'. meta meta';
+	}
+	.meta {
+		grid-area: meta;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		color: var(--muted);
+		font-size: 0.72rem;
+	}
+	.count { font-variant-numeric: tabular-nums; }
+	/* historical units carry the rhombus they wear on the map */
+	.dot.proto { border-radius: 2px; transform: rotate(45deg) scale(0.86); }
+
 	.fam {
 		display: flex;
 		gap: 0.5rem;
@@ -528,14 +587,6 @@
 		background: var(--plum);
 		color: var(--nav-fg);
 	}
-	.hist {
-		font-size: 0.85rem;
-		color: var(--muted);
-		display: flex;
-		align-items: center;
-		gap: 0.3rem;
-		cursor: pointer;
-	}
 	.hist input {
 		accent-color: var(--plum);
 	}
@@ -558,105 +609,7 @@
 		font-variant-numeric: tabular-nums;
 		font-weight: 600;
 	}
-	.layout {
-		display: flex;
-		gap: 1rem;
-		align-items: flex-start;
-	}
-	.map-col {
-		flex: 1 1 auto;
-		min-width: 0;
-	}
-	.side {
-		flex: 0 0 29rem;
-		max-width: 29rem;
-	}
-	.side-head {
-		display: flex;
-		align-items: center;
-		gap: 0.45rem;
-		font-size: 1rem;
-	}
-	.side-head .dot {
-		width: 0.85rem;
-		height: 0.85rem;
-		border-radius: 50%;
-		border: 1px solid rgba(0, 0, 0, 0.3);
-	}
-	.side-sub {
-		margin: 0.15rem 0 0;
-		font-size: 0.8rem;
-	}
-	.side-table {
-		margin-top: 0.5rem;
-		max-height: 520px;
-		overflow-y: auto;
-	}
-	.side-table tbody tr {
-		cursor: pointer;
-	}
-	.side-table .id-tag {
-		margin-left: 0.35rem;
-		font-size: 0.72rem;
-		color: var(--muted);
-	}
-	.num-col {
-		text-align: right;
-		white-space: nowrap;
-	}
-	.num-cell {
-		text-align: right;
-		font-variant-numeric: tabular-nums;
-		font-weight: 600;
-		white-space: nowrap;
-	}
-	.odds-cell {
-		font-size: 0.86rem;
-	}
-	.side-empty {
-		border: 1px dashed var(--border-strong);
-		border-radius: var(--radius, 8px);
-		padding: 1rem;
-		font-size: 0.88rem;
-	}
 	@media (max-width: 820px) {
-		.layout {
-			flex-direction: column;
-		}
-		.side {
-			flex: 1 1 auto;
-			max-width: none;
-			width: 100%;
-		}
-	}
-	.statusbar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 0.8rem;
-		flex-wrap: wrap;
-		margin: 0.55rem 0;
-		font-size: 0.9rem;
-	}
-	.sel {
-		display: flex;
-		align-items: center;
-		gap: 0.45rem;
-	}
-	.sel .dot {
-		width: 0.8rem;
-		height: 0.8rem;
-		border-radius: 50%;
-		border: 1px solid rgba(0, 0, 0, 0.3);
-	}
-	.clear {
-		border: 1px solid var(--border-strong);
-		border-radius: 999px;
-		background: var(--surface);
-		color: var(--ink);
-		padding: 0.25rem 0.8rem;
-		cursor: pointer;
-		font-size: 0.85rem;
 	}
 	.clear:hover {
 		background: var(--surface-2);
@@ -675,9 +628,6 @@
 			padding-inline: 0.55rem;
 		}
 		.thresh input[type='range'] {
-			width: 100%;
-		}
-		.statusbar .clear {
 			width: 100%;
 		}
 	}

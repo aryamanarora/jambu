@@ -8,7 +8,7 @@
  */
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 import { OPFS_DB_PATH } from './dbMeta';
-import { makeVinAny } from './dbShared';
+import { makeVinIn } from './dbShared';
 
 // In dev we skip the versioned OPFS cache and load the current local DB straight into an in-memory
 // SQLite, so a rebuilt db.db is picked up on reload with no DB_VERSION bump / re-download dance.
@@ -36,13 +36,21 @@ type DbHandle = {
 	): void;
 };
 
+/**
+ * Candidate sets for `vin_in`, installed by the query that uses them (see runQuery) and cleared
+ * on the next one. Passing them out of band rather than as a bind parameter is what keeps a
+ * whole-table blob scan affordable: sqlite-wasm converts every UDF argument to a JS value on
+ * every row, so a bound id list would be re-decoded 480k times per query.
+ */
+const setRegistry = new Map<number, Set<number>>();
+
 /** Register the custom SQL functions the compact-schema query layer relies on. */
 function registerFunctions(h: DbHandle): DbHandle {
-	const vinAny = makeVinAny();
+	const vinIn = makeVinIn((setId) => setRegistry.get(setId));
 	h.createFunction(
-		'vin_any',
-		(_ctx: number, blob: unknown, json: unknown) =>
-			vinAny(blob as Uint8Array | null, String(json)),
+		'vin_in',
+		(_ctx: number, blob: unknown, setId: unknown) =>
+			vinIn(blob as Uint8Array | null, Number(setId)),
 		{ arity: 2, deterministic: true }
 	);
 	return h;
@@ -169,7 +177,18 @@ export async function deleteCached(): Promise<void> {
 	if (p.getFileNames().includes(OPFS_DB_PATH)) p.unlink(OPFS_DB_PATH);
 }
 
-export function runQuery(sql: string, params: unknown[]): Record<string, unknown>[] {
+/** `sets` are `vin_in` candidate sets for this query only: [setId, members][]. */
+export function runQuery(
+	sql: string,
+	params: unknown[],
+	sets?: Array<[number, number[]]>
+): Record<string, unknown>[] {
 	if (!db) throw new Error('database not loaded');
-	return db.exec({ sql, bind: params, rowMode: 'object', returnValue: 'resultRows' });
+	setRegistry.clear();
+	if (sets) for (const [setId, members] of sets) setRegistry.set(setId, new Set(members));
+	try {
+		return db.exec({ sql, bind: params, rowMode: 'object', returnValue: 'resultRows' });
+	} finally {
+		setRegistry.clear();
+	}
 }

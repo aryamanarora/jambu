@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { cladeColor } from '$lib/clades';
 	import type { OriginSlice } from '$lib/query';
+	import ReferenceLink from './ReferenceLink.svelte';
+	import { referenceLabel } from '$lib/render';
+	import Tooltip from './Tooltip.svelte';
 
 	// A donut (pie with a hole) of a language's reflexes by the language of their origin, with a
 	// legend. Rendered as pure SVG (stroke-dasharray arcs on a circle of circumference 100).
@@ -69,6 +72,34 @@
 		onselect?.(a.members);
 	}
 
+	// A slice that *is* one source carries its record, so the legend can show the standard pill
+	// and its citation card instead of a bare string.
+	const referenceOf = (a: (typeof arcs)[number]) =>
+		a.members.length === 1 ? a.members[0].reference : undefined;
+	/** What to call a slice out loud — a source goes by its citation label, not its short code. */
+	function displayName(a: (typeof arcs)[number]): string {
+		const ref = referenceOf(a);
+		return ref
+			? referenceLabel({ id: ref.id, short: ref.short ?? null, source: ref.source ?? null })
+			: a.name;
+	}
+
+	// hover card for a wedge — the legend row it belongs to says the same thing, but the wedge is
+	// what the pointer is usually over
+	let hoverArc = $state<string | null>(null);
+	let hoverEl = $state<HTMLElement | null>(null);
+	let hideTimer: ReturnType<typeof setTimeout>;
+	function showArc(name: string, event: MouseEvent | FocusEvent) {
+		clearTimeout(hideTimer);
+		hoverArc = name;
+		hoverEl = event.currentTarget as HTMLElement;
+	}
+	function hideArc() {
+		clearTimeout(hideTimer);
+		hideTimer = setTimeout(() => (hoverArc = null), 80);
+	}
+	const hovered = $derived(arcs.find((a) => a.name === hoverArc) ?? null);
+
 	function onArcKeydown(event: KeyboardEvent, a: (typeof arcs)[number]) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			event.preventDefault();
@@ -106,14 +137,30 @@
 					role={onselect ? 'button' : undefined}
 					tabindex={onselect ? 0 : undefined}
 					aria-pressed={onselect ? a.selected : undefined}
-					aria-label={onselect ? `Filter by ${a.name}` : undefined}
+					aria-label={onselect ? `Filter by ${displayName(a)}` : undefined}
+					onmouseenter={(event) => showArc(a.name, event)}
+					onmouseleave={hideArc}
+					onfocus={(event) => showArc(a.name, event)}
+					onblur={hideArc}
 					onclick={() => activate(a)}
-					onkeydown={(event) => onArcKeydown(event, a)}><title>{a.name}: {a.count.toLocaleString()}</title></circle
-				>
+					onkeydown={(event) => onArcKeydown(event, a)}
+				></circle>
 			{/each}
 			<text x="18" y="17.4" class="d-total">{total.toLocaleString()}</text>
 			<text x="18" y="21.4" class="d-sub">{unit}</text>
 		</svg>
+		{#if hovered}
+			<Tooltip anchor={hoverEl} prefer="above" interactive={false}>
+				<span class="arc-card">
+					<span class="arc-name"><span class="sw" style="background:{hovered.color}"></span>{displayName(hovered)}</span>
+					<span class="arc-figures">
+						{hovered.count.toLocaleString()}
+						{unit} · {hovered.pct.toFixed(hovered.pct < 1 ? 1 : 0)}%
+					</span>
+					{#if onselect}<span class="arc-hint">{hovered.selected ? 'click to clear' : 'click to filter'}</span>{/if}
+				</span>
+			</Tooltip>
+		{/if}
 		<ul class="legend">
 			{#each arcs as a (a.name)}
 				<li class:selected={a.selected}>
@@ -121,11 +168,15 @@
 						type="button"
 						disabled={!onselect}
 						aria-pressed={onselect ? a.selected : undefined}
-						title={onselect ? `${a.selected ? 'Clear' : 'Apply'} ${a.name} filter` : undefined}
+						title={onselect ? `${a.selected ? 'Clear' : 'Apply'} ${displayName(a)} filter` : undefined}
 						onclick={() => activate(a)}
 					>
 						<span class="sw" style="background:{a.color}"></span>
-						<span class="nm">{a.name}</span>
+						{#if referenceOf(a)}
+							<span class="nm"><ReferenceLink reference={referenceOf(a)!} as="text" /></span>
+						{:else}
+							<span class="nm">{a.name}</span>
+						{/if}
 						<span class="ct">{a.count.toLocaleString()} · {a.pct.toFixed(a.pct < 1 ? 1 : 0)}%</span>
 					</button>
 				</li>
@@ -216,6 +267,29 @@
 	}
 	.nm {
 		flex: 1;
+		min-width: 0;
+	}
+	.arc-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		font-family: var(--font-sans);
+		font-size: 0.78rem;
+		white-space: nowrap;
+	}
+	.arc-name {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--ink);
+		font-weight: 600;
+	}
+	.arc-figures { color: var(--muted); font-variant-numeric: tabular-nums; }
+	.arc-hint {
+		color: var(--faint);
+		font-size: 0.66rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 	.ct {
 		color: var(--muted);

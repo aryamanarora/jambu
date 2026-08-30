@@ -18,6 +18,59 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-08-30',
+		label: '30 August 2026',
+		title: 'Survey wordlists and a broader dialect atlas',
+		changes: [
+			'Added 139,355 forms, 96 references, 57 languages, and 582 named dialects from modern surveys and historical lexical sources across South Asia.',
+			'Completed 20,734 scan-backed survey records for Western Tharu, Irula, Koch and Kurux in Bangladesh, Kurumba, Northern Dhule Bhils, Noira, Adi, and Haryanvi, preserving hand-transcribed IPA, exact page and item citations, and each survey site as a dialect.',
+			'Expanded Munda, Indo-Aryan, Nuristani, and Romani coverage with reproducible source audits, stable form identities, and clearer source-specific dialect handling.',
+			'Language and concept browsing now uses an atlas-style map and reusable browse cards; correspondences, isoglosses, entry evidence, filters, and source links are easier to inspect across desktop and mobile.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Buksa', label: 'Bhuksa Tharu' },
+				{ id: 'Irula', label: 'Irula' },
+				{ id: 'AluKurumba', label: 'Alu Kurumba' },
+				{ id: 'Koch', label: 'Koch' },
+				{ id: 'Kurux', label: 'Kurux' },
+				{ id: 'Vasavi', label: 'Vasavi' },
+				{ id: 'Noiri', label: 'Noiri' },
+				{ id: 'MisingPadamMiriMinyong', label: 'Adi varieties' },
+				{ id: 'kaithal', label: 'Haryanvi' }
+			],
+			sources: [
+				{ id: 'webster', label: 'Webster 2017 · manual IPA' },
+				{ id: 'ernest-oleary-kelsall2018irula', label: 'Ernest et al. 2018' },
+				{ id: 'blairetal2012kurumba', label: 'Blair et al. 2012' },
+				{ id: 'kim-ahmad-kim-sangma2011kochbd', label: 'Kim et al. 2011 · Koch' },
+				{ id: 'kim-ahmad-kim-sangma2011kurux', label: 'Kim et al. 2011 · Kurux' },
+				{ id: 'watters2013northerndhule', label: 'Watters 2013' },
+				{ id: 'varghesekumar2015noira', label: 'Varghese & Kumar 2015' },
+				{ id: 'padung-sako2015adi', label: 'Padung & Sako 2015' },
+				{ id: 'webster2024haryanvi', label: 'Webster 2024' }
+			]
+		}
+	},
+	{
+		date: '2026-08-28',
+		label: '28 August 2026',
+		title: 'Best guesses in concept maps',
+		changes: [
+			'Concept maps can now preview strong phonological matches for unetymologised forms, using only etyma already attested for that meaning and keeping every suggestion visibly marked.'
+		]
+	},
+	{
+		date: '2026-08-25',
+		label: '25 August 2026',
+		title: 'Corpus totals on the homepage',
+		changes: [
+			'The homepage now opens with the size of the corpus — headwords, forms, languages, dialects, concepts, and sources — with each figure linking to the list it counts.',
+			'Source pages open immediately. The cited-form list, its count, and the language breakdown used to be computed by reading every form in the dictionary — on the largest sources that took over a minute; they are now looked up directly and appear as soon as the page does.',
+			'Filtering any list by source is much faster as well, and the language breakdown on a source page now counts exactly the forms the list below it shows.'
+		]
+	},
+	{
 		date: '2026-08-23',
 		label: '23 August 2026',
 		title: 'Dravidian reconstructions, Torwali, and source-backed comparisons',

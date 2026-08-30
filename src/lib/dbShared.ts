@@ -26,6 +26,14 @@ export function readVarints(blob: Uint8Array | null | undefined): number[] {
 	return out;
 }
 
+/** Decode a flat varint list as consecutive pairs (ref_lex.langs). */
+export function readVarintPairs(blob: Uint8Array | null | undefined): Array<[number, number]> {
+	const vals = readVarints(blob);
+	const out: Array<[number, number]> = [];
+	for (let i = 0; i + 1 < vals.length; i += 2) out.push([vals[i], vals[i + 1]]);
+	return out;
+}
+
 /** Decode a sorted delta-encoded varint list (concepts.rids). */
 export function readDeltas(blob: Uint8Array | null | undefined): number[] {
 	const vals = readVarints(blob);
@@ -304,10 +312,34 @@ export function hydrateLem(row: RawLem, ctx: HydrateCtx): Record<string, unknown
 	};
 }
 
-// ── varint-blob membership (the one SQL UDF both drivers register) ──────────
+// ── varint-blob membership (the SQL UDFs both drivers register) ─────────────
+
+/** Does the varint blob contain any member of `set`? */
+export function varintsContainAny(blob: Uint8Array | null, set: Set<number>): boolean {
+	if (!blob || set.size === 0) return false;
+	let n = 0;
+	let shift = 0;
+	for (let i = 0; i < blob.length; i++) {
+		const b = blob[i];
+		n += (b & 0x7f) * 2 ** shift;
+		if (b & 0x80) shift += 7;
+		else {
+			if (set.has(n)) return true;
+			n = 0;
+			shift = 0;
+		}
+	}
+	return false;
+}
 
 /** `vin_any(blob, json)` — does the varint blob contain any int of the JSON array?
- *  The parsed set is memoized on the JSON string (the driver calls this once per row). */
+ *  The parsed set is memoized on the JSON string (the driver calls this once per row).
+ *
+ *  PREFER `vin_in` (below) for anything scanning a large table: the memoization saves the
+ *  JSON.parse but not the per-row conversion of the TEXT argument into a JS string, which both
+ *  drivers do before this function is even entered. On a 480k-row scan of `lem` a 167 KB id list
+ *  therefore decodes ~80 GB of text and takes ~25 s. This form survives only for the dev
+ *  etymology API, whose id lists are short. */
 export function makeVinAny(): (blob: Uint8Array | null, json: string) => number {
 	let lastJson = '';
 	let lastSet: Set<number> = new Set();
@@ -316,20 +348,22 @@ export function makeVinAny(): (blob: Uint8Array | null, json: string) => number 
 			lastJson = json;
 			lastSet = new Set(JSON.parse(json) as number[]);
 		}
-		if (!blob || lastSet.size === 0) return 0;
-		let n = 0;
-		let shift = 0;
-		for (let i = 0; i < blob.length; i++) {
-			const b = blob[i];
-			n += (b & 0x7f) * 2 ** shift;
-			if (b & 0x80) shift += 7;
-			else {
-				if (lastSet.has(n)) return 1;
-				n = 0;
-				shift = 0;
-			}
-		}
-		return 0;
+		return varintsContainAny(blob, lastSet) ? 1 : 0;
+	};
+}
+
+/** `vin_in(blob, setId)` — the same test with the candidate set passed out of band: the query
+ *  ships its sets alongside the SQL (see sqliteCore.ts) and binds only a small integer handle,
+ *  so no per-row argument conversion happens at all. */
+export function makeVinIn(
+	setOf: (setId: number) => Set<number> | undefined
+): (blob: Uint8Array | null, setId: number) => number {
+	return (blob, setId) => {
+		const set = setOf(setId);
+		// a missing set means the query forgot to ship it: fail loudly rather than silently
+		// returning "no match" for every row
+		if (!set) throw new Error(`vin_in: no candidate set ${setId} installed for this query`);
+		return varintsContainAny(blob, set) ? 1 : 0;
 	};
 }
 

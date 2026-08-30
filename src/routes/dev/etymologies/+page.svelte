@@ -414,7 +414,7 @@
 					</div>
 					<div class="table-wrap working-table-wrap" aria-busy={relatedBusy}>
 						<table class="data working-table">
-							<thead><tr><th><span class="sr-only">Include</span></th><th>Language</th><th>Word</th><th>Gloss</th><th>Source</th><th>Confidence</th><th>Relationship</th></tr></thead>
+							<thead><tr><th><span class="sr-only">Include</span></th><th class="accent">Language</th><th>Word</th><th>Gloss</th><th>Source</th><th>Confidence</th><th>Relationship</th></tr></thead>
 							<tbody>
 								<tr class="seed-table-row">
 									<td class="include-cell"><span class="locked" title="Seed form is always included" aria-label="Seed form is always included">✓</span></td>
@@ -452,7 +452,7 @@
 					<table class="data candidate-table">
 						<thead>
 							<tr>
-								<th><span class="sr-only">Select</span></th><th>Etymon</th><th>Language</th><th>Gloss</th><th>Confidence</th>
+								<th class="select-cell"><span class="sr-only">Select</span></th><th>Etymon</th><th>Language</th><th>Gloss</th><th>Confidence</th>
 								<th>Closest reflex</th><th>Reference</th>
 							</tr>
 						</thead>
@@ -565,7 +565,7 @@
 	.locked { display:grid; place-items:center; width:1.05rem; height:1.05rem; color:white; background:var(--plum); border-radius:.2rem; font-size:.72rem; }
 	.working-table-wrap { max-height:22rem; margin:0; border-width:1px 0 0; border-radius:0; box-shadow:none; }
 	.working-table { min-width:48rem; table-layout:fixed; font-size:.82rem; }
-	.working-table th { padding:.45rem .55rem; }
+	.working-table th { padding:.45rem .6rem; } /* inline padding matches table.data td */
 	.working-table th:nth-child(1) { width:2rem; }
 	.working-table th:nth-child(2) { width:8.5rem; }
 	.working-table th:nth-child(3) { width:8.5rem; }
@@ -598,9 +598,11 @@
 	.candidate-word { white-space:nowrap; }
 	.candidate-gloss { max-width:18rem; }
 	.candidate-source,.best-cognate { color:var(--muted); font-size:.75rem; max-width:13rem; }
-	.select-cell { width:2.2rem; padding-right:.15rem !important; }
+	/* icon-button gutter: symmetric padding so the button sits on the column's centre line,
+	   header and cells sharing one width */
+	.candidate-table th.select-cell, .candidate-table td.select-cell { width:2.2rem; padding-inline:.15rem; text-align:center; }
 	.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-	.choose { width:1.75rem; height:1.75rem; display:grid; place-items:center; padding:0; border-radius:50%; font-size:1rem; line-height:1; font-weight:700; }
+	.choose { width:1.75rem; height:1.75rem; display:inline-grid; place-items:center; padding:0; border-radius:50%; font-size:1rem; line-height:1; font-weight:700; }
 	.choose.chosen { color:white; background:var(--plum); border-color:var(--plum); }
 	.confidence-viz { width:10.5rem; }
 	.confidence-heading { display:flex; justify-content:space-between; align-items:baseline; font-variant-numeric:tabular-nums; }

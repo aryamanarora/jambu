@@ -33,6 +33,10 @@ v2 schema (mirrored by src/lib/dbShared.ts — the two codecs MUST stay in sync)
   concepts.rids  varint-delta blob of linked lemma rowids (replaces lemma_concept).
   languages.lex  per-language lemma rowids in display ("order") order (replaces the
                  (language_id, "order") index).
+  ref_lex        per-reference citation index: ref_rid → (lex, langs). `lex` is the non-redirect
+                 lemma rowids citing that source in display ("order") order — the citation twin
+                 of languages.lex, so the reference page needs no citation-blob scan of `lem`;
+                 `langs` is (lang_rid, count) varint pairs for its language donut.
   edges          typed non-attestation graph: (child_rid, parent_rid, kind, rank, pos, note)
                  with kind codes 5=component / 6=derived plus rank>=2 alternate hypotheses
                  (kind 1-3); replaces the v2 `derivation` table.
@@ -261,6 +265,7 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         r[0] for r in con.execute("SELECT DISTINCT child_id FROM edges WHERE rank >= 2")
     }
     ocr_cites = {cite_rid[k] for k in cite_keys if k[0] in ocr_refs}
+    ref_of_cite = {cite_rid[k]: k[0] for k in cite_keys}
 
     # 3. relationship prep on old rowids.
     #    borrowed_from was verified to always equal origin_lemma_id, so it is dropped entirely.
@@ -283,6 +288,7 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     # 5. build lem rows.
     section_re = re.compile(r"[0-9].*-[0-9].*")
     lem_rows = []
+    cited_forms: list[tuple[int, int, int, int | None]] = []  # (ref rowid, ord, rowid, lang rowid)
     unresolved_refs = 0
     for rec, r in encoded:
         (old_rowid, id_, word, gloss, native, phonemic, notes, clades, cognateset, _order,
@@ -330,6 +336,17 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
                 varints(cites) if cites else None, kids_blob,
             )
         )
+        # one (source, form) pair per distinct reference cited by this form; see step 6b
+        if cites and link_rid is None:
+            for ref_rid_ in {ref_of_cite[c] for c in cites}:
+                cited_forms.append(
+                    (
+                        ref_rid_,
+                        order_rank[old_rowid],
+                        new_rowid_of_old[old_rowid],
+                        lang_rowid.get(language_id),
+                    )
+                )
     if unresolved_refs:
         log(f"WARNING: {unresolved_refs} rows had unresolvable origin/variant/redirect targets")
     orphan_langs = {r[10] for r in old if r[10] and r[10] not in lang_rowid}
@@ -448,6 +465,41 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         "UPDATE languages SET lex = ? WHERE rowid = ?",
         [(varints(rid for _, rid in sorted(v)), lang) for lang, v in lex_of.items()],
     )
+
+    # 6b. per-reference lemma lists, the citation mirror of languages.lex. Without these the
+    #     reference page had to answer "which forms cite this source?" by scanning the citation
+    #     blob of every lem row (three times: count, page, language donut); now the list, its
+    #     count and the donut are a blob decode plus a rowid slice. Redirect stubs are excluded,
+    #     matching the listing's `link_rid IS NULL`, so donut totals agree with the form count.
+    ref_lex_of: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    ref_langs_of: dict[int, dict[int, int]] = defaultdict(lambda: defaultdict(int))
+    for ref_rid_, ord_, new_rowid, lang_rid_ in cited_forms:
+        ref_lex_of[ref_rid_].append((ord_, new_rowid))
+        if lang_rid_ is not None:
+            ref_langs_of[ref_rid_][lang_rid_] += 1
+    con.execute(
+        "CREATE TABLE ref_lex (ref_rid INTEGER PRIMARY KEY, lex BLOB NOT NULL, "
+        "langs BLOB NOT NULL) WITHOUT ROWID"
+    )
+    con.executemany(
+        "INSERT INTO ref_lex VALUES (?,?,?)",
+        [
+            (
+                ref_rid_,
+                varints(rid for _, rid in sorted(forms)),
+                varints(
+                    value
+                    for lang, n in sorted(
+                        ref_langs_of[ref_rid_].items(), key=lambda kv: (-kv[1], kv[0])
+                    )
+                    for value in (lang, n)
+                ),
+            )
+            for ref_rid_, forms in ref_lex_of.items()
+        ],
+    )
+    log(f"built ref_lex for {len(ref_lex_of)} references "
+        f"({sum(len(v) for v in ref_lex_of.values())} (form, source) pairs)")
 
     # 7. aliases → grouped blobs.
     groups: dict[str, list[tuple[int, int]]] = defaultdict(list)

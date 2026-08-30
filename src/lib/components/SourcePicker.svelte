@@ -88,7 +88,7 @@
 		onclick={() => (open = !open)}
 	>
 		<span class:placeholder={!value}>{selected ? referenceLabel(selected) : value || placeholder}</span>
-		<span class="caret" class:up={open}>▾</span>
+		<span class="chev" class:open aria-hidden="true"></span>
 	</button>
 	{#if open}
 		<div class="panel" use:floatingPanel={triggerEl}>
@@ -142,8 +142,7 @@
 	.trigger.active { border-color: var(--plum-2); box-shadow: 0 0 0 3px rgba(160, 46, 125, 0.15); }
 	.trigger > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 	.placeholder { color: var(--muted); }
-	.caret { margin-left: auto; font-size: 0.68em; transition: transform 0.12s; }
-	.caret.up { transform: rotate(180deg); }
+	.trigger :global(.chev) { margin-left: auto; }
 	.panel {
 		width: min(32rem, calc(100vw - 1rem));
 		background: var(--surface);

@@ -29,7 +29,10 @@ strings in `lem`; `src/lib/dbShared.ts` decodes rows back to the legacy `Lemma` 
 facts: `origin_rid` is the rank-1 (accepted) edge target — a variant's actual target, not its
 etymon; `etymon_rid` materialises the attestation-tree root; `link_rid` carries only redirects;
 the `edges` table holds the typed non-attestation graph (component/derived + rank≥2 alternate
-hypotheses with review notes). Both SQLite layers register the `vin_any` varint-blob UDF.
+hypotheses with review notes). Varint-blob membership is tested by a SQL UDF: the browser layer
+registers `vin_in(blob, setId)`, whose candidate set travels with the query rather than as a bind
+parameter (a bound list is re-converted to JS on *every row*, which cost the reference page ~74 s);
+the build/dev layer still registers the older `vin_any(blob, json)` for the dev etymology API.
 
 ## The DB, end to end
 

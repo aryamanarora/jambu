@@ -95,7 +95,8 @@
 	];
 	const researchNav = [
 		{ href: '/correspondences', label: 'Sound correspondences' },
-		{ href: '/isoglosses', label: 'Isoglosses' }
+		{ href: '/isoglosses', label: 'Isoglosses' },
+		{ href: '/transcription', label: 'Transcription' }
 	];
 
 	function isActive(href: string): boolean {
@@ -105,6 +106,11 @@
 	function anyActive(items: { href: string }[]): boolean {
 		return items.some((item) => isActive(item.href));
 	}
+
+	// The concept atlas is an edge-to-edge map with a panel floating over it, so it opts out of
+	// the centred, scrolling document shell and takes whatever height the chrome leaves.
+	const FULL_BLEED_ROUTES = ['/concepts', '/concepts/[id]', '/languages', '/isoglosses', '/correspondences'];
+	const fullBleed = $derived(FULL_BLEED_ROUTES.includes(page.route.id ?? ''));
 </script>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -175,7 +181,7 @@
 
 <DbBanner />
 
-<main class="content" id="main-content">
+<main class="content" class:full-bleed={fullBleed} id="main-content">
 	{@render children()}
 </main>
 

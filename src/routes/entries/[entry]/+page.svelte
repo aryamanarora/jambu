@@ -31,6 +31,7 @@
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
+	import { activePoint, mutedPoint } from '$lib/atlas';
 	import FormWord from '$lib/components/FormWord.svelte';
 	import ReferenceLink from '$lib/components/ReferenceLink.svelte';
 	import RefList from '$lib/components/RefList.svelte';
@@ -248,10 +249,38 @@
 		return [...m.values()].sort((a, b) => b.count - a.count);
 	});
 	const selSeg = $derived(selected != null && ea ? ea.etymon[selected]?.seg : null);
+	/** The column the map is answering to — only alignment view asks it anything. */
+	const activeCol = $derived(view === 'align' ? selected : null);
 
 	function toggleSel(i: number) {
 		selected = selected === i ? null : i;
 	}
+	// which outcomes of the selected column are drawn: pinned by clicking a chip, previewed by
+	// hovering one. Hovering a table row previews that reflex's own places instead.
+	let pinnedOut = $state<string[]>([]);
+	let hoverOut = $state<string | null>(null);
+	let hoverRow = $state<string | null>(null);
+	// the map repaints every point when the emphasis changes, so let the pointer settle first
+	let hoverTimer: ReturnType<typeof setTimeout>;
+	function previewRow(id: string | null) {
+		clearTimeout(hoverTimer);
+		hoverTimer = setTimeout(() => (hoverRow = id), id ? 70 : 0);
+	}
+	const activeOut = $derived(
+		hoverOut && !pinnedOut.includes(hoverOut) ? [...pinnedOut, hoverOut] : pinnedOut
+	);
+	// outcomes only single anything out while their column is the one being asked about
+	const litOutcomes = $derived(activeCol == null ? [] : activeOut);
+	function toggleOut(seg: string) {
+		pinnedOut = pinnedOut.includes(seg) ? pinnedOut.filter((o) => o !== seg) : [...pinnedOut, seg];
+	}
+	// a column change is a different question entirely — none of the old answers carry over
+	$effect(() => {
+		selected;
+		pinnedOut = [];
+		hoverOut = null;
+	});
+
 	function toggleExp(id: string) {
 		const s = new Set(expanded);
 		s.has(id) ? s.delete(id) : s.add(id);
@@ -266,7 +295,7 @@
 	// outcome segment (at the selected column) → colour, ordered by frequency; loss → grey
 	const outcomeColors = $derived.by<Map<string, string>>(() => {
 		const m = new Map<string, string>();
-		if (selected == null) return m;
+		if (activeCol == null) return m;
 		const bySeg = new Map<string, number>();
 		for (const c of correspondence) {
 			const k = c.seg || '∅';
@@ -274,7 +303,7 @@
 		}
 		let pi = 0;
 		for (const [seg] of [...bySeg.entries()].sort((a, b) => b[1] - a[1]))
-			m.set(seg, seg === '∅' ? '#8b8b8b' : PALETTE[pi++ % PALETTE.length]);
+			m.set(seg, seg === '∅' ? '#4f555e' : PALETTE[pi++ % PALETTE.length]);
 		return m;
 	});
 
@@ -310,24 +339,31 @@
 		return [...byLocation.values()].map(({ lang, name, lat, long, reflexes }) => {
 			let color = cladeColor(lang.clade);
 			let extra = '';
-			let dim = false;
-			if (selected != null) {
-				const seg = reflexes.map((r) => r.segs.find((s) => s.etymonIdx === selected)).find(Boolean);
-				const out = seg ? seg.reflexSeg || '∅' : null;
-				if (out != null) {
-					color = outcomeColors.get(out) ?? '#8b8b8b';
-					extra = ` · *${selSeg} → ${out}`;
-				} else dim = true;
+			// what this place shows for the selected column, if anything
+			const seg =
+				activeCol == null
+					? null
+					: reflexes.map((r) => r.segs.find((s) => s.etymonIdx === activeCol)).find(Boolean);
+			const out = seg ? seg.reflexSeg || '∅' : null;
+			if (out != null) {
+				color = outcomeColors.get(out) ?? '#8b8b8b';
+				extra = ` · *${selSeg} → ${out}`;
 			}
 			const words = reflexes.map((r) => striptags(r.lemma.word));
 			const ids = reflexes.map((r) => r.lemma.id);
 			const ocr = reflexes.map((r) => r.lemma.references?.some((reference) => Boolean(reference.ocr)));
+			// Emphasis follows the atlases: everything is drawn until you name something. A hovered
+			// table row wins over a picked outcome, because it is the more specific question.
+			const lit = hoverRow
+				? ids.includes(hoverRow)
+				: litOutcomes.length
+					? out != null && litOutcomes.includes(out)
+					: activeCol == null || out != null;
 			return {
 				lat,
 				long,
 				svg: lang.map_marker,
-				color,
-				dim,
+				...(lit ? activePoint(color) : mutedPoint()),
 				tooltip: `${name}${extra ? ` · <span class="phon">${extra.slice(3)}</span>` : ''}`,
 				popupHtml: `<h3>${striptags(name)}</h3><ul>${words
 					.map(
@@ -338,12 +374,6 @@
 			};
 		});
 	});
-
-	// always frame the map on South Asia (the Map flags anything outside the live view itself)
-	const INDIA_BOUNDS: [[number, number], [number, number]] = [
-		[4, 60],
-		[37, 98]
-	];
 
 	const plainGloss = $derived(striptags(entry.gloss) || shortGloss(entry.etymology ?? ''));
 	const langCount = $derived(new Set(ea?.reflexes.map((r) => r.lemma.language_id) ?? []).size);
@@ -455,7 +485,7 @@
 								title="Confidence in the source's printed comparison, not a new editorial borrowing claim"
 								>{comparison.confidence}</span
 							>
-							<span class="comparison-caret" aria-hidden="true">›</span>
+							<span class="chev comparison-caret" aria-hidden="true"></span>
 						</span>
 					</summary>
 					<div class="comparison-evidence etymology serif">
@@ -500,20 +530,8 @@
 	</details>
 {/if}
 	</div>
-	<aside class="entry-context" aria-label="Entry clade and distribution">
+	<aside class="entry-context" aria-label="Entry clades">
 		<CladeBars clades={entry.clades} size="lg" />
-		{#if ea && view === 'normal' && markers.length}
-			<section class="entry-map-overview" aria-labelledby="distribution-title">
-				<div class="entry-map-heading">
-					<h2 id="distribution-title">Distribution</h2>
-					<p class="muted">
-						{markers.length} location{markers.length === 1 ? '' : 's'} · {langCount}
-						language{langCount === 1 ? '' : 's'}
-					</p>
-				</div>
-				<MapView {markers} height="190px" bounds={INDIA_BOUNDS} />
-			</section>
-		{/if}
 	</aside>
 </div>
 
@@ -564,28 +582,12 @@
 	</div>
 {/if}
 
-<!-- correspondence readout for the selected column -->
-{#if ea && view === 'align' && selected != null}
-	<div class="corrbar active">
-		<span class="corr-head">*{selSeg} →</span>
-		{#each correspondence as c (c.seg + c.change)}
-			{@const info = changeInfo(c.change)}
-			<span class="corr-chip {info.cls}" title={c.langs.join(', ')}>
-				<span class="sw" style="background:{outcomeColors.get(c.seg || '∅')}"></span><b
-					>{c.seg || '∅'}</b
-				><span class="x">×{c.count}</span><span class="corr-name">{info.name}</span>
-			</span>
-		{/each}
-		<button class="clear" onclick={() => (selected = null)}>clear</button>
-	</div>
-{/if}
-
 <!-- alignment matrix -->
 {#if loading}
 	<div class="loader-line" style="margin:1.5rem 0"></div>
 {:else if ea}
 	<p class="count muted">{ea.reflexes.length.toLocaleString()} reflexes · {langCount} languages</p>
-	<div class="entry-body" class:alignment-view={view === 'align'}>
+	<div class="entry-body">
 		<div class="matrix-col">
 			<div class="table-wrap aln-wrap">
 				<table class="aln">
@@ -616,6 +618,8 @@
 						class:open={expanded.has(row.r.lemma.id)}
 						style="--clade:{row.color}"
 						onclick={(e) => rowClick(e, row.r.lemma.id)}
+						onmouseenter={() => previewRow(row.r.lemma.id)}
+						onmouseleave={() => previewRow(null)}
 					>
 						<td class="c-clade clade-cell">{row.firstClade ? row.clade : ''}</td>
 						<td class="c-lang">
@@ -668,13 +672,53 @@
 		</div>
 		</div>
 
-		{#if view === 'align'}
-			<aside class="map-col">
-				{#if markers.length}<MapView {markers} height="64vh" bounds={INDIA_BOUNDS} />{/if}
-				<div class="map-cap muted">
-					{#if selected != null}marker colour = <b class="phon">*{selSeg}</b> outcome{:else}select a
-						column to map its outcomes{/if}
+		{#if markers.length}
+			<aside class="map-col" aria-label="Where these reflexes are attested">
+				<div class="map-head">
+					<h2>Distribution</h2>
+					<p class="muted">
+						{markers.length} location{markers.length === 1 ? '' : 's'} · {langCount}
+						language{langCount === 1 ? '' : 's'}
+					</p>
 				</div>
+				<MapView {markers} height="clamp(16rem, 44vh, 32rem)" />
+
+				<!-- with a column selected the correspondence becomes a picker: the swatches are the
+				     map's own colours, so clicking one isolates where that outcome happens -->
+				{#if view === 'align' && selected != null && correspondence.length}
+					<div class="outcomes">
+						<div class="outcomes-head">
+							<span class="corr-head">*{selSeg} →</span>
+							{#if pinnedOut.length}
+								<button class="clear" onclick={() => (pinnedOut = [])}>clear {pinnedOut.length}</button>
+							{/if}
+						</div>
+						{#each correspondence as c (c.seg + c.change)}
+							{@const info = changeInfo(c.change)}
+							{@const seg = c.seg || '∅'}
+							<button
+								class="outcome {info.cls}"
+								class:on={pinnedOut.includes(seg)}
+								class:off={activeOut.length > 0 && !activeOut.includes(seg)}
+								style="--c:{outcomeColors.get(seg)}"
+								aria-pressed={pinnedOut.includes(seg)}
+								title={c.langs.join(', ')}
+								onmouseenter={() => (hoverOut = seg)}
+								onmouseleave={() => (hoverOut = null)}
+								onfocus={() => (hoverOut = seg)}
+								onblur={() => (hoverOut = null)}
+								onclick={() => toggleOut(seg)}
+							>
+								<span class="sw"></span>
+								<b>{seg}</b>
+								<span class="corr-name">{info.name}</span>
+								<span class="x">×{c.count}</span>
+							</button>
+						{/each}
+					</div>
+				{:else if view === 'align'}
+					<p class="map-cap muted">Select a column in the table to map its outcomes.</p>
+				{/if}
 			</aside>
 		{/if}
 	</div>
@@ -723,14 +767,10 @@
 		gap: 0.38rem;
 	}
 	.comparison-caret {
-		display: inline-block;
 		color: var(--faint);
-		font-size: 1rem;
-		line-height: 1;
-		transform: rotate(0deg);
-		transition: transform 0.12s ease;
+		transform: rotate(-45deg); /* points right while closed */
 	}
-	.comparison-row[open] .comparison-caret { transform: rotate(90deg); }
+	.comparison-row[open] .comparison-caret { transform: rotate(45deg); }
 	.comparison-relation, .comparison-language, .comparison-gloss {
 		color: var(--muted);
 		font-size: 0.82rem;
@@ -959,25 +999,6 @@
 		font-size: 0.92rem;
 		margin-top: 0.4rem;
 	}
-	.entry-map-overview {
-		margin: 0;
-	}
-	.entry-map-heading {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: 1rem;
-		margin-bottom: 0.45rem;
-	}
-	.entry-map-heading h2 {
-		margin: 0;
-		font-size: 1.05rem;
-	}
-	.entry-map-heading p {
-		margin: 0;
-		font-size: 0.82rem;
-		text-align: right;
-	}
 
 	/* view toggle */
 	.toggle {
@@ -1075,54 +1096,84 @@
 		text-align: left;
 	}
 
-	/* correspondence bar */
-	.corrbar {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 6px;
-		margin-top: 0.8rem;
-		padding: 0.55rem 0.8rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		background: var(--surface);
-		font-size: 0.85rem;
-		min-height: 1.2rem;
+	/* ---- the outcomes of the selected column, as a picker beneath the map ----
+	   Same grammar as the atlas lists: a swatch that is literally the map's colour, the thing
+	   itself, what it is called, how many. Clicking isolates it; hovering previews. */
+	.outcomes {
+		display: grid;
+		gap: 2px;
+		margin-top: 0.5rem;
+		max-height: 30vh;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: var(--border-strong) transparent;
 	}
-	.corrbar.active {
-		border-color: var(--berry);
+	.outcomes-head {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		padding: 0 0.15rem 0.2rem;
 	}
 	.corr-head {
 		font-family: var(--font-phon);
-		font-size: 1.1rem;
+		font-size: 1.05rem;
 		font-weight: 600;
 	}
-	.corr-chip {
-		display: inline-flex;
+	.outcome {
+		display: grid;
+		grid-template-columns: auto auto minmax(0, 1fr) auto;
 		align-items: baseline;
-		gap: 5px;
-		padding: 3px 11px;
-		border-radius: 999px;
+		gap: 0.45rem;
+		padding: 0.25rem 0.45rem;
+		border: 1.5px solid transparent;
+		border-radius: 8px;
+		background: none;
+		color: var(--ink);
+		font: inherit;
 		font-size: 0.8rem;
-		border: 1px solid var(--border-strong);
+		text-align: left;
+		cursor: pointer;
+		transition: background 120ms ease, border-color 120ms ease, opacity 120ms ease;
 	}
-	.corr-chip b {
+	.outcome:hover {
+		border-color: var(--c);
+		background: color-mix(in srgb, var(--c) 12%, transparent);
+	}
+	.outcome.on {
+		border-color: var(--c);
+		background: color-mix(in srgb, var(--c) 22%, transparent);
+	}
+	/* not in the current selection: still listed, but stood down like its points on the map */
+	.outcome.off {
+		opacity: 0.4;
+	}
+	.outcome:focus-visible {
+		outline: 2px solid var(--c);
+		outline-offset: -2px;
+	}
+	.outcome b {
 		font-family: var(--font-phon);
 		font-size: 0.98rem;
 	}
-	.corr-chip .sw {
+	.outcome .sw {
+		align-self: center;
 		width: 10px;
 		height: 10px;
 		border-radius: 50%;
 		border: 1px solid rgba(0, 0, 0, 0.25);
+		background: var(--c);
 		flex-shrink: 0;
 	}
-	.corr-chip .x {
+	.outcome .x {
 		color: var(--muted);
+		font-variant-numeric: tabular-nums;
 	}
 	.corr-name {
 		font-size: 0.68rem;
 		color: var(--muted);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.clear {
 		margin-left: auto;
@@ -1157,7 +1208,7 @@
 		color: var(--muted);
 		background: var(--surface-2);
 		border-bottom: 1px solid var(--border-strong);
-		padding: 0.3rem 0.5rem;
+		padding: 0.3rem 0.55rem; /* inline padding matches table.aln td */
 		vertical-align: middle;
 		position: sticky;
 		top: 0;
@@ -1200,6 +1251,17 @@
 		text-align: center;
 		width: 2em;
 	}
+	/* `table.aln th` sets text-align, so the centred columns need to out-specify it or their
+	   headers drift left of the cells they label */
+	table.aln th.c-seg,
+	table.aln th.c-cog {
+		text-align: center;
+	}
+	/* tighter gutters on the segment columns, header and cells in step */
+	table.aln th.c-seg,
+	table.aln td.c-seg {
+		padding-inline: 0.3rem;
+	}
 
 	table.aln td {
 		padding: 0.26rem 0.55rem;
@@ -1230,8 +1292,6 @@
 	td.c-seg {
 		text-align: center;
 		white-space: nowrap;
-		padding-left: 0.3rem;
-		padding-right: 0.3rem;
 	}
 	td.c-seg.sel {
 		background: color-mix(in srgb, var(--berry) 11%, transparent) !important;
@@ -1316,6 +1376,22 @@
 		position: sticky;
 		top: 66px;
 	}
+	.map-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin-bottom: 0.4rem;
+	}
+	.map-head h2 {
+		margin: 0;
+		font-size: 1.05rem;
+	}
+	.map-head p {
+		margin: 0;
+		font-size: 0.78rem;
+		text-align: right;
+	}
 	.map-cap {
 		font-size: 0.78rem;
 		text-align: center;
@@ -1344,10 +1420,10 @@
 		}
 	}
 	@media (max-width: 640px) {
-		.entry-map-heading {
+		.map-head {
 			display: block;
 		}
-		.entry-map-heading p {
+		.map-head p {
 			margin-top: 0.15rem;
 			text-align: left;
 		}

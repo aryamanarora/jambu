@@ -2,10 +2,10 @@
 //
 // DB_VERSION namespaces the copy cached in OPFS. Bump it whenever the deployed jambu.db changes
 // so returning visitors re-download instead of querying a stale cached copy.
-export const DB_VERSION = '26';
+export const DB_VERSION = '28';
 
 /** Path of the DB inside the OPFS SAHPool VFS (versioned for cache-busting). */
 export const OPFS_DB_PATH = `/jambu-v${DB_VERSION}.db`;
 
 /** Approximate uncompressed DB size, used only to render a download progress bar. */
-export const DB_APPROX_BYTES = 78_430_208; // db-v26 (78.4 MB on disk)
+export const DB_APPROX_BYTES = 89_161_728; // db-v28 (89.2 MB on disk)

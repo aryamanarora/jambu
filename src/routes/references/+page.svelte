@@ -77,7 +77,7 @@
 />
 
 <div class="table-wrap">
-	<table class="data accent-col mobile-cards">
+	<table class="data mobile-cards">
 		<colgroup>
 			<col class="ref-col" />
 			<col class="citation-col" />
@@ -89,7 +89,7 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<FilterCell label="Reference" sortKey="reference" {activeSort} onFilter={() => {}} onSort={setSort} />
+				<FilterCell label="Reference" sortKey="reference" accent {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Citation" sortKey="citation" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Editor" sortKey="editor" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Extraction" sortKey="extraction" {activeSort} onFilter={() => {}} onSort={setSort} />
@@ -127,7 +127,7 @@
 	}
 	table {
 		width: 100%;
-		min-width: 980px;
+		min-width: 1040px;
 		table-layout: fixed;
 	}
 	.ref-col {
@@ -148,8 +148,9 @@
 	.forms-col {
 		width: 6.5rem;
 	}
+	/* wide enough for the header label plus its sort control, so neither spills into Forms */
 	.unetym-col {
-		width: 8.5rem;
+		width: 11rem;
 	}
 	td.markdown {
 		overflow-wrap: anywhere;

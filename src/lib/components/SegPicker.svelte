@@ -66,7 +66,7 @@
 		>
 			<span class="cur phon">{value === null ? 'any' : segLabel(value)}</span>
 			{#if valueOpt}<span class="curn">{valueOpt.n.toLocaleString()}</span>{/if}
-			<span class="caret">▾</span>
+			<span class="chev" class:open aria-hidden="true"></span>
 		</button>
 		{#if open}
 			<div class="panel" class:right={align === 'end'}>
@@ -135,13 +135,6 @@
 		font-family: var(--font-sans);
 		font-size: 0.6rem;
 		opacity: 0.65;
-	}
-	.trigger .caret {
-		font-size: 0.62rem;
-		transition: transform 0.12s ease;
-	}
-	.trigger.active .caret {
-		transform: rotate(180deg);
 	}
 	.panel {
 		position: absolute;

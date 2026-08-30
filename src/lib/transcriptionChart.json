@@ -1,0 +1,10384 @@
+{
+	"generatedFrom": "../data/conversion/*.txt",
+	"profileCount": 79,
+	"graphemeCount": 1344,
+	"map": {
+		" ": {
+			"house": "#",
+			"profiles": 55,
+			"agreement": 52,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 3,
+					"examples": [
+						"chattisgarhi",
+						"rajasthani",
+						"toulmin"
+					]
+				}
+			]
+		},
+		" ̆": {
+			"house": "#̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"!": {
+			"house": "!",
+			"profiles": 8,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "ḷ",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"\"\"\"\"": {
+			"house": "\"\"\"\"",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"#": {
+			"house": "#",
+			"profiles": 4,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": " ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				},
+				{
+					"house": "ɨ",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"$": {
+			"house": "$",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"%": {
+			"house": "%",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"&": {
+			"house": "&",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"&amp;iacutebrev": {
+			"house": "ɪ́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"&amp;igravetilde": {
+			"house": "ĩ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"'": {
+			"house": "'",
+			"profiles": 18,
+			"agreement": 12,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 3,
+					"examples": [
+						"northern",
+						"schmidt-kashmiri",
+						"ssnp"
+					]
+				},
+				{
+					"house": "ʼ",
+					"profiles": 3,
+					"examples": [
+						"sil-bangladesh",
+						"sil-kurux",
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"'a": {
+			"house": "á",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"'u": {
+			"house": "ú",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"(": {
+			"house": "(",
+			"profiles": 32,
+			"agreement": 31,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"naaba"
+					]
+				}
+			]
+		},
+		"(ʷ": {
+			"house": "(ʷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		")": {
+			"house": ")",
+			"profiles": 33,
+			"agreement": 32,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"naaba"
+					]
+				}
+			]
+		},
+		"*": {
+			"house": "*",
+			"profiles": 10,
+			"agreement": 10,
+			"variants": []
+		},
+		"+": {
+			"house": "+",
+			"profiles": 7,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "#",
+					"profiles": 1,
+					"examples": [
+						"lsi"
+					]
+				},
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		",": {
+			"house": ",",
+			"profiles": 15,
+			"agreement": 14,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"-": {
+			"house": "-",
+			"profiles": 49,
+			"agreement": 49,
+			"variants": []
+		},
+		".": {
+			"house": ".",
+			"profiles": 28,
+			"agreement": 24,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 4,
+					"examples": [
+						"ghatage",
+						"northern",
+						"ssnp",
+						"wadiyara"
+					]
+				}
+			]
+		},
+		".̩": {
+			"house": ".",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"/": {
+			"house": "/",
+			"profiles": 20,
+			"agreement": 20,
+			"variants": []
+		},
+		"0": {
+			"house": "0",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"1": {
+			"house": "1",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"2": {
+			"house": "2",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"3": {
+			"house": "3",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"4": {
+			"house": "4",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"5": {
+			"house": "5",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"6": {
+			"house": "6",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"7": {
+			"house": "7",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"8": {
+			"house": "8",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"9": {
+			"house": "9",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		":": {
+			"house": ":",
+			"profiles": 14,
+			"agreement": 11,
+			"variants": [
+				{
+					"house": "ː",
+					"profiles": 3,
+					"examples": [
+						"dewas-rai",
+						"north-gorkha",
+						"schmidt-kashmiri"
+					]
+				}
+			]
+		},
+		";": {
+			"house": ";",
+			"profiles": 9,
+			"agreement": 8,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"ssnp"
+					]
+				}
+			]
+		},
+		"<": {
+			"house": "<",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"</b>": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"</i>": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"</superscript>": {
+			"house": "</sup>",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<b>": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<i>": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<smallcaps>ì</smallcaps>": {
+			"house": "ì",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<smallcaps>í</smallcaps>": {
+			"house": "í",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<smallcaps>ĩ</smallcaps>": {
+			"house": "ĩ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<smallcaps>ī</smallcaps>": {
+			"house": "ī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<smallcaps>īˋ</smallcaps>": {
+			"house": "ī̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<smallcaps>ī́</smallcaps>": {
+			"house": "ī́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<superscript>": {
+			"house": "<sup>",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"<superscript>ŭ</superscript>": {
+			"house": "ᵘ̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"=": {
+			"house": "=",
+			"profiles": 9,
+			"agreement": 8,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		">": {
+			"house": ">",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"?": {
+			"house": "?",
+			"profiles": 13,
+			"agreement": 12,
+			"variants": [
+				{
+					"house": "ʔ",
+					"profiles": 1,
+					"examples": [
+						"chhulung"
+					]
+				}
+			]
+		},
+		"@": {
+			"house": "@",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "̃",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"A": {
+			"house": "A",
+			"profiles": 9,
+			"agreement": 8,
+			"variants": [
+				{
+					"house": "h",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"A:": {
+			"house": "Ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"B": {
+			"house": "B",
+			"profiles": 10,
+			"agreement": 9,
+			"variants": [
+				{
+					"house": "b",
+					"profiles": 1,
+					"examples": [
+						"dotyali"
+					]
+				}
+			]
+		},
+		"C": {
+			"house": "C",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"D": {
+			"house": "D",
+			"profiles": 6,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "d",
+					"profiles": 1,
+					"examples": [
+						"dotyali"
+					]
+				}
+			]
+		},
+		"E": {
+			"house": "E",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"E:": {
+			"house": "Ē",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"F": {
+			"house": "F",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"G": {
+			"house": "G",
+			"profiles": 8,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "g",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				},
+				{
+					"house": "ɢ",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"H": {
+			"house": "H",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "h",
+					"profiles": 1,
+					"examples": [
+						"chhulung"
+					]
+				}
+			]
+		},
+		"I": {
+			"house": "I",
+			"profiles": 12,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "í",
+					"profiles": 1,
+					"examples": [
+						"khowar"
+					]
+				},
+				{
+					"house": "i",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"I:": {
+			"house": "Ī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"J": {
+			"house": "J",
+			"profiles": 9,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "y",
+					"profiles": 1,
+					"examples": [
+						"chhulung"
+					]
+				},
+				{
+					"house": "ẓ",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"J̣": {
+			"house": "ʣ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"K": {
+			"house": "K",
+			"profiles": 13,
+			"agreement": 11,
+			"variants": [
+				{
+					"house": "k",
+					"profiles": 2,
+					"examples": [
+						"markodi",
+						"vaagri"
+					]
+				}
+			]
+		},
+		"L": {
+			"house": "L",
+			"profiles": 7,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ʟ",
+					"profiles": 1,
+					"examples": [
+						"thakali"
+					]
+				},
+				{
+					"house": "l",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"M": {
+			"house": "M",
+			"profiles": 12,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "m",
+					"profiles": 2,
+					"examples": [
+						"chhulung",
+						"markodi"
+					]
+				}
+			]
+		},
+		"N": {
+			"house": "N",
+			"profiles": 12,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "n",
+					"profiles": 1,
+					"examples": [
+						"dotyali"
+					]
+				},
+				{
+					"house": "ɴ",
+					"profiles": 1,
+					"examples": [
+						"thakali"
+					]
+				}
+			]
+		},
+		"O": {
+			"house": "O",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"O:": {
+			"house": "Ō",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"P": {
+			"house": "P",
+			"profiles": 10,
+			"agreement": 9,
+			"variants": [
+				{
+					"house": "p",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"Q": {
+			"house": "Q",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"R": {
+			"house": "R",
+			"profiles": 9,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "ʀ",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"vaagri"
+					]
+				}
+			]
+		},
+		"S": {
+			"house": "S",
+			"profiles": 12,
+			"agreement": 11,
+			"variants": [
+				{
+					"house": "ś",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"T": {
+			"house": "T",
+			"profiles": 12,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "t",
+					"profiles": 2,
+					"examples": [
+						"dotyali",
+						"vaagri"
+					]
+				}
+			]
+		},
+		"U": {
+			"house": "U",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"U:": {
+			"house": "Ū",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"V": {
+			"house": "V",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"W": {
+			"house": "W",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"X": {
+			"house": "X",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ś",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"Y": {
+			"house": "Y",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"Z": {
+			"house": "Z",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"[": {
+			"house": "[",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"\\": {
+			"house": "\\",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"]": {
+			"house": "]",
+			"profiles": 8,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"_": {
+			"house": "#",
+			"profiles": 8,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "_",
+					"profiles": 2,
+					"examples": [
+						"badaga-hockings",
+						"merriam-reconstruction"
+					]
+				},
+				{
+					"house": "",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"ssnp"
+					]
+				},
+				{
+					"house": " ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"`": {
+			"house": "`",
+			"profiles": 4,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "́",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"a": {
+			"house": "a",
+			"profiles": 78,
+			"agreement": 72,
+			"variants": [
+				{
+					"house": "ā",
+					"profiles": 6,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"magahi-survey",
+						"rajasthani"
+					]
+				}
+			]
+		},
+		"a:": {
+			"house": "ā",
+			"profiles": 15,
+			"agreement": 15,
+			"variants": []
+		},
+		"a:~": {
+			"house": "ā̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a@": {
+			"house": "ã",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a@:": {
+			"house": "ā̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"aa": {
+			"house": "ā",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"aà": {
+			"house": "ā̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"aá": {
+			"house": "ā̌",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"aa̤": {
+			"house": "ā̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ai": {
+			"house": "ai",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"aiː": {
+			"house": "aī",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"au": {
+			"house": "au",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"auː": {
+			"house": "aū",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"aà": {
+			"house": "ā̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"aá": {
+			"house": "ā̌",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"aĩ": {
+			"house": "ãĩ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"aũ": {
+			"house": "ãũ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"aʰ": {
+			"house": "aʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"aː": {
+			"house": "ā",
+			"profiles": 24,
+			"agreement": 23,
+			"variants": [
+				{
+					"house": "aa",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"aːi": {
+			"house": "āi",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"aːiː": {
+			"house": "āī",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"aːu": {
+			"house": "āu",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"aˑ": {
+			"house": "aˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"à": {
+			"house": "à",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"àa": {
+			"house": "ā̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"àá": {
+			"house": "ā̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"á": {
+			"house": "á",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "á",
+					"profiles": 1,
+					"examples": [
+						"kalkoti"
+					]
+				}
+			]
+		},
+		"áa": {
+			"house": "ā̂",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"â": {
+			"house": "a̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ã": {
+			"house": "ã",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ā̃",
+					"profiles": 1,
+					"examples": [
+						"wadiyara"
+					]
+				}
+			]
+		},
+		"ä": {
+			"house": "æ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ää": {
+			"house": "ǣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ää̀": {
+			"house": "ǣ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ää́": {
+			"house": "ǣ̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä̀": {
+			"house": "æ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä̀ä": {
+			"house": "ǣ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä̀ä́": {
+			"house": "ǣ̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä́": {
+			"house": "ǽ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä́ä": {
+			"house": "ǣ̂",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̍": {
+			"house": "a̍",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̤a": {
+			"house": "ā̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̤a̤": {
+			"house": "ā̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̤ː": {
+			"house": "ā̤",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"a̩": {
+			"house": "a̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"â̩": {
+			"house": "a̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̩̽": {
+			"house": "ã̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̯": {
+			"house": "a̯",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"a̰ː": {
+			"house": "ā̰",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"a̽": {
+			"house": "ã",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"a̽̂": {
+			"house": "ã̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"b": {
+			"house": "b",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"bh": {
+			"house": "bʰ",
+			"profiles": 20,
+			"agreement": 20,
+			"variants": []
+		},
+		"bĥ": {
+			"house": "bʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"bāḷant(iṇ)": {
+			"house": "bāḷant(īṇ)",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"bĥ": {
+			"house": "bʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"bɦ": {
+			"house": "bʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"bʰ": {
+			"house": "bʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"bʰˑ": {
+			"house": "bʰˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"bʷ": {
+			"house": "bʷ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"bː": {
+			"house": "bb",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"b̥": {
+			"house": "b̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"bβ": {
+			"house": "bβ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"bⁿ": {
+			"house": "bⁿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"c": {
+			"house": "c",
+			"profiles": 46,
+			"agreement": 43,
+			"variants": [
+				{
+					"house": "ʦ",
+					"profiles": 3,
+					"examples": [
+						"boretzky-romani",
+						"buddruss-grangali",
+						"buddruss-wama"
+					]
+				}
+			]
+		},
+		"ch": {
+			"house": "cʰ",
+			"profiles": 9,
+			"agreement": 9,
+			"variants": []
+		},
+		"chh": {
+			"house": "cʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"cː": {
+			"house": "cc",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ċ": {
+			"house": "ʦ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ċh": {
+			"house": "ʦʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"č": {
+			"house": "c",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"čh": {
+			"house": "cʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"c̚": {
+			"house": "c",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"c̠": {
+			"house": "ɔ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ĉ̠": {
+			"house": "ɔ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"c̠̽": {
+			"house": "ɔ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"c̠̽̂": {
+			"house": "ɔ̯̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"c̣": {
+			"house": "ʦ̣",
+			"profiles": 11,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "c̣",
+					"profiles": 1,
+					"examples": [
+						"nured"
+					]
+				}
+			]
+		},
+		"c̣h": {
+			"house": "ʦ̣ʰ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"č̣": {
+			"house": "ʦ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d": {
+			"house": "d",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"d:": {
+			"house": "dd",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dh": {
+			"house": "dʰ",
+			"profiles": 20,
+			"agreement": 20,
+			"variants": []
+		},
+		"dĥ": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dz": {
+			"house": "ʣ",
+			"profiles": 14,
+			"agreement": 14,
+			"variants": []
+		},
+		"dzh": {
+			"house": "ʣʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"dzʰ": {
+			"house": "ʣʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"dzʲ": {
+			"house": "ʣʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dĥ": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dź": {
+			"house": "ʥ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dž": {
+			"house": "j",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"dɦ": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʑ": {
+			"house": "ʣ̣",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"dʑʰ": {
+			"house": "ʣ̣ʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"dʑː": {
+			"house": "ʣ̣ʣ̣",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"dʒ": {
+			"house": "j",
+			"profiles": 30,
+			"agreement": 30,
+			"variants": []
+		},
+		"dʒh": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒɦ": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒʰ": {
+			"house": "jʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"dʒʲ": {
+			"house": "jʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒː": {
+			"house": "jj",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒ̩": {
+			"house": "j",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒ̩h": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒ̩ĥ": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʒ̩ĥ": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dʰ": {
+			"house": "dʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"dʲ": {
+			"house": "dʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"dː": {
+			"house": "dd",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"dˑ": {
+			"house": "ḍ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "dˑ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"dˑh": {
+			"house": "ḍʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dˑĥ": {
+			"house": "ḍʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dˑĥ": {
+			"house": "ḍʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d̆": {
+			"house": "d̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḍ": {
+			"house": "ḍ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ḍh": {
+			"house": "ḍʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"d̥": {
+			"house": "d̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"d̪": {
+			"house": "d",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"d̪h": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d̪z": {
+			"house": "ʣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d̪ɦ": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d̪ʒ": {
+			"house": "j",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d̪ʰ": {
+			"house": "dʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"d̪ː": {
+			"house": "dd",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"d̪ˤ": {
+			"house": "dˤ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d̺": {
+			"house": "d",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"d͡z": {
+			"house": "ʣ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"d͡zʰ": {
+			"house": "ʣʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"d͡ʑ": {
+			"house": "j",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"d͡ʒ": {
+			"house": "j",
+			"profiles": 10,
+			"agreement": 10,
+			"variants": []
+		},
+		"d͡ʒʰ": {
+			"house": "jʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"dᶻ": {
+			"house": "ʣ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"dᶻʰ": {
+			"house": "ʣʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"dᶽ": {
+			"house": "j",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dᶽʰ": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dᶽʱ": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dⁿ": {
+			"house": "d",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dⁿh": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dⁿĥ": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"dⁿĥ": {
+			"house": "dʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e": {
+			"house": "e",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"e:": {
+			"house": "ē",
+			"profiles": 16,
+			"agreement": 16,
+			"variants": []
+		},
+		"ee": {
+			"house": "ē",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"eè": {
+			"house": "ḕ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"eé": {
+			"house": "ē̌",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ei": {
+			"house": "ei",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"eiː": {
+			"house": "eī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"eí": {
+			"house": "eí",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"eè": {
+			"house": "ḕ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"eé": {
+			"house": "ē̌",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"eɳː": {
+			"house": "eṇṇ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"eː": {
+			"house": "ē",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"eˑ": {
+			"house": "eˑ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ē",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"è": {
+			"house": "è",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"èe": {
+			"house": "ḕ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"èé": {
+			"house": "ē̌̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ē̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"é": {
+			"house": "é",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "é",
+					"profiles": 1,
+					"examples": [
+						"kalkoti"
+					]
+				}
+			]
+		},
+		"ée": {
+			"house": "ē̂",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"éː": {
+			"house": "ḗ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ê": {
+			"house": "e̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ẽ": {
+			"house": "ẽ",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ẽ",
+					"profiles": 1,
+					"examples": [
+						"khowar"
+					]
+				}
+			]
+		},
+		"ẽː": {
+			"house": "ē̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ĕ": {
+			"house": "e",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ë": {
+			"house": "e",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ě": {
+			"house": "ɛ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̍": {
+			"house": "e̍",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̠": {
+			"house": "ə",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ê̠": {
+			"house": "ə̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̠̽": {
+			"house": "ə̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̠̽̂": {
+			"house": "ə̯̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̤ː": {
+			"house": "ē̤",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"e̩": {
+			"house": "e̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ê̩": {
+			"house": "e̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̩̽": {
+			"house": "ẽ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̯": {
+			"house": "ε",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̽": {
+			"house": "ẽ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"e̽̂": {
+			"house": "ẽ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"eⁿ": {
+			"house": "eⁿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"f": {
+			"house": "f",
+			"profiles": 45,
+			"agreement": 45,
+			"variants": []
+		},
+		"fː": {
+			"house": "ff",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"g": {
+			"house": "g",
+			"profiles": 75,
+			"agreement": 75,
+			"variants": []
+		},
+		"gh": {
+			"house": "gʰ",
+			"profiles": 19,
+			"agreement": 19,
+			"variants": []
+		},
+		"gĥ": {
+			"house": "gʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"gĥ": {
+			"house": "gʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"gɦ": {
+			"house": "gʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"gʰ": {
+			"house": "gʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"gʲ": {
+			"house": "gʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"gː": {
+			"house": "gg",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ĝ": {
+			"house": "gʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ĝh": {
+			"house": "gʸʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ġ": {
+			"house": "ġ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"g̠": {
+			"house": "ɠ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ɣ",
+					"profiles": 1,
+					"examples": [
+						"dedr"
+					]
+				}
+			]
+		},
+		"g̣": {
+			"house": "ɣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"g̱": {
+			"house": "g̱",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"g̲h̲": {
+			"house": "ɣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"gᵒ": {
+			"house": "gᵒ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"h": {
+			"house": "h",
+			"profiles": 76,
+			"agreement": 76,
+			"variants": []
+		},
+		"hʰ": {
+			"house": "hʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"hʲ": {
+			"house": "hʸ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"hː": {
+			"house": "hh",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ĥ": {
+			"house": "ʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i": {
+			"house": "i",
+			"profiles": 79,
+			"agreement": 70,
+			"variants": [
+				{
+					"house": "ī",
+					"profiles": 9,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"kudiya",
+						"magahi-survey"
+					]
+				}
+			]
+		},
+		"i:": {
+			"house": "ī",
+			"profiles": 12,
+			"agreement": 12,
+			"variants": []
+		},
+		"i:~": {
+			"house": "ī̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ii": {
+			"house": "ī",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"iì": {
+			"house": "ī̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ií": {
+			"house": "ī̌",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"iì": {
+			"house": "ī̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ií": {
+			"house": "ī̌",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"iʹ": {
+			"house": "ǐ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"iː": {
+			"house": "ī",
+			"profiles": 24,
+			"agreement": 24,
+			"variants": []
+		},
+		"iˑ": {
+			"house": "iˑ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ī",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ì": {
+			"house": "ì",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ìi": {
+			"house": "ī̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ī̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ìí": {
+			"house": "ī̌̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ī̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"í": {
+			"house": "í",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "í",
+					"profiles": 1,
+					"examples": [
+						"kalkoti"
+					]
+				}
+			]
+		},
+		"íi": {
+			"house": "ī̂",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"íː": {
+			"house": "ī́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"î": {
+			"house": "i̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ĩ": {
+			"house": "ī̃",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ĩ",
+					"profiles": 1,
+					"examples": [
+						"khowar"
+					]
+				}
+			]
+		},
+		"ĩː": {
+			"house": "ī̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ï": {
+			"house": "i",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i̍": {
+			"house": "i̍",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i̤ː": {
+			"house": "ī̤",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"i̥": {
+			"house": "i̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"i̩": {
+			"house": "i̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"î̩": {
+			"house": "i̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i̩̽": {
+			"house": "ĩ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i̯": {
+			"house": "i̯",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"i̯ː": {
+			"house": "ī̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i̽": {
+			"house": "ĩ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"i̽̂": {
+			"house": "ĩ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"j": {
+			"house": "y",
+			"profiles": 73,
+			"agreement": 49,
+			"variants": [
+				{
+					"house": "j",
+					"profiles": 24,
+					"examples": [
+						"andersen",
+						"badaga-hockings",
+						"berger",
+						"brahui"
+					]
+				}
+			]
+		},
+		"jh": {
+			"house": "jʰ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"jʰ": {
+			"house": "yʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"jː": {
+			"house": "yy",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"j̄": {
+			"house": "ʄ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "jj",
+					"profiles": 1,
+					"examples": [
+						"gandhari"
+					]
+				}
+			]
+		},
+		"j̈": {
+			"house": "ʣ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "j̈",
+					"profiles": 1,
+					"examples": [
+						"nured"
+					]
+				}
+			]
+		},
+		"j̈h": {
+			"house": "ʣʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǰ": {
+			"house": "j",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ǰh": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǰ̣": {
+			"house": "ʣ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"j̚": {
+			"house": "y",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"j̣": {
+			"house": "ʣ̣",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"j̣h": {
+			"house": "ʣ̣ʰ",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"k": {
+			"house": "k",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"k:": {
+			"house": "kk",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"kh": {
+			"house": "kʰ",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"kĥ": {
+			"house": "kʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"kĥ": {
+			"house": "kʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"kʰ": {
+			"house": "kʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"kʰː": {
+			"house": "kkʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"kʲ": {
+			"house": "kʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"kː": {
+			"house": "kk",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"kˑ": {
+			"house": "kˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"k̂": {
+			"house": "k̂",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "kʸ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"k̚": {
+			"house": "k",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḳ": {
+			"house": "ʦ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"k̪": {
+			"house": "k",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"kⁿ": {
+			"house": "kⁿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"l": {
+			"house": "l",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"lh": {
+			"house": "lʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"lʰ": {
+			"house": "lʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"lʲ": {
+			"house": "lʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"lː": {
+			"house": "ll",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"lˑ": {
+			"house": "ḷ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "lˑ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"lˑh": {
+			"house": "ḷʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"lˑĥ": {
+			"house": "ḷʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"lˑĥ": {
+			"house": "ḷʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"lˠ": {
+			"house": "lˠ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"l̆": {
+			"house": "l̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"l̚": {
+			"house": "l",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḷ": {
+			"house": "ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"l̥": {
+			"house": "l̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"l̪": {
+			"house": "l",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"l̪ː": {
+			"house": "ll",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"m": {
+			"house": "m",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"mecu": {
+			"house": "mecū",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"mh": {
+			"house": "mʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"mĥ": {
+			"house": "mʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"māṇḍi": {
+			"house": "māṇḍī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"mĥ": {
+			"house": "mʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"mʰ": {
+			"house": "mʰ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"mʷ": {
+			"house": "mʷ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"mː": {
+			"house": "mm",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"mˑ": {
+			"house": "mˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"mˤ": {
+			"house": "mˤ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"m̆": {
+			"house": "m̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"m̆b": {
+			"house": "ᵐb",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"m̥": {
+			"house": "m̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"mⁿ": {
+			"house": "mⁿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n": {
+			"house": "n",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"n:": {
+			"house": "nn",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ng": {
+			"house": "ŋg",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"nh": {
+			"house": "nʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"niṭ": {
+			"house": "nīṭ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"nʰ": {
+			"house": "nʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"nʲ": {
+			"house": "nʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"nʷ": {
+			"house": "nʷ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"nː": {
+			"house": "nn",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"nˑ": {
+			"house": "ṇ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "nˑ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"nˑh": {
+			"house": "ṇʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"nˑĥ": {
+			"house": "ṇʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"nˑĥ": {
+			"house": "ṇʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̄": {
+			"house": "n̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̆": {
+			"house": "n̆",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"n̆b": {
+			"house": "ᵐb",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̆d": {
+			"house": "ⁿd",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̆g": {
+			"house": "ⁿg",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̆ḍ": {
+			"house": "ⁿḍ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṅ": {
+			"house": "ŋ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̚": {
+			"house": "n",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṇ": {
+			"house": "ṇ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"n̥": {
+			"house": "n̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"n̩̆": {
+			"house": "n̩̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̪": {
+			"house": "n",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"n̪ː": {
+			"house": "nn",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"n̪̊": {
+			"house": "n̥",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"n̪̊ʰ": {
+			"house": "n̥ʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"o": {
+			"house": "o",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"o:": {
+			"house": "ō",
+			"profiles": 12,
+			"agreement": 12,
+			"variants": []
+		},
+		"oi": {
+			"house": "oi",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"oí": {
+			"house": "oí",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"oo": {
+			"house": "ō",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"oò": {
+			"house": "ṑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"oó": {
+			"house": "ō̌",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ou": {
+			"house": "ou",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"oò": {
+			"house": "ṑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"oó": {
+			"house": "ō̌",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"oʰ": {
+			"house": "oʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"oː": {
+			"house": "ō",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"oˑ": {
+			"house": "oˑ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ō",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"o˞": {
+			"house": "o˞",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ò": {
+			"house": "ò",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"òí": {
+			"house": "oí",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"òo": {
+			"house": "ṑ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ō̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"òó": {
+			"house": "ō̌̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ō̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ó": {
+			"house": "ó",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ó",
+					"profiles": 1,
+					"examples": [
+						"kalkoti"
+					]
+				}
+			]
+		},
+		"óo": {
+			"house": "ō̂",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"óː": {
+			"house": "ṓ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ṓ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ô": {
+			"house": "o̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"õ": {
+			"house": "õ",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "õ",
+					"profiles": 1,
+					"examples": [
+						"khowar"
+					]
+				}
+			]
+		},
+		"õː": {
+			"house": "ō̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ö": {
+			"house": "ø",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"o̍": {
+			"house": "o̍",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"o̤ː": {
+			"house": "ō̤",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"o̩": {
+			"house": "o̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ô̩": {
+			"house": "o̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"o̩̽": {
+			"house": "õ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"o̯": {
+			"house": "ɔ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "o̯",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"o̰ː": {
+			"house": "ō̰",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"o̽": {
+			"house": "õ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"o̽̂": {
+			"house": "õ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"p": {
+			"house": "p",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"p:": {
+			"house": "pp",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ph": {
+			"house": "pʰ",
+			"profiles": 24,
+			"agreement": 24,
+			"variants": []
+		},
+		"pĥ": {
+			"house": "pʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"pĥ": {
+			"house": "pʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"pɸ": {
+			"house": "pɸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"pʰ": {
+			"house": "pʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"pʲ": {
+			"house": "pʲ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"pː": {
+			"house": "pp",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"pˑ": {
+			"house": "pˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"p̚": {
+			"house": "p",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"pⁿ": {
+			"house": "pⁿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"q": {
+			"house": "q",
+			"profiles": 32,
+			"agreement": 32,
+			"variants": []
+		},
+		"qh": {
+			"house": "qʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"qː": {
+			"house": "qq",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"r": {
+			"house": "r",
+			"profiles": 78,
+			"agreement": 78,
+			"variants": []
+		},
+		"rh": {
+			"house": "rʰ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"rʰ": {
+			"house": "rʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"rʲ": {
+			"house": "rʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"rː": {
+			"house": "rr",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"rˑ": {
+			"house": "ṛ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "rˑ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"rˑh": {
+			"house": "ṛʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"rˑĥ": {
+			"house": "ṛʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"rˑĥ": {
+			"house": "ṛʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"rˡ": {
+			"house": "rˡ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"r̃": {
+			"house": "r̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"r̆": {
+			"house": "r̆",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"r̚": {
+			"house": "r",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṛ": {
+			"house": "ṛ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"r̤": {
+			"house": "ṛ̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"r̥": {
+			"house": "r̩",
+			"profiles": 5,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "r̥",
+					"profiles": 2,
+					"examples": [
+						"liljegren-hindukush",
+						"tagin-puroik"
+					]
+				},
+				{
+					"house": "ṛ",
+					"profiles": 1,
+					"examples": [
+						"dedr"
+					]
+				}
+			]
+		},
+		"r̩": {
+			"house": "ṛ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"r̪": {
+			"house": "r",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"s": {
+			"house": "s",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"sh": {
+			"house": "sʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"sʰ": {
+			"house": "sʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"sʲ": {
+			"house": "sʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"sː": {
+			"house": "ss",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"sˑ": {
+			"house": "ṣ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "sˑ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"sˑh": {
+			"house": "ṣʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"sˑĥ": {
+			"house": "ṣʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"sˑĥ": {
+			"house": "ṣʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"š": {
+			"house": "ś",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"s̚": {
+			"house": "s",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṣ": {
+			"house": "ṣ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"s̪": {
+			"house": "s",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"s̱": {
+			"house": "s̱",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"t": {
+			"house": "t",
+			"profiles": 79,
+			"agreement": 79,
+			"variants": []
+		},
+		"th": {
+			"house": "tʰ",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"tĥ": {
+			"house": "tʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ts": {
+			"house": "ʦ",
+			"profiles": 22,
+			"agreement": 22,
+			"variants": []
+		},
+		"tsh": {
+			"house": "ʦʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"tsʰ": {
+			"house": "ʦʰ",
+			"profiles": 10,
+			"agreement": 10,
+			"variants": []
+		},
+		"tsʲ": {
+			"house": "ʦʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tsʲʰ": {
+			"house": "ʦʸʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tsː": {
+			"house": "ʦʦ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tĥ": {
+			"house": "tʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tɕ": {
+			"house": "ʦ̣",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"tɕʰ": {
+			"house": "ʦ̣ʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"tɕʰː": {
+			"house": "ʦ̣ʦ̣ʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tɕː": {
+			"house": "ʦ̣ʦ̣",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tʃ": {
+			"house": "c",
+			"profiles": 30,
+			"agreement": 30,
+			"variants": []
+		},
+		"tʃh": {
+			"house": "cʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tʃʰ": {
+			"house": "cʰ",
+			"profiles": 9,
+			"agreement": 9,
+			"variants": []
+		},
+		"tʃʰʲ": {
+			"house": "cʰʸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tʃʲ": {
+			"house": "cʲ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "cʸ",
+					"profiles": 1,
+					"examples": [
+						"gurung"
+					]
+				}
+			]
+		},
+		"tʃː": {
+			"house": "cc",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"tʃ̑": {
+			"house": "c",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tʃ̩": {
+			"house": "c",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tʃ̩h": {
+			"house": "cʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tʃ̩ĥ": {
+			"house": "cʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tʃ̩ĥ": {
+			"house": "cʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tʰ": {
+			"house": "tʰ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"tʲ": {
+			"house": "tʸ",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "tʲ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"tː": {
+			"house": "tt",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"tˑ": {
+			"house": "ṭ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "tˑ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"tˑh": {
+			"house": "ṭʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tˑĥ": {
+			"house": "ṭʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tˑĥ": {
+			"house": "ṭʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tˢ": {
+			"house": "ʦ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tˢʰ": {
+			"house": "ʦʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tˢʱ": {
+			"house": "ʦʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tˤ": {
+			"house": "tˤ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t́": {
+			"house": "t́",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ṭ": {
+			"house": "ṭ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ṭh": {
+			"house": "ṭʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"t̪": {
+			"house": "t",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"t̪:": {
+			"house": "tt",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t̪h": {
+			"house": "tʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t̪s": {
+			"house": "ʦ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t̪ʃ": {
+			"house": "c",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t̪ʰ": {
+			"house": "tʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"t̪ː": {
+			"house": "tt",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"t̪ˑ": {
+			"house": "tˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t̪̚": {
+			"house": "t",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t̺": {
+			"house": "t",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"t͡s": {
+			"house": "ʦ",
+			"profiles": 10,
+			"agreement": 10,
+			"variants": []
+		},
+		"t͡sʰ": {
+			"house": "ʦʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"t͡ɕ": {
+			"house": "c",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ʦ̣",
+					"profiles": 1,
+					"examples": [
+						"ssnp"
+					]
+				}
+			]
+		},
+		"t͡ʃ": {
+			"house": "c",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"t͡ʃʰ": {
+			"house": "cʰ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"tᶳ": {
+			"house": "c",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tᶳʰ": {
+			"house": "cʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"tᶳʱ": {
+			"house": "cʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tⁿ": {
+			"house": "t",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tⁿh": {
+			"house": "tʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tⁿĥ": {
+			"house": "tʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"tⁿĥ": {
+			"house": "tʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"u": {
+			"house": "u",
+			"profiles": 79,
+			"agreement": 70,
+			"variants": [
+				{
+					"house": "ū",
+					"profiles": 9,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"kudiya",
+						"magahi-survey"
+					]
+				}
+			]
+		},
+		"u:": {
+			"house": "ū",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"u:~": {
+			"house": "ū̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ui": {
+			"house": "ui",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"uiː": {
+			"house": "uī",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"uu": {
+			"house": "ū",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"uù": {
+			"house": "ū̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"uú": {
+			"house": "ū̌",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"uù": {
+			"house": "ū̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"uú": {
+			"house": "ū̌",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"uː": {
+			"house": "ū",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"uˑ": {
+			"house": "uˑ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ū",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ù": {
+			"house": "ù",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ùu": {
+			"house": "ū̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ū̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ùú": {
+			"house": "ū̌̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ū̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ùũ": {
+			"house": "ū̌̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ú": {
+			"house": "ú",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ú",
+					"profiles": 1,
+					"examples": [
+						"kalkoti"
+					]
+				}
+			]
+		},
+		"úu": {
+			"house": "ū̂",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"úː": {
+			"house": "ū́",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"û": {
+			"house": "u̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ũ": {
+			"house": "ū̃",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ũ",
+					"profiles": 1,
+					"examples": [
+						"khowar"
+					]
+				}
+			]
+		},
+		"ũː": {
+			"house": "ū̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ü": {
+			"house": "ɨ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "y",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"üː": {
+			"house": "ɨ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"u̍": {
+			"house": "u̍",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ụ": {
+			"house": "u",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṳː": {
+			"house": "ṳ̄",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"u̥": {
+			"house": "u̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"u̩": {
+			"house": "u̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"û̩": {
+			"house": "u̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"u̩̽": {
+			"house": "ũ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"u̯": {
+			"house": "u̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"u̽": {
+			"house": "ũ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"u̽̂": {
+			"house": "ũ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v": {
+			"house": "v",
+			"profiles": 51,
+			"agreement": 51,
+			"variants": []
+		},
+		"vh": {
+			"house": "vʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"vː": {
+			"house": "vv",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"vˑ": {
+			"house": "vˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v̆": {
+			"house": "v̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v̚": {
+			"house": "v",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v̠": {
+			"house": "ʌ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v̠̂": {
+			"house": "ʌ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v̠̽": {
+			"house": "ʌ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"v̠̽̂": {
+			"house": "ʌ̯̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"w": {
+			"house": "v",
+			"profiles": 73,
+			"agreement": 62,
+			"variants": [
+				{
+					"house": "w",
+					"profiles": 11,
+					"examples": [
+						"badaga-hockings",
+						"boretzky-romani",
+						"buddruss-grangali",
+						"buddruss-waigali"
+					]
+				}
+			]
+		},
+		"wh": {
+			"house": "vʰ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"wː": {
+			"house": "vv",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ww",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"w̃": {
+			"house": "ṽ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"x": {
+			"house": "x",
+			"profiles": 43,
+			"agreement": 43,
+			"variants": []
+		},
+		"xʷ": {
+			"house": "xʷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"xː": {
+			"house": "xx",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"x̌": {
+			"house": "χ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"xᵒ": {
+			"house": "xᵒ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"y": {
+			"house": "y",
+			"profiles": 50,
+			"agreement": 47,
+			"variants": [
+				{
+					"house": "ü",
+					"profiles": 3,
+					"examples": [
+						"humla",
+						"mustang-loke",
+						"naaba"
+					]
+				}
+			]
+		},
+		"yh": {
+			"house": "yʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"yː": {
+			"house": "ȳ",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ǖ",
+					"profiles": 2,
+					"examples": [
+						"mustang-loke",
+						"naaba"
+					]
+				},
+				{
+					"house": "yy",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"y̆": {
+			"house": "y̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"y̜": {
+			"house": "y̜",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ỵ": {
+			"house": "ṛ̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"y̤ː": {
+			"house": "ṳ̈̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"z": {
+			"house": "z",
+			"profiles": 66,
+			"agreement": 66,
+			"variants": []
+		},
+		"zʰ": {
+			"house": "zʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"zʲ": {
+			"house": "zʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"zː": {
+			"house": "zz",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ž": {
+			"house": "ź",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ž",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"z̚": {
+			"house": "z",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ẓ": {
+			"house": "ẓ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"z̥": {
+			"house": "z̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"{": {
+			"house": "{",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"|": {
+			"house": "|",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"}": {
+			"house": "}",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"~": {
+			"house": "̃",
+			"profiles": 11,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "~",
+					"profiles": 5,
+					"examples": [
+						"khowar",
+						"merriam-reconstruction",
+						"nihali",
+						"schmidt-kashmiri"
+					]
+				}
+			]
+		},
+		"¢": {
+			"house": "¢",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"£": {
+			"house": "£",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"¥": {
+			"house": "ś",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"«": {
+			"house": "«",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"®": {
+			"house": "®",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"°": {
+			"house": "°",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"²": {
+			"house": "²",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"²³": {
+			"house": "²³",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"²¹": {
+			"house": "²¹",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"²⁴": {
+			"house": "²⁴",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"³": {
+			"house": "³",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"³²": {
+			"house": "³²",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"³³": {
+			"house": "³³",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"´": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"·": {
+			"house": "·",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"¹": {
+			"house": "¹",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"¹²": {
+			"house": "¹²",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"¹³": {
+			"house": "¹³",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"¿": {
+			"house": "¿",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"É": {
+			"house": "É",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Í": {
+			"house": "Í",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Î": {
+			"house": "Î",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ñ": {
+			"house": "Ñ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"Ù": {
+			"house": "Ù",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"Þ": {
+			"house": "Þ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ß": {
+			"house": "ß",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"à": {
+			"house": "à",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"àa": {
+			"house": "ā̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"àá": {
+			"house": "ā̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"á": {
+			"house": "á",
+			"profiles": 25,
+			"agreement": 23,
+			"variants": [
+				{
+					"house": "á",
+					"profiles": 2,
+					"examples": [
+						"berger",
+						"liljegren"
+					]
+				}
+			]
+		},
+		"á:": {
+			"house": "ā́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"áa": {
+			"house": "ā̂",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"â": {
+			"house": "â",
+			"profiles": 5,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "a̯",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				},
+				{
+					"house": "ɔ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "ā",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"â:": {
+			"house": "ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"âʹ": {
+			"house": "ǎ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"âː": {
+			"house": "āā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"â̩": {
+			"house": "a̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ã": {
+			"house": "ã",
+			"profiles": 51,
+			"agreement": 45,
+			"variants": [
+				{
+					"house": "ā̃",
+					"profiles": 6,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"magahi-survey",
+						"rajasthani"
+					]
+				}
+			]
+		},
+		"ã:": {
+			"house": "ā̃",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ãã": {
+			"house": "ā̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ãː": {
+			"house": "ā̃",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"ã˘": {
+			"house": "ʌ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ã́": {
+			"house": "ã́",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ã̄": {
+			"house": "ā̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä": {
+			"house": "ä",
+			"profiles": 9,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "æ",
+					"profiles": 4,
+					"examples": [
+						"cdial",
+						"dedr",
+						"kalkoti",
+						"strand"
+					]
+				}
+			]
+		},
+		"ää": {
+			"house": "ǣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ää̀": {
+			"house": "ǣ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ää́": {
+			"house": "ǣ̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä̀": {
+			"house": "æ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä̀ä": {
+			"house": "ǣ̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä̀ä́": {
+			"house": "ǣ̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä́": {
+			"house": "ǽ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ä́ä": {
+			"house": "ǣ̂",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"å": {
+			"house": "å",
+			"profiles": 6,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ɔ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "a",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"æ": {
+			"house": "æ",
+			"profiles": 36,
+			"agreement": 33,
+			"variants": [
+				{
+					"house": "ai",
+					"profiles": 2,
+					"examples": [
+						"chattisgarhi",
+						"magahi-survey"
+					]
+				},
+				{
+					"house": "ä",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"æ:": {
+			"house": "ǣ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"æ:~": {
+			"house": "ǣ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"æː": {
+			"house": "ǣ",
+			"profiles": 13,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "ǣ",
+					"profiles": 5,
+					"examples": [
+						"sil-bangladesh",
+						"sil-koch",
+						"sil-kurux",
+						"sil-survey"
+					]
+				},
+				{
+					"house": "ǟ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ǽː": {
+			"house": "ǣ́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"æ̃": {
+			"house": "æ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"æ̃ː": {
+			"house": "ǣ̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"æ̤ː": {
+			"house": "ǣ̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ç": {
+			"house": "ç",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "h",
+					"profiles": 1,
+					"examples": [
+						"rajasthani"
+					]
+				}
+			]
+		},
+		"è": {
+			"house": "è",
+			"profiles": 6,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ɛ",
+					"profiles": 1,
+					"examples": [
+						"dedr"
+					]
+				}
+			]
+		},
+		"èe": {
+			"house": "ḕ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"èí": {
+			"house": "eí",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"èé": {
+			"house": "ē̌̀",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ē̌",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"é": {
+			"house": "é",
+			"profiles": 23,
+			"agreement": 22,
+			"variants": [
+				{
+					"house": "ẽ",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"é:": {
+			"house": "ḗ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ē̃",
+					"profiles": 1,
+					"examples": [
+						"vaagri"
+					]
+				}
+			]
+		},
+		"ée": {
+			"house": "ē̂",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ê": {
+			"house": "ê",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "e̯",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				},
+				{
+					"house": "ɛ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "ē",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"êʹ": {
+			"house": "ē̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ê̠": {
+			"house": "ə̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ê̩": {
+			"house": "e̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ë": {
+			"house": "ë",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ə",
+					"profiles": 1,
+					"examples": [
+						"dedr"
+					]
+				}
+			]
+		},
+		"ë́": {
+			"house": "ë́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ë̃": {
+			"house": "ë̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ë̃́": {
+			"house": "ë̃́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ë̄́": {
+			"house": "ë̄́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ì": {
+			"house": "ì",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ìi": {
+			"house": "ī̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ìí": {
+			"house": "ī̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"í": {
+			"house": "í",
+			"profiles": 24,
+			"agreement": 21,
+			"variants": [
+				{
+					"house": "í",
+					"profiles": 3,
+					"examples": [
+						"berger",
+						"cdial",
+						"liljegren"
+					]
+				}
+			]
+		},
+		"í:": {
+			"house": "ī́",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"íi": {
+			"house": "ī̂",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"î": {
+			"house": "î",
+			"profiles": 5,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "i̯",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				},
+				{
+					"house": "ī",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"îʹ": {
+			"house": "ī̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"î̩": {
+			"house": "i̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ï": {
+			"house": "ï",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ɨ",
+					"profiles": 2,
+					"examples": [
+						"dedr",
+						"toda"
+					]
+				},
+				{
+					"house": "i",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ïː": {
+			"house": "ï̄",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ɨ̄",
+					"profiles": 1,
+					"examples": [
+						"toda"
+					]
+				}
+			]
+		},
+		"ð": {
+			"house": "ð",
+			"profiles": 10,
+			"agreement": 10,
+			"variants": []
+		},
+		"ðˤ": {
+			"house": "ðˤ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ñ": {
+			"house": "ñ",
+			"profiles": 18,
+			"agreement": 18,
+			"variants": []
+		},
+		"ò": {
+			"house": "ò",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"òo": {
+			"house": "ṑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"òó": {
+			"house": "ō̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ó": {
+			"house": "ó",
+			"profiles": 21,
+			"agreement": 21,
+			"variants": []
+		},
+		"ó:": {
+			"house": "ṓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"óo": {
+			"house": "ō̂",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ô": {
+			"house": "ô",
+			"profiles": 5,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "o̯",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				},
+				{
+					"house": "ɔ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "ō",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ôʹ": {
+			"house": "ō̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ô̩": {
+			"house": "o̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"õ": {
+			"house": "õ",
+			"profiles": 43,
+			"agreement": 43,
+			"variants": []
+		},
+		"õ:": {
+			"house": "ō̃",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"õː": {
+			"house": "ō̃",
+			"profiles": 12,
+			"agreement": 12,
+			"variants": []
+		},
+		"õ˞": {
+			"house": "õ˞",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ö": {
+			"house": "ö",
+			"profiles": 8,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ø",
+					"profiles": 2,
+					"examples": [
+						"dedr",
+						"toda"
+					]
+				},
+				{
+					"house": "ə̄",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "ɘ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"öː": {
+			"house": "ɘ̄",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ø̄",
+					"profiles": 1,
+					"examples": [
+						"toda"
+					]
+				}
+			]
+		},
+		"ö́": {
+			"house": "ö́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ø": {
+			"house": "ö",
+			"profiles": 8,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ø",
+					"profiles": 3,
+					"examples": [
+						"liljegren-hindukush",
+						"lsi",
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"ø:": {
+			"house": "ø̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"øy": {
+			"house": "øy",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"øː": {
+			"house": "ø̄",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ø̃": {
+			"house": "ø̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ø̜": {
+			"house": "ø̜",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ø̜ː": {
+			"house": "ø̜̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ø̤ː": {
+			"house": "ø̤̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ù": {
+			"house": "ù",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ùu": {
+			"house": "ū̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ùú": {
+			"house": "ū̌̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ú": {
+			"house": "ú",
+			"profiles": 22,
+			"agreement": 21,
+			"variants": [
+				{
+					"house": "ú",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ú:": {
+			"house": "ū́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"úu": {
+			"house": "ū̂",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"û": {
+			"house": "û",
+			"profiles": 5,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "u̯",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				},
+				{
+					"house": "ū",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ûʹ": {
+			"house": "ū̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"û̩": {
+			"house": "u̩̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ü": {
+			"house": "ü",
+			"profiles": 13,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "y",
+					"profiles": 2,
+					"examples": [
+						"dedr",
+						"toda"
+					]
+				},
+				{
+					"house": "ɨ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ü:": {
+			"house": "ɨ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"üː": {
+			"house": "ɨ̄",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ȳ",
+					"profiles": 1,
+					"examples": [
+						"toda"
+					]
+				}
+			]
+		},
+		"ü̃́": {
+			"house": "ü̃́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ý": {
+			"house": "ý",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"Ā": {
+			"house": "Ā",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ā": {
+			"house": "ā",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"āi": {
+			"house": "āī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"āˋ": {
+			"house": "ā̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ā̀": {
+			"house": "ā̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ā́": {
+			"house": "ā́",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ā̃": {
+			"house": "ā̃",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ā̆": {
+			"house": "ā̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ā̆́": {
+			"house": "ā̆́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ā̊": {
+			"house": "ɔ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ā̤": {
+			"house": "ǣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ă": {
+			"house": "ă",
+			"profiles": 11,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "ʌ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ą": {
+			"house": "ą",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ąː": {
+			"house": "ą̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ć": {
+			"house": "ć",
+			"profiles": 7,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ʨ",
+					"profiles": 1,
+					"examples": [
+						"boretzky-romani"
+					]
+				},
+				{
+					"house": "c",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "ʦ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ćh": {
+			"house": "ʨʰ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ʦʰ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ĉ̠": {
+			"house": "ɔ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ċ": {
+			"house": "ċ",
+			"profiles": 4,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ʦ",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"weinreich-domaaki"
+					]
+				}
+			]
+		},
+		"ċh": {
+			"house": "ʦʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Č": {
+			"house": "C",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"č": {
+			"house": "c",
+			"profiles": 21,
+			"agreement": 17,
+			"variants": [
+				{
+					"house": "č",
+					"profiles": 3,
+					"examples": [
+						"dedr",
+						"merriam-reconstruction",
+						"nured"
+					]
+				},
+				{
+					"house": "ʦ̣",
+					"profiles": 1,
+					"examples": [
+						"kalasha"
+					]
+				}
+			]
+		},
+		"čh": {
+			"house": "cʰ",
+			"profiles": 9,
+			"agreement": 8,
+			"variants": [
+				{
+					"house": "ʦ̣ʰ",
+					"profiles": 1,
+					"examples": [
+						"kalasha"
+					]
+				}
+			]
+		},
+		"č̣": {
+			"house": "ʦ̣",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ď": {
+			"house": "ď",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"đ": {
+			"house": "đ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ē": {
+			"house": "ē",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"ḗ": {
+			"house": "ḗ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ē̃": {
+			"house": "ē̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ē̃́": {
+			"house": "ē̃́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ĕ": {
+			"house": "ĕ",
+			"profiles": 6,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ɛ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				},
+				{
+					"house": "e",
+					"profiles": 1,
+					"examples": [
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"ė": {
+			"house": "ė",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ę": {
+			"house": "ę",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ęː": {
+			"house": "ę̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ě": {
+			"house": "ě",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "e",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ĝ": {
+			"house": "ĝ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ğ": {
+			"house": "ğ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ġ": {
+			"house": "ġ",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ɣ",
+					"profiles": 2,
+					"examples": [
+						"dedr",
+						"domari-aleppo"
+					]
+				},
+				{
+					"house": "g",
+					"profiles": 1,
+					"examples": [
+						"weinreich-domaaki"
+					]
+				}
+			]
+		},
+		"ģ": {
+			"house": "ģ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ĥ": {
+			"house": "ʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ħ": {
+			"house": "ħ",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "h",
+					"profiles": 1,
+					"examples": [
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"ĩ": {
+			"house": "ĩ",
+			"profiles": 39,
+			"agreement": 34,
+			"variants": [
+				{
+					"house": "ī̃",
+					"profiles": 4,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"magahi-survey",
+						"rajasthani"
+					]
+				},
+				{
+					"house": "ĩ",
+					"profiles": 1,
+					"examples": [
+						"toulmin"
+					]
+				}
+			]
+		},
+		"ĩ:": {
+			"house": "ī̃",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ĩː": {
+			"house": "ī̃",
+			"profiles": 11,
+			"agreement": 11,
+			"variants": []
+		},
+		"ĩ́": {
+			"house": "ĩ́",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ī": {
+			"house": "ī",
+			"profiles": 16,
+			"agreement": 16,
+			"variants": []
+		},
+		"ī˜": {
+			"house": "ī̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ī́": {
+			"house": "ī́",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ī̃": {
+			"house": "ī̃",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ĭ": {
+			"house": "ĭ",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "i",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ĭ̄": {
+			"house": "i",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Į": {
+			"house": "Į",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"į": {
+			"house": "į",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"įː": {
+			"house": "į̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"İ": {
+			"house": "İ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ı": {
+			"house": "i",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ı",
+					"profiles": 1,
+					"examples": [
+						"schmidt-kashmiri"
+					]
+				}
+			]
+		},
+		"ĵ": {
+			"house": "ĵ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ķ": {
+			"house": "Ķ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ĺ": {
+			"house": "ĺ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ļ": {
+			"house": "ļ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ḷ",
+					"profiles": 1,
+					"examples": [
+						"ghatage"
+					]
+				}
+			]
+		},
+		"ľ": {
+			"house": "ľ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ł": {
+			"house": "ł",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ḷ",
+					"profiles": 1,
+					"examples": [
+						"ghatage"
+					]
+				}
+			]
+		},
+		"ł̣": {
+			"house": "ł̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ń": {
+			"house": "ń",
+			"profiles": 9,
+			"agreement": 9,
+			"variants": []
+		},
+		"ņ": {
+			"house": "ņ",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ṇ",
+					"profiles": 1,
+					"examples": [
+						"ghatage"
+					]
+				}
+			]
+		},
+		"ň": {
+			"house": "ň",
+			"profiles": 6,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "r̆̃",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ňd": {
+			"house": "ⁿd",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ňg": {
+			"house": "ⁿg",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ŋ": {
+			"house": "ŋ",
+			"profiles": 59,
+			"agreement": 58,
+			"variants": [
+				{
+					"house": "ṅ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ŋg": {
+			"house": "ŋg",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ŋː": {
+			"house": "ŋŋ",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ṅṅ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ō": {
+			"house": "ō",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"ṓ": {
+			"house": "ṓ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ō̃": {
+			"house": "ō̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ŏ": {
+			"house": "ŏ",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ɔ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ő": {
+			"house": "ő",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"Œ": {
+			"house": "Œ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"œ": {
+			"house": "œ",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ö",
+					"profiles": 2,
+					"examples": [
+						"humla",
+						"mustang-loke"
+					]
+				},
+				{
+					"house": "o",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"œː": {
+			"house": "ȫ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"œ̤ː": {
+			"house": "ȫ̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ŕ": {
+			"house": "ŕ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "r̆",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ŕ̊": {
+			"house": "ŕ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ŕ̥": {
+			"house": "ŕ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ř": {
+			"house": "ř",
+			"profiles": 7,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "r̆",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"strand"
+					]
+				}
+			]
+		},
+		"Ś": {
+			"house": "Ś",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ś": {
+			"house": "ś",
+			"profiles": 16,
+			"agreement": 16,
+			"variants": []
+		},
+		"ş": {
+			"house": "ş",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Š": {
+			"house": "Š",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "Ś",
+					"profiles": 1,
+					"examples": [
+						"yoshioka"
+					]
+				}
+			]
+		},
+		"š": {
+			"house": "ś",
+			"profiles": 23,
+			"agreement": 19,
+			"variants": [
+				{
+					"house": "š",
+					"profiles": 4,
+					"examples": [
+						"brahui",
+						"dedr",
+						"emeneau-brahui",
+						"nured"
+					]
+				}
+			]
+		},
+		"ṣ̌": {
+			"house": "ṣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ũ": {
+			"house": "ũ",
+			"profiles": 44,
+			"agreement": 40,
+			"variants": [
+				{
+					"house": "ū̃",
+					"profiles": 4,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"magahi-survey",
+						"rajasthani"
+					]
+				}
+			]
+		},
+		"ũ:": {
+			"house": "ū̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ũː": {
+			"house": "ū̃",
+			"profiles": 12,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "ũ̄",
+					"profiles": 5,
+					"examples": [
+						"sil-bangladesh",
+						"sil-koch",
+						"sil-kurux",
+						"sil-survey"
+					]
+				}
+			]
+		},
+		"ū": {
+			"house": "ū",
+			"profiles": 17,
+			"agreement": 17,
+			"variants": []
+		},
+		"ū̀": {
+			"house": "ū̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ū́": {
+			"house": "ū́",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ū̃": {
+			"house": "ū̃",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ŭ": {
+			"house": "ŭ",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "u",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ů": {
+			"house": "ů",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ɯ",
+					"profiles": 1,
+					"examples": [
+						"dedr"
+					]
+				}
+			]
+		},
+		"ű": {
+			"house": "ű",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"Ų": {
+			"house": "Ų",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ų": {
+			"house": "ų",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ųː": {
+			"house": "ų̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ź": {
+			"house": "ź",
+			"profiles": 7,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ž",
+					"profiles": 1,
+					"examples": [
+						"kalasha"
+					]
+				},
+				{
+					"house": "ʣ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"źh": {
+			"house": "ʣʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ż": {
+			"house": "ż",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ž": {
+			"house": "ž",
+			"profiles": 16,
+			"agreement": 9,
+			"variants": [
+				{
+					"house": "ź",
+					"profiles": 7,
+					"examples": [
+						"boretzky-romani",
+						"buddruss-wama",
+						"cdial",
+						"domari-aleppo"
+					]
+				}
+			]
+		},
+		"ẓ̌": {
+			"house": "ẓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ƈ": {
+			"house": "ƈ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ə": {
+			"house": "ə",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ƒ": {
+			"house": "f",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǎ": {
+			"house": "ǎ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǐ": {
+			"house": "ǐ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǒ": {
+			"house": "ɔ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ǒ",
+					"profiles": 1,
+					"examples": [
+						"schmidt-kashmiri"
+					]
+				}
+			]
+		},
+		"ǔ": {
+			"house": "ǔ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǖ": {
+			"house": "ɨ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǖ́": {
+			"house": "ɨ̄́",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ǖ́",
+					"profiles": 1,
+					"examples": [
+						"nured"
+					]
+				}
+			]
+		},
+		"ǘ": {
+			"house": "ǘ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ǝ": {
+			"house": "ə",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ǝ",
+					"profiles": 1,
+					"examples": [
+						"merriam-reconstruction"
+					]
+				}
+			]
+		},
+		"ǟ": {
+			"house": "ǣ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ǟ",
+					"profiles": 1,
+					"examples": [
+						"merriam-reconstruction"
+					]
+				}
+			]
+		},
+		"ǡ": {
+			"house": "ǡ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǧ": {
+			"house": "ǧ",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ɣ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ǫ": {
+			"house": "ǫ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǫː": {
+			"house": "ǭ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǯ": {
+			"house": "ǯ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǰ": {
+			"house": "j",
+			"profiles": 11,
+			"agreement": 9,
+			"variants": [
+				{
+					"house": "ǰ",
+					"profiles": 2,
+					"examples": [
+						"nihali",
+						"nured"
+					]
+				}
+			]
+		},
+		"ǰh": {
+			"house": "jʰ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ǵ": {
+			"house": "ǵ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ǹ": {
+			"house": "ǹ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ǻ": {
+			"house": "ǻ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ȇ": {
+			"house": "ȇ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ȍ": {
+			"house": "ȍ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ȏ": {
+			"house": "ȏ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ȗ": {
+			"house": "ȗ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ț": {
+			"house": "ț",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ṭ",
+					"profiles": 1,
+					"examples": [
+						"ghatage"
+					]
+				}
+			]
+		},
+		"ȧ": {
+			"house": "ə",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ȫ": {
+			"house": "ə̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ȷ": {
+			"house": "j",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɉ": {
+			"house": "j",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɐ": {
+			"house": "a",
+			"profiles": 15,
+			"agreement": 13,
+			"variants": [
+				{
+					"house": "ā",
+					"profiles": 1,
+					"examples": [
+						"chattisgarhi"
+					]
+				},
+				{
+					"house": "ɐ",
+					"profiles": 1,
+					"examples": [
+						"kullui"
+					]
+				}
+			]
+		},
+		"ɐ:": {
+			"house": "ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɐː": {
+			"house": "ā",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ɑ": {
+			"house": "ā",
+			"profiles": 30,
+			"agreement": 28,
+			"variants": [
+				{
+					"house": "ɑ",
+					"profiles": 1,
+					"examples": [
+						"domari-aleppo"
+					]
+				},
+				{
+					"house": "a",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"ɑ:": {
+			"house": "ā",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɑɑ": {
+			"house": "ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑɑ́": {
+			"house": "ā̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑː": {
+			"house": "ā",
+			"profiles": 11,
+			"agreement": 11,
+			"variants": []
+		},
+		"ɑˑ": {
+			"house": "ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̀í": {
+			"house": "aí",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̀ó": {
+			"house": "aó",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̀ɑ": {
+			"house": "ā̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̀ɑ́": {
+			"house": "ā̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ́ɑ": {
+			"house": "ā̂",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ́ː": {
+			"house": "ā́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̃": {
+			"house": "ā̃",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"ɑ̃ɑ̃": {
+			"house": "ā̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̃ː": {
+			"house": "ā̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɑ̄": {
+			"house": "ɑ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̈": {
+			"house": "æ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɑ̰ː": {
+			"house": "ā̰",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɒ": {
+			"house": "o",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɓ": {
+			"house": "ɓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔ": {
+			"house": "o",
+			"profiles": 43,
+			"agreement": 30,
+			"variants": [
+				{
+					"house": "ɔ",
+					"profiles": 11,
+					"examples": [
+						"cdial",
+						"dedr",
+						"ghatage",
+						"gondi-beine"
+					]
+				},
+				{
+					"house": "au",
+					"profiles": 2,
+					"examples": [
+						"chattisgarhi",
+						"magahi-survey"
+					]
+				}
+			]
+		},
+		"ɔ:": {
+			"house": "ɔ̄",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ō",
+					"profiles": 1,
+					"examples": [
+						"north-gorkha"
+					]
+				}
+			]
+		},
+		"ɔɪ": {
+			"house": "oi",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔː": {
+			"house": "ō",
+			"profiles": 19,
+			"agreement": 16,
+			"variants": [
+				{
+					"house": "ɔ̄",
+					"profiles": 3,
+					"examples": [
+						"gondi-beine",
+						"markodi",
+						"toda"
+					]
+				}
+			]
+		},
+		"ɔˑ": {
+			"house": "ɔˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔ́": {
+			"house": "ɔ́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔ́ː": {
+			"house": "ṓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔ̃": {
+			"house": "õ",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ɔ̃",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"kullui"
+					]
+				},
+				{
+					"house": "õ",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ɔ̃ː": {
+			"house": "ō̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɔ̃˞": {
+			"house": "õ˞",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɔ̃́": {
+			"house": "ɔ̃́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔ̈̄": {
+			"house": "ɔ̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɔ̯ˑ": {
+			"house": "ɔ̯ˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɕ": {
+			"house": "ś",
+			"profiles": 18,
+			"agreement": 18,
+			"variants": []
+		},
+		"ɕʲ": {
+			"house": "śʸ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɕː": {
+			"house": "śś",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ɖ": {
+			"house": "ḍ",
+			"profiles": 41,
+			"agreement": 41,
+			"variants": []
+		},
+		"ɖh": {
+			"house": "ḍʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɖɦ": {
+			"house": "ḍʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɖʐ": {
+			"house": "ʣ̣",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɖʐʰ": {
+			"house": "ʣ̣ʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɖʰ": {
+			"house": "ḍʰ",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"ɖː": {
+			"house": "ḍḍ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɖ̆": {
+			"house": "ḍ̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɖ̪": {
+			"house": "ḍ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɗ": {
+			"house": "ɗ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɘ": {
+			"house": "ə",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ə": {
+			"house": "ə",
+			"profiles": 48,
+			"agreement": 38,
+			"variants": [
+				{
+					"house": "a",
+					"profiles": 9,
+					"examples": [
+						"chattisgarhi",
+						"hajong-survey",
+						"halbi-woods",
+						"kannauji"
+					]
+				},
+				{
+					"house": "ə̄",
+					"profiles": 1,
+					"examples": [
+						"southworth-marathi"
+					]
+				}
+			]
+		},
+		"ə:": {
+			"house": "ə̄",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"əʊ": {
+			"house": "əu",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"əː": {
+			"house": "ə̄",
+			"profiles": 10,
+			"agreement": 10,
+			"variants": []
+		},
+		"ə́": {
+			"house": "ə́",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ə́ː": {
+			"house": "ə̄́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̃": {
+			"house": "ə̃",
+			"profiles": 6,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ã",
+					"profiles": 2,
+					"examples": [
+						"halbi-woods",
+						"wadiyara"
+					]
+				},
+				{
+					"house": "ə",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ə̃ː": {
+			"house": "ə̄̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̄": {
+			"house": "ə̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̄́": {
+			"house": "ə̄́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̆": {
+			"house": "ə̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̌": {
+			"house": "ə̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̌:": {
+			"house": "ə̄̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̥": {
+			"house": "ə̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ə̯": {
+			"house": "ə̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ə̰": {
+			"house": "ə̰",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɛ": {
+			"house": "e",
+			"profiles": 42,
+			"agreement": 33,
+			"variants": [
+				{
+					"house": "ɛ",
+					"profiles": 9,
+					"examples": [
+						"cdial",
+						"chattisgarhi",
+						"ghatage",
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ɛ:": {
+			"house": "ē",
+			"profiles": 6,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ɛ̄",
+					"profiles": 1,
+					"examples": [
+						"ghatage"
+					]
+				}
+			]
+		},
+		"ɛɛ́": {
+			"house": "ē̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛʷ": {
+			"house": "ɛʷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛː": {
+			"house": "ē",
+			"profiles": 19,
+			"agreement": 17,
+			"variants": [
+				{
+					"house": "ɛ̄",
+					"profiles": 2,
+					"examples": [
+						"gondi-beine",
+						"markodi"
+					]
+				}
+			]
+		},
+		"ɛˑ": {
+			"house": "ɛˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛ̀ɛ́": {
+			"house": "ē̌",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛ́": {
+			"house": "ɛ́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛ́ː": {
+			"house": "ḗ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛ̃": {
+			"house": "ẽ",
+			"profiles": 9,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "ɛ̃",
+					"profiles": 2,
+					"examples": [
+						"gondi-beine",
+						"kullui"
+					]
+				},
+				{
+					"house": "ẽ",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ɛ̃:": {
+			"house": "ɛ̄̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛ̃ː": {
+			"house": "ē̃",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ɛ̄": {
+			"house": "ɛ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɛ̤": {
+			"house": "e̤",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɜ": {
+			"house": "ɜ",
+			"profiles": 10,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ə",
+					"profiles": 4,
+					"examples": [
+						"maikoti-kham",
+						"majhi-bote",
+						"tagin-puroik",
+						"yamphu"
+					]
+				},
+				{
+					"house": "a",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"ɜː": {
+			"house": "ɜ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɟ": {
+			"house": "j",
+			"profiles": 7,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ɟ",
+					"profiles": 3,
+					"examples": [
+						"liljegren-hindukush",
+						"tagin-puroik",
+						"torwali-student"
+					]
+				}
+			]
+		},
+		"ɠ": {
+			"house": "ɠ",
+			"profiles": 4,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "g",
+					"profiles": 2,
+					"examples": [
+						"rajasthani",
+						"yamphu"
+					]
+				}
+			]
+		},
+		"ɡ": {
+			"house": "g",
+			"profiles": 21,
+			"agreement": 21,
+			"variants": []
+		},
+		"ɡh": {
+			"house": "gʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɡĥ": {
+			"house": "gʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɡĥ": {
+			"house": "gʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɡʰ": {
+			"house": "gʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɡː": {
+			"house": "gg",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɡˑ": {
+			"house": "gˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɡ̚": {
+			"house": "g",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɢ": {
+			"house": "g",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɣ": {
+			"house": "ɣ",
+			"profiles": 23,
+			"agreement": 21,
+			"variants": [
+				{
+					"house": "ġ",
+					"profiles": 2,
+					"examples": [
+						"berger",
+						"kalkoti"
+					]
+				}
+			]
+		},
+		"ɣʰ": {
+			"house": "ɣʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɤ": {
+			"house": "ɤ",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "o",
+					"profiles": 1,
+					"examples": [
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"ɤː": {
+			"house": "ɤ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ɦ": {
+			"house": "h",
+			"profiles": 15,
+			"agreement": 12,
+			"variants": [
+				{
+					"house": "ɦ",
+					"profiles": 2,
+					"examples": [
+						"pahari",
+						"pyangaun-newar"
+					]
+				},
+				{
+					"house": "ʰ",
+					"profiles": 1,
+					"examples": [
+						"kannauji"
+					]
+				}
+			]
+		},
+		"ɦ̊": {
+			"house": "h",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɨ": {
+			"house": "ɨ",
+			"profiles": 27,
+			"agreement": 24,
+			"variants": [
+				{
+					"house": "i",
+					"profiles": 2,
+					"examples": [
+						"chattisgarhi",
+						"kannauji"
+					]
+				},
+				{
+					"house": "ŭ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ɨ:": {
+			"house": "ɨ̄",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɨː": {
+			"house": "ɨ̄",
+			"profiles": 8,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "ŭ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ɨ̯": {
+			"house": "ɨ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɩ": {
+			"house": "i",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɩ:": {
+			"house": "ī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɪ": {
+			"house": "i",
+			"profiles": 35,
+			"agreement": 33,
+			"variants": [
+				{
+					"house": "ɪ",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ɪ:": {
+			"house": "ī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɪː": {
+			"house": "ī",
+			"profiles": 10,
+			"agreement": 9,
+			"variants": [
+				{
+					"house": "ɪ̄",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ɪ́ː": {
+			"house": "ī́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɪ̃": {
+			"house": "ĩ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɪ̃ː": {
+			"house": "ɪ̄̃",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ī̃",
+					"profiles": 1,
+					"examples": [
+						"ssnp"
+					]
+				}
+			]
+		},
+		"ɪ̯": {
+			"house": "ɪ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɫ": {
+			"house": "ḷ",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "ɫ",
+					"profiles": 1,
+					"examples": [
+						"toda"
+					]
+				}
+			]
+		},
+		"ɫː": {
+			"house": "ḷḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɬ": {
+			"house": "ɬ",
+			"profiles": 14,
+			"agreement": 13,
+			"variants": [
+				{
+					"house": "ḷ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ɬː": {
+			"house": "ḷḷ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ɬɬ",
+					"profiles": 1,
+					"examples": [
+						"ssnp"
+					]
+				}
+			]
+		},
+		"ɭ": {
+			"house": "ḷ",
+			"profiles": 20,
+			"agreement": 20,
+			"variants": []
+		},
+		"ɭː": {
+			"house": "ḷḷ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɭˑ": {
+			"house": "ḷˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɭ̆": {
+			"house": "ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɮ": {
+			"house": "ɮ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ɯ": {
+			"house": "u",
+			"profiles": 12,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "ɯ",
+					"profiles": 5,
+					"examples": [
+						"liljegren-hindukush",
+						"lsi",
+						"maikoti-kham",
+						"tagin-puroik"
+					]
+				},
+				{
+					"house": "a",
+					"profiles": 1,
+					"examples": [
+						"chattisgarhi"
+					]
+				}
+			]
+		},
+		"ɯː": {
+			"house": "ū",
+			"profiles": 6,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "ɯ̄",
+					"profiles": 1,
+					"examples": [
+						"maikoti-kham"
+					]
+				}
+			]
+		},
+		"ɯ̃": {
+			"house": "ɯ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɰ": {
+			"house": "ɰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ɱ": {
+			"house": "m",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɲ": {
+			"house": "ñ",
+			"profiles": 29,
+			"agreement": 29,
+			"variants": []
+		},
+		"ɲː": {
+			"house": "ññ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɳ": {
+			"house": "ṇ",
+			"profiles": 27,
+			"agreement": 27,
+			"variants": []
+		},
+		"ɳː": {
+			"house": "ṇṇ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ɴ": {
+			"house": "ŋ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɵ": {
+			"house": "ə",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "ɵ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ɵ̩": {
+			"house": "ɸ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɵ̩ĥ": {
+			"house": "ɸʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɵ̩ĥ": {
+			"house": "ɸʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɵ̯": {
+			"house": "ɵ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɶ": {
+			"house": "æ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɷ": {
+			"house": "u",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɷ:": {
+			"house": "ū",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɸ": {
+			"house": "ɸ",
+			"profiles": 23,
+			"agreement": 20,
+			"variants": [
+				{
+					"house": "f",
+					"profiles": 2,
+					"examples": [
+						"kannauji",
+						"pahari"
+					]
+				},
+				{
+					"house": "pʰ",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ɸʰ": {
+			"house": "ɸʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɹ": {
+			"house": "r",
+			"profiles": 14,
+			"agreement": 14,
+			"variants": []
+		},
+		"ɻ": {
+			"house": "ṛ",
+			"profiles": 14,
+			"agreement": 11,
+			"variants": [
+				{
+					"house": "r",
+					"profiles": 2,
+					"examples": [
+						"humla",
+						"mustang-loke"
+					]
+				},
+				{
+					"house": "ḻ",
+					"profiles": 1,
+					"examples": [
+						"markodi"
+					]
+				}
+			]
+		},
+		"ɻː": {
+			"house": "ḻḻ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɽ": {
+			"house": "ṛ",
+			"profiles": 28,
+			"agreement": 28,
+			"variants": []
+		},
+		"ɽʰ": {
+			"house": "ṛʰ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ɽː": {
+			"house": "ṛṛ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɽ̥": {
+			"house": "ṛ̥",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɾ": {
+			"house": "r",
+			"profiles": 34,
+			"agreement": 34,
+			"variants": []
+		},
+		"ɾː": {
+			"house": "rr",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ɾˑ": {
+			"house": "rˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɾ̪": {
+			"house": "r",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ɿ": {
+			"house": "ɿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʀ": {
+			"house": "r",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʁ": {
+			"house": "ʁ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʂ": {
+			"house": "ṣ",
+			"profiles": 19,
+			"agreement": 19,
+			"variants": []
+		},
+		"ʂː": {
+			"house": "ṣṣ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʃ": {
+			"house": "ś",
+			"profiles": 43,
+			"agreement": 42,
+			"variants": [
+				{
+					"house": "ṣ",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				}
+			]
+		},
+		"ʃː": {
+			"house": "śś",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʃ̩": {
+			"house": "ṣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʅ": {
+			"house": "ʅ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʈ": {
+			"house": "ṭ",
+			"profiles": 43,
+			"agreement": 43,
+			"variants": []
+		},
+		"ʈh": {
+			"house": "ṭʰ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʈʂ": {
+			"house": "ʦ̣",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʈʂʰ": {
+			"house": "ʦ̣ʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʈʰ": {
+			"house": "ṭʰ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"ʈː": {
+			"house": "ṭṭ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ʈˑ": {
+			"house": "ṭˑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʈ͡ʂ": {
+			"house": "ʦ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʈ͡ʂʰ": {
+			"house": "ʦ̣ʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʉ": {
+			"house": "ʉ",
+			"profiles": 9,
+			"agreement": 7,
+			"variants": [
+				{
+					"house": "u",
+					"profiles": 2,
+					"examples": [
+						"humla",
+						"naaba"
+					]
+				}
+			]
+		},
+		"ʉ:": {
+			"house": "ʉ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʉː": {
+			"house": "ʉ̄",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʊ": {
+			"house": "u",
+			"profiles": 18,
+			"agreement": 17,
+			"variants": [
+				{
+					"house": "ʊ",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ʊː": {
+			"house": "ū",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ʊ́ː": {
+			"house": "ū́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʊ̃": {
+			"house": "ũ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʊ̃ː": {
+			"house": "ū̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʋ": {
+			"house": "v",
+			"profiles": 19,
+			"agreement": 19,
+			"variants": []
+		},
+		"ʋː": {
+			"house": "vv",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʌ": {
+			"house": "a",
+			"profiles": 36,
+			"agreement": 33,
+			"variants": [
+				{
+					"house": "ʌ",
+					"profiles": 3,
+					"examples": [
+						"cdial",
+						"gondi-beine",
+						"nured"
+					]
+				}
+			]
+		},
+		"ʌ:": {
+			"house": "ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʌʰ": {
+			"house": "ʌʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʌː": {
+			"house": "ā",
+			"profiles": 13,
+			"agreement": 12,
+			"variants": [
+				{
+					"house": "ʌ̄",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ʌ́": {
+			"house": "á",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʌ́ː": {
+			"house": "ā́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʌ̃": {
+			"house": "ã",
+			"profiles": 11,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "ʌ̃",
+					"profiles": 1,
+					"examples": [
+						"gondi-beine"
+					]
+				}
+			]
+		},
+		"ʌ̃ː": {
+			"house": "ā̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʌ̯": {
+			"house": "ʌ̯",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʍ": {
+			"house": "ʍ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʎ": {
+			"house": "ʎ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ʏ": {
+			"house": "ʏ",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ü",
+					"profiles": 1,
+					"examples": [
+						"humla"
+					]
+				}
+			]
+		},
+		"ʐ": {
+			"house": "ẓ",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"ʐʰ": {
+			"house": "ẓʰ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʐː": {
+			"house": "ẓẓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʑ": {
+			"house": "ź",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ʑː": {
+			"house": "źź",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʒ": {
+			"house": "ž",
+			"profiles": 39,
+			"agreement": 37,
+			"variants": [
+				{
+					"house": "ẓ",
+					"profiles": 1,
+					"examples": [
+						"beine-bhatri"
+					]
+				},
+				{
+					"house": "ʒ",
+					"profiles": 1,
+					"examples": [
+						"merriam-reconstruction"
+					]
+				}
+			]
+		},
+		"ʒː": {
+			"house": "žž",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʒ̩": {
+			"house": "ẓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʔ": {
+			"house": "ʔ",
+			"profiles": 35,
+			"agreement": 35,
+			"variants": []
+		},
+		"ʔː": {
+			"house": "ʔʔ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʕ": {
+			"house": "ʕ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʙ": {
+			"house": "ʙ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʝ": {
+			"house": "ʝ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʟ": {
+			"house": "ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʣ": {
+			"house": "ʣ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʤ": {
+			"house": "j",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʤh": {
+			"house": "jʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʦ": {
+			"house": "ʦ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ʧ": {
+			"house": "c",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ʧh": {
+			"house": "cʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʰ": {
+			"house": "ʰ",
+			"profiles": 46,
+			"agreement": 46,
+			"variants": []
+		},
+		"ʱ": {
+			"house": "ʰ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"ʲ": {
+			"house": "ʸ",
+			"profiles": 27,
+			"agreement": 23,
+			"variants": [
+				{
+					"house": "ʲ",
+					"profiles": 4,
+					"examples": [
+						"sil-bangladesh",
+						"sil-koch",
+						"sil-kurux",
+						"sil-tripura"
+					]
+				}
+			]
+		},
+		"ʳ": {
+			"house": "ʳ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʷ": {
+			"house": "ʷ",
+			"profiles": 23,
+			"agreement": 23,
+			"variants": []
+		},
+		"ʸ": {
+			"house": "ʸ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ʹa": {
+			"house": "á",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹa:": {
+			"house": "ā́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹe": {
+			"house": "é",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹi": {
+			"house": "í",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹi:": {
+			"house": "ī́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹiː": {
+			"house": "ī́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹo": {
+			"house": "ó",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹoː": {
+			"house": "ṓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹr̥": {
+			"house": "ŕ̩",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹu": {
+			"house": "ú",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹu:": {
+			"house": "ū́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹuː": {
+			"house": "ū́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹâ": {
+			"house": "ā́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹâː": {
+			"house": "ā́ā́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹä": {
+			"house": "ǽ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹê": {
+			"house": "ḗ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹî": {
+			"house": "ī́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹô": {
+			"house": "ṓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹû": {
+			"house": "ū́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʹü": {
+			"house": "ɨ́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʼ": {
+			"house": "ʼ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ʾ": {
+			"house": "ʾ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ʿ": {
+			"house": "ʿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ˀ": {
+			"house": "ˀ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ʔ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ˁ": {
+			"house": "ʕ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"˅": {
+			"house": "v",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ˈ": {
+			"house": "",
+			"profiles": 5,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ˈ",
+					"profiles": 2,
+					"examples": [
+						"nured",
+						"torwali-student"
+					]
+				}
+			]
+		},
+		"ˊ": {
+			"house": "ˊ",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "́",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ˊu": {
+			"house": "ú",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ˋ": {
+			"house": "̀",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ː": {
+			"house": "ː",
+			"profiles": 18,
+			"agreement": 14,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 4,
+					"examples": [
+						"chattisgarhi",
+						"halbi-woods",
+						"rajasthani",
+						"ssnp"
+					]
+				}
+			]
+		},
+		"ˑ": {
+			"house": "ˑ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"˚": {
+			"house": "ᵃ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"˜": {
+			"house": "̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"˞": {
+			"house": "˞",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ˠ": {
+			"house": "ˠ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ˣ": {
+			"house": "ˣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"˺": {
+			"house": "˺",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̀": {
+			"house": "̀",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "̂",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"́": {
+			"house": "́",
+			"profiles": 21,
+			"agreement": 20,
+			"variants": [
+				{
+					"house": "̌",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"̂": {
+			"house": "̂",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"̃": {
+			"house": "̃",
+			"profiles": 46,
+			"agreement": 46,
+			"variants": []
+		},
+		"̄": {
+			"house": "̄",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"̆": {
+			"house": "̆",
+			"profiles": 12,
+			"agreement": 12,
+			"variants": []
+		},
+		"̇": {
+			"house": "̇",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"̈": {
+			"house": "̈",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"̊": {
+			"house": "̊",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"̌": {
+			"house": "̌",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"̍": {
+			"house": "̍",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̑": {
+			"house": "̑",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"̚": {
+			"house": "̚",
+			"profiles": 16,
+			"agreement": 15,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"̠": {
+			"house": "",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "̠",
+					"profiles": 1,
+					"examples": [
+						"toda"
+					]
+				}
+			]
+		},
+		"̡": {
+			"house": "̡",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̣": {
+			"house": "̣",
+			"profiles": 9,
+			"agreement": 9,
+			"variants": []
+		},
+		"̤": {
+			"house": "̤",
+			"profiles": 19,
+			"agreement": 16,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 3,
+					"examples": [
+						"chattisgarhi",
+						"rajasthani",
+						"toulmin"
+					]
+				}
+			]
+		},
+		"̥": {
+			"house": "̥",
+			"profiles": 15,
+			"agreement": 14,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"̦": {
+			"house": "̦",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̨": {
+			"house": "̨",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̩": {
+			"house": "̩",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"chattisgarhi"
+					]
+				}
+			]
+		},
+		"̪": {
+			"house": "",
+			"profiles": 18,
+			"agreement": 15,
+			"variants": [
+				{
+					"house": "̪",
+					"profiles": 3,
+					"examples": [
+						"humla",
+						"north-gorkha",
+						"yamphu"
+					]
+				}
+			]
+		},
+		"̬": {
+			"house": "̬",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"tagin-puroik"
+					]
+				}
+			]
+		},
+		"̭": {
+			"house": "̭",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̯": {
+			"house": "̯",
+			"profiles": 12,
+			"agreement": 11,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"chattisgarhi"
+					]
+				}
+			]
+		},
+		"̰": {
+			"house": "̰",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"̱": {
+			"house": "̱",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"̴": {
+			"house": "̴",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"̻": {
+			"house": "",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "\"\"",
+					"profiles": 1,
+					"examples": [
+						"rajasthani"
+					]
+				}
+			]
+		},
+		"͂": {
+			"house": "͂",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ͅ": {
+			"house": "ͅ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"͏": {
+			"house": "",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"͑": {
+			"house": "͑",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"͡": {
+			"house": "",
+			"profiles": 8,
+			"agreement": 5,
+			"variants": [
+				{
+					"house": "͡",
+					"profiles": 2,
+					"examples": [
+						"kurux-nepal",
+						"rabha"
+					]
+				},
+				{
+					"house": "\"\"",
+					"profiles": 1,
+					"examples": [
+						"rajasthani"
+					]
+				}
+			]
+		},
+		"ά": {
+			"house": "ά",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"έ": {
+			"house": "έ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"α": {
+			"house": "α",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"β": {
+			"house": "β",
+			"profiles": 18,
+			"agreement": 18,
+			"variants": []
+		},
+		"βʰ": {
+			"house": "βʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"βʷ": {
+			"house": "βʷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"γ": {
+			"house": "ɣ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"δ": {
+			"house": "ð",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"δ̣": {
+			"house": "δ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ε": {
+			"house": "ε",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ζ": {
+			"house": "ζ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"η": {
+			"house": "η",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ŋ",
+					"profiles": 1,
+					"examples": [
+						"gurung"
+					]
+				}
+			]
+		},
+		"θ": {
+			"house": "θ",
+			"profiles": 7,
+			"agreement": 7,
+			"variants": []
+		},
+		"ι": {
+			"house": "ι",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"κ": {
+			"house": "κ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"λ": {
+			"house": "λ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"μ": {
+			"house": "μ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ν": {
+			"house": "ν",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ξ": {
+			"house": "ξ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ο": {
+			"house": "ο",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ρ": {
+			"house": "ρ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ς": {
+			"house": "ς",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"σ": {
+			"house": "σ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"τ": {
+			"house": "τ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"υ": {
+			"house": "υ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"χ": {
+			"house": "x",
+			"profiles": 9,
+			"agreement": 8,
+			"variants": [
+				{
+					"house": "χ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ω": {
+			"house": "ω",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ό": {
+			"house": "ό",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ώ": {
+			"house": "ώ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ͻ": {
+			"house": "y",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"՝": {
+			"house": "՝",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᴂ": {
+			"house": "ä",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᵃ": {
+			"house": "ᵃ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ᵅ": {
+			"house": "ā",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᵉ": {
+			"house": "ᵉ",
+			"profiles": 5,
+			"agreement": 4,
+			"variants": [
+				{
+					"house": "e",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ᵊ": {
+			"house": "ᵊ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ᵏ": {
+			"house": "ᵏ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᵐ": {
+			"house": "ᵐ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᵑ": {
+			"house": "ⁿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᵒ": {
+			"house": "ᵒ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"ᵗ": {
+			"house": "ᵗ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ᵘ": {
+			"house": "ᵘ",
+			"profiles": 9,
+			"agreement": 8,
+			"variants": [
+				{
+					"house": "u",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ᵘ̈": {
+			"house": "ᵘ̈",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᵬ": {
+			"house": "b",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶏ": {
+			"house": "a",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶑ": {
+			"house": "ᶑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶘ": {
+			"house": "ṣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶚ": {
+			"house": "ṛ̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶤ": {
+			"house": "ᵘ̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶦ": {
+			"house": "ᶦ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "i",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ᶷ": {
+			"house": "ᶷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᶸ": {
+			"house": "ᶸ",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "ᵘ",
+					"profiles": 1,
+					"examples": [
+						"north-gorkha"
+					]
+				}
+			]
+		},
+		"ᶺ": {
+			"house": "a",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"᷇": {
+			"house": "᷇",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ᷴ": {
+			"house": "ᵘ̈",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḁ": {
+			"house": "a̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḅ": {
+			"house": "ḅ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḇ": {
+			"house": "ɓ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḋ": {
+			"house": "ḋ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ḍ": {
+			"house": "Ḍ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḍ": {
+			"house": "ḍ",
+			"profiles": 27,
+			"agreement": 27,
+			"variants": []
+		},
+		"ḍh": {
+			"house": "ḍʰ",
+			"profiles": 11,
+			"agreement": 11,
+			"variants": []
+		},
+		"ḍhḷ": {
+			"house": "ḍ͡ḷʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḍoi": {
+			"house": "ḍoī",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḍ̠": {
+			"house": "ᶑ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḍḷ": {
+			"house": "ḍ͡ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḏ": {
+			"house": "ḏ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ḕ": {
+			"house": "ḕ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḗ": {
+			"house": "ḗ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ḛ": {
+			"house": "e̤",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḛː": {
+			"house": "ḛ̄",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ḡ": {
+			"house": "ḡ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḥ": {
+			"house": "ḣ",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ħ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ḫ": {
+			"house": "ḫ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḭː": {
+			"house": "ḭ̄",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ḱ": {
+			"house": "ḱ",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ḳ": {
+			"house": "ḳ",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "x",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ḵ": {
+			"house": "ḵ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ḷ": {
+			"house": "Ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḷ": {
+			"house": "ḷ",
+			"profiles": 12,
+			"agreement": 10,
+			"variants": [
+				{
+					"house": "ḷ",
+					"profiles": 2,
+					"examples": [
+						"cdial",
+						"strand"
+					]
+				}
+			]
+		},
+		"ḷh": {
+			"house": "ḷʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḻ": {
+			"house": "ṛ̆",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ḿ": {
+			"house": "ḿ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ṁ": {
+			"house": "ṁ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ṃ": {
+			"house": "ṁ",
+			"profiles": 7,
+			"agreement": 6,
+			"variants": [
+				{
+					"house": "ṃ",
+					"profiles": 1,
+					"examples": [
+						"merriam-reconstruction"
+					]
+				}
+			]
+		},
+		"ṅ": {
+			"house": "ŋ",
+			"profiles": 8,
+			"agreement": 8,
+			"variants": []
+		},
+		"ṇ": {
+			"house": "ṇ",
+			"profiles": 20,
+			"agreement": 19,
+			"variants": [
+				{
+					"house": "ṇ",
+					"profiles": 1,
+					"examples": [
+						"strand"
+					]
+				}
+			]
+		},
+		"ṇ˘ḍ": {
+			"house": "ⁿḍ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṉ": {
+			"house": "ṉ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ṍ": {
+			"house": "ṍ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ṓ": {
+			"house": "ṓ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ṕ": {
+			"house": "ṕ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ṙ": {
+			"house": "ṙ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṛ": {
+			"house": "ṛ",
+			"profiles": 20,
+			"agreement": 20,
+			"variants": []
+		},
+		"ṛh": {
+			"house": "ṛʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṟ": {
+			"house": "ṟ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ṟ̣": {
+			"house": "ṟ̣",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ṣ": {
+			"house": "Ṣ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṣ": {
+			"house": "ṣ",
+			"profiles": 19,
+			"agreement": 19,
+			"variants": []
+		},
+		"ṣ̄": {
+			"house": "ṣṇ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"Ṭ": {
+			"house": "Ṭ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ṭ": {
+			"house": "ṭ",
+			"profiles": 28,
+			"agreement": 28,
+			"variants": []
+		},
+		"ṭh": {
+			"house": "ṭʰ",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"ṭl̬": {
+			"house": "ṭ͡ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṭ́h": {
+			"house": "ṭṭʰ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṭḷ": {
+			"house": "ṭ͡ḷ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṯ": {
+			"house": "ṯ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ṳ": {
+			"house": "ṳ",
+			"profiles": 16,
+			"agreement": 9,
+			"variants": [
+				{
+					"house": "ṳ",
+					"profiles": 4,
+					"examples": [
+						"eastern-magar",
+						"gurung",
+						"majhi-bote",
+						"western-tamang"
+					]
+				},
+				{
+					"house": "u",
+					"profiles": 3,
+					"examples": [
+						"chattisgarhi",
+						"rajasthani",
+						"toulmin"
+					]
+				}
+			]
+		},
+		"ṳ̄": {
+			"house": "ɨ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṵ": {
+			"house": "ṵ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ṵː": {
+			"house": "ṵ̄",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ṷ": {
+			"house": "u",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "v",
+					"profiles": 1,
+					"examples": [
+						"khowar"
+					]
+				}
+			]
+		},
+		"ṹ": {
+			"house": "ṹ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ṽ": {
+			"house": "ṽ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ṿ": {
+			"house": "ṿ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ẉ": {
+			"house": "ẉ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ẓ": {
+			"house": "ẓ",
+			"profiles": 13,
+			"agreement": 13,
+			"variants": []
+		},
+		"ẖ": {
+			"house": "ẖ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ạ": {
+			"house": "ạ",
+			"profiles": 4,
+			"agreement": 3,
+			"variants": [
+				{
+					"house": "ǝ",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"ạ̄": {
+			"house": "ạ̄",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ấ": {
+			"house": "ấ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ắ": {
+			"house": "ʌ́",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ẵ": {
+			"house": "ẵ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ẹ": {
+			"house": "ẹ",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ẽ": {
+			"house": "ẽ",
+			"profiles": 37,
+			"agreement": 37,
+			"variants": []
+		},
+		"ẽ:": {
+			"house": "ē̃",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ẽː": {
+			"house": "ē̃",
+			"profiles": 6,
+			"agreement": 6,
+			"variants": []
+		},
+		"ẽ́": {
+			"house": "ẽ́",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ễ": {
+			"house": "ɛ̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ị": {
+			"house": "ị",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ọ": {
+			"house": "ọ",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"ọ̆": {
+			"house": "o",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ụ": {
+			"house": "ụ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ỵ": {
+			"house": "ỵ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"ỹ": {
+			"house": "ỹ",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"ỹː": {
+			"house": "ȳ̃",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ἀ": {
+			"house": "ἀ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ἁ": {
+			"house": "ἁ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ἔ": {
+			"house": "ἔ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ὄ": {
+			"house": "ὄ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ὲ": {
+			"house": "ὲ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"῀": {
+			"house": "̃",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"–": {
+			"house": "",
+			"profiles": 2,
+			"agreement": 1,
+			"variants": [
+				{
+					"house": "–",
+					"profiles": 1,
+					"examples": [
+						"zoller"
+					]
+				}
+			]
+		},
+		"—": {
+			"house": "—",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"‘": {
+			"house": "‘",
+			"profiles": 4,
+			"agreement": 4,
+			"variants": []
+		},
+		"’": {
+			"house": "’",
+			"profiles": 5,
+			"agreement": 5,
+			"variants": []
+		},
+		"“": {
+			"house": "“",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"”": {
+			"house": "”",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"…": {
+			"house": "…",
+			"profiles": 2,
+			"agreement": 2,
+			"variants": []
+		},
+		"ⁱ": {
+			"house": "ⁱ",
+			"profiles": 15,
+			"agreement": 14,
+			"variants": [
+				{
+					"house": "i",
+					"profiles": 1,
+					"examples": [
+						"northern"
+					]
+				}
+			]
+		},
+		"ⁱ̃": {
+			"house": "ĩ",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁴": {
+			"house": "⁴",
+			"profiles": 3,
+			"agreement": 2,
+			"variants": [
+				{
+					"house": "\"\"",
+					"profiles": 1,
+					"examples": [
+						"cdial"
+					]
+				}
+			]
+		},
+		"⁴²": {
+			"house": "⁴²",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁴³": {
+			"house": "⁴³",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁴⁴": {
+			"house": "⁴⁴",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁴⁵": {
+			"house": "⁴⁵",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁵³": {
+			"house": "⁵³",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁵⁴": {
+			"house": "⁵⁴",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"⁶": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ⁿ": {
+			"house": "ⁿ",
+			"profiles": 3,
+			"agreement": 3,
+			"variants": []
+		},
+		"∅": {
+			"house": "∅",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"": {
+			"house": "",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ﬁ": {
+			"house": "fi",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		},
+		"ﬂ": {
+			"house": "fl",
+			"profiles": 1,
+			"agreement": 1,
+			"variants": []
+		}
+	}
+}

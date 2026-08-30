@@ -6,11 +6,10 @@
 	import { base } from '$app/paths';
 	import type { Lemma } from '$lib/types';
 	import FormWord from './FormWord.svelte';
+	import Tooltip from './Tooltip.svelte';
 
 	let visible = $state(false);
-	let x = $state(0);
-	let y = $state(0);
-	let below = $state(true);
+	let anchor = $state<HTMLElement | null>(null);
 	let loading = $state(false);
 	let current = $state<Lemma | null>(null);
 	let activeId = '';
@@ -21,11 +20,7 @@
 		const id = el.getAttribute('data-eref');
 		if (!id) return;
 		clearTimeout(hideTimer);
-		const r = el.getBoundingClientRect();
-		// clamp horizontally so a wide card never runs off the right edge
-		x = Math.min(r.left, window.innerWidth - 360);
-		below = r.bottom + 140 < window.innerHeight; // flip above near the viewport bottom
-		y = below ? r.bottom + 6 : window.innerHeight - r.top + 6;
+		anchor = el; // Tooltip places, clamps and follows scrolling from here
 		activeId = id;
 		visible = true;
 		if (cache.has(id)) {
@@ -65,14 +60,8 @@
 <svelte:document onmouseover={onOver} onmouseout={onOut} onclick={hideNow} />
 
 {#if visible}
-	<div
-		class="peek"
-		class:above={!below}
-		style="left:{x}px; {below ? 'top' : 'bottom'}:{y}px"
-		role="tooltip"
-		onmouseenter={() => clearTimeout(hideTimer)}
-		onmouseleave={scheduleHide}
-	>
+	<Tooltip {anchor} prefer="below" onenter={() => clearTimeout(hideTimer)} onleave={scheduleHide}>
+		<div class="peek">
 		{#if loading}
 			<span class="peek-muted">loading…</span>
 		{:else if current}
@@ -85,19 +74,13 @@
 		{:else}
 			<span class="peek-muted">entry not found</span>
 		{/if}
-	</div>
+		</div>
+	</Tooltip>
 {/if}
 
 <style>
+	/* the card chrome is Tooltip.svelte's; this is just the peek's own type */
 	.peek {
-		position: fixed;
-		z-index: 1000;
-		max-width: 22rem;
-		padding: 0.5rem 0.7rem;
-		background: var(--surface);
-		border: 1px solid var(--border-strong);
-		border-radius: 8px;
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 		font-size: 0.9rem;
 		line-height: 1.45;
 	}

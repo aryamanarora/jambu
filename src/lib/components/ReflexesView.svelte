@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { createListState } from '$lib/listState.svelte';
-	import { getFilterDialects, getFilterLanguages, getLanguageDialects } from '$lib/query';
+	import { getFilterDialects, getFilterLanguages } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
 	import { safe, md } from '$lib/render';
 	import { hashColor, cladeColor } from '$lib/clades';
@@ -89,17 +89,6 @@
 		});
 	});
 
-	let dialectOptions = $state<SelectOption[]>([]);
-	$effect(() => {
-		if (mode !== 'lexicon' || !languageId) return;
-		getLanguageDialects(languageId).then((ds) => {
-			dialectOptions = ds.map((d) => ({
-				value: d.token,
-				label: d.name,
-				sub: `${d.lemma_count.toLocaleString()} reflexes`
-			}));
-		});
-	});
 </script>
 
 {#snippet filters()}
@@ -111,17 +100,6 @@
 				options={langOptions}
 				value={list.params.origin_lang ?? ''}
 				onSelect={(value) => list.setFilter('origin_lang', value)}
-			/>
-		</label>
-	{/if}
-	{#if mode === 'lexicon' && dialectOptions.length}
-		<label class="filter-control">
-			<span>Dialect</span>
-			<SelectFilter
-				placeholder="Any dialect"
-				options={dialectOptions}
-				value={list.params.dialect ?? ''}
-				onSelect={(value) => list.setFilter('dialect', value)}
 			/>
 		</label>
 	{/if}
@@ -176,13 +154,14 @@
 {#if list.error}<QueryError error={list.error} />{/if}
 
 <div class="table-wrap">
-	<table class="data mobile-cards" class:accent-col={showLangCol}>
+	<table class="data mobile-cards">
 		<thead>
 			<tr>
 				{#if showLangCol}
 					<FilterCell
 						label="Language"
 						sortKey="lang"
+						accent
 						activeSort={list.params.sort ?? ''}
 						onFilter={list.setFilter}
 						onSort={list.setSort}
@@ -198,6 +177,7 @@
 				<FilterCell
 					label="Origin"
 					sortKey="origin"
+					accent={!showLangCol}
 					activeSort={list.params.sort ?? ''}
 					onFilter={list.setFilter}
 					onSort={list.setSort}
@@ -266,7 +246,7 @@
 							{:else}<span class="faint">—</span>{/if}
 						</td>
 						<td class="muted" data-label="Meaning">{@html safe(r.gloss) || '—'}</td>
-						<td data-label="Tags"><Tags tags={r.tags} /></td>
+						<td class="tag-cell" data-label="Tags"><Tags tags={r.tags} /></td>
 						<td class="muted markdown" data-label="Notes">{@html md(r.notes)}</td>
 						<td data-label="Source"><RefList references={r.references} /></td>
 					</tr>

@@ -11,7 +11,7 @@ type InMsg =
 	| { type: 'init'; id: number; url: string }
 	| { type: 'load'; id: number; url: string }
 	| { type: 'delete'; id: number }
-	| { type: 'query'; id: number; sql: string; params: unknown[] };
+	| { type: 'query'; id: number; sql: string; params: unknown[]; sets?: Array<[number, number[]]> };
 
 function respond(port: MessagePort, msg: Record<string, unknown>) {
 	port.postMessage(msg);
@@ -26,7 +26,7 @@ async function handle(port: MessagePort, msg: InMsg) {
 			await deleteCached();
 			respond(port, { type: 'done', id: msg.id });
 		} else if (msg.type === 'query') {
-			respond(port, { type: 'result', id: msg.id, rows: runQuery(msg.sql, msg.params) });
+			respond(port, { type: 'result', id: msg.id, rows: runQuery(msg.sql, msg.params, msg.sets) });
 		}
 	} catch (err) {
 		respond(port, {

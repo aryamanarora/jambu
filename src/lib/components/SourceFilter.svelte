@@ -3,6 +3,7 @@
 	import { referenceLabel, striptags } from '$lib/render';
 	import type { Reference } from '$lib/types';
 	import { floatingPanel } from '$lib/floatingPanel';
+	import SortToggle from './SortToggle.svelte';
 
 	let {
 		value = '',
@@ -58,15 +59,6 @@
 		open = false;
 		search = '';
 	}
-	function cycleSort() {
-		onSort(
-			activeSort === 'asc-source'
-				? 'desc-source'
-				: activeSort === 'desc-source'
-					? ''
-					: 'asc-source'
-		);
-	}
 
 	$effect(() => {
 		if (!open) return;
@@ -94,15 +86,10 @@
 			onclick={() => (open = !open)}
 		>
 			<span class:placeholder={!value}>{selected ? referenceLabel(selected) : value || 'Source'}</span>
-			<span class="caret" class:up={open}>▾</span>
+			<span class="chev" class:open aria-hidden="true"></span>
 		</button>
 		{#if !standalone}
-			<button
-				class="sort-cycle"
-				class:active={activeSort === 'asc-source' || activeSort === 'desc-source'}
-				aria-label="Sort Source; currently {activeSort === 'asc-source' ? 'ascending' : activeSort === 'desc-source' ? 'descending' : 'unsorted'}"
-				onclick={cycleSort}
-			>{activeSort === 'asc-source' ? '↑' : activeSort === 'desc-source' ? '↓' : '↕'}</button>
+			<SortToggle label="Source" sortKey="source" {activeSort} {onSort} />
 		{/if}
 	</div>
 	{#if open}
@@ -147,23 +134,6 @@
 		align-content: end;
 		min-width: 0;
 	}
-	.sort-cycle {
-		flex: 0 0 auto;
-		width: 28px;
-		height: 32px;
-		padding: 0;
-		border: 0;
-		border-radius: 4px;
-		background: transparent;
-		color: var(--faint);
-		font: inherit;
-		cursor: pointer;
-	}
-	.sort-cycle:hover,
-	.sort-cycle.active {
-		background: color-mix(in srgb, var(--berry) 10%, transparent);
-		color: var(--berry);
-	}
 	.trigger {
 		display: inline-flex;
 		align-items: center;
@@ -183,8 +153,7 @@
 	.trigger:hover, .trigger.active { border-color: var(--plum-2); }
 	.trigger > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 	.placeholder { color: var(--muted); }
-	.caret { margin-left: auto; font-size: 0.68em; transition: transform 0.12s; }
-	.caret.up { transform: rotate(180deg); }
+	.trigger :global(.chev) { margin-left: auto; }
 	.panel {
 		width: min(32rem, calc(100vw - 1rem));
 		background: var(--surface);

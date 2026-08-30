@@ -50,7 +50,7 @@
 	<summary aria-label="Database status: {statusLabel}" title="Database status">
 		<span class="status-dot" class:ready={dbUI.ready} class:error={dbUI.status === 'error'}></span>
 		<span class="summary-label">{variant === 'menu' ? 'Dictionary data' : 'DB'} <span>{statusLabel}</span></span>
-		<span class="chevron" aria-hidden="true">▾</span>
+		<span class="chev chevron" aria-hidden="true"></span>
 	</summary>
 
 	<div class="panel">
@@ -157,10 +157,9 @@
 	}
 	.chevron {
 		color: var(--nav-fg-dim);
-		transition: transform 0.15s ease;
 	}
 	.db-menu[open] .chevron {
-		transform: rotate(180deg);
+		transform: rotate(225deg);
 	}
 	.panel {
 		position: absolute;

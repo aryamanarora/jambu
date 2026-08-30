@@ -10,12 +10,12 @@
  *    through rowids: the sorted binary id table (loaded once into this thread) maps public
  *    text ids ↔ lem rowids with no SQL index at all.
  *  - Filters run against the compact base columns (ints, interned tag/cognateset refs, varint
- *    citation blobs via the vin_any() UDF); display rows are rebuilt to the legacy Lemma shape
+ *    citation blobs via the vin_in() UDF); display rows are rebuilt to the legacy Lemma shape
  *    by hydrateLem so components are unchanged.
  *  - The entries default listing keeps its partial index; the per-language default listing
  *    reads the language's precomputed `lex` rowid list instead of an index.
  */
-import { query, queryOne } from './db.svelte';
+import { query, queryOne, type QuerySets } from './db.svelte';
 import { CLADE_ORDER } from './clades';
 import {
 	IdIndex,
@@ -23,6 +23,7 @@ import {
 	LEM_COLS,
 	LEM_JOINS,
 	readVarints,
+	readVarintPairs,
 	readDeltas,
 	readCorrCells,
 	readCellDict,
@@ -88,6 +89,17 @@ function jsonList(rids: number[]): string {
 	return JSON.stringify(rids);
 }
 const IN_JSON = '(SELECT value FROM json_each(?))';
+
+/**
+ * A `vin_in(blob, ?)` membership test: the query binds a small integer handle and ships the
+ * candidate set out of band (see sqliteCore.ts). Never bind such a set as a JSON parameter to a
+ * UDF — sqlite-wasm re-converts every UDF argument on every row, so a big list costs seconds.
+ */
+let nextSetId = 1;
+function vinIn(col: string, members: number[]): { sql: string; params: unknown[]; sets: QuerySets } {
+	const setId = nextSetId++;
+	return { sql: `vin_in(${col}, ?) = 1`, params: [setId], sets: [[setId, members]] };
+}
 
 /** v3: link_rid carries only redirects, so this is a plain null check. */
 const NOT_REDIRECT = 'l.link_rid IS NULL';
@@ -213,6 +225,32 @@ async function ensureCites(): Promise<void> {
 	await citesPromise;
 }
 
+function refRidOf(referenceId: string): number | null {
+	for (const [rid, r] of referencesByRid!) if (r.id === referenceId) return rid;
+	return null;
+}
+
+/**
+ * The forms citing one source, in display order, from the precomputed `ref_lex` index. This is
+ * the citation twin of `languages.lex`: it replaces a citation-blob scan of all 480k `lem`
+ * rows (which the reference page ran three times — count, page, donut) with one blob decode.
+ * A single-entry cache is enough to make paging through a source free.
+ */
+let refLexCache: { rid: number; rids: number[] } | null = null;
+async function referenceFormRids(referenceId: string): Promise<number[]> {
+	await ensureCites();
+	const rid = refRidOf(referenceId);
+	if (rid == null) return [];
+	if (refLexCache?.rid === rid) return refLexCache.rids;
+	const row = await queryOne<{ lex: Uint8Array | null }>(
+		'SELECT lex FROM ref_lex WHERE ref_rid = ?',
+		[rid]
+	);
+	const rids = readVarints(row?.lex);
+	refLexCache = { rid, rids };
+	return rids;
+}
+
 /** Cite ids whose reference matches a predicate (for source / reference filters). */
 async function citeIdsWhere(refPred: (r: Reference & { rid: number }) => boolean): Promise<number[]> {
 	await ensureCites();
@@ -322,6 +360,26 @@ export async function getBorrowedReflexes(reflexId: string): Promise<Lemma[]> {
 	return rows;
 }
 
+/** Every concept, light enough for the atlas's picker — no rids blob, no bar segments. Cached
+ *  for the session: the list is fixed and the picker is opened repeatedly. */
+export interface ConceptPick {
+	id: number;
+	name: string;
+	category: string;
+	etyma_count: number;
+	lang_count: number;
+	form_count: number;
+}
+let conceptListCache: ConceptPick[] | null = null;
+export async function getConceptList(): Promise<ConceptPick[]> {
+	if (conceptListCache) return conceptListCache;
+	conceptListCache = await query<ConceptPick>(
+		`SELECT id, name, category, etyma_count, lang_count, form_count
+		 FROM concepts ORDER BY form_count DESC, name`
+	);
+	return conceptListCache;
+}
+
 /** Reflexes of one etymon that match a given concept — the inline expansion on the concepts view. */
 export async function getConceptReflexes(entryId: string, conceptId: string): Promise<Lemma[]> {
 	const idx = await ensureCore();
@@ -366,6 +424,7 @@ const NEEDS_LANG_JOIN = new Set(['lang', 'clade', 'reflexes']);
 interface Cond {
 	sql: string;
 	params: unknown[];
+	sets?: QuerySets;
 }
 
 /** Whole-token tagset match: rows whose interned tag string contains the token. */
@@ -450,12 +509,12 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 				(field ?? '').toLowerCase().includes(needle)
 			)
 		);
-		conds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
+		conds.push(vinIn('l.cites', cids));
 	}
 	if (p.source_ids?.trim()) {
 		const ids = new Set(p.source_ids.split(',').filter(Boolean));
 		const cids = await citeIdsWhere((r) => ids.has(r.id));
-		conds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
+		conds.push(vinIn('l.cites', cids));
 	}
 	// tags: whole-token match (AND across the selected tags)
 	if (p.tags?.trim()) {
@@ -626,9 +685,12 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	}
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(languageId) ?? -1] });
+	// The reference's form list is precomputed (ref_lex) and already excludes redirect stubs, so
+	// even the filtered path is a rowid restriction rather than a scan of every lemma's citations.
+	let refRids: number[] | null = null;
 	if (referenceId) {
-		const cids = await citeIdsWhere((r) => r.id === referenceId);
-		modeConds.push({ sql: 'vin_any(l.cites, ?) = 1', params: [jsonList(cids)] });
+		refRids = await referenceFormRids(referenceId);
+		modeConds.push({ sql: `l.rowid IN ${IN_JSON}`, params: [jsonList(refRids)] });
 	}
 
 	// concept restriction: entries that are the immediate etymon of a form mapped to the concept.
@@ -664,6 +726,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	const all = [...modeConds, ...conds];
 	const whereParams = all.flatMap((c) => c.params);
+	const whereSets = all.flatMap((c) => c.sets ?? []);
 	const whereSql = all.length ? 'WHERE ' + all.map((c) => c.sql).join(' AND ') : '';
 	const join = needsLangJoin ? 'JOIN languages lang ON lang.rowid = l.lang_rid' : '';
 
@@ -685,10 +748,20 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 		!needsLangJoin &&
 		conds.length === 0 &&
 		!(params.sort ?? '').trim();
+	// Fast path 3: a source's cited forms with no filters/sort → the reference's `lex` rowid list.
+	const isDefaultReference =
+		mode === 'reflexes' &&
+		!!refRids &&
+		!conceptId &&
+		!needsLangJoin &&
+		conds.length === 0 &&
+		!(params.sort ?? '').trim();
 
 	const hasFilters = conds.length > 0 || !!params.loanSourcesOnly || !!referenceId || !!conceptId;
 	let count: number;
-	if (!hasFilters && mode === 'entries') {
+	if (refRids && conds.length === 0 && !conceptId && mode === 'reflexes') {
+		count = refRids.length; // ref_lex.lex already applies the listing's redirect exclusion
+	} else if (!hasFilters && mode === 'entries') {
 		count = await metaCount('total_entries');
 	} else if (!hasFilters && mode === 'reflexes') {
 		count = await metaCount('total_lexicon');
@@ -702,7 +775,8 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	} else {
 		const countRow = await queryOne<{ c: number }>(
 			`SELECT COUNT(*) AS c FROM lem l ${join} ${whereSql}`,
-			whereParams
+			whereParams,
+			whereSets
 		);
 		count = countRow?.c ?? 0;
 	}
@@ -712,7 +786,9 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	const order = orderBy(params, fallbackOrder);
 
 	let rows: HLemma[];
-	if (isDefaultLexicon) {
+	if (isDefaultReference) {
+		rows = await lemmasByRids(refRids!.slice(offset, offset + PAGE_SIZE));
+	} else if (isDefaultLexicon) {
 		const lex = await queryOne<{ lex: Uint8Array | null }>(
 			'SELECT lex FROM languages WHERE id = ?',
 			[languageId]
@@ -730,7 +806,8 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 		// bounded set: fetch all matches, order + paginate here so concept_match can sort
 		const raw = await query<RawLem>(
 			`${LEM_SELECT} ${join} ${whereSql} ORDER BY ${order}`,
-			whereParams
+			whereParams,
+			whereSets
 		);
 		let full = raw.map(hydrate);
 		for (const r of full) {
@@ -744,7 +821,8 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	} else {
 		const raw = await query<RawLem>(
 			`${LEM_SELECT} ${join} ${whereSql} ORDER BY ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`,
-			whereParams
+			whereParams,
+			whereSets
 		);
 		rows = raw.map(hydrate);
 	}
@@ -1141,6 +1219,7 @@ export interface OriginSlice {
 	clade: string | null;
 	count: number;
 	color?: string; // explicit slice colour (used by the references donut; else clade-derived)
+	reference?: Reference; // when the slice *is* a source, so a legend can show its pill and card
 }
 
 /** Deterministic distinct colour for a reference slice (no clade to key off). */
@@ -1171,7 +1250,14 @@ export async function getReferenceDistribution(languageId: string): Promise<Orig
 		.map(([refRid, c]) => {
 			const ref = referencesByRid!.get(refRid);
 			const short = ref?.short || ref?.id || String(refRid);
-			return { lang: ref?.id ?? String(refRid), name: short, clade: null, count: c, color: refColor(short) };
+			return {
+				lang: ref?.id ?? String(refRid),
+				name: short,
+				clade: null,
+				count: c,
+				color: refColor(short),
+				reference: ref
+			};
 		})
 		.sort((a, b) => b.count - a.count);
 }
@@ -1215,19 +1301,21 @@ export async function getFilterReferences(): Promise<Reference[]> {
 	);
 }
 
-/** Distribution of every lemma cited by one reference over its attested languages. */
+/** Distribution of every lemma cited by one reference over its attested languages, read from the
+ *  reference's precomputed rollup (`ref_lex.langs`) rather than counted by scanning `lem`. */
 export async function getReferenceLanguageDistribution(referenceId: string): Promise<OriginSlice[]> {
 	await ensureCore();
-	const cids = await citeIdsWhere((r) => r.id === referenceId);
-	const rows = await query<{ lrid: number; c: number }>(
-		`SELECT l.lang_rid AS lrid, COUNT(*) AS c FROM lem l
-		 WHERE vin_any(l.cites, ?) = 1 GROUP BY l.lang_rid`,
-		[jsonList(cids)]
+	await ensureCites();
+	const rid = refRidOf(referenceId);
+	if (rid == null) return [];
+	const row = await queryOne<{ langs: Uint8Array | null }>(
+		'SELECT langs FROM ref_lex WHERE ref_rid = ?',
+		[rid]
 	);
-	return rows
-		.map((r) => {
-			const l = langByRid(r.lrid);
-			return { lang: l?.id ?? String(r.lrid), name: l?.name ?? String(r.lrid), clade: l?.clade ?? null, count: r.c };
+	return readVarintPairs(row?.langs)
+		.map(([lrid, count]) => {
+			const l = langByRid(lrid);
+			return { lang: l?.id ?? String(lrid), name: l?.name ?? String(lrid), clade: l?.clade ?? null, count };
 		})
 		.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
@@ -1653,6 +1741,39 @@ export async function getSegRows(proto: string, seg: string): Promise<CorrCtx[]>
 }
 
 /** Per-language context rows for one clade (loaded when a branch is expanded). */
+/**
+ * Every language's outcomes for one proto-segment, corpus-wide — the language-level view the
+ * branch expansion gives one clade at a time. The atlas needs all of them at once: a clade has no
+ * location of its own, so only languages can be put on a map.
+ */
+export async function getSegLangRows(proto: string, seg: string): Promise<LangCtx[]> {
+	const idx = await ensureCore();
+	const meta = await ensureAlignMeta();
+	const groups = await corrGroups(proto, seg);
+	const out: LangCtx[] = [];
+	for (const g of groups) {
+		const lang = langByRid(g.langRid);
+		if (!lang) continue;
+		for (const c of g.cells) {
+			const cell = meta.cells[c.cellId - 1];
+			const pair = meta.pair.get(cell.pairId)!;
+			const ctx = meta.context.get(cell.ctxId)!;
+			out.push({
+				lang: lang.id,
+				langName: lang.name,
+				clade: lang.clade ?? '',
+				prev: meta.symbol.get(ctx.p) ?? '',
+				next: meta.symbol.get(ctx.n) ?? '',
+				reflexSeg: meta.symbol.get(pair.r) ?? '',
+				change: meta.symbol.get(pair.c) ?? '',
+				n: c.n,
+				example: idx.idOf(c.exampleRid)
+			});
+		}
+	}
+	return out;
+}
+
 export async function getCladeLangRows(
 	proto: string,
 	seg: string,
@@ -1711,7 +1832,7 @@ async function corrLangTotal(q: CorrQuery): Promise<number> {
 }
 
 /** Every reflex exhibiting a given correspondence, for the drill-down page. Candidate cells are
- *  resolved in JS from the cell dictionary; matching forms come from a vin_any() scan of the
+ *  resolved in JS from the cell dictionary; matching forms come from a vin_in() scan of the
  *  per-form alignment blobs, then each matching position becomes one row. */
 export async function getCorrespondenceReflexes(
 	q: CorrQuery,
@@ -1738,8 +1859,9 @@ export async function getCorrespondenceReflexes(
 	}
 	if (!candidates.size) return { rows: [], total: 0, truncated: false };
 
-	const conds = ['vin_any(a.segs, ?) = 1', 'e.lang_rid = ?'];
-	const params: unknown[] = [jsonList([...candidates]), protoRid];
+	const cellSet = vinIn('a.segs', [...candidates]);
+	const conds = [cellSet.sql, 'e.lang_rid = ?'];
+	const params: unknown[] = [...cellSet.params, protoRid];
 	if (q.clade) {
 		conds.push('rl.clade = ?');
 		params.push(q.clade);
@@ -1773,7 +1895,8 @@ export async function getCorrespondenceReflexes(
 		 WHERE ${conds.join(' AND ')}
 		 ORDER BY rl."order", rl.id, rf.ord
 		 LIMIT ?`,
-		[...params, limit]
+		[...params, limit],
+		cellSet.sets
 	);
 	const rows: CorrReflex[] = [];
 	for (const f of forms) {
