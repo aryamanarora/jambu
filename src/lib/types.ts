@@ -153,6 +153,8 @@ export interface CrossFamilyComparison {
 export interface ListParams {
 	lang?: string;
 	word?: string;
+	form?: string; // column-level form/headword filter; `word` is the all-visible-columns search
+	relaxed?: boolean; // compatibility-fold Unicode and ignore diacritics in text searches
 	gloss?: string;
 	etymology?: string;
 	notes?: string;

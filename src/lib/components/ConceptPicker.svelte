@@ -281,4 +281,17 @@
 		font-size: 0.78rem;
 		text-align: center;
 	}
+
+	@media (max-width: 560px) {
+		.panel {
+			width: calc(100vw - 1rem);
+			max-height: calc(100dvh - 1rem);
+		}
+		.list {
+			max-height: calc(100dvh - 8rem);
+		}
+		.opt {
+			min-height: 2.75rem;
+		}
+	}
 </style>

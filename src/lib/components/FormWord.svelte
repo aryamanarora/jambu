@@ -1,19 +1,22 @@
 <script lang="ts">
-	import { safe } from '$lib/render';
+	import { highlightHtml, safe, type HighlightQuery } from '$lib/render';
 	import type { Reference } from '$lib/types';
 
 	let {
 		word,
 		references = [],
-		ocr = false
-	}: { word: string; references?: Reference[]; ocr?: boolean | number } = $props();
+		ocr = false,
+		highlight = '',
+		relaxed = false
+	}: { word: string; references?: Reference[]; ocr?: boolean | number; highlight?: HighlightQuery; relaxed?: boolean } = $props();
 
 	const parsedByOcr = $derived(Boolean(ocr) || references.some((reference) => Boolean(reference.ocr)));
+	const renderedWord = $derived(highlight ? highlightHtml(safe(word), highlight, relaxed) : safe(word));
 	const explanation =
 		'Parsed automatically with optical character recognition (OCR). The spelling may contain transcription errors; check the original source when accuracy matters.';
 </script>
 
-<span class:ocr-word={parsedByOcr}>{@html safe(word)}</span>{#if parsedByOcr}<span
+<span class="word-text" class:ocr-word={parsedByOcr}>{@html renderedWord}</span>{#if parsedByOcr}<span
 		class="ocr-badge"
 		role="img"
 		aria-label={explanation}

@@ -8,6 +8,8 @@ export function paramsFromUrl(sp: URLSearchParams): ListParams {
 	return {
 		lang: g('lang'),
 		word: g('word'),
+		form: g('form'),
+		relaxed: sp.get('relaxed') === '1',
 		gloss: g('gloss'),
 		etymology: g('etymology'),
 		notes: g('notes'),

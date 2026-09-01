@@ -3,7 +3,8 @@
 	import { createListState } from '$lib/listState.svelte';
 	import { getFilterDialects, getFilterLanguages } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
-	import { safe, md } from '$lib/render';
+	import { highlightHtml, highlightText, md, referenceLabel, safe } from '$lib/render';
+	import { tagLabel } from '$lib/tags';
 	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
 	import FilterField from './FilterField.svelte';
@@ -16,10 +17,11 @@
 	import RefList from './RefList.svelte';
 	import Pager from './Pager.svelte';
 	import { getConceptReflexes } from '$lib/query';
-	import type { Lemma } from '$lib/types';
+	import type { Lemma, Reference } from '$lib/types';
 	import FormWord from './FormWord.svelte';
 	import SourceFilter from './SourceFilter.svelte';
 	import Ancestry from './Ancestry.svelte';
+	import SearchMatchToggle from './SearchMatchToggle.svelte';
 
 	// `concept` restricts the list to entries expressing that Concepticon concept; `expandable`
 	// lets each entry row expand to an inline reflex view (used on the concepts page).
@@ -48,6 +50,8 @@
 	);
 	const activeFilterCount = $derived(
 		[
+			list.params.relaxed,
+			list.params.form,
 			list.params.origin_lang,
 			list.params.gloss,
 			list.params.etymology,
@@ -62,8 +66,22 @@
 	// variant word forms arrive \x1f-separated from group_concat (see query.ts)
 	const variantList = (s?: string | null): string[] => (s ? [...new Set(s.split(''))] : []);
 	const ocrVariants = (s?: string | null): Set<string> => new Set(variantList(s));
-
 	let langOptions = $state<SelectOption[]>([]);
+	const optionHighlight = (options: SelectOption[], value?: string) => {
+		const label = options.find((option) => option.value === value)?.label ?? '';
+		return label.split(': ').filter(Boolean);
+	};
+	const tagHighlights = $derived(
+		(list.params.tags ?? '').split(/\s+/).filter(Boolean).map(tagLabel)
+	);
+	const languageHighlights = $derived(optionHighlight(langOptions, list.params.origin_lang));
+	const sourceHighlights = (references: Reference[] = []) => {
+		const selected = references.find(
+			(reference) => reference.id === list.params.source || reference.short === list.params.source
+		);
+		return [list.params.word, selected ? referenceLabel(selected) : ''];
+	};
+
 	$effect(() => {
 		Promise.all([getFilterLanguages('entries'), getFilterDialects('entries')]).then(([ls, ds]) => {
 			const byId = new Map(ls.map((l) => [l.id, l]));
@@ -86,6 +104,17 @@
 </script>
 
 {#snippet filters()}
+	<SearchMatchToggle
+		relaxed={list.params.relaxed}
+		onToggle={(relaxed) => list.setFilter('relaxed', relaxed ? '1' : '')}
+	/>
+	<FilterField
+		label="Form"
+		placeholder="Filter forms…"
+		palette
+		value={list.params.form ?? ''}
+		onValue={(value) => list.setFilter('form', value)}
+	/>
 	<label class="filter-control">
 		<span>Language</span>
 		<SelectFilter
@@ -163,8 +192,8 @@
 <div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
 <ListToolbar
 	value={list.params.word ?? ''}
-	placeholder="Search headwords…"
-	searchLabel="Search headwords"
+	placeholder="Search all columns…"
+	searchLabel="Search all shown columns"
 	{resultLabel}
 	filterCount={activeFilterCount}
 	onSearch={(value) => list.setFilter('word', value)}
@@ -254,22 +283,22 @@
 								<span class="entry-word-line">
 									{#if expandable}<span class="chev row-caret" class:right={!expanded.has(e.id)} aria-hidden="true"></span>{/if}
 									{#if e.word?.trim()}
-										<a href="{base}/entries/{e.id}"><FormWord word={e.word} references={e.references} /></a>
-										<span class="id-tag">[{e.id}]</span>
+										<a href="{base}/entries/{e.id}"><FormWord word={e.word} references={e.references} highlight={[list.params.word, list.params.form]} relaxed={list.params.relaxed} /></a>
+										<span class="id-tag">[{@html highlightText(e.id, list.params.word, list.params.relaxed)}]</span>
 									{:else}
-										<a href="{base}/entries/{e.id}" class="id-link">[{e.id}]</a>
+										<a href="{base}/entries/{e.id}" class="id-link">[{@html highlightText(e.id, list.params.word, list.params.relaxed)}]</a>
 									{/if}
 											</span>
-								{#if e.variant_forms}{#each variantList(e.variant_forms) as vf (vf)}<span class="var-line"><span class="var-arrow">→</span>&nbsp;<span class="var-form"><FormWord word={vf} ocr={ocrVariants(e.ocr_variant_forms).has(vf)} /></span></span>{/each}{/if}
+								{#if e.variant_forms}{#each variantList(e.variant_forms) as vf (vf)}<span class="var-line"><span class="var-arrow">→</span>&nbsp;<span class="var-form"><FormWord word={vf} ocr={ocrVariants(e.ocr_variant_forms).has(vf)} highlight={[list.params.word, list.params.form]} relaxed={list.params.relaxed} /></span></span>{/each}{/if}
 						<CladeBars clades={e.clades} />
 							</div>
 						</td>
 						<td class="lang-plain" data-label="Language">
-							{e.language?.language}{#if e.language?.dialect}: <span class="font-thin"
-									>{e.language.dialect}</span
+							{@html highlightText(e.language?.language, [list.params.word, ...languageHighlights], list.params.relaxed)}{#if e.language?.dialect}: <span class="font-thin"
+									>{@html highlightText(e.language.dialect, [list.params.word, ...languageHighlights], list.params.relaxed)}</span
 								>{/if}
 						</td>
-						<td class="muted gloss-cell" data-label="Meaning">{@html safe(e.gloss) || '—'}</td>
+						<td class="muted gloss-cell" data-label="Meaning">{@html highlightHtml(safe(e.gloss), [list.params.word, list.params.gloss], list.params.relaxed) || '—'}</td>
 						{#if !expandable}
 							<td class="muted etym-cell" data-label="Etymology">
 								<div class="etym-stack">
@@ -279,6 +308,8 @@
 											chain={e.ancestry}
 											startLang={e.language?.name}
 											compact
+											highlight={[list.params.word, list.params.etymology]}
+											relaxed={list.params.relaxed}
 										/>
 									{/if}
 									{#if e.comparisons?.length}
@@ -287,9 +318,9 @@
 												<div class="cross-line" title={comparison.evidence}>
 													<span class="cross-relation">cf.</span>
 													<a class="cross-word" href="{base}/entries/{comparison.other_id}"
-														><FormWord word={comparison.other_word || comparison.other_id} /></a
-													>
-													<span class="id-tag">[{comparison.other_id}]</span>
+												><FormWord word={comparison.other_word || comparison.other_id} highlight={[list.params.word, list.params.etymology]} relaxed={list.params.relaxed} /></a
+											>
+											<span class="id-tag">[{@html highlightText(comparison.other_id, [list.params.word, list.params.etymology], list.params.relaxed)}]</span>
 												</div>
 											{/each}
 										</div>
@@ -297,14 +328,14 @@
 									{#if !e.ancestry?.length && !e.comparisons?.length}—{/if}
 								</div>
 							</td>
-							<td class="tag-cell" data-label="Tags"><Tags tags={e.tags} /></td>
+							<td class="tag-cell" data-label="Tags"><Tags tags={e.tags} highlight={[list.params.word, ...tagHighlights]} relaxed={list.params.relaxed} /></td>
 						{/if}
-						<td class="num" data-label="Languages">{e.lang_count?.toLocaleString() ?? ''}</td>
-						<td class="num" data-label="Forms">{(expandable ? e.concept_match : e.reflex_count)?.toLocaleString() ?? ''}</td>
+						<td class="num" data-label="Languages">{@html highlightText(e.lang_count?.toLocaleString() ?? '', list.params.word, list.params.relaxed)}</td>
+						<td class="num" data-label="Forms">{@html highlightText((expandable ? e.concept_match : e.reflex_count)?.toLocaleString() ?? '', list.params.word, list.params.relaxed)}</td>
 						{#if !expandable}
-							<td class="num" data-label="Derived">{e.derived_count?.toLocaleString() ?? ''}</td>
+							<td class="num" data-label="Derived">{@html highlightText(e.derived_count?.toLocaleString() ?? '', list.params.word, list.params.relaxed)}</td>
 						{/if}
-						<td data-label="Source"><RefList references={e.references} /></td>
+						<td data-label="Source"><RefList references={e.references} highlight={sourceHighlights(e.references)} relaxed={list.params.relaxed} /></td>
 					</tr>
 					{#if expandable && expanded.has(e.id)}
 						<tr class="reflex-detail">

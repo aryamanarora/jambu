@@ -1,25 +1,41 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { etymonSlotColor } from '$lib/etyma';
+	import { highlightText } from '$lib/render';
+	import { unicodeSearchIncludes } from '$lib/unicodeSearch';
 	import type { ConceptBarGroup, ConceptRow } from '$lib/types';
 	import ListToolbar from '$lib/components/ListToolbar.svelte';
+	import SearchMatchToggle from '$lib/components/SearchMatchToggle.svelte';
 
 	let { data } = $props();
 	const concepts = data.concepts as ConceptRow[];
 
 	let search = $state('');
+	let relaxed = $state(false);
 	let category = $state('all');
 	let sort = $state('etyma');
 	let splitByReflexFamily = $state(false);
 
 	const categories = $derived(['all', ...new Set(concepts.map((c) => c.category).filter(Boolean))]);
+	const numericSearch = (value: number, query: string) =>
+		[value.toString(), value.toLocaleString()].some((text) => text.toLocaleLowerCase().includes(query));
+	const numericHighlight = (value: number) => {
+		const formatted = value.toLocaleString();
+		const query = search.trim();
+		return formatted.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+			? query
+			: (query && value.toString().includes(query.replaceAll(',', '')) ? formatted : '');
+	};
 
 	const filtered = $derived.by(() => {
-		const q = search.trim().toLowerCase();
+		const q = search.trim();
 		let rows = concepts.filter(
 			(c) =>
 				(category === 'all' || c.category === category) &&
-				(!q || c.name.toLowerCase().includes(q))
+				(!q ||
+					[c.name, c.category].some((value) => unicodeSearchIncludes(value, q, relaxed)) ||
+					numericSearch(c.etyma_count, q) ||
+					numericSearch(c.lang_count, q))
 		);
 		const key = sort as keyof ConceptRow;
 		rows = [...rows].sort((a, b) =>
@@ -52,6 +68,7 @@
 </p>
 
 {#snippet filters()}
+	<SearchMatchToggle {relaxed} onToggle={(value) => (relaxed = value)} />
 	<label class="filter-control">
 		<span>Category</span>
 		<select bind:value={category}>
@@ -77,10 +94,10 @@
 
 <ListToolbar
 	value={search}
-	placeholder="Search concepts…"
-	searchLabel="Search concepts"
+	placeholder="Search all columns…"
+	searchLabel="Search all shown columns"
 	resultLabel={`${filtered.length.toLocaleString()} concepts`}
-	filterCount={(category !== 'all' ? 1 : 0) + (splitByReflexFamily ? 1 : 0)}
+	filterCount={(category !== 'all' ? 1 : 0) + (splitByReflexFamily ? 1 : 0) + (relaxed ? 1 : 0)}
 	onSearch={(value) => (search = value)}
 	{filters}
 />
@@ -106,10 +123,10 @@
 		<tbody>
 			{#each filtered as c (c.id)}
 				<tr>
-					<td class="name-cell"><a href="{base}/concepts/{c.id}">{c.name}</a></td>
-					<td class="muted" data-label="Category">{c.category}</td>
-					<td class="numeric" data-label="Etyma">{c.etyma_count.toLocaleString()}</td>
-					<td class="numeric" data-label="Languages">{c.lang_count.toLocaleString()}</td>
+					<td class="name-cell"><a href="{base}/concepts/{c.id}">{@html highlightText(c.name, search, relaxed)}</a></td>
+					<td class="muted" data-label="Category">{@html highlightText(c.category, [search, category !== 'all' ? category : ''], relaxed)}</td>
+					<td class="numeric" data-label="Etyma">{@html highlightText(c.etyma_count.toLocaleString(), numericHighlight(c.etyma_count))}</td>
+					<td class="numeric" data-label="Languages">{@html highlightText(c.lang_count.toLocaleString(), numericHighlight(c.lang_count))}</td>
 					<td class="dist-col" data-label="Distribution">
 						{#if splitByReflexFamily && c.reflex_family_bars}
 							<div class="family-bars">

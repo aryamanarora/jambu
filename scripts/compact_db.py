@@ -43,7 +43,8 @@ v2 schema (mirrored by src/lib/dbShared.ts — the two codecs MUST stay in sync)
 
 lem.flags bit layout: bits 0-2 rank-1 edge kind (0 none, 1 reflex, 2 variant, 3 borrowed,
 4 unlinked); bit 3 cites an OCR source; bit 4 CDIAL section-form id; bit 5 loan source (has a
-borrowed child); bit 6 has rank>=2 alternate-etymology edges.
+borrowed child); bit 6 has rank>=2 alternate-etymology edges; bit 7 is a listed dictionary
+headword. Headword status is independent of the accepted graph parent.
 
 v3 (edge model): origin_rid is the rank-1 edge target (a variant's actual target, not its
 etymon); etymon_rid materialises the attestation-tree root; link_rid carries ONLY redirects;
@@ -67,6 +68,7 @@ FLAG_OCR = 8
 FLAG_SECTION = 16
 FLAG_LOAN_SOURCE = 32
 FLAG_HAS_ALT = 64
+FLAG_ENTRY = 128
 
 _NUM = re.compile(r"0|[1-9]\d*")
 
@@ -304,6 +306,14 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
             flags |= FLAG_LOAN_SOURCE
         if id_ in has_alt_ids:
             flags |= FLAG_HAS_ALT
+        # Most listed entries are graph roots. A CDIAL article remains an independently
+        # addressable dictionary headword when a curated comparison gives it an accepted
+        # Proto-Indo-Iranian or Proto-Dravidian parent. CDIAL's article nodes use the dedicated
+        # Indo-Aryan source language and retain their full article HTML; numbered section forms
+        # have no article HTML and remain available through the separate Section-forms mode.
+        is_cdial_article = language_id == "Indo-Aryan" and bool(etymology)
+        if (not origin_id and relation != "unlinked") or is_cdial_article:
+            flags |= FLAG_ENTRY
         mask = 0
         if clades:
             for c in clades.split(","):
@@ -635,7 +645,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         con.execute("DROP TABLE clades")
         log(f"packed corr_lang into {len(cl_rows)} groups; dropped corr/clades rollups")
 
-    # 12. retire the v1 tables and build the one remaining index.
+    # 12. retire the v1 tables and build the one remaining index. Entry membership has its own
+    # flag because accepted ancestry no longer implies that a source headword stops being listed.
     con.executescript(
         """
         DROP TABLE lemmas;
@@ -643,7 +654,10 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         DROP TABLE lemma_text;
         DROP TABLE lemma_aliases;
         DROP TABLE lemma_concept;
-        CREATE INDEX idx_entries_ord ON lem(ord) WHERE origin_rid IS NULL AND (flags & 7) != 4;
+        CREATE INDEX idx_entries_ord ON lem(ord) WHERE (flags & 128) != 0;
+        UPDATE meta SET value = (
+            SELECT COUNT(*) FROM lem WHERE (flags & 128) != 0 AND link_rid IS NULL
+        ) WHERE key = 'total_entries';
         """
     )
     con.commit()

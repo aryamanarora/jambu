@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { Reference } from '$lib/types';
+	import type { HighlightQuery } from '$lib/render';
 	import ReferenceLink from './ReferenceLink.svelte';
 
-	let { references = [] }: { references?: Reference[] } = $props();
+	let { references = [], highlight, relaxed = false }: { references?: Reference[]; highlight?: HighlightQuery; relaxed?: boolean } = $props();
 	// attachReferences already combines repeated locators for one source; retain a defensive dedupe.
 	const refs = $derived([...new Map(references.map((r) => [r.id, r])).values()]);
 </script>
 
 {#if refs.length}
-	<span class="references">{#each refs as reference (reference.id)}<ReferenceLink {reference} />{/each}</span>
+	<span class="references">{#each refs as reference (reference.id)}<ReferenceLink {reference} {highlight} {relaxed} />{/each}</span>
 {:else}<span class="faint">—</span>{/if}
 
 <style>

@@ -1,19 +1,37 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { md } from '$lib/render';
+	import { highlightHtml, highlightText, md } from '$lib/render';
+	import { unicodeSearchIncludes } from '$lib/unicodeSearch';
 	import FilterCell from '$lib/components/FilterCell.svelte';
 	import ListToolbar from '$lib/components/ListToolbar.svelte';
+	import SearchMatchToggle from '$lib/components/SearchMatchToggle.svelte';
 	import type { Reference } from '$lib/types';
 
 	let { data } = $props();
 	let search = $state('');
+	let relaxed = $state(false);
 	let activeSort = $state('desc-forms');
+	const extractionLabel = (reference: Reference) => reference.ocr ? 'OCR' : '—';
+	const numericHighlight = (value: string) => {
+		const query = search.trim();
+		return value.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+			? query
+			: (query && value.replaceAll(',', '').includes(query.replaceAll(',', '')) ? value : '');
+	};
 	const sortedReferences = $derived.by(() => {
-		const needle = search.trim().toLocaleLowerCase();
+		const needle = search.trim();
 		const rows = ([...data.references] as Reference[]).filter((reference) =>
-			!needle || [reference.id, reference.short, reference.source, reference.editor].some((field) =>
-				(field ?? '').toLocaleLowerCase().includes(needle)
-			)
+			!needle || [
+				reference.id,
+				reference.short,
+				reference.source,
+				reference.editor,
+				extractionLabel(reference),
+				etymologyLabel(reference.etymology_provenance),
+				(reference.lemma_count ?? 0).toLocaleString(),
+				(reference.lemma_count ?? 0).toString(),
+				unetymologisedPct(reference.lemma_count ?? 0, reference.unetymologised_count ?? 0)
+			].some((field) => unicodeSearchIncludes(field ?? '', needle, relaxed))
 		);
 		if (!activeSort) return rows;
 		const [direction, key] = activeSort.split('-');
@@ -68,12 +86,18 @@
 <h1>Sources</h1>
 <p class="muted">Sources digitised for Jambu. The coloured bar shows digitisation progress.</p>
 
+{#snippet filters()}
+	<SearchMatchToggle {relaxed} onToggle={(value) => (relaxed = value)} />
+{/snippet}
+
 <ListToolbar
 	value={search}
-	placeholder="Search sources, citations, or editors…"
-	searchLabel="Search sources"
+	placeholder="Search all columns…"
+	searchLabel="Search all shown columns"
 	resultLabel={`${sortedReferences.length.toLocaleString()} sources`}
+	filterCount={relaxed ? 1 : 0}
 	onSearch={(value) => (search = value)}
+	{filters}
 />
 
 <div class="table-wrap">
@@ -103,16 +127,16 @@
 				{@const b = badge(r.progress)}
 				<tr>
 					<td class="lang-cell ref-cell" style="border-left-color: {borderColor[b]}">
-						<a href="{base}/references/{r.id}">{r.short || r.id}</a>
-						<span class="id-tag">[{r.id}]</span>
+						<a href="{base}/references/{r.id}">{@html highlightText(r.short || r.id, search, relaxed)}</a>
+						<span class="id-tag">[{@html highlightText(r.id, search, relaxed)}]</span>
 					</td>
-					<td class="markdown" data-label="Citation">{@html md(r.source)}</td>
-					<td data-label="Editor">{r.editor || '—'}</td>
-					<td data-label="Extraction">{#if r.ocr}<span class="ocr-ref" title="Forms from this reference were parsed with optical character recognition">OCR</span>{:else}<span class="faint">—</span>{/if}</td>
-					<td data-label="Etymology">{etymologyLabel(r.etymology_provenance)}</td>
-					<td class="pct" data-label="Forms">{(r.lemma_count ?? 0).toLocaleString()}</td>
+					<td class="markdown" data-label="Citation">{@html highlightHtml(md(r.source), search, relaxed)}</td>
+					<td data-label="Editor">{@html highlightText(r.editor || '—', search, relaxed)}</td>
+					<td data-label="Extraction">{#if r.ocr}<span class="ocr-ref" title="Forms from this reference were parsed with optical character recognition">{@html highlightText('OCR', search, relaxed)}</span>{:else}<span class="faint">{@html highlightText('—', search, relaxed)}</span>{/if}</td>
+					<td data-label="Etymology">{@html highlightText(etymologyLabel(r.etymology_provenance), search, relaxed)}</td>
+					<td class="pct" data-label="Forms">{@html highlightText((r.lemma_count ?? 0).toLocaleString(), numericHighlight((r.lemma_count ?? 0).toLocaleString()))}</td>
 					<td class="pct" data-label="Unetymologised" title="{(r.unetymologised_count ?? 0).toLocaleString()} of {(r.lemma_count ?? 0).toLocaleString()} forms">
-						{unetymologisedPct(r.lemma_count ?? 0, r.unetymologised_count ?? 0)}
+						{@html highlightText(unetymologisedPct(r.lemma_count ?? 0, r.unetymologised_count ?? 0), search, relaxed)}
 					</td>
 				</tr>
 			{/each}

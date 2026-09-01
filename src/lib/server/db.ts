@@ -17,6 +17,7 @@ import { statSync } from 'node:fs';
 import { dev } from '$app/environment';
 import { cladeFamily } from '$lib/cladeTree';
 import { bestEtymologyGuess } from '$lib/etymologyGuess';
+import { unicodeSearchFold } from '$lib/unicodeSearch';
 import {
 	IdIndex,
 	hydrateLem,
@@ -28,6 +29,7 @@ import {
 	aliasLookup,
 	makeVinAny,
 	FLAG_OCR,
+	FLAG_ENTRY,
 	REL_UNLINKED,
 	REL_VARIANT,
 	type RawLem,
@@ -90,6 +92,9 @@ export function getDb(): Database.Database {
 		const vinAny = makeVinAny();
 		db.function('vin_any', { deterministic: true }, (blob: unknown, json: unknown) =>
 			vinAny(blob ? new Uint8Array(blob as Buffer) : null, String(json))
+		);
+		db.function('unicode_fold', { deterministic: true }, (value: unknown) =>
+			unicodeSearchFold(String(value ?? ''))
 		);
 	}
 	return db;
@@ -154,7 +159,7 @@ function limit<T>(rows: T[]): T[] {
 export function allEntryIds(): { entry: string }[] {
 	const idx = ids();
 	const rows = getDb()
-		.prepare('SELECT rowid AS rid FROM lem WHERE origin_rid IS NULL ORDER BY ord')
+		.prepare(`SELECT rowid AS rid FROM lem WHERE (flags & ${FLAG_ENTRY}) != 0 AND link_rid IS NULL ORDER BY ord`)
 		.all() as { rid: number }[];
 	return limit(rows.map((r) => ({ entry: idx.idOf(r.rid) })));
 }

@@ -844,5 +844,17 @@
 		content: '\2019';
 	}
 
-	/* ---- narrow screens: the panel stops floating and the page scrolls again -- */
+	@media (max-width: 560px) {
+		.cbar {
+			height: 2rem;
+		}
+		.guess-toggle {
+			min-height: 2.75rem;
+		}
+		.reflexes li {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 0.15rem;
+			padding-block: 0.45rem;
+		}
+	}
 </style>

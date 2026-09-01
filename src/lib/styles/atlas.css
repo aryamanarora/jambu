@@ -307,22 +307,92 @@
 @media (max-width: 860px) {
 	.atlas {
 		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+			'scope'
+			'map'
+			'list';
+		align-content: start;
 		gap: 0.7rem;
 		padding: 0.7rem;
+		width: 100%;
 	}
 	.atlas .atlas-map {
+		grid-area: map;
 		position: relative;
 		inset: auto;
-		height: 45vh;
+		height: clamp(17rem, 45svh, 28rem);
+		min-width: 0;
 		border-radius: 0.9rem;
 		overflow: hidden;
 	}
-	.atlas .atlas-panel {
+	/* Include the side classes here: their desktop width/inset rules have higher specificity than
+	   `.atlas-panel` alone and otherwise squeeze each phone panel down to ~30vw. */
+	.atlas .atlas-panel.left,
+	.atlas .atlas-panel.right {
 		position: relative;
 		inset: auto;
-		width: auto;
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+	}
+	.atlas .atlas-panel.left {
+		grid-area: scope;
+	}
+	.atlas .atlas-panel.right {
+		grid-area: list;
+	}
+	.atlas .atlas-panel.right:not(.collapsed) {
+		max-height: min(42rem, 72svh);
 	}
 	.atlas .list {
+		min-height: 0;
 		max-height: none;
+		overscroll-behavior: contain;
+	}
+	.atlas .panel-head,
+	.atlas .crumb-head {
+		min-height: 3rem;
+	}
+	.atlas .panel-toggle {
+		width: 2.75rem;
+		height: 2.75rem;
+	}
+	.atlas .controls {
+		flex-wrap: wrap;
+	}
+	.atlas .search {
+		min-height: 2.75rem;
+		font-size: 1rem;
+	}
+	.atlas .clear {
+		min-height: 2.25rem;
+		padding-inline: 0.75rem;
+	}
+	.atlas .pick {
+		min-height: 3rem;
+		padding-block: 0.45rem;
+	}
+	.atlas .disclose {
+		width: 2.75rem;
+		min-height: 2.75rem;
+	}
+	.atlas .detail-head {
+		flex-wrap: wrap;
+	}
+}
+
+@media (max-width: 480px) {
+	.atlas {
+		gap: 0.5rem;
+		padding: 0.5rem;
+	}
+	.atlas .atlas-panel,
+	.atlas .atlas-map {
+		border-radius: 0.75rem;
+	}
+	.atlas .stats {
+		justify-content: space-between;
+		gap: 0.5rem;
 	}
 }

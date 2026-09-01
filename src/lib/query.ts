@@ -17,6 +17,9 @@
  */
 import { query, queryOne, type QuerySets } from './db.svelte';
 import { CLADE_ORDER } from './clades';
+import { referenceLabel } from './render';
+import { tagLabel } from './tags';
+import { unicodeSearchFold, unicodeSearchIncludes } from './unicodeSearch';
 import {
 	IdIndex,
 	hydrateLem,
@@ -33,6 +36,7 @@ import {
 	FLAG_SECTION,
 	FLAG_LOAN_SOURCE,
 	FLAG_HAS_ALT,
+	FLAG_ENTRY,
 	REL_REFLEX,
 	REL_VARIANT,
 	REL_BORROWED,
@@ -99,6 +103,12 @@ let nextSetId = 1;
 function vinIn(col: string, members: number[]): { sql: string; params: unknown[]; sets: QuerySets } {
 	const setId = nextSetId++;
 	return { sql: `vin_in(${col}, ?) = 1`, params: [setId], sets: [[setId, members]] };
+}
+
+/** Membership test for compact sorted delta-encoded rowid lists such as concepts.rids. */
+function vdeltaIn(col: string, members: number[]): { sql: string; params: unknown[]; sets: QuerySets } {
+	const setId = nextSetId++;
+	return { sql: `vdelta_in(${col}, ?) = 1`, params: [setId], sets: [[setId, members]] };
 }
 
 /** v3: link_rid carries only redirects, so this is a plain null check. */
@@ -435,32 +445,246 @@ function tagCond(token: string): Cond {
 	};
 }
 
-async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLangJoin: boolean }> {
+let tagsetsCache: Array<{ rid: number; txt: string }> | null = null;
+async function matchingTagsetRids(needle: string, relaxed: boolean): Promise<number[]> {
+	if (!tagsetsCache)
+		tagsetsCache = await query<{ rid: number; txt: string }>('SELECT rowid AS rid, txt FROM tagsets');
+	return tagsetsCache
+		.filter(({ txt }) =>
+			txt.split(/\s+/).some((tag) =>
+				[tag, tagLabel(tag)].some((value) => unicodeSearchIncludes(value, needle, relaxed))
+			)
+		)
+		.map(({ rid }) => rid);
+}
+
+const searchNeedle = (value: string, relaxed: boolean) =>
+	relaxed ? unicodeSearchFold(value) : value.toLocaleLowerCase();
+const searchExpression = (expression: string, relaxed: boolean) =>
+	relaxed
+		? `unicode_fold(COALESCE(${expression}, ''))`
+		: `lower(COALESCE(${expression}, ''))`;
+const containsExpression = (expression: string, relaxed: boolean) =>
+	`instr(${searchExpression(expression, relaxed)}, ?) > 0`;
+
+/** The toolbar search is deliberately broader than the Word column filter: it follows the
+ * visible columns of each table. Derived display fields use uncorrelated subqueries so SQLite
+ * scans their compact tables once instead of repeating a scan for every lemma row. */
+async function globalLemmaCond(queryText: string, mode: ListOpts['mode'], relaxed: boolean): Promise<Cond> {
+	const needle = searchNeedle(queryText, relaxed);
+	const parts: string[] = [];
+	const params: unknown[] = [];
+	const sets: QuerySets = [];
+	const contains = (expression: string) => {
+		parts.push(containsExpression(expression, relaxed));
+		params.push(needle);
+	};
+
+	contains('l.word');
+	contains('l.gloss');
+	if (mode !== 'entries') {
+		contains('l.phonemic');
+		contains('l.notes');
+	}
+
+	// The own-language column is hidden in a per-language lexicon.
+	if (mode !== 'lexicon') {
+		for (const col of ['id', 'name', 'language', 'dialect', 'clade']) contains(`lang.${col}`);
+	}
+
+	const exactRid = ids?.ridOf(queryText) ?? ids?.ridOf(needle);
+	if (exactRid) {
+		parts.push('l.rowid = ?');
+		params.push(exactRid);
+	}
+
+	const tagsetRids = await matchingTagsetRids(queryText, relaxed);
+	if (tagsetRids.length) {
+		parts.push(`l.tagset_rid IN ${IN_JSON}`);
+		params.push(jsonList(tagsetRids));
+	}
+
+	const citeIds = await citeIdsWhere((reference) =>
+		unicodeSearchIncludes(referenceLabel(reference), queryText, relaxed)
+	);
+	if (citeIds.length) {
+		const source = vinIn('l.cites', citeIds);
+		parts.push(source.sql);
+		params.push(...source.params);
+		sets.push(...source.sets);
+	}
+
+	if (mode !== 'entries') {
+		const originParts = [
+			'o.word',
+			'ol.id',
+			'ol.name',
+			'ol.language',
+			'ol.dialect',
+			'ol.clade'
+		].map((col) => containsExpression(col, relaxed));
+		parts.push(`EXISTS (
+			SELECT 1 FROM lem o LEFT JOIN languages ol ON ol.rowid = o.lang_rid
+			WHERE o.rowid = l.origin_rid AND (${originParts.join(' OR ')})
+		)`);
+		params.push(...originParts.map(() => needle));
+		if (exactRid) {
+			parts.push('l.origin_rid = ?');
+			params.push(exactRid);
+		}
+	} else {
+		// Variant forms, ancestry, and comparison words are rendered into the Etymology/Entry cells.
+		parts.push(`l.rowid IN (
+			SELECT origin_rid FROM lem v
+			WHERE origin_rid IS NOT NULL AND (v.flags & 7) = ${REL_VARIANT}
+			  AND ${containsExpression('v.word', relaxed)}
+		)`);
+		params.push(needle);
+		parts.push(`EXISTS (
+			SELECT 1 FROM lem p LEFT JOIN languages pl ON pl.rowid = p.lang_rid
+			WHERE p.rowid = l.origin_rid AND (
+				${containsExpression('p.word', relaxed)} OR
+				${containsExpression('pl.name', relaxed)} OR
+				${containsExpression('pl.language', relaxed)} OR
+				${containsExpression('pl.dialect', relaxed)}${exactRid ? ' OR p.rowid = ?' : ''}
+			)
+		)`);
+		params.push(needle, needle, needle, needle);
+		if (exactRid) params.push(exactRid);
+		parts.push(`l.rowid IN (
+			SELECT d.child_rid FROM edges d JOIN lem p ON p.rowid = d.parent_rid
+			LEFT JOIN languages pl ON pl.rowid = p.lang_rid
+			WHERE d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1 AND (
+				${containsExpression('p.word', relaxed)} OR
+				${containsExpression('pl.name', relaxed)} OR
+				${containsExpression('pl.language', relaxed)} OR
+				${containsExpression('pl.dialect', relaxed)}${exactRid ? ' OR p.rowid = ?' : ''}
+			)
+		)`);
+		params.push(needle, needle, needle, needle);
+		if (exactRid) params.push(exactRid);
+		parts.push(`l.rowid IN (
+			SELECT c.entry_rid FROM comparisons c JOIN lem other ON other.rowid = c.compared_rid
+			 WHERE ${containsExpression('other.word', relaxed)}${exactRid ? ' OR other.rowid = ?' : ''}
+			UNION
+			SELECT c.compared_rid FROM comparisons c JOIN lem other ON other.rowid = c.entry_rid
+			 WHERE ${containsExpression('other.word', relaxed)}${exactRid ? ' OR other.rowid = ?' : ''}
+		)`);
+		params.push(needle);
+		if (exactRid) params.push(exactRid);
+		params.push(needle);
+		if (exactRid) params.push(exactRid);
+	}
+
+	// Count columns are textual table values from a user's point of view. Ignore punctuation in
+	// the search term so both "1200" and the rendered "1,200" find the same rows.
+	const numericNeedle = needle.replaceAll(',', '');
+	if (/^\d+$/.test(numericNeedle)) {
+		if (mode === 'entries') {
+			parts.push(`instr(CAST((l.counts % 1024) AS TEXT), ?) > 0`);
+			params.push(numericNeedle);
+			parts.push(`instr(CAST((l.counts / 1024) AS TEXT), ?) > 0`);
+			params.push(numericNeedle);
+			parts.push(`l.rowid IN (
+				SELECT d.parent_rid FROM edges d JOIN lem child ON child.rowid = d.child_rid
+				WHERE d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+				  AND child.origin_rid IS NULL
+				GROUP BY d.parent_rid HAVING instr(CAST(COUNT(*) AS TEXT), ?) > 0
+			)`);
+			params.push(numericNeedle);
+		}
+	}
+
+	return { sql: `(${parts.join(' OR ')})`, params, sets };
+}
+
+async function lemmaConditions(p: ListParams, mode: ListOpts['mode']): Promise<{ conds: Cond[]; needsLangJoin: boolean }> {
 	const conds: Cond[] = [];
 	let needsLangJoin = false;
 
-	// Case-insensitive substring terms over the base text columns.
+	const global = (p.word ?? '').trim();
+	if (global.length >= MIN_SEARCH_CHARS) {
+		conds.push(await globalLemmaCond(global, mode, !!p.relaxed));
+		needsLangJoin = mode !== 'lexicon';
+	}
+
+	// Unlike the toolbar's broad `word` search, this filter is scoped to the row's own form.
+	const form = (p.form ?? '').trim();
+	if (form.length >= MIN_SEARCH_CHARS) {
+		conds.push({
+			sql: containsExpression('l.word', !!p.relaxed),
+			params: [searchNeedle(form, !!p.relaxed)]
+		});
+	}
+
+	// Case-insensitive column-level substring terms over the base text columns.
 	for (const [key, col] of [
-		['word', 'word'],
 		['gloss', 'gloss'],
-		['etymology', 'etymology'],
 		['notes', 'notes']
 	] as const) {
 		const v = (p[key] ?? '').trim();
 		if (v.length >= MIN_SEARCH_CHARS) {
 			conds.push({
-				sql: `instr(lower(COALESCE(l.${col}, '')), ?) > 0`,
-				params: [v.toLocaleLowerCase()]
+				sql: containsExpression(`l.${col}`, !!p.relaxed),
+				params: [searchNeedle(v, !!p.relaxed)]
 			});
 		}
 	}
+	if (mode === 'entries' && (p.etymology ?? '').trim().length >= MIN_SEARCH_CHARS) {
+		const needle = searchNeedle(p.etymology!.trim(), !!p.relaxed);
+		const exactRid = ids?.ridOf(p.etymology!.trim()) ?? ids?.ridOf(needle);
+		const exactOrigin = exactRid ? ' OR p.rowid = ?' : '';
+		const params: unknown[] = [needle, needle, needle, needle];
+		if (exactRid) params.push(exactRid);
+		params.push(needle, needle, needle, needle);
+		if (exactRid) params.push(exactRid);
+		params.push(needle);
+		if (exactRid) params.push(exactRid);
+		params.push(needle);
+		if (exactRid) params.push(exactRid);
+		conds.push({
+			sql: `(
+				EXISTS (
+					SELECT 1 FROM lem p LEFT JOIN languages pl ON pl.rowid = p.lang_rid
+					WHERE p.rowid = l.origin_rid AND (
+						${containsExpression('p.word', !!p.relaxed)} OR
+						${containsExpression('pl.name', !!p.relaxed)} OR
+						${containsExpression('pl.language', !!p.relaxed)} OR
+						${containsExpression('pl.dialect', !!p.relaxed)}${exactOrigin}
+					)
+				) OR l.rowid IN (
+					SELECT d.child_rid FROM edges d JOIN lem p ON p.rowid = d.parent_rid
+					LEFT JOIN languages pl ON pl.rowid = p.lang_rid
+					WHERE d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1 AND (
+						${containsExpression('p.word', !!p.relaxed)} OR
+						${containsExpression('pl.name', !!p.relaxed)} OR
+						${containsExpression('pl.language', !!p.relaxed)} OR
+						${containsExpression('pl.dialect', !!p.relaxed)}${exactOrigin}
+					)
+				) OR l.rowid IN (
+					SELECT c.entry_rid FROM comparisons c JOIN lem other ON other.rowid = c.compared_rid
+					 WHERE ${containsExpression('other.word', !!p.relaxed)}${exactRid ? ' OR other.rowid = ?' : ''}
+					UNION
+					SELECT c.compared_rid FROM comparisons c JOIN lem other ON other.rowid = c.entry_rid
+					 WHERE ${containsExpression('other.word', !!p.relaxed)}${exactRid ? ' OR other.rowid = ?' : ''}
+				)
+			)`,
+			params
+		});
+	}
 
 	if (p.lang?.trim()) {
-		conds.push({ sql: 'lang.name LIKE ?', params: [`%${p.lang.trim()}%`] });
+		conds.push({
+			sql: containsExpression('lang.name', !!p.relaxed),
+			params: [searchNeedle(p.lang.trim(), !!p.relaxed)]
+		});
 		needsLangJoin = true;
 	}
 	if (p.clade?.trim()) {
-		conds.push({ sql: 'lang.clade LIKE ?', params: [`%${p.clade.trim()}%`] });
+		conds.push({
+			sql: containsExpression('lang.clade', !!p.relaxed),
+			params: [searchNeedle(p.clade.trim(), !!p.relaxed)]
+		});
 		needsLangJoin = true;
 	}
 	if (p.origin_lang?.trim()) {
@@ -498,15 +722,15 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 	}
 	if ((p.origin ?? '').trim().length >= MIN_SEARCH_CHARS) {
 		conds.push({
-			sql: `l.origin_rid IN (SELECT rowid FROM lem WHERE instr(lower(COALESCE(word, '')), ?) > 0)`,
-			params: [p.origin!.trim().toLocaleLowerCase()]
+			sql: `l.origin_rid IN (SELECT rowid FROM lem WHERE ${containsExpression('word', !!p.relaxed)})`,
+			params: [searchNeedle(p.origin!.trim(), !!p.relaxed)]
 		});
 	}
 	if (p.source?.trim()) {
-		const needle = p.source.trim().toLowerCase();
+		const needle = p.source.trim();
 		const cids = await citeIdsWhere((r) =>
 			[r.id, r.short, r.source, r.editor].some((field) =>
-				(field ?? '').toLowerCase().includes(needle)
+				unicodeSearchIncludes(field ?? '', needle, !!p.relaxed)
 			)
 		);
 		conds.push(vinIn('l.cites', cids));
@@ -524,7 +748,7 @@ async function lemmaConditions(p: ListParams): Promise<{ conds: Cond[]; needsLan
 	// root nodes only: entries not derived from any other etymon (no incoming derivation edge)
 	if (p.rootsOnly) {
 		conds.push({
-			sql: `NOT EXISTS (SELECT 1 FROM edges WHERE child_rid = l.rowid AND kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND rank = 1)`,
+			sql: `l.origin_rid IS NULL AND NOT EXISTS (SELECT 1 FROM edges WHERE child_rid = l.rowid AND kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND rank = 1)`,
 			params: []
 		});
 	}
@@ -669,19 +893,22 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	const { mode, languageId, referenceId, conceptId, params } = opts;
 	await ensureCore();
 	const page = Math.max(1, params.page ?? 1);
-	const { conds, needsLangJoin } = await lemmaConditions(params);
+	const { conds, needsLangJoin } = await lemmaConditions(params, mode);
 
 	// base mode condition (see the v1 layer for semantics; redirect stubs are never listed)
 	const modeConds: Cond[] = [{ sql: NOT_REDIRECT, params: [] }];
 	if (mode === 'entries') {
 		if (params.loanSourcesOnly)
 			modeConds.push({ sql: `(l.flags & ${FLAG_LOAN_SOURCE}) != 0`, params: [] });
+		else if (params.sectionsOnly)
+			// Numbered CDIAL sub-entries are dictionary sections even though they are graph children.
+			modeConds.push({ sql: `(l.flags & ${FLAG_SECTION}) != 0`, params: [] });
 		else if (conceptId)
 			// A concept's immediate etymon can itself be a reflex/derived node. The concept
 			// match below supplies the exact head set, so do not apply the global root-only
 			// entries restriction here (users can still request it with the Roots filter).
 			modeConds.push({ sql: `(l.flags & 7) != ${REL_UNLINKED}`, params: [] });
-		else modeConds.push({ sql: `l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED}`, params: [] });
+		else modeConds.push({ sql: `(l.flags & ${FLAG_ENTRY}) != 0`, params: [] });
 	}
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(languageId) ?? -1] });
@@ -798,7 +1025,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	} else if (isDefaultEntries) {
 		const raw = await query<RawLem>(
 			`SELECT ${LEM_COLS} FROM lem l INDEXED BY idx_entries_ord ${LEM_JOINS}
-			 WHERE l.origin_rid IS NULL AND (l.flags & 7) != ${REL_UNLINKED} AND l.link_rid IS NULL
+			 WHERE (l.flags & ${FLAG_ENTRY}) != 0 AND l.link_rid IS NULL
 			 ORDER BY l.ord LIMIT ${PAGE_SIZE} OFFSET ${offset}`
 		);
 		rows = raw.map(hydrate);
@@ -1437,10 +1664,17 @@ export interface AlignSeg {
 export interface AlignedReflex {
 	lemma: Lemma;
 	segs: AlignSeg[];
+	concepts: ReflexConcept[];
 }
 export interface EntryAlignment {
 	etymon: { idx: number; seg: string }[];
 	reflexes: AlignedReflex[];
+}
+
+export interface ReflexConcept {
+	id: number;
+	name: string;
+	category: string;
 }
 
 // alignment metadata caches (symbols / pairs / contexts / the cell dictionary)
@@ -1544,6 +1778,26 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 			)
 		: [];
 	const segsByRid = new Map(blobs.map((b) => [b.form_rid, decodeSegs(meta, b.segs)]));
+	// Concept membership is stored compactly as one delta-coded form set per concept. Ask the
+	// vin_in UDF for only the concepts touching this entry, then invert those few sets for rows.
+	const conceptsByRid = new Map<number, ReflexConcept[]>();
+	if (rids.length) {
+		const matching = vdeltaIn('rids', rids);
+		const conceptRows = await query<ReflexConcept & { rids: Uint8Array }>(
+			`SELECT id, name, category, rids FROM concepts WHERE ${matching.sql} ORDER BY name`,
+			matching.params,
+			matching.sets
+		);
+		const shown = new Set(rids);
+		for (const concept of conceptRows) {
+			for (const rid of readDeltas(concept.rids)) {
+				if (!shown.has(rid)) continue;
+				const list = conceptsByRid.get(rid) ?? [];
+				list.push({ id: concept.id, name: concept.name, category: concept.category });
+				conceptsByRid.set(rid, list);
+			}
+		}
+	}
 	const etymonMap = new Map<number, string>();
 	for (const segs of segsByRid.values()) {
 		for (const s of segs) if (s.etymonIdx >= 0 && !etymonMap.has(s.etymonIdx)) etymonMap.set(s.etymonIdx, s.etymonSeg);
@@ -1551,7 +1805,11 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 	const etymon = [...etymonMap.entries()]
 		.sort((a, b) => a[0] - b[0])
 		.map(([i, seg]) => ({ idx: i, seg }));
-	const aligned = reflexes.map((l) => ({ lemma: l as Lemma, segs: segsByRid.get(l.rid) ?? [] }));
+	const aligned = reflexes.map((l) => ({
+		lemma: l as Lemma,
+		segs: segsByRid.get(l.rid) ?? [],
+		concepts: conceptsByRid.get(l.rid) ?? []
+	}));
 	return { etymon, reflexes: aligned };
 }
 
@@ -2119,7 +2377,7 @@ export async function getFilterLanguages(mode: 'entries' | 'reflexes'): Promise<
 	// entries → languages with an etymon OR a loan-source reflex; reflexes → every language.
 	const where =
 		mode === 'entries'
-			? `WHERE (origin_rid IS NULL AND (flags & 7) != ${REL_UNLINKED}) OR (flags & ${FLAG_LOAN_SOURCE}) != 0`
+			? `WHERE (flags & ${FLAG_ENTRY}) != 0 OR (flags & ${FLAG_LOAN_SOURCE}) != 0`
 			: '';
 	const rows = await query<{ lang_rid: number }>(`SELECT DISTINCT lang_rid FROM lem ${where}`);
 	const out = rows

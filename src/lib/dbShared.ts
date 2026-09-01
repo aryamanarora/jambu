@@ -204,6 +204,9 @@ export const FLAG_OCR = 8;
 export const FLAG_SECTION = 16;
 export const FLAG_LOAN_SOURCE = 32;
 export const FLAG_HAS_ALT = 64;
+/** A node shown in the Entries list. This is intentionally independent of origin_rid: a source
+ * dictionary headword remains a headword after it gains an accepted external ancestor. */
+export const FLAG_ENTRY = 128;
 export const REL_NONE = 0,
 	REL_REFLEX = 1,
 	REL_VARIANT = 2,
@@ -332,6 +335,26 @@ export function varintsContainAny(blob: Uint8Array | null, set: Set<number>): bo
 	return false;
 }
 
+/** Does a sorted delta-encoded varint blob contain any member of `set`? */
+export function deltasContainAny(blob: Uint8Array | null, set: Set<number>): boolean {
+	if (!blob || set.size === 0) return false;
+	let value = 0;
+	let delta = 0;
+	let shift = 0;
+	for (let i = 0; i < blob.length; i++) {
+		const b = blob[i];
+		delta += (b & 0x7f) * 2 ** shift;
+		if (b & 0x80) shift += 7;
+		else {
+			value += delta;
+			if (set.has(value)) return true;
+			delta = 0;
+			shift = 0;
+		}
+	}
+	return false;
+}
+
 /** `vin_any(blob, json)` — does the varint blob contain any int of the JSON array?
  *  The parsed set is memoized on the JSON string (the driver calls this once per row).
  *
@@ -364,6 +387,17 @@ export function makeVinIn(
 		// returning "no match" for every row
 		if (!set) throw new Error(`vin_in: no candidate set ${setId} installed for this query`);
 		return varintsContainAny(blob, set) ? 1 : 0;
+	};
+}
+
+/** `vdelta_in(blob, setId)` — membership for sorted delta-encoded varint lists. */
+export function makeVdeltaIn(
+	setOf: (setId: number) => Set<number> | undefined
+): (blob: Uint8Array | null, setId: number) => number {
+	return (blob, setId) => {
+		const set = setOf(setId);
+		if (!set) throw new Error(`vdelta_in: no candidate set ${setId} installed for this query`);
+		return deltasContainAny(blob, set) ? 1 : 0;
 	};
 }
 

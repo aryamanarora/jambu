@@ -8,7 +8,8 @@
  */
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 import { OPFS_DB_PATH } from './dbMeta';
-import { makeVinIn } from './dbShared';
+import { makeVdeltaIn, makeVinIn } from './dbShared';
+import { unicodeSearchFold } from './unicodeSearch';
 
 // In dev we skip the versioned OPFS cache and load the current local DB straight into an in-memory
 // SQLite, so a rebuilt db.db is picked up on reload with no DB_VERSION bump / re-download dance.
@@ -47,11 +48,23 @@ const setRegistry = new Map<number, Set<number>>();
 /** Register the custom SQL functions the compact-schema query layer relies on. */
 function registerFunctions(h: DbHandle): DbHandle {
 	const vinIn = makeVinIn((setId) => setRegistry.get(setId));
+	const vdeltaIn = makeVdeltaIn((setId) => setRegistry.get(setId));
 	h.createFunction(
 		'vin_in',
 		(_ctx: number, blob: unknown, setId: unknown) =>
 			vinIn(blob as Uint8Array | null, Number(setId)),
 		{ arity: 2, deterministic: true }
+	);
+	h.createFunction(
+		'vdelta_in',
+		(_ctx: number, blob: unknown, setId: unknown) =>
+			vdeltaIn(blob as Uint8Array | null, Number(setId)),
+		{ arity: 2, deterministic: true }
+	);
+	h.createFunction(
+		'unicode_fold',
+		(_ctx: number, value: unknown) => unicodeSearchFold(String(value ?? '')),
+		{ arity: 1, deterministic: true }
 	);
 	return h;
 }

@@ -31,7 +31,7 @@
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
 	import MapView from '$lib/components/Map.svelte';
-	import { activePoint, mutedPoint } from '$lib/atlas';
+	import { activePoint, mutedPoint, pieMarker } from '$lib/atlas';
 	import FormWord from '$lib/components/FormWord.svelte';
 	import ReferenceLink from '$lib/components/ReferenceLink.svelte';
 	import RefList from '$lib/components/RefList.svelte';
@@ -104,7 +104,7 @@
 	let loading = $state(true);
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
-	let view = $state<'align' | 'normal'>('normal');
+	let view = $state<'align' | 'concept' | 'normal'>('normal');
 	const entryReferences = $derived.by(() =>
 		referenceSummary(
 			[
@@ -229,7 +229,9 @@
 			};
 		});
 	});
-	const totalCols = $derived(view === 'align' ? (ea?.etymon.length ?? 0) + 4 : 5);
+	const totalCols = $derived(
+		view === 'align' ? (ea?.etymon.length ?? 0) + 4 : view === 'concept' ? 6 : 5
+	);
 
 	// ---- correspondence for the selected column (etymon segment) -------------
 	interface Corr { seg: string; change: string; count: number; langs: string[] }
@@ -292,6 +294,41 @@
 		'#3366CC', '#DC3912', '#FF9900', '#109618', '#990099',
 		'#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395'
 	];
+	interface ConceptSummary { id: number; name: string; category: string; count: number }
+	const conceptSummary = $derived.by<ConceptSummary[]>(() => {
+		const counts = new Map<number, ConceptSummary>();
+		for (const reflex of ea?.reflexes ?? []) {
+			for (const concept of reflex.concepts) {
+				const current = counts.get(concept.id);
+				if (current) current.count++;
+				else counts.set(concept.id, { ...concept, count: 1 });
+			}
+		}
+		return [...counts.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+	});
+	const conceptColors = $derived.by<Map<number, string>>(() =>
+		new Map(conceptSummary.map((concept, index) => [concept.id, PALETTE[index % PALETTE.length]]))
+	);
+	const unmappedConceptCount = $derived(
+		(ea?.reflexes ?? []).filter((reflex) => reflex.concepts.length === 0).length
+	);
+	let pinnedConcepts = $state<number[]>([]);
+	let hoverConcept = $state<number | null>(null);
+	const activeConcepts = $derived(
+		hoverConcept != null && !pinnedConcepts.includes(hoverConcept)
+			? [...pinnedConcepts, hoverConcept]
+			: pinnedConcepts
+	);
+	function toggleConcept(id: number) {
+		pinnedConcepts = pinnedConcepts.includes(id)
+			? pinnedConcepts.filter((concept) => concept !== id)
+			: [...pinnedConcepts, id];
+	}
+	$effect(() => {
+		view;
+		pinnedConcepts = [];
+		hoverConcept = null;
+	});
 	// outcome segment (at the selected column) → colour, ordered by frequency; loss → grey
 	const outcomeColors = $derived.by<Map<string, string>>(() => {
 		const m = new Map<string, string>();
@@ -349,6 +386,18 @@
 				color = outcomeColors.get(out) ?? '#8b8b8b';
 				extra = ` · *${selSeg} → ${out}`;
 			}
+			const conceptCounts = new Map<number, number>();
+			for (const reflex of reflexes)
+				for (const concept of reflex.concepts)
+					conceptCounts.set(concept.id, (conceptCounts.get(concept.id) ?? 0) + 1);
+			const conceptSlices = [...conceptCounts.entries()]
+				.map(([id, n]) => ({ id, n, color: conceptColors.get(id) ?? '#8b8b8b' }))
+				.sort((a, b) => b.n - a.n);
+			const locationConceptIds = conceptSlices.map((slice) => slice.id);
+			if (view === 'concept' && conceptSlices.length === 1)
+				color = conceptSlices[0].color;
+			else if (view === 'concept' && conceptSlices.length === 0)
+				color = '#8b8b8b';
 			const words = reflexes.map((r) => striptags(r.lemma.word));
 			const ids = reflexes.map((r) => r.lemma.id);
 			const ocr = reflexes.map((r) => r.lemma.references?.some((reference) => Boolean(reference.ocr)));
@@ -356,19 +405,32 @@
 			// table row wins over a picked outcome, because it is the more specific question.
 			const lit = hoverRow
 				? ids.includes(hoverRow)
+				: view === 'concept' && activeConcepts.length
+					? locationConceptIds.some((id) => activeConcepts.includes(id))
 				: litOutcomes.length
 					? out != null && litOutcomes.includes(out)
 					: activeCol == null || out != null;
+			const conceptNames = conceptSlices
+				.map((slice) => conceptSummary.find((concept) => concept.id === slice.id)?.name)
+				.filter(Boolean);
+			const conceptMarker = view === 'concept' && conceptSlices.length > 1;
+			const pointStyle = conceptMarker
+				? {
+						svg: pieMarker(conceptSlices),
+						size: hoverRow && ids.includes(hoverRow) ? 20 : 16,
+						dim: !lit,
+						foreground: lit && (!!hoverRow || activeConcepts.length > 0)
+					}
+				: { svg: lang.map_marker, ...(lit ? activePoint(color) : mutedPoint()) };
 			return {
 				lat,
 				long,
-				svg: lang.map_marker,
-				...(lit ? activePoint(color) : mutedPoint()),
-				tooltip: `${name}${extra ? ` · <span class="phon">${extra.slice(3)}</span>` : ''}`,
+				...pointStyle,
+				tooltip: `${name}${extra ? ` · <span class="phon">${extra.slice(3)}</span>` : ''}${view === 'concept' ? ` · ${conceptNames.join(', ') || 'No parsed concept'}` : ''}`,
 				popupHtml: `<h3>${striptags(name)}</h3><ul>${words
 					.map(
 						(w, i) =>
-							`<li><a class="lemma-word" href="${base}/reflexes/${ids[i]}">${w}</a>${ocr[i] ? ' <span class="map-ocr" title="Parsed with optical character recognition; check the original source when accuracy matters">OCR</span>' : ''}</li>`
+							`<li><a class="lemma-word" href="${base}/reflexes/${ids[i]}">${w}</a>${ocr[i] ? ' <span class="map-ocr" title="Parsed with optical character recognition; check the original source when accuracy matters">OCR</span>' : ''}${view === 'concept' && reflexes[i].concepts.length ? `<span class="map-concepts">${reflexes[i].concepts.map((concept) => `<a href="${base}/concepts/${concept.id}">${concept.name}</a>`).join(', ')}</span>` : ''}</li>`
 					)
 					.join('')}</ul>`
 			};
@@ -579,6 +641,7 @@
 	<div class="toggle" role="tablist" aria-label="View">
 		<button role="tab" aria-selected={view === 'normal'} class:on={view === 'normal'} onclick={() => (view = 'normal')}>Forms</button>
 		<button role="tab" aria-selected={view === 'align'} class:on={view === 'align'} onclick={() => (view = 'align')}>Sound alignment</button>
+		<button role="tab" aria-selected={view === 'concept'} class:on={view === 'concept'} onclick={() => (view = 'concept')}>Concepts</button>
 	</div>
 {/if}
 
@@ -607,6 +670,7 @@
 						<th class="c-form">Form</th>
 					{/if}
 					<th class="c-gloss">Gloss</th>
+					{#if view === 'concept'}<th class="c-concepts">Concepts</th>{/if}
 					<th class="c-cog">§</th>
 				</tr>
 			</thead>
@@ -625,7 +689,7 @@
 						<td class="c-lang">
 							{#if row.firstLang}<LangName lang={row.r.lemma.language} />{/if}
 						</td>
-						{#if view === 'normal'}
+						{#if view !== 'align'}
 							<td class="c-form formcell">
 								<span class="lemma-word"><FormWord word={row.r.lemma.word} references={row.r.lemma.references} /></span>{#if row.r.lemma.phonemic}
 									<span class="phon">/{row.r.lemma.phonemic}/</span>{/if}{#if row.r.lemma.reflex_sub_count}&nbsp;<a class="refcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.reflex_sub_count} reflex(es) of this word">→&#8288;{row.r.lemma.reflex_sub_count}</a>{/if}{#if row.r.lemma.sub_count}&nbsp;<a class="subcount" href="{base}/entries/{row.r.lemma.id}" title="{row.r.lemma.sub_count} form(s) borrowed from this word">→&#8288;{row.r.lemma.sub_count}</a>{/if}
@@ -655,6 +719,20 @@
 									title="alternate etymology — this form's accepted etymon is another entry">alternate</span
 								>{/if}</td
 						>
+						{#if view === 'concept'}
+							<td class="c-concepts concept-cell">
+								{#if row.r.concepts.length}
+									{#each row.r.concepts as concept (concept.id)}
+										<a
+											class="concept-pill"
+											style={`--concept-color:${conceptColors.get(concept.id) ?? '#8b8b8b'}`}
+											title={concept.category}
+											href={`${base}/concepts/${concept.id}`}>{concept.name}</a
+										>
+									{/each}
+								{:else}<span class="faint">—</span>{/if}
+							</td>
+						{/if}
 						<td class="c-cog cog-cell" title={striptags(row.cogLabel)}>{row.cogCode}</td>
 					</tr>
 					{#if expanded.has(row.r.lemma.id)}
@@ -682,6 +760,45 @@
 					</p>
 				</div>
 				<MapView {markers} height="clamp(16rem, 44vh, 32rem)" />
+
+				{#if view === 'concept'}
+					<div class="concept-key">
+						<div class="outcomes-head">
+							<span class="corr-head">Concepts</span>
+							{#if pinnedConcepts.length}
+								<button class="clear" onclick={() => (pinnedConcepts = [])}>clear {pinnedConcepts.length}</button>
+							{/if}
+						</div>
+						{#if conceptSummary.length}
+							<div class="concept-options">
+								{#each conceptSummary as concept (concept.id)}
+									<button
+										class="concept-option"
+										class:on={pinnedConcepts.includes(concept.id)}
+										class:off={activeConcepts.length > 0 && !activeConcepts.includes(concept.id)}
+										style={`--concept-color:${conceptColors.get(concept.id)}`}
+										aria-pressed={pinnedConcepts.includes(concept.id)}
+										title={concept.category}
+										onmouseenter={() => (hoverConcept = concept.id)}
+										onmouseleave={() => (hoverConcept = null)}
+										onfocus={() => (hoverConcept = concept.id)}
+										onblur={() => (hoverConcept = null)}
+										onclick={() => toggleConcept(concept.id)}
+									>
+										<span class="sw"></span>
+										<span>{concept.name}</span>
+										<span class="x">×{concept.count}</span>
+									</button>
+								{/each}
+								{#if unmappedConceptCount}
+									<span class="concept-unmapped"><span class="sw"></span>Unmapped <span class="x">×{unmappedConceptCount}</span></span>
+								{/if}
+							</div>
+						{:else}
+							<p class="map-cap muted">No concept assignments for these reflexes.</p>
+						{/if}
+					</div>
+				{/if}
 
 				<!-- with a column selected the correspondence becomes a picker: the swatches are the
 				     map's own colours, so clicking one isolates where that outcome happens -->
@@ -823,6 +940,12 @@
 		font-weight: 700;
 		letter-spacing: 0.05em;
 		vertical-align: middle;
+	}
+	:global(.map-concepts) {
+		display: block;
+		margin-top: 0.15rem;
+		color: var(--muted);
+		font-size: 0.72rem;
 	}
 	.derived {
 		margin: 1rem 0 1.25rem;
@@ -1095,6 +1218,31 @@
 	th.c-form {
 		text-align: left;
 	}
+	.c-concepts {
+		min-width: 10rem;
+	}
+	.concept-cell {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+	.concept-pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.12rem 0.42rem;
+		border: 1px solid color-mix(in srgb, var(--concept-color) 58%, var(--border));
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--concept-color) 13%, var(--surface));
+		color: color-mix(in srgb, var(--concept-color) 72%, var(--ink));
+		font-size: 0.72rem;
+		font-weight: 600;
+		line-height: 1.25;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+	.concept-pill:hover {
+		background: color-mix(in srgb, var(--concept-color) 22%, var(--surface));
+	}
 
 	/* ---- the outcomes of the selected column, as a picker beneath the map ----
 	   Same grammar as the atlas lists: a swatch that is literally the map's colour, the thing
@@ -1184,6 +1332,61 @@
 		font-size: 0.78rem;
 		text-decoration: underline;
 	}
+	.concept-key {
+		display: grid;
+		gap: 0.2rem;
+		margin-top: 0.55rem;
+		max-height: 30vh;
+		overflow-y: auto;
+		scrollbar-width: thin;
+	}
+	.concept-options {
+		display: grid;
+		gap: 2px;
+	}
+	.concept-option,
+	.concept-unmapped {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 0.45rem;
+		padding: 0.28rem 0.45rem;
+		border: 1.5px solid transparent;
+		border-radius: 8px;
+		background: none;
+		color: var(--ink);
+		font: inherit;
+		font-size: 0.8rem;
+		text-align: left;
+	}
+	.concept-option {
+		cursor: pointer;
+		transition: background 120ms ease, border-color 120ms ease, opacity 120ms ease;
+	}
+	.concept-option:hover,
+	.concept-option.on {
+		border-color: var(--concept-color);
+		background: color-mix(in srgb, var(--concept-color) 16%, transparent);
+	}
+	.concept-option.off { opacity: 0.4; }
+	.concept-option:focus-visible {
+		outline: 2px solid var(--concept-color);
+		outline-offset: -2px;
+	}
+	.concept-option .sw,
+	.concept-unmapped .sw {
+		width: 10px;
+		height: 10px;
+		border: 1px solid rgba(0, 0, 0, 0.25);
+		border-radius: 50%;
+		background: var(--concept-color, #8b8b8b);
+	}
+	.concept-option .x,
+	.concept-unmapped .x {
+		color: var(--muted);
+		font-variant-numeric: tabular-nums;
+	}
+	.concept-unmapped { color: var(--muted); }
 
 	.count {
 		margin: 1rem 0 0.4rem;

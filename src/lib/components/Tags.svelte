@@ -1,14 +1,15 @@
 <script lang="ts">
 	// Renders structured tags (including DB-generated dialect tags) as category-coloured pills.
 	import { tagCategory, tagLabel } from '$lib/tags';
-	let { tags }: { tags?: string | null } = $props();
+	import { highlightText, type HighlightQuery } from '$lib/render';
+	let { tags, highlight, relaxed = false }: { tags?: string | null; highlight?: HighlightQuery; relaxed?: boolean } = $props();
 	const list = $derived((tags ?? '').split(/\s+/).filter(Boolean));
 </script>
 
 {#if list.length}
 	<span class="tags">
 		{#each list as t (t)}
-			<span class="tag {tagCategory(t)}" title={tagLabel(t)}>{tagLabel(t)}</span>
+			<span class="tag {tagCategory(t)}" title={tagLabel(t)}>{@html highlightText(tagLabel(t), highlight, relaxed)}</span>
 		{/each}
 	</span>
 {/if}

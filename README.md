@@ -1,8 +1,8 @@
 # Jambu (static)
 
 A static, **GitHub Pages–hostable** rebuild of the [Jambu](https://arxiv.org/abs/2306.02514)
-etymological dictionary of South Asian languages (26,288 entries / 274,747 reflexes / 344 base
-languages / 392 references in the 2026-08-18 build). No server, no Heroku — the browser queries
+etymological dictionary of South Asian languages (26,610 entries / 288,969 reflexes / 408 base
+languages / 519 references in the 2026-08-31 build). No server, no Heroku — the browser queries
 the SQLite database directly over HTTP Range requests.
 
 ## How it works
@@ -13,7 +13,7 @@ the SQLite database directly over HTTP Range requests.
   Pages deploy.
 - **In-browser SQLite**: [`sql.js-httpvfs`](https://github.com/phiresky/sql.js-httpvfs) runs
   SQLite (WASM) in a Web Worker and fetches only the byte ranges each query touches, so the
-  ~78 MB DB is cached locally. Substring search scans its compact lemma table directly.
+  ~120 MB DB is cached locally. Substring search scans its compact lemma table directly.
 - **Hybrid rendering** (SvelteKit + `adapter-static`):
   - **Prerendered** to static HTML for SEO/citability: home, the list pages, and every
     `/entries/[id]` (26k), `/languages/[id]` (344), `/references/[id]` (392) — each carries its

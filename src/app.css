@@ -779,6 +779,13 @@ table.data tbody tr:hover td {
 table.data td p {
 	margin: 0;
 }
+mark.search-match {
+	padding: 0 0.06em;
+	border-radius: 0.16em;
+	background: color-mix(in srgb, var(--berry) 30%, var(--surface));
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--berry) 42%, transparent);
+	color: inherit;
+}
 .lang-cell {
 	border-left: 4px solid var(--clade-empty);
 	font-weight: 500;

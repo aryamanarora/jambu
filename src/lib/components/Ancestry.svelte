@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import type { AncestorRef } from '$lib/query';
+	import { highlightText, type HighlightQuery } from '$lib/render';
 	import FormWord from './FormWord.svelte';
 
 	// A node's place in the etymon graph: the "from" chain shown under the headword on both entry and
@@ -11,8 +12,10 @@
 		label,
 		chain,
 		startLang,
-		compact = false
-	}: { label: string; chain: AncestorRef[][]; startLang?: string | null; compact?: boolean } = $props();
+		compact = false,
+		highlight,
+		relaxed = false
+	}: { label: string; chain: AncestorRef[][]; startLang?: string | null; compact?: boolean; highlight?: HighlightQuery; relaxed?: boolean } = $props();
 
 	const rendered = $derived.by(() => {
 		let running = startLang ?? null;
@@ -31,11 +34,11 @@
 		{#each rendered as level, li (li)}
 			<div class="anc-line">
 				<span class="kind">{li === 0 ? label : '↳ from'}</span>
-				{#each level as p, i (p.id)}{#if p.showLang}<span class="lang">{p.lang}</span> {/if}<a
+				{#each level as p, i (p.id)}{#if p.showLang}<span class="lang">{@html highlightText(p.lang, highlight, relaxed)}</span> {/if}<a
 						class="anc"
 						href="{base}/entries/{p.id}"
-						><FormWord word={p.word} ocr={p.ocr} />{#if !compact}
-							<span class="id-tag"> [{p.id}]</span>{/if}</a
+						><FormWord word={p.word} ocr={p.ocr} {highlight} {relaxed} />{#if !compact}
+							<span class="id-tag"> [{@html highlightText(p.id, highlight, relaxed)}]</span>{/if}</a
 					>{#if i < level.length - 1}<span class="sep">, </span>{/if}{/each}
 			</div>
 		{/each}

@@ -842,12 +842,32 @@
 	.dwhere { color: var(--muted); font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 	.dn { color: var(--faint); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
 
-	/* ---- narrow screens: the panels stop floating and the page scrolls again -- */
-	@media (max-width: 860px) {
-		.atlas { display: grid; gap: 0.7rem; padding: 0.7rem; }
-		.atlas-map { position: relative; inset: auto; height: 45vh; border-radius: 0.9rem; overflow: hidden; }
-		.scope-panel,
-		.list-panel { position: relative; inset: auto; width: auto; }
-		.list { max-height: none; }
+	@media (max-width: 560px) {
+		.picker-panel {
+			width: calc(100vw - 1rem);
+			max-height: calc(100dvh - 1rem);
+		}
+		.tree {
+			max-height: calc(100dvh - 8rem);
+		}
+		.tree-node {
+			min-height: 2.75rem;
+		}
+		.sorts {
+			width: 100%;
+		}
+		.sorts button {
+			flex: 1 1 0;
+			min-height: 2.75rem;
+		}
+		.dialects li {
+			grid-template-columns: minmax(0, 1fr) auto auto;
+			gap: 0.25rem 0.5rem;
+			padding-block: 0.45rem;
+		}
+		.dwhere {
+			grid-column: 1 / -1;
+			grid-row: 2;
+		}
 	}
 </style>

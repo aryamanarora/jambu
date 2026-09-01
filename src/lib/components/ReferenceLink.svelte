@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { md, referenceLabel } from '$lib/render';
+	import { highlightText, md, referenceLabel, type HighlightQuery } from '$lib/render';
 	import type { Reference } from '$lib/types';
 
 	type PartialReference = Partial<Reference> & { id: string };
@@ -17,10 +17,14 @@
 	// just without the parts of the card it has no data for.
 	let {
 		reference,
-		as = 'link'
+		as = 'link',
+		highlight,
+		relaxed = false
 	}: {
 		reference: PartialReference;
 		as?: 'link' | 'text';
+		highlight?: HighlightQuery;
+		relaxed?: boolean;
 	} = $props();
 	let anchor = $state<HTMLElement | null>(null);
 	let visible = $state(false);
@@ -58,7 +62,7 @@
 
 {#snippet pill()}
 	<span class="mark" aria-hidden="true">§</span>
-	<span class="short">{label}</span>
+	<span class="short">{@html highlightText(label, highlight, relaxed)}</span>
 {/snippet}
 
 <span class="reference">

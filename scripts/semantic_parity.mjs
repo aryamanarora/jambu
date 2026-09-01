@@ -114,7 +114,7 @@ if (isV3) {
 // ---- entries listing ---------------------------------------------------------------------
 
 const entryPred = isV3
-	? `origin_rid IS NULL AND (flags & 7) != 4 AND link_rid IS NULL`
+	? `(flags & 128) != 0 AND link_rid IS NULL`
 	: `origin_rid IS NULL AND (flags & 7) != 4 AND (link_rid IS NULL OR (flags & 7) IN (2, 3))`;
 const entries = db
 	.prepare(`SELECT rowid AS rid FROM lem WHERE ${entryPred} ORDER BY ord`)

@@ -3,7 +3,8 @@
 	import { createListState } from '$lib/listState.svelte';
 	import { getFilterDialects, getFilterLanguages } from '$lib/query';
 	import { PAGE_SIZE } from '$lib/types';
-	import { safe, md } from '$lib/render';
+	import { highlightHtml, highlightText, md, referenceLabel, safe } from '$lib/render';
+	import { tagLabel } from '$lib/tags';
 	import { hashColor, cladeColor } from '$lib/clades';
 	import FilterCell from './FilterCell.svelte';
 	import FilterField from './FilterField.svelte';
@@ -16,6 +17,8 @@
 	import FormWord from './FormWord.svelte';
 	import TagFilter from './TagFilter.svelte';
 	import SourceFilter from './SourceFilter.svelte';
+	import SearchMatchToggle from './SearchMatchToggle.svelte';
+	import type { Reference } from '$lib/types';
 
 	let {
 		mode = 'reflexes',
@@ -34,6 +37,8 @@
 	);
 	const activeFilterCount = $derived(
 		[
+			list.params.relaxed,
+			list.params.form,
 			showLangCol ? list.params.origin_lang : '',
 			list.params.dialect,
 			list.params.origin,
@@ -88,10 +93,37 @@
 			})];
 		});
 	});
+	const optionHighlight = (options: SelectOption[], value?: string) => {
+		const label = options.find((option) => option.value === value)?.label ?? '';
+		return label.split(': ').filter(Boolean);
+	};
+	const languageHighlights = $derived(optionHighlight(langOptions, list.params.origin_lang));
+	const originLanguageHighlights = $derived(optionHighlight(originLangOptions, list.params.etymon_lang));
+	const tagHighlights = $derived([
+		...(list.params.tags ?? '').split(/\s+/).filter(Boolean).map(tagLabel),
+		...(list.params.dialect ? [tagLabel(list.params.dialect)] : [])
+	]);
+	const sourceHighlights = (references: Reference[] = []) => {
+		const selected = references.find(
+			(reference) => reference.id === list.params.source || reference.short === list.params.source
+		);
+		return [list.params.word, selected ? referenceLabel(selected) : ''];
+	};
 
 </script>
 
 {#snippet filters()}
+	<SearchMatchToggle
+		relaxed={list.params.relaxed}
+		onToggle={(relaxed) => list.setFilter('relaxed', relaxed ? '1' : '')}
+	/>
+	<FilterField
+		label="Form"
+		placeholder="Filter forms…"
+		palette
+		value={list.params.form ?? ''}
+		onValue={(value) => list.setFilter('form', value)}
+	/>
 	{#if showLangCol}
 		<label class="filter-control">
 			<span>Language</span>
@@ -143,8 +175,8 @@
 <div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
 <ListToolbar
 	value={list.params.word ?? ''}
-	placeholder={mode === 'lexicon' ? 'Search this lexicon…' : 'Search all forms…'}
-	searchLabel={mode === 'lexicon' ? 'Search this lexicon' : 'Search all forms'}
+	placeholder={mode === 'lexicon' ? 'Search all columns in this lexicon…' : 'Search all columns…'}
+	searchLabel="Search all shown columns"
 	{resultLabel}
 	filterCount={activeFilterCount}
 	onSearch={(value) => list.setFilter('word', value)}
@@ -213,15 +245,15 @@
 						{#if showLangCol}
 							<td class="lang-cell" style="border-left-color: {hashColor(r.language?.color)}">
 								<a href="{base}/languages/{r.language_id}"
-									>{r.language?.language}{#if r.language?.dialect}: <span class="font-thin"
-											>{r.language.dialect}</span
+									>{@html highlightText(r.language?.language, [list.params.word, ...languageHighlights], list.params.relaxed)}{#if r.language?.dialect}: <span class="font-thin"
+											>{@html highlightText(r.language.dialect, [list.params.word, ...languageHighlights], list.params.relaxed)}</span
 										>{/if}</a
 								>
 							</td>
 						{/if}
 						<td class="lemma-word" data-label="Form">
-							<a href="{base}/entries/{r.id}"><FormWord word={r.word} references={r.references} /></a>{#if r.phonemic}
-								<span class="phonemic">/&#8288;{r.phonemic}&#8288;/</span>{/if}{#if r.sub_count}
+							<a href="{base}/entries/{r.id}"><FormWord word={r.word} references={r.references} highlight={[list.params.word, list.params.form]} relaxed={list.params.relaxed} /></a>{#if r.phonemic}
+								<span class="phonemic">/&#8288;{@html highlightText(r.phonemic, list.params.word, list.params.relaxed)}&#8288;/</span>{/if}{#if r.sub_count}
 								<a
 									class="subcount"
 									href="{base}/entries/{r.id}"
@@ -238,17 +270,17 @@
 						>
 							{#if r.origin_lemma}
 								{#if r.origin_lemma.language}<span class="olang"
-										>{r.origin_lemma.language.name}</span
+										>{@html highlightText(r.origin_lemma.language.name, [list.params.word, ...originLanguageHighlights], list.params.relaxed)}</span
 									> {/if}<a class="origin" href="{base}/entries/{r.origin_lemma.id}"
-									><FormWord word={r.origin_lemma.word} ocr={r.origin_lemma.ocr} /> <span class="id-tag">[{r.origin_lemma.id}]</span
+									><FormWord word={r.origin_lemma.word} ocr={r.origin_lemma.ocr} highlight={[list.params.word, list.params.origin]} relaxed={list.params.relaxed} /> <span class="id-tag">[{@html highlightText(r.origin_lemma.id, list.params.word, list.params.relaxed)}]</span
 									></a
 								>
 							{:else}<span class="faint">—</span>{/if}
 						</td>
-						<td class="muted" data-label="Meaning">{@html safe(r.gloss) || '—'}</td>
-						<td class="tag-cell" data-label="Tags"><Tags tags={r.tags} /></td>
-						<td class="muted markdown" data-label="Notes">{@html md(r.notes)}</td>
-						<td data-label="Source"><RefList references={r.references} /></td>
+						<td class="muted" data-label="Meaning">{@html highlightHtml(safe(r.gloss), [list.params.word, list.params.gloss], list.params.relaxed) || '—'}</td>
+						<td class="tag-cell" data-label="Tags"><Tags tags={r.tags} highlight={[list.params.word, ...tagHighlights]} relaxed={list.params.relaxed} /></td>
+						<td class="muted markdown" data-label="Notes">{@html highlightHtml(md(r.notes), [list.params.word, list.params.notes], list.params.relaxed)}</td>
+						<td data-label="Source"><RefList references={r.references} highlight={sourceHighlights(r.references)} relaxed={list.params.relaxed} /></td>
 					</tr>
 				{/each}
 			{/if}

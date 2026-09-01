@@ -11,7 +11,7 @@ export const prerender = 'auto';
 export async function entries() {
 	if (!import.meta.env.SSR) return [];
 	const { default: Database } = await import('better-sqlite3');
-	const { IdIndex } = await import('$lib/dbShared');
+	const { IdIndex, FLAG_ENTRY } = await import('$lib/dbShared');
 	const database = new Database(process.env.JAMBU_DB ?? '.dbwork/jambu.db', {
 		readonly: true,
 		fileMustExist: true
@@ -22,7 +22,7 @@ export async function entries() {
 	}[]).map((r) => r.id);
 	const idx = new IdIndex(new Uint8Array(data), misc);
 	const rows = database
-		.prepare('SELECT rowid AS rid FROM lem WHERE origin_rid IS NULL ORDER BY ord')
+		.prepare(`SELECT rowid AS rid FROM lem WHERE (flags & ${FLAG_ENTRY}) != 0 AND link_rid IS NULL ORDER BY ord`)
 		.all() as { rid: number }[];
 	database.close();
 	const limit = process.env.PRERENDER_LIMIT ? parseInt(process.env.PRERENDER_LIMIT, 10) : rows.length;

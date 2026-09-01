@@ -1056,9 +1056,11 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         """
         CREATE INDEX idx_lemmas_origin_lemma_id ON lemmas(origin_lemma_id);
         CREATE INDEX idx_lemmas_language_order   ON lemmas(language_id, "order");
-        -- partial index for the Entries list (headwords): ORDER BY "order" with no temp sort.
-        -- Lone (unetymologised) nodes have an empty origin but Relation='local'; keep them out.
-        CREATE INDEX idx_entries_order ON lemmas("order") WHERE origin_lemma_id IS NULL AND relation IS NOT 'unlinked';
+        -- partial index for the intermediate-schema Entries list. A CDIAL article remains a
+        -- dictionary headword after an accepted external ancestry link gives it an origin.
+        CREATE INDEX idx_entries_order ON lemmas("order") WHERE
+            (origin_lemma_id IS NULL AND relation IS NOT 'unlinked') OR
+            (language_id = 'Indo-Aryan' AND etymology IS NOT NULL);
         """
     )
     log("created compact lemma lookup + hot-path ordering indexes")
@@ -1079,7 +1081,10 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
         INSERT INTO meta VALUES
             ('total_lemmas',   (SELECT COUNT(*) FROM lemmas)),
             ('total_lexicon',  (SELECT COUNT(*) FROM lemmas WHERE redirect_to IS NULL)),
-            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE origin_lemma_id IS NULL AND redirect_to IS NULL AND relation IS NOT 'unlinked')),
+            ('total_entries',  (SELECT COUNT(*) FROM lemmas WHERE redirect_to IS NULL AND (
+                (origin_lemma_id IS NULL AND relation IS NOT 'unlinked') OR
+                (language_id = 'Indo-Aryan' AND etymology IS NOT NULL)
+            ))),
             ('total_reflexes', (SELECT COUNT(*) FROM lemmas WHERE relation = 'reflex')),
             ('total_variants', (SELECT COUNT(*) FROM lemmas WHERE relation = 'variant'));
         """
@@ -1095,7 +1100,8 @@ def transform(out: Path, page_size: int, cldf: Path) -> None:
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex'),
             lang_count   = (SELECT COUNT(DISTINCT r.language_id) FROM lemmas r
                             WHERE r.origin_lemma_id = lemmas.id AND r.relation = 'reflex')
-        WHERE origin_lemma_id IS NULL AND relation IS NOT 'unlinked';
+        WHERE (origin_lemma_id IS NULL AND relation IS NOT 'unlinked') OR
+              (language_id = 'Indo-Aryan' AND etymology IS NOT NULL);
         """
     )
     con.commit()
