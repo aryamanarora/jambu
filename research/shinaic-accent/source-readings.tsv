@@ -1,0 +1,7 @@
+file	row	language	gloss	database_reading	source_reading	source_page	note	action
+20230621-shina.csv	1507	bro	tooth	da'nii	daˈnii (pl.?)	260, Table 2 item 32	Source explicitly queries plural; database gloss omits this qualification.	Research reading only; lexical source unchanged
+20230621-shina.csv	1539	dr	name	néom	nóom	261, Table 2 item 48	Printed first accented o; database has éo.	Research reading only; lexical source unchanged
+20230621-shina.csv	1540	bro	name	nto	nũũ	261, Table 2 item 48	Printed nasalized long u; database nto does not match the source. Accent is not marked.	Research reading only; lexical source unchanged
+20230621-shina.csv	1903	bro	hot	taáto	ˈtaato	276, Table 2 item 218	Printed apostrophe marks syllable stress; database acute on second a must not be analyzed as mora accent.	Research reading only; lexical source unchanged
+20220913-palula.csv	2187	Phal	canal; inlet; flume	nāḍí-	nāḍī́-	Turner7047, printed404	Palula etymology field has a short final i; the cited Turner headword has long accented ī. This corrects the cited input, not the modern accent or the etymology itself.	Research reading only; lexical source unchanged
+20220913-palula.csv	3052	Phal	thirteen	*trayédaśa	*trayēdaśa (no marked accent)	Turner6001, printed342	The Palula etymological label supplies an accent not printed on Turner’s reconstructed alternative. Turner’s primary headword is tráyōdaśa. This is a source-comparison qualification, not proof that Liljegren intended a verbatim transcription.	Research reading only; lexical source unchanged

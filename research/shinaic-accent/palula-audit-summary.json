@@ -1,0 +1,12 @@
+{
+  "explicit_aa_imperatives": 34,
+  "early_aa_imperatives": 34,
+  "all_closed_aa_nominals": 227,
+  "literal_modern_short_a_alternation": 36,
+  "limitations": [
+    "The imperative count covers explicitly supplied forms only.",
+    "Modern alternation does not by itself establish historical short a.",
+    "Loans, historical long vowels and contractions are not eligible tests of late short-a lengthening.",
+    "No rule success percentage is computed before manual historical annotation."
+  ]
+}

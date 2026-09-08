@@ -1,0 +1,29 @@
+{
+  "build": "passed, full production prerender",
+  "check": {
+    "errors": 0,
+    "warnings": 7
+  },
+  "blog_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "prerendered": {
+    "entries": 33169,
+    "concepts": 3261,
+    "languages": 1928,
+    "references": 521
+  },
+  "semantic_records": 17,
+  "archive_sha256": "49f97972f92c3b3f8ea98d0b918acbafd2ad252433c8113290527a8aa8e83998",
+  "release_db_tag": "db-v29",
+  "release_db_sha256": "b7c3afe7211d746ccfd9af66cc2a89cb961281848338aa0500faa18265bfe66c",
+  "static_404_fallback": {
+    "form": "f_ma6j5px33fee6",
+    "http_status": 404,
+    "client_rendered": true
+  },
+  "browser_width": 1280,
+  "document_width": 1280,
+  "mobile_viewport": "API override did not take effect; no mobile test claimed"
+}

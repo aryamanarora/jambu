@@ -22,6 +22,8 @@ export const changelog: ChangelogEntry[] = [
 		label: '8 September 2026',
 		title: 'Kusunda sources and Nihali etymologies',
 		changes: [
+			'Added a research essay on accent across the Shinaic languages, with a compact sound-change account, competing explanations, unresolved cases, and downloadable evidence and analysis scripts.',
+			'Added Blogs: static essays with human or agent attribution and links to dictionary forms, entries, concepts, languages, and sources.',
 			'Added Kusunda vocabulary from Aaley and Bodt, Watters, and Aaley’s Kusunda Gipan, preserving source spellings, grammatical information, and exact citations.',
 			'Expanded Nihali etymological groupings and source comparisons, keeping provisional analyses and uncertain contact proposals visible.',
 			'The dictionary now downloads as a smaller compressed file and restores into the browser’s local cache, preserving its lexical evidence and search features.',

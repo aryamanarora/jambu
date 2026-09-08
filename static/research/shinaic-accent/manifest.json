@@ -1,0 +1,238 @@
+{
+  "date": "2026-09-08",
+  "author": "Codex (AI agent)",
+  "purpose": "Research appendix to How the Shinaic languages got their accents",
+  "data_repository": "https://github.com/moli-mandala/data",
+  "data_commit": "169616890d196e5246d642d20872a42a9162520b",
+  "input_sha256": {
+    "data/other/forms/20220913-palula.csv": "4e4d31788d1a80d47825130c427b249b1112f09a9078ddcb2c8ed04fcaf2ef7f",
+    "data/other/forms/20230621-shina.csv": "c179e476025e1b54898b802d40a65c2a9b19e6f72dcdc29b9523b5966644617c",
+    "data/cdial/params.csv": "f375be2b786375e14ea94df551dffe1f31ed98cccc0f6f71cb6b15870809a8c6",
+    "data/other/forms/raw_data/northern": "19bda61decda556a3622304279830ae7f48c4e786aaa3c05dc33e4330844f1c8",
+    "data/other/forms/raw_data/northern_param": "e67e868395cbd99dd00c8483fa41fee696549d97ecbb0ca0260777d9bc605b44",
+    "cldf/forms.csv": "20dbe52a7c32c0d092658568716542d6a58b36c8bbdaa92a4676b265f002fe7b",
+    "cldf/form-source-keys.csv": "6c980d969f860ca8178aa6505f400c531a61d81551412d6618d0fa8ba5018302",
+    "cldf/form-id-aliases.csv": "fab19b0d780a7c443e55d033ee3831b36ff060f8d1ee31f31ca9ac066cf7e27f"
+  },
+  "script_sha256": {
+    "inventory.py": "9855446ec7687c8e9ef6e838b26e309d48bd5b72e4df3dc1f8ee88ffac1fdec4",
+    "audit_palula.py": "b570fa013a1887e023810bbea44c4326239b8eff319766ad83587af576574f7c",
+    "compare_shina.py": "53f43a2c78b1b133212a2198e74385e6b22c25391448b4f073638892fbb0e61b",
+    "annotate_families.py": "035fedce174b7fbec7075c8fdb7e10c256319ee384a79283f3284958db90f8e8",
+    "annotate_palula_nominals.py": "3fc5a921dbc50cec5fbac150ff5a65f8cf49e8d810cdac8e5a98962017031b5b",
+    "survey_comparison.py": "f2a789a94f8a84c9dd832371d9d0ed93c5af06e3c135e52909bdc98771e512f3"
+  },
+  "summaries": {
+    "inventory-summary.json": {
+      "source": "data/data/other/forms/20220913-palula.csv",
+      "source_sha256": "4e4d31788d1a80d47825130c427b249b1112f09a9078ddcb2c8ed04fcaf2ef7f",
+      "raw_rows": 3493,
+      "main_entries": 2700,
+      "main_entries_with_turner": 511,
+      "main_entries_with_etymology_or_origin": 1087,
+      "main_entries_with_first_proto_accent_and_turner": 263,
+      "accent_types": {
+        "short-or-diphthong": 839,
+        "implicit-short": 155,
+        "first-mora": 959,
+        "second-mora": 475,
+        "multiple": 255,
+        "unmarked": 17
+      },
+      "missing_jambu_ids": [
+        "liljegren-LX000148",
+        "liljegren-LX000295",
+        "liljegren-LX000520",
+        "liljegren-LX000528",
+        "liljegren-LX000623",
+        "liljegren-LX000747",
+        "liljegren-LX000799",
+        "liljegren-LX000800",
+        "liljegren-LX000801",
+        "liljegren-LX000803",
+        "liljegren-LX000804",
+        "liljegren-LX000805",
+        "liljegren-LX000806",
+        "liljegren-LX000812",
+        "liljegren-LX000894",
+        "liljegren-LX000962",
+        "liljegren-LX000963",
+        "liljegren-mung",
+        "liljegren-LX001535",
+        "liljegren-LX001637",
+        "liljegren-LX001638",
+        "liljegren-LX001639",
+        "liljegren-LX001640",
+        "liljegren-LX002110",
+        "liljegren-LX002232",
+        "liljegren-LX002321",
+        "liljegren-LX002349",
+        "liljegren-LX002360",
+        "liljegren-LX002476",
+        "liljegren-LX002481",
+        "liljegren-LX002583"
+      ],
+      "limitations": [
+        "Entry counts are not independent etymological-family counts.",
+        "Acute marks are inventoried, not repaired or inferred in Sanskrit.",
+        "First proto-form may be a remote ancestor or derivative base.",
+        "Sanskrit ai/au are grouped; unusual source spellings and morphological boundaries still require manual review.",
+        "Closed syllables and source-specific phonetics require manual analysis."
+      ]
+    },
+    "palula-audit-summary.json": {
+      "explicit_aa_imperatives": 34,
+      "early_aa_imperatives": 34,
+      "all_closed_aa_nominals": 227,
+      "literal_modern_short_a_alternation": 36,
+      "limitations": [
+        "The imperative count covers explicitly supplied forms only.",
+        "Modern alternation does not by itself establish historical short a.",
+        "Loans, historical long vowels and contractions are not eligible tests of late short-a lengthening.",
+        "No rule success percentage is computed before manual historical annotation."
+      ]
+    },
+    "palula-nominal-screen-summary.json": {
+      "entries": 187,
+      "distinct_turner_links": 183,
+      "overlapping_assessment_counts": {
+        "F": 86,
+        "K": 66,
+        "C": 95,
+        "P": 38,
+        "A": 43,
+        "S": 23,
+        "Q": 29
+      },
+      "source_accent_vs_modern_contour": [
+        {
+          "source_accent": "initial",
+          "modern_contour": "first-mora",
+          "records": 60
+        },
+        {
+          "source_accent": "initial",
+          "modern_contour": "implicit-short",
+          "records": 3
+        },
+        {
+          "source_accent": "initial",
+          "modern_contour": "second-mora",
+          "records": 7
+        },
+        {
+          "source_accent": "initial",
+          "modern_contour": "short-or-diphthong",
+          "records": 11
+        },
+        {
+          "source_accent": "noninitial",
+          "modern_contour": "first-mora",
+          "records": 46
+        },
+        {
+          "source_accent": "noninitial",
+          "modern_contour": "implicit-short",
+          "records": 10
+        },
+        {
+          "source_accent": "noninitial",
+          "modern_contour": "second-mora",
+          "records": 35
+        },
+        {
+          "source_accent": "noninitial",
+          "modern_contour": "short-or-diphthong",
+          "records": 15
+        }
+      ],
+      "noninitial_source_early_modern": 46,
+      "noninitial_source_early_modern_formation_flag": 27,
+      "not_a_success_rate": true,
+      "selection_limit": "Only nominal/numeral entries with Turner links and an acute in the first source proto token; not all inherited vocabulary.",
+      "verification_limit": "Manual screening is not universal page-image verification or acceptance of the supplied etymology."
+    },
+    "shina-comparison-summary.json": {
+      "source": "data/data/other/forms/20230621-shina.csv",
+      "sha256": "c179e476025e1b54898b802d40a65c2a9b19e6f72dcdc29b9523b5966644617c",
+      "rows": 2050,
+      "varieties": {
+        "gil": 375,
+        "koh": 360,
+        "gur": 409,
+        "Astor": 298,
+        "dr": 321,
+        "bro": 287
+      },
+      "linked_rows": 711,
+      "non_turner_linked_rows": 18,
+      "linked_families": 219,
+      "families_with_accent_in_turner_headword": 139,
+      "families_with_palula_comparanda": 124,
+      "cautions": [
+        "Brokskat marks stress, not mora accent.",
+        "Unlinked items are excluded from cognate grouping, not from the source inventory.",
+        "Each Turner family is counted once; multiple dictionary formations may share an ID.",
+        "Rows and proposed source etymologies need manual verification before sound-law counts."
+      ]
+    },
+    "shina-survey-summary.json": {
+      "source_sha256": "19bda61decda556a3622304279830ae7f48c4e786aaa3c05dc33e4330844f1c8",
+      "selected_rows": 692,
+      "concepts": 23,
+      "localities": [
+        "Astor",
+        "Bagrot",
+        "Bunji",
+        "ChilasJelil",
+        "ChilasKhinar",
+        "Darel",
+        "DashkinAstor",
+        "Dras",
+        "Gahorabad",
+        "Gilgit",
+        "Gultari",
+        "Gupis",
+        "Haramosh",
+        "Harban",
+        "HunzaNasirabad",
+        "Jalkot",
+        "KachuraJel",
+        "Kharmang",
+        "Kolai",
+        "NagarChalt",
+        "NagarThol",
+        "Palas",
+        "Punial",
+        "Rondu",
+        "Satpara",
+        "Sazin",
+        "Tangir"
+      ],
+      "pitch_marked_rows": 306,
+      "primary_source": "Backstrom & Radloff 1992, Languages of Northern Areas; transcription pp147–148, 209; lists pp302–369",
+      "warning": "Counts measure coverage and explicit notation, not sound-law fit or historical absence of accent."
+    }
+  },
+  "limitations": [
+    "Counts measure selected records and notation, not sound-law accuracy.",
+    "Manual screens are provisional; only central examples have independent page checks.",
+    "Source readings are preserved; corrections are recorded separately.",
+    "Shared family IDs do not prove that every form continues the same formation.",
+    "The article does not change accepted etymologies or lexical source files."
+  ],
+  "appendix_sha256": {
+    "README.md": "476e77bd0309834c3f5f49850722fe04a0b8d761bf9857bb5705e4625229ce23",
+    "evidence-ledger.tsv": "b4b1f8d510c16952020e9c22e418db6dc7c499bcbbee65f902f3c87fbb272b5e",
+    "nasal-backing-screen.tsv": "fda98ee3e109da0847d23fc5ad1e736dc6926e5b6a8890b7b51e71d670e0974b",
+    "palula-aa-imperatives.tsv": "b0fb85da4f274fb4fdbd47b0b28e9970f138b2ec2cfd38fbc5a5c1c9a1eba809",
+    "palula-closed-aa-candidates.tsv": "21983c4034b09b1127e79cce9e3f1fb253447bf7e6f5c45421eba75ae815d6e9",
+    "palula-nominal-screen.tsv": "8ab24825672f1e0847fddea6c7feff90cf7000ed2eb3d8b224d5446df67cc7fd",
+    "palula-short-a-test.tsv": "8a377a24701befe0b83d39e90aef900fb33cd56a0de16ca82f3dfe6612e60b42",
+    "rule-ledger.tsv": "d42fed460e68a8e1a6d61831eee04c005316613a8c2eda4442d3b22124a3f3a2",
+    "shina-family-screen.tsv": "ec8aa42c050ef111309348eb226fc11c5bf76e428849a781ca9990a5ea0f5848",
+    "shina-survey-matrix.tsv": "0066dc639d839d00f4647a9b9e75c9194995bf728cea95dd2d7596eef589d3ae",
+    "shina-survey-selected.tsv": "2dc8e3c15e6992f7bdcfac1aebfb3a636a2f9541e4c7975d51e191c8c072ff81",
+    "source-readings.tsv": "23900dafb703cf7703bd3c746ea23d60341bde8c5d512ce24b8a309430b43cbd"
+  }
+}

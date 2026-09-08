@@ -1,5 +1,6 @@
 import { allEntryIds, allLanguageIds, allReferenceIds } from '$lib/server/db';
 import { base } from '$app/paths';
+import { publishedPosts } from '$lib/blog';
 
 // Prerendered sitemap covering the citable canonical pages (entries, languages, references)
 // plus the top-level list pages. Set SITE_URL in CI to your deployed origin.
@@ -14,6 +15,8 @@ export function GET() {
 		'/reflexes',
 		'/languages',
 		'/references',
+		'/blogs',
+		...publishedPosts().map((post) => `/blogs/${post.slug}`),
 		...allEntryIds().map((e) => `/entries/${e.entry}`),
 		...allLanguageIds().map((l) => `/languages/${l.lang1}`),
 		...allReferenceIds().map((r) => `/references/${r.ref}`)

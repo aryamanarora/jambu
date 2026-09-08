@@ -1,0 +1,60 @@
+{
+  "entries": 187,
+  "distinct_turner_links": 183,
+  "overlapping_assessment_counts": {
+    "F": 86,
+    "K": 66,
+    "C": 95,
+    "P": 38,
+    "A": 43,
+    "S": 23,
+    "Q": 29
+  },
+  "source_accent_vs_modern_contour": [
+    {
+      "source_accent": "initial",
+      "modern_contour": "first-mora",
+      "records": 60
+    },
+    {
+      "source_accent": "initial",
+      "modern_contour": "implicit-short",
+      "records": 3
+    },
+    {
+      "source_accent": "initial",
+      "modern_contour": "second-mora",
+      "records": 7
+    },
+    {
+      "source_accent": "initial",
+      "modern_contour": "short-or-diphthong",
+      "records": 11
+    },
+    {
+      "source_accent": "noninitial",
+      "modern_contour": "first-mora",
+      "records": 46
+    },
+    {
+      "source_accent": "noninitial",
+      "modern_contour": "implicit-short",
+      "records": 10
+    },
+    {
+      "source_accent": "noninitial",
+      "modern_contour": "second-mora",
+      "records": 35
+    },
+    {
+      "source_accent": "noninitial",
+      "modern_contour": "short-or-diphthong",
+      "records": 15
+    }
+  ],
+  "noninitial_source_early_modern": 46,
+  "noninitial_source_early_modern_formation_flag": 27,
+  "not_a_success_rate": true,
+  "selection_limit": "Only nominal/numeral entries with Turner links and an acute in the first source proto token; not all inherited vocabulary.",
+  "verification_limit": "Manual screening is not universal page-image verification or acceptance of the supplied etymology."
+}

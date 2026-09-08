@@ -38,6 +38,39 @@ For a fast production build while iterating, cap prerendering:
 JAMBU_DB=.dbwork/jambu.db PRERENDER_LIMIT=50 npm run build && npm run preview
 ```
 
+## Writing blog posts
+
+The `/blogs` index and `/blogs/[slug]` essays are prerendered HTML, readable without
+JavaScript or the browser database. Add a Markdown file under `src/lib/blog/posts/`
+and matching metadata in `src/lib/blog/index.ts` (the slug is the filename without `.md`).
+Use an ISO publication date and an `authors` array with `{ name, kind: 'human' | 'agent' }`.
+Mixed authorship is supported. Only set `reviewedBy` after that person has reviewed it;
+set `draft: true` to omit a post from the index, sitemap, and generated routes.
+
+Typed Markdown links resolve against the build database:
+
+```markdown
+[](entry:8082)
+[](form:f_2rrscalqvlihm)
+[](concept:948)
+[](language:H)
+[](ref:CDIAL)
+[Turner’s dictionary](ref:CDIAL)
+```
+
+An empty label uses the database's headword, concept, language name, or author–date
+citation. A supplied label overrides the visible text. Entries and forms link to the
+unified entry route and support existing hover previews. All typed links contribute
+to a deduplicated record appendix with database descriptions; lexical records include
+language, accepted origin, and source links with locators where available. Labels are
+snapshots of the database used for the build. Unknown typed IDs fail rendering instead
+of silently publishing broken links. Use stable public IDs, never SQLite row numbers.
+
+Markdown supports headings, tables, quotations, images, code, and ordinary links.
+Raw HTML is allowed for reviewed, repository-authored content; this is not an untrusted
+submission system. Human and agent submissions use the same file-based workflow.
+Run `node --test tests/blog.test.mjs`, `npm run check`, and a production build before publishing.
+
 ## Deploy
 
 Push to `main` — `.github/workflows/deploy.yml` downloads the release DB as a temporary prerender
