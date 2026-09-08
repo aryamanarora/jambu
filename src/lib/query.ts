@@ -28,6 +28,7 @@ import {
 	readVarints,
 	readVarintPairs,
 	readDeltas,
+	expandCitationGroups,
 	readCorrCells,
 	readCellDict,
 	aliasGroupKey,
@@ -65,19 +66,28 @@ export type { AncestorRef } from './types';
 
 let ids: IdIndex | null = null;
 let cladeNames: string[] = [];
+let tagsetsByRid: string[] = [];
 let corePromise: Promise<void> | null = null;
 
 async function ensureCore(): Promise<IdIndex> {
 	if (ids) return ids;
 	if (!corePromise) {
 		corePromise = (async () => {
-			const [idsRow, misc, clades] = await Promise.all([
+			const [idsRow, misc, clades, tags, tagsets] = await Promise.all([
 				queryOne<{ data: Uint8Array }>('SELECT data FROM ids'),
 				query<{ id: string }>('SELECT id FROM ids_misc ORDER BY rank'),
 				query<{ name: string }>('SELECT name FROM mask_clades ORDER BY rowid'),
+				query<{ txt: string }>('SELECT txt FROM tags ORDER BY rowid'),
+				query<{ data: Uint8Array }>('SELECT data FROM tagsets ORDER BY rowid'),
 				getAllLanguages()
 			]);
 			cladeNames = clades.map((r) => r.name);
+			tagsetsByRid = tagsets.map((set) =>
+				readVarints(set.data)
+					.map((rid) => tags[rid - 1]?.txt ?? '')
+					.filter(Boolean)
+					.join(' ')
+			);
 			ids = new IdIndex(
 				idsRow!.data,
 				misc.map((r) => r.id)
@@ -177,6 +187,7 @@ function hydrate(row: RawLem): HLemma {
 	const l = hydrateLem(row, {
 		ids: ids!,
 		langIdOf: (rid) => langByRid(rid)?.id ?? '',
+		tagsetOf: (rid) => tagsetsByRid[rid - 1] ?? '',
 		cladeNames
 	}) as unknown as HLemma;
 	// carry through any computed extras (e.g. `secondary` from UNION queries)
@@ -222,12 +233,13 @@ async function ensureCites(): Promise<void> {
 	if (citesCache) return;
 	if (!citesPromise) {
 		citesPromise = (async () => {
-			const [cites, refs] = await Promise.all([
-				query<{ rid: number; ref_rid: number; locator: string }>(
-					'SELECT rowid AS rid, ref_rid, locator FROM cites'
+			const [groups, refs] = await Promise.all([
+				query<{ ref_rid: number; first_rid: number; n: number; locators: Uint8Array }>(
+					'SELECT ref_rid, first_rid, n, locators FROM cites'
 				),
 				query<Reference & { rid: number }>('SELECT rowid AS rid, * FROM "references"')
 			]);
+			const cites = expandCitationGroups(groups);
 			citesCache = new Map(cites.map((c) => [c.rid, { ref: c.ref_rid, locator: c.locator }]));
 			referencesByRid = new Map(refs.map((r) => [r.rid, r]));
 		})();
@@ -438,18 +450,21 @@ interface Cond {
 }
 
 /** Whole-token tagset match: rows whose interned tag string contains the token. */
-function tagCond(token: string): Cond {
+async function tagCond(token: string): Promise<Cond> {
+	await ensureCore();
+	const rids = tagsetsByRid
+		.map((txt, i) => (txt.split(/\s+/).includes(token) ? i + 1 : 0))
+		.filter(Boolean);
 	return {
-		sql: `l.tagset_rid IN (SELECT rowid FROM tagsets WHERE (' ' || txt || ' ') LIKE ?)`,
-		params: [`% ${token} %`]
+		sql: `l.tagset_rid IN ${IN_JSON}`,
+		params: [jsonList(rids)]
 	};
 }
 
-let tagsetsCache: Array<{ rid: number; txt: string }> | null = null;
 async function matchingTagsetRids(needle: string, relaxed: boolean): Promise<number[]> {
-	if (!tagsetsCache)
-		tagsetsCache = await query<{ rid: number; txt: string }>('SELECT rowid AS rid, txt FROM tagsets');
-	return tagsetsCache
+	await ensureCore();
+	return tagsetsByRid
+		.map((txt, i) => ({ rid: i + 1, txt }))
 		.filter(({ txt }) =>
 			txt.split(/\s+/).some((tag) =>
 				[tag, tagLabel(tag)].some((value) => unicodeSearchIncludes(value, needle, relaxed))
@@ -689,17 +704,17 @@ async function lemmaConditions(p: ListParams, mode: ListOpts['mode']): Promise<{
 	}
 	if (p.origin_lang?.trim()) {
 		const selected = p.origin_lang.trim();
-		if (selected.startsWith('dialect:')) conds.push(tagCond(selected));
+		if (selected.startsWith('dialect:')) conds.push(await tagCond(selected));
 		else conds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(selected) ?? -1] });
 	}
 	if (p.etymon_lang?.trim()) {
 		const selected = p.etymon_lang.trim();
+		const tag = selected.startsWith('dialect:') ? await tagCond(selected) : null;
 		conds.push(
-			selected.startsWith('dialect:')
+			tag
 				? {
-						sql: `l.origin_rid IN (SELECT rowid FROM lem
-						      WHERE tagset_rid IN (SELECT rowid FROM tagsets WHERE (' ' || txt || ' ') LIKE ?))`,
-						params: [`% ${selected} %`]
+						sql: `l.origin_rid IN (SELECT l.rowid FROM lem l WHERE ${tag.sql})`,
+						params: tag.params
 					}
 				: { sql: 'l.origin_rid IN (SELECT rowid FROM lem WHERE lang_rid = ?)', params: [langRidOf(selected) ?? -1] }
 		);
@@ -718,7 +733,7 @@ async function lemmaConditions(p: ListParams, mode: ListOpts['mode']): Promise<{
 		conds.push({ sql: `(l.flags & 7) = ${REL_UNLINKED}`, params: [] });
 	}
 	if (p.dialect?.trim()) {
-		conds.push(tagCond(p.dialect.trim()));
+		conds.push(await tagCond(p.dialect.trim()));
 	}
 	if ((p.origin ?? '').trim().length >= MIN_SEARCH_CHARS) {
 		conds.push({
@@ -742,7 +757,7 @@ async function lemmaConditions(p: ListParams, mode: ListOpts['mode']): Promise<{
 	}
 	// tags: whole-token match (AND across the selected tags)
 	if (p.tags?.trim()) {
-		for (const t of p.tags.trim().split(/\s+/)) conds.push(tagCond(t));
+		for (const t of p.tags.trim().split(/\s+/)) conds.push(await tagCond(t));
 	}
 
 	// root nodes only: entries not derived from any other etymon (no incoming derivation edge)
@@ -1213,13 +1228,18 @@ export async function getCrossFamilyComparisons(id: string): Promise<CrossFamily
 
 async function attachTextBlocks(lemma: HLemma): Promise<void> {
 	lemma.text_blocks = await query<EntryTextBlock>(
-		`SELECT t.pos AS position, t.kind, t.format, t.content,
+		`SELECT t.pos AS position, tk.txt AS kind, tf.txt AS format, tc.txt AS content,
 		        r.id AS source_id, r.short AS source_label, r.source AS source_citation,
 		        r.progress AS source_progress, r.provenance AS source_provenance,
 		        r.editor AS source_editor, r.ocr AS source_ocr,
 		        r.lemma_count AS source_lemma_count,
-		        r.unetymologised_count AS source_unetymologised_count, t.locator
-		 FROM texts t LEFT JOIN "references" r ON r.rowid = t.ref_rid
+		        r.unetymologised_count AS source_unetymologised_count, tl.txt AS locator
+		 FROM texts t
+		 JOIN text_kinds tk ON tk.rowid = t.kind_rid
+		 JOIN text_formats tf ON tf.rowid = t.format_rid
+		 JOIN text_contents tc ON tc.rowid = t.content_rid
+		 LEFT JOIN text_locators tl ON tl.rowid = t.locator_rid
+		 LEFT JOIN "references" r ON r.rowid = t.ref_rid
 		 WHERE t.lemma_rid = ? ORDER BY t.pos`,
 		[lemma.rid]
 	);
@@ -1409,23 +1429,23 @@ export async function getLanguage(id: string): Promise<Language | null> {
 /** Structured tags attested by at least one row in a language. */
 export async function getLanguageTags(languageId: string): Promise<string[]> {
 	await ensureCore();
-	const rows = await query<{ txt: string }>(
-		`SELECT DISTINCT ts.txt AS txt FROM lem l JOIN tagsets ts ON ts.rowid = l.tagset_rid
-		 WHERE l.lang_rid = ?`,
+	const rows = await query<{ tagset_rid: number }>(
+		`SELECT DISTINCT tagset_rid FROM lem WHERE lang_rid = ? AND tagset_rid IS NOT NULL`,
 		[langRidOf(languageId) ?? -1]
 	);
-	return [...new Set(rows.flatMap((r) => r.txt.split(/\s+/).filter(Boolean)))];
+	return [...new Set(rows.flatMap((r) => (tagsetsByRid[r.tagset_rid - 1] ?? '').split(/\s+/).filter(Boolean)))];
 }
 
 /** Every structured tag in the corpus with its row count — for the (auto-built) tag filter. */
 export async function getAllTags(): Promise<{ tag: string; count: number }[]> {
-	const rows = await query<{ tags: string; c: number }>(
-		`SELECT ts.txt AS tags, COUNT(*) AS c FROM lem l JOIN tagsets ts ON ts.rowid = l.tagset_rid
-		 GROUP BY l.tagset_rid`
+	await ensureCore();
+	const rows = await query<{ tagset_rid: number; c: number }>(
+		`SELECT tagset_rid, COUNT(*) AS c FROM lem WHERE tagset_rid IS NOT NULL GROUP BY tagset_rid`
 	);
 	const counts = new Map<string, number>();
 	for (const r of rows)
-		for (const t of r.tags.split(/\s+/).filter(Boolean)) counts.set(t, (counts.get(t) ?? 0) + r.c);
+		for (const t of (tagsetsByRid[r.tagset_rid - 1] ?? '').split(/\s+/).filter(Boolean))
+			counts.set(t, (counts.get(t) ?? 0) + r.c);
 	return [...counts.entries()]
 		.map(([tag, count]) => ({ tag, count }))
 		.sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));

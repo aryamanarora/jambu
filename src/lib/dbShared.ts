@@ -41,6 +41,60 @@ export function readDeltas(blob: Uint8Array | null | undefined): number[] {
 	return vals.map((v) => (acc += v));
 }
 
+/** Decode strings stored by compact_db.py's UTF-8 front coder. */
+export function readFrontCoded(blob: Uint8Array | null | undefined, count: number): string[] {
+	if (!blob || count === 0) return [];
+	const decoder = new TextDecoder();
+	const out: string[] = [];
+	let offset = 0;
+	let previous = new Uint8Array();
+	const read = (): number => {
+		let value = 0;
+		let shift = 0;
+		for (;;) {
+			if (offset >= blob.length) throw new Error('truncated front-coded string blob');
+			const byte = blob[offset++];
+			value += (byte & 0x7f) * 2 ** shift;
+			if (!(byte & 0x80)) return value;
+			shift += 7;
+		}
+	};
+	for (let i = 0; i < count; i++) {
+		const common = read();
+		const suffixLength = read();
+		if (common > previous.length || offset + suffixLength > blob.length)
+			throw new Error('invalid front-coded string blob');
+		const current = new Uint8Array(common + suffixLength);
+		current.set(previous.subarray(0, common));
+		current.set(blob.subarray(offset, offset + suffixLength), common);
+		offset += suffixLength;
+		out.push(decoder.decode(current));
+		previous = current;
+	}
+	if (offset !== blob.length) throw new Error('trailing bytes in front-coded string blob');
+	return out;
+}
+
+export interface CitationGroupRow {
+	ref_rid: number;
+	first_rid: number;
+	n: number;
+	locators: Uint8Array;
+}
+
+/** Expand the compact per-reference citation groups into citation-id order. */
+export function expandCitationGroups(
+	groups: CitationGroupRow[]
+): Array<{ rid: number; ref_rid: number; locator: string }> {
+	const out: Array<{ rid: number; ref_rid: number; locator: string }> = [];
+	for (const group of groups) {
+		const locators = readFrontCoded(group.locators, group.n);
+		for (let i = 0; i < locators.length; i++)
+			out.push({ rid: group.first_rid + i, ref_rid: group.ref_rid, locator: locators[i] });
+	}
+	return out;
+}
+
 // ── id codec ────────────────────────────────────────────────────────────────
 
 const F_ALPHABET = '234567abcdefghijklmnopqrstuvwxyz';
@@ -238,11 +292,11 @@ export function decodeCladeMask(mask: number | null, names: string[]): string | 
 /** Column list reconstructing the legacy lemma row shape (aliases `ord` back to "order").
  *  Use with `FROM lem l ${LEM_JOINS}`. */
 export const LEM_COLS = `l.rowid AS rid, l.word, l.gloss, l.native, l.phonemic, l.notes,
-	l.etymology, l.ord AS ord, l.lang_rid, l.origin_rid, l.etymon_rid, l.link_rid,
-	ts.txt AS tags, cs.txt AS cognateset, l.clades_mask, l.counts, l.flags,
+	et.txt AS etymology, l.ord AS ord, l.lang_rid, l.origin_rid, l.etymon_rid, l.link_rid,
+	l.tagset_rid, cs.txt AS cognateset, l.clades_mask, l.counts, l.flags,
 	l.cites, l.children`;
-export const LEM_JOINS = `LEFT JOIN tagsets ts ON ts.rowid = l.tagset_rid
-	LEFT JOIN cogsets cs ON cs.rowid = l.cogset_rid`;
+export const LEM_JOINS = `LEFT JOIN cogsets cs ON cs.rowid = l.cogset_rid
+	LEFT JOIN etymologies et ON et.rowid = l.etymology_rid`;
 
 export interface RawLem {
 	rid: number;
@@ -257,7 +311,7 @@ export interface RawLem {
 	origin_rid: number | null;
 	etymon_rid: number | null;
 	link_rid: number | null;
-	tags: string | null;
+	tagset_rid: number | null;
 	cognateset: string | null;
 	clades_mask: number | null;
 	counts: number | null;
@@ -270,6 +324,8 @@ export interface HydrateCtx {
 	ids: IdIndex;
 	/** languages.rowid → languages.id (the textual language id). */
 	langIdOf: (rid: number) => string;
+	/** tagsets.rowid → the exact space-separated legacy tags string. */
+	tagsetOf: (rid: number) => string;
 	/** mask_clades names, bit i ↔ names[i]. */
 	cladeNames: string[];
 }
@@ -303,7 +359,7 @@ export function hydrateLem(row: RawLem, ctx: HydrateCtx): Record<string, unknown
 		variant_of: relation === 'variant' ? origin : null,
 		redirect_to: row.link_rid ? ctx.ids.idOf(row.link_rid) : null,
 		borrowed_from: relation === 'borrowed' ? origin : null,
-		tags: row.tags,
+		tags: row.tagset_rid != null ? ctx.tagsetOf(row.tagset_rid) : null,
 		// legacy shape: attested rows (CLDF pass 2) stored '' rather than NULL
 		cognateset: row.cognateset ?? (row.origin_rid ? '' : null),
 		clades: decodeCladeMask(row.clades_mask, ctx.cladeNames),

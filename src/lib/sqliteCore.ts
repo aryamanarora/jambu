@@ -7,7 +7,8 @@
  * for browsers without SharedWorker.
  */
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
-import { OPFS_DB_PATH } from './dbMeta';
+import { decompress } from 'fzstd';
+import { DB_LOCAL_BYTES, OPFS_DB_PATH } from './dbMeta';
 import { makeVdeltaIn, makeVinIn } from './dbShared';
 import { unicodeSearchFold } from './unicodeSearch';
 
@@ -102,26 +103,50 @@ export async function openCached(): Promise<boolean> {
 	return !!db;
 }
 
-/** Fetch the whole DB file into one Uint8Array, reporting bytes received. */
+/** Fetch the packed DB artifact into one Uint8Array, reporting transferred bytes. */
 async function fetchBytes(url: string, onProgress: (received: number) => void): Promise<Uint8Array> {
 	const resp = await fetch(url, DEV ? { cache: 'no-store' } : undefined);
 	if (!resp.ok || !resp.body) throw new Error(`download failed: HTTP ${resp.status}`);
 	const reader = resp.body.getReader();
+	const expected = Number(resp.headers.get('content-length'));
+	let bytes = Number.isSafeInteger(expected) && expected > 0 ? new Uint8Array(expected) : null;
 	const chunks: Uint8Array[] = [];
 	let received = 0;
 	for (;;) {
 		const { done, value } = await reader.read();
 		if (done) break;
-		chunks.push(value);
+		if (bytes && received + value.length <= bytes.length) bytes.set(value, received);
+		else {
+			if (bytes) {
+				chunks.push(bytes.subarray(0, received));
+				bytes = null;
+			}
+			chunks.push(value);
+		}
 		received += value.length;
 		onProgress(received);
 	}
-	const bytes = new Uint8Array(received);
-	let off = 0;
-	for (const c of chunks) {
-		bytes.set(c, off);
-		off += c.length;
+	if (bytes) {
+		if (received !== bytes.length)
+			throw new Error(`truncated download: expected ${bytes.length} bytes, received ${received}`);
+		return bytes;
 	}
+	const joined = new Uint8Array(received);
+	let offset = 0;
+	for (const chunk of chunks) {
+		joined.set(chunk, offset);
+		offset += chunk.length;
+	}
+	return joined;
+}
+
+/** Expand the transferred artifact and reject truncation or the wrong release asset early. */
+function unpackDatabase(packed: Uint8Array): Uint8Array {
+	const bytes = decompress(packed);
+	const header = new TextDecoder().decode(bytes.subarray(0, 16));
+	if (header !== 'SQLite format 3\0') throw new Error('download did not unpack to a SQLite database');
+	if (bytes.length !== DB_LOCAL_BYTES)
+		throw new Error(`database size mismatch: expected ${DB_LOCAL_BYTES}, received ${bytes.length}`);
 	return bytes;
 }
 
@@ -147,7 +172,8 @@ export function load(url: string, onProgress: (received: number) => void): Promi
 	loadingPromise = (async () => {
 		const version = DEV ? await fetchVersion(url) : null;
 		if (db && version === loadedVersion) return;
-		const bytes = await fetchBytes(url, onProgress);
+		const packed = await fetchBytes(url, onProgress);
+		const bytes = unpackDatabase(packed);
 		if (DEV) {
 			const s = await ensureSqlite();
 			const h = new s.oo1.DB();

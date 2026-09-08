@@ -2,9 +2,8 @@
 """
 build_static_db.py — transform the raw Jambu SQLite DB into a static, browser-queryable form.
 
-The raw data.db (published as a GitHub release asset on moli-mandala/data) is optimised for a
-server with an ORM. For the static GitHub Pages site we query it directly in the browser via
-sql.js-httpvfs, so we bake in everything the client needs:
+The unified CLDF data is optimised here for the static GitHub Pages site, whose browser worker
+restores and queries SQLite locally, so we bake in everything the client needs:
 
   1. Build compact browser tables directly from the unified CLDF data.
   2. Add the compact set of indexes the client query layer relies on.
@@ -46,9 +45,9 @@ CLADE_COLORS = {
     "Nihali": "ff9a00", "Other": "FAF9F6",
 }
 CLADE_ORDER = list(CLADE_COLORS.keys())
-# KEWA's 2,575 source-attributed OCR blocks move the compact database baseline to about 80.6 MB.
+# The 2026-09 corpus is 95.3 MB after grouped citations and dictionary-coded prose/tags.
 # Report future growth above this narrow allowance without interrupting an otherwise valid build.
-OUTPUT_SIZE_WARNING_BYTES = 83_000_000
+OUTPUT_SIZE_WARNING_BYTES = 97_000_000
 
 # These inputs define independently addressable reconstruction records. Even when two rows have
 # identical lexical content and the same parent, their record locators are part of their identity

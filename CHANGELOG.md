@@ -1,5 +1,21 @@
 # Changelog
 
+## db-v29 — 2026-09-08
+
+- Added 2,210 Kusunda attestations from Aaley and Bodt (662), Watters (1,387), and
+  Aaley’s *Kusunda Gipan* (161), with source spellings, grammatical tags, and citation locators.
+- Expanded Nihali provisional etymologies, lexical groupings, and audited contact comparisons.
+- Removed extraction-only clutter from form notes while retaining the source audit records.
+- Compressed the browser download with Zstandard; restored databases preserve citation locators,
+  structured tags, article text, alignments, aliases, and graph relations.
+- Rebuilt 588,949 database nodes, including 29,362 entries and 290,267 reflexes, across
+  409 languages and 523 references. The download is 43.00 MB (97.04 MB expanded).
+- Updated browser cache versioning and deployment to serve the compressed artifact.
+
+Validation: data build, database integrity, complete compaction parity, browser decompression
+round-trip, and eight DB builder tests passed. Svelte check: zero errors, seven warnings.
+Data suite: 1,430 passed, 14 skipped, 21 failures, all present in the pre-run failure cache.
+
 ## db-v28 — 2026-08-31
 
 ### Added

@@ -25,6 +25,7 @@ import {
 	LEM_JOINS,
 	readVarints,
 	readDeltas,
+	expandCitationGroups,
 	aliasGroupKey,
 	aliasLookup,
 	makeVinAny,
@@ -61,18 +62,24 @@ let openedMtime = 0;
 let _ids: IdIndex | null = null;
 let _cladeNames: string[] | null = null;
 let _langById: Map<number, string> | null = null;
+let _tagsetsByRid: string[] | null = null;
 let _dialectPoints: Map<string, { name: string; lat: number; long: number }> | null = null;
 let _guessReflexes: Map<
 	number,
 	Array<{ word: string; phonemic: string | null; language_id: string | null }>
 > | null = null;
+let _citeById: Map<number, { refRid: number; locator: string }> | null = null;
+let _referenceByRid: Map<number, Reference & { reference_rid: number }> | null = null;
 
 function resetCaches(): void {
 	_ids = null;
 	_cladeNames = null;
 	_langById = null;
+	_tagsetsByRid = null;
 	_dialectPoints = null;
 	_guessReflexes = null;
+	_citeById = null;
+	_referenceByRid = null;
 }
 
 export function getDb(): Database.Database {
@@ -124,9 +131,23 @@ function hydrateCtx(): HydrateCtx {
 				(r) => [r.rid, r.id]
 			)
 		);
+	if (!_tagsetsByRid) {
+		const tags = (dbh.prepare('SELECT txt FROM tags ORDER BY rowid').all() as { txt: string }[]).map(
+			(r) => r.txt
+		);
+		_tagsetsByRid = (dbh.prepare('SELECT data FROM tagsets ORDER BY rowid').all() as {
+			data: Buffer;
+		}[]).map((set) =>
+			readVarints(new Uint8Array(set.data))
+				.map((rid) => tags[rid - 1] ?? '')
+				.filter(Boolean)
+				.join(' ')
+		);
+	}
 	return {
 		ids: ids(),
 		langIdOf: (rid) => _langById!.get(rid) ?? '',
+		tagsetOf: (rid) => _tagsetsByRid![rid - 1] ?? '',
 		cladeNames: _cladeNames
 	};
 }
@@ -396,12 +417,11 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 		? (dbh
 				.prepare(
 					`SELECT l.rowid AS rid, l.ord AS ord, l.word, l.gloss, l.phonemic, l.flags, l.origin_rid,
-					        ts.txt AS tags,
+						        l.tagset_rid,
 					        lang.id AS language_id, lang.name AS language, lang.clade AS clade,
 					        lang.color AS color, lang.lat AS lat, lang.long AS long,
 					        lang."order" AS lorder, lang.map_marker AS map_marker
 					 FROM lem l
-					 LEFT JOIN tagsets ts ON ts.rowid = l.tagset_rid
 					 LEFT JOIN languages lang ON lang.rowid = l.lang_rid
 					 WHERE l.rowid IN (SELECT value FROM json_each(?))
 					 ORDER BY lorder, l.word`,
@@ -414,6 +434,7 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 				phonemic: string | null;
 				flags: number;
 				origin_rid: number | null;
+				tagset_rid: number | null;
 				tags: string | null;
 				language_id: string | null;
 				language: string | null;
@@ -425,6 +446,8 @@ export function getConceptDetail(id: string): ConceptDetail | null {
 				map_marker: string | null;
 			}>)
 		: [];
+	for (const row of linked)
+		row.tags = row.tagset_rid == null ? null : (hydrateCtx().tagsetOf(row.tagset_rid) ?? null);
 	// legacy row order: immediate etymon id (binary), then language order (NULLs first), then word
 	linked.sort((a, b) => {
 		const ea = idx.idOf(a.origin_rid ?? a.rid);
@@ -645,17 +668,28 @@ export function getEntryMeta(id: string): EntryMeta | null {
 
 function referencesForCiteIds(citeIds: number[]): Reference[] {
 	if (!citeIds.length) return [];
-	const placeholders = citeIds.map(() => '?').join(',');
-	const rows = getDb()
-		.prepare(
-			`SELECT r.rowid AS reference_rid, r.id, r.short, r.source, r.progress,
-			        r.provenance, r.editor, r.ocr, r.etymology_provenance,
-			        r.lemma_count, r.unetymologised_count,
-			        c.locator
-			 FROM cites c JOIN "references" r ON r.rowid = c.ref_rid
-			 WHERE c.rowid IN (${placeholders}) ORDER BY r.short, c.rowid`
-		)
-		.all(...citeIds) as Array<Reference & { reference_rid: number }>;
+	if (!_citeById || !_referenceByRid) {
+		const groups = getDb()
+			.prepare('SELECT ref_rid, first_rid, n, locators FROM cites ORDER BY first_rid')
+			.all() as Array<{ ref_rid: number; first_rid: number; n: number; locators: Buffer }>;
+		_citeById = new Map(
+			expandCitationGroups(
+				groups.map((g) => ({ ...g, locators: new Uint8Array(g.locators) }))
+			).map((c) => [c.rid, { refRid: c.ref_rid, locator: c.locator }])
+		);
+		_referenceByRid = new Map(
+			(getDb().prepare('SELECT rowid AS reference_rid, * FROM "references"').all() as Array<
+				Reference & { reference_rid: number }
+			>).map((r) => [r.reference_rid, r])
+		);
+	}
+	const rows: Array<Reference & { reference_rid: number; locator: string }> = [];
+	for (const cid of citeIds) {
+		const cite = _citeById.get(cid);
+		const reference = cite ? _referenceByRid.get(cite.refRid) : undefined;
+		if (reference && cite) rows.push({ ...reference, locator: cite.locator });
+	}
+	rows.sort((a, b) => (a.short ?? '').localeCompare(b.short ?? ''));
 	const byReference = new Map<number, Reference>();
 	for (const row of rows) {
 		const existing = byReference.get(row.reference_rid);
@@ -684,13 +718,18 @@ function referencesForCiteIds(citeIds: number[]): Reference[] {
 function getTextBlocks(rid: number): Lemma['text_blocks'] {
 	return getDb()
 		.prepare(
-			`SELECT t.pos AS position, t.kind, t.format, t.content,
+			`SELECT t.pos AS position, tk.txt AS kind, tf.txt AS format, tc.txt AS content,
 			        r.id AS source_id, r.short AS source_label, r.source AS source_citation,
 			        r.progress AS source_progress, r.provenance AS source_provenance,
 			        r.editor AS source_editor, r.ocr AS source_ocr,
 			        r.lemma_count AS source_lemma_count,
-			        r.unetymologised_count AS source_unetymologised_count, t.locator
-			 FROM texts t LEFT JOIN "references" r ON r.rowid = t.ref_rid
+			        r.unetymologised_count AS source_unetymologised_count, tl.txt AS locator
+			 FROM texts t
+			 JOIN text_kinds tk ON tk.rowid = t.kind_rid
+			 JOIN text_formats tf ON tf.rowid = t.format_rid
+			 JOIN text_contents tc ON tc.rowid = t.content_rid
+			 LEFT JOIN text_locators tl ON tl.rowid = t.locator_rid
+			 LEFT JOIN "references" r ON r.rowid = t.ref_rid
 			 WHERE t.lemma_rid = ? ORDER BY t.pos`
 		)
 		.all(rid) as Lemma['text_blocks'];

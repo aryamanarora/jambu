@@ -9,9 +9,8 @@ on:
 # Deployment target (project page at https://aryamanarora.github.io/jambu/):
 #   • BASE_PATH — "/<repo>" for a project page; "" for a custom domain / user root.
 #   • SITE_URL  — absolute origin (no path), used only for sitemap.xml <loc>s.
-#   • STATIC_DB_URL — the pre-built SQLite DB (FTS + alignment + correspondence tables),
-#                     published as a release asset. Regenerate locally with
-#                     `npm run db:transform` and upload as `jambu.db` on a release.
+#   • STATIC_DB_URL — the pre-built SQLite source published as a release asset. CI packs this
+#                     build input before deployment; browsers receive only `jambu.db.zst`.
 # ─────────────────────────────────────────────────────────────────────────────
 env:
   BASE_PATH: '/jambu'
@@ -44,17 +43,18 @@ jobs:
 
       - name: Download pre-built database (release asset)
         run: |
-          mkdir -p static/db
-          curl -L --fail "$STATIC_DB_URL" -o static/db/jambu.db
-          echo "Downloaded $(du -h static/db/jambu.db | cut -f1)"
+          mkdir -p .dbwork
+          curl -L --fail "$STATIC_DB_URL" -o .dbwork/jambu.db
+          npm run db:stage
+          echo "Packed deploy artifact: $(du -h static/db/jambu.db.zst | cut -f1)"
 
       - name: Build site (prerender canonical pages + SPA fallback)
         run: npm run build
         env:
           BASE_PATH: ${{ env.BASE_PATH }}
           SITE_URL: ${{ env.SITE_URL }}
-          # prerender reads the same DB via better-sqlite3
-          JAMBU_DB: static/db/jambu.db
+          # prerender reads a temporary expanded copy via better-sqlite3
+          JAMBU_DB: .dbwork/jambu.db
           # no PRERENDER_LIMIT → prerender ALL entries/languages/references
 
       - uses: actions/configure-pages@v5

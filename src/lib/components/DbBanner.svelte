@@ -1,12 +1,11 @@
 <script lang="ts">
-	// A slim banner that gates the in-browser database. The dictionary data lives in a ~76 MB
-	// download; rather than pull it automatically, we ask the user once. After loading it's cached
-	// on their device (OPFS), so this only appears on the first visit (or after a data update).
+	// A slim banner that gates the packed in-browser database. After loading it is expanded into
+	// private browser storage (OPFS), so this only appears on the first visit after a data update.
 	import { dbUI, loadDatabase } from '$lib/db.svelte';
-	import { DB_APPROX_BYTES } from '$lib/dbMeta';
+	import { DB_DOWNLOAD_BYTES } from '$lib/dbMeta';
 
 	const mb = (b: number) => (b / 1e6).toFixed(0);
-	const approxMb = mb(DB_APPROX_BYTES);
+	const approxMb = mb(DB_DOWNLOAD_BYTES);
 </script>
 
 {#if dbUI.status !== 'ready' && dbUI.status !== 'checking'}

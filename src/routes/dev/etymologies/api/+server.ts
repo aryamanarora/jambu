@@ -3,7 +3,13 @@ import { error, json } from '@sveltejs/kit';
 import { readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { getDb, ids } from '$lib/server/db';
-import { readDeltas, readVarints, FLAG_SECTION, REL_UNLINKED } from '$lib/dbShared';
+import {
+	expandCitationGroups,
+	readDeltas,
+	readVarints,
+	FLAG_SECTION,
+	REL_UNLINKED
+} from '$lib/dbShared';
 import { ETYMOLOGY_GUESS_THRESHOLD, soundSimilarity } from '$lib/etymologyGuess';
 import type { RequestHandler } from './$types';
 
@@ -38,12 +44,13 @@ function citeInfo() {
 				unetymologised_count: number;
 			}[]).map((r) => [r.rid, r])
 		);
+		const groups = db.prepare(
+			'SELECT ref_rid, first_rid, n, locators FROM cites ORDER BY first_rid'
+		).all() as Array<{ ref_rid: number; first_rid: number; n: number; locators: Buffer }>;
 		_citeInfo = new Map(
-			(db.prepare('SELECT rowid AS rid, ref_rid, locator FROM cites').all() as {
-				rid: number;
-				ref_rid: number;
-				locator: string;
-			}[]).map((c) => {
+			expandCitationGroups(
+				groups.map((g) => ({ ...g, locators: new Uint8Array(g.locators) }))
+			).map((c) => {
 				const ref = refs.get(c.ref_rid);
 				return [
 					c.rid,

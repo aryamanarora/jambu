@@ -18,9 +18,11 @@ v2 schema (mirrored by src/lib/dbShared.ts — the two codecs MUST stay in sync)
                  reflex_count*1024 + lang_count on entry rows.
   ids            one row; concatenation of the 376k sorted fixed-width (10-byte) id records.
   ids_misc       rank → id text for the handful of ids the fixed-width codec can't express.
-  tagsets        rowid → the distinct `tags` strings (lem.tagset_rid).
+  tags           rowid → one structured tag token.
+  tagsets        rowid → varint tag-rowids for one distinct tag set (lem.tagset_rid).
   cogsets        rowid → the distinct cognateset labels (lem.cogset_rid).
-  cites          rowid → (reference_rid, locator): the distinct citation edges (lem.cites blob).
+  cites          one row per reference: its contiguous citation-id range plus front-coded,
+                 lexicographically sorted locators (lem.cites still stores citation ids).
   comparisons    source-attributed article comparisons with both endpoints remapped to lem rowids;
                  relation/direction/confidence stay readable because this table is small.
   aliases        legacy-id redirects, grouped: prefix → blob of (ΔM varint, lemma rowid varint)
@@ -96,6 +98,30 @@ def varints(values) -> bytes:
     out = bytearray()
     for v in values:
         put_varint(out, v)
+    return bytes(out)
+
+
+def frontcode(strings: list[str]) -> bytes:
+    """Losslessly front-code sorted UTF-8 strings as (prefix length, suffix length, suffix).
+
+    Citation locators are already sorted within a reference when citation ids are assigned.
+    Keeping their ids stable while storing each reference as one blob removes both repeated
+    prose prefixes and the per-row SQLite B-tree overhead.
+    """
+    out = bytearray()
+    previous = b""
+    for value in strings:
+        current = value.encode("utf-8")
+        common = 0
+        for a, b in zip(previous, current):
+            if a != b:
+                break
+            common += 1
+        suffix = current[common:]
+        put_varint(out, common)
+        put_varint(out, len(suffix))
+        out.extend(suffix)
+        previous = current
     return bytes(out)
 
 
@@ -242,6 +268,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         t for (t,) in con.execute("SELECT DISTINCT tags FROM lemmas WHERE tags IS NOT NULL AND tags != ''")
     )
     tagset_rid = {t: i + 1 for i, t in enumerate(tag_texts)}
+    tag_tokens = sorted({token for text in tag_texts for token in text.split()})
+    tag_rid = {token: i + 1 for i, token in enumerate(tag_tokens)}
     cog_texts = sorted(
         c
         for (c,) in con.execute(
@@ -254,6 +282,11 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         for ref, loc in con.execute("SELECT DISTINCT reference_rid, locator FROM lemma_reference")
     )
     cite_rid = {k: i + 1 for i, k in enumerate(cite_keys)}
+
+    # Repeated long-form etymologies are display-only, so intern them without changing any
+    # queryable/searchable lemma text. Empty strings remain distinct from NULL.
+    etymology_texts = sorted({r[16] for r in old if r[16] is not None})
+    etymology_rid = {t: i + 1 for i, t in enumerate(etymology_texts)}
 
     cites_of: dict[int, list[int]] = defaultdict(list)  # old lemma rowid → sorted cite ids
     for lemma_rid, ref_rid, loc in con.execute(
@@ -367,7 +400,7 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     con.executescript(
         """
         CREATE TABLE lem (
-            word TEXT, gloss TEXT, native TEXT, phonemic TEXT, notes TEXT, etymology TEXT,
+            word TEXT, gloss TEXT, native TEXT, phonemic TEXT, notes TEXT, etymology_rid INTEGER,
             ord INTEGER, lang_rid INTEGER, origin_rid INTEGER, etymon_rid INTEGER,
             link_rid INTEGER, tagset_rid INTEGER, cogset_rid INTEGER, clades_mask INTEGER,
             counts INTEGER, flags INTEGER NOT NULL,
@@ -378,17 +411,22 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         -- bit i-1 of lem.clades_mask ↔ mask_clades rowid i (the client must use THIS alphabet,
         -- not its own CLADE_ORDER constant, which can drift from the build's).
         CREATE TABLE mask_clades (name TEXT NOT NULL);
-        CREATE TABLE tagsets (txt TEXT NOT NULL);
+        CREATE TABLE tags (txt TEXT NOT NULL);
+        CREATE TABLE tagsets (data BLOB NOT NULL);
         CREATE TABLE cogsets (txt TEXT NOT NULL);
-        CREATE TABLE cites (ref_rid INTEGER NOT NULL, locator TEXT NOT NULL);
+        CREATE TABLE etymologies (txt TEXT NOT NULL);
+        CREATE TABLE cites (
+            ref_rid INTEGER PRIMARY KEY, first_rid INTEGER NOT NULL,
+            n INTEGER NOT NULL, locators BLOB NOT NULL
+        ) WITHOUT ROWID;
         """
     )
     con.executemany(
-        "INSERT INTO lem (rowid, word, gloss, native, phonemic, notes, etymology, ord, lang_rid,"
+        "INSERT INTO lem (rowid, word, gloss, native, phonemic, notes, etymology_rid, ord, lang_rid,"
         " origin_rid, etymon_rid, link_rid, tagset_rid, cogset_rid, clades_mask, counts, flags,"
         " cites, children)"
         " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        lem_rows,
+        [row[:6] + (etymology_rid.get(row[6]),) + row[7:] for row in lem_rows],
     )
     con.execute("INSERT INTO ids (data) VALUES (?)", (b"".join(recs),))
     con.executemany(
@@ -399,27 +437,83 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
         "INSERT INTO mask_clades (rowid, name) VALUES (?,?)",
         [(i + 1, c) for i, c in enumerate(mask_alphabet)],
     )
-    con.executemany("INSERT INTO tagsets (rowid, txt) VALUES (?,?)", [(i + 1, t) for i, t in enumerate(tag_texts)])
+    con.executemany(
+        "INSERT INTO tags (rowid, txt) VALUES (?,?)",
+        [(i + 1, token) for i, token in enumerate(tag_tokens)],
+    )
+    con.executemany(
+        "INSERT INTO tagsets (rowid, data) VALUES (?,?)",
+        [
+            (i + 1, varints(tag_rid[token] for token in text.split()))
+            for i, text in enumerate(tag_texts)
+        ],
+    )
     con.executemany("INSERT INTO cogsets (rowid, txt) VALUES (?,?)", [(i + 1, c) for i, c in enumerate(cog_texts)])
     con.executemany(
-        "INSERT INTO cites (rowid, ref_rid, locator) VALUES (?,?,?)",
-        [(i + 1, k[0], k[1]) for i, k in enumerate(cite_keys)],
+        "INSERT INTO etymologies (rowid, txt) VALUES (?,?)",
+        [(i + 1, t) for i, t in enumerate(etymology_texts)],
+    )
+    cite_groups: dict[int, list[str]] = defaultdict(list)
+    for ref_rid_, locator in cite_keys:
+        cite_groups[ref_rid_].append(locator)
+    con.executemany(
+        "INSERT INTO cites (ref_rid, first_rid, n, locators) VALUES (?,?,?,?)",
+        [
+            (ref_rid_, cite_rid[(ref_rid_, locators[0])], len(locators), frontcode(locators))
+            for ref_rid_, locators in cite_groups.items()
+        ],
     )
     # Independently ordered/attributed entry prose.  Keep kind and format as readable strings:
     # their cardinality is tiny and this makes future block types schema-compatible.
-    text_rows = [
+    raw_text_rows = [
         (new_rowid_of_old[lemma_rid], pos, kind, fmt, content, ref_rid, locator)
         for lemma_rid, pos, kind, fmt, content, ref_rid, locator in con.execute(
             "SELECT lemma_rid,pos,kind,format,content,reference_rid,locator "
             "FROM lemma_text ORDER BY lemma_rid,pos"
         )
     ]
-    con.execute(
-        "CREATE TABLE texts (lemma_rid INTEGER NOT NULL, pos INTEGER NOT NULL, "
-        "kind TEXT NOT NULL, format TEXT NOT NULL, content TEXT NOT NULL, "
-        "ref_rid INTEGER, locator TEXT, PRIMARY KEY (lemma_rid,pos)) WITHOUT ROWID"
+    text_kinds = sorted({r[2] for r in raw_text_rows})
+    text_formats = sorted({r[3] for r in raw_text_rows})
+    text_contents = sorted({r[4] for r in raw_text_rows})
+    text_locators = sorted({r[6] for r in raw_text_rows if r[6] is not None})
+    kind_rid = {v: i + 1 for i, v in enumerate(text_kinds)}
+    format_rid = {v: i + 1 for i, v in enumerate(text_formats)}
+    content_rid = {v: i + 1 for i, v in enumerate(text_contents)}
+    locator_rid = {v: i + 1 for i, v in enumerate(text_locators)}
+    con.executescript(
+        """
+        CREATE TABLE text_kinds (txt TEXT NOT NULL);
+        CREATE TABLE text_formats (txt TEXT NOT NULL);
+        CREATE TABLE text_contents (txt TEXT NOT NULL);
+        CREATE TABLE text_locators (txt TEXT NOT NULL);
+        CREATE TABLE texts (
+            lemma_rid INTEGER NOT NULL, pos INTEGER NOT NULL,
+            kind_rid INTEGER NOT NULL, format_rid INTEGER NOT NULL,
+            content_rid INTEGER NOT NULL, ref_rid INTEGER, locator_rid INTEGER,
+            PRIMARY KEY (lemma_rid,pos)
+        ) WITHOUT ROWID;
+        """
     )
-    con.executemany("INSERT INTO texts VALUES (?,?,?,?,?,?,?)", text_rows)
+    for table, values in (
+        ("text_kinds", text_kinds),
+        ("text_formats", text_formats),
+        ("text_contents", text_contents),
+        ("text_locators", text_locators),
+    ):
+        con.executemany(
+            f"INSERT INTO {table} (rowid, txt) VALUES (?,?)",
+            [(i + 1, value) for i, value in enumerate(values)],
+        )
+    con.executemany(
+        "INSERT INTO texts VALUES (?,?,?,?,?,?,?)",
+        [
+            (
+                lemma_rid, pos, kind_rid[kind], format_rid[fmt], content_rid[content],
+                ref_rid, locator_rid.get(locator),
+            )
+            for lemma_rid, pos, kind, fmt, content, ref_rid, locator in raw_text_rows
+        ],
+    )
 
     # Article-level comparisons are symmetric at query time, so remap both old lemma rowids and
     # retain two narrow endpoint indexes.  This table is intentionally not folded into `edges`:
@@ -462,7 +556,8 @@ def compact(con: sqlite3.Connection, clade_order: list[str]) -> None:
     con.execute("CREATE INDEX idx_comparisons_entry ON comparisons(entry_rid)")
     con.execute("CREATE INDEX idx_comparisons_compared ON comparisons(compared_rid)")
     log(f"built lem ({len(lem_rows)} rows), {len(tag_texts)} tagsets, {len(cog_texts)} cogsets, "
-        f"{len(cite_keys)} citation edges, {len(comparison_rows)} comparisons")
+        f"{len(cite_keys)} citations in {len(cite_groups)} groups, "
+        f"{len(etymology_texts)} etymologies, {len(comparison_rows)} comparisons")
 
     # 6. per-language display-order lists (replaces the (language_id, "order") index).
     lex_of: dict[int, list[tuple[int, int]]] = defaultdict(list)

@@ -13,7 +13,7 @@
  */
 import { browser } from '$app/environment';
 import { base } from '$app/paths';
-import { DB_APPROX_BYTES } from './dbMeta';
+import { DB_DOWNLOAD_BYTES } from './dbMeta';
 
 // dev loads the local DB automatically (no manual gate); prod waits for the user to opt in.
 const DEV = import.meta.env.DEV;
@@ -34,10 +34,9 @@ export const dbUI = {
 	get receivedBytes() {
 		return receivedBytes;
 	},
-	/** 0..1 download progress (approximate — the transfer is gzipped, so we compare against a
-	 *  known uncompressed size). */
+	/** 0..1 download progress against the packed release artifact. */
 	get progress() {
-		return Math.min(1, receivedBytes / DB_APPROX_BYTES);
+		return Math.min(1, receivedBytes / DB_DOWNLOAD_BYTES);
 	},
 	get error() {
 		return errorMsg;
@@ -48,7 +47,7 @@ export const dbUI = {
 
 const LOCK = 'jambu-db-leader';
 const CHANNEL = 'jambu-db';
-const DB_URL = () => `${base}/db/jambu.db`;
+const DB_URL = () => `${base}/db/jambu.db.zst`;
 
 let started = false;
 // A route load can query the database before the root layout mounts (notably on a direct
@@ -231,7 +230,7 @@ async function becomeLeader() {
 	worker.onmessage = (e: MessageEvent) => onWorkerMessage(e.data);
 	try {
 		// A named SharedWorker is one process for every dev tab on this origin. Its init performs a
-		// cheap HEAD freshness check and downloads only when .dbwork/jambu.db has changed.
+		// cheap HEAD freshness check and downloads only when the served packed artifact has changed.
 		if (sharedDevWorker) {
 			status = 'downloading';
 			await workerCall({ type: 'init', url: DB_URL() });

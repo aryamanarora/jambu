@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { dbUI, deleteDatabase, loadDatabase } from '$lib/db.svelte';
-	import { DB_APPROX_BYTES, DB_VERSION } from '$lib/dbMeta';
+	import { DB_DOWNLOAD_BYTES, DB_LOCAL_BYTES, DB_VERSION } from '$lib/dbMeta';
 
 	let { variant = 'nav' }: { variant?: 'nav' | 'menu' } = $props();
 
@@ -9,7 +9,8 @@
 	let deleting = $state(false);
 	let actionError = $state<string | null>(null);
 
-	const approximateMb = Math.round(DB_APPROX_BYTES / 1e6);
+	const downloadMb = Math.round(DB_DOWNLOAD_BYTES / 1e6);
+	const localMb = Math.round(DB_LOCAL_BYTES / 1e6);
 	const statusLabel = $derived(
 		dbUI.status === 'ready'
 			? 'Loaded'
@@ -67,9 +68,9 @@
 			<div>
 				<b>{statusLabel}</b>
 				{#if dbUI.status === 'ready'}
-					<span>Ready for searches · ~{approximateMb} MB</span>
+					<span>Ready for searches · ~{localMb} MB stored locally</span>
 				{:else if dbUI.status === 'downloading'}
-					<span>{Math.round(dbUI.receivedBytes / 1e6)} of ~{approximateMb} MB downloaded</span>
+					<span>{Math.round(dbUI.receivedBytes / 1e6)} of ~{downloadMb} MB downloaded</span>
 				{:else if dbUI.status === 'checking'}
 					<span>Looking for a saved copy</span>
 				{:else if dbUI.status === 'error'}

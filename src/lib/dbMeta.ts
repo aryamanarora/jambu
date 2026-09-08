@@ -1,11 +1,12 @@
 // Metadata shared between the main thread and the SQLite worker.
 //
-// DB_VERSION namespaces the copy cached in OPFS. Bump it whenever the deployed jambu.db changes
+// DB_VERSION namespaces the copy cached in OPFS. Bump it whenever the deployed database changes
 // so returning visitors re-download instead of querying a stale cached copy.
-export const DB_VERSION = '28';
+export const DB_VERSION = '29';
 
 /** Path of the DB inside the OPFS SAHPool VFS (versioned for cache-busting). */
 export const OPFS_DB_PATH = `/jambu-v${DB_VERSION}.db`;
 
-/** Approximate uncompressed DB size, used only to render a download progress bar. */
-export const DB_APPROX_BYTES = 89_161_728; // db-v28 (89.2 MB on disk)
+/** Exact sizes for the downloadable Zstandard artifact and its local SQLite image. */
+export const DB_DOWNLOAD_BYTES = 43_000_184; // db-v29 (43.00 MB transferred)
+export const DB_LOCAL_BYTES = 97_042_432; // expanded once into private OPFS storage

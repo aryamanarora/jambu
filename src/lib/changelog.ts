@@ -18,6 +18,33 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-09-08',
+		label: '8 September 2026',
+		title: 'Kusunda sources and Nihali etymologies',
+		changes: [
+			'Added Kusunda vocabulary from Aaley and Bodt, Watters, and Aaley’s Kusunda Gipan, preserving source spellings, grammatical information, and exact citations.',
+			'Expanded Nihali etymological groupings and source comparisons, keeping provisional analyses and uncertain contact proposals visible.',
+			'The dictionary now downloads as a smaller compressed file and restores into the browser’s local cache, preserving its lexical evidence and search features.',
+			'Cleaned editorial notes while retaining their source evidence and stable form links.'
+		],
+		ingested: {
+			languages: [{ id: 'Kusunda', label: 'Kusunda' }],
+			sources: [
+				{ id: 'aaley-bodt2020kusunda', label: 'Aaley & Bodt 2020' },
+				{ id: 'watters2006kusunda', label: 'Watters 2006' },
+				{ id: 'aaley2021kusundagipan', label: 'Aaley 2021' }
+			]
+		}
+	},
+	{
+		date: '2026-09-01',
+		label: '1 September 2026',
+		title: 'A lighter dictionary download',
+		changes: [
+			'The complete dictionary download is now 42.54 MB—less than half its former size—while preserving every entry, citation locator, structured tag, article block, alignment, alias, and graph relation.'
+		]
+	},
+	{
 		date: '2026-08-30',
 		label: '30 August 2026',
 		title: 'Survey wordlists and a broader dialect atlas',

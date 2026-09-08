@@ -37,7 +37,7 @@ the build/dev layer still registers the older `vin_any(blob, json)` for the dev 
 ## The DB, end to end
 
 ```
-../data/cldf/*   --(scripts/build_static_db.py)-->  .dbwork/jambu.db  --(db:stage)-->  static/db/jambu.db
+../data/cldf/*   --(scripts/build_static_db.py)-->  .dbwork/jambu.db  --(db:stage)-->  static/db/jambu.db.zst
                        npm run db:transform                                 npm run db:stage
 ```
 
@@ -54,7 +54,7 @@ the build/dev layer still registers the older `vin_any(blob, json)` for the dev 
   `JAMBU_SKIP_COMPACT=1`) — it verifies the compaction end to end. For schema-semantics changes,
   `scripts/semantic_parity.mjs` + `scripts/semantic_compare.mjs` prove parity across schema
   generations with enumerated waivers.
-- `npm run db:stage` copies it to `static/db/jambu.db`, served at `/db/jambu.db`.
+- `npm run db:stage` packs it to `static/db/jambu.db.zst`, served at `/db/jambu.db.zst`.
 - In **CI** the DB is NOT built — it's downloaded from a release asset (`STATIC_DB_URL` in
   `.github/workflows/deploy.yml`). So a data change only reaches prod after you rebuild `jambu.db`
   and re-upload it to the release. See "Shipping" below.
