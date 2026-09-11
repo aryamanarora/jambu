@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-09-08T15:31:39.972574+00:00",
+  "scope": "Final article and generated supplement; lexical database unchanged; no push or deployment.",
+  "checks": {
+    "blog_renderer_tests": "4 passed",
+    "svelte_check": {
+      "errors": 0,
+      "existing_warnings": 7
+    },
+    "production_build": {
+      "passed": true,
+      "prerender_seed_limit": 50,
+      "html_pages": 23125,
+      "note": "Build passed before final prose refinements; final prose then inspected through local SSR."
+    },
+    "article_form_links": 11,
+    "article_reference_links": 1,
+    "supplement_entry_links": 181,
+    "supplement_anchors": 7,
+    "download_copies_equal": [
+      "casebook.md",
+      "vowel-lowering-audit.md",
+      "bibliography.md",
+      "cluster-triage.tsv",
+      "reconstruction-audit.tsv",
+      "candidate-records.tsv",
+      "legacy-level-flags.tsv",
+      "inventory-summary.json"
+    ],
+    "table_rows": {
+      "cluster-triage.tsv": 116,
+      "reconstruction-audit.tsv": 13
+    },
+    "browser": {
+      "essay": "Desktop rendering, reconstruction stars, evidence links and minimal-account jump inspected.",
+      "supplement": "Search for 1787 displayed 1 of 116 groups; clearing restored 116 of 116.",
+      "responsive_viewport": "Not separately tested."
+    }
+  },
+  "limitations": [
+    "External scholarly links were consulted during research but not all re-fetched in this final check.",
+    "Canonical public links become available after deployment; current verification used localhost:5202/jambu."
+  ],
+  "final_artifact_sha256": {
+    "src/lib/blog/posts/telugu-metathesis.md": "489dff1133fac79eb3e7697a810973bb426a1ddd9bb226b6727e2cd7f89df018",
+    "static/research/telugu-metathesis/evidence.html": "031993ffc87ee35b8c8239a967be9bbb0bb5aacd69122a003d838253c8af7faf"
+  }
+}

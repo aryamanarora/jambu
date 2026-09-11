@@ -1,0 +1,2152 @@
+{
+  "annotation-audit.json": {
+    "raw_records": 25505,
+    "analysis_tokens": 25593,
+    "family_first_pass": 1686,
+    "languages": {
+      "Phal": {
+        "records": 5477,
+        "raw_linked": 2137,
+        "research_linked": 2232,
+        "strict_excluded": 16,
+        "manual_link_records": 95,
+        "primary_reading_records": 0
+      },
+      "Sh": {
+        "records": 16128,
+        "raw_linked": 7952,
+        "research_linked": 8409,
+        "strict_excluded": 42,
+        "manual_link_records": 457,
+        "primary_reading_records": 0
+      },
+      "Kalk": {
+        "records": 1145,
+        "raw_linked": 152,
+        "research_linked": 449,
+        "strict_excluded": 24,
+        "manual_link_records": 297,
+        "primary_reading_records": 50
+      },
+      "Kund": {
+        "records": 316,
+        "raw_linked": 166,
+        "research_linked": 176,
+        "strict_excluded": 1,
+        "manual_link_records": 10,
+        "primary_reading_records": 13
+      },
+      "bro": {
+        "records": 670,
+        "raw_linked": 8,
+        "research_linked": 166,
+        "strict_excluded": 25,
+        "manual_link_records": 158,
+        "primary_reading_records": 275
+      },
+      "Sv": {
+        "records": 1238,
+        "raw_linked": 278,
+        "research_linked": 601,
+        "strict_excluded": 100,
+        "manual_link_records": 323,
+        "primary_reading_records": 0
+      },
+      "Ush": {
+        "records": 531,
+        "raw_linked": 2,
+        "research_linked": 202,
+        "strict_excluded": 12,
+        "manual_link_records": 200,
+        "primary_reading_records": 0
+      }
+    },
+    "record_decision_count": 54,
+    "research_link_records": 1540,
+    "source_reading_records": 338,
+    "brokskat_primary_items": 269
+  },
+  "palula-u-adjectives-summary.json": {
+    "raw_records": 134,
+    "unique_citation_types": 129,
+    "consistent": 115,
+    "exception": 8,
+    "unscorable": 6,
+    "by_inflection_class": {
+      "Reg-u-masculine-with-feminine-i": {
+        "consistent": 78,
+        "exception": 8,
+        "unscorable": 4
+      },
+      "Uml-u-masculine-with-feminine-i": {
+        "consistent": 37,
+        "unscorable": 2
+      }
+    },
+    "domain": "Regular or umlaut gender-inflecting citation ending in short u, including accented ú, with recorded feminine-i inflection class; includes participial forms. Unequal vowel sequences and multiple words not scored. Variant entries can inherit the main lemma feminine metadata, so not every cited feminine is a verified dialect-specific counterpart. No filter on observed accent.",
+    "audit_correction": "An earlier literal-final-u selection omitted eight final-accented ú citations. This version selects the accent-stripped final segment and supersedes the earlier exceptionless count."
+  },
+  "palula-tagged-u-summary.json": {
+    "raw_records": 131,
+    "unique_form_gloss_types": 126,
+    "counts": {
+      "consistent": 111,
+      "exception": 9,
+      "unscorable": 6
+    },
+    "domain": "Explicit source adjective tag, final short u including accented ú; no inflection-class filter. This corrects an earlier accent-sensitive literal-suffix selection."
+  },
+  "gilgit-o-adjectives-summary.json": {
+    "raw_records": 123,
+    "unique_form_gloss_types": 121,
+    "counts": {
+      "consistent": 110,
+      "unscorable": 11
+    },
+    "source_counts": {
+      "buddruss-shina1996": {
+        "consistent": 13,
+        "unscorable": 2
+      },
+      "degener-shina2008": {
+        "consistent": 99,
+        "unscorable": 9
+      }
+    },
+    "domain": "Source adjective tag, at least two nuclei, final short o. Unequal sequences, compound boundaries and absent/multiple marks not scored. Independent source transcriptions are preserved; form/gloss types are not independent historical etyma."
+  },
+  "palula-umlaut-i-summary.json": {
+    "form_gloss_cells": 74,
+    "comparable_form_cells": 73,
+    "comparable_lexemes": 66,
+    "status_counts": {
+      "consistent": 73,
+      "excluded-unmatched-paradigm": 1
+    },
+    "domain": "Source i-decl nouns with a full printed inflection: consonant-final citation whose last vowel is long aa, paired with one-more-nucleus inflection ending long ee plus short i. Selection ignores all accents. No suffix-only expansions. Same-source modern morphological prediction, not proof of a unique OIA ancestor."
+  },
+  "palula-i-decl-extension-summary.json": {
+    "candidates": 43,
+    "valid_form_cells": 42,
+    "valid_lexemes": 30,
+    "status_counts": {
+      "consistent": 42,
+      "excluded-unverified-variant-paradigm": 1
+    },
+    "citation_outcomes": {
+      "L": 24,
+      "short-monosyllable": 7,
+      "E": 6,
+      "S": 5
+    },
+    "inflected_positions": {
+      "1": 42
+    },
+    "scope": "Extension outside the long-aa/ee+i subclass; full i-declension inflections only, one extra nucleus, consonant-final citations. This is a new structural subset, not random held-out sampling."
+  },
+  "coverage": [
+    {
+      "language": "Sh",
+      "raw_records": 16128,
+      "analysis_tokens": 16151,
+      "raw_linked": 7952,
+      "research_linked": 8409,
+      "research_families": 1249,
+      "unlinked": 7719,
+      "review_levels": {
+        "family-context-first-pass": 7799,
+        "explicit-structural-or-paradigm-review": 583,
+        "explicit-record-decision": 17,
+        "unlinked-inventory": 7272,
+        "manual-research-link": 457
+      },
+      "notation_counts": {
+        "historical-dictionary": 2221,
+        "survey-phonetic": 6131,
+        "shina-mora": 1732,
+        "gilgit-mora": 1888,
+        "dras-stress-vowel-sequence": 2999,
+        "accent-not-investigated": 565,
+        "historical-list": 592
+      }
+    },
+    {
+      "language": "Phal",
+      "raw_records": 5477,
+      "analysis_tokens": 5528,
+      "raw_linked": 2137,
+      "research_linked": 2232,
+      "research_families": 733,
+      "unlinked": 3245,
+      "review_levels": {
+        "family-context-first-pass": 1978,
+        "explicit-structural-or-paradigm-review": 329,
+        "explicit-record-decision": 17,
+        "unlinked-inventory": 3058,
+        "manual-research-link": 95
+      },
+      "notation_counts": {
+        "historical-dictionary": 871,
+        "palula-mora": 3322,
+        "strand-phonatory-accent": 504,
+        "survey-phonetic": 599,
+        "accent-not-investigated": 181
+      }
+    },
+    {
+      "language": "Sv",
+      "raw_records": 1238,
+      "analysis_tokens": 1238,
+      "raw_linked": 278,
+      "research_linked": 601,
+      "research_families": 289,
+      "unlinked": 637,
+      "review_levels": {
+        "family-context-first-pass": 264,
+        "explicit-structural-or-paradigm-review": 283,
+        "explicit-record-decision": 1,
+        "unlinked-inventory": 367,
+        "manual-research-link": 323
+      },
+      "notation_counts": {
+        "historical-dictionary": 272,
+        "survey-phonetic": 201,
+        "accent-not-investigated": 765
+      }
+    },
+    {
+      "language": "Kalk",
+      "raw_records": 1145,
+      "analysis_tokens": 1145,
+      "raw_linked": 152,
+      "research_linked": 449,
+      "research_families": 192,
+      "unlinked": 696,
+      "review_levels": {
+        "family-context-first-pass": 112,
+        "explicit-structural-or-paradigm-review": 16,
+        "primary-source-reading": 50,
+        "explicit-record-decision": 2,
+        "unlinked-inventory": 466,
+        "manual-research-link": 286,
+        "manual-unlinked-assessment": 213
+      },
+      "notation_counts": {
+        "kalkoti-HL-2013": 276,
+        "survey-phonetic": 198,
+        "accent-not-investigated": 196,
+        "kalkoti-HL-2023": 475
+      }
+    },
+    {
+      "language": "Kund",
+      "raw_records": 316,
+      "analysis_tokens": 316,
+      "raw_linked": 166,
+      "research_linked": 176,
+      "research_families": 143,
+      "unlinked": 140,
+      "review_levels": {
+        "family-context-first-pass": 150,
+        "explicit-structural-or-paradigm-review": 12,
+        "primary-source-reading": 13,
+        "explicit-record-decision": 1,
+        "unlinked-inventory": 130,
+        "manual-research-link": 10
+      },
+      "notation_counts": {
+        "kundal-mixed-legacy": 161,
+        "accent-not-investigated": 155
+      }
+    },
+    {
+      "language": "bro",
+      "raw_records": 670,
+      "analysis_tokens": 679,
+      "raw_linked": 8,
+      "research_linked": 166,
+      "research_families": 143,
+      "unlinked": 504,
+      "review_levels": {
+        "family-context-first-pass": 6,
+        "primary-table-reading": 262,
+        "primary-source-reading": 4,
+        "manual-unlinked-assessment": 9,
+        "unlinked-inventory": 361,
+        "manual-research-link": 18,
+        "explicit-structural-or-paradigm-review": 10
+      },
+      "notation_counts": {
+        "historical-dictionary": 5,
+        "brokskat-stress": 276,
+        "accent-not-investigated": 203,
+        "historical-list": 186
+      }
+    },
+    {
+      "language": "Ush",
+      "raw_records": 531,
+      "analysis_tokens": 536,
+      "raw_linked": 2,
+      "research_linked": 202,
+      "research_families": 186,
+      "unlinked": 329,
+      "review_levels": {
+        "manual-unlinked-assessment": 122,
+        "manual-research-link": 200,
+        "family-context-first-pass": 2,
+        "unlinked-inventory": 197,
+        "explicit-structural-or-paradigm-review": 10
+      },
+      "notation_counts": {
+        "survey-phonetic": 318,
+        "accent-not-investigated": 213
+      }
+    }
+  ],
+  "old-long-screen.tsv": [
+    {
+      "test": "old-long-barytone",
+      "language": "Sh",
+      "prediction": "E",
+      "scorable_families": "24",
+      "consistent": "20",
+      "conflicting": "2",
+      "opposite": "2",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-barytone",
+      "language": "Phal",
+      "prediction": "E",
+      "scorable_families": "22",
+      "consistent": "19",
+      "conflicting": "1",
+      "opposite": "2",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-barytone",
+      "language": "Sv",
+      "prediction": "E",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-barytone",
+      "language": "Kalk",
+      "prediction": "E",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-barytone",
+      "language": "Kund",
+      "prediction": "E",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-barytone",
+      "language": "bro",
+      "prediction": "E",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-barytone",
+      "language": "Ush",
+      "prediction": "E",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "Sh",
+      "prediction": "L",
+      "scorable_families": "19",
+      "consistent": "13",
+      "conflicting": "4",
+      "opposite": "2",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "Phal",
+      "prediction": "L",
+      "scorable_families": "14",
+      "consistent": "9",
+      "conflicting": "1",
+      "opposite": "4",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "Sv",
+      "prediction": "L",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "Kalk",
+      "prediction": "L",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "Kund",
+      "prediction": "L",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "bro",
+      "prediction": "L",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    },
+    {
+      "test": "old-long-oxytone",
+      "language": "Ush",
+      "prediction": "L",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "",
+      "scope": "Modern monosyllabic E/L forms, all nearest two-syllable old-long inputs, no manual nominal/formation restriction; exploratory falsification screen, not an established law."
+    }
+  ],
+  "old-long-nominal-sensitivity.tsv": [
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "11",
+      "consistent": "10",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "10",
+      "consistent": "9",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "11",
+      "consistent": "9",
+      "conflicting": "2",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "7",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": "2"
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "all-sources-all-lects",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "11",
+      "consistent": "10",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "10",
+      "consistent": "9",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "11",
+      "consistent": "9",
+      "conflicting": "2",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "7",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": "2"
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "nearest-formation-only",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "9",
+      "consistent": "8",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "9",
+      "consistent": "8",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "9",
+      "consistent": "7",
+      "conflicting": "2",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "6",
+      "consistent": "4",
+      "conflicting": "",
+      "opposite": "2"
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "exclude-documented-input-alternatives",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "7",
+      "consistent": "7",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "10",
+      "consistent": "10",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Degener-only",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "1",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": "1"
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "2",
+      "consistent": "1",
+      "conflicting": "1",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Gilgit-Buddruss-only",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "10",
+      "consistent": "9",
+      "conflicting": "",
+      "opposite": "1"
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "7",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": "2"
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Liljegren-only",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "9",
+      "consistent": "9",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "6",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": "1"
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Palula-Strand-only",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "5",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "5",
+      "consistent": "4",
+      "conflicting": "",
+      "opposite": "1"
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gil",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "5",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "5",
+      "consistent": "4",
+      "conflicting": "",
+      "opposite": "1"
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-koh",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "6",
+      "consistent": "6",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "4",
+      "consistent": "3",
+      "conflicting": "",
+      "opposite": "1"
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-gur",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "6",
+      "consistent": "6",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "5",
+      "consistent": "5",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-Astor",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "Sh",
+      "scorable_families": "3",
+      "consistent": "3",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-barytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "Sh",
+      "scorable_families": "1",
+      "consistent": "1",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "Phal",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "Sv",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "Kalk",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "Kund",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "bro",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    },
+    {
+      "scope": "Shina-Schmidt-dr",
+      "input_class": "old-long-oxytone",
+      "language": "Ush",
+      "scorable_families": "0",
+      "consistent": "",
+      "conflicting": "",
+      "opposite": ""
+    }
+  ],
+  "palula-short-a-sensitivity.tsv": [
+    {
+      "domain": "all-form-gloss-pairs",
+      "input_class": "short-a-without-h",
+      "units": "28",
+      "expected": "E",
+      "opposite": "1",
+      "consistent": "27",
+      "outcome_sets": "{\"L\": 1, \"E\": 27}"
+    },
+    {
+      "domain": "all-form-gloss-pairs",
+      "input_class": "short-a-with-h",
+      "units": "9",
+      "expected": "L",
+      "opposite": "2",
+      "consistent": "7",
+      "outcome_sets": "{\"L\": 7, \"E\": 2}"
+    },
+    {
+      "domain": "closed-form-gloss-pairs",
+      "input_class": "short-a-without-h",
+      "units": "27",
+      "expected": "E",
+      "opposite": "1",
+      "consistent": "26",
+      "outcome_sets": "{\"L\": 1, \"E\": 26}"
+    },
+    {
+      "domain": "closed-form-gloss-pairs",
+      "input_class": "short-a-with-h",
+      "units": "9",
+      "expected": "L",
+      "opposite": "2",
+      "consistent": "7",
+      "outcome_sets": "{\"L\": 7, \"E\": 2}"
+    },
+    {
+      "domain": "closed-lexemes-article-numeral-one-collapsed",
+      "input_class": "short-a-without-h",
+      "units": "26",
+      "expected": "E",
+      "opposite": "1",
+      "consistent": "25",
+      "outcome_sets": "{\"L\": 1, \"E\": 25}"
+    },
+    {
+      "domain": "closed-lexemes-article-numeral-one-collapsed",
+      "input_class": "short-a-with-h",
+      "units": "9",
+      "expected": "L",
+      "opposite": "2",
+      "consistent": "7",
+      "outcome_sets": "{\"L\": 7, \"E\": 2}"
+    }
+  ],
+  "property-location-summary.tsv": [
+    {
+      "language": "Sh",
+      "families": "39",
+      "family_statuses": "{\"only-penultimate\": 35, \"mixed-with-penultimate\": 4}",
+      "position_family_counts": "{\"2\": 39, \"1\": 4, \"3\": 1}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    },
+    {
+      "language": "Phal",
+      "families": "28",
+      "family_statuses": "{\"mixed-with-penultimate\": 2, \"only-penultimate\": 25, \"only-other-position\": 1}",
+      "position_family_counts": "{\"2\": 27, \"3\": 2, \"1\": 1}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    },
+    {
+      "language": "Sv",
+      "families": "14",
+      "family_statuses": "{\"only-other-position\": 3, \"unscorable\": 10, \"only-penultimate\": 1}",
+      "position_family_counts": "{\"1\": 3, \"2\": 1}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    },
+    {
+      "language": "Kalk",
+      "families": "0",
+      "family_statuses": "{}",
+      "position_family_counts": "{}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    },
+    {
+      "language": "Kund",
+      "families": "1",
+      "family_statuses": "{\"unscorable\": 1}",
+      "position_family_counts": "{}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    },
+    {
+      "language": "bro",
+      "families": "11",
+      "family_statuses": "{\"unscorable\": 1, \"only-penultimate\": 10}",
+      "position_family_counts": "{\"2\": 10}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    },
+    {
+      "language": "Ush",
+      "families": "19",
+      "family_statuses": "{\"only-penultimate\": 14, \"unscorable\": 4, \"only-other-position\": 1}",
+      "position_family_counts": "{\"2\": 14, \"3\": 1}",
+      "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+    }
+  ],
+  "kalkoti-palula-combined-summary.tsv": [
+    {
+      "input_class": "Palula-E-without-short-final-vowel",
+      "lexeme_form_cells": "35",
+      "broad_families": "34",
+      "statuses": "{\"unscorable\": 14, \"consistent\": 7, \"residual\": 4, \"excluded\": 10}"
+    },
+    {
+      "input_class": "Palula-L-without-short-final-vowel",
+      "lexeme_form_cells": "13",
+      "broad_families": "13",
+      "statuses": "{\"Low-interaction\": 4, \"consistent\": 4, \"unscorable\": 4, \"excluded\": 1}"
+    },
+    {
+      "input_class": "Palula-prefinal-accent-plus-short-final-vowel",
+      "lexeme_form_cells": "28",
+      "broad_families": "27",
+      "statuses": "{\"excluded\": 8, \"consistent\": 10, \"unscorable\": 10}"
+    },
+    {
+      "input_class": "other-comparative-structure",
+      "lexeme_form_cells": "2",
+      "broad_families": "2",
+      "statuses": "{\"excluded\": 2}"
+    }
+  ],
+  "dras-suffix-accent-summary.tsv": [
+    {
+      "suffix": "-eh/-eɦ",
+      "plural_citations": "60",
+      "with_final_accent": "57",
+      "statuses": "{\"stem-accent-only\": 3, \"final-accent-only\": 53, \"final-plus-other-accent\": 4}"
+    },
+    {
+      "suffix": "-e",
+      "plural_citations": "176",
+      "with_final_accent": "24",
+      "statuses": "{\"stem-accent-only\": 130, \"final-plus-other-accent\": 2, \"unmarked\": 22, \"final-accent-only\": 22}"
+    },
+    {
+      "suffix": "-i",
+      "plural_citations": "15",
+      "with_final_accent": "1",
+      "statuses": "{\"unmarked\": 3, \"stem-accent-only\": 11, \"final-accent-only\": 1}"
+    },
+    {
+      "suffix": "other",
+      "plural_citations": "36",
+      "with_final_accent": "28",
+      "statuses": "{\"final-accent-only\": 27, \"unmarked\": 4, \"stem-accent-only\": 4, \"final-plus-other-accent\": 1}"
+    }
+  ],
+  "vowel-raising-summary.tsv": [
+    {
+      "input_class": "Biori-early-a-long-final-closed",
+      "form_pairs": "35",
+      "consistent": "29",
+      "other-quality": "6",
+      "outside-closed-syllable-test": ""
+    },
+    {
+      "input_class": "other-syllable-domain",
+      "form_pairs": "30",
+      "consistent": "",
+      "other-quality": "",
+      "outside-closed-syllable-test": "30"
+    },
+    {
+      "input_class": "Biori-early-e-long-final-closed",
+      "form_pairs": "11",
+      "consistent": "11",
+      "other-quality": "",
+      "outside-closed-syllable-test": ""
+    },
+    {
+      "input_class": "Biori-late-a-long-final-closed",
+      "form_pairs": "2",
+      "consistent": "2",
+      "other-quality": "",
+      "outside-closed-syllable-test": ""
+    }
+  ]
+}

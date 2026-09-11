@@ -1,0 +1,172 @@
+"""Attach a manual first-pass historical assessment to 139 linked families.
+
+This is a research screen, NOT an etymological acceptance list or success-rate
+calculation. Source forms are unchanged. Central examples receive separate
+page-image checks in the working notes; other rows remain leads for checking.
+"""
+import csv
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+# R: retention compatible; A: apocope compatible; U: short citation uninformative;
+# M: formation/paradigm must be controlled; D: dialect divergence; S: source conflict;
+# X: residual against mechanical copying of the cited OIA accent.
+NOTES = {
+ '43': ('M', 'Compare attested accented dual akṣī́, not only singular ákṣi. Shared final íi also requires gender/number history.'),
+ '125': ('X', 'Shared accent on the old long medial vowel. Weight attraction is plausible; cannot call this direct retention of áṅgāra.'),
+ '135': ('M', 'Final long feminine formations and glide/coalescence histories differ. Palula thumb is a different gender/formation.'),
+ '137': ('M', 'Root-final accent survives before gender vowel; separate ṣṭ reduction from loss of the internal syllable in Kohistani.'),
+ '145': ('M', 'Female goat requires feminine ajā́ or an extended feminine, not masculine ajá alone; contraction in ái needs analysis.'),
+ '242': ('U;X', 'Short Shina aš cannot reveal mora position. Palula aáǰ is a residual for simple nonaspirated closed-a lengthening.'),
+ '549': ('M', 'Shared root accent in extended cloud forms requires resetting relative to abhrá; Palula also has svarabhakti.'),
+ '722': ('R', 'Initial accent compatible with álpa after cluster simplification and gender-suffix remodeling.'),
+ '941': ('U;A', 'Most Shina short forms uninformative. Palula early áa can arise by later closed-a lengthening after apocope has transferred final accent to a short vowel; no special numeral retraction is required by this citation form.'),
+ '1111': ('M;D', 'Final gender-suffix accents differ in length and mora position. Do not infer one shared contour from the OIA headword.'),
+ '1288': ('M', 'Modern infinitive versus OIA finite verb; inherently accented infinitive ending prevents direct comparison.'),
+ '1869': ('U', 'Short monosyllables; inflection required to determine fixed versus mobile class.'),
+ '1921': ('M', 'Substantial loss and glide/contraction history; old accented a does not survive as an independently identifiable vowel.'),
+ '1929': ('M', 'Extended hungry adjective has medial accent; suffix and stem remodeling needed before testing udanyú.'),
+ '2349': ('X', 'Final urán does not mechanically continue initial úraṇa. Check derivative formation and class before positing a retraction/advancement law.'),
+ '2485': ('M', 'Teen compound contraction and numeral analogy; first-member OIA accent cannot be copied onto the resulting diphthong.'),
+ '2563': ('R', 'Old accented long/diphthongal nucleus corresponds to early long accent; final gender vowels vary.'),
+ '2574': ('M', 'Interrogative pronouns have added/contracted material and number/gender variation, not a bare reflex of ká.'),
+ '2588': ('R', 'Initial accent compatible with kákṣa; cluster and final vowel history remain separate.'),
+ '2589': ('U;R', 'Short Shina citation forms uninformative; Palula early aa compatible with later closed-a lengthening.'),
+ '2830': ('U;D', 'Palula fixed ear versus Gilgiti mobile kon/konéṭ in Radloff as cited by Baart; do not infer class from short Shina kon alone.'),
+ '2892': ('U;R', 'Palula B kram/kráama versus A kráam demonstrates accent-conditioned open then closed lengthening; Shina bare forms uninformative.'),
+ '2993': ('R', 'Early accent on old ā compatible with retention; Palula raising ā > oo and final consonant require separate history.'),
+ '3023': ('R', 'Early long accent retained; ā-quality changes are separate from the position of accent.'),
+ '3084': ('A', 'Late kaál compatible with old final accent plus apocope. sáal is a separate Iranian comparison/loan, not another reflex of kālá.'),
+ '3120': ('M', 'Extended wood forms have early root accent despite final OIA accent; cluster retention/aspiration and suffix history need control.'),
+ '3241': ('M', 'Infinitives carry their own accent; compare full verbal paradigms rather than OIA causative finite form.'),
+ '3451': ('M', 'Accent on final root syllable before gender vowel; Palula epenthesis splits kṛṣṇ while main Shina reduces it.'),
+ '3735': ('R', 'Early long root accent compatible with inherited kṣḗtra; r and affricate/retroflex history separate.'),
+ '3781': ('U', 'Short monosyllables cannot test mora position or noun-class retention.'),
+ '3792': ('U;X', 'Palula kháaṇ violates unrestricted aspirated-onset late lengthening. Alternative skandhá also has late OIA accent; etymology swap alone does not solve it.'),
+ '3832': ('M', 'Root-final accent before extended ending; dialects show different loss/contraction of v and final material.'),
+ '3865': ('M', 'Infinitive accent is suffixal; modern imperative/perfective comparison needed. Kohistani khy- perfective is probably analogical to drink.'),
+ '4336': ('S;D', '2008 tables reverse Gilgit/Astor readings. Independent Gilgit goóṭ supported; Kohistani and Guresi fixed góoṣ genuinely differ from Palula mobile ghoóṣṭ.'),
+ '4368': ('R', 'Old accented ā corresponds to early oo. Astori epenthesis does not displace accent from inherited root vowel.'),
+ '4501': ('A;M', 'Late gií compatible with loss/coalescence following old final accent; Palula retains a different extended consonantal formation.'),
+ '4655': ('R', 'Accent continues the old accented long ā after initial-syllable and cluster reduction; modern first syllable is not the OIA first syllable.'),
+ '4701': ('U', 'Short monosyllables; noun inflection needed.'),
+ '5110': ('M', 'Simple versus extended snake nouns not equivalent accent tests; judraá/ǰhanduraá have additional derivational material.'),
+ '5198': ('M;D', 'Final accent in remodeled masculine forms. Gilgit/Palula late oo versus Guresi/Astori early oo and Kohistani short ó; do not posit uniform contour.'),
+ '5228': ('U;D', 'Citation short throughout. Kohistani ǰip/ǰíba fixed versus Palula ǰip/ǰipí mobile supplies real class divergence.'),
+ '5301': ('R;S', '2008 early yúun compatible with old jyṓtsnā; Ahmed 2016 Gurezi juún has late accent. Source/locality distinction required.'),
+ '5637': ('M', 'Metathesis and extension in talúuṇ; cannot align accents by syllable number alone.'),
+ '5679': ('M;D', 'Hot: Gilgit taáto, Kohistani táto, Guresi tátu, Astori tátto, Palula táatu. Test distinct geminate reduction/lengthening after morphological root-accent assignment.'),
+ '5806': ('M', 'Root accent in extended adjective; short vowel after cluster simplification opposes universal compensatory lengthening.'),
+ '5839': ('M', 'Early root accent in extended adjective, with old ī retained. Late OIA accent does not survive mechanically.'),
+ '5889': ('U', 'Short monosyllabic pronoun; paradigm and enclisis needed.'),
+ '5994': ('R;M', 'Initial accent compatible with retention, but diphthong/contracted endings and different Palula vowel require reconstruction.'),
+ '6119': ('M', 'Final-root-syllable accent shared against initial dákṣiṇa. Strong evidence for formation-specific resetting, not arbitrary lexical retraction.'),
+ '6152': ('U;R', 'Kohistani don/dódi fixed supports old initial accent; Palula dáand fixed. Other short citation forms alone are uninformative.'),
+ '6227': ('R;M', 'Initial accent compatible with retention through loss/contraction; individual Shina forms have diphthongs rather than a uniform long monophthong.'),
+ '6260': ('M', 'Early accent compatible, but Astori dáli has shortened root and feminine morphology to explain.'),
+ '6273': ('M', 'Bull adjective/noun has extended masculine formation and root accent; not direct retention of dāntá.'),
+ '6333': ('D', 'Kohistani/Palula late versus Gilgit/Guresi/Astori early. Independent Gilgit dictionary supports early. Paradigms must explain the split.'),
+ '6368': ('M', 'Early root accent before gender vowel despite final OIA accent; old length is shortened in closed/cluster history before the observed forms.'),
+ '6391': ('U', 'Short monosyllables conceal accent class; cluster reduction did not uniformly leave long vowels.'),
+ '6481': ('A;M', 'Late daughter vowels are compatible with accent preservation after contraction/loss, but old kinship inflection must be reconstructed.'),
+ '6495': ('D;M', 'Gilgit late duúr versus early other Shina and Palula dhúura. Formation and analogy needed; aspiration cannot distinguish these Shina forms.'),
+ '6658': ('R;M', 'Old first-member accent compatible after compound contraction; vowel qualities and loss of daśa differ by branch.'),
+ '6849': ('A', 'Late duúm compatible with final-accent apocope; Palula dhuumíi is a separate suffixed formation.'),
+ '6906': ('U', 'Unaccented negation in connected speech is not a lexical noun-accent test.'),
+ '6920': ('M', 'Extended nail nouns with early root accent; loss of internal kh and vowel contraction precede modern forms.'),
+ '6983': ('D;M', 'Gilgit naáwo has late accent against early/shorter related forms. Do not infer its late aa directly from náva; contraction and analogical class require checking.'),
+ '6984': ('R;M', 'Old initial accent compatible; glide and diphthong outcomes differ.'),
+ '7067': ('R', 'Early long accent consistently compatible with nā́man; Palula m > w and final w loss affect segmental shape.'),
+ '7200': ('U;X', 'Shina nir needs paradigm. Palula níindra differs from nidrā́; Dybo considers pre-Vedic accent, but this requires independent comparative evidence.'),
+ '7563': ('R', 'Early accent on retained old ī compatible with inheritance before gender suffix.'),
+ '7627': ('M', 'Root-accented extended feather noun; same CC history controls quantity, not OIA accent alone.'),
+ '7655': ('U;R', 'Shina short forms uninformative; Palula early aa compatible with accented short-a lengthening after cluster history.'),
+ '7662': ('M', 'Compound restructuring/teen-series analogy; modern final accent not direct continuation of first-member páñca.'),
+ '7733': ('R', 'Initial accent compatible, with short vowel after cluster simplification; counterexample to universal compensation after any CC loss.'),
+ '7785': ('U;R', 'Palula fixed páand supports old accent; bare Shina pon requires inflection.'),
+ '8056': ('R', 'Early long accent after intervocalic consonant/final-vowel loss compatible with pā́da.'),
+ '8188': ('M', 'Kinship derivatives and feminine/masculine ending differences; pítriya alone is not an adequate immediate input.'),
+ '8201': ('M;D', 'Most early accent on old long medial vowel, Guresi late ii. Palula and Shina formations differ; inspect source before generalizing.'),
+ '8249': ('M', 'Final long suffix in phacoó is additional formation; cannot compare its accent directly with púccha.'),
+ '8265': ('U;A', 'Short son forms conceal contour; Palula putr/putrá supports lost-final-accent account.'),
+ '8416': ('R', 'Old accented au gives early long accent; Palula raising distinguishes quality, not accent locus.'),
+ '9029': ('M', 'Extended flea nouns preserve initial prominence but have complex vowel/nasal history; do not count as a direct vowel-to-vowel match.'),
+ '9216': ('A', 'Late baál compatible with bālá plus apocope; verify paradigm to distinguish retention from secondary class assignment.'),
+ '9250': ('R', 'Early long accent compatible with old bī́ja after intervocalic consonant and final vowel loss.'),
+ '9303': ('M', 'Compound has two accents in cited OIA form; modern compound selection and syllable loss must be analyzed.'),
+ '9568': ('R;M', 'Initial accent compatible, but quantifier paradigm and cluster shortening complicate derivation.'),
+ '9661': ('R;S', 'Main Shina early ẓáa is a strong old-long comparison. Palula brother has conflicting accent transcription and is excluded from fine chronology.'),
+ '9982': ('A', 'Late moós/mhaás compatible with final-accent apocope; nasal/aspiration/vowel-quality history is separate.'),
+ '9989': ('M', 'Honey feminine derivative mākṣikā-type, not adjectival mākṣiká alone; final íi and earlier vowels need formation-specific history.'),
+ '10016': ('M;D', 'Contracted kinship forms differ: Gilgit/Kohistani late versus Guresi early. Full old paradigm and contractions needed.'),
+ '10104': ('R', 'Early accent compatible with mā́sa, contrasting late flesh. Gilgit máaz differs in quality, not mora accent.'),
+ '10158': ('U', 'Short citation forms uninformative; compare Kundal Shahi postaccenting oblique face rather than assume fixed class.'),
+ '10221': ('M', 'Fist, arm and shoulder formations differ; Palula múṣṭi has retracted accent against muṣṭí, requiring further history.'),
+ '10244': ('M', 'Curdled adjective has early root accent before gender ending, despite final accent in mūrtá.'),
+ '10250': ('M', 'Root/radish forms have extra feminine/derivational material; mulií and mulái are not bare continuations of mū́la.'),
+ '10264': ('U;M', 'Short bird form uninformative; proposed bird/markhor cognacy needs semantic and consonantal justification separately.'),
+ '10299': ('M', 'Extended good adjective has early root accent; cluster simplification and old vocalic-r development separately required.'),
+ '10323': ('R;D', 'Early accent in Gilgit/Astor/Palula compatible with mḗdas; Guresi late mií requires source/paradigm check.'),
+ '10394': ('R;M', 'Initial accent broadly compatible but strong segmental remodeling and alternative old liver stems need reconstruction.'),
+ '10412': ('U;X', 'Short Guresi citation uninformative. Palula fixed yáandr differs from yantrá; Dybo pre-Vedic hypothesis must be tested outside this one pair.'),
+ '10442': ('U;X', 'Short Shina citation forms uninformative. Palula yáab has early accent and requires formation/earlier accent history against yavyā́.'),
+ '10452': ('M', 'Modern infinitive/come versus old finite go: suffix accent and suppletion prevent direct comparison.'),
+ '10652': ('M', 'Modern infinitive versus OIA finite verb; inherently accented suffix is decisive.'),
+ '10702': ('R;D', 'Main Shina early ráati agrees with old rā́trī; Palula raát versus róot split remains unexplained, not two independent inherited cognates.'),
+ '10978': ('M', 'Late luúṇi retains a final vowel; contraction and an extended feminine formation, not simple final apocope alone.'),
+ '10988': ('D;M', 'Gilgit leéc̣ late versus Kohistani léec̣i early: different retained endings and contraction history.'),
+ '11009': ('M;D', 'Tail formations have metathesis and distinct final-suffix accents; cannot treat them as a uniform reflex of lāṅgūlá.'),
+ '11302': ('U;M', 'Short pronouns; contraction and pronominal paradigm, not an independent mora-accent test.'),
+ '11392': ('M;D', 'Year/summer/rain comparison involves distinct formations. Palula báaṣ has later early aa but mobile paradigm; lexical falling does not imply historical barytonesis.'),
+ '11572': ('R', 'Early long accent compatible with vā́la; Palula root raising plus extended gender vowel.'),
+ '11616': ('A;M', 'Late bií/bhiíš compatible with lost final accent; contraction and numeral restructuring must be separated from simple retention.'),
+ '12051': ('M', 'Blue sky adjective versus Palula inchoative verb not like-for-like. Main Shina early root accent needs adjectival formation history.'),
+ '12064': ('D;M', 'Kohistani rising versus Guresi early and short Gilgit/Astor. Later Tileli rising ẓuúk/ẓukí differs from 2008 Guresi; fixed/mobile paradigms essential.'),
+ '12233': ('M', 'Final nasalized diphthong; contraction of old syllables and morphological form need checking before accent alignment.'),
+ '12278': ('U', 'Short monosyllables cannot reveal mora contrast or inflectional class.'),
+ '12323': ('R', 'Early accent on contracted śáyana compatible with retention; Kohistani shortening and Palula raising are independent.'),
+ '12326': ('M', 'Final stem accent broadly compatible with śaraṇá after extension/contraction; different vowel lengths by dialect.'),
+ '12329': ('M', 'Extended autumn forms with long final gender vowel require derivation and suffix-accent history.'),
+ '12487': ('M', 'Root-final accent in extended cold adjective versus final accent of śītalá. Fever šaál is a separate contracted/substantivized formation.'),
+ '12492': ('U', 'Short monosyllables; old ī shortened but citation form gives no class information.'),
+ '12497': ('D;A', 'Guresi/Astori late long compatible with final-accent apocope; Gilgit/Kohistani/Palula short reflect separate quantity history.'),
+ '12548': ('R;M', 'Initial accent compatible after cluster change; Palula cited item is a verb and not a directly comparable adjective.'),
+ '12583': ('R;M', 'Initial accent compatible; different gender endings, nasal loss and treatment of vocalic r.'),
+ '12619': ('R;M', 'Early long accent compatible; ashes versus grief etymology and consonant-loss history require independent justification.'),
+ '12753': ('R;M', 'Initial prominence broadly compatible, but alternate diphthong/glide formations must precede Palula and Kohistani contractions.'),
+ '12759': ('U;M', 'Short monosyllables conceal contour; daughter-in-law-like kinship analogy and cluster history need checking.'),
+ '12774': ('M', 'Extended white adjective shows root accent despite old final accent; loss of intervocalic t and contraction create different vowel outcomes.'),
+ '12803': ('U', 'Short numeral; no mora-position contrast.'),
+ '12815': ('U;M', 'Pronominal paradigm and enclisis; simple sá is not a full input to plural ses.'),
+ '13139': ('U;A', 'Short Shina forms uninformative. Palula sáat permits saptá > sat > sáat: apocope to a short vowel followed by later closed-a lengthening. Early aa alone does not require numeral accent remodeling.'),
+ '13386': ('R', 'Initial accent compatible with síkatā; final syllable loss and medial consonant change separate.'),
+ '13415': ('U', 'Short monosyllables need inflectional evidence.'),
+ '13519': ('D;M', 'Kohistani/Guresi late soóṇ versus short Gilgit and extended Astori soná. Internal loss/contraction interacts with old accent; not final-vowel apocope alone.'),
+ '13574': ('R', 'Early long accent compatible with sū́ra; final feminine morphology retained.'),
+ '13576': ('U;X', 'Short Shina forms uninformative; Palula ṣáak/ṣaká mobile despite old initial accent, opposing simple class inheritance.'),
+ '13627': ('M', 'Kohistani kaṇíi is an extended feminine; Palula káand is mobile despite early aa, with aspiration migration/loss to explain.'),
+ '13801': ('A;M', 'Late nuúṣ compatible with loss of final accented ā; metathesis/cluster simplification still needed.'),
+ '13839': ('M', 'Shoulder and mattock have different derivational suffixes. Reconstructed *sphiyá is not a securely accented attested OIA input.'),
+ '13913': ('U;M', 'Short kinship forms; old strong/weak inflection and replacement of final segments need reconstruction.'),
+ '14000': ('U;A', 'Palula haál/halá mobile compatible with old final accent, but late Ashret aa independently follows the aspiration-conditioned lengthening rule.'),
+ '14024': ('U;R', 'Palula haát/háata fixed despite late singular aa: different syllable structures date lengthening, not a change of inherited noun class.'),
+ '14152': ('R;M', 'Early prominence compatible with hŕ̥daya, but stem hṛd and gender remodeling may be closer inputs than this exact formation.'),
+}
+
+
+def main():
+    rows = list(csv.DictReader((HERE / 'shina-accented-comparison.tsv').open(), delimiter='\t'))
+    assert {r['turner'] for r in rows} == set(NOTES), 'Manual screen and input inventory differ'
+    for r in rows:
+        r['assessment_codes'], r['historical_assessment'] = NOTES[r['turner']]
+        r['verification_scope'] = 'First-pass comparison; see family-notes.md for independently page-checked central examples'
+    with (HERE / 'shina-family-screen.tsv').open('w', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=rows[0].keys(), delimiter='\t')
+        w.writeheader()
+        w.writerows(rows)
+    print(f'Wrote {len(rows)} family assessments; no success rate inferred.')
+
+
+if __name__ == '__main__':
+    main()

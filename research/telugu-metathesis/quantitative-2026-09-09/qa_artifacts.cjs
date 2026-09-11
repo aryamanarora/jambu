@@ -1,0 +1,27 @@
+const fs=require('fs');
+const path=require('path');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE || '/Users/aryamanarora/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{
+ const browser=await chromium.launch({channel:'chrome',headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
+ const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ await page.goto('file://'+path.join(__dirname,'report.html'));
+ await page.screenshot({path:path.join(__dirname,'report-preview.png')});
+ const report={title:await page.title(),headings:await page.locator('h2').count(),tables:await page.locator('table').count(),imagesLoaded:await page.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))};
+ await page.locator('img').scrollIntoViewIfNeeded();
+ await page.screenshot({path:path.join(__dirname,'report-figure-preview.png')});
+ await page.goto('file://'+path.join(__dirname,'casebook.html'));
+ const total=await page.locator('details').count();
+ await page.locator('#q').fill('d277');
+ const visible=await page.locator('details:visible').count();
+ await page.locator('#d277 summary').click();
+ await page.screenshot({path:path.join(__dirname,'casebook-preview.png')});
+ const open=await page.locator('#d277').getAttribute('open');
+ await page.goto('file://'+path.join(__dirname,'casebook.html')+'#d4866');
+ const anchorOpen=await page.locator('#d4866').getAttribute('open');
+ const anchorTop=await page.locator('#d4866 summary').evaluate(el=>el.getBoundingClientRect().top);
+ const evidenceTables=await page.locator('#d4866 table').count();
+ const result={status:errors.length||total!==409||!report.imagesLoaded||open===null||anchorOpen===null||!evidenceTables?'FAIL':'PASS',report,casebookEntries:total,searchVisibleEntries:visible,destroyEntryExpanded:open!==null,directAnchorExpanded:anchorOpen!==null,directAnchorTop:anchorTop,swallowEvidenceTables:evidenceTables,errors};
+ fs.writeFileSync(path.join(__dirname,'browser-qa.json'),JSON.stringify(result,null,2)+'\n');
+ console.log(JSON.stringify(result,null,2));await browser.close();if(result.status!=='PASS')process.exitCode=1;
+})().catch(e=>{console.error(e);process.exitCode=1});

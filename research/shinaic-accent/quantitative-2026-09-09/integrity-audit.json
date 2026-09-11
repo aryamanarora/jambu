@@ -1,0 +1,197 @@
+{
+  "status": "passed",
+  "raw_records": 25505,
+  "analysis_tokens": 25593,
+  "families": 1686,
+  "historical_observations": 12321,
+  "research_linked_records": 12235,
+  "unlinked_records": 13270,
+  "missing_family_annotations": 0,
+  "duplicate_family_annotations": 0,
+  "missing_raw_records": 0,
+  "altered_raw_fields": 0,
+  "unresolved_research_ancestor_ids": [],
+  "live_database_drift_since_freeze": [],
+  "live_database_sha256": {
+    "languages.csv": "baf09089fc9a06c612441ac40b806b385ba6d563bd13959412db624cada81c9c",
+    "dialects.csv": "7d6cc42daf7b62f415a329c909c8834f39aefaecc55a1fe3c6219cfd525fe2c0",
+    "forms.csv": "20dbe52a7c32c0d092658568716542d6a58b36c8bbdaa92a4676b265f002fe7b",
+    "edges.csv": "4912ce8c7f2a138cddf1ca31316d7c682d34c59de932ef5b03eb93f24c0075f8",
+    "references.csv": "ba31f2a56037ef6c5d52d6f50ec3d0a1020299a0ba4c4de93c268a1cdfbc197a",
+    "form_concepts.csv": "298036d83c81486a8fe83d1e370234766e78eefe0b47fc5e5adeaa44faf3064c",
+    "concepts.csv": "1a5ddc75f91ee3f380173dc40a8e905ffd1b256ae7ec87185c2509da84d27a52",
+    "form-source-keys.csv": "6c980d969f860ca8178aa6505f400c531a61d81551412d6618d0fa8ba5018302",
+    "form-id-aliases.csv": "fab19b0d780a7c443e55d033ee3831b36ff060f8d1ee31f31ca9ac066cf7e27f"
+  },
+  "review_levels": {
+    "family-context-first-pass": 10311,
+    "explicit-structural-or-paradigm-review": 1243,
+    "primary-source-reading": 67,
+    "explicit-record-decision": 38,
+    "unlinked-inventory": 11851,
+    "manual-research-link": 1389,
+    "primary-table-reading": 262,
+    "manual-unlinked-assessment": 344
+  },
+  "coverage": [
+    {
+      "language": "Sh",
+      "raw_records": 16128,
+      "analysis_tokens": 16151,
+      "raw_linked": 7952,
+      "research_linked": 8409,
+      "research_families": 1249,
+      "unlinked": 7719,
+      "review_levels": {
+        "family-context-first-pass": 7799,
+        "explicit-structural-or-paradigm-review": 583,
+        "explicit-record-decision": 17,
+        "unlinked-inventory": 7272,
+        "manual-research-link": 457
+      },
+      "notation_counts": {
+        "historical-dictionary": 2221,
+        "survey-phonetic": 6131,
+        "shina-mora": 1732,
+        "gilgit-mora": 1888,
+        "dras-stress-vowel-sequence": 2999,
+        "accent-not-investigated": 565,
+        "historical-list": 592
+      }
+    },
+    {
+      "language": "Phal",
+      "raw_records": 5477,
+      "analysis_tokens": 5528,
+      "raw_linked": 2137,
+      "research_linked": 2232,
+      "research_families": 733,
+      "unlinked": 3245,
+      "review_levels": {
+        "family-context-first-pass": 1978,
+        "explicit-structural-or-paradigm-review": 329,
+        "explicit-record-decision": 17,
+        "unlinked-inventory": 3058,
+        "manual-research-link": 95
+      },
+      "notation_counts": {
+        "historical-dictionary": 871,
+        "palula-mora": 3322,
+        "strand-phonatory-accent": 504,
+        "survey-phonetic": 599,
+        "accent-not-investigated": 181
+      }
+    },
+    {
+      "language": "Sv",
+      "raw_records": 1238,
+      "analysis_tokens": 1238,
+      "raw_linked": 278,
+      "research_linked": 601,
+      "research_families": 289,
+      "unlinked": 637,
+      "review_levels": {
+        "family-context-first-pass": 264,
+        "explicit-structural-or-paradigm-review": 283,
+        "explicit-record-decision": 1,
+        "unlinked-inventory": 367,
+        "manual-research-link": 323
+      },
+      "notation_counts": {
+        "historical-dictionary": 272,
+        "survey-phonetic": 201,
+        "accent-not-investigated": 765
+      }
+    },
+    {
+      "language": "Kalk",
+      "raw_records": 1145,
+      "analysis_tokens": 1145,
+      "raw_linked": 152,
+      "research_linked": 449,
+      "research_families": 192,
+      "unlinked": 696,
+      "review_levels": {
+        "family-context-first-pass": 112,
+        "explicit-structural-or-paradigm-review": 16,
+        "primary-source-reading": 50,
+        "explicit-record-decision": 2,
+        "unlinked-inventory": 466,
+        "manual-research-link": 286,
+        "manual-unlinked-assessment": 213
+      },
+      "notation_counts": {
+        "kalkoti-HL-2013": 276,
+        "survey-phonetic": 198,
+        "accent-not-investigated": 196,
+        "kalkoti-HL-2023": 475
+      }
+    },
+    {
+      "language": "Kund",
+      "raw_records": 316,
+      "analysis_tokens": 316,
+      "raw_linked": 166,
+      "research_linked": 176,
+      "research_families": 143,
+      "unlinked": 140,
+      "review_levels": {
+        "family-context-first-pass": 150,
+        "explicit-structural-or-paradigm-review": 12,
+        "primary-source-reading": 13,
+        "explicit-record-decision": 1,
+        "unlinked-inventory": 130,
+        "manual-research-link": 10
+      },
+      "notation_counts": {
+        "kundal-mixed-legacy": 161,
+        "accent-not-investigated": 155
+      }
+    },
+    {
+      "language": "bro",
+      "raw_records": 670,
+      "analysis_tokens": 679,
+      "raw_linked": 8,
+      "research_linked": 166,
+      "research_families": 143,
+      "unlinked": 504,
+      "review_levels": {
+        "family-context-first-pass": 6,
+        "primary-table-reading": 262,
+        "primary-source-reading": 4,
+        "manual-unlinked-assessment": 9,
+        "unlinked-inventory": 361,
+        "manual-research-link": 18,
+        "explicit-structural-or-paradigm-review": 10
+      },
+      "notation_counts": {
+        "historical-dictionary": 5,
+        "brokskat-stress": 276,
+        "accent-not-investigated": 203,
+        "historical-list": 186
+      }
+    },
+    {
+      "language": "Ush",
+      "raw_records": 531,
+      "analysis_tokens": 536,
+      "raw_linked": 2,
+      "research_linked": 202,
+      "research_families": 186,
+      "unlinked": 329,
+      "review_levels": {
+        "manual-unlinked-assessment": 122,
+        "manual-research-link": 200,
+        "family-context-first-pass": 2,
+        "unlinked-inventory": 197,
+        "explicit-structural-or-paradigm-review": 10
+      },
+      "notation_counts": {
+        "survey-phonetic": 318,
+        "accent-not-investigated": 213
+      }
+    }
+  ],
+  "evidence_limit": "Complete family first pass and complete record inventory do not imply individual printed-source QA for every citation. Review status and access level are explicit."
+}

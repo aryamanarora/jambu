@@ -1,0 +1,9 @@
+{
+  "candidates": 313,
+  "accepted_groups": 310,
+  "rejected": {
+    "93": "Empty target gloss; identity insufficiently constrained.",
+    "193": "Maize family markaka bird is a disputed semantic/contact comparison, not a secure inherited anchor.",
+    "272": "Year saal is likely Iranian; do not propagate the unsupported kaala assignment."
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "raw_records": 25505,
+  "analysis_tokens": 25593,
+  "family_first_pass": 1686,
+  "languages": {
+    "Phal": {
+      "records": 5477,
+      "raw_linked": 2137,
+      "research_linked": 2232,
+      "strict_excluded": 16,
+      "manual_link_records": 95,
+      "primary_reading_records": 0
+    },
+    "Sh": {
+      "records": 16128,
+      "raw_linked": 7952,
+      "research_linked": 8409,
+      "strict_excluded": 42,
+      "manual_link_records": 457,
+      "primary_reading_records": 0
+    },
+    "Kalk": {
+      "records": 1145,
+      "raw_linked": 152,
+      "research_linked": 449,
+      "strict_excluded": 24,
+      "manual_link_records": 297,
+      "primary_reading_records": 45
+    },
+    "Kund": {
+      "records": 316,
+      "raw_linked": 166,
+      "research_linked": 176,
+      "strict_excluded": 1,
+      "manual_link_records": 10,
+      "primary_reading_records": 13
+    },
+    "bro": {
+      "records": 670,
+      "raw_linked": 8,
+      "research_linked": 166,
+      "strict_excluded": 25,
+      "manual_link_records": 158,
+      "primary_reading_records": 275
+    },
+    "Sv": {
+      "records": 1238,
+      "raw_linked": 278,
+      "research_linked": 601,
+      "strict_excluded": 100,
+      "manual_link_records": 323,
+      "primary_reading_records": 0
+    },
+    "Ush": {
+      "records": 531,
+      "raw_linked": 2,
+      "research_linked": 202,
+      "strict_excluded": 12,
+      "manual_link_records": 200,
+      "primary_reading_records": 0
+    }
+  },
+  "record_decision_count": 54,
+  "research_link_records": 1540,
+  "source_reading_records": 333,
+  "brokskat_primary_items": 269
+}

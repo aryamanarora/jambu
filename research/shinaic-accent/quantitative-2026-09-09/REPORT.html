@@ -1,0 +1,776 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shinaic accent — quantitative research report</title><style>
+:root{--ink:#1c2c35;--muted:#536369;--line:#d7dedb;--accent:#1a6257;--paper:#fdfdf9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.68 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent);text-underline-offset:3px}a:hover{color:#082f2a}.top{border-bottom:1px solid var(--line);padding:16px 36px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:13px}.top strong{letter-spacing:.12em;text-transform:uppercase;font-size:11px}main{max-width:1130px;padding:40px 50px 80px;margin:auto}h1{font:46px/1.12 Georgia,"Times New Roman",serif;letter-spacing:-.02em;max-width:950px;margin:12px 0 25px}h2{font:30px/1.22 Georgia,serif;margin:58px 0 18px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:18px}h3{font:22px/1.3 Georgia,serif;margin:30px 0 12px}p{margin:16px 0}strong{font-weight:650}em{font-family:"Charis SIL","Noto Serif",Georgia,serif}ul,ol{padding-left:25px}li{margin:8px 0}.table-wrap{overflow:auto;margin:25px 0}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.5}thead{background:#eaf0ed}th{text-align:left;font-size:12px;letter-spacing:.015em}td,th{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}blockquote{background:#f1f4ed;border-left:3px solid var(--accent);padding:4px 20px;margin:28px 0;color:#30433f}code{font:13px ui-monospace,SFMono-Regular,monospace;background:#edf1ec;padding:2px 4px;border-radius:3px}pre{overflow:auto;padding:16px;background:#edf1ec}pre code{padding:0}hr{border:0;border-top:1px solid var(--line);margin:35px 0}.contents{max-width:1130px;margin:0 auto;padding:22px 50px 0;font-size:14px}.contents summary{cursor:pointer;color:var(--accent)}.contents ol{columns:2;column-gap:35px;line-height:1.4}.contents li{break-inside:avoid;margin:9px 0}footer{padding:25px 36px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media(max-width:760px){body{font-size:16px}main{padding:24px 20px 50px}.top{padding:14px 20px}h1{font-size:35px}h2{font-size:27px;margin-top:38px}.contents{padding:18px 20px 0}.contents ol{columns:1}td,th{padding:9px}}
+@media print{@page{size:A4;margin:19mm 17mm}body{background:white;font-size:10.5pt;line-height:1.45}.top,.contents,footer{display:none}main{padding:0;max-width:none}h1{font-size:26pt}h2{font-size:18pt;margin-top:25pt;break-after:avoid}h3{font-size:13pt;break-after:avoid}table{font-size:8pt}td,th{padding:5pt}.table-wrap{overflow:visible}tr{break-inside:avoid}a{color:inherit;text-decoration:none}blockquote{break-inside:avoid}p{orphans:3;widows:3}}
+</style><header class="top"><strong>Jambu · Research / 9 September 2026</strong><nav><a href="appendices/index.html">Complete annotated appendices</a> · <a href="appendices/tables.html">Quantitative tables</a> · <a href="REPORT.md">Markdown</a></nav></header><details class="contents"><summary>Contents</summary><ol><li><a href="#1-scope-units-and-what-deterministic-means-here">1. Scope, units and what “deterministic” means here</a></li><li><a href="#2-the-outcomes-are-several-different-things">2. The outcomes are several different things</a></li><li><a href="#3-old-long-root-nouns-preserve-a-substantial-accentual-opposition">3. Old long-root nouns preserve a substantial accentual opposition</a></li><li><a href="#4-new-vowel-length-creates-a-different-set-of-accentual-outcomes">4. New vowel length creates a different set of accentual outcomes</a></li><li><a href="#5-short-gender-endings-define-a-strong-stem-accent-domain">5. Short gender endings define a strong stem-accent domain</a></li><li><a href="#6-productive-noun-morphology-explains-an-important-apparent-exception">6. Productive noun morphology explains an important apparent exception</a></li><li><a href="#7-vowel-quality-supplies-relative-chronology">7. Vowel quality supplies relative chronology</a></li><li><a href="#8-kalkoti-separates-final-vowel-loss-mora-correspondence-and-low-tone">8. Kalkoti separates final-vowel loss, mora correspondence and Low tone</a></li><li><a href="#9-inflection-and-the-other-shinaic-branches">9. Inflection and the other Shinaic branches</a></li><li><a href="#10-etymological-decisions-that-materially-affect-the-accent-analysis">10. Etymological decisions that materially affect the accent analysis</a></li><li><a href="#11-the-historical-narrative-the-data-support">11. The historical narrative the data support</a></li><li><a href="#12-how-to-audit-and-extend-the-result">12. How to audit and extend the result</a></li></ol></details><main><h1 id="shinaic-accent-inherited-alignment-new-vowel-length-and-morphological-reorganization">Shinaic accent: inherited alignment, new vowel length and morphological reorganization</h1>
+<p><strong>A quantitative, etymon-by-etymon analysis of the Jambu database</strong><br>9 September 2026 · Analysis frozen at 11:55 UTC, after work beginning at 05:07 UTC</p>
+<p>The clearest predictors of Shinaic accent are <strong>the historical formation, the age of its vowel length, and its inflectional class</strong>. Keeping those three properties separate reveals several sharply regular domains: old long-root nominal accent in a restricted Gilgit sample; penultimate accent in Gilgit short-<em>o</em> adjectives and Palula umlaut adjectives; final <em>-í</em> accent across a productive Palula noun class; and a consistent Palula–Kalkoti correspondence in the eight ten-compound numerals. Other proposals remain strong tendencies with identifiable residuals. The evidence supports a layered history, with old lexical accent surviving alongside later lengthening, morphological reassignment and language-specific tonogenesis.</p>
+<p>This report was written after the analytical freeze. Its evidence is the <a href="appendices/index.html">complete annotated appendices</a>, including all <strong>1,686 original anchored families</strong>, <strong>25,505 raw records</strong>, and <strong>25,593 analysis tokens</strong> after separating merged citations. The <a href="appendices/tables.html">quantitative tables</a> retain every candidate, exclusion and conflicting outcome. The <a href="appendices/sources.html">source register</a> distinguishes what was checked in print from what is known through database transcriptions.</p>
+<h2 id="1-scope-units-and-what-deterministic-means-here">1. Scope, units and what “deterministic” means here</h2>
+<p>The scope is the database’s Shinaic clade: Shina, Palula, Sauji, Kalkoti, Kundal Shahi, Brokskat and Ushojo. Old Shina is registered but has no records. Shina’s dialects remain separate within the analysis; a Gilgit result is not automatically a result for Kohistani, Guresi, Astori or Dras.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Language</th>
+<th align="right">Raw records</th>
+<th align="right">Research-linked records</th>
+<th align="right">Research families represented</th>
+<th align="right">Records without a research family</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shina</td>
+<td align="right">16,128</td>
+<td align="right">8,409</td>
+<td align="right">1,249</td>
+<td align="right">7,719</td>
+</tr>
+<tr>
+<td>Palula</td>
+<td align="right">5,477</td>
+<td align="right">2,232</td>
+<td align="right">733</td>
+<td align="right">3,245</td>
+</tr>
+<tr>
+<td>Sauji</td>
+<td align="right">1,238</td>
+<td align="right">601</td>
+<td align="right">289</td>
+<td align="right">637</td>
+</tr>
+<tr>
+<td>Kalkoti</td>
+<td align="right">1,145</td>
+<td align="right">449</td>
+<td align="right">192</td>
+<td align="right">696</td>
+</tr>
+<tr>
+<td>Kundal Shahi</td>
+<td align="right">316</td>
+<td align="right">176</td>
+<td align="right">143</td>
+<td align="right">140</td>
+</tr>
+<tr>
+<td>Brokskat</td>
+<td align="right">670</td>
+<td align="right">166</td>
+<td align="right">143</td>
+<td align="right">504</td>
+</tr>
+<tr>
+<td>Ushojo</td>
+<td align="right">531</td>
+<td align="right">202</td>
+<td align="right">186</td>
+<td align="right">329</td>
+</tr>
+<tr>
+<td><strong>Total records</strong></td>
+<td align="right"><strong>25,505</strong></td>
+<td align="right"><strong>12,235</strong></td>
+<td align="right"><strong>Families overlap across languages</strong></td>
+<td align="right"><strong>13,270</strong></td>
+</tr>
+</tbody></table></div>
+<p>The raw graph linked 10,695 records. Research-only corrections and lexical comparisons add 1,540 linked records, without changing the database. A family is a broad etymological grouping; its immediate historical formation can differ between records. Sanskrit <em>bālá</em>, a <em>bālaka</em> derivative and a modern compound containing the same root are therefore not interchangeable inputs.</p>
+<p>Every anchored family received an individual first-pass analysis. The deeper checks included all 269 printed Brokskat comparison items, all 473 previously unlinked Hultman Kalkoti records, all 573 Knobloch Sauji records in 335 lexical groups, all 287 selected Dras plural citations, and complete retrieved sets for the morphological tests below. This is <strong>not</strong> a claim that every one of the 25,505 citations received an independent printed-page check: 11,851 remain at the unlinked-inventory review level, and 10,311 at family-context first pass. Their status is visible on every record. The original printed Degener and Buddruss pages were unavailable; their checked-in transcriptions remain a distinct evidence level.</p>
+<p>I use “deterministic in the observed domain” for a class selected without using the target accent and showing one outcome in every comparable, scorable member. This does not establish an exceptionless historical law outside that domain. The analyses are exploratory, with source and input sensitivity checks; they are not random-sample estimates or independently preregistered prediction experiments. A restricted follow-up class must therefore be read alongside the broader screen that motivated it.</p>
+<p>Several mechanisms discussed below—Palula raising, inflectional mobility, and Kalkoti apocope and tone—are already described in the cited literature. This study&#39;s contribution is the database-wide etymological audit, explicit quantitative domains and counterexamples, and comparisons such as the expanded i-declension test and the complete teen-numeral series. A newly quantified regularity is not automatically a newly discovered sound change.</p>
+<p>The appendices distinguish raw citations, source-split tokens, form/gloss types, inflectional cells, lexemes and broad families. Duplicate dictionary attestations do not vote an exception away. The <a href="appendices/tables.html#class-counterparts-all-languages.tsv">class counterpart panels</a> tabulate all seven languages across <a href="appendices/tables.html#class-definitions.tsv">27 explicit lexical class domains</a>, distinguishing selected class members from other formations in the same family. Availability counts distinguish an absent counterpart from an attested but unmarked form. Unlinked members remain visible without invented counterparts; the separate primary-paradigm tables retain cells that cannot securely be mapped into this lexical comparison.</p>
+<h2 id="2-the-outcomes-are-several-different-things">2. The outcomes are several different things</h2>
+<p>Three questions must be kept apart: <strong>which syllable is prominent, which mora of a long vowel carries the accent, and whether a word has a lexical tone</strong>. Inflectional mobility adds a fourth question: what changes when another grammatical cell is formed?</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Source domain</th>
+<th>Usable contrast</th>
+<th>What the notation does not establish</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gilgit/Shina mora sources; Palula; Strand</td>
+<td>Early <strong>E</strong> versus late <strong>L</strong> on a long vowel, plus syllable position</td>
+<td>An unmarked long vowel is not automatically E</td>
+</tr>
+<tr>
+<td>Kalkoti 2023</td>
+<td><strong>H1</strong>, <strong>H2</strong>, short-vowel High, and Low</td>
+<td>An unmarked citation is often uncertain, not necessarily toneless</td>
+</tr>
+<tr>
+<td>Kalkoti 2013</td>
+<td>Explicit phonetic contour groups and an earlier Low-based analysis</td>
+<td>A falling contour is not by itself evidence of the same phonological representation as H1</td>
+</tr>
+<tr>
+<td>Kundal Shahi</td>
+<td>Source-specific falling/rising patterns and inflectional mobility</td>
+<td>Compressed database diacritics can obscure the original analysis</td>
+</tr>
+<tr>
+<td>Brokskat and Dras</td>
+<td>Syllable stress in the principal sources</td>
+<td>Stress on a long vowel does not identify E versus L</td>
+</tr>
+<tr>
+<td>Sauji, Ushojo and survey evidence</td>
+<td>Some syllable marks, phonetic contours or segmental information</td>
+<td>Missing marks do not prove loss of lexical accent</td>
+</tr>
+</tbody></table></div>
+<p>E/L below refers only to compatible mora notation. Old Indo-Aryan barytonesis and oxytonesis locate accent on a syllable; the modern E/L distinction is a finer alignment contrast. “Retention” consequently need not mean identical ancient and modern phonetic contours.</p>
+<p>Two concrete corrections show why this matters. Dras <em>aá/uú</em> can be vowel sequences, with length separately written by a colon; treating them as Gilgit doubled-vowel mora spelling creates false correspondences. Kundal water, raw <em>pā̌nī̂</em>, was checked as <em>pàaníi</em>: initial low pitch followed by final early/falling accent, rather than two lexical contour accents. Brokskat seed <em>bii</em>, flesh <em>moos</em>, house <em>gooṭ</em> and white <em>šoo</em> are unmarked in print. None can supply an E/L outcome. See <a href="https://www.wisdomlib.org/uploads/journals/acta-orie/vol-69-2008/7372-6759-23258.pdf">Schmidt and Kaul, especially p. 234 n. 5</a>, <a href="https://www.aa.tufs.ac.jp/~tjun/shina/Grammar_of_Shina_Language_And_Vocabulary.pdf">Rajapurohit, pp. 32–33</a>, and the <a href="appendices/tables.html#editorial-and-source-decisions.tsv">recorded source decisions</a>.</p>
+<h2 id="3-old-long-root-nouns-preserve-a-substantial-accentual-opposition">3. Old long-root nouns preserve a substantial accentual opposition</h2>
+<p>The strongest inherited contrast is between old long-root barytones and old long-root oxytones whose final vowel disappears. The working predictions are:</p>
+<ul>
+<li><strong>Old accented long root → modern E</strong>, where the long vowel remains diagnostic.</li>
+<li><strong>Old unaccented long root followed by the lost accented ending → modern L</strong>.</li>
+</ul>
+<p>The most informative comparisons hold much of the segmental shape constant. Kohistani <em>báal</em> “hair” versus <em>baál</em> “child” corresponds to <em>vā́la</em> versus <em>bālá</em>. The latter has <strong>old long ā</strong>; its length need not be newly created. Month <em>mā́sa</em> gives early <em>móos</em> in several Shina dialects, whereas flesh <em>māṁsá</em> gives late <em>moós</em>. Gilgit month is <em>máaz</em>, whose different vowel and consonant outcomes are preserved rather than normalized to the comparison form.</p>
+<h3 id="the-broad-screen-and-the-restricted-nominal-result">The broad screen and the restricted nominal result</h3>
+<p>An intentionally broad screen selects nearest two-syllable old-long inputs and modern monosyllabic E/L readings, without restricting all inputs to one nominal formation. It produces substantial agreement, but also real failures:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Historical input</th>
+<th>Language</th>
+<th align="right">Predicted outcome only</th>
+<th align="right">Conflicting E/L outcomes</th>
+<th align="right">Opposite outcome only</th>
+<th align="right">Scorable families</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Old long-root barytone</td>
+<td>Shina</td>
+<td align="right">20 E</td>
+<td align="right">2</td>
+<td align="right">2 L</td>
+<td align="right">24</td>
+</tr>
+<tr>
+<td>Old long-root barytone</td>
+<td>Palula</td>
+<td align="right">19 E</td>
+<td align="right">1</td>
+<td align="right">2 L</td>
+<td align="right">22</td>
+</tr>
+<tr>
+<td>Old long-root oxytone</td>
+<td>Shina</td>
+<td align="right">13 L</td>
+<td align="right">4</td>
+<td align="right">2 E</td>
+<td align="right">19</td>
+</tr>
+<tr>
+<td>Old long-root oxytone</td>
+<td>Palula</td>
+<td align="right">9 L</td>
+<td align="right">1</td>
+<td align="right">4 E</td>
+<td align="right">14</td>
+</tr>
+</tbody></table></div>
+<p>This broad class mixes ordinary nouns with feminine stems, verbs, directional forms and contracted adjectives. Its <a href="appendices/tables.html#old-long-screen-residuals.tsv">complete residual table</a> is essential evidence against a universal “old long vowel predicts modern mora” rule.</p>
+<p>A narrower, explicitly enumerated follow-up uses <strong>29 nominal families with old a-stem noun meanings and corresponding modern noun senses</strong>. It retains the difficult smell, village and foam/steam cases. It is a selected nominal subset, not a claim to exhaust every reconstructible a-stem in the database.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Restricted nominal input</th>
+<th>Shina, all sources and lects</th>
+<th>Palula, all sources</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Old long-root barytone</td>
+<td>10 E-only; 1 conflict</td>
+<td>9 E-only; 1 conflict</td>
+</tr>
+<tr>
+<td>Old long-root oxytone</td>
+<td>9 L-only; 2 conflicts</td>
+<td>5 L-only; 2 E-only</td>
+</tr>
+</tbody></table></div>
+<p>Within the <strong>Degener Gilgit transcription alone</strong>, all 17 scorable nominal families match: seven barytones give E and ten oxytones give L. This is the cleanest old-input result in the study. Its source restriction matters: pooling named lects and independent sources reintroduces disagreement. Excluding documented old-input alternatives also does not eliminate the main problems: Shina retains one barytone conflict and two oxytone conflicts, while Palula retains its barytone conflict and both opposite oxytones. The <a href="appendices/tables.html#old-long-nominal-sensitivity.tsv">selection audit and twelve sensitivity scopes</a> make those decisions reviewable.</p>
+<h3 id="the-residuals-tell-us-which-parts-of-the-history-are-still-missing">The residuals tell us which parts of the history are still missing</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Observed problem</th>
+<th>Best current analysis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Field, 3735</td>
+<td>Predominantly E <em>c̣héec̣</em>, but Buddruss Gilgit L <em>c̣heéc</em></td>
+<td>A source/speaker or lexical-cell difference remains unresolved. The printed Buddruss page still needs checking; majority agreement does not cancel its reading.</td>
+</tr>
+<tr>
+<td>House, 4336</td>
+<td>Gilgit <em>goóṭ</em> versus early Kohistani/Guresi <em>góoṣ</em>, with a conflicting Schmidt Gilgit table form</td>
+<td>A real inflectional-class or lect difference is plausible, alongside a source-table conflict. A single geographic law cannot be inferred from the table alone.</td>
+</tr>
+<tr>
+<td>Oil, 5958</td>
+<td>Buddruss gives usual E <em>téel</em> and rare L <em>teél</em>; Degener has L</td>
+<td>Variation is reported within one source. Speaker, frequency, inflection and contact are testable explanations; none is established here.</td>
+</tr>
+<tr>
+<td>Foam/steam, 9108</td>
+<td>Strand E <em>phʹîṇ</em> “foam” versus Liljegren L <em>phiíṇ</em> “steam, vapour”</td>
+<td>Related senses may have separated lexically or accentually. Shared raised <em>ii</em> suggests an earlier stage with E before any later reassignment.</td>
+</tr>
+<tr>
+<td>Smell, 4531</td>
+<td>Palula E, raised <em>ghróoṇ</em> against <em>ghrāṇá</em></td>
+<td>Retraction must precede raising if this input is correct. A distinct older formation is possible but not independently demonstrated.</td>
+</tr>
+<tr>
+<td>Home village/region, 6547</td>
+<td>Palula <em>díiš</em>, Biori <em>déeš</em>, against <em>dēśá</em></td>
+<td>An early retraction or morphological reassignment is required before raising. This is also recognized as irregular in the Palula grammar.</td>
+</tr>
+</tbody></table></div>
+<p>The broader screen adds louse, counted night, mother, marrow/grease, collar, directional/adjectival forms and verbal cases. Each has a dossier. In particular, late louse under <em>yūkā</em> remains a counterexample under that etymology; Turner also explicitly offers a competing <em>jīvá</em> comparison for the Palula word. Those are two hypotheses for one lexeme, not independent confirmations. Counted night has a much stronger morphological explanation, developed below.</p>
+<p>Old input ambiguity must be retained independently of the modern outcome. Arrow has both <em>kā́ṇḍa</em> and <em>kāṇḍá</em>; flesh has an old consonant-stem <em>mā́s</em> alternative; the load family has a short-<em>bhára</em> comparison; ashes has a nominal versus adjectival accent distinction. The nominal sensitivity analysis excludes these where appropriate rather than silently choosing the form that fits. <a href="https://dsal.uchicago.edu/dictionaries/soas/">Turner’s full entries</a> supply information omitted from a broad database headword.</p>
+<h2 id="4-new-vowel-length-creates-a-different-set-of-accentual-outcomes">4. New vowel length creates a different set of accentual outcomes</h2>
+<p>The age of a long vowel is indispensable. A modern <em>aa</em> can continue old <em>ā</em>, arise through consonant reduction, result from vowel contraction, or come from a later lengthening of a short vowel. These histories need not yield the same accent.</p>
+<h3 id="shina-the-clean-cluster-examples-are-local-not-universal">Shina: the clean cluster examples are local, not universal</h3>
+<p>Gilgit <em>aápo</em> “few” from <em>álpa</em>, <em>aá~ṣo</em> “tear” from <em>áśru</em>, and <em>taáto</em> “hot” from <em>taptá</em> share late long <em>aa</em> before an unaccented ending. In “hot,” Astori <em>tátto</em> preserves a useful geminate comparison; Kohistani <em>táto</em> and Guresi <em>tátu</em> have short vowels, whereas Palula <em>táatu</em> has early long <em>aa</em>. A common root-prominent formation followed by different treatments of the consonant cluster/geminate and later lengthening explains the shared syllable locus and different mora alignment more economically than treating every form as direct retention of Sanskrit accent.</p>
+<p>The broader short-<em>a</em> cluster retrieval finds five Gilgit families, all L, but two are <em>jhalla → jeél</em> and <em>manyú → moón</em>, with additional vowel/glide developments. These five are therefore not five independently demonstrated instances of one compensatory-lengthening mechanism. Extending the proposal to every short root vowel fails: early <em>úu~ṭ</em> “camel,” <em>líic̣o</em> “poor” and <em>búuši</em> “cat” occur in the broader cluster comparisons. The <a href="appendices/tables.html#short-root-cluster-summary.tsv">full vowel-by-lect screen</a> preserves those controls.</p>
+<p>Two tempting examples were removed from strict argument. Fig belongs to the independently recorded long-vowel <em>phālgu</em> branch, not the corrupted digital broad headword that made it look short. Gilgit <em>baáṣ</em> means <strong>lung</strong>, not armpit; Turner’s Addenda reject the simple <em>vákṣas</em> comparison and point to tentative <em>bhaṣma/bhāṣma</em>. It cannot serve as secure proof of a <em>kṣ</em> accent law.</p>
+<h3 id="palula-later-short-a-lengthening-interacts-with-aspiration">Palula: later short-a lengthening interacts with aspiration</h3>
+<p>Biori gives an independent short-vowel comparison for Ashret long-<em>aa</em> forms. The closed-monosyllable test partitions these by aspiration/<em>h</em> without consulting the Ashret accent. After collapsing the article and numeral “one” into one lexeme:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Biori input</th>
+<th align="right">Ashret E</th>
+<th align="right">Ashret L</th>
+<th align="right">Lexemes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Closed short-<em>a</em>, without <em>h</em>/aspiration</td>
+<td align="right">25</td>
+<td align="right">1</td>
+<td align="right">26</td>
+</tr>
+<tr>
+<td>Closed short-<em>a</em>, with <em>h</em>/aspiration</td>
+<td align="right">2</td>
+<td align="right">7</td>
+<td align="right">9</td>
+</tr>
+</tbody></table></div>
+<p>The all-form inventory is 37 pairs; the closed-form inventory is 36; the closed-lexeme inventory is 35. The difference is explicit in the <a href="appendices/tables.html#palula-short-a-sensitivity.tsv">unit sensitivity table</a>. This is a strong conditional tendency, with three real residuals:</p>
+<ul>
+<li><strong>Today:</strong> Biori <em>aǰ</em> versus Ashret <em>aáǰ</em> is L without aspiration. Old <em>adyá</em> offers an independent source of final prominence, but preservation of that accent through the relevant quantity stages or exceptional high-frequency behavior remains a hypothesis.</li>
+<li><strong>Mountain:</strong> <em>kháaṇ</em> is E despite aspiration. Its quantity/formation history requires independent evidence; aspiration alone is insufficient.</li>
+<li><strong>Grape:</strong> <em>dhráac̣</em> is E despite aspiration. Old <em>drā́kṣā/drākṣā́</em> and quantity alternatives make a distinct older-long history plausible, but the correct route cannot be selected only because it yields E.</li>
+</ul>
+<p>The noun paradigm is a further control: <em>haát/háata</em> “hand” and <em>haáḍ/háaḍa</em> “bone” have L citations but early root accent in the inflected form. A noun’s “fixed” or “mobile” class consequently must not be equated with an invariant E/L value. The relevant historical lengthening and raising distinctions are discussed by <a href="https://doi.org/10.5617/ao.5341">Liljegren 2009, pp. 20–25</a>, and illustrated in <a href="https://langsci-press.org/catalog/view/82/85/399-1.pdf">Liljegren 2016, pp. 29, 78–80</a>.</p>
+<h2 id="5-short-gender-endings-define-a-strong-stem-accent-domain">5. Short gender endings define a strong stem-accent domain</h2>
+<p>The most extensive deterministic-looking location result is grammatical. Source-tagged Gilgit adjectives ending in short <em>-o</em>, with at least two securely interpretable nuclei, place accent on the penultimate nucleus. Palula has a closely related pattern with short <em>-u</em>, particularly in the independently tagged umlaut masculine/feminine class.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Independently selected modern class</th>
+<th align="right">Penultimate</th>
+<th align="right">Final</th>
+<th align="right">Other / unscorable</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gilgit source-tagged short-<em>o</em> adjectives</td>
+<td align="right">110</td>
+<td align="right">0</td>
+<td align="right">11 unscorable</td>
+<td>121 unique form/gloss types</td>
+</tr>
+<tr>
+<td>Palula source-tagged short-<em>u</em> adjectives</td>
+<td align="right">111</td>
+<td align="right">9</td>
+<td align="right">6 unscorable</td>
+<td>126 unique form/gloss types</td>
+</tr>
+<tr>
+<td>Palula regular/umlaut <em>u : i</em> gender-inflecting types, including participles</td>
+<td align="right">115</td>
+<td align="right">8</td>
+<td align="right">6 unscorable</td>
+<td>129 unique citation types</td>
+</tr>
+<tr>
+<td>Palula umlaut <em>u : i</em> subclass</td>
+<td align="right">37</td>
+<td align="right">0</td>
+<td align="right">2 unscorable</td>
+<td>39 unique citation types</td>
+</tr>
+</tbody></table></div>
+<p>Selection includes accented final <em>ú/ó</em>. An earlier literal-suffix selector accidentally excluded Palula <em>ú</em> and produced a false exceptionless total; the table above is the corrected result. The <a href="appendices/tables.html#palula-tagged-u-adjectives.tsv">complete candidate tables</a> preserve the correction and all omitted-by-that-selector cases.</p>
+<p>This is a <strong>location</strong> generalization. Root <em>aa</em> can be E or L within the same penultimate syllable. Thus the historical stem-accent pattern can coexist with the quantity histories described above. A final <em>u/o</em> does not, by itself, prove an inherited <em>-aka</em> suffix: independently attested <em>-aka</em> formations are useful evidence, but analogical extension and convergence from other endings also occur. The Palula grammar explicitly discusses this morphological history. <a href="https://langsci-press.org/catalog/view/82/85/399-1.pdf">Liljegren 2016, pp. 119–123</a>.</p>
+<h3 id="the-palula-final-accented-cases-form-partly-coherent-subclasses">The Palula final-accented cases form partly coherent subclasses</h3>
+<p>Two are <strong>age comparatives</strong>, <em>ghaḍeerú</em> “older” and <em>lhookeerú</em> “younger,” with final-accented feminine counterparts. Four are <strong>quality pro-adjectives in -eeṇú</strong>. These are independently recognizable formations, so ending accent is a class property rather than an arbitrary exception assigned to each word. The remaining items are the <strong>tail-less compound</strong> <em>lameeṭičhinilú</em>, unresolved <em>kirpuṭú</em>, and <em>muṣṭú</em>, which the grammar treats as an adverb. The older comparative citation <em>gaḍhḗro</em> still conflicts with the modern ending-accent pattern; morphological grouping does not erase that source-history problem. All nine are individually discussed in the <a href="appendices/tables.html#exception-ledger.tsv">exception ledger</a>.</p>
+<p>A separate core-property comparison provides the cross-language range where a short final vowel survives:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Language</th>
+<th align="right">Penultimate only</th>
+<th align="right">Penultimate plus another position</th>
+<th align="right">Other position only</th>
+<th align="right">Unscorable</th>
+<th align="right">Families</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shina</td>
+<td align="right">35</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">39</td>
+</tr>
+<tr>
+<td>Palula</td>
+<td align="right">25</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">28</td>
+</tr>
+<tr>
+<td>Sauji</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3 final</td>
+<td align="right">10</td>
+<td align="right">14</td>
+</tr>
+<tr>
+<td>Kalkoti</td>
+<td align="right">—</td>
+<td align="right">—</td>
+<td align="right">—</td>
+<td align="right">—</td>
+<td align="right">0 in this retained-ending domain</td>
+</tr>
+<tr>
+<td>Kundal Shahi</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>Brokskat</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">11</td>
+</tr>
+<tr>
+<td>Ushojo</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">1 antepenultimate</td>
+<td align="right">4</td>
+<td align="right">19</td>
+</tr>
+</tbody></table></div>
+<p>These are predeclared property families and senses, not the larger POS-tagged samples above. Brokskat and Ushojo contribute syllable stress; Sauji’s historical marks locate prominence without establishing a mora contrast. Ushojo <em>&#39;kinono</em> “black” is a genuine initial/antepenultimate residual. Older Palula initial-accented “heavy,” Sauji final-accented “heavy/white/red,” directional “left,” and derived or compound forms receive separate annotations. The <a href="appendices/tables.html#property-location-screen.tsv">full property rows</a> also retain uncertain vowel sequences instead of forcing a penultimate analysis.</p>
+<h2 id="6-productive-noun-morphology-explains-an-important-apparent-exception">6. Productive noun morphology explains an important apparent exception</h2>
+<p>Palula counted “night” is especially revealing because there are two relevant words. Ordinary <strong>róot/róota</strong> is a fixed a-declension noun. <strong>raát/reetí</strong> denotes a counted night-and-day period and belongs to the i-declension. Strand explicitly distinguishes their senses and assigns the ordinary noun to <em>rātra</em> and the measure noun to <em>rā́tri</em>. The unaccented <em>rātra</em> entry cannot independently prove an old barytone input. <a href="https://nuristan.info/IndoAryan/Indus/Atsaret/AtsaretLanguage/Lexicon/phon.html">Strand’s lexical source</a>; <a href="appendices/index.html#family-10702">family 10702</a>.</p>
+<p>The crucial new quantitative result is that <em>raát/reetí</em> belongs to a much larger independently defined pattern. Select source i-declension nouns with a consonant-final citation whose last vowel is long <em>aa</em>, and a full inflected form with long <em>ee</em> plus short <em>i</em>. Neither accent is used for selection.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Morphological domain</th>
+<th align="right">Retrieved form cells</th>
+<th align="right">Comparable cells</th>
+<th align="right">Distinct lexemes within the domain</th>
+<th>Observed result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Citation <em>aa</em> / inflected <em>ee+i</em></td>
+<td align="right">74</td>
+<td align="right">73</td>
+<td align="right">66</td>
+<td>Every comparable citation is L on the last root vowel; every inflection accents final <em>i</em></td>
+</tr>
+<tr>
+<td>Further full i-declension paradigms outside that selection</td>
+<td align="right">43</td>
+<td align="right">42</td>
+<td align="right">30</td>
+<td>Every comparable inflection accents final <em>i</em>; citation accent varies</td>
+</tr>
+<tr>
+<td><strong>Combined</strong></td>
+<td align="right"><strong>117</strong></td>
+<td align="right"><strong>115</strong></td>
+<td align="right"><strong>95</strong>, with one overlapping lexeme</td>
+<td><strong>115/115 comparable inflected forms have final -í</strong></td>
+</tr>
+</tbody></table></div>
+<p>The first set includes <em>raát/reetí</em> “counted night,” <em>baát/beetí</em> “word,” <em>kitaáb/kiteebí</em> “book,” <em>gilaás/gileesí</em> “glass,” and <em>pruugraám/pruugreemí</em> “programme,” alongside native abstract nouns. Its productivity and participation by recent loans make it a modern grammatical class, not a collection of individually preserved Sanskrit accent patterns. The grammar’s discussion of i-declension and loan umlaut provides independent morphological grounding. <a href="https://langsci-press.org/catalog/view/82/85/399-1.pdf">Liljegren 2016, pp. 81, 117–118</a>; <a href="appendices/tables.html#palula-umlaut-i-nouns.tsv">all paradigm cells</a>.</p>
+<p>The extension test prevents overgeneralization. Its 42 comparable forms include 24 L citations, six E citations, five short-vowel accented citations and seven short monosyllables without a diagnostic mora contrast. E citations such as <em>čáar/čarí</em> “fresh grass,” <em>sáar/sarí</em> “lake” and <em>ráang/rangí</em> “colour” have independent Biori short-root comparators. Thus <strong>i-declension predicts the inflected suffix accent; the aa/ee subclass additionally predicts citation L</strong>. A modern long vowel created from a short root can enter the same mobile inflection without acquiring that citation pattern.</p>
+<p>The two excluded pairs are informative metadata problems. Biori <em>niildhráal</em> “rainbow” was supplied with <em>izreeṇí</em>, the inflection of its synonym <em>izraáṇ</em>. Biori <em>thupéek</em> “gun” inherited the main lemma <em>toobaák</em>’s <em>toobakí</em>. Neither is a demonstrated paradigm of the displayed variant. Their early citation accents remain in the data; only the mismatched pairings are excluded. Suffix-only shorthand was never expanded by copying the citation accent.</p>
+<p>This substantially improves the explanation of counted night. Its exceptional L relative to old <em>rā́tri</em> is consistent with membership in a productive, independently identified class. What remains unknown is the historical path and date by which it entered that class. Modern regularity does not, by itself, reconstruct the exact ancient reassignment.</p>
+<h2 id="7-vowel-quality-supplies-relative-chronology">7. Vowel quality supplies relative chronology</h2>
+<p>Biori–Ashret comparisons let vowel quality check an accent analysis independently. The 78 retrieved pairs match meaning, consonantal frame and nucleus count, and select Biori accented long <em>aa/ee</em> without selecting the Ashret result.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Biori input and domain</th>
+<th>Ashret outcome</th>
+<th align="right">Form pairs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E long <em>aa</em> in a final closed syllable</td>
+<td><em>oo</em></td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td>Same input</td>
+<td><em>uu</em></td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td>E long <em>ee</em> in a final closed syllable</td>
+<td><em>ii</em></td>
+<td align="right">11</td>
+</tr>
+<tr>
+<td>L long <em>aa</em> in a final closed syllable</td>
+<td><em>aa</em> retained</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>Other syllable domains</td>
+<td>Separately reviewed, outside this closed-syllable prediction</td>
+<td align="right">30</td>
+</tr>
+</tbody></table></div>
+<p>The two L controls are <em>lenaám/tenaám</em> accusative-plural forms: two surface forms but one grammatical ending. Five final-genitive <em>-ée/-íi</em> comparisons likewise instantiate one ending. This is not a balanced random sample of unchanged and raised vowels; dictionary variant recording affects retrieval.</p>
+<p>The six <em>aa → uu</em> cases are father-in-law, four, story, stream, lap and Drosh. A proto-<em>au</em> explanation is independently supported most clearly in father-in-law by internal <em>ša(w)úra</em>. Four and story are also included in the published proto-<em>au</em> proposal. Extending <em>au</em> to stream, lap and Drosh solely because their modern outcome is <em>uu</em> would be circular. They remain residuals of an undifferentiated surface <em>aa → oo</em> rule. <a href="https://doi.org/10.5617/ao.5341">Liljegren 2009, pp. 20–25</a>; <a href="appendices/tables.html#vowel-raising-reviewed.tsv">all 78 adjudicated pairs</a>.</p>
+<p>The chronology is nevertheless powerful. Early raised <em>díiš</em> “home village” requires early accent before <em>ee → ii</em> if the proposed history is right; a very recent accent retraction would not explain its vowel. Conversely, late <em>phiíṇ</em> “steam” shares the raised vowel of early “foam,” making subsequent reassignment or lexical splitting plausible. Unraised early <em>bháaru</em> “load” motivates comparison with the independently attested short-<em>bhára</em> base rather than automatic derivation from early-retracted old long <em>bhārá</em>.</p>
+<p>The raising pattern also includes integrated contact vocabulary: bazaar, prayer, halal, khalas, sign, hunting and shirt. Biori <em>baazáar/baazúura</em>, independently given in the grammar, adds an inflectional syllable-structure comparison. These words show the lexical reach of the local process; they do not individually date it without a borrowing chronology. <a href="https://langsci-press.org/catalog/view/82/85/399-1.pdf">Liljegren 2016, p. 80</a>.</p>
+<h2 id="8-kalkoti-separates-final-vowel-loss-mora-correspondence-and-low-tone">8. Kalkoti separates final-vowel loss, mora correspondence and Low tone</h2>
+<p>The Palula–Kalkoti comparison becomes clearer when three dimensions are treated separately: whether Palula retains an unaccented final vowel, which mora is accented when that vowel is absent, and whether aspiration history contributes Low.</p>
+<p>The reviewed comparison inventory yields:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Palula comparative input</th>
+<th>Predicted Kalkoti class</th>
+<th align="right">Matching cells</th>
+<th>Other known outcomes</th>
+<th align="right">Unknown</th>
+<th align="right">Excluded</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prefinal accent + short unaccented final vowel</td>
+<td>Final High / rising</td>
+<td align="right">10</td>
+<td>0</td>
+<td align="right">10</td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td>Monosyllabic E without that ending</td>
+<td>Zero High / default</td>
+<td align="right">7</td>
+<td>4 final-High residuals</td>
+<td align="right">14</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>Monosyllabic L without that ending</td>
+<td>H1 / falling</td>
+<td align="right">4</td>
+<td>4 Low interactions</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+</tbody></table></div>
+<p>These are consolidated family-plus-Palula-form cells, combining separately preserved source evidence. The first row’s ten matching cells represent nine broad families because grandfather and grandmother share one family. Published phonetic examples are selected evidence: ten matches among ten scorable cells is not a claim that every unknown member has the predicted tone. <a href="appendices/tables.html#kalkoti-palula-combined.tsv">Complete comparisons and exclusions</a>.</p>
+<p>The final-vowel-loss class includes <em>tóoru/taár</em> “star,” <em>déedi/deéd</em> “paternal grandmother,” <em>dhrígu/dríg</em> “long,” <em>yíiṛi/eér</em> “sheep,” and <em>ghúuṛu/gòór</em> “horse.” “Long” has short-vowel final High, not an invented long vowel. Horse combines the expected final High with Low, showing that the apocope and aspiration dimensions can coexist. Cow <em>ghaáu</em> is a vowel sequence, not a transparent short-<em>u</em> suffix; boy <em>phoó</em> has an accented long final vowel and belongs to a different comparison.</p>
+<p>For L without the short ending, wood <em>šaák/šáak</em>, boy <em>phoó/púu</em>, song <em>rhoó/róo</em> and twenty <em>bhiíš/bíiš</em> match the H1/falling pattern. Wheat, belly, sister and salt instead have Low without marked High. Low may interact with or obscure the expected High association, but the available forms do not establish that derivation. Likewise, Palula breathy/aspirated onsets do not universally predict Kalkoti Low: meat and song are explicit difficulties, and village is another important case.</p>
+<p>The 2013 analysis represents some falling contours with late Low, whereas 2023 uses early High. Wood is the clearest example. This is an analytical difference between descriptions, not evidence of an observed sound change between their publication dates. The report therefore gives phonetic contour and phonological representation separately. <a href="https://journals.dartmouth.edu/journals/xmlpage/1/article/423?htmlOnce=yes">Liljegren 2013, pp. 140–144</a>; <a href="https://www.diva-portal.org/smash/get/diva2%3A1772061/FULLTEXT01.pdf">Hultman 2023, pp. 14–20</a>.</p>
+<h3 id="the-teen-numerals-supply-a-coherent-exception-class">The teen numerals supply a coherent exception class</h3>
+<p>The simple E → zero/default comparison has four known residuals: village, man, twelve and thirteen. The two numerals belong to a broader, independently identifiable series. Hultman’s complete numeral table shows final H2 in <strong>all eight ten compounds, 11–18</strong>, while both recorded Palula dialect counterparts have E on the final syllable.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Palula Ashret</th>
+<th>Kalkoti</th>
+<th>Correspondence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>11</td>
+<td><em>akóoš</em></td>
+<td><em>äkaáš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>12</td>
+<td><em>bóoš</em></td>
+<td><em>baáš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>13</td>
+<td><em>tríiš</em></td>
+<td><em>treéš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>14</td>
+<td><em>čandíiš</em></td>
+<td><em>čändeéš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>15</td>
+<td><em>panǰíiš</em></td>
+<td><em>pänǰeéš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>16</td>
+<td><em>ṣoṛíiš</em></td>
+<td><em>ṣureéš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>17</td>
+<td><em>satóoš</em></td>
+<td><em>sätaáš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>18</td>
+<td><em>aṣṭóoš</em></td>
+<td><em>iṣṭaáš</em></td>
+<td>E → H2</td>
+</tr>
+<tr>
+<td>19, twenty-element formation</td>
+<td><em>aṇabhiíš</em></td>
+<td><em>änbíiš</em></td>
+<td>L → H1</td>
+</tr>
+<tr>
+<td>20</td>
+<td><em>bhiíš</em></td>
+<td><em>bíiš</em></td>
+<td>L → H1</td>
+</tr>
+</tbody></table></div>
+<p>The contrast with nineteen is especially useful: its independently recognizable twenty element follows twenty’s correspondence. This motivates <strong>compound-series remodeling or inherited compound-specific accent</strong> as an explanation for twelve and thirteen. It does not yet choose between those historical mechanisms, and eight members of one series are not eight independent innovations. <a href="https://www.diva-portal.org/smash/get/diva2%3A1772061/FULLTEXT01.pdf">Hultman 2023, Table 16, p. 28</a>; <a href="appendices/tables.html#numeral-series-language-panel.tsv">all 381 numeral tokens and seven-language panels</a>.</p>
+<p>Village <em>ghróom/draám</em> and man <em>míiš/meéš</em> remain outside that explanation. A lost extra ending, lexical analogy, contact or a different historical formation could account for their H2, but none is independently established. Palula man is <strong>early míiš</strong>; changing it to <em>miíš</em> would falsely remove the problem. Ordinary Kalkoti Low <em>ràat</em> “night” is semantically better compared with ordinary Palula <em>róot</em> than counted <em>raát</em>. That improves the High-class comparison but leaves the Low unexplained.</p>
+<h2 id="9-inflection-and-the-other-shinaic-branches">9. Inflection and the other Shinaic branches</h2>
+<h3 id="dras-suffix-accent-is-quantitatively-clearer-than-a-wordlist-mora-contrast">Dras: suffix accent is quantitatively clearer than a wordlist mora contrast</h3>
+<p>All 287 selected plural citations were reviewed with available singular candidates. The final-accent distribution differs sharply by ending:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Dras plural ending</th>
+<th align="right">Final accent only</th>
+<th align="right">Final plus another acute</th>
+<th align="right">Stem accent only</th>
+<th align="right">Unmarked</th>
+<th align="right">Citations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>-eh/-eɦ</em></td>
+<td align="right">53</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">60</td>
+</tr>
+<tr>
+<td><em>-e</em></td>
+<td align="right">22</td>
+<td align="right">2</td>
+<td align="right">130</td>
+<td align="right">22</td>
+<td align="right">176</td>
+</tr>
+<tr>
+<td><em>-i</em></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">11</td>
+<td align="right">3</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td>Other formations</td>
+<td align="right">27</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">36</td>
+</tr>
+</tbody></table></div>
+<p>Thus 57/60 <em>-eh</em> citations mark final accent, compared with 24/176 plain-<em>e</em> citations. These are raw plural citations, not independent etyma or automatically verified singular–plural paradigms. The result supports suffix-conditioned accent while preserving the source’s complexity. <a href="appendices/tables.html#dras-suffix-accent-review.tsv">Every reviewed plural</a>.</p>
+<p>The three stem-only <em>-eh</em> readings are knife, people and scissors. Knife has conflicting citations within the source; the grammar gives people with an additional final acute; scissors may involve a lexicalized compound, but that explanation is unproved. Brush and hammer genuinely carry two acute marks in print. Egg, spindle and dates also have source-internal paradigm or transcription differences. These cannot responsibly be normalized to the modal pattern. <a href="https://www.aa.tufs.ac.jp/~tjun/shina/Grammar_of_Shina_Language_And_Vocabulary.pdf">Rajapurohit, nominal grammar and vocabulary</a>.</p>
+<h3 id="kundal-shahi-distinct-paradigm-classes-with-five-unresolved-postaccenting-nouns">Kundal Shahi: distinct paradigm classes, with five unresolved postaccenting nouns</h3>
+<p>The primary source actually read was the <strong>9 January 2004 draft</strong>, not the unretrieved final 2005 publication. Its complete relevant paradigm inventory contains:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Independently described paradigm set</th>
+<th>Examples / outcome</th>
+<th align="right">Paradigms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fixed stems</td>
+<td>Stem accent retained through the listed cells</td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td>Mobile rising stems</td>
+<td>Dish and horse; suffix-accented oblique plural</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>Truncated feminine <em>ī</em> formations</td>
+<td>Root rising/Low or final-<em>i</em> outcomes, with umlaut</td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td>Postaccenting nouns without a rising stem</td>
+<td>Button, face, plough, ox, shoe</td>
+<td align="right">5</td>
+</tr>
+</tbody></table></div>
+<p>The last class cannot be reduced to short roots: ox and shoe have long stems. Its shared inflectional behavior is real, but the source leaves the historical origin unexplained. Treating those five as a descriptive paradigm class is warranted; claiming an independently established phonological sound law for them is not. The <a href="appendices/tables.html#kundal-primary-paradigms.tsv">21 fully transcribed paradigms</a> preserve every cell and the exact source-version caveat.</p>
+<h3 id="brokskat-ushojo-and-sauji-useful-correspondence-evidence-with-different-limits">Brokskat, Ushojo and Sauji: useful correspondence evidence with different limits</h3>
+<p>Brokskat contributes ten penultimate-only property families among eleven retained-ending candidates, and a revealing numeral split: initial stress in 11, 12, 14, 15 and 16; final stress in 17 and 18; unmarked 13. These are syllable-stress facts, not E/L. The complete printed comparison also contains counterexamples to simple word-shape predictions, such as final-stressed “walk” despite a long earlier vowel. The source’s uncertainty about pitch versus list intonation prevents using its wordlist as proof either of inherited mora accent or of its complete loss.</p>
+<p>Ushojo likewise supports a strong prefinal property pattern, with <em>&#39;kinono</em> “black” as a genuine earlier-position residual and several uncertain vowel-sequence forms. Its sparse original graph linkage was a database limitation, not absence of cognates: the research inventory now represents 186 families. The available wordlist still cannot supply a comprehensive Ushojo tonal history.</p>
+<p>Sauji is the most important missing-accent caution. Knobloch explicitly did not investigate stress and pitch accent, so reviewing all 573 records does not turn their unmarked forms into a toneless lexicon. Older final-accented property words “heavy,” “white” and “red” differ from the predominantly prefinal pattern elsewhere, but source, lect and historical differences remain open. <a href="https://urn.kb.se/resolve?urn=urn:nbn:se:su:diva-182519">Knobloch 2020, p. 16</a>.</p>
+<p>Gomes’s acoustic study argues against a Palula-like lexical pitch-accent contrast in its Sauji sample. It used 71 nouns from one male speaker, in basic/inflected and isolated/framed conditions. That is independent evidence compatible with loss or restructuring, with a clear sampling limit; phrase-final contours cannot be substituted for lexical categories on every database entry. <a href="https://www.diva-portal.org/smash/get/diva2%3A1055060/FULLTEXT01.pdf">Gomes 2014</a>.</p>
+<h2 id="10-etymological-decisions-that-materially-affect-the-accent-analysis">10. Etymological decisions that materially affect the accent analysis</h2>
+<p>Several apparent accent anomalies disappear only because the original comparison was wrong or underspecified. These corrections are kept separate from genuine sound-change explanations.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Research decision</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Palula boy/girl, 8399</td>
+<td>Use Turner’s explicit unaccented <em>phōta</em> branch for these Palula words</td>
+<td>They cannot automatically test barytone <em>pṓta</em> retention</td>
+</tr>
+<tr>
+<td>Spleen, 12664</td>
+<td>Use unaccented <em>śyāmī</em>, separately from the colour adjective and bird formation</td>
+<td>The modern contrast remains real; the broad colour headword does not establish its old accent</td>
+</tr>
+<tr>
+<td>Brother-in-law, 6546</td>
+<td>Preserve <em>dēvará</em> and the independently recorded <em>dḗvara</em> alternative</td>
+<td>Do not choose the favorable accent or use a falsely shortened input</td>
+</tr>
+<tr>
+<td>Ice, 13355</td>
+<td>Exclude from strict inherited predictions: Turner calls the comparison phonetically doubtful and compares Wakhi</td>
+<td>Its modern L remains data, but not a secure counterexample to one uniquely known ancestor</td>
+</tr>
+<tr>
+<td>Cowife, 6534</td>
+<td>Turner explicitly identifies the Palula word as a Pashto loan</td>
+<td>It cannot test inherited accent from the proposed native compound</td>
+</tr>
+<tr>
+<td>Year <em>saal</em> versus <em>kaal</em></td>
+<td>Keep the Iranian year word separate from <em>kālá</em> reflexes</td>
+<td>Lexical replacement does not become an accent exception</td>
+</tr>
+<tr>
+<td>Kundal <em>lut</em> “light”</td>
+<td>Primary meaning is light in weight, not turmeric colour</td>
+<td>Exclude the mislinked semantic comparison; no replacement etymology is forced</td>
+</tr>
+</tbody></table></div>
+<p>Reference-number corrections include ram, strainer, “down,” month and a wasp-compound component. Earthquake records with inherited wheat glosses, compound components presented as whole-word ancestors, and present dictionary lemmas linked through old perfectives receive explicit dispositions. Their <a href="appendices/tables.html#editorial-and-source-decisions.tsv">complete decision register</a> identifies the source and the exact record; the original database fields remain untouched.</p>
+<p>Five supplementary etymological proposals are worth pursuing:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Modern item</th>
+<th>Proposed comparison</th>
+<th>Independent support and remaining uncertainty</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sauji <em>gaːɬ</em> “skin”</td>
+<td><em>gā́tra</em>, 4124</td>
+<td>Turner independently gives Gawar-Bati <em>gaλ</em> “skin” and Dameli <em>gadra</em>. Sauji <em>tr</em> comparisons support the lateral outcome. Inheritance versus contact is unresolved; modern accent is unmarked.</td>
+</tr>
+<tr>
+<td>Sauji <em>drab</em> “grass”</td>
+<td><em>darbhá</em>, 6203</td>
+<td>Lahnda <em>drabh/darabh/drab</em> supplies precise segmental and semantic parallels for metathesis. A regional plant-name loan remains possible.</td>
+</tr>
+<tr>
+<td>Brokskat <em>dyo&#39;daar</em> “cedar/deodar”</td>
+<td><em>devadāru</em>, 6531</td>
+<td>Segmental and tree-name agreement support the regional compound. Final stress may reflect its transmission history.</td>
+</tr>
+<tr>
+<td>Ushojo <em>joŋ / pɑ̃</em> “leg”</td>
+<td>Separate <em>jáṅghā</em> / <em>pāda</em> comparisons</td>
+<td>The merged record contains two words requiring separate histories; neither supplies a marked accent here.</td>
+</tr>
+<tr>
+<td>Ushojo <em>&#39;ɽɪɳɖi</em> “widow”</td>
+<td>The <em>raṇḍā/raṇḍī</em> family, 10593 branch 5</td>
+<td>Meaning and regional forms support the association; initial retroflexion, vowel history and borrowing need resolution.</td>
+</tr>
+</tbody></table></div>
+<p>The skin comparison is the strongest new lexical lead: it has a precise external “skin” parallel, not just a general body-part semantic argument. Gawar-Bati is intended here, not Gawri. These proposals remain outside the frozen 1,686-family registry and contribute no manufactured accent predictions. <a href="appendices/proposals.html">Complete proposals and discriminating tests</a>; <a href="https://dsal.uchicago.edu/dictionaries/soas/">Turner</a>.</p>
+<h2 id="11-the-historical-narrative-the-data-support">11. The historical narrative the data support</h2>
+<p>The evidence is best organized as a <strong>partial chronology</strong>, with language-specific branches rather than one uninterrupted universal chain.</p>
+<p>First, old lexical accent and formation mattered. Ordinary long-root nouns preserve a substantial root-accented versus ending-accented opposition, particularly clearly in the restricted Gilgit source sample. A lost accented ending can correspond to modern L, while an accented old long root commonly gives E. Distinct old number, gender and derivational formations must be identified before interpreting an apparent shift: eye, spleen, boy and the kinship terms make that requirement concrete.</p>
+<p>Second, morphological stem-accent domains developed or expanded. The retained short gender endings strongly favor prominence immediately before the ending. Some members have independent <em>-aka</em> ancestry; others plausibly entered by analogy or convergent suffix history. The modern penultimate rule is much firmer than a claim that every such adjective has the same reconstructed suffix.</p>
+<p>Third, quantity changes operated on these accentual structures. Cluster reduction, contraction and later short-vowel lengthening created long vowels with different alignments in different branches. Gilgit late <em>aa</em> in the clean cluster examples and Palula early <em>aa</em> in corresponding short-root formations cannot be explained by treating all long vowels as inherited <em>ā</em>.</p>
+<p>Fourth, Palula vowel raising provides relative dating. Some early accents must precede raising; later reassignment can leave a raised vowel behind. The short-a lengthening layer and its aspiration interaction account for many early/late outcomes independently of the old headword’s accent. The unresolved <em>aa → uu</em> cases show that proto-vowel identity is still underspecified in part of the lexicon.</p>
+<p>Fifth, productive inflectional classes reorganized lexical accent. The Palula i-declension result extends into recent loans and gives counted night a coherent modern home. Its general suffix accent and the narrower aa/ee citation-L subclass must be distinguished. This is a mechanism capable of creating historically irregular but synchronically regular outcomes.</p>
+<p>Sixth, Kalkoti transformed the western correspondence system through final-vowel loss and its own tonal development. A lost short unaccented ending predicts final High in every scorable cell of the reviewed class; otherwise E and L often correspond to zero/default and H1/falling. Low adds a partly independent aspiration-related dimension. The ten-compound numeral series is a separate accentual domain, while village and man remain unexplained lexical residuals.</p>
+<p>Finally, the remaining branches require outcomes appropriate to their evidence. Kundal Shahi preserves informative paradigm classes; Dras shows strong suffix-conditioned stress; Brokskat and Ushojo preserve substantial syllable-location correspondences; Sauji has limited independent evidence for restructuring or loss of a Palula-like contrast. Their incomplete tone annotation is part of the result, not a blank space to fill with assumed zeroes.</p>
+<p>The most secure deterministic domains here are therefore <strong>local and explicitly bounded</strong>: 17/17 restricted Degener nominal families; 110/110 scorable Gilgit short-<em>o</em> adjective types; 37/37 scorable Palula umlaut adjective types; 73/73 comparable aa/ee+i noun cells for citation-L plus suffix accent; 115/115 comparable i-declension inflected cells for final-<em>í</em>; and eight of eight Palula–Kalkoti ten compounds. Each has a stated selection rule, denominator and uncertainty inventory. The broader historical generalizations remain valuable precisely because their failures have been preserved and analyzed.</p>
+<h2 id="12-how-to-audit-and-extend-the-result">12. How to audit and extend the result</h2>
+<p>Start with the <a href="appendices/index.html">family explorer</a>: search a Turner number, modern form or meaning, then open its complete dossier. It contains the revised analysis, unresolved questions, all seven language panels, every research-linked record, and raw members reassigned during the study. The <a href="appendices/tables.html#exception-ledger.tsv">exception ledger</a> collects model residuals; the <a href="appendices/tables.html#all-family-open-issues.tsv">complete family open-issue register</a> also includes unresolved questions outside the scored models.</p>
+<p>The main remaining limits are substantive. Much of the unlinked vocabulary still lacks a secure ancestral alignment; many verbs need a full cell-by-cell historical paradigm; identical glosses do not prove identical inflectional cells; some source disagreements need recordings or inaccessible printed originals; and several successful classes were identified during exploration rather than independently validated on a new corpus. The complete data make those limits inspectable instead of concealing them behind a single accuracy figure.</p>
+<p>For replication, <a href="reproduce.py">reproduce.py</a> rebuilds the quantitative outputs from the frozen corpus and explicit research annotations. <a href="input-manifest.json">input-manifest.json</a> records the starting database hashes; <a href="integrity-audit.json">integrity-audit.json</a> records the final coverage and preservation checks; <a href="artifact-manifest.json">artifact-manifest.json</a> hashes the research package. All nine live database inputs still matched their starting hashes at the analytical freeze. The <a href="appendices/data-dictionary.md">data dictionary</a> explains fields, notation, review levels, splits and exclusions.</p>
+<p>The next most discriminating evidence would be matched paradigms and recordings for village, smell, louse, oil and the conflicting field/house readings; fuller Biori inflection for the <em>aa → uu</em> cases; and comparable tonal elicitation in Sauji, Ushojo and Brokskat. Those checks would decide between the competing mechanisms left open here, rather than merely enlarge the number of unaligned citations.</p>
+</main><footer>Research-only analysis of a frozen Jambu snapshot. Source readings, competing etymologies, excluded comparisons and unresolved cases remain available in the linked appendices.</footer></html>

@@ -1,0 +1,88 @@
+cluster tokens 30 property tokens 857
+[
+  {
+    "language": "Sh",
+    "families": 39,
+    "family_statuses": {
+      "only-penultimate": 34,
+      "mixed-with-penultimate": 5
+    },
+    "position_family_counts": {
+      "2": 39,
+      "1": 5,
+      "3": 1
+    },
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  },
+  {
+    "language": "Phal",
+    "families": 28,
+    "family_statuses": {
+      "mixed-with-penultimate": 2,
+      "only-penultimate": 25,
+      "only-other-position": 1
+    },
+    "position_family_counts": {
+      "2": 27,
+      "3": 2,
+      "1": 1
+    },
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  },
+  {
+    "language": "Sv",
+    "families": 11,
+    "family_statuses": {
+      "only-other-position": 3,
+      "unscorable": 7,
+      "only-penultimate": 1
+    },
+    "position_family_counts": {
+      "1": 3,
+      "2": 1
+    },
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  },
+  {
+    "language": "Kalk",
+    "families": 0,
+    "family_statuses": {},
+    "position_family_counts": {},
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  },
+  {
+    "language": "Kund",
+    "families": 1,
+    "family_statuses": {
+      "unscorable": 1
+    },
+    "position_family_counts": {},
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  },
+  {
+    "language": "bro",
+    "families": 11,
+    "family_statuses": {
+      "unscorable": 1,
+      "only-penultimate": 10
+    },
+    "position_family_counts": {
+      "2": 10
+    },
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  },
+  {
+    "language": "Ush",
+    "families": 19,
+    "family_statuses": {
+      "only-penultimate": 16,
+      "unscorable": 2,
+      "only-other-position": 1
+    },
+    "position_family_counts": {
+      "2": 16,
+      "3": 1
+    },
+    "scope": "Predeclared core property families and property senses with a retained final short vowel; all sources shown separately in detailed rows. Savi historical accent marks indicate location, not mora contrast. This is a comparative location screen, not a fitted sound law."
+  }
+]

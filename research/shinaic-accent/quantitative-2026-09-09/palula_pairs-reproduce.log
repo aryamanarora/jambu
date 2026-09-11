@@ -1,0 +1,22 @@
+[
+  {
+    "input_class": "short-a-without-h",
+    "lexemes": 28,
+    "opposite": 1,
+    "consistent": 27,
+    "outcomes": {
+      "L": 1,
+      "E": 27
+    }
+  },
+  {
+    "input_class": "short-a-with-h",
+    "lexemes": 9,
+    "consistent": 7,
+    "opposite": 2,
+    "outcomes": {
+      "L": 7,
+      "E": 2
+    }
+  }
+]

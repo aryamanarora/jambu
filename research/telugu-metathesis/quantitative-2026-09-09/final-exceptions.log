@@ -1,0 +1,21 @@
+RESIDUAL d698 loŋgu;lō;lōna;lōnu;lōpala;lō̃cu;lō̃ga;lō̃gu;oḷana (7tʰ cent.);ullamu
+RESIDUAL d1850 gruddu;guddu;gummu;guppu;kummu
+RESIDUAL d2010 krēḍincu;krēṇincu;kēraḍamu;kēru
+RESIDUAL d4599 ponju;prō̃gu;prō̃ju;pō̃cu;pō̃gu;pō̃ju
+RESIDUAL d5372 atuku;baduku;batuku;bradimi;braduku;bratikincu;bratuku
+QUANTITY_EXCEPTION d474 d474:nonhuman-two
+QUANTITY_EXCEPTION d694 d694:deer
+QUANTITY_EXCEPTION d1787 d1787:blind-full
+QUANTITY_EXCEPTION d4993 d4993:sink-full
+QUANTITY_EXCEPTION d1767 d1767:bend-full
+QUANTITY_EXCEPTION d2687 d2687:shrink-full
+QUANTITY_EXCEPTION d4312 d4312:worm-full;d4312:worm-retained
+QUANTITY_EXCEPTION d4975 d4975:perish
+VC_CLASS short-vowel-initial-singleton-apical / alveolar 7/23 5 7/23
+VC_CLASS short-vowel-initial-singleton-apical / lateral 6/28 4 6/33
+VC_CLASS short-vowel-initial-singleton-apical / mixed-apical 1/2 0 1/3
+VC_CLASS short-vowel-initial-singleton-apical / retroflex-approximant 6/8 1 6/14
+VC_CLASS short-vowel-initial-singleton-apical / retroflex-rhotic 0/0 0 0/0
+VC_CLASS short-vowel-initial-singleton-apical / retroflex-stop 7/36 4 7/37
+VC_CLASS short-vowel-initial-singleton-apical / rhotic 8/28 3 8/39
+VC_CLASS short-vowel-initial-singleton-apical / rhotic-or-alveolar 1/4 1 1/5

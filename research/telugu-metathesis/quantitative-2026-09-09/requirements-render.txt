@@ -1,0 +1,2 @@
+matplotlib==3.11.1
+Markdown==3.10.3

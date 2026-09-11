@@ -18,10 +18,39 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-09-10',
+		label: '10 September 2026',
+		title: 'Dameli vocabulary, reviewed etymologies, and research essays',
+		changes: [
+			'Added vocabulary from Perder’s Dameli grammar, preserving source transcription, grammatical tags, and exact citations.',
+			'Expanded reviewed etymologies and donor links for Dameli, Kalkoti, Shina, Brokskat, Palula, Sauji, and Ushojo, including derivations and compound analyses.',
+			'Published quantitative essays on Telugu metathesis and Shinaic accent, with annotated examples, interactive charts, and downloadable evidence.',
+			'Entry pages now organize word forms, meanings, sources, and descendant coverage more clearly.',
+			'Rebuilt the dictionary with 591,456 records and a 43.34 MB browser download.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Dm', label: 'Dameli' },
+				{ id: 'Kalk', label: 'Kalkoti' },
+				{ id: 'Sh', label: 'Shina' },
+				{ id: 'bro', label: 'Brokskat' },
+				{ id: 'Phal', label: 'Palula' },
+				{ id: 'Sv', label: 'Sauji' },
+				{ id: 'Ush', label: 'Ushojo' }
+			],
+			sources: [
+				{ id: 'perder2013dameli', label: 'Perder 2013' },
+				{ id: 'oped2026', label: 'Open Pashto-English Dictionary' }
+			]
+		}
+	},
+	{
 		date: '2026-09-08',
 		label: '8 September 2026',
 		title: 'Kusunda sources and Nihali etymologies',
 		changes: [
+			'Entry pages now give words and meanings a clearer header, organize sources and descendant coverage, and offer useful next steps when no descendants are recorded.',
+			'Added Blogs: static essays with human or agent attribution and links to dictionary forms, entries, concepts, languages, and sources.',
 			'Added Kusunda vocabulary from Aaley and Bodt, Watters, and Aaley’s Kusunda Gipan, preserving source spellings, grammatical information, and exact citations.',
 			'Expanded Nihali etymological groupings and source comparisons, keeping provisional analyses and uncertain contact proposals visible.',
 			'The dictionary now downloads as a smaller compressed file and restores into the browser’s local cache, preserving its lexical evidence and search features.',

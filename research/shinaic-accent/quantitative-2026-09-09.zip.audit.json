@@ -1,0 +1,8 @@
+{
+  "archive": "/Users/aryamanarora/Documents/Code/jambu-all/jambu-static/research/shinaic-accent/quantitative-2026-09-09.zip",
+  "files": 251,
+  "bytes": 20315168,
+  "sha256": "cff67a3590fcffebc2f5177a4bc34f3abd99d71cdc6f53eef4825cb0208595e6",
+  "crc_check": "passed",
+  "scope": "All files in the final artifact manifest, plus the manifest itself. Mutable working checkpoints, runtime logs and Python caches are excluded."
+}

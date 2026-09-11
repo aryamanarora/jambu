@@ -1,0 +1,52 @@
+{"item":43,"forms":["'pooc̣o"],"page":261,"note":"Grandson; initial stress, confirmed independently of adjacent Shina acute."}
+{"item":44,"forms":["byɜɜ"],"page":261,"note":"Man; unmarked central-vowel sequence. Footnote2 explicitly says same words for son and man were provided by two separate speakers; this polysemy is not an extraction error."}
+{"item":45,"forms":["'aae"],"page":261,"note":"Mother; initial stress in a vowel sequence."}
+{"item":46,"forms":["'muumo"],"page":261,"note":"Maternal uncle; one initial stress mark, not two."}
+{"item":47,"forms":["šaṣ"],"page":261,"note":"Mother-in-law; unmarked."}
+{"item":48,"forms":["nũũ"],"page":261,"note":"Name; nasalized doubled u, not stored nto. No stress marked."}
+{"item":49,"forms":["muṣ"],"page":261,"note":"Person; unmarked. Exact central/rounded u quality remains approximate; Shina columns are manuẓo-type, not ridgepole."}
+{"item":50,"forms":["'kaakʲe"],"page":261,"note":"Sister; initial stress. Same lexical form also in brother's-wife alternatives."}
+{"item":51,"forms":["byɜɜ"],"page":261,"note":"Son; same form as man, confirmed by source footnote2. Unmarked central vowel sequence."}
+{"item":52,"forms":["ža'moo"],"page":261,"note":"Son-in-law; final stress."}
+{"item":53,"forms":["šadže'rii"],"page":261,"note":"Wife's brother; final stress; stored extra z/ẓ sequence is not printed."}
+{"item":54,"forms":["chi'gaa","mu'ley"],"page":261,"note":"Woman; two comma-separated alternatives, second also daughter. Do not treat as one phrase."}
+{"item":55,"forms":["daah"],"page":262,"note":"Arrow; unmarked Purik loan."}
+{"item":56,"forms":["thal'tsir"],"page":262,"note":"Ashes; final stress, Purik loan."}
+{"item":57,"forms":["car'pii"],"page":262,"note":"Bed; final stress, source proposes Kashmiri loan."}
+{"item":58,"forms":["man'nili"],"page":262,"note":"Bread; medial stress in three-syllable reading."}
+{"item":59,"forms":["tha'riŋi"],"page":262,"note":"Churn; medial stress, source identifies Burushaski loan."}
+{"item":60,"forms":["gaan"],"page":262,"note":"Curds; unmarked long vowel."}
+{"item":61,"forms":["'ṣaac̣ii"],"page":262,"note":"Dream; initial stress; source explicitly adds pl.? Final ii may be plural and must not be equated with ordinary final i nouns."}
+{"item":62,"forms":["puš"],"page":262,"note":"Fertilizer; unmarked, final š rather than stored s; exact u quality approximate."}
+{"item":63,"forms":["bun","kheey"],"page":262,"note":"Field; two alternatives, kheey identified as an Indo-Aryan loan. Exact rounded/central vowel of bun approximate."}
+{"item":64,"forms":["goor"],"page":262,"note":"Fire; unmarked long vowel."}
+{"item":65,"forms":["gʲii"],"page":262,"note":"Ghee; palatalized g and long ii, unmarked. Stored gi loses length/palatalization."}
+{"item":66,"forms":["miŋ"],"page":262,"note":"Grease; final velar nasal visible, no accent. Distinct from sunny-slope form read separately."}
+{"item":67,"forms":["ḍiṭ"],"page":262,"note":"Handspan; retroflex/underlined initial and final stops, unmarked."}
+{"item":68,"forms":["gʲãã'tsi"],"page":263,"note":"Honey; palatalized g and nasal long aa before stressed tsi. Source discussion's gliiitsi spelling differs; preserve table reading for stress, with exact nasal-vowel quality uncertain."}
+{"item":69,"forms":["gooṭ"],"page":263,"note":"House; long oo and retroflex final, NO acute or stress mark in Brokskat cell."}
+{"item":70,"forms":["gʲab","ṣka"],"page":263,"note":"Irrigation channel; two alternatives. Stored gia is palatalized g, and second form has no initial i vowel."}
+{"item":71,"forms":["thak'ṣaa"],"page":263,"note":"Loom; final stress, Purik loan."}
+{"item":72,"forms":["thok'tse"],"page":263,"note":"Mattock; final stress."}
+{"item":73,"forms":["ɜ'džen"],"page":263,"note":"Milk; stressed džen with preceding reduced/central vowel. Precise initial glyph approximate, stress position clear."}
+{"item":74,"forms":["pon"],"page":263,"note":"Path; unmarked."}
+{"item":75,"forms":["hal"],"page":263,"note":"Plough; unmarked."}
+{"item":76,"forms":["'šaltaa"],"page":263,"note":"Roof; initial stress despite long final aa."}
+{"item":77,"forms":["pa'yuu"],"page":263,"note":"Salt; final stress; printed final doubled barred/central u normalized as uu. Not stored yue."}
+{"item":78,"forms":["bo'ṣuŋs"],"page":263,"note":"Sickle; final stress."}
+{"item":79,"forms":["duu"],"page":263,"note":"Smoke; unmarked doubled barred/central u normalized as uu. Stored dre is an extraction error, enabling comparison with dhūma after final m loss."}
+{"item":80,"forms":["caq"],"page":263,"note":"Spinning wheel; unmarked."}
+{"item":81,"forms":["bun"],"page":264,"note":"Village; unmarked barred/central u approximate. Same spelling as field in table, distinct from first-person plural reading."}
+{"item":82,"forms":["'kooṭ"],"page":264,"note":"Wood; initial/only-syllable stress with long oo."}
+{"item":83,"forms":["krom"],"page":264,"note":"Work; unmarked."}
+{"item":84,"forms":[],"page":264,"note":"Blue sky; Brokskat dash, no attestation."}
+{"item":85,"forms":["á'ẓeṣ"],"page":264,"note":"Cloud; the printed initial a has an acute-looking mark as well as a pre-second-syllable apostrophe. Treat this as an anomalous source marking, not a normal mora or clean single-stress datum, pending higher-resolution/source clarification."}
+{"item":86,"forms":["brok"],"page":264,"note":"Lightning; unmarked Purik loan."}
+{"item":87,"forms":["gʲun"],"page":264,"note":"Moon; palatalized g, unmarked."}
+{"item":88,"forms":["char'chu"],"page":264,"note":"Rain; final stress, rounded/central final u approximate, Purik loan."}
+{"item":89,"forms":["do'lo"],"page":264,"note":"Sky; final stress."}
+{"item":90,"forms":["'aẓo"],"page":264,"note":"Snow; initial stress, retroflex sibilant visible; strengthens lexical comparison with abhra/aẓo rain but semantic transfer still requires assessment."}
+{"item":91,"forms":["'turi"],"page":264,"note":"Star; initial stress."}
+{"item":92,"forms":["'suri"],"page":264,"note":"Sun; initial stress, barred/central u normalized as u; stored sari misreads vowel."}
+{"item":93,"forms":["wɜɜ"],"page":264,"note":"Water; doubled central vowel, unmarked."}
+{"item":94,"forms":["yyš"],"page":264,"note":"Wind; long y vowel and final š, unmarked."}

@@ -1,0 +1,164 @@
+[
+  {
+    "class_id": "short-a-without-h",
+    "definition": "Biori short-a comparative input, partitioned by h/aspiration; consult closed-syllable and lexeme sensitivity.",
+    "source_table": "palula-short-a-pairs.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "short-a-with-h",
+    "definition": "Biori short-a comparative input, partitioned by h/aspiration; consult closed-syllable and lexeme sensitivity.",
+    "source_table": "palula-short-a-pairs.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Gilgit-short-o-adjectives",
+    "definition": "Source-tagged Gilgit adjectives ending in short o.",
+    "source_table": "gilgit-o-adjectives.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Palula-short-u-adjectives",
+    "definition": "Source POS-tagged Palula adjectives ending in short u, including accented ú.",
+    "source_table": "palula-tagged-u-adjectives.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Palula-aa-ee-i-nouns",
+    "definition": "Source i-declension full comparable aa/ee+i paradigms; no accent used for selection.",
+    "source_table": "palula-umlaut-i-nouns.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Palula-other-i-nouns",
+    "definition": "Full i-declension paradigms outside the aa/ee+i selection, with one additional final-i nucleus.",
+    "source_table": "palula-i-decl-extension.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Palula-umlaut-u-adjectives",
+    "definition": "Independently tagged umlaut masculine-u/feminine-i class, including unknown accent readings.",
+    "source_table": "palula-u-adjectives.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Palula-grammatical-u-adjectives",
+    "definition": "Full regular/umlaut gender-inflecting short-u class, including participles, residuals and unscorable citations.",
+    "source_table": "palula-u-adjectives.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "raising-Biori-early-a-long-final-closed",
+    "definition": "Biori input accent, vowel quality and final closed syllable, before observing Ashret quality; both sides of the reviewed pair are shown.",
+    "source_table": "vowel-raising-reviewed.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "raising-Biori-early-e-long-final-closed",
+    "definition": "Biori input accent, vowel quality and final closed syllable, before observing Ashret quality; both sides of the reviewed pair are shown.",
+    "source_table": "vowel-raising-reviewed.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "raising-Biori-late-a-long-final-closed",
+    "definition": "Biori input accent, vowel quality and final closed syllable, before observing Ashret quality; both sides of the reviewed pair are shown.",
+    "source_table": "vowel-raising-reviewed.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Kalkoti-comparison-Palula-E-without-short-final-vowel",
+    "definition": "Palula comparative structure selected independently of the Kalkoti outcome; model-excluded pairings omitted, unknown and residual outcomes retained.",
+    "source_table": "kalkoti-palula-adjudicated.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Kalkoti-comparison-Palula-L-without-short-final-vowel",
+    "definition": "Palula comparative structure selected independently of the Kalkoti outcome; model-excluded pairings omitted, unknown and residual outcomes retained.",
+    "source_table": "kalkoti-palula-adjudicated.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel",
+    "definition": "Palula comparative structure selected independently of the Kalkoti outcome; model-excluded pairings omitted, unknown and residual outcomes retained.",
+    "source_table": "kalkoti-palula-adjudicated.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Dras-plural--e",
+    "definition": "Dras plural citations selected by their final segments; counterparts elsewhere are lexical relatives, not claims of identical plural morphology.",
+    "source_table": "dras-suffix-accent-review.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Dras-plural--eh/-eɦ",
+    "definition": "Dras plural citations selected by their final segments; counterparts elsewhere are lexical relatives, not claims of identical plural morphology.",
+    "source_table": "dras-suffix-accent-review.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Dras-plural--i",
+    "definition": "Dras plural citations selected by their final segments; counterparts elsewhere are lexical relatives, not claims of identical plural morphology.",
+    "source_table": "dras-suffix-accent-review.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "Dras-plural-other",
+    "definition": "Dras plural citations selected by their final segments; counterparts elsewhere are lexical relatives, not claims of identical plural morphology.",
+    "source_table": "dras-suffix-accent-review.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "short-root-cluster-a",
+    "definition": "The frozen exploratory cluster screen partitioned by old root vowel. Source/formation caveats in the original table remain; no universal compensatory mechanism is asserted.",
+    "source_table": "short-root-cluster-screen.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "short-root-cluster-i",
+    "definition": "The frozen exploratory cluster screen partitioned by old root vowel. Source/formation caveats in the original table remain; no universal compensatory mechanism is asserted.",
+    "source_table": "short-root-cluster-screen.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "short-root-cluster-r",
+    "definition": "The frozen exploratory cluster screen partitioned by old root vowel. Source/formation caveats in the original table remain; no universal compensatory mechanism is asserted.",
+    "source_table": "short-root-cluster-screen.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "short-root-cluster-u",
+    "definition": "The frozen exploratory cluster screen partitioned by old root vowel. Source/formation caveats in the original table remain; no universal compensatory mechanism is asserted.",
+    "source_table": "short-root-cluster-screen.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "retained-ending-core-properties",
+    "definition": "The frozen core-property family/sense inventory with a retained short final vowel; all marked, unmarked and excluded source readings remain in the source table.",
+    "source_table": "property-location-screen.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "ten-compounds",
+    "definition": "Numerals selected by meaning and independently identified ten versus twenty formations; whole-compound identity varies across languages.",
+    "source_table": "numeral-series-records.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "nineteen-twenty-comparison",
+    "definition": "Numerals selected by meaning and independently identified ten versus twenty formations; whole-compound identity varies across languages.",
+    "source_table": "numeral-series-records.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "old-long-barytone-nominals",
+    "definition": "Restricted29-family nominal follow-up, two-nucleus old-long input, independently marked old accent.",
+    "source_table": "old-long-nominal-formation-audit.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  },
+  {
+    "class_id": "old-long-oxytone-nominals",
+    "definition": "Restricted29-family nominal follow-up, two-nucleus old-long input, independently marked old accent.",
+    "source_table": "old-long-nominal-formation-audit.tsv",
+    "interpretation": "Counterpart ranges are all records in the same research family, including different formations and senses. Only records explicitly selected by the source table are direct class members; no automatic transfer of the grammatical class to another language."
+  }
+]

@@ -1,0 +1,88 @@
+"""Cases that expose relative chronology, morphological boundaries, and contact."""
+
+def populate(add,tokens):
+    add('d1619','below, lower, east','short *kiẓ-nd / *kiẓ-V-kk versus long *kīẓ',
+        'k','i','ẓ','zero/unknown','CVC-nd / CVC-V-kk / CVVC','postposition/adjective/verb',
+        'Tamil/Malayalam kiẓakku and Kannada kiẓ/kiẓgu independently establish a short allomorph alongside long kīẓ. Parji kiṛi corroborates short vowel before apical. K03 p.128 uses immediate *kiẓ-nd for Telugu below.',
+        'Southern short and long forms establish k-V-apical order. Telugu krinda places the apical before the vowel; kinda can be connected to it by independently attested cluster simplification.',
+        '*kiẓ-nd > *kẓind > krind > kind gives krinda/kinda. Displacement removes the front vowel from immediately after k, blocking Telugu k>c palatalization; later r-loss restores ki after that palatalization has ceased to act on this item. Long kīḍupaḍu retains the apical medially; krī may be a separate contraction or abbreviated derivative.',
+        'This is a relative chronology argument conditional on inheritance and the independently established palatalization environment, not proof from an isolated unpalatalized k. Do not shorten the citation root kīẓ ad hoc: a short allomorph is independently attested. Exact -nd and -nc history is less secure than initial order. Nilgiri/Brahui kī types admit medial-apical loss without displacement; they do not independently prove the Telugu route.',
+        {'Tamil':('R','kiṛ̆akku|kīṛ̆|kīṛ̆vu|kīṛ̆mai','Short versus long root formations preserve order.'),'Malayalam':('R','kiṛ̆akku|kiṛ̆u|kiṛ̆iyuka|kiṛ̆ikka|kīṛ̆','Independent short/long allomorphs.'),'Kannada':('R','kiṛ̆|kiṛ̆gu|kirgu|kīṛ̆|kīṛ̆a|keḷagu','Medial apical retained despite quality and quantity variation.'),
+         'Telugu':('M','krinda|krindu|krindiki|kinda|kindu|krincu|kincu|krī|kīḍupaḍu','Short displaced and r-reduced formations; long retained compound; krī quantity history separate.'),
+         'Tulu':('R','kīḷɯ|kīḍɯ|kīṭage|kīṭake|kīlmēlɯ','Long-root medial apical.'),'Kota':('O','ki·|ki·ṛm','Medial apical lost in bare form, retained in derivative.'),'Toda':('O','ki·|ki·koy|kī','Medial apical loss in long root.'),'Kodagu':('O','kɨ·|kɨ·ḷɨ|kɨ·da|kɨppuṇi','Medial loss and cluster assimilation alongside retained apical.'),
+         'Parji':('R','kiṛi','Independent short-vowel retained form.'),'Kurux':('O','kiyyā|kiyyantā|kītā|kītantā','Medial glide/stop and length developments, no initial cluster evidence.'),'Brahui':('O','ki|kī|kē|kēraɣẖ','Bare forms lose medial apical; derivative retains r.'),'Badaga':('O','kīy-|kīe','Long root with medial glide/loss.'),'markodi':('O','kī','Long root with medial loss.')},
+        input_confidence='high',confidence='high',quantity='mixed by formation',references='K03 p.128 Rule 14, p.158 Rule 21; DEDR 1619',
+        boundary='Short/long grades independently attested; Telugu consonantal local formation not identical to southern east -kk.')
+    tokens('d1619','Telugu',D='krinda|krindu|krindiki|kinda|kindu|krincu|kincu',R='kīḍupaḍu',A='krī')
+    tokens('d1619','Kota',R='ki·ṛm',O='ki·')
+    tokens('d1619','Kodagu',R='kɨ·ḷɨ|kɨ·da',O='kɨ·|kɨppuṇi')
+    tokens('d1619','Brahui',R='kēraɣẖ',O='ki|kī|kē')
+
+    add('d3976','cotton','*par-utti; immediate *par-tt-i','p','a','r','u','CVC-u-tt-i','noun',
+        'Tamil/Malayalam parutti independently supplies a before r and high u before tt. Kannada/Tulu parti and Gondi part support a syncopated medial cluster.',
+        'Full and syncopated comparanda support par- as earlier than Telugu pra-. Telugu pratti and patti document the cluster and its rhotic-free outcome in the same language.',
+        '*par-utti > *par-tti > *pra-tti > pratti > patti. The derivative already has tt; metathesis need not create it anew. Kannada parti > patti is also possible through direct medial r assimilation, without a pra stage.',
+        'Cotton vocabulary can travel, and Kuvi Sunkarametta pratti may be a Telugu loan; other Kuvi/Kui forms retain part-. Neither shared crop semantics nor a matching modern patti establishes inheritance. Kannada paẓti has an additional apical correspondence and should not override the robust r series. Long Tamil pāram is a separate formation, not the exact input to Telugu short a.',
+        {'Tamil':('R','parutti|pāram','Short full formation and separate long noun.'),'Malayalam':('R','parutti','Short high-u formation.'),'Kannada':('O','parti|paṛ̆ti|patti','Medial cluster and assimilated variant.'),'Tulu':('R','parti','Syncope retains initial vowel before r.'),'Kodagu':('R','parati','Different medial vowel; same order.'),'Toda':('O','pašty|paśty','Medial rhotic-to-fricative cluster development.'),
+         'Telugu':('D','pratti|patti','Displaced and r-reduced variants.'),'Gondi':('R','part','Koya retained medial cluster.'),'Kui':('R','parti','Retained medial cluster.'),'Kuwi':('A','parti|paṛti|pratti','Retained F./Israel variants and possibly borrowed Sunkarametta pratti.')},
+        references='DEDR 3976; K03 *par-utti reconstruction',input_confidence='high',boundary='High-u cotton-name formation independently matched; full -utti not inferred from Telugu output.')
+    tokens('d3976','Kannada',R='parti|paṛ̆ti',O='patti')
+    tokens('d3976','Kuwi',R='parti|paṛti',A='pratti')
+
+    add('d4005','rib, side, armpit','*paẓ-k-; shorter *paẓ-u','p','a','ẓ','zero/u','CVC-k / CVC-u','noun',
+        'Kannada paẓke, Konda paṛka and Kuvi paṛka independently support a medial approximant plus velar extension; Tamil paẓu supplies a shorter rib root.',
+        'The independent velar formations support pa-apical-k as earlier order. Kuvi paṛka/pṛaka demonstrates actual order variation, while Telugu prakka has promoted r and a strengthened velar.',
+        '*paẓ-k > *pẓak(k) > prakka in Telugu; strengthening may precede or follow displacement. Kuvi paṛka > pṛaka is a separate local exchange without Telugu gemination. Later Telugu r-loss would produce pakka, but that modern form is not supplied as a standalone reflex in this corpus group.',
+        'DEDR explicitly notes convergence with Middle Indo-Aryan pakkha, especially in Telugu. Thus a pure inherited account of every pakka/prakka token would be unjustified: inherited metathesis, borrowing and analogical mixing may all contribute. Exact corpus prakka retains the apical, but the formation’s loan history still needs independent textual evidence. Do not treat Tamil paẓu as proof of a vocalic suffix in the velar derivative.',
+        {'Tamil':('R','paṛ̆u','Shorter apical root.'),'Kannada':('R','paṛ̆ke','Independent velar formation.'),'Telugu':('D','prakka','Displaced order, with explicit Indo-Aryan convergence caveat.'),'Konda':('R','paṛka|paṛka ḍumu','Retained velar noun and rib compound.'),'Kuwi':('M','paṛka|pṛaka','Both orders in Israel; source/dialect variation retained.'),'Pengo':('R','paṛka','Retained velar formation.')},
+        references='DEDR 4005 and explicit DBIA 233a convergence note; Hume 2004 p.225',input_confidence='high',eligibility='core-contact-convergence',boundary='Velar extension independently attested; convergence with Indo-Aryan pakkha must be represented separately.')
+    tokens('d4005','Kuwi',R='paṛka',D='pṛaka')
+
+    add('d5263','write, draw lines, scratch','*war-ay; *war-i and other scratching formations',
+        'w','a','r','a/i','CVC-ay / CVC-i','verb/noun',
+        'Tamil varai and Malayalam varayuka independently establish low-a drawing formation; Kannada bare and Tulu barepini corroborate labial-V-r order. Tamil vari independently establishes a high-i counterpart.',
+        'Multiple southern forms support var- before Telugu vrā-. The coexistence of vrāyu/rāyu directly supports subsequent loss of the first cluster member, unlike Telugu finger vrēlu>vēlu.',
+        '*war-ay > *wrāy > vrāyu > rāyu. Writing nouns vrā̃ta/vrālu and causative vrāyincu have distinct suffix histories. Telugu variyu metal-testing preserves the high-i formation. Kui vrīsa/Kuvi brīnai has high ī and different suffix history, potentially *war-i versus a different earlier vowel grade.',
+        'One first-member-loss word does not establish a universal low-vowel rule for wr clusters. Literacy vocabulary readily diffuses: Gondi/Konda/Kuvi rās/rāc and Gadaba rāyap may be Telugu exports or reflect local developments. Gondi varasānā retains full order, but its relation to a possible borrowed rās is uncertain. Telugu baruku and Parji varc have explicit alternative d5322 etymologies. Badaga finger/place-name homonyms attached to this group are not writing reflexes.',
+        {'Tamil':('R','varai|vari|varaivu|varaippu','Low/high formations distinguished.'),'Malayalam':('R','varayuka|variyuka|vara|vari|varekka','Full retained variants.'),'Kannada':('R','bari|bare|baraha|barapa|barepa|barasu|barisu','Medial r retained with different suffixes.'),'Tulu':('R','barepini|baripuni|bareta|barāvu|barɛ','Medial r retained.'),'Kodagu':('R','bare','Retained stripe/brand-mark word.'),'Kota':('R','var|varv- (vard-)','Retained medial r.'),'Toda':('R','par|par- (parQ-)','Initial w>p; no r displacement.'),
+         'Telugu':('M','vrāyu|rāyu|rāsu|vrāyi|vrāyincu|vrā̃ta|vrālu|vrāyasamu|rāyasamu|variyu|baruku','Displaced writing formations, retained testing-metal formation, alternate-cognacy scratch verb.'),
+         'Gondi':('A','varasānā|varasaval|varsānā|rāsānā|rasāna|rās','Retained-order formations plus possible Telugu-area writing loans.'),'Konda':('A','rās- (-t-)','Telugu loan versus local displacement unresolved.'),'Kui':('A','vrīsa (vrīsi-)','Initial cluster clear, exact input vowel/formation unresolved.'),'Kuwi':('A','brīnai|rāc- (-it-)|rācinai|rāskinai','High-ī draw form and low-ā writing series differ; contact possible.'),'Parji':('A','varc','Explicit alternate scratch etymology.'),'Gadaba':('A','rāyap- (rāyat-)','Probable Telugu-area writing loan, independent diagnosis pending.'),'Badaga':('R','bare|barava','Retained writing verb and noun.')},
+        confidence='high',input_confidence='high',references='K61 pp.67–68; K03 pp.157–158; PSS83 pp.230–231; DEDR 5263',boundary='Low-ay write versus high-i scratch/test formations independently attested; derivatives and recipient writing vocabulary not independent roots.')
+    tokens('d5263','Telugu',D='vrāyu|rāyu|rāsu|vrāyi|vrāyincu|vrā̃ta|vrālu|vrāyasamu|rāyasamu',R='variyu',A='baruku')
+    tokens('d5263','Gondi',R='varasānā|varasaval|varsānā',A='rāsānā|rasāna|rās')
+
+    add('d5295','scrape, wipe, erase inscription','*waẓ-i; *waẓ-C / *waẓ-a/icu causative formations',
+        'w','a','ẓ','i/a/zero','CVC-i / CVC-C','verb',
+        'Tamil vaẓi and Kannada baẓi/baẓicu/baẓacu establish w/b-V-ẓ and different vowel-bearing extensions. Telugu vẓaccu preserves the identity of the promoted approximant before its merger with r.',
+        'Independent southern medial ẓ plus old Telugu cluster vẓ supports displacement before postconsonantal ẓ>r. The surviving cluster consonant is stronger direction evidence than a modern r alone.',
+        'A consonantal *waẓ-cc > *wẓacc > vraccu accounts for short a with cc; alternatively high-i syncope could precede the consonantal stage. Kannada baẓacu has low a and cannot be mechanically chosen as the exact immediate Telugu input without explaining the short output. Telugu baḍiyu retains V before the apical in a different ritual sweeping formation.',
+        'The exact causative/input vowel remains a substantive uncertainty; old cluster spelling does not solve it. Inscriptional vẓ/vr dates need separate localization. Badaga bāku may have medial assimilation/loss and lengthening rather than initial metathesis. Toda poṛt ud contains the comparison in a compound; bare ud must not be counted as another independent reflex of waẓ.',
+        {'Tamil':('R','vaṛ̆i|vaṛ̆iyal','Independent medial approximant.'),'Malayalam':('O','vaṭikka','Medial stop/cluster assimilation.'),'Kannada':('R','baṛ̆i|boṛ̆i|baṛ̆u|baṛ̆icu|baṛ̆acu|baṛ̆isu|baḷugu','Full formations retain apical after V.'),'Tulu':('R','baḷi','Medial lateral correspondence.'),
+         'Telugu':('M','vṛ̆accu|vraccu|baḍiyu','Historical cluster approximant/rhotic versus retained medial stop in different derivative.'),'Toda':('R','poḍy- (poḍc-)|poṛt ud','Medial apical remains after vowel; compound analyzed at correct member.'),'Badaga':('O','bāku|bāki','Medial apical loss/assimilation and lengthening possible; no initial cluster evidence.')},
+        confidence='high for order; medium for full formation',input_confidence='medium',references='DEDR 5295; K61 pp.67–68; K03 p.158 apical reflex table',boundary='Exact short -cc formation is not independently identical to Kannada low-a -acu; preserve this unresolved step.')
+    tokens('d5295','Telugu',D='vṛ̆accu|vraccu',R='baḍiyu')
+
+    add('d4555','town, city','regional *poẓ-al','p','o','ẓ','a','CVC-a-L','noun',
+        'Kannada poẓal directly supplies medial approximant, short o and low a. Telugu archaic pẓōl/pẓōlu retains the same approximant in the newly formed initial cluster.',
+        'The consonant identity correspondence and fuller Kannada formation support po-ẓ-al earlier than p-ẓō-l. Only one unshifted language is attested, so wider ancestral level and loan direction remain less secure than local order.',
+        '*poẓ-al > *pẓōl > prōl, with later Telugu ending u. Literal rearrangement+contraction and a>o assimilation followed by first-vowel loss are alternatives; pẓ precedes merger to pr under either mechanism.',
+        'Settlement vocabulary can be borrowed. Even if Telugu borrowed an uncontracted poẓal-type stem and changed it locally, it would still witness Telugu displacement but not inherited pan-Dravidian cognacy. The queried poẓil d4558 comparison needs separate review. A dated town-name spelling would bound its own form, not date the inception of the rule.',
+        {'Kannada':('R','poṛ̆al','Only full unshifted city comparison.'),'Telugu':('D','pṛ̆ōl|pṛ̆ōlu|prōlu','Promoted old approximant and later r reflex.')},
+        references='DEDR 4555; K61 pp.67–68',eligibility='regional-contact-uncertain',boundary='Low-al city formation supported in Kannada; deeper cognacy/contact direction unresolved.')
+
+    add('d910','seven, seventy','short *eẓ-u-pat- tens versus long *ēẓ-u numeral',
+        'Ø','e','ẓ','u/zero','VC-u + ten / VVC-u','numeral',
+        'Tamil/Malayalam eẓu-patu seventy and short attributive eẓu- independently establish the short root beside ēẓu seven. Tulu eḷpa and Kodagu əḷu-vadɨ independently retain a short tens formation.',
+        'Southern short attributive/tens forms support e before ẓ. Telugu ḍebbadi promotes the apical, whereas ēḍu preserves the independent long root in numeral and person formation.',
+        '*eẓ-(u)-pat > *ẓe-ppat > ḍebbadi is schematic: vowel loss, displacement, labial strengthening/voicing and the Telugu tens suffix require separate chronology. Later ḍebbʰai/ḍabbʰai adds suffix contraction, aspiration and e/a variation. Long *ēẓ-u > ēḍu retains order; no ad hoc shortening of modern ēḍu is required to feed seventy.',
+        'The compound boundary supplies independent conditioning information, but exact prehistoric weakening of u and voicing of p cannot be inferred merely from a compound label. The original ḍ in seventy remains distinct from later d elsewhere; orthography/source traditions need checking before claiming one universal merger date. K03 p.264 diagnoses Kolami seven forms as Telugu loans. Kui oḍgi is itself queried and has separate vowel/suffix history, not initial metathesis.',
+        {'Tamil':('R','ēṛ̆u|eṛ̆uvar|eṛ̆u-patu|eṛ̆u-nūṟu','Long numeral versus short compound/attributive forms.'),'Malayalam':('R','ēṛ̆u|eṛ̆u-patu|eṛ̆uvar|eṛ̆unnūṟu','Same distinction.'),'Kannada':('O','ēṛ̆u|ēṛ̆-pattu|eppattu|eḷnūṟu|ēṛ̆varu','Retained long forms and short medially assimilated tens.'),'Tulu':('R','ēḷɯ|eḷpa|ēḷpa|erpa|ēḷverɯ','Short/long compounds and medial apical variation.'),'Kodagu':('O','ə·ḷɨ|əḷu-vadɨ|ə·ḷ-ṇu·rɨ|əvvə','Retained apical forms and internally assimilated person formation.'),
+         'Telugu':('M','ēḍu|ēḍuguru|ēṇ-nūṟu|ḍebbadi|ḍebbʰai|ḍabbʰai|ḍebbaṇḍru','Long retained base versus displaced short tens; hundred nasal assimilation separate.'),'OTelugu':('R','ēṛ̆u','Seventh-century source-dated retained long numeral.'),
+         'Kota':('O','e·y|eḷ vat','Long medial-loss numeral versus retained short tens.'),'Toda':('O','øv|øv (ø̄)|ø· kva·x','Medial consonant loss and quantity changes, no initial displaced apical.'),'Gondi':('R','ēṛuŋ|yēṛung|yeḍung|ēṛvir|ēṛvur|ēṛur','Retained apical with prothetic y and numeral/person endings.'),'Konda':('R','ēṛu','Long vowel before apical retained.'),
+         'Kui':('A','oṛi|odgi|oḍ|oḍgi|odi pattu|oṛiŋ gōṛi','Queried root quality and derivative history.'),'Kolami':('B','ēṛ|eḍ|eḍgur|ergur','K03 explicitly Telugu loans.'),'Badaga':('O','īu|iyyu|iḷu nūru|eḷ avattāvadu','Medial loss/glide variants and short/long compound forms.'),'markodi':('O','eśu|eśŭ','Medial apical-to-fricative development; original vowel retained.')},
+        input_confidence='high',quantity='mixed by formation',references='K03 p.264 §6.5.7; PSS83 p.235; DEDR 910',boundary='Short attributive/tens grade and long independent numeral are independently attested in several languages.')
+    tokens('d910','Telugu',D='ḍebbadi|ḍebbʰai|ḍabbʰai|ḍebbaṇḍru',R='ēḍu|ēḍuguru',O='ēṇ-nūṟu')
+    tokens('d910','Kannada',R='ēṛ̆u|ēṛ̆-pattu|eḷnūṟu|ēṛ̆varu',O='eppattu')
+    tokens('d910','Kodagu',R='ə·ḷɨ|əḷu-vadɨ|ə·ḷ-ṇu·rɨ',O='əvvə')
+    tokens('d910','Kota',R='eḷ vat',O='e·y')
+    tokens('d910','Badaga',R='iḷu nūru|eḷ avattāvadu',O='īu|iyyu')

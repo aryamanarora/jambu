@@ -1,0 +1,7264 @@
+[
+  {
+    "candidate": 0,
+    "language": "Kalk",
+    "gloss": "a",
+    "spelling": "ä",
+    "family_id": "2462",
+    "record_ids": [
+      "f_lq6z4kfwchoey"
+    ],
+    "target_forms": [
+      "ä [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_e7g3xk26fva4e"
+    ],
+    "anchor_forms": [
+      "ä [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 1,
+    "language": "Kalk",
+    "gloss": "became",
+    "spelling": "bil",
+    "family_id": "9552",
+    "record_ids": [
+      "f_kkxlbfhhbs3bq"
+    ],
+    "target_forms": [
+      "bil [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_y5gtk6ywt5bmu"
+    ],
+    "anchor_forms": [
+      "bìl [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 2,
+    "language": "Kalk",
+    "gloss": "boy",
+    "spelling": "pu",
+    "family_id": "8399",
+    "record_ids": [
+      "f_dbbnoef5z7zno"
+    ],
+    "target_forms": [
+      "puu [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_ucngi42xnlqxk"
+    ],
+    "anchor_forms": [
+      "púu [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 3,
+    "language": "Kalk",
+    "gloss": "come",
+    "spelling": "yal",
+    "family_id": "10452",
+    "record_ids": [
+      "f_x3s26fniglhcq"
+    ],
+    "target_forms": [
+      "yaal [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_phuhrfd7gk2dk"
+    ],
+    "anchor_forms": [
+      "yaál [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 4,
+    "language": "Kalk",
+    "gloss": "come",
+    "spelling": "yun",
+    "family_id": "10452",
+    "record_ids": [
+      "f_wovjxiwxw6j6k"
+    ],
+    "target_forms": [
+      "yuun [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_gbav3mquoj3la"
+    ],
+    "anchor_forms": [
+      "yùun [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 5,
+    "language": "Kalk",
+    "gloss": "come",
+    "spelling": "yä",
+    "family_id": "10452",
+    "record_ids": [
+      "f_eyi354kd6cudc"
+    ],
+    "target_forms": [
+      "yä [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_b6yarzkmresym"
+    ],
+    "anchor_forms": [
+      "yä [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 6,
+    "language": "Kalk",
+    "gloss": "daughter",
+    "spelling": "pe",
+    "family_id": "8271",
+    "record_ids": [
+      "f_szbqpozts23rw",
+      "f_gighm5wwgwmje"
+    ],
+    "target_forms": [
+      "pe [rensch-decker-hallberg1992]",
+      "peː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_3lmu5cvv6nwnk"
+    ],
+    "anchor_forms": [
+      "pee [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 7,
+    "language": "Kalk",
+    "gloss": "did",
+    "spelling": "thääl",
+    "family_id": "13756",
+    "record_ids": [
+      "f_cw7pkvzlzgfkq"
+    ],
+    "target_forms": [
+      "thääl [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_acev6h47vpvts"
+    ],
+    "anchor_forms": [
+      "thää́l [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 8,
+    "language": "Kalk",
+    "gloss": "die",
+    "spelling": "mur",
+    "family_id": "10278",
+    "record_ids": [
+      "f_bsq2bu77qo2n2"
+    ],
+    "target_forms": [
+      "mur [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_wtpjhrtfpas2g"
+    ],
+    "anchor_forms": [
+      "múr [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 9,
+    "language": "Kalk",
+    "gloss": "do",
+    "spelling": "thääl",
+    "family_id": "13756",
+    "record_ids": [
+      "f_qcbylladcerhe"
+    ],
+    "target_forms": [
+      "thääl [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_mttqfnuthcij6"
+    ],
+    "anchor_forms": [
+      "thää́l [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 10,
+    "language": "Kalk",
+    "gloss": "ear",
+    "spelling": "kɑn",
+    "family_id": "2830",
+    "record_ids": [
+      "f_rrqhygm3dh47o"
+    ],
+    "target_forms": [
+      "kɑn [rensch-decker-hallberg1992]"
+    ],
+    "anchor_ids": [
+      "f_njrdhilqbvxue"
+    ],
+    "anchor_forms": [
+      "kɑːn [liljegren-hindukush]"
+    ]
+  },
+  {
+    "candidate": 11,
+    "language": "Kalk",
+    "gloss": "eye",
+    "spelling": "ic̣i",
+    "family_id": "43",
+    "record_ids": [
+      "f_w7ltxs5ag7oym"
+    ],
+    "target_forms": [
+      "ic̣ì [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_bku6mqciy2vxs"
+    ],
+    "anchor_forms": [
+      "ic̣ii [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 12,
+    "language": "Kalk",
+    "gloss": "far away",
+    "spelling": "dur",
+    "family_id": "6495",
+    "record_ids": [
+      "f_2ybntmeeu7u6e"
+    ],
+    "target_forms": [
+      "duur [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_6j4eipdomd5pk"
+    ],
+    "anchor_forms": [
+      "dùúr [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 13,
+    "language": "Kalk",
+    "gloss": "four",
+    "spelling": "cor",
+    "family_id": "4655",
+    "record_ids": [
+      "f_jyc3heqje2q6i"
+    ],
+    "target_forms": [
+      "cor [rensch-decker-hallberg1992]"
+    ],
+    "anchor_ids": [
+      "f_l5e4enw3ttgw2",
+      "f_a6czihnjrvck4"
+    ],
+    "anchor_forms": [
+      "čoor [hultman2023kalkoti]",
+      "čoor [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 14,
+    "language": "Kalk",
+    "gloss": "give",
+    "spelling": "din",
+    "family_id": "6141",
+    "record_ids": [
+      "f_3pt4pcndjav6i"
+    ],
+    "target_forms": [
+      "diin [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_hom5dpjgnkjv6"
+    ],
+    "anchor_forms": [
+      "diin [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 15,
+    "language": "Kalk",
+    "gloss": "give",
+    "spelling": "dit",
+    "family_id": "6141",
+    "record_ids": [
+      "f_aiv3uay4tc6gk"
+    ],
+    "target_forms": [
+      "dit [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_jino56umwtaye"
+    ],
+    "anchor_forms": [
+      "dit [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 16,
+    "language": "Kalk",
+    "gloss": "go",
+    "spelling": "bans",
+    "family_id": "12225",
+    "record_ids": [
+      "f_xdqy6cb3l3az4"
+    ],
+    "target_forms": [
+      "baans [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_5ngceqohtjin4"
+    ],
+    "anchor_forms": [
+      "baans [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 17,
+    "language": "Kalk",
+    "gloss": "he, she, it (remote)",
+    "spelling": "so",
+    "family_id": "12815",
+    "record_ids": [
+      "f_c46wn4f6kcb6i"
+    ],
+    "target_forms": [
+      "soo [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_elmnnieu2lqvo"
+    ],
+    "anchor_forms": [
+      "soo [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 18,
+    "language": "Kalk",
+    "gloss": "i",
+    "spelling": "mi",
+    "family_id": "9691",
+    "record_ids": [
+      "f_5snqs7kci2o6q"
+    ],
+    "target_forms": [
+      "mi [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_t73le5nyithoc"
+    ],
+    "anchor_forms": [
+      "mi [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 19,
+    "language": "Kalk",
+    "gloss": "laugh",
+    "spelling": "äsil",
+    "family_id": "14021",
+    "record_ids": [
+      "f_bmpetr5czy5y2"
+    ],
+    "target_forms": [
+      "äsil [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_acb3oj5faq2rg"
+    ],
+    "anchor_forms": [
+      "ä̀sil [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 20,
+    "language": "Kalk",
+    "gloss": "man",
+    "spelling": "misal",
+    "family_id": "9828",
+    "record_ids": [
+      "f_jjsrjhjd5lcts"
+    ],
+    "target_forms": [
+      "mišaal [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_rj46tdan3kdjy"
+    ],
+    "anchor_forms": [
+      "míšaal [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 21,
+    "language": "Kalk",
+    "gloss": "one",
+    "spelling": "ä",
+    "family_id": "2462",
+    "record_ids": [
+      "f_yfaslvwarfbvk"
+    ],
+    "target_forms": [
+      "ä [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_gikfn2biveqiy"
+    ],
+    "anchor_forms": [
+      "ä [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 22,
+    "language": "Kalk",
+    "gloss": "salt",
+    "spelling": "lun",
+    "family_id": "10978",
+    "record_ids": [
+      "f_dhbzyqy53jqqk"
+    ],
+    "target_forms": [
+      "lun [rensch-decker-hallberg1992]"
+    ],
+    "anchor_ids": [
+      "f_qxq45u7zcs7wo"
+    ],
+    "anchor_forms": [
+      "lùun [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 23,
+    "language": "Kalk",
+    "gloss": "see",
+    "spelling": "driṣ",
+    "family_id": "6518",
+    "record_ids": [
+      "f_tgh4lgdb3ae7e",
+      "f_6mqad6hd73ro6"
+    ],
+    "target_forms": [
+      "driṣ [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_ceyuon6lh3ad4"
+    ],
+    "anchor_forms": [
+      "driṣ [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 24,
+    "language": "Kalk",
+    "gloss": "son",
+    "spelling": "pu",
+    "family_id": "8265",
+    "record_ids": [
+      "f_wcpnaqbzyecgy"
+    ],
+    "target_forms": [
+      "puː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_z4xbfgbfh5tw2"
+    ],
+    "anchor_forms": [
+      "puu [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 25,
+    "language": "Kalk",
+    "gloss": "sun",
+    "spelling": "sir",
+    "family_id": "13574",
+    "record_ids": [
+      "f_krwxfz3dczr4s"
+    ],
+    "target_forms": [
+      "siːr [rensch-decker-hallberg1992]"
+    ],
+    "anchor_ids": [
+      "f_t3jpshztsgh46",
+      "f_xcffh3i7y4om4"
+    ],
+    "anchor_forms": [
+      "siir [hultman2023kalkoti]",
+      "siir [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 26,
+    "language": "Kalk",
+    "gloss": "tongue",
+    "spelling": "jib",
+    "family_id": "5228",
+    "record_ids": [
+      "f_3s36aymwdlzt4"
+    ],
+    "target_forms": [
+      "jib [rensch-decker-hallberg1992]"
+    ],
+    "anchor_ids": [
+      "f_xrztuiah7243c"
+    ],
+    "anchor_forms": [
+      "ǰib [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 27,
+    "language": "Kalk",
+    "gloss": "two",
+    "spelling": "du",
+    "family_id": "6648",
+    "record_ids": [
+      "f_vbsnsijn7ih54",
+      "f_qylpn5gjh3qss"
+    ],
+    "target_forms": [
+      "du [rensch-decker-hallberg1992]",
+      "duː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_kumba4tloakkq",
+      "f_ruqzrgiycpz4m",
+      "f_odkqoytys2px6"
+    ],
+    "anchor_forms": [
+      "du [hultman2023kalkoti]",
+      "duu [hultman2023kalkoti]",
+      "duu [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 28,
+    "language": "Kalk",
+    "gloss": "we",
+    "spelling": "is",
+    "family_id": "986",
+    "record_ids": [
+      "f_wuh2cj7pbcxpg"
+    ],
+    "target_forms": [
+      "is [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_fd2mcat45k7aq"
+    ],
+    "anchor_forms": [
+      "is [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 29,
+    "language": "Kalk",
+    "gloss": "we",
+    "spelling": "äsi",
+    "family_id": "986",
+    "record_ids": [
+      "f_2h5ohdvawsl2k"
+    ],
+    "target_forms": [
+      "äsi [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_zgkzn4iftixto"
+    ],
+    "anchor_forms": [
+      "äsi [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 30,
+    "language": "Kalk",
+    "gloss": "wrote",
+    "spelling": "cuṇil",
+    "family_id": "f_dxexl5ub5kgl4",
+    "record_ids": [
+      "f_nvliqifnexony"
+    ],
+    "target_forms": [
+      "čuṇil [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_mbikzikroniru"
+    ],
+    "anchor_forms": [
+      "čuṇil [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 31,
+    "language": "Kalk",
+    "gloss": "you (plural)",
+    "spelling": "tis",
+    "family_id": "10511",
+    "record_ids": [
+      "f_5htnv474nvyh6"
+    ],
+    "target_forms": [
+      "tis [rensch-decker-hallberg1992]"
+    ],
+    "anchor_ids": [
+      "f_jsn2uzwjeez72",
+      "f_zdcyzybkrb2mg"
+    ],
+    "anchor_forms": [
+      "tis [hultman2023kalkoti]",
+      "tis [kalkoti]"
+    ]
+  },
+  {
+    "candidate": 32,
+    "language": "Kalk",
+    "gloss": "you (plural)",
+    "spelling": "tusi",
+    "family_id": "10511",
+    "record_ids": [
+      "f_uevzqbttgbexg"
+    ],
+    "target_forms": [
+      "tusi [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_dhjbejes27gi2"
+    ],
+    "anchor_forms": [
+      "tusi [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 33,
+    "language": "Kalk",
+    "gloss": "you (singular)",
+    "spelling": "thi",
+    "family_id": "5889",
+    "record_ids": [
+      "f_zxbykfeafknq4"
+    ],
+    "target_forms": [
+      "thi [kalkoti]"
+    ],
+    "anchor_ids": [
+      "f_aypt35ut5ci7m"
+    ],
+    "anchor_forms": [
+      "thi [hultman2023kalkoti]"
+    ]
+  },
+  {
+    "candidate": 34,
+    "language": "Kund",
+    "gloss": "father",
+    "spelling": "mal",
+    "family_id": "9935",
+    "record_ids": [
+      "f_khlrpr6kwweie"
+    ],
+    "target_forms": [
+      "maːl [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_httpabuw6ns2a"
+    ],
+    "anchor_forms": [
+      "mā̌l [kund]"
+    ]
+  },
+  {
+    "candidate": 35,
+    "language": "Kund",
+    "gloss": "fire",
+    "spelling": "aŋgar",
+    "family_id": "125",
+    "record_ids": [
+      "f_brlx2kpz3ekps"
+    ],
+    "target_forms": [
+      "aŋgaːr [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_d7h2ynahv44ne"
+    ],
+    "anchor_forms": [
+      "aŋgār [kund]"
+    ]
+  },
+  {
+    "candidate": 36,
+    "language": "Kund",
+    "gloss": "i",
+    "spelling": "mã",
+    "family_id": "9691",
+    "record_ids": [
+      "f_4473lvtrx4tq6"
+    ],
+    "target_forms": [
+      "mã [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_hqogeq3obnr5w"
+    ],
+    "anchor_forms": [
+      "mã [kund]"
+    ]
+  },
+  {
+    "candidate": 37,
+    "language": "Kund",
+    "gloss": "leaf",
+    "spelling": "pan",
+    "family_id": "7918",
+    "record_ids": [
+      "f_ajwapbdcdoszs"
+    ],
+    "target_forms": [
+      "pan [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_lksdkudugwhwo"
+    ],
+    "anchor_forms": [
+      "pan [kund]"
+    ]
+  },
+  {
+    "candidate": 38,
+    "language": "Kund",
+    "gloss": "nose",
+    "spelling": "natʰ",
+    "family_id": "7031",
+    "record_ids": [
+      "f_of3bdgvwaowlm"
+    ],
+    "target_forms": [
+      "natʰ [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_7il7ukcuy3k4a"
+    ],
+    "anchor_forms": [
+      "natʰ [kund]"
+    ]
+  },
+  {
+    "candidate": 39,
+    "language": "Kund",
+    "gloss": "sister",
+    "spelling": "saz",
+    "family_id": "13913",
+    "record_ids": [
+      "f_32drkt2gxvsfe"
+    ],
+    "target_forms": [
+      "saz [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_knezx3cmksfg2"
+    ],
+    "anchor_forms": [
+      "saz [kund]"
+    ]
+  },
+  {
+    "candidate": 40,
+    "language": "Kund",
+    "gloss": "star",
+    "spelling": "tar",
+    "family_id": "5798",
+    "record_ids": [
+      "f_e263t6exarbz6"
+    ],
+    "target_forms": [
+      "taːr [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_nzdwmpz2gvxnw"
+    ],
+    "anchor_forms": [
+      "tār [kund]"
+    ]
+  },
+  {
+    "candidate": 41,
+    "language": "Kund",
+    "gloss": "sun",
+    "spelling": "sir",
+    "family_id": "13574",
+    "record_ids": [
+      "f_qqujauiouuu5k"
+    ],
+    "target_forms": [
+      "siːr [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_57heatc3ynoca"
+    ],
+    "anchor_forms": [
+      "sīr [kund]"
+    ]
+  },
+  {
+    "candidate": 42,
+    "language": "Kund",
+    "gloss": "two",
+    "spelling": "dui",
+    "family_id": "6648",
+    "record_ids": [
+      "f_zyvujz4lesfic"
+    ],
+    "target_forms": [
+      "duːi [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_gzsh7cvklm3ao"
+    ],
+    "anchor_forms": [
+      "duī [kund]"
+    ]
+  },
+  {
+    "candidate": 43,
+    "language": "Kund",
+    "gloss": "water",
+    "spelling": "pani",
+    "family_id": "8082",
+    "record_ids": [
+      "f_wpiojaphu3x4i"
+    ],
+    "target_forms": [
+      "pani [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_b4eprwo2bbmc4"
+    ],
+    "anchor_forms": [
+      "pā̌nī̂ [kund]"
+    ]
+  },
+  {
+    "candidate": 44,
+    "language": "Phal",
+    "gloss": "2",
+    "spelling": "du",
+    "family_id": "6648",
+    "record_ids": [
+      "f_nzqhs572i6mj4"
+    ],
+    "target_forms": [
+      "duː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_rqgvyewzttp5c"
+    ],
+    "anchor_forms": [
+      "dʹû [strand]"
+    ]
+  },
+  {
+    "candidate": 45,
+    "language": "Phal",
+    "gloss": "3",
+    "spelling": "tro",
+    "family_id": "5994",
+    "record_ids": [
+      "f_qd527v32hpkg2"
+    ],
+    "target_forms": [
+      "troː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_j2z27yequor4s"
+    ],
+    "anchor_forms": [
+      "trʹô [strand]"
+    ]
+  },
+  {
+    "candidate": 46,
+    "language": "Phal",
+    "gloss": "7",
+    "spelling": "sat",
+    "family_id": "13139",
+    "record_ids": [
+      "f_ze67tv2nrwrqu"
+    ],
+    "target_forms": [
+      "saːt [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_qupv7p73hwoay",
+      "f_zige3vr22dxl6",
+      "f_snh3iq3qg2fwa"
+    ],
+    "anchor_forms": [
+      "sat [CDIAL]",
+      "sāt [CDIAL]",
+      "sʹât [strand]"
+    ]
+  },
+  {
+    "candidate": 47,
+    "language": "Phal",
+    "gloss": "9",
+    "spelling": "nu",
+    "family_id": "6984",
+    "record_ids": [
+      "f_c3reywq7dvki6"
+    ],
+    "target_forms": [
+      "nuː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_vdk4bpwey22uy"
+    ],
+    "anchor_forms": [
+      "nʹû [strand]"
+    ]
+  },
+  {
+    "candidate": 48,
+    "language": "Phal",
+    "gloss": "ant",
+    "spelling": "pililo",
+    "family_id": "8201",
+    "record_ids": [
+      "f_xg42pguxu7a4w",
+      "f_yjulms3zcsdmw",
+      "f_xz6dzzgnx32w6"
+    ],
+    "target_forms": [
+      "pililo [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_scitem33vcfhg"
+    ],
+    "anchor_forms": [
+      "pilʹîlo [strand]"
+    ]
+  },
+  {
+    "candidate": 49,
+    "language": "Phal",
+    "gloss": "bones; skeleton",
+    "spelling": "haḍung",
+    "family_id": "13952",
+    "record_ids": [
+      "f_i4qmk6bggzcx2"
+    ],
+    "target_forms": [
+      "haḍúng [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_cm4pvgrxkj6xo"
+    ],
+    "anchor_forms": [
+      "haḍúng [liljegren]"
+    ]
+  },
+  {
+    "candidate": 50,
+    "language": "Phal",
+    "gloss": "bones; skeleton",
+    "spelling": "haṇḍuk",
+    "family_id": "13952",
+    "record_ids": [
+      "f_b64ucecup23dk"
+    ],
+    "target_forms": [
+      "haṇḍúk [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_edzzvjgnn4ga4"
+    ],
+    "anchor_forms": [
+      "haṇḍúk [liljegren]"
+    ]
+  },
+  {
+    "candidate": 51,
+    "language": "Phal",
+    "gloss": "boy",
+    "spelling": "pho",
+    "family_id": "8399",
+    "record_ids": [
+      "f_mstl4zqqorj2y",
+      "f_ogtdr5x5fpedg",
+      "f_5efk4x2nvebng"
+    ],
+    "target_forms": [
+      "phoː [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_ivezmvwiqciak"
+    ],
+    "anchor_forms": [
+      "phō [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 52,
+    "language": "Phal",
+    "gloss": "brain",
+    "spelling": "matu",
+    "family_id": "9926",
+    "record_ids": [
+      "f_avmwglozkii7a"
+    ],
+    "target_forms": [
+      "máatu [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_hqxzq6p6fqtqy",
+      "f_ali4aloh4gepu"
+    ],
+    "anchor_forms": [
+      "mātu [CDIAL]",
+      "mʹâtu [strand]"
+    ]
+  },
+  {
+    "candidate": 53,
+    "language": "Phal",
+    "gloss": "ceiling",
+    "spelling": "tal",
+    "family_id": "5731",
+    "record_ids": [
+      "f_y47t25bit7ovy"
+    ],
+    "target_forms": [
+      "táal [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_pfe6ljuduwyaq"
+    ],
+    "anchor_forms": [
+      "tʹâl [strand]"
+    ]
+  },
+  {
+    "candidate": 54,
+    "language": "Phal",
+    "gloss": "dog",
+    "spelling": "kucuro",
+    "family_id": "3219",
+    "record_ids": [
+      "f_bdhiggqrljjiu",
+      "f_daoj4nql5d7xw",
+      "f_vh4jgxjcwtgec"
+    ],
+    "target_forms": [
+      "kucuro [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_2ltuqd43ghkre",
+      "f_jqgyl2wnangwo"
+    ],
+    "anchor_forms": [
+      "kučuro [CDIAL]",
+      "kučʹuro [strand]"
+    ]
+  },
+  {
+    "candidate": 55,
+    "language": "Phal",
+    "gloss": "drink",
+    "spelling": "pi-",
+    "family_id": "8209",
+    "record_ids": [
+      "f_rnhpy43etbxg6",
+      "f_6cdbuny2o2wrc"
+    ],
+    "target_forms": [
+      "pi- [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_plmgkdtpd4ggo"
+    ],
+    "anchor_forms": [
+      "pi- [decker1992]"
+    ]
+  },
+  {
+    "candidate": 56,
+    "language": "Phal",
+    "gloss": "earthquake",
+    "spelling": "ghumal",
+    "family_id": "9560",
+    "record_ids": [
+      "f_7uajz5tyhjtfu"
+    ],
+    "target_forms": [
+      "ghuumaál [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_jhr3nwezdxvzw",
+      "f_qpgvquqcyazio"
+    ],
+    "anchor_forms": [
+      "ghumâʹl [strand]",
+      "ghūmāl [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 57,
+    "language": "Phal",
+    "gloss": "eat",
+    "spelling": "khu",
+    "family_id": "3865",
+    "record_ids": [
+      "f_bzxjs77xocln4"
+    ],
+    "target_forms": [
+      "khu [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_akxbn7ln54gr4"
+    ],
+    "anchor_forms": [
+      "khúu [liljegren]"
+    ]
+  },
+  {
+    "candidate": 58,
+    "language": "Phal",
+    "gloss": "face",
+    "spelling": "mux",
+    "family_id": "10174",
+    "record_ids": [
+      "f_5n45sftgh4gpm"
+    ],
+    "target_forms": [
+      "mux [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_7iyt77m2jyf2c"
+    ],
+    "anchor_forms": [
+      "mʹux [strand]"
+    ]
+  },
+  {
+    "candidate": 59,
+    "language": "Phal",
+    "gloss": "fat",
+    "spelling": "mi",
+    "family_id": "10323",
+    "record_ids": [
+      "f_bsfv5zvihtdce",
+      "f_oh2b5sofssb42",
+      "f_cosvqre6ftdqs"
+    ],
+    "target_forms": [
+      "mi [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_dyw4u5xlo5uow"
+    ],
+    "anchor_forms": [
+      "mʹî [strand]"
+    ]
+  },
+  {
+    "candidate": 60,
+    "language": "Phal",
+    "gloss": "father",
+    "spelling": "babu",
+    "family_id": "9209",
+    "record_ids": [
+      "f_fimas6pumvye4"
+    ],
+    "target_forms": [
+      "baːbu [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_a7lxchtr3gljq"
+    ],
+    "anchor_forms": [
+      "báabu [liljegren]"
+    ]
+  },
+  {
+    "candidate": 61,
+    "language": "Phal",
+    "gloss": "girl",
+    "spelling": "phoi",
+    "family_id": "8399",
+    "record_ids": [
+      "f_smrbo3j72oneq"
+    ],
+    "target_forms": [
+      "phoí [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_mzbg7nccmdmtu"
+    ],
+    "anchor_forms": [
+      "phōī [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 62,
+    "language": "Phal",
+    "gloss": "hand",
+    "spelling": "hat",
+    "family_id": "14024",
+    "record_ids": [
+      "f_awuxsj5gbgld2"
+    ],
+    "target_forms": [
+      "haːt [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_oevcjtgw3t5bo",
+      "f_7u5cqjsh3cqo2"
+    ],
+    "anchor_forms": [
+      "haát [liljegren]",
+      "hat [liljegren]"
+    ]
+  },
+  {
+    "candidate": 63,
+    "language": "Phal",
+    "gloss": "heat",
+    "spelling": "huluk",
+    "family_id": "14148",
+    "record_ids": [
+      "f_zjlaveo2lx4tg"
+    ],
+    "target_forms": [
+      "húluk [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_65oonecqn6evs"
+    ],
+    "anchor_forms": [
+      "hʹuluk [strand]"
+    ]
+  },
+  {
+    "candidate": 64,
+    "language": "Phal",
+    "gloss": "i",
+    "spelling": "ma",
+    "family_id": "9691",
+    "record_ids": [
+      "f_glotco74gqvjm"
+    ],
+    "target_forms": [
+      "ma [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_lgpdae3kr3saw"
+    ],
+    "anchor_forms": [
+      "mʹa [strand]"
+    ]
+  },
+  {
+    "candidate": 65,
+    "language": "Phal",
+    "gloss": "ladle",
+    "spelling": "ḍuri",
+    "family_id": "5573",
+    "record_ids": [
+      "f_ex67dtlpidi4g"
+    ],
+    "target_forms": [
+      "ḍúuri [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_ojltwzhrz5xeg"
+    ],
+    "anchor_forms": [
+      "ḍʹûri [strand]"
+    ]
+  },
+  {
+    "candidate": 66,
+    "language": "Phal",
+    "gloss": "leaf",
+    "spelling": "pala",
+    "family_id": "7969",
+    "record_ids": [
+      "f_ozrlhs6bqyyzg"
+    ],
+    "target_forms": [
+      "paːlaː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_dwilgafgw3uqi",
+      "f_7yqg7lmypbyb2",
+      "f_6vt5urr2wegvi"
+    ],
+    "anchor_forms": [
+      "paalaá [liljegren]",
+      "palā́ [CDIAL]",
+      "pâlâʹ [strand]"
+    ]
+  },
+  {
+    "candidate": 67,
+    "language": "Phal",
+    "gloss": "lightning",
+    "spelling": "biji",
+    "family_id": "11742",
+    "record_ids": [
+      "f_6ksiffwl2ycls",
+      "f_wjraagqcqp4uo",
+      "f_endkh3rprdt7q"
+    ],
+    "target_forms": [
+      "biji [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_gsxme4nkg6e4i",
+      "f_cm7aqo6wjmplu",
+      "f_dlkhgny4w3lsw"
+    ],
+    "anchor_forms": [
+      "biǰi [CDIAL]",
+      "bíǰi [liljegren]",
+      "bʹiǰi [strand]"
+    ]
+  },
+  {
+    "candidate": 68,
+    "language": "Phal",
+    "gloss": "moon",
+    "spelling": "yun",
+    "family_id": "5301",
+    "record_ids": [
+      "f_ua7ubm3bp4olo",
+      "f_w3i5zx65kfxsw",
+      "f_jzgocjp4cduwg"
+    ],
+    "target_forms": [
+      "yun [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_k7yqyv27gnywg"
+    ],
+    "anchor_forms": [
+      "yūn [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 69,
+    "language": "Phal",
+    "gloss": "mother",
+    "spelling": "yei",
+    "family_id": "1351",
+    "record_ids": [
+      "f_hccrwdof2ynvm",
+      "f_n2xx27y6xss7y",
+      "f_xnbza3rlbd2sa"
+    ],
+    "target_forms": [
+      "yei [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_tjmbsv4dddpj4",
+      "f_rjnv7k27abukq"
+    ],
+    "anchor_forms": [
+      "yéei [liljegren]",
+      "yēi [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 70,
+    "language": "Phal",
+    "gloss": "name",
+    "spelling": "nõ",
+    "family_id": "7067",
+    "record_ids": [
+      "f_mz24b73uflbba"
+    ],
+    "target_forms": [
+      "nõ [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_bcxaqw4n77blm"
+    ],
+    "anchor_forms": [
+      "nō̃ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 71,
+    "language": "Phal",
+    "gloss": "needle",
+    "spelling": "sileni",
+    "family_id": "13444",
+    "record_ids": [
+      "f_sx6fchp27tfew"
+    ],
+    "target_forms": [
+      "siléeni [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_dvwxidw6762ww"
+    ],
+    "anchor_forms": [
+      "silʹêni [strand]"
+    ]
+  },
+  {
+    "candidate": 72,
+    "language": "Phal",
+    "gloss": "neighbour",
+    "spelling": "gawaṇḍi",
+    "family_id": "4376",
+    "record_ids": [
+      "f_xxtzmohw5fyj4"
+    ],
+    "target_forms": [
+      "gaawaṇḍí [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_zbesowhbynby4"
+    ],
+    "anchor_forms": [
+      "gāwaṇḍī́ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 73,
+    "language": "Phal",
+    "gloss": "new",
+    "spelling": "nawu",
+    "family_id": "6983",
+    "record_ids": [
+      "f_s2cs7q7x26ytw"
+    ],
+    "target_forms": [
+      "naːwu [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_3le4z2i63455c",
+      "f_gyj7em6aqpm4e"
+    ],
+    "anchor_forms": [
+      "náawu [liljegren]",
+      "nā́wu [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 74,
+    "language": "Phal",
+    "gloss": "nose",
+    "spelling": "nas",
+    "family_id": "7031",
+    "record_ids": [
+      "f_xfaxavh5urtvg"
+    ],
+    "target_forms": [
+      "naːs [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_ujvlyk74hm24w",
+      "f_y2n5hwwg4och4",
+      "f_jezuoqg7vzbwe"
+    ],
+    "anchor_forms": [
+      "nas [liljegren]",
+      "náas [liljegren]",
+      "nʹâs [strand]"
+    ]
+  },
+  {
+    "candidate": 75,
+    "language": "Phal",
+    "gloss": "older brother",
+    "spelling": "kaku",
+    "family_id": "2998",
+    "record_ids": [
+      "f_elkyy6azlu3bo",
+      "f_vsybnhomwtc6w"
+    ],
+    "target_forms": [
+      "kaːku [liljegren-hindukush]",
+      "káaku [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_i3q64g73lmqvk"
+    ],
+    "anchor_forms": [
+      "kʹâku [strand]"
+    ]
+  },
+  {
+    "candidate": 76,
+    "language": "Phal",
+    "gloss": "one",
+    "spelling": "ak",
+    "family_id": "2462",
+    "record_ids": [
+      "f_vhddik67sv3nm"
+    ],
+    "target_forms": [
+      "aːk [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_ajobtwmq4wiqi"
+    ],
+    "anchor_forms": [
+      "āk [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 77,
+    "language": "Phal",
+    "gloss": "roof",
+    "spelling": "san",
+    "family_id": "12326",
+    "record_ids": [
+      "f_zhr2kiplmdubm",
+      "f_6aypqwxcxxodq"
+    ],
+    "target_forms": [
+      "šan [liljegren]",
+      "šáan [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_h3njxc5njnhbe",
+      "f_5hygorg5fc622"
+    ],
+    "anchor_forms": [
+      "šān [CDIAL;AO;Buddruss Woṭ]",
+      "šʹân [strand]"
+    ]
+  },
+  {
+    "candidate": 78,
+    "language": "Phal",
+    "gloss": "smoke",
+    "spelling": "dhumi",
+    "family_id": "6849",
+    "record_ids": [
+      "f_jpbl5j5obqeoo",
+      "f_qvoqbk3mfsjjq",
+      "f_mztkbyx652pvm"
+    ],
+    "target_forms": [
+      "dhumi [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_ecsrh2q36r5hg",
+      "f_thzky3u745hvg"
+    ],
+    "anchor_forms": [
+      "dhumʹî [strand]",
+      "dhūmī́ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 79,
+    "language": "Phal",
+    "gloss": "son",
+    "spelling": "putr",
+    "family_id": "8265",
+    "record_ids": [
+      "f_nt5b2zangkw2m",
+      "f_536ywv6crioxm",
+      "f_wwy7tvqqyp23i",
+      "f_hk2q2vwhjgzhc"
+    ],
+    "target_forms": [
+      "putr [decker1992]",
+      "putr [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_n6zvn3hnecy3s"
+    ],
+    "anchor_forms": [
+      "pʹutr [strand]"
+    ]
+  },
+  {
+    "candidate": 80,
+    "language": "Phal",
+    "gloss": "star",
+    "spelling": "toro",
+    "family_id": "5798",
+    "record_ids": [
+      "f_a3opqkxyc7fhk",
+      "f_ydxumdhyir7ve",
+      "f_maunb2z62cmj2",
+      "f_5d735z65esv3k"
+    ],
+    "target_forms": [
+      "toro [decker1992]",
+      "toːro [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_lykf4p7jci2eo"
+    ],
+    "anchor_forms": [
+      "tʹôro [strand]"
+    ]
+  },
+  {
+    "candidate": 81,
+    "language": "Phal",
+    "gloss": "sun",
+    "spelling": "suri",
+    "family_id": "13574",
+    "record_ids": [
+      "f_kpafzts2liwi6",
+      "f_q4g5p76r7bx24",
+      "f_5gx7coj5w4fao",
+      "f_7btxcvforan3e"
+    ],
+    "target_forms": [
+      "suːri [decker1992]",
+      "suːri [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_f5ppuzenbgtk6",
+      "f_b3wh4zm7yqi4c"
+    ],
+    "anchor_forms": [
+      "súuri [liljegren]",
+      "sʹûri [strand]"
+    ]
+  },
+  {
+    "candidate": 82,
+    "language": "Phal",
+    "gloss": "thread",
+    "spelling": "sutr",
+    "family_id": "13561",
+    "record_ids": [
+      "f_dpk7fcxat3qmg",
+      "f_zhlfmhgc2cfey",
+      "f_ow4swb2aq63ny"
+    ],
+    "target_forms": [
+      "sutr [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_2nkrt4ov277x6",
+      "f_nzb6jsirkxzou",
+      "f_phvhgiu4mhkrc"
+    ],
+    "anchor_forms": [
+      "súutr [liljegren]",
+      "sūtr [CDIAL]",
+      "sʹûtr [strand]"
+    ]
+  },
+  {
+    "candidate": 83,
+    "language": "Phal",
+    "gloss": "three",
+    "spelling": "tro",
+    "family_id": "5994",
+    "record_ids": [
+      "f_lxm73z3bh5ipa",
+      "f_morta2iwhuhnm",
+      "f_a3w6g4u4db4v6"
+    ],
+    "target_forms": [
+      "tro [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_u7ls4eyuoroxs"
+    ],
+    "anchor_forms": [
+      "tróo [liljegren]"
+    ]
+  },
+  {
+    "candidate": 84,
+    "language": "Phal",
+    "gloss": "tongue",
+    "spelling": "jip",
+    "family_id": "5228",
+    "record_ids": [
+      "f_ynjr6ha25zzuo"
+    ],
+    "target_forms": [
+      "jip [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_yms6ipib7onvy"
+    ],
+    "anchor_forms": [
+      "ǰip [liljegren]"
+    ]
+  },
+  {
+    "candidate": 85,
+    "language": "Phal",
+    "gloss": "tooth",
+    "spelling": "dand",
+    "family_id": "6152",
+    "record_ids": [
+      "f_6dm6hy7hofzpw"
+    ],
+    "target_forms": [
+      "daːnd [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_7fzbbwvnqq5lw",
+      "f_5sq2oddvu2hb4"
+    ],
+    "anchor_forms": [
+      "dáand [liljegren]",
+      "dʹând [strand]"
+    ]
+  },
+  {
+    "candidate": 86,
+    "language": "Phal",
+    "gloss": "two",
+    "spelling": "du",
+    "family_id": "6648",
+    "record_ids": [
+      "f_7ylehfpdnadqo",
+      "f_chmtukftls7pu",
+      "f_bynroxwh4ivfk",
+      "f_il4b45kvoydus"
+    ],
+    "target_forms": [
+      "du [decker1992]",
+      "duː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_qxukba7owcsmm",
+      "f_ky22likdlg36w"
+    ],
+    "anchor_forms": [
+      "dúu [liljegren]",
+      "dū [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 87,
+    "language": "Phal",
+    "gloss": "urine",
+    "spelling": "mutr",
+    "family_id": "10234",
+    "record_ids": [
+      "f_jatykhnwwbtji",
+      "f_u5fs4nwrvr4km",
+      "f_7u4bvfjtpspm6"
+    ],
+    "target_forms": [
+      "mutr [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_v2vu6rm5slxbk",
+      "f_lbfd44wga5rkw",
+      "f_t3mgqwtuv4jhk"
+    ],
+    "anchor_forms": [
+      "múutr [liljegren]",
+      "mūtr [CDIAL]",
+      "mʹûtr [strand]"
+    ]
+  },
+  {
+    "candidate": 88,
+    "language": "Phal",
+    "gloss": "water",
+    "spelling": "wi",
+    "family_id": "1921",
+    "record_ids": [
+      "f_rw5hzithmoxhi"
+    ],
+    "target_forms": [
+      "wiː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_ffaeshyxuaw72",
+      "f_izuotzqoy7wuk"
+    ],
+    "anchor_forms": [
+      "wíi [liljegren]",
+      "wī [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 89,
+    "language": "Phal",
+    "gloss": "we",
+    "spelling": "be",
+    "family_id": "11302",
+    "record_ids": [
+      "f_b6bzf4p6fekao"
+    ],
+    "target_forms": [
+      "be [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_f6nd26zokyzuy"
+    ],
+    "anchor_forms": [
+      "bʹe [strand]"
+    ]
+  },
+  {
+    "candidate": 90,
+    "language": "Phal",
+    "gloss": "who",
+    "spelling": "ko",
+    "family_id": "2574",
+    "record_ids": [
+      "f_2wy4cum7bzem2",
+      "f_x5b55bsdsumku",
+      "f_jqz3yqsuqhh5m"
+    ],
+    "target_forms": [
+      "kóː [decker1992]"
+    ],
+    "anchor_ids": [
+      "f_n6rmr32om2zs2"
+    ],
+    "anchor_forms": [
+      "kôʹ [strand]"
+    ]
+  },
+  {
+    "candidate": 91,
+    "language": "Phal",
+    "gloss": "wound",
+    "spelling": "parhar",
+    "family_id": "8906",
+    "record_ids": [
+      "f_peyh23hgbodl4"
+    ],
+    "target_forms": [
+      "parhaár [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_3lnxrfclkktms",
+      "f_augknon4nsgda"
+    ],
+    "anchor_forms": [
+      "parhâʹr [strand]",
+      "parhā́r [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 92,
+    "language": "Phal",
+    "gloss": "write, embroider",
+    "spelling": "coṇṭo",
+    "family_id": "f_dxexl5ub5kgl4",
+    "record_ids": [
+      "f_grybtteknfdue"
+    ],
+    "target_forms": [
+      "čooṇṭóo [liljegren]"
+    ],
+    "anchor_ids": [
+      "f_dksppnjqx42oy"
+    ],
+    "anchor_forms": [
+      "cōṇṭō̂ [liljegren]"
+    ]
+  },
+  {
+    "candidate": 93,
+    "language": "Sh",
+    "gloss": "",
+    "spelling": "to",
+    "family_id": "5889",
+    "record_ids": [
+      "f_jiht3zy5auevy"
+    ],
+    "target_forms": [
+      "to [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_patuiraybz6bw"
+    ],
+    "anchor_forms": [
+      "tō [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 94,
+    "language": "Sh",
+    "gloss": "1000",
+    "spelling": "sas",
+    "family_id": "13307",
+    "record_ids": [
+      "f_sbuz6xq6ogmhs"
+    ],
+    "target_forms": [
+      "saːs [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_tucxnqxj3xsgw"
+    ],
+    "anchor_forms": [
+      "sās [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 95,
+    "language": "Sh",
+    "gloss": "20",
+    "spelling": "bi",
+    "family_id": "11616",
+    "record_ids": [
+      "f_vhwopfyhgego6",
+      "f_lhlstu5zpbzsy",
+      "f_fgc25vkm3sfau"
+    ],
+    "target_forms": [
+      "biː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_wx5ri6w3f7wqw",
+      "f_dqohjtdh5quiy"
+    ],
+    "anchor_forms": [
+      "bì [CDIAL]",
+      "bī [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 96,
+    "language": "Sh",
+    "gloss": "7",
+    "spelling": "sat",
+    "family_id": "13139",
+    "record_ids": [
+      "f_uwwfzponchi5u",
+      "f_onmgxaskgea6s",
+      "f_ymfaijdtfbers"
+    ],
+    "target_forms": [
+      "sat [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_fexvni6uu27uq"
+    ],
+    "anchor_forms": [
+      "sat [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 97,
+    "language": "Sh",
+    "gloss": "ant",
+    "spelling": "philili",
+    "family_id": "8201",
+    "record_ids": [
+      "f_eoqysvgpyprvy",
+      "f_e27lzuuru4okg"
+    ],
+    "target_forms": [
+      "philí:li [rajapurohit2012]",
+      "philíili [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_qidodwxsxbfw2",
+      "f_yqtkrdxmvfcmc",
+      "f_wrsjlscvue7ma"
+    ],
+    "anchor_forms": [
+      "philiíli [degener-shina2008]",
+      "philíili [schmidt]"
+    ]
+  },
+  {
+    "candidate": 98,
+    "language": "Sh",
+    "gloss": "arrow",
+    "spelling": "koṇ",
+    "family_id": "3023",
+    "record_ids": [
+      "f_7o4ueiq2bbc5q"
+    ],
+    "target_forms": [
+      "kóoṇ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_cffcjntzcmsty",
+      "f_ay5v7vqi3cw5c",
+      "f_jt2vmptbw36cu",
+      "f_d4z3foabv4hki",
+      "f_yvqkukrnenzqk"
+    ],
+    "anchor_forms": [
+      "kóoṇ [schmidt]",
+      "kōṇ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 99,
+    "language": "Sh",
+    "gloss": "autumn",
+    "spelling": "saro",
+    "family_id": "12329",
+    "record_ids": [
+      "f_odblcgdsjgkts"
+    ],
+    "target_forms": [
+      "šaróo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_qf64f2lxe6o26",
+      "f_6sp3tip6xvu4c",
+      "f_dysmiybbfcz7u",
+      "f_tn7lnoj5xqqr2"
+    ],
+    "anchor_forms": [
+      "šaróo [schmidt]",
+      "šarṓ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 100,
+    "language": "Sh",
+    "gloss": "back",
+    "spelling": "piṭo",
+    "family_id": "8371",
+    "record_ids": [
+      "f_aej7tlqelqkek"
+    ],
+    "target_forms": [
+      "pīṭō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_qbyozvp6alszu"
+    ],
+    "anchor_forms": [
+      "piṭo [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 101,
+    "language": "Sh",
+    "gloss": "back",
+    "spelling": "ḍaki",
+    "family_id": "5582",
+    "record_ids": [
+      "f_ckwepniiajwce",
+      "f_kf673c3tbqtcu"
+    ],
+    "target_forms": [
+      "ḍāki [grierson-lsi1928]",
+      "ḍākī [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_dloanw3z5vc24"
+    ],
+    "anchor_forms": [
+      "ḍáaki [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 102,
+    "language": "Sh",
+    "gloss": "bear",
+    "spelling": "ic̣",
+    "family_id": "2445",
+    "record_ids": [
+      "f_dkws7pki7g4pu",
+      "f_rdddx3vjfcqja"
+    ],
+    "target_forms": [
+      "ic̣ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_bo3vqjgcd6c2y"
+    ],
+    "anchor_forms": [
+      "ic̣ [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 103,
+    "language": "Sh",
+    "gloss": "bear",
+    "spelling": "i~c̣",
+    "family_id": "2445",
+    "record_ids": [
+      "f_37uhfuwhga23a"
+    ],
+    "target_forms": [
+      "i~c̣ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_6olj65jlgemue"
+    ],
+    "anchor_forms": [
+      "i~c̣ [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 104,
+    "language": "Sh",
+    "gloss": "beard",
+    "spelling": "dae",
+    "family_id": "6250",
+    "record_ids": [
+      "f_5vvovwk667kzw"
+    ],
+    "target_forms": [
+      "dáae [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_xqz7uzvxonhyo"
+    ],
+    "anchor_forms": [
+      "dáae [schmidt]"
+    ]
+  },
+  {
+    "candidate": 105,
+    "language": "Sh",
+    "gloss": "beard",
+    "spelling": "dai",
+    "family_id": "6250",
+    "record_ids": [
+      "f_5z5h4wjuk4iye"
+    ],
+    "target_forms": [
+      "dái [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_s3gs2lph52azs"
+    ],
+    "anchor_forms": [
+      "dáai [buddruss-shina1996]"
+    ]
+  },
+  {
+    "candidate": 106,
+    "language": "Sh",
+    "gloss": "belly",
+    "spelling": "ḍer",
+    "family_id": "5589",
+    "record_ids": [
+      "f_xkma6t22ttm6s",
+      "f_mpctowd77q7m2",
+      "f_lkmfor5ut5u6g"
+    ],
+    "target_forms": [
+      "ḍēr [grierson-lsi1928]",
+      "ḍeér [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_xjelitwylfrzk",
+      "f_7t3ckwpwpdqg6",
+      "f_peokurzbfu66k",
+      "f_3vubniewe3ic4",
+      "f_jk2d5ppamvga2",
+      "f_n2zcvsy7pizui",
+      "f_uv2zpiuffcdsy",
+      "f_taiywe4sj2pwu",
+      "f_2asuz7yhgiu2c",
+      "f_6fnoq5butiqeg",
+      "f_fgutycoun2vek",
+      "f_xsaypbp3vrgwm",
+      "f_s4pcbouxrrgbe",
+      "f_m4qyasleyijyk",
+      "f_vxrxxec4jxpse",
+      "f_ktmkeylihjgxy",
+      "f_mljzzhr3soqoi",
+      "f_gp7obumjd73ru",
+      "f_7pwxuxizksqps",
+      "f_ls3d3uvhxr7mg",
+      "f_ehshajzraiy76",
+      "f_v5kmbd3xppyym"
+    ],
+    "anchor_forms": [
+      "ḍeer [backstrom1992]",
+      "ḍer [backstrom1992]",
+      "ḍeér [backstrom1992]",
+      "ḍèér [backstrom1992]",
+      "ḍeér [schmidt]",
+      "ḍēr [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 107,
+    "language": "Sh",
+    "gloss": "big",
+    "spelling": "baṛo",
+    "family_id": "11225",
+    "record_ids": [
+      "f_waakbcflt74ig"
+    ],
+    "target_forms": [
+      "báṛo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jn6hud2zdnbn6",
+      "f_bq33i7ltba756",
+      "f_acfpqfguddyem",
+      "f_r3u7jvmxk7o5o"
+    ],
+    "anchor_forms": [
+      "báṛo [degener-shina2008]",
+      "báṛo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 108,
+    "language": "Sh",
+    "gloss": "bird",
+    "spelling": "briṅ",
+    "family_id": "10264",
+    "record_ids": [
+      "f_zpn2fbw4wh3aq"
+    ],
+    "target_forms": [
+      "briṅ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_4wnvdz7z27dmi"
+    ],
+    "anchor_forms": [
+      "briṅ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 109,
+    "language": "Sh",
+    "gloss": "black",
+    "spelling": "kiṇo",
+    "family_id": "3451",
+    "record_ids": [
+      "f_hbqblpaox2u7k"
+    ],
+    "target_forms": [
+      "kíṇo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_a3srfv2q4q3fk",
+      "f_6sajoid2w5s2w",
+      "f_oau5uipmj4wqe",
+      "f_7uvwh3uojvozo",
+      "f_u6sj6bfu4sr4s",
+      "f_wfyvjjv2wgp7e",
+      "f_i6tzbdt6wwkim",
+      "f_pzlk3rew2rc5s",
+      "f_dnqesvt2aubj2",
+      "f_i7s5zjm5zdesu",
+      "f_b2sa7jcdkkg6w",
+      "f_22gfd6jib427w",
+      "f_jmurzu4pvqqtw",
+      "f_wehxeo52qgqe6",
+      "f_warzwq45y2rny",
+      "f_zoqdvpfnwdbky"
+    ],
+    "anchor_forms": [
+      "kiṇo [backstrom1992]",
+      "kíṇo [schmidt]",
+      "ˈkiṇo [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 110,
+    "language": "Sh",
+    "gloss": "blue",
+    "spelling": "nilo",
+    "family_id": "7563",
+    "record_ids": [
+      "f_k5xrjgsi4vzxw"
+    ],
+    "target_forms": [
+      "ní:lo [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_qvjwriuno2ijg"
+    ],
+    "anchor_forms": [
+      "niílo [buddruss-shina1996]"
+    ]
+  },
+  {
+    "candidate": 111,
+    "language": "Sh",
+    "gloss": "bone",
+    "spelling": "a~ṭi",
+    "family_id": "958",
+    "record_ids": [
+      "f_p5xhvbclrvmqg"
+    ],
+    "target_forms": [
+      "á~ṭi [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_idp3aurtie2ym",
+      "f_hjc3pj3ehf5zu",
+      "f_gpiyc3lxp65se",
+      "f_mspjgs6sbj3hk"
+    ],
+    "anchor_forms": [
+      "á~ṭi [degener-shina2008]",
+      "á~ṭi [schmidt]"
+    ]
+  },
+  {
+    "candidate": 112,
+    "language": "Sh",
+    "gloss": "bread",
+    "spelling": "ṭikki",
+    "family_id": "5466",
+    "record_ids": [
+      "f_igv2l65xjfeqi"
+    ],
+    "target_forms": [
+      "ṭíkki [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_um3wlejb7lpgs"
+    ],
+    "anchor_forms": [
+      "ṭíkki [schmidt]"
+    ]
+  },
+  {
+    "candidate": 113,
+    "language": "Sh",
+    "gloss": "brother",
+    "spelling": "ẓa",
+    "family_id": "9661",
+    "record_ids": [
+      "f_oxzymvm543f6g"
+    ],
+    "target_forms": [
+      "ẓáa [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_q7poopa42oeiq",
+      "f_mcvx55gzr63ju",
+      "f_dzcg6m2uwxva6",
+      "f_nrl2tn6qb5wg4"
+    ],
+    "anchor_forms": [
+      "ẓáa [degener-shina2008]",
+      "ẓáa [schmidt]"
+    ]
+  },
+  {
+    "candidate": 114,
+    "language": "Sh",
+    "gloss": "brother's wife",
+    "spelling": "jaj̣e",
+    "family_id": "9660",
+    "record_ids": [
+      "f_jtdfllpf2utxk"
+    ],
+    "target_forms": [
+      "jaj̣eé [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_daidmumwig4q4"
+    ],
+    "anchor_forms": [
+      "jaj̣eé [schmidt]"
+    ]
+  },
+  {
+    "candidate": 115,
+    "language": "Sh",
+    "gloss": "buttermilk",
+    "spelling": "mel",
+    "family_id": "9767",
+    "record_ids": [
+      "f_326ddpojgp23s"
+    ],
+    "target_forms": [
+      "mé:l [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_sapoikbm46iwq",
+      "f_oldlgvrok3lva"
+    ],
+    "anchor_forms": [
+      "mel [degener-shina2008]",
+      "mēl [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 116,
+    "language": "Sh",
+    "gloss": "camel",
+    "spelling": "u~ṭ",
+    "family_id": "2387",
+    "record_ids": [
+      "f_msukojir3lkc2",
+      "f_atyvfibovvwak",
+      "f_b7p6idevk5vxm"
+    ],
+    "target_forms": [
+      "úu~ṭ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_76xqa7cucj7ps"
+    ],
+    "anchor_forms": [
+      "úu~ṭ [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 117,
+    "language": "Sh",
+    "gloss": "cat",
+    "spelling": "busi",
+    "family_id": "8298",
+    "record_ids": [
+      "f_ewbj7g46rn3jk",
+      "f_vc4ofyyicw3zy",
+      "f_sgslfl4ysnl6k"
+    ],
+    "target_forms": [
+      "bušī [grierson-lsi1928]",
+      "būšī [grierson-lsi1928]",
+      "búuši [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_rbyr3q2xhpque"
+    ],
+    "anchor_forms": [
+      "būši [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 118,
+    "language": "Sh",
+    "gloss": "cat",
+    "spelling": "puso",
+    "family_id": "8298",
+    "record_ids": [
+      "f_wzxfxeh5a3rbs"
+    ],
+    "target_forms": [
+      "pušō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_ie246tvn6jn5m"
+    ],
+    "anchor_forms": [
+      "púšo [CDIAL;Lor]"
+    ]
+  },
+  {
+    "candidate": 119,
+    "language": "Sh",
+    "gloss": "chain",
+    "spelling": "saṅali",
+    "family_id": "12580",
+    "record_ids": [
+      "f_c4w57pdn5dtp6",
+      "f_jxy5qr6z7zuxw"
+    ],
+    "target_forms": [
+      "šaṅaáli [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_6dy3ghl2xajzk"
+    ],
+    "anchor_forms": [
+      "šaṅáli [schmidt]"
+    ]
+  },
+  {
+    "candidate": 120,
+    "language": "Sh",
+    "gloss": "child",
+    "spelling": "bal",
+    "family_id": "9216",
+    "record_ids": [
+      "f_k4ew6gsz5ixh4"
+    ],
+    "target_forms": [
+      "bāl [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_urlxejo35q3kk",
+      "f_go3dktplkugbm"
+    ],
+    "anchor_forms": [
+      "baál [schmidt]"
+    ]
+  },
+  {
+    "candidate": 121,
+    "language": "Sh",
+    "gloss": "cow",
+    "spelling": "gao",
+    "family_id": "4147",
+    "record_ids": [
+      "f_hm4ls6vqlbq3g",
+      "f_3vrrqcgxuuur4",
+      "f_ajvmdi5r3i27u",
+      "f_dkv2yumjx7w4e",
+      "f_irjniwva3sdyc"
+    ],
+    "target_forms": [
+      "gào [grierson-lsi1928]",
+      "gāō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_l6tshmawochhu",
+      "f_4azqh6ebzsvbc"
+    ],
+    "anchor_forms": [
+      "gaáo [schmidt]",
+      "gáao [schmidt]"
+    ]
+  },
+  {
+    "candidate": 122,
+    "language": "Sh",
+    "gloss": "cow",
+    "spelling": "gau",
+    "family_id": "4147",
+    "record_ids": [
+      "f_3fkumyg3wdgd4"
+    ],
+    "target_forms": [
+      "gāū [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_jkcwmcjer7gqk"
+    ],
+    "anchor_forms": [
+      "gaáu [schmidt]"
+    ]
+  },
+  {
+    "candidate": 123,
+    "language": "Sh",
+    "gloss": "cow",
+    "spelling": "go",
+    "family_id": "4147",
+    "record_ids": [
+      "f_qnfdlvt5maah2",
+      "f_z2xt5v6ezsg4u",
+      "f_4bxwcxoilyo3o"
+    ],
+    "target_forms": [
+      "gō [grierson-lsi1928]",
+      "góo [buddruss-shina1996]"
+    ],
+    "anchor_ids": [
+      "f_wbjdigklda55u",
+      "f_jhuq6sffbzr4w",
+      "f_5qxtuqwatwdic",
+      "f_j346kggcuh24q",
+      "f_4cg5czbovlogw",
+      "f_tt2xi6gexeize",
+      "f_f6dal5yvqf3fa",
+      "f_y66syz3o4qhiq",
+      "f_l6tpgu5god6cm",
+      "f_gpgh6cv32nyfg"
+    ],
+    "anchor_forms": [
+      "go [backstrom1992]",
+      "goo [backstrom1992]",
+      "goó [schmidt]",
+      "gòo [backstrom1992]",
+      "góo [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 124,
+    "language": "Sh",
+    "gloss": "crooked",
+    "spelling": "kolo",
+    "family_id": "3533",
+    "record_ids": [
+      "f_rau6ueeszhgyg"
+    ],
+    "target_forms": [
+      "kó:lo [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_esdb7wpul7uyw"
+    ],
+    "anchor_forms": [
+      "kóolo [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 125,
+    "language": "Sh",
+    "gloss": "crow",
+    "spelling": "ka~",
+    "family_id": "2993",
+    "record_ids": [
+      "f_4kshbly2ndudo"
+    ],
+    "target_forms": [
+      "káa~ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_riw3exz7z7uou"
+    ],
+    "anchor_forms": [
+      "káa~ [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 126,
+    "language": "Sh",
+    "gloss": "daughter",
+    "spelling": "di",
+    "family_id": "6481",
+    "record_ids": [
+      "f_45rs3wssgnptu",
+      "f_fspazmit3czok",
+      "f_kuu5ulhqoep3g",
+      "f_s377d7broilde",
+      "f_wpqkyc64eiwtc"
+    ],
+    "target_forms": [
+      "dii [degener-shina2008]",
+      "diː [liljegren-hindukush]",
+      "dī [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_wrmnd5dp3i2jw",
+      "f_cdewqiz3kugjw",
+      "f_muv24bqw5fkw6",
+      "f_edf7vqycyz24c",
+      "f_fqke3ijl7jkmu",
+      "f_nckbesk6whcxy",
+      "f_dsa7aefswjbbo",
+      "f_ijtnpgtxbuz2i",
+      "f_y76zlacn5uu72",
+      "f_t45tpan4mgnl2",
+      "f_53mdupxcrgpgm",
+      "f_srw4vaxuhfl4s",
+      "f_bt5nd36jsj2yu",
+      "f_k3lmeefukiomi",
+      "f_ldqfapfaxvrey",
+      "f_nolstw3h3fgnw",
+      "f_nqvsb3gdhh5ri",
+      "f_pj222nsyh7sqc",
+      "f_2f4kqqrwwnb4a",
+      "f_pyfezmsugg6xs",
+      "f_oefrtxwe2pq3y",
+      "f_4w65yi4wg6boa",
+      "f_pwblvix4zk4t4",
+      "f_aobjdnjtg74ow",
+      "f_5jmrpxkj6j552",
+      "f_4nw6fzv4z6jww",
+      "f_zuy4ghwiloreu",
+      "f_2e2xshwpsuxc2",
+      "f_z53cok3p7wf5a",
+      "f_a4adimogl55qy"
+    ],
+    "anchor_forms": [
+      "dii [backstrom1992]",
+      "dií [backstrom1992]",
+      "dií [buddruss-shina1996]",
+      "dií [schmidt]",
+      "dìí [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 127,
+    "language": "Sh",
+    "gloss": "day",
+    "spelling": "des",
+    "family_id": "6333",
+    "record_ids": [
+      "f_bgjuwmy7gtfua",
+      "f_y3uyvvj7rnfcc"
+    ],
+    "target_forms": [
+      "de:s [rajapurohit2012]",
+      "dées [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_nhxc54ih764fe",
+      "f_loejrsi4bpd2o",
+      "f_rqijhqmbaqu3y",
+      "f_egveb5nxa6su6",
+      "f_hlmsfgkwdgdpk",
+      "f_otq2xh4azfrtk",
+      "f_6zel4beey5mdk",
+      "f_c4htohjabeyha",
+      "f_rhrex25vipufg",
+      "f_pkv3shuwcldo2",
+      "f_aoa7luiqh2tng",
+      "f_vhcqjukh3w4is",
+      "f_w4t3q3dm7c62a",
+      "f_7y6u7osqddqxe",
+      "f_sqggoju4pwgrq",
+      "f_efeu2sme7c3pg",
+      "f_yj2eajkuntfby",
+      "f_hxskutghuyso4",
+      "f_7ywksgamsywuy",
+      "f_6thsnrp7lpqjk",
+      "f_q3wftdjpwtarg",
+      "f_xo4k2vrfgpupy",
+      "f_kkxxhdjrf3ec4",
+      "f_jokae57ehw4sg"
+    ],
+    "anchor_forms": [
+      "des [backstrom1992]",
+      "deés [schmidt]",
+      "dées [degener-shina2008]",
+      "dées [schmidt]",
+      "dēs [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 128,
+    "language": "Sh",
+    "gloss": "die",
+    "spelling": "mir-",
+    "family_id": "10278",
+    "record_ids": [
+      "f_wfqvuh6tjhj72",
+      "f_aetzbrwx2xeis"
+    ],
+    "target_forms": [
+      "mir- [grierson-lsi1928]",
+      "mīr- [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_3ujj3vlii6j2k"
+    ],
+    "anchor_forms": [
+      "mir- [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 129,
+    "language": "Sh",
+    "gloss": "dog",
+    "spelling": "su~",
+    "family_id": "12528",
+    "record_ids": [
+      "f_447csjqissisu",
+      "f_tbeck7fpe3rcy",
+      "f_jvxra7wl5wwua"
+    ],
+    "target_forms": [
+      "súu~ [schmidt]",
+      "šúu~ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_3dyyrpeunhxvy",
+      "f_q5c6bb4tqu3wa"
+    ],
+    "anchor_forms": [
+      "šu~ [degener-shina2008]",
+      "šu~ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 130,
+    "language": "Sh",
+    "gloss": "dog",
+    "spelling": "sũ",
+    "family_id": "12528",
+    "record_ids": [
+      "f_bx2fseajics42",
+      "f_tqdhgivhcwsne"
+    ],
+    "target_forms": [
+      "šũ [grierson-lsi1928]",
+      "šū̃ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_saqjmntzsilnq",
+      "f_lfg2twca374mi",
+      "f_ojw6aob3ftscs",
+      "f_dhbn6t7jz3ztu",
+      "f_ftzj2my6fsmoy",
+      "f_bvtiolq4xr4h2",
+      "f_r5iwien33mzaw",
+      "f_mewwmhfgnj2qg",
+      "f_oib3ytdgh5wrq",
+      "f_gbgij5ahovrrm",
+      "f_dcoszd65flhvm",
+      "f_l3hncnvd2bqa4",
+      "f_vvyuehit4kcd6",
+      "f_6bbop5q5l37xc",
+      "f_7mof2m32ss6r4",
+      "f_kjsijkiquf5be",
+      "f_md7wivivnm3eg",
+      "f_4n6pjr42wetly",
+      "f_tvco2iztyovfc"
+    ],
+    "anchor_forms": [
+      "šũ [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 131,
+    "language": "Sh",
+    "gloss": "door",
+    "spelling": "dʌr",
+    "family_id": "6651",
+    "record_ids": [
+      "f_uduafnh4ac6lm"
+    ],
+    "target_forms": [
+      "dʌ́r [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_tucsamx5rwjim",
+      "f_2yq77oke4mcq6",
+      "f_32r57uzg6b4qq"
+    ],
+    "anchor_forms": [
+      "dʌr [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 132,
+    "language": "Sh",
+    "gloss": "dream",
+    "spelling": "sa~c̣o",
+    "family_id": "13929",
+    "record_ids": [
+      "f_frtwfx6lufwko"
+    ],
+    "target_forms": [
+      "sáa~c̣o [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_56r2ax4jkfa4q",
+      "f_ukugk2yjrj7cm"
+    ],
+    "anchor_forms": [
+      "sáa~c̣o [degener-shina2008]",
+      "sáa~c̣o [schmidt]"
+    ]
+  },
+  {
+    "candidate": 133,
+    "language": "Sh",
+    "gloss": "dust",
+    "spelling": "udu",
+    "family_id": "2025",
+    "record_ids": [
+      "f_5mzh7hen3spkc"
+    ],
+    "target_forms": [
+      "udú: [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_ro2ivngv3ivv4",
+      "f_qkoszicea2peg",
+      "f_uwypfxdva7erm",
+      "f_reqh5kh3e54ww",
+      "f_dcjthvkkruese",
+      "f_oxcqjzew4meiw",
+      "f_e4ksemu7rgcnm",
+      "f_zdsxudmwihiso",
+      "f_c4jixkh32j5kk",
+      "f_gv3qbejygbcnm",
+      "f_7q45pozhk66ty",
+      "f_jw7vjusci7hwm",
+      "f_cjhkg4hecamvy",
+      "f_gk66myv5nnby2",
+      "f_gs2rkgckegoqs"
+    ],
+    "anchor_forms": [
+      "uduú [degener-shina2008]",
+      "udùú [backstrom1992]",
+      "uˈdu [backstrom1992]",
+      "uˈduu [backstrom1992]",
+      "uˈdùú [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 134,
+    "language": "Sh",
+    "gloss": "ear",
+    "spelling": "kon",
+    "family_id": "2830",
+    "record_ids": [
+      "f_j2sl76y4ddlto"
+    ],
+    "target_forms": [
+      "kon [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_ziudf4xjwmafo",
+      "f_7aqhzf3zyg7hy",
+      "f_tm7j23pizdz7a",
+      "f_zgjravqapcx5u"
+    ],
+    "anchor_forms": [
+      "kon [backstrom1992]",
+      "kon [buddruss-shina1996]",
+      "kon [degener-shina2008]",
+      "kōn [grierson-lsi1928]"
+    ]
+  },
+  {
+    "candidate": 135,
+    "language": "Sh",
+    "gloss": "eight",
+    "spelling": "a~ṣṭ",
+    "family_id": "941",
+    "record_ids": [
+      "f_ylsnpwst3675e"
+    ],
+    "target_forms": [
+      "a~ṣṭ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_7y5uu227nay2y"
+    ],
+    "anchor_forms": [
+      "a~ṣṭ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 136,
+    "language": "Sh",
+    "gloss": "eight",
+    "spelling": "aṣ",
+    "family_id": "941",
+    "record_ids": [
+      "f_42hpydgc43dy4"
+    ],
+    "target_forms": [
+      "aṣ̌ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_suf33qdji3rf6"
+    ],
+    "anchor_forms": [
+      "aṣ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 137,
+    "language": "Sh",
+    "gloss": "eleven",
+    "spelling": "akai",
+    "family_id": "2485",
+    "record_ids": [
+      "f_yhkgs2ftnl5sm"
+    ],
+    "target_forms": [
+      "akáai [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_4pkfqmryhv6gs",
+      "f_zwapa36frc6he",
+      "f_l7n2psgu4unoy"
+    ],
+    "anchor_forms": [
+      "akáai [schmidt]"
+    ]
+  },
+  {
+    "candidate": 138,
+    "language": "Sh",
+    "gloss": "eye",
+    "spelling": "achi",
+    "family_id": "43",
+    "record_ids": [
+      "f_3ihfmevndolf2"
+    ],
+    "target_forms": [
+      "āchī [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_5io42qqwdkh76"
+    ],
+    "anchor_forms": [
+      "achíi [buddruss-shina1996]"
+    ]
+  },
+  {
+    "candidate": 139,
+    "language": "Sh",
+    "gloss": "eye",
+    "spelling": "ac̣hi",
+    "family_id": "43",
+    "record_ids": [
+      "f_6sv45y4w3pnqk",
+      "f_4muq4zqe6ufeg"
+    ],
+    "target_forms": [
+      "ac̣hii [degener-shina2008]",
+      "ac̣híi [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jk3gjx7x4u26e",
+      "f_nk6cfub4rffdu",
+      "f_63hvzkzpiofsa",
+      "f_pxuuek2qnmrru",
+      "f_v3m4wuuxy56ic"
+    ],
+    "anchor_forms": [
+      "ac̣híi [schmidt]",
+      "ac̣hī́ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 140,
+    "language": "Sh",
+    "gloss": "far",
+    "spelling": "dur",
+    "family_id": "6495",
+    "record_ids": [
+      "f_yiliyv7jryvpa",
+      "f_mgndvzpmfcy24",
+      "f_6ju2ki5a6o67u"
+    ],
+    "target_forms": [
+      "dūr [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_rlkbvgv2ltlai",
+      "f_yqzvsr2234epe",
+      "f_qc2wb5cri6jiu",
+      "f_6ghbh2ndow3di",
+      "f_74xuk73wxr6hk",
+      "f_iwn6prl4tbe5i",
+      "f_nuywrvpldq4nk",
+      "f_oki6npw55yu5g",
+      "f_ukfddsud5wkii",
+      "f_7jrkuedclaegy",
+      "f_vfmlmq66ggwcm",
+      "f_jspnzmew4otfg",
+      "f_qah7rx5wejnte",
+      "f_fcauo7z6cahpo",
+      "f_rpbx7pxpslpgy",
+      "f_ilren2x4fuqck",
+      "f_qo3c6votcjdkm",
+      "f_tmwtlfwtyn3pa",
+      "f_ixhxhguwtjfoe",
+      "f_2dac72l47t5cm",
+      "f_i3h53ep4nc3ps",
+      "f_cnfuabdrqqee4",
+      "f_kkgvipu5uokls",
+      "f_fys6mtefzqhqy",
+      "f_nru2mhunugwom",
+      "f_z6yjvyt5sar3c",
+      "f_as6uifec35sso",
+      "f_rhyhyjiwn2c46",
+      "f_uzp6thctfjre4"
+    ],
+    "anchor_forms": [
+      "dur [backstrom1992]",
+      "duur [backstrom1992]",
+      "duúr [backstrom1992]",
+      "duúr [degener-shina2008]",
+      "duúr [schmidt]",
+      "dùúr [backstrom1992]",
+      "dúur [schmidt]"
+    ]
+  },
+  {
+    "candidate": 141,
+    "language": "Sh",
+    "gloss": "father",
+    "spelling": "babo",
+    "family_id": "9209",
+    "record_ids": [
+      "f_75vyfms54ot4e",
+      "f_vr57jlhqjqrbg",
+      "f_7arsezj7zssiu",
+      "f_hs6ccdjwli53w",
+      "f_2e37gifmrypks"
+    ],
+    "target_forms": [
+      "babo [schmidt]",
+      "baːbo [liljegren-hindukush]",
+      "bābo [grierson-lsi1928]",
+      "bābō [grierson-lsi1928]",
+      "bábo [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_ocon5gbynsvxo",
+      "f_dm54pjk3ntg5s",
+      "f_pmrpscg4en4ko"
+    ],
+    "anchor_forms": [
+      "baábo [buddruss-shina1996]",
+      "baábo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 142,
+    "language": "Sh",
+    "gloss": "father",
+    "spelling": "buba",
+    "family_id": "9209",
+    "record_ids": [
+      "f_uq323ij5g3tnw"
+    ],
+    "target_forms": [
+      "bubaː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_z2x6j4ucaojfs",
+      "f_fiqr3dtgtutri"
+    ],
+    "anchor_forms": [
+      "bubáa [schmidt]",
+      "bubā [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 143,
+    "language": "Sh",
+    "gloss": "father",
+    "spelling": "malo",
+    "family_id": "9935",
+    "record_ids": [
+      "f_jmqy4azjrgq4u",
+      "f_7nqgk7afaul24",
+      "f_pgyewc7vgouzo"
+    ],
+    "target_forms": [
+      "maːlo [liljegren-hindukush]",
+      "mālo [grierson-lsi1928]",
+      "mālō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_5ou5gjt5infju",
+      "f_njd2x7o6xvfn6",
+      "f_fcsowyovcbl3a",
+      "f_o7vb65knpxojc"
+    ],
+    "anchor_forms": [
+      "maálo [buddruss-shina1996]",
+      "maálo [degener-shina2008]",
+      "maálo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 144,
+    "language": "Sh",
+    "gloss": "father-in-law",
+    "spelling": "ser",
+    "family_id": "12753",
+    "record_ids": [
+      "f_hmkxtr4b7jnii"
+    ],
+    "target_forms": [
+      "šéer [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jhrqgia22b3qu",
+      "f_rbcncuuznan7s",
+      "f_gcn4rqybehnjc"
+    ],
+    "anchor_forms": [
+      "šéer [schmidt]",
+      "šēr [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 145,
+    "language": "Sh",
+    "gloss": "fertilizer",
+    "spelling": "paṣ",
+    "family_id": "8019",
+    "record_ids": [
+      "f_agnojycrhkthm"
+    ],
+    "target_forms": [
+      "páaṣ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_qiy54mf2y5n52",
+      "f_hryal5rp46bti",
+      "f_jovsolrvkeae6",
+      "f_a443uiipzv7fe"
+    ],
+    "anchor_forms": [
+      "páaṣ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 146,
+    "language": "Sh",
+    "gloss": "field",
+    "spelling": "c̣hec̣",
+    "family_id": "3735",
+    "record_ids": [
+      "f_dyvyalc56zqw6"
+    ],
+    "target_forms": [
+      "c̣héec̣ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_cvjzeguvdgzwo",
+      "f_llv7icnuuu3qm",
+      "f_fzembord6wbkc",
+      "f_feicyj3ooxgpm"
+    ],
+    "anchor_forms": [
+      "c̣héec̣ [degener-shina2008]",
+      "c̣héec̣ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 147,
+    "language": "Sh",
+    "gloss": "finger",
+    "spelling": "aṅwi~",
+    "family_id": "135",
+    "record_ids": [
+      "f_7vf4nm4mxh5h2"
+    ],
+    "target_forms": [
+      "aṅwíi~ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_wzi5hvsmblhfg"
+    ],
+    "anchor_forms": [
+      "aṅwíi~ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 148,
+    "language": "Sh",
+    "gloss": "fire",
+    "spelling": "agar",
+    "family_id": "125",
+    "record_ids": [
+      "f_644bwschv6g26"
+    ],
+    "target_forms": [
+      "agār [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_sqdubzq6wjx4q",
+      "f_cux73ghio4jcw",
+      "f_pexpxasjf36si"
+    ],
+    "anchor_forms": [
+      "agáar [degener-shina2008]",
+      "agáar [schmidt]",
+      "agā́r [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 149,
+    "language": "Sh",
+    "gloss": "fire",
+    "spelling": "hagar",
+    "family_id": "125",
+    "record_ids": [
+      "f_dqglcigubskk6",
+      "f_5ee5cglq2kdrk",
+      "f_qj7trakvo7feu"
+    ],
+    "target_forms": [
+      "hagaːr [liljegren-hindukush]",
+      "hagār [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_cqpo2vmnimbyk",
+      "f_x5txxhbnextzm",
+      "f_kh6gygbxq3p7c",
+      "f_r4wkhadtewfp2"
+    ],
+    "anchor_forms": [
+      "hagáar [buddruss-shina1996]",
+      "hagáar [degener-shina2008]",
+      "hagáar [schmidt]",
+      "hagā́r [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 150,
+    "language": "Sh",
+    "gloss": "five",
+    "spelling": "pos",
+    "family_id": "7655",
+    "record_ids": [
+      "f_v2psyu7qeziku"
+    ],
+    "target_forms": [
+      "poš [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_vl4p3nporp2ei",
+      "f_qng73e7fu3igi",
+      "f_jhlg2zaxcud6w",
+      "f_jdlmpjcip4mkg",
+      "f_tmcdoixu6lfn4",
+      "f_t3sbta2vqzss4",
+      "f_khyfdlhmid4fq",
+      "f_f4wr36jsaqz6w",
+      "f_de3lunl2mfq6q",
+      "f_oddrjnu7rey2c",
+      "f_ln6kcoflrapyq",
+      "f_d2eavktcrdsre"
+    ],
+    "anchor_forms": [
+      "poš [backstrom1992]",
+      "poš [CDIAL]",
+      "poš [schmidt]"
+    ]
+  },
+  {
+    "candidate": 151,
+    "language": "Sh",
+    "gloss": "five",
+    "spelling": "poĩ",
+    "family_id": "7655",
+    "record_ids": [
+      "f_zqptcjnzeaizs"
+    ],
+    "target_forms": [
+      "pōĩ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_hf7fdanxwihoc"
+    ],
+    "anchor_forms": [
+      "poĩ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 152,
+    "language": "Sh",
+    "gloss": "five",
+    "spelling": "põs",
+    "family_id": "7655",
+    "record_ids": [
+      "f_ukzwbsb4vykjo"
+    ],
+    "target_forms": [
+      "pō̃š [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_ciaall5co43by",
+      "f_6ejspdpqxxcak",
+      "f_qapcc2rfkpsxi"
+    ],
+    "anchor_forms": [
+      "põš [backstrom1992]",
+      "pō̃š [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 153,
+    "language": "Sh",
+    "gloss": "flesh",
+    "spelling": "mos",
+    "family_id": "9982",
+    "record_ids": [
+      "f_k4hhbo6tmni6k"
+    ],
+    "target_forms": [
+      "mó:s [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_uzxsz4ydyttp4",
+      "f_i5tpl7g7ffyks",
+      "f_tvlukxeskvu5a",
+      "f_xfe6sp7f5okkg",
+      "f_c6ei6ca26zsdc"
+    ],
+    "anchor_forms": [
+      "mos [CDIAL]",
+      "moós [schmidt]",
+      "mōs [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 154,
+    "language": "Sh",
+    "gloss": "flour",
+    "spelling": "a~ṭe",
+    "family_id": "1338",
+    "record_ids": [
+      "f_z5nn5gexhe3gq",
+      "f_srz754iuh575u"
+    ],
+    "target_forms": [
+      "áa~ṭe [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_mdsi46fq3mc4o"
+    ],
+    "anchor_forms": [
+      "áa~ṭe [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 155,
+    "language": "Sh",
+    "gloss": "foot",
+    "spelling": "pa",
+    "family_id": "8056",
+    "record_ids": [
+      "f_xsmhjjk6rpwmc",
+      "f_zrnimsvpjtceu"
+    ],
+    "target_forms": [
+      "pā [grierson-lsi1928]",
+      "páa [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_7lbzm5yoldeom",
+      "f_hym2tbcgzxaqk",
+      "f_iat47mrhk7bl6",
+      "f_xh7ybbshcd7m4",
+      "f_tshtaileb6ebi",
+      "f_lcaqurxt7tsjw"
+    ],
+    "anchor_forms": [
+      "páa [buddruss-shina1996]",
+      "páa [degener-shina2008]",
+      "páa [schmidt]",
+      "pā [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 156,
+    "language": "Sh",
+    "gloss": "forest",
+    "spelling": "jel",
+    "family_id": "5355",
+    "record_ids": [
+      "f_sg27so2yl4hbs"
+    ],
+    "target_forms": [
+      "jeél [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jhb224q3jd4ho",
+      "f_rjhzcn3hasv74",
+      "f_qndw37rkbceha",
+      "f_7535oc6i6yep2"
+    ],
+    "anchor_forms": [
+      "jeél [schmidt]",
+      "ǰēl [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 157,
+    "language": "Sh",
+    "gloss": "four",
+    "spelling": "car",
+    "family_id": "4655",
+    "record_ids": [
+      "f_ljm26eyilxo3w"
+    ],
+    "target_forms": [
+      "cáar [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_ocirh5yyaqaao",
+      "f_dup3ssb2tbcwy",
+      "f_e4nj5ifzuy42m",
+      "f_5xyle5oi5llau",
+      "f_5omssubwsvgug",
+      "f_6dqlklx66b4ly"
+    ],
+    "anchor_forms": [
+      "cáar [schmidt]",
+      "čáar [buddruss-shina1996]",
+      "čáar [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 158,
+    "language": "Sh",
+    "gloss": "fox",
+    "spelling": "loi",
+    "family_id": "11142",
+    "record_ids": [
+      "f_glot7aoytkxvu",
+      "f_fqccxcigfw2ds",
+      "f_5d57izabuf6ys",
+      "f_tikmp4jgpzmos",
+      "f_grokh5tw24e7q"
+    ],
+    "target_forms": [
+      "loi [rajapurohit2012]",
+      "lói [rajapurohit2012]",
+      "lói [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jbfumw2ej5hrg"
+    ],
+    "anchor_forms": [
+      "lṓi [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 159,
+    "language": "Sh",
+    "gloss": "goat",
+    "spelling": "ai",
+    "family_id": "145",
+    "record_ids": [
+      "f_wwr6cdzerhbt2",
+      "f_fgzjio74nnywk"
+    ],
+    "target_forms": [
+      "ai [buddruss-shina1996]",
+      "ai [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_do3plkig2kslg"
+    ],
+    "anchor_forms": [
+      "ai [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 160,
+    "language": "Sh",
+    "gloss": "gold",
+    "spelling": "son",
+    "family_id": "13519",
+    "record_ids": [
+      "f_rkfdvtfevlsgg",
+      "f_pnecn2vuvle7c"
+    ],
+    "target_forms": [
+      "son [grierson-lsi1928]",
+      "sōn [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_rrnjk3j44jtr2",
+      "f_kczt7urxmcney",
+      "f_cg4bxl4okveqy",
+      "f_nb7w3aegympxg",
+      "f_45to4qj6adgwq",
+      "f_7pep4fycsjosy",
+      "f_vj7np7zqamoku",
+      "f_v347i7ifkrx2u"
+    ],
+    "anchor_forms": [
+      "son [backstrom1992]",
+      "son [degener-shina2008]",
+      "soon [backstrom1992]",
+      "soón [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 161,
+    "language": "Sh",
+    "gloss": "granddaughter",
+    "spelling": "poc̣i",
+    "family_id": "8417",
+    "record_ids": [
+      "f_lhz5oewikm4kw"
+    ],
+    "target_forms": [
+      "póoc̣i [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_y6tmkvdak2m5q",
+      "f_6tv4wrat7ayoc",
+      "f_523ff7cphdx4g",
+      "f_vs4gg5iuth6mq",
+      "f_zybejbguopmfy"
+    ],
+    "anchor_forms": [
+      "póoc̣i [degener-shina2008]",
+      "póoc̣i [schmidt]"
+    ]
+  },
+  {
+    "candidate": 162,
+    "language": "Sh",
+    "gloss": "grandson",
+    "spelling": "poc̣o",
+    "family_id": "8416",
+    "record_ids": [
+      "f_fjclepwreooq2"
+    ],
+    "target_forms": [
+      "póoc̣o [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_s5icoaxu77w56",
+      "f_7ow2hnewiwmxm",
+      "f_o7kfxyace2chm",
+      "f_esz64ezebswuu",
+      "f_6ranjwcrlstvu"
+    ],
+    "anchor_forms": [
+      "póoc̣o [degener-shina2008]",
+      "póoc̣o [schmidt]"
+    ]
+  },
+  {
+    "candidate": 163,
+    "language": "Sh",
+    "gloss": "grease",
+    "spelling": "mi~",
+    "family_id": "10323",
+    "record_ids": [
+      "f_4pbvfa4ko6g2u"
+    ],
+    "target_forms": [
+      "míi~ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_gw5jbf4kpwhmq",
+      "f_pfnnye4l7aueq",
+      "f_5vmol47kvam4g"
+    ],
+    "anchor_forms": [
+      "mií~ [schmidt]",
+      "míi~ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 164,
+    "language": "Sh",
+    "gloss": "green",
+    "spelling": "nilo",
+    "family_id": "7563",
+    "record_ids": [
+      "f_nwhpij73g4bog"
+    ],
+    "target_forms": [
+      "níilo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_h4z2frtsvu5re",
+      "f_2oyqgkielbvui"
+    ],
+    "anchor_forms": [
+      "níilo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 165,
+    "language": "Sh",
+    "gloss": "hair",
+    "spelling": "balo",
+    "family_id": "11572",
+    "record_ids": [
+      "f_phhjzq5cm745w"
+    ],
+    "target_forms": [
+      "bālo [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_sf2wpze3i3fji",
+      "f_65iqb47jfeld2"
+    ],
+    "anchor_forms": [
+      "báalo [degener-shina2008]",
+      "bālo [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 166,
+    "language": "Sh",
+    "gloss": "hair",
+    "spelling": "jaku",
+    "family_id": "5075",
+    "record_ids": [
+      "f_7e7tdgmznv5ho"
+    ],
+    "target_forms": [
+      "jakúu [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_vepwcg4wzydnq"
+    ],
+    "anchor_forms": [
+      "jakúu [schmidt]"
+    ]
+  },
+  {
+    "candidate": 167,
+    "language": "Sh",
+    "gloss": "hair",
+    "spelling": "jakur",
+    "family_id": "5075",
+    "record_ids": [
+      "f_spy6lrff777hq"
+    ],
+    "target_forms": [
+      "jakur [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_tajegc5q3g7qg"
+    ],
+    "anchor_forms": [
+      "jakúr [schmidt]"
+    ]
+  },
+  {
+    "candidate": 168,
+    "language": "Sh",
+    "gloss": "hand",
+    "spelling": "hat",
+    "family_id": "14024",
+    "record_ids": [
+      "f_qbux4h7b5z2yu",
+      "f_q6pc5jlm2lqlo",
+      "f_npyuzejl5qnhe",
+      "f_347znzurfcuao"
+    ],
+    "target_forms": [
+      "hat [grierson-lsi1928]",
+      "hat [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_g634w3vq5kwus",
+      "f_dquipefrbkpms",
+      "f_ytqpuzvpzatbe",
+      "f_qjlpphcyqimq6",
+      "f_y7om3ei4qz5do",
+      "f_mldxwl7pzfrmo"
+    ],
+    "anchor_forms": [
+      "hat [buddruss-shina1996]",
+      "hat [degener-shina2008]",
+      "hat [schmidt]"
+    ]
+  },
+  {
+    "candidate": 169,
+    "language": "Sh",
+    "gloss": "head",
+    "spelling": "ṣiṣ",
+    "family_id": "12497",
+    "record_ids": [
+      "f_fdva5amid3hum"
+    ],
+    "target_forms": [
+      "ṣ̌iṣ̌ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_pr4adalrd5kia",
+      "f_4lsnot23t35po",
+      "f_qvvwsa3zdocae",
+      "f_ummicuxv66hmw",
+      "f_lpwauqq2a2ago",
+      "f_2topkurfyhpeq",
+      "f_ipyhlr4lgfbk2",
+      "f_izquqc5fnnlxu"
+    ],
+    "anchor_forms": [
+      "ṣ̌iṣ̌ [backstrom1992]",
+      "ṣiíṣ [schmidt]",
+      "ṣiṣ [buddruss-shina1996]",
+      "ṣiṣ [degener-shina2008]",
+      "ṣiṣ [schmidt]",
+      "ṣīṣ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 170,
+    "language": "Sh",
+    "gloss": "heart",
+    "spelling": "hiu",
+    "family_id": "14152",
+    "record_ids": [
+      "f_ykizq5bcdon6u"
+    ],
+    "target_forms": [
+      "híiu [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_pixel5tdmllm6",
+      "f_n36huxk3e3qhg",
+      "f_wnat5vcctsjxe",
+      "f_skkfwvlqi6hmk",
+      "f_u25762cyom724",
+      "f_ceqbrt7upt2vu"
+    ],
+    "anchor_forms": [
+      "hiu [backstrom1992]",
+      "híiu [schmidt]",
+      "ˈhiu [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 171,
+    "language": "Sh",
+    "gloss": "honey",
+    "spelling": "mac̣hi",
+    "family_id": "9989",
+    "record_ids": [
+      "f_utvsxia727wzs"
+    ],
+    "target_forms": [
+      "mac̣híi [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_moplzqpw7sw2w",
+      "f_uysakqx6tjvki",
+      "f_h2z7knpwnp6qw",
+      "f_6czq666wo7xwq"
+    ],
+    "anchor_forms": [
+      "mac̣híi [degener-shina2008]",
+      "mac̣híi [schmidt]"
+    ]
+  },
+  {
+    "candidate": 172,
+    "language": "Sh",
+    "gloss": "horn",
+    "spelling": "ṣiṅo",
+    "family_id": "12583",
+    "record_ids": [
+      "f_cahbnj32mykek"
+    ],
+    "target_forms": [
+      "ṣíṅo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_7qfiqmz6giyre"
+    ],
+    "anchor_forms": [
+      "ṣíṅo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 173,
+    "language": "Sh",
+    "gloss": "horse",
+    "spelling": "aspo",
+    "family_id": "920",
+    "record_ids": [
+      "f_isbejvb72zlyi",
+      "f_ex3daadmkldqs",
+      "f_7jzqtxwzkj2li"
+    ],
+    "target_forms": [
+      "ašpō [grierson-lsi1928]",
+      "àšpō [grierson-lsi1928]",
+      "ášpoo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_x7lkylm43wth2",
+      "f_7a3yrr5inoocc"
+    ],
+    "anchor_forms": [
+      "ášpo [buddruss-shina1996]",
+      "ášpō [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 174,
+    "language": "Sh",
+    "gloss": "horse",
+    "spelling": "a~spo",
+    "family_id": "920",
+    "record_ids": [
+      "f_wqi3h6sgvqxog"
+    ],
+    "target_forms": [
+      "á~špo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_bvbgr6jdxnjvy"
+    ],
+    "anchor_forms": [
+      "á~špo [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 175,
+    "language": "Sh",
+    "gloss": "hot",
+    "spelling": "tatto",
+    "family_id": "5679",
+    "record_ids": [
+      "f_52pcfirp5tnc2"
+    ],
+    "target_forms": [
+      "tátto [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_e7vww6ozmn5i2"
+    ],
+    "anchor_forms": [
+      "tátto [schmidt]"
+    ]
+  },
+  {
+    "candidate": 176,
+    "language": "Sh",
+    "gloss": "hot",
+    "spelling": "tʌto",
+    "family_id": "5679",
+    "record_ids": [
+      "f_xrhbhuaoqlbli"
+    ],
+    "target_forms": [
+      "tʌ́to [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_ew3ozi4u5by4a",
+      "f_mnm72gbxpwfti",
+      "f_t6el2lafzkzu4"
+    ],
+    "anchor_forms": [
+      "ˈtʌto [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 177,
+    "language": "Sh",
+    "gloss": "house",
+    "spelling": "goṭ",
+    "family_id": "4336",
+    "record_ids": [
+      "f_ixvivcvolbfem",
+      "f_n5ywkp3n2nao4",
+      "f_e5utk26ihx7gy"
+    ],
+    "target_forms": [
+      "goóṭ [schmidt]",
+      "gōṭ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_pn2a7ebb57hre",
+      "f_ylzunctledekg",
+      "f_njsph22tt7onw",
+      "f_tesimm527xe7i",
+      "f_v24l4taiwrg4y",
+      "f_owoldfadcrz5k",
+      "f_xt7nsdzvcvvqo",
+      "f_x5mpiyag6f37w",
+      "f_dw64b6qaisljc",
+      "f_eu5yhgapyatny",
+      "f_cq3roehq4esz6",
+      "f_dg2f46czdw6b4",
+      "f_bivfnxfgr7sse",
+      "f_255jbhu5mddng",
+      "f_oetdadrtngayc",
+      "f_yyt3dcsldeqt6"
+    ],
+    "anchor_forms": [
+      "goṭ [backstrom1992]",
+      "goóṭ [buddruss-shina1996]",
+      "goóṭ [degener-shina2008]",
+      "gòóṭ [backstrom1992]",
+      "goṭ [CDIAL]",
+      "góoṭ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 178,
+    "language": "Sh",
+    "gloss": "hundred",
+    "spelling": "sal",
+    "family_id": "12278",
+    "record_ids": [
+      "f_rmulrcvf3klee",
+      "f_sx5jkurtwjbrw"
+    ],
+    "target_forms": [
+      "šal [grierson-lsi1928]",
+      "šāl [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_eqmmgqoa3twqy",
+      "f_4fha5njljwo4y",
+      "f_tqic57j37k6ko",
+      "f_6zaucw4xqgigi",
+      "f_gytoiek6v2wck"
+    ],
+    "anchor_forms": [
+      "šal [buddruss-shina1996]",
+      "šal [degener-shina2008]",
+      "šal [schmidt]"
+    ]
+  },
+  {
+    "candidate": 179,
+    "language": "Sh",
+    "gloss": "hungry",
+    "spelling": "nirano",
+    "family_id": "7266",
+    "record_ids": [
+      "f_tdhaklh6m34ac"
+    ],
+    "target_forms": [
+      "niráno [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_yysrjupqs7km6"
+    ],
+    "anchor_forms": [
+      "niráno [schmidt]"
+    ]
+  },
+  {
+    "candidate": 180,
+    "language": "Sh",
+    "gloss": "i",
+    "spelling": "ma",
+    "family_id": "9691",
+    "record_ids": [
+      "f_z26kpsjqurhfu",
+      "f_z3oc4yd5pnqfe"
+    ],
+    "target_forms": [
+      "ma [liljegren-hindukush]",
+      "mà [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_tfdotc7si5mbu",
+      "f_y4gxec7wmykf6",
+      "f_nh6wb2ll5vb4m"
+    ],
+    "anchor_forms": [
+      "ma [buddruss-shina1996]",
+      "ma [degener-shina2008]",
+      "ma [schmidt]"
+    ]
+  },
+  {
+    "candidate": 181,
+    "language": "Sh",
+    "gloss": "i",
+    "spelling": "mas",
+    "family_id": "9691",
+    "record_ids": [
+      "f_l6o5grl2g3wws"
+    ],
+    "target_forms": [
+      "màs [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_z43njgde4rlou"
+    ],
+    "anchor_forms": [
+      "mas [schmidt]"
+    ]
+  },
+  {
+    "candidate": 182,
+    "language": "Sh",
+    "gloss": "i",
+    "spelling": "mo",
+    "family_id": "9691",
+    "record_ids": [
+      "f_n2b4ym2syfmz4"
+    ],
+    "target_forms": [
+      "mo [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_cho3jwegdaqyo",
+      "f_io5dzz6yc55ww",
+      "f_xmtihzv7wuhis"
+    ],
+    "anchor_forms": [
+      "mo [backstrom1992]",
+      "mo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 183,
+    "language": "Sh",
+    "gloss": "i",
+    "spelling": "mõ",
+    "family_id": "9691",
+    "record_ids": [
+      "f_656rvzkkodymc",
+      "f_o4q4chxkim3ue"
+    ],
+    "target_forms": [
+      "mõ [liljegren-hindukush]",
+      "mō̃ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_5qhbwovhvjvr6",
+      "f_gcxmxlv5gqbdk"
+    ],
+    "anchor_forms": [
+      "mõ [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 184,
+    "language": "Sh",
+    "gloss": "ice",
+    "spelling": "sor",
+    "family_id": "13355",
+    "record_ids": [
+      "f_ems5ebwpqwjew"
+    ],
+    "target_forms": [
+      "so:r [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_ftu4mjbeedqzo"
+    ],
+    "anchor_forms": [
+      "sōr [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 185,
+    "language": "Sh",
+    "gloss": "lamb",
+    "spelling": "uran",
+    "family_id": "2349",
+    "record_ids": [
+      "f_4nlazd7fgfhyu"
+    ],
+    "target_forms": [
+      "urán [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_zi4omq4z2t4oc",
+      "f_k4j7zca2ud622",
+      "f_doim6n5axonc4",
+      "f_o2y3uwfk75hyk",
+      "f_qrlvxsnrjjtny"
+    ],
+    "anchor_forms": [
+      "urán [buddruss-shina1996]",
+      "urán [degener-shina2008]",
+      "urán [schmidt]"
+    ]
+  },
+  {
+    "candidate": 186,
+    "language": "Sh",
+    "gloss": "leaf",
+    "spelling": "paṭo",
+    "family_id": "7733",
+    "record_ids": [
+      "f_3lalevjesyqoa"
+    ],
+    "target_forms": [
+      "páṭo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_7naj4zmcdeyk4",
+      "f_glixme7lgc6jc",
+      "f_xkaah3xy4rplw"
+    ],
+    "anchor_forms": [
+      "paṭo [degener-shina2008]",
+      "páṭo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 187,
+    "language": "Sh",
+    "gloss": "leopard",
+    "spelling": "di~",
+    "family_id": "6694",
+    "record_ids": [
+      "f_ekjj2qnkadqd2",
+      "f_gab3fhq72mzqu",
+      "f_igz772xfhelje",
+      "f_oxc4bdatomcui"
+    ],
+    "target_forms": [
+      "dií~ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_k3cafq26epvys"
+    ],
+    "anchor_forms": [
+      "dii~ [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 188,
+    "language": "Sh",
+    "gloss": "light",
+    "spelling": "loko",
+    "family_id": "10896",
+    "record_ids": [
+      "f_5meopvkafgfec"
+    ],
+    "target_forms": [
+      "lóko [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_dspwdarapo5cg",
+      "f_kfqtlc6orsmnk",
+      "f_nfmfelkbsxgls",
+      "f_6gxyn7pxnrwni",
+      "f_teeazoppi6ooc",
+      "f_u6ypeiosva3o6",
+      "f_e75li6m4c5y4a",
+      "f_eymppwgi6cuco"
+    ],
+    "anchor_forms": [
+      "loóko [backstrom1992]",
+      "ˈloko [backstrom1992]",
+      "ˈlooko [backstrom1992]",
+      "ˈloóko [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 189,
+    "language": "Sh",
+    "gloss": "lightning",
+    "spelling": "bicuṣ",
+    "family_id": "11743",
+    "record_ids": [
+      "f_bk5mpzuv75dzi"
+    ],
+    "target_forms": [
+      "bícuṣ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_s7dgpgs3hvwkc",
+      "f_nq2liopwq4u4o",
+      "f_6uin6zzazrb5c",
+      "f_biikxp4rcuajm",
+      "f_qiamwbtgfsf3o",
+      "f_3awx3d2xh5eoe",
+      "f_zrwat7kpdrpem",
+      "f_gc5lu4rghw4yi",
+      "f_eo3otdx2ogugu",
+      "f_hs4lutxbblkiy"
+    ],
+    "anchor_forms": [
+      "bičuṣ [CDIAL]",
+      "biˈčuṣ̌ [backstrom1992]",
+      "bícuṣ [schmidt]",
+      "ˈbičuṣ̌ [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 190,
+    "language": "Sh",
+    "gloss": "lip",
+    "spelling": "o~ṭo",
+    "family_id": "2563",
+    "record_ids": [
+      "f_b7vkne5m66cog"
+    ],
+    "target_forms": [
+      "óo~ṭo [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_fyjdsmxp5fbl4"
+    ],
+    "anchor_forms": [
+      "óo~ṭo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 191,
+    "language": "Sh",
+    "gloss": "louse",
+    "spelling": "ju",
+    "family_id": "10512",
+    "record_ids": [
+      "f_srwgl4purjzgi"
+    ],
+    "target_forms": [
+      "juú [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_4y5k67bugi7ks",
+      "f_a2mjbfbmo3efq"
+    ],
+    "anchor_forms": [
+      "ǰuú [degener-shina2008]",
+      "ǰū [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 192,
+    "language": "Sh",
+    "gloss": "louse",
+    "spelling": "ju~",
+    "family_id": "10512",
+    "record_ids": [
+      "f_qm4ncvib27byg",
+      "f_qix3ozbkiou72",
+      "f_3izy3bs5sgpbg"
+    ],
+    "target_forms": [
+      "juú~ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_e4ry26vyn5ida"
+    ],
+    "anchor_forms": [
+      "ǰuú~ [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 193,
+    "language": "Sh",
+    "gloss": "maize",
+    "spelling": "makai",
+    "family_id": "9879",
+    "record_ids": [
+      "f_3rmf7vtlqiy6e",
+      "f_pmhxqws37zyti",
+      "f_25kyw2a57oe42"
+    ],
+    "target_forms": [
+      "makái [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_nvg7y2tx3frqc"
+    ],
+    "anchor_forms": [
+      "makái [buddruss-shina1996]"
+    ]
+  },
+  {
+    "candidate": 194,
+    "language": "Sh",
+    "gloss": "male",
+    "spelling": "biro",
+    "family_id": "12056",
+    "record_ids": [
+      "f_xxs6twb32u2ym"
+    ],
+    "target_forms": [
+      "bíro [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_xvyjzmztgbjb2"
+    ],
+    "anchor_forms": [
+      "biiro [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 195,
+    "language": "Sh",
+    "gloss": "mare",
+    "spelling": "bam",
+    "family_id": "11219",
+    "record_ids": [
+      "f_ev65dgrzcjjqu",
+      "f_35xsmfkqfo5sg"
+    ],
+    "target_forms": [
+      "bām [grierson-lsi1928]",
+      "báam [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_q7ctwlbhqfrag"
+    ],
+    "anchor_forms": [
+      "bam [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 196,
+    "language": "Sh",
+    "gloss": "marrow",
+    "spelling": "miyo",
+    "family_id": "10323",
+    "record_ids": [
+      "f_agedhhunjhtck"
+    ],
+    "target_forms": [
+      "miyó: [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_k3fnksdxqb4zy"
+    ],
+    "anchor_forms": [
+      "miyo [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 197,
+    "language": "Sh",
+    "gloss": "meat",
+    "spelling": "mos",
+    "family_id": "9982",
+    "record_ids": [
+      "f_dcln42fy37miq"
+    ],
+    "target_forms": [
+      "mós [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_i7l4ggxaoli6w",
+      "f_yiytl7c5fckbu",
+      "f_air2zmxwqjiko",
+      "f_6dmsu3kxry4my",
+      "f_jiyuh3uohnp4o",
+      "f_t5xhh2e6s26mm",
+      "f_kfb4jqlyfwbk2",
+      "f_mfnf2ljvsz6ik",
+      "f_s3ulbd3hyg4ci",
+      "f_rle5vb42emb2s",
+      "f_yyoy73rdr2a3k",
+      "f_7yjd5js7en2nm",
+      "f_2j7x4pue7hacs",
+      "f_g7eltlgusufdq",
+      "f_nbf5n4xh3lis6",
+      "f_6tkuhtvmi2x52",
+      "f_hsuy6tnrdgpxo",
+      "f_ftcqdozrmlsec",
+      "f_tac5rgcuruule",
+      "f_u62raqpcuuzhu",
+      "f_xhk4dh75ekxx6",
+      "f_2a7um2f2nylq6"
+    ],
+    "anchor_forms": [
+      "moos [backstrom1992]",
+      "moós [backstrom1992]",
+      "moós [degener-shina2008]",
+      "mòós [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 198,
+    "language": "Sh",
+    "gloss": "milk",
+    "spelling": "dut",
+    "family_id": "6391",
+    "record_ids": [
+      "f_5s6qtemls6cz4"
+    ],
+    "target_forms": [
+      "dut [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_5fv6dxfgvrruw",
+      "f_hsa5nakqyzbnu",
+      "f_xxm7itkwn7wgg",
+      "f_aobr25vknni3s",
+      "f_q4pbybx5x2vva",
+      "f_ddqa6et4jtmuw",
+      "f_u2jqzdhidtnlw",
+      "f_3lvws6setlexi"
+    ],
+    "anchor_forms": [
+      "dut [CDIAL]",
+      "dut [backstrom1992]",
+      "dut [degener-shina2008]",
+      "dut [schmidt]"
+    ]
+  },
+  {
+    "candidate": 199,
+    "language": "Sh",
+    "gloss": "moon",
+    "spelling": "yun",
+    "family_id": "5301",
+    "record_ids": [
+      "f_2bxckeivx3vfe",
+      "f_4bzyubncv2afc",
+      "f_thrqwhpnxtfey",
+      "f_rqnznfxhu5jxi"
+    ],
+    "target_forms": [
+      "yūn [grierson-lsi1928]",
+      "yún [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_g5hzakcl3niii",
+      "f_lh2mxyolqcmpe",
+      "f_pm2qgdnliajj2",
+      "f_wx6mqdprqw6vk",
+      "f_rsztj5owbuvu4",
+      "f_fa2mw6izqruis",
+      "f_p7d52dhp3fl64",
+      "f_ppiznsbxorisa",
+      "f_zp4hqnrwuttpo",
+      "f_mwrqs3pg7ti2w",
+      "f_pykvr7w475elg",
+      "f_rvm5chymfloai",
+      "f_mv464yrh6rdue",
+      "f_kqmogwkznnv2i",
+      "f_h64xgdprjo5oi",
+      "f_zx7nsqlb32nes",
+      "f_v7gtsjdbmdgjc",
+      "f_lmzxjgf7qkqoo",
+      "f_ltet3i4ucjz7y",
+      "f_wwq263yizi2og",
+      "f_2p6qlwwp7zj6m",
+      "f_7gwwwuo2qwb5w",
+      "f_etknna3s7x6kw",
+      "f_mb7nbdjvg3sdy",
+      "f_jy3p4qvzrikdg",
+      "f_bvxnxsqzy7tuc",
+      "f_v5anqonv6o3v6",
+      "f_zxguxd5z6l34e",
+      "f_rwisjkk4xktbs",
+      "f_6xlmd4qpre7oy",
+      "f_y7egcciwzp2mg",
+      "f_5dh7wohyjabl2",
+      "f_e6onyns47wtzy",
+      "f_j2qr7v75lyyuk",
+      "f_7q2mqnkqe53h6"
+    ],
+    "anchor_forms": [
+      "yun [CDIAL]",
+      "yuun [backstrom1992]",
+      "yuún [backstrom1992]",
+      "yùun [backstrom1992]",
+      "yúun [buddruss-shina1996]",
+      "yúun [degener-shina2008]",
+      "yúun [schmidt]",
+      "yūn [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 200,
+    "language": "Sh",
+    "gloss": "mother",
+    "spelling": "aje",
+    "family_id": "1351",
+    "record_ids": [
+      "f_easycwugytwto"
+    ],
+    "target_forms": [
+      "āje [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_xhxvqimwttqxw"
+    ],
+    "anchor_forms": [
+      "āǰe [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 201,
+    "language": "Sh",
+    "gloss": "mother",
+    "spelling": "ma",
+    "family_id": "10016",
+    "record_ids": [
+      "f_6pu4qgxunras2",
+      "f_nrbncot4hgglg",
+      "f_7ivofryegy7si"
+    ],
+    "target_forms": [
+      "maː [liljegren-hindukush]",
+      "mà [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_z3iqklhspvufk",
+      "f_aa3fjpbzuto6k"
+    ],
+    "anchor_forms": [
+      "mā [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 202,
+    "language": "Sh",
+    "gloss": "mother-in-law",
+    "spelling": "ṣaṣ",
+    "family_id": "12759",
+    "record_ids": [
+      "f_yd6lykteriwxc"
+    ],
+    "target_forms": [
+      "ṣaṣ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_gxoweh2ujmehs",
+      "f_7l3vcslvb3zae"
+    ],
+    "anchor_forms": [
+      "ṣaṣ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 203,
+    "language": "Sh",
+    "gloss": "nail",
+    "spelling": "kili",
+    "family_id": "3202",
+    "record_ids": [
+      "f_ph2uiffkpegvq"
+    ],
+    "target_forms": [
+      "kí:li [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_6zpojkyuwenpo"
+    ],
+    "anchor_forms": [
+      "kīli [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 204,
+    "language": "Sh",
+    "gloss": "needle",
+    "spelling": "su",
+    "family_id": "13551",
+    "record_ids": [
+      "f_wa7tbs4la2kz6"
+    ],
+    "target_forms": [
+      "su: [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_kixriizmwyn7k",
+      "f_zpeaq2nbgbh72",
+      "f_lrsh24jai3n64",
+      "f_cnqb64u5hrcpo",
+      "f_unbxyjcqbvqew",
+      "f_btqgkclzpvvyq",
+      "f_bx2tep4ylcvbs",
+      "f_opuwrsbdw5gzk",
+      "f_hfycdta6p7aue",
+      "f_h4rp2qknme6gm",
+      "f_e73zckvmvbn76",
+      "f_ak2pshs5oklxe",
+      "f_lsz43ykzgus2o",
+      "f_g6kot66yi4gvm",
+      "f_oncyrzdu2wyqc",
+      "f_xta2h2lkkpkb6",
+      "f_htbx7kzgv6ufc",
+      "f_4rjemfsvrj7la",
+      "f_6oghxw4jilcim",
+      "f_jgq2isvkydpbi",
+      "f_lsvn6cmrp5dcg"
+    ],
+    "anchor_forms": [
+      "su [backstrom1992]",
+      "suu [backstrom1992]",
+      "suú [backstrom1992]",
+      "suú [degener-shina2008]",
+      "sùu [backstrom1992]",
+      "sùú [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 205,
+    "language": "Sh",
+    "gloss": "new",
+    "spelling": "na",
+    "family_id": "6983",
+    "record_ids": [
+      "f_t2kke56megcn6"
+    ],
+    "target_forms": [
+      "naː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_nrza47ql3czfe"
+    ],
+    "anchor_forms": [
+      "nā [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 206,
+    "language": "Sh",
+    "gloss": "new",
+    "spelling": "nawo",
+    "family_id": "6983",
+    "record_ids": [
+      "f_lxrrvuvvd7224"
+    ],
+    "target_forms": [
+      "naːwo [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_qi6wctkzoj7is",
+      "f_xl3kmfsnqx522"
+    ],
+    "anchor_forms": [
+      "naáwo [degener-shina2008]",
+      "naáwo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 207,
+    "language": "Sh",
+    "gloss": "new",
+    "spelling": "nõ",
+    "family_id": "6983",
+    "record_ids": [
+      "f_ze6ujhium22ss"
+    ],
+    "target_forms": [
+      "nõː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_bqzgoevsxtq4k",
+      "f_gazk6szh4kzxe"
+    ],
+    "anchor_forms": [
+      "nõ [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 208,
+    "language": "Sh",
+    "gloss": "night",
+    "spelling": "rati",
+    "family_id": "10702",
+    "record_ids": [
+      "f_sz5if3rrejcpc",
+      "f_dg47n4o63u4ow"
+    ],
+    "target_forms": [
+      "ráati [schmidt]",
+      "ráti [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_zqekxfzjryfra",
+      "f_apb2i5g5qimq2",
+      "f_pngpocpczf4bg",
+      "f_fmuqsc35vtftu",
+      "f_5vxsjuzrnj3m6"
+    ],
+    "anchor_forms": [
+      "ráati [degener-shina2008]",
+      "ráati [schmidt]"
+    ]
+  },
+  {
+    "candidate": 209,
+    "language": "Sh",
+    "gloss": "nine",
+    "spelling": "nau",
+    "family_id": "6984",
+    "record_ids": [
+      "f_slk2ep3uotx6i",
+      "f_2toecfgclsook",
+      "f_v4jukjr5k3iia",
+      "f_j7xarstipdo46"
+    ],
+    "target_forms": [
+      "nau [grierson-lsi1928]",
+      "náu [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_iiph4s6ex7jf4",
+      "f_2o5fainsmfk5e"
+    ],
+    "anchor_forms": [
+      "náu [schmidt]"
+    ]
+  },
+  {
+    "candidate": 210,
+    "language": "Sh",
+    "gloss": "nose",
+    "spelling": "nato",
+    "family_id": "7031",
+    "record_ids": [
+      "f_6qowod7r27at6",
+      "f_zqwzfaf5jika4"
+    ],
+    "target_forms": [
+      "nato [grierson-lsi1928]",
+      "natō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_cam5d3g4xcgq4",
+      "f_zgpfojcirwxcq",
+      "f_sjtjomqad5cqy"
+    ],
+    "anchor_forms": [
+      "náto [buddruss-shina1996]",
+      "náto [schmidt]"
+    ]
+  },
+  {
+    "candidate": 211,
+    "language": "Sh",
+    "gloss": "nose",
+    "spelling": "noto",
+    "family_id": "7031",
+    "record_ids": [
+      "f_oqy7ksfzh2yfs",
+      "f_wtxs3tlp2rrim"
+    ],
+    "target_forms": [
+      "noto [grierson-lsi1928]",
+      "nóto [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_kotrx4dxa4l52",
+      "f_qitqexesl47ei",
+      "f_se46pio3efi7e",
+      "f_7zwoxzt2yoml6",
+      "f_ryyi6vuns3twy",
+      "f_fvw3hodbqbhsw",
+      "f_ru22sv2hgk2h6"
+    ],
+    "anchor_forms": [
+      "ˈnoto [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 212,
+    "language": "Sh",
+    "gloss": "nose",
+    "spelling": "notʰu̥",
+    "family_id": "7031",
+    "record_ids": [
+      "f_hlfqad2u4xakq"
+    ],
+    "target_forms": [
+      "noːtʰu̥ [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_t6q55ybtkqv5y",
+      "f_5f764nsu7czag",
+      "f_y32t7rbjon5so"
+    ],
+    "anchor_forms": [
+      "notʰu̥ [backstrom1992]",
+      "ˈnotʰu̥ [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 213,
+    "language": "Sh",
+    "gloss": "not",
+    "spelling": "ne",
+    "family_id": "7603",
+    "record_ids": [
+      "f_xlmv2mlyvys7k",
+      "f_b3sgclvul7o6q"
+    ],
+    "target_forms": [
+      "ne [schmidt]",
+      "neé [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_wys3cxckdnd42",
+      "f_lw5w4cjp54b4o"
+    ],
+    "anchor_forms": [
+      "neé [buddruss-shina1996]",
+      "neé [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 214,
+    "language": "Sh",
+    "gloss": "old",
+    "spelling": "prono",
+    "family_id": "8283",
+    "record_ids": [
+      "f_cynyvim7lzyfw"
+    ],
+    "target_forms": [
+      "pró:no [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_n3xs3uw7i3av4",
+      "f_2dqv4u7zurt7y",
+      "f_uuidrqd6qbtj2"
+    ],
+    "anchor_forms": [
+      "ˈprono [backstrom1992]",
+      "ˈpròono [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 215,
+    "language": "Sh",
+    "gloss": "one",
+    "spelling": "ek",
+    "family_id": "2462",
+    "record_ids": [
+      "f_2pkeh6lnlbudm",
+      "f_rlbdj7llianou",
+      "f_hmoksens2gthq",
+      "f_bm2uhhcx34dya",
+      "f_xnobambcvfa6u",
+      "f_6avm4j55pfdo6",
+      "f_imqdnbtj6ft3i",
+      "f_3dmsqcypc5ois"
+    ],
+    "target_forms": [
+      "ek [grierson-lsi1928]",
+      "ek [liljegren-hindukush]",
+      "ek [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jye3qgwf6c2y2"
+    ],
+    "anchor_forms": [
+      "ek [buddruss-shina1996]"
+    ]
+  },
+  {
+    "candidate": 216,
+    "language": "Sh",
+    "gloss": "path",
+    "spelling": "pon",
+    "family_id": "7785",
+    "record_ids": [
+      "f_gbpumf6xtwcay",
+      "f_w6hmckb2foxxs",
+      "f_r345wpaymx7re",
+      "f_f3biu25gmmxee"
+    ],
+    "target_forms": [
+      "pon [liljegren-hindukush]",
+      "pón [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_b3oegpxgslilw",
+      "f_l6mzbymchqd2m",
+      "f_ixrbizocpny4w",
+      "f_nxs3c65se2fau",
+      "f_tdojqmsadikh6",
+      "f_x3oeqv2skhgjo",
+      "f_kyqbwi6ebv3zu",
+      "f_zrbvfm6rdpdds"
+    ],
+    "anchor_forms": [
+      "pon [backstrom1992]",
+      "pon [schmidt]"
+    ]
+  },
+  {
+    "candidate": 217,
+    "language": "Sh",
+    "gloss": "person",
+    "spelling": "manuẓo",
+    "family_id": "9827",
+    "record_ids": [
+      "f_nkliv6dbkca4o"
+    ],
+    "target_forms": [
+      "manúuẓo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_mydhsxe6ltqsc",
+      "f_c74poxd64dw56"
+    ],
+    "anchor_forms": [
+      "manúuẓo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 218,
+    "language": "Sh",
+    "gloss": "potato",
+    "spelling": "ʌlu",
+    "family_id": "1388",
+    "record_ids": [
+      "f_pe43l5rhdlwxe"
+    ],
+    "target_forms": [
+      "ʌlú: [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_trom5tyqrpyja"
+    ],
+    "anchor_forms": [
+      "ʌˈlu [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 219,
+    "language": "Sh",
+    "gloss": "red",
+    "spelling": "lolo",
+    "family_id": "11168",
+    "record_ids": [
+      "f_ybyzivzne43xk"
+    ],
+    "target_forms": [
+      "loólo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_qp6ggferkqszu",
+      "f_jbktawca2zte6",
+      "f_jlkdeiob34iwu",
+      "f_wmajedauy5fdc",
+      "f_qg2wssb7qkj3s",
+      "f_o65asuau2ande",
+      "f_6gkeucermxwju",
+      "f_wejcz7wlkcrde",
+      "f_75dt3yta4engu"
+    ],
+    "anchor_forms": [
+      "ˈlolo [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 220,
+    "language": "Sh",
+    "gloss": "red",
+    "spelling": "lolyo",
+    "family_id": "11168",
+    "record_ids": [
+      "f_szevgf5gonuwo",
+      "f_rzpwf7cgep3k6"
+    ],
+    "target_forms": [
+      "loólyo [buddruss-shina1996]",
+      "loólyo [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_nop4rgt4eg2iu"
+    ],
+    "anchor_forms": [
+      "loólyo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 221,
+    "language": "Sh",
+    "gloss": "rest, repose",
+    "spelling": "ṣu",
+    "family_id": "12684",
+    "record_ids": [
+      "f_o5cabpnicxt3g"
+    ],
+    "target_forms": [
+      "ṣúu [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_fc4a5plofz6vu"
+    ],
+    "anchor_forms": [
+      "ṣū [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 222,
+    "language": "Sh",
+    "gloss": "salt",
+    "spelling": "luṇi",
+    "family_id": "10978",
+    "record_ids": [
+      "f_m5i2w2hy4e2je"
+    ],
+    "target_forms": [
+      "luúṇi [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_gpp75i3f3wcjo",
+      "f_a6wvlbihiqk72",
+      "f_nagib2lzdnql4",
+      "f_ta7grwjplggnk",
+      "f_la4qusicxh4xi",
+      "f_drg7eimnmdnps"
+    ],
+    "anchor_forms": [
+      "luúṇi [schmidt]",
+      "luṇi [CDIAL]",
+      "ˈluuṇi [backstrom1992]",
+      "ˈlùuṇi [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 223,
+    "language": "Sh",
+    "gloss": "seed",
+    "spelling": "bi",
+    "family_id": "9250",
+    "record_ids": [
+      "f_32dcztwz53gw4",
+      "f_nmo6brkd4ongs"
+    ],
+    "target_forms": [
+      "bii [degener-shina2008]",
+      "bíi [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_slkwflntr5ft4",
+      "f_2qw7bsf3atsca",
+      "f_bw56aqzkn5gvs",
+      "f_shgmszmpejubq",
+      "f_wmhdb44x7f2ja"
+    ],
+    "anchor_forms": [
+      "bi [CDIAL]",
+      "bíi [schmidt]"
+    ]
+  },
+  {
+    "candidate": 224,
+    "language": "Sh",
+    "gloss": "seven",
+    "spelling": "sat",
+    "family_id": "13139",
+    "record_ids": [
+      "f_lbmgbs2jfjgyq",
+      "f_qc4op64b7f2i6"
+    ],
+    "target_forms": [
+      "sat [grierson-lsi1928]",
+      "sāt [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_yas5pwh25yys6",
+      "f_fw2funxnmz3nu",
+      "f_xxnke5lwwgang",
+      "f_wc7av542vvmpo"
+    ],
+    "anchor_forms": [
+      "sat [degener-shina2008]",
+      "sat [schmidt]"
+    ]
+  },
+  {
+    "candidate": 225,
+    "language": "Sh",
+    "gloss": "shame",
+    "spelling": "las",
+    "family_id": "10910",
+    "record_ids": [
+      "f_5xrpav7xdbrvy",
+      "f_wmrmicu5vi25s"
+    ],
+    "target_forms": [
+      "laš [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_pghnn5axklthg"
+    ],
+    "anchor_forms": [
+      "laš [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 226,
+    "language": "Sh",
+    "gloss": "sister",
+    "spelling": "sa",
+    "family_id": "13913",
+    "record_ids": [
+      "f_rtzdjekkozqyw",
+      "f_3fryrvtpzgcxw",
+      "f_2cngglas5gs3s"
+    ],
+    "target_forms": [
+      "sa [liljegren-hindukush]",
+      "sà [grierson-lsi1928]",
+      "sā [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_mtvam7jz3z7mo"
+    ],
+    "anchor_forms": [
+      "sa [buddruss-shina1996]"
+    ]
+  },
+  {
+    "candidate": 227,
+    "language": "Sh",
+    "gloss": "sister",
+    "spelling": "sas",
+    "family_id": "13913",
+    "record_ids": [
+      "f_7offvrlazhgmo",
+      "f_fmegifzyz7nzu",
+      "f_3x6nwhxognsau"
+    ],
+    "target_forms": [
+      "sas [grierson-lsi1928]",
+      "sas [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_umcyitt5z46ik",
+      "f_edvbztnelvip4",
+      "f_xjafnqpjr3bmg"
+    ],
+    "anchor_forms": [
+      "sas [schmidt]"
+    ]
+  },
+  {
+    "candidate": 228,
+    "language": "Sh",
+    "gloss": "six",
+    "spelling": "ṣa",
+    "family_id": "12803",
+    "record_ids": [
+      "f_kspu3g4e5plc2",
+      "f_xwtksnfw7m3kg"
+    ],
+    "target_forms": [
+      "ṣ̌ā [grierson-lsi1928]",
+      "ṣa [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_n4oqrdifnexl2",
+      "f_i4ypqsdqxf5hk",
+      "f_mwtvatww6poec",
+      "f_m72vibpamtpgy",
+      "f_fj7piv6lm4dma"
+    ],
+    "anchor_forms": [
+      "ṣa [CDIAL;schmidt]",
+      "ṣa [buddruss-shina1996]",
+      "ṣa [schmidt]"
+    ]
+  },
+  {
+    "candidate": 229,
+    "language": "Sh",
+    "gloss": "smoke",
+    "spelling": "dum",
+    "family_id": "6849",
+    "record_ids": [
+      "f_qdfjltvwklvko"
+    ],
+    "target_forms": [
+      "duúm [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_gjf3afjmsfkxi",
+      "f_2f52yo3lm6c3m",
+      "f_fahmvo6lf5pf4",
+      "f_wdastokbnpymi",
+      "f_mrtgp7uwj6nh6",
+      "f_jcpdvhkl6x56w",
+      "f_ecpktj3mx3h5y",
+      "f_g3ysjms5bdt6c",
+      "f_phd452nxzuffk",
+      "f_ndbnqg72rcnj4",
+      "f_d3ohnccl2qwjc",
+      "f_2jrc73knkanzm",
+      "f_d74q7nmtt7myq",
+      "f_vkfdkzecwrqbk",
+      "f_k37awydaowfoy",
+      "f_3dmhempvuti5w",
+      "f_w2yugqs47she2",
+      "f_5nmlwuqs4zs2w",
+      "f_wqjh7arxvjyky",
+      "f_sqtoenpb5nhzk",
+      "f_3plqoupo5mzhm",
+      "f_drjfkfkvh7igc",
+      "f_lj4mn26e3hbx2",
+      "f_yks2rf6lppbmc",
+      "f_xvlg2lmrivqas",
+      "f_z3mz5rh33yuhu",
+      "f_424shcbvqfm32",
+      "f_hfilp3tyzlgy2",
+      "f_ts44ynlysavtm",
+      "f_swxtiyldyxsqm",
+      "f_lx7hnzkdz2q7m",
+      "f_i33dgkvdbb6iy",
+      "f_vm2a3jh4a7m66",
+      "f_w3x3eqs6pza62"
+    ],
+    "anchor_forms": [
+      "d'ūm [CDIAL]",
+      "dum [CDIAL]",
+      "dum [backstrom1992]",
+      "duum [backstrom1992]",
+      "duúm [backstrom1992]",
+      "duúm [degener-shina2008]",
+      "duúm [schmidt]",
+      "dùum [backstrom1992]",
+      "dùúm [backstrom1992]",
+      "dūm [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 230,
+    "language": "Sh",
+    "gloss": "sour",
+    "spelling": "curko",
+    "family_id": "4850",
+    "record_ids": [
+      "f_kmg7oe6smtrzo",
+      "f_5jfvingvc5uyy"
+    ],
+    "target_forms": [
+      "cúrko [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_hh5x5cslm3ejw"
+    ],
+    "anchor_forms": [
+      "čúrko [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 231,
+    "language": "Sh",
+    "gloss": "spleen",
+    "spelling": "som",
+    "family_id": "12664",
+    "record_ids": [
+      "f_rb52c5em53vwc",
+      "f_ki75x7fqyr6eq",
+      "f_4omvw4rwxqqei",
+      "f_ux7ut5uhm44vq"
+    ],
+    "target_forms": [
+      "šooom [schmidt]",
+      "šóom [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_zp5l7jxcv7wyi",
+      "f_jnq4sgew7wsfs",
+      "f_g5fhpcvs6tx2k"
+    ],
+    "anchor_forms": [
+      "šom [CDIAL]",
+      "šōm [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 232,
+    "language": "Sh",
+    "gloss": "star",
+    "spelling": "taro",
+    "family_id": "5798",
+    "record_ids": [
+      "f_k425vzkrsie7k",
+      "f_mqsgtjqeyqlni"
+    ],
+    "target_forms": [
+      "tārō [grierson-lsi1928]",
+      "táaro [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_alsrj3tmsra7o",
+      "f_nhilspcxqfc2e",
+      "f_qcpjtuajnodje",
+      "f_i2zmfzxkdpc7o",
+      "f_eaktmjih3eq7a"
+    ],
+    "anchor_forms": [
+      "táaro [buddruss-shina1996]",
+      "táaro [schmidt]",
+      "tāro [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 233,
+    "language": "Sh",
+    "gloss": "star",
+    "spelling": "taru",
+    "family_id": "5798",
+    "record_ids": [
+      "f_fxarj4g4yvphw",
+      "f_kqebzzh3phibq"
+    ],
+    "target_forms": [
+      "taːru [liljegren-hindukush]",
+      "tārū [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_iuiblpja3ri5a"
+    ],
+    "anchor_forms": [
+      "táaru [schmidt]"
+    ]
+  },
+  {
+    "candidate": 234,
+    "language": "Sh",
+    "gloss": "summer",
+    "spelling": "uwalo",
+    "family_id": "2144",
+    "record_ids": [
+      "f_3il4tw2jgqk2g"
+    ],
+    "target_forms": [
+      "uwáalo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_755gnapr7bgmy",
+      "f_3cfhg7lvld6fy"
+    ],
+    "anchor_forms": [
+      "uwáalo [buddruss-shina1996]",
+      "uwáalo [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 235,
+    "language": "Sh",
+    "gloss": "summer",
+    "spelling": "walo",
+    "family_id": "2144",
+    "record_ids": [
+      "f_pzkmkmhh4ptcu",
+      "f_lxl6mxki7ocge"
+    ],
+    "target_forms": [
+      "wáalo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_nrms7vstg3hzy"
+    ],
+    "anchor_forms": [
+      "wāalo [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 236,
+    "language": "Sh",
+    "gloss": "sun",
+    "spelling": "suri",
+    "family_id": "13574",
+    "record_ids": [
+      "f_ykgn7kkw7rths",
+      "f_v4txbgxo74pew",
+      "f_g6sgqpnpv4kny",
+      "f_hjphh2udl3jke"
+    ],
+    "target_forms": [
+      "suːri [liljegren-hindukush]",
+      "sūrī [grierson-lsi1928]",
+      "súuri [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_mkxgiciltahgm",
+      "f_rnpjfrulr2ezg",
+      "f_nk7wrhldsm4jm",
+      "f_lzflqfwpp72nm",
+      "f_islz5iaygkf3c",
+      "f_ahvsm4yh5on46",
+      "f_xhh3wax67kdl6",
+      "f_j7uhnoxh4ar7u",
+      "f_gsjm25ewvvdb6",
+      "f_tz3657uhk2dpy",
+      "f_rbgizacudrsta",
+      "f_k2w42evpp55ba",
+      "f_leb5rfarpxra4",
+      "f_ryp46ovcfjpwy",
+      "f_amykemeu2qrby",
+      "f_5ku47doswxfxa",
+      "f_vlotnxixafdtg",
+      "f_rtqpoaw7m5yhc",
+      "f_qm37vu3wxgbqq",
+      "f_7nqcxmd4geie4",
+      "f_cyr6xw6t6nfsg",
+      "f_27kkmfmsvylty",
+      "f_z26qgxjfbybai",
+      "f_hcq4ms75q64m4",
+      "f_nntkegf2y56qu",
+      "f_ls2hkxnb2tihc"
+    ],
+    "anchor_forms": [
+      "súuri [buddruss-shina1996]",
+      "súuri [schmidt]",
+      "ˈsuri [backstrom1992]",
+      "ˈsuuri [backstrom1992]",
+      "ˈsùuri [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 237,
+    "language": "Sh",
+    "gloss": "sunday",
+    "spelling": "adit",
+    "family_id": "1154",
+    "record_ids": [
+      "f_7tpl3i2rfxnbe"
+    ],
+    "target_forms": [
+      "adít [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_ou7gg7j7es7m4",
+      "f_emjjic573otnm"
+    ],
+    "anchor_forms": [
+      "adít [schmidt]"
+    ]
+  },
+  {
+    "candidate": 238,
+    "language": "Sh",
+    "gloss": "ten",
+    "spelling": "dai",
+    "family_id": "6227",
+    "record_ids": [
+      "f_qui6hjffxaneq",
+      "f_mjpt37c45zevo",
+      "f_5far226wbuj3a",
+      "f_6rz7jcvuyiqms"
+    ],
+    "target_forms": [
+      "dai [rajapurohit2012]",
+      "daii [grierson-lsi1928]",
+      "daī [grierson-lsi1928]",
+      "dái [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_jgf7uldihll4o",
+      "f_u4iri5wcolj7y",
+      "f_zn754ddml5jfi",
+      "f_qwrnkdbtij5ys",
+      "f_nzzvf7nmj23n6"
+    ],
+    "anchor_forms": [
+      "dai [buddruss-shina1996]",
+      "dáai [schmidt]",
+      "dái [CDIAL]",
+      "dái [schmidt]"
+    ]
+  },
+  {
+    "candidate": 239,
+    "language": "Sh",
+    "gloss": "this (m.)",
+    "spelling": "anuh",
+    "family_id": "283",
+    "record_ids": [
+      "f_ynxxm2bk64lko"
+    ],
+    "target_forms": [
+      "anúh [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_chgn6izxhtshq"
+    ],
+    "anchor_forms": [
+      "anúh [schmidt]"
+    ]
+  },
+  {
+    "candidate": 240,
+    "language": "Sh",
+    "gloss": "thorn",
+    "spelling": "kono",
+    "family_id": "2668",
+    "record_ids": [
+      "f_4jhmf53pshzz4"
+    ],
+    "target_forms": [
+      "kóno [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_jyv3zaaqt4ae4"
+    ],
+    "anchor_forms": [
+      "ˈkono [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 241,
+    "language": "Sh",
+    "gloss": "thou",
+    "spelling": "tu",
+    "family_id": "5889",
+    "record_ids": [
+      "f_du4jy67ivwrmg",
+      "f_fbgyand53677e",
+      "f_wey5ow6mr7pd6"
+    ],
+    "target_forms": [
+      "tu [grierson-lsi1928]",
+      "tū [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_p2mdihrqv4tmc"
+    ],
+    "anchor_forms": [
+      "tu [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 242,
+    "language": "Sh",
+    "gloss": "three",
+    "spelling": "c̣e",
+    "family_id": "5994",
+    "record_ids": [
+      "f_5vvlrgx47vat2",
+      "f_6ug5wjbbq2dcy"
+    ],
+    "target_forms": [
+      "c̣e [schmidt]",
+      "c̣ée [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_edesd73i2qjr6",
+      "f_jbrmdbfnkzuwc",
+      "f_iemi7qbkatqnu",
+      "f_q2rgbdspwulz6",
+      "f_6iqwvspylldn2",
+      "f_l5twaapjpsoey",
+      "f_lauyionnc6vmq",
+      "f_qm3vtxitqlx5u",
+      "f_ubrougfnhfjzw",
+      "f_4wykqljsgddoy",
+      "f_rs75r3qtbgel2",
+      "f_nfl4ydzd7pafm",
+      "f_gtwxtiacnov3a",
+      "f_lkgj6zpqyscww",
+      "f_l6vsoh3zazoim",
+      "f_ixqhsmjnl6yjc",
+      "f_j4mplax4crhyc",
+      "f_q5tbdrgtpfk4m",
+      "f_g2agawizyxlti",
+      "f_smfgyhlpg36tq",
+      "f_yj44y6fmjvxr6",
+      "f_m3o73kkn2zqgs",
+      "f_wfagt4ljv47ck",
+      "f_f2pfjdmysqy4o",
+      "f_ddevo7pr3g3fm",
+      "f_evt7cbx7og3cg",
+      "f_rw3zdnded4rvq",
+      "f_ddr756ek7ehva",
+      "f_veeav4jbglrbi",
+      "f_kuglzobynuznk",
+      "f_oqmuhwx5e33sc"
+    ],
+    "anchor_forms": [
+      "c̣e [CDIAL]",
+      "c̣ée [degener-shina2008]",
+      "c̣ée [schmidt]",
+      "c̣ē [CDIAL]",
+      "č̣e [backstrom1992]",
+      "č̣ee [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 243,
+    "language": "Sh",
+    "gloss": "tiger",
+    "spelling": "dĩ",
+    "family_id": "6694",
+    "record_ids": [
+      "f_rqnajyflxvijo"
+    ],
+    "target_forms": [
+      "dĩ́: [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_4v2hhwh7plac2"
+    ],
+    "anchor_forms": [
+      "dī̃ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 244,
+    "language": "Sh",
+    "gloss": "today",
+    "spelling": "as",
+    "family_id": "242",
+    "record_ids": [
+      "f_7dhla4rxp2tfk"
+    ],
+    "target_forms": [
+      "aš [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_wkepxp22isqdg",
+      "f_epquwsc64bnly",
+      "f_lfzztv5domalu",
+      "f_3pywdrjgrqru6",
+      "f_lw5psvnmb6e7k"
+    ],
+    "anchor_forms": [
+      "aš [CDIAL]",
+      "aš [degener-shina2008]",
+      "aš [schmidt]"
+    ]
+  },
+  {
+    "candidate": 245,
+    "language": "Sh",
+    "gloss": "tongue",
+    "spelling": "jib",
+    "family_id": "5228",
+    "record_ids": [
+      "f_rew3emkfk4ieu"
+    ],
+    "target_forms": [
+      "jib [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_zopejb4l5syis"
+    ],
+    "anchor_forms": [
+      "jib [schmidt]"
+    ]
+  },
+  {
+    "candidate": 246,
+    "language": "Sh",
+    "gloss": "tongue",
+    "spelling": "jip",
+    "family_id": "5228",
+    "record_ids": [
+      "f_aty474s7o5gfc"
+    ],
+    "target_forms": [
+      "jīp [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_ez3rvg5d3uzek",
+      "f_6a4t2caavg5fe",
+      "f_5wngqzslcshm6",
+      "f_t7aud7h6rgqve",
+      "f_u5ydgx2jbzjr6",
+      "f_ev4ojcs67kiku",
+      "f_6zkjtkksu6jcg",
+      "f_i2qahaggswwn6",
+      "f_crz67mchqob7i",
+      "f_bclx75wjb2bfy"
+    ],
+    "anchor_forms": [
+      "jip [buddruss-shina1996]",
+      "jip [schmidt]",
+      "ǰip [backstrom1992]",
+      "ǰip [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 247,
+    "language": "Sh",
+    "gloss": "tooth",
+    "spelling": "don",
+    "family_id": "6152",
+    "record_ids": [
+      "f_qjztf5mr3klqa",
+      "f_hdrwb42z6zase",
+      "f_3vhriqcmnd2pa",
+      "f_trdghuzpboqfm"
+    ],
+    "target_forms": [
+      "don [liljegren-hindukush]",
+      "don [schmidt]",
+      "dōn [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_gr4g2v6cx7irs",
+      "f_5o7dmty747sd4",
+      "f_msagtcwybwapg",
+      "f_mbrb4cmuiyjew",
+      "f_uydq6d7hztfjc",
+      "f_5li56uvc46mrc",
+      "f_lxl7y36ryj5om",
+      "f_3qasrgt6i75ho",
+      "f_fzb45nb4xhfay",
+      "f_hjqvlslwynera",
+      "f_myh2b33xfxyni",
+      "f_mvvw5sqfsadze"
+    ],
+    "anchor_forms": [
+      "don [backstrom1992]",
+      "don [buddruss-shina1996]",
+      "don [degener-shina2008]",
+      "don [schmidt]"
+    ]
+  },
+  {
+    "candidate": 248,
+    "language": "Sh",
+    "gloss": "tree",
+    "spelling": "tom",
+    "family_id": "13682",
+    "record_ids": [
+      "f_zqqwecw34z5uc",
+      "f_up3o3rssnwcg4",
+      "f_5rwidgzxjfwgg",
+      "f_ygiupjenfbrh6"
+    ],
+    "target_forms": [
+      "tom [buddruss-shina1996]",
+      "tom [degener-shina2008]",
+      "tom [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_sp74isa6ibaeg",
+      "f_quees7ghztexo",
+      "f_nocfo4zu4bnig",
+      "f_iffmb7l6pmia6",
+      "f_zrjv7squrxag4"
+    ],
+    "anchor_forms": [
+      "tom [backstrom1992]",
+      "tom [schmidt]"
+    ]
+  },
+  {
+    "candidate": 249,
+    "language": "Sh",
+    "gloss": "tuesday",
+    "spelling": "aṅgaro",
+    "family_id": "126",
+    "record_ids": [
+      "f_6jr76byw2i5hi"
+    ],
+    "target_forms": [
+      "aṅgaáro [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_ppnlfskjsyh5s",
+      "f_3de4scat2zxkk"
+    ],
+    "anchor_forms": [
+      "aṅgáaro [schmidt]"
+    ]
+  },
+  {
+    "candidate": 250,
+    "language": "Sh",
+    "gloss": "twenty",
+    "spelling": "bi",
+    "family_id": "11616",
+    "record_ids": [
+      "f_4qpwwlwoztg2c",
+      "f_7vygvuojkdyw4",
+      "f_icuigdn2kzjig",
+      "f_xwwfrn3embiua"
+    ],
+    "target_forms": [
+      "bi: [rajapurohit2012]",
+      "bií [schmidt]",
+      "bī [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_6kydu4svvuxje",
+      "f_dt3dqqjciq5tq",
+      "f_xmycxzccfnqnk",
+      "f_ymffe2jtvqb6w",
+      "f_6dzh6pum5q6fq",
+      "f_ybnatubhwhndg",
+      "f_txqrpvtrwfnwk",
+      "f_qmgruyqclfhtg",
+      "f_aois6qaqfqcue",
+      "f_ohc3cndnfcjtk",
+      "f_ekn4xn723vequ",
+      "f_vo3ks26itzbjm",
+      "f_3kouy7yprles6",
+      "f_iha4ci2ld6poi",
+      "f_pj55bqvfjaya6",
+      "f_2pcztdctmbh56",
+      "f_74z77gmjxxkls",
+      "f_4asj2yal5zuoi",
+      "f_lvsvnwbncjm4g",
+      "f_6wfettwt7turq",
+      "f_d4nztwrntw2pm",
+      "f_vynj6pukbingm",
+      "f_6prw2owpbrmcs",
+      "f_ekwo32ykccjzi",
+      "f_rqem2gh2fnhv4",
+      "f_aab5w2ilfpfpq",
+      "f_gnvqtvmbcq45y",
+      "f_4mbudocyldfui",
+      "f_i3pay6wq2wl3w",
+      "f_3l2vnfbvp5bbe"
+    ],
+    "anchor_forms": [
+      "bii [backstrom1992]",
+      "bií [backstrom1992]",
+      "bií [buddruss-shina1996]",
+      "bií [schmidt]",
+      "bìí [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 251,
+    "language": "Sh",
+    "gloss": "two",
+    "spelling": "du",
+    "family_id": "6648",
+    "record_ids": [
+      "f_miziadrgxtoyq",
+      "f_r43ja3sujlja2",
+      "f_6nqsliaqwawao",
+      "f_cwzuzfb4jsjt6",
+      "f_ncuda6yilw3je",
+      "f_xe3dmrbzvi23c",
+      "f_ospt4iy7fjowi",
+      "f_es5huqwryrnvq"
+    ],
+    "target_forms": [
+      "du [grierson-lsi1928]",
+      "du [schmidt]",
+      "du: [rajapurohit2012]",
+      "duː [liljegren-hindukush]",
+      "dū [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_4wj76ozcbxaga",
+      "f_wf42pzkz7d2ny",
+      "f_qfxayakd775b4",
+      "f_mnv4ezbs57bbe",
+      "f_uwinbgcx5z3d6",
+      "f_kemrrad7keetk",
+      "f_cxvcsaltdwvqq",
+      "f_cyo4zgc4sw2rw",
+      "f_cu6eaexjwrew6",
+      "f_kzwytbolv25t6",
+      "f_vtab42dhwpal4",
+      "f_doje5cwxhmme6",
+      "f_r3nkoknffpmuu",
+      "f_5b5bat6fv5ets",
+      "f_5ig4seaicbt4i",
+      "f_vxp46kgbepdto",
+      "f_pvjocayjejszi",
+      "f_os3vkkircr7ei",
+      "f_uvzu5cbab3tnu",
+      "f_r5axr7fceblcc",
+      "f_ysnltsfjxsqae",
+      "f_fkbjqskaxcn32",
+      "f_7msl7hs4mzcga",
+      "f_m4invvahpvmu6",
+      "f_5t3qy6d3qgjiu",
+      "f_hvlpq72nc3wew",
+      "f_mp2zwxnugkiri",
+      "f_rt26zpreprn7o",
+      "f_vz6xywvicxlui",
+      "f_2ucl6ubpazans",
+      "f_joaxpxd6xi57w",
+      "f_sbjanppa47n2u",
+      "f_jgat437kmmaj6",
+      "f_d5ai4ec2b6ley",
+      "f_5w4mgfxebii5y"
+    ],
+    "anchor_forms": [
+      "du [CDIAL]",
+      "du [backstrom1992]",
+      "du [schmidt]",
+      "dúu [buddruss-shina1996]",
+      "dúu [degener-shina2008]",
+      "dúu [schmidt]",
+      "dū [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 252,
+    "language": "Sh",
+    "gloss": "up(hill)",
+    "spelling": "aja",
+    "family_id": "274",
+    "record_ids": [
+      "f_pa26tloakwy5w"
+    ],
+    "target_forms": [
+      "ajá [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_ig2ifetxhh37a"
+    ],
+    "anchor_forms": [
+      "ajá [schmidt]"
+    ]
+  },
+  {
+    "candidate": 253,
+    "language": "Sh",
+    "gloss": "urine",
+    "spelling": "miko",
+    "family_id": "10337",
+    "record_ids": [
+      "f_sga2dmpmsrln2",
+      "f_qsikjzzoa6uyw"
+    ],
+    "target_forms": [
+      "miíko [schmidt]",
+      "míko [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_t2hngbvvuivkm"
+    ],
+    "anchor_forms": [
+      "miíko [schmidt]"
+    ]
+  },
+  {
+    "candidate": 254,
+    "language": "Sh",
+    "gloss": "village",
+    "spelling": "gam",
+    "family_id": "4368",
+    "record_ids": [
+      "f_vq5rmrfm6p2tw"
+    ],
+    "target_forms": [
+      "gá:m [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_q7l2ycosjbw32",
+      "f_fuhbv5bn4dwqy"
+    ],
+    "anchor_forms": [
+      "gáam [degener-shina2008]",
+      "gām [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 255,
+    "language": "Sh",
+    "gloss": "village",
+    "spelling": "kui",
+    "family_id": "3232",
+    "record_ids": [
+      "f_e6cb7co4m6h64"
+    ],
+    "target_forms": [
+      "kui [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_2zr6reimufq7m",
+      "f_blxp3yrgv5xfo",
+      "f_2qjlb4re427ws",
+      "f_gtjtkpynf5c2u",
+      "f_2cxzlfhrvarwk"
+    ],
+    "anchor_forms": [
+      "kui [backstrom1992]",
+      "kúi [schmidt]"
+    ]
+  },
+  {
+    "candidate": 256,
+    "language": "Sh",
+    "gloss": "violet",
+    "spelling": "lilo",
+    "family_id": "11168",
+    "record_ids": [
+      "f_63pkrhziwgaaq"
+    ],
+    "target_forms": [
+      "liilóo [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_2llxyp63fxzmg"
+    ],
+    "anchor_forms": [
+      "līlo [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 257,
+    "language": "Sh",
+    "gloss": "walnut",
+    "spelling": "ac̣ho",
+    "family_id": "48",
+    "record_ids": [
+      "f_aj5s7rj5xlegc",
+      "f_wshtdhbl2mtlq",
+      "f_7u3kfwt2q5oyg"
+    ],
+    "target_forms": [
+      "ac̣hoó [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_icliixncvds2e"
+    ],
+    "anchor_forms": [
+      "ac̣hṓ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 258,
+    "language": "Sh",
+    "gloss": "water",
+    "spelling": "wei",
+    "family_id": "1921",
+    "record_ids": [
+      "f_ozdododz6ajto"
+    ],
+    "target_forms": [
+      "wēī [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_umwjohmbdviak",
+      "f_qeowozwpyswqk",
+      "f_n4mgdwococpj6",
+      "f_qhcqkkg4px4gm",
+      "f_myeytnc5235w6",
+      "f_cmy6ttktxn4fk",
+      "f_72ft2xi6s2qss",
+      "f_ivyclqllt66iw",
+      "f_5mqde2tqtwi5w",
+      "f_jzhu7uhrvq3ii",
+      "f_zei32tyiuguzi",
+      "f_wgmwvrz43sgro",
+      "f_ptadhdjqhz4g6",
+      "f_leexhabrfoumi",
+      "f_xvo72ndsvqelw",
+      "f_27oswpy2piiny",
+      "f_djy7hvs3bs5ym",
+      "f_eznwcdhxbzcx4",
+      "f_2dhngksvhumgc",
+      "f_tvu3qbbv5z6za"
+    ],
+    "anchor_forms": [
+      "wei [backstrom1992]",
+      "wei [buddruss-shina1996]",
+      "wei [degener-shina2008]",
+      "ˈwei [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 259,
+    "language": "Sh",
+    "gloss": "water",
+    "spelling": "woi",
+    "family_id": "1921",
+    "record_ids": [
+      "f_mfztjqfzhm2zi",
+      "f_pxs22clueb2im",
+      "f_p3q3xktb2lk26"
+    ],
+    "target_forms": [
+      "woī [grierson-lsi1928]",
+      "wōī [grierson-lsi1928]",
+      "wói [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_3riqwbewiirpk",
+      "f_t2ac2snthisge",
+      "f_2pzxwfvidgnyk"
+    ],
+    "anchor_forms": [
+      "woi [backstrom1992]",
+      "wói [schmidt]"
+    ]
+  },
+  {
+    "candidate": 260,
+    "language": "Sh",
+    "gloss": "we",
+    "spelling": "be",
+    "family_id": "11302",
+    "record_ids": [
+      "f_lrcqzqyrlg6j2",
+      "f_ku5vvtzdkjrgg",
+      "f_fxo6ay6mxybfu",
+      "f_tsn32mf2iz25s"
+    ],
+    "target_forms": [
+      "be [liljegren-hindukush]",
+      "bē [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_syuvpmlftvrzg",
+      "f_ogmxeb7djd73w",
+      "f_h4eb6uhrcoc3o",
+      "f_pwww2rfklufq4",
+      "f_stpzy43ekajec"
+    ],
+    "anchor_forms": [
+      "be [CDIAL;schmidt]",
+      "be [degener-shina2008]",
+      "be [schmidt]",
+      "bē [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 261,
+    "language": "Sh",
+    "gloss": "we",
+    "spelling": "beʔ",
+    "family_id": "11302",
+    "record_ids": [
+      "f_4xsary2czqf4c"
+    ],
+    "target_forms": [
+      "beʔ [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_bjlro4xdcscku"
+    ],
+    "anchor_forms": [
+      "beʔ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 262,
+    "language": "Sh",
+    "gloss": "wednesday",
+    "spelling": "bodo",
+    "family_id": "9322",
+    "record_ids": [
+      "f_apbpqq45zopvu",
+      "f_4b3kd3hayyoxy"
+    ],
+    "target_forms": [
+      "bó:do [rajapurohit2012]",
+      "bóodo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_x3cxvdayctika",
+      "f_g3bp2jgandmwg",
+      "f_7itphcsm53mus",
+      "f_pnvny277t5rd4"
+    ],
+    "anchor_forms": [
+      "bodo [CDIAL]",
+      "bóodo [degener-shina2008]",
+      "bóodo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 263,
+    "language": "Sh",
+    "gloss": "wheat",
+    "spelling": "gum",
+    "family_id": "4287",
+    "record_ids": [
+      "f_el4g2rmqdrlnm",
+      "f_6bjjpqablobno"
+    ],
+    "target_forms": [
+      "gu:m [rajapurohit2012]",
+      "gum [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_klurnwkpermuy",
+      "f_72cveivz3d474",
+      "f_xxayisc4cn6d4",
+      "f_j3imlrta3e43s",
+      "f_t2movazrefs5u",
+      "f_rbjobrugm2xfg",
+      "f_xjc737ydy5lh4",
+      "f_lwz47ntrvbpgu",
+      "f_qfrkqxbi5ftx4",
+      "f_z52i56zyr4p62",
+      "f_gu4ccjjysglbm",
+      "f_3jqxv254n3bee",
+      "f_khmbuaofubtni",
+      "f_zlqagwmmwvq2q",
+      "f_hpvt7q2xpqx3s",
+      "f_trm7zxnwpq5ve",
+      "f_xrnte2e5inglk",
+      "f_6lkyedx4s5kkq",
+      "f_opmk5miagyjda",
+      "f_3wv4wjyqtl64w",
+      "f_brqkomegibv34",
+      "f_ojo5bwazzvnlu",
+      "f_pv7znljjivu74",
+      "f_rjcu7ukk7db54",
+      "f_5mpiipglcxsig",
+      "f_eqnphalf3y2wo",
+      "f_kgh46gatrtmvg",
+      "f_ijyhfa4t5wulg"
+    ],
+    "anchor_forms": [
+      "gum [backstrom1992]",
+      "guum [backstrom1992]",
+      "gùum [backstrom1992]",
+      "gúum [degener-shina2008]",
+      "ˈguum [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 264,
+    "language": "Sh",
+    "gloss": "when",
+    "spelling": "kʌre",
+    "family_id": "2918",
+    "record_ids": [
+      "f_w3kib6hxj7fze"
+    ],
+    "target_forms": [
+      "kʌré: [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_bzgwr6fvkeyng",
+      "f_3eododk6m7twg",
+      "f_aep7qdsi7omem",
+      "f_ddzpomtklqrak",
+      "f_s6ziimxoppwzu",
+      "f_65km2mkxgtbro",
+      "f_wovlaibc76zou",
+      "f_ewrijc4prj2ew",
+      "f_lxqp6zgzpx4dq",
+      "f_wl6bgdngcoja6",
+      "f_gcqoupihdlore"
+    ],
+    "anchor_forms": [
+      "kʌˈree [backstrom1992]",
+      "kʌˈreé [backstrom1992]",
+      "kʌˈrèé [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 265,
+    "language": "Sh",
+    "gloss": "who",
+    "spelling": "koi",
+    "family_id": "2574",
+    "record_ids": [
+      "f_nmhiuhugb7xts"
+    ],
+    "target_forms": [
+      "koi [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_epjeecdstdpkc",
+      "f_epjch5e7wdkgg",
+      "f_qi2jzb2tyxdz4",
+      "f_2iessq55on7uw",
+      "f_qyysg5lwp6fa4",
+      "f_kvjabyucdmcca",
+      "f_ga33rncajzhj6",
+      "f_g3flembus27gq",
+      "f_7gvi55ufqphrq",
+      "f_tssygkoz3fa5c",
+      "f_mflrittybj2ho",
+      "f_toyzogxdhyjlg",
+      "f_epf4szp4cdquk"
+    ],
+    "anchor_forms": [
+      "koi [backstrom1992]",
+      "koí [backstrom1992]",
+      "kòí [backstrom1992]",
+      "ˈkoi [backstrom1992]"
+    ]
+  },
+  {
+    "candidate": 266,
+    "language": "Sh",
+    "gloss": "who? (m.)",
+    "spelling": "koe",
+    "family_id": "2574",
+    "record_ids": [
+      "f_lq553vgnqyx3w"
+    ],
+    "target_forms": [
+      "koóe [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_3ovbiqliu24so"
+    ],
+    "anchor_forms": [
+      "koé [schmidt]"
+    ]
+  },
+  {
+    "candidate": 267,
+    "language": "Sh",
+    "gloss": "wife's brother",
+    "spelling": "sairi",
+    "family_id": "12757",
+    "record_ids": [
+      "f_amht3vl5kxewu"
+    ],
+    "target_forms": [
+      "šairí [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_abtigdl3z4kkg"
+    ],
+    "anchor_forms": [
+      "šairí [schmidt]"
+    ]
+  },
+  {
+    "candidate": 268,
+    "language": "Sh",
+    "gloss": "wood",
+    "spelling": "kaṭo",
+    "family_id": "3120",
+    "record_ids": [
+      "f_udwz4ka75pw74"
+    ],
+    "target_forms": [
+      "káaṭo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_j464h6wyisba6",
+      "f_szbq3ese7jphm"
+    ],
+    "anchor_forms": [
+      "káaṭo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 269,
+    "language": "Sh",
+    "gloss": "wooden bowl",
+    "spelling": "pati",
+    "family_id": "8055",
+    "record_ids": [
+      "f_bvzjcpfjo4c3y"
+    ],
+    "target_forms": [
+      "páti [buddruss-shina1996]"
+    ],
+    "anchor_ids": [
+      "f_k664s2nvwyi76"
+    ],
+    "anchor_forms": [
+      "páti [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 270,
+    "language": "Sh",
+    "gloss": "work",
+    "spelling": "krom",
+    "family_id": "2892",
+    "record_ids": [
+      "f_6pibo6y53wjna"
+    ],
+    "target_forms": [
+      "krom [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_zfpqqjo7e55ui",
+      "f_fxc76d6d4weku"
+    ],
+    "anchor_forms": [
+      "krom [schmidt]"
+    ]
+  },
+  {
+    "candidate": 271,
+    "language": "Sh",
+    "gloss": "wound",
+    "spelling": "gal",
+    "family_id": "4460",
+    "record_ids": [
+      "f_5jogv4yadyeru"
+    ],
+    "target_forms": [
+      "gá:l [rajapurohit2012]"
+    ],
+    "anchor_ids": [
+      "f_qgj5vxhsrtk7s"
+    ],
+    "anchor_forms": [
+      "gaál [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 272,
+    "language": "Sh",
+    "gloss": "year",
+    "spelling": "sal",
+    "family_id": "3084",
+    "record_ids": [
+      "f_mzirjnz35jh3w"
+    ],
+    "target_forms": [
+      "sáal [degener-shina2008]"
+    ],
+    "anchor_ids": [
+      "f_dk5u725b3htho",
+      "f_vrwi2ivu6ywic"
+    ],
+    "anchor_forms": [
+      "sáal [schmidt]"
+    ]
+  },
+  {
+    "candidate": 273,
+    "language": "Sh",
+    "gloss": "yellow",
+    "spelling": "pilo",
+    "family_id": "8233",
+    "record_ids": [
+      "f_q6ag76u3kkvpi"
+    ],
+    "target_forms": [
+      "píilo [schmidt]"
+    ],
+    "anchor_ids": [
+      "f_fuvff5hdtzr6i"
+    ],
+    "anchor_forms": [
+      "pī́lo [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 274,
+    "language": "Sh",
+    "gloss": "you",
+    "spelling": "tu",
+    "family_id": "5889",
+    "record_ids": [
+      "f_egvguxgcxlp6u",
+      "f_bvykw4iwoogbe",
+      "f_cub5j5q47rm3u"
+    ],
+    "target_forms": [
+      "tu [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_mzqgm6nyuecj2",
+      "f_zbcuxk6nuzdoi",
+      "f_aecrlqxz54xvk",
+      "f_awuf7b3shylq4",
+      "f_uk7dtw6k62sea",
+      "f_hc2jjhqq4pc6o",
+      "f_aadzs5rkaf6l6",
+      "f_itvguiulvpiya",
+      "f_j7cu6q3q2par6",
+      "f_hrsm37bmcuiw4",
+      "f_3ubyjwmvdk52i",
+      "f_iqc3qipr6g4qi",
+      "f_ty4akdjgbxkk2"
+    ],
+    "anchor_forms": [
+      "tu [backstrom1992]",
+      "tu [degener-shina2008]"
+    ]
+  },
+  {
+    "candidate": 275,
+    "language": "Sv",
+    "gloss": "7",
+    "spelling": "sat",
+    "family_id": "13139",
+    "record_ids": [
+      "f_rxbpqastbt4xo",
+      "f_icvtrtaul5oqm"
+    ],
+    "target_forms": [
+      "saat [knobloch2020sauji]",
+      "saːt [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_ahvlziz4upjsc"
+    ],
+    "anchor_forms": [
+      "sat [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 276,
+    "language": "Sv",
+    "gloss": "blood",
+    "spelling": "rat",
+    "family_id": "10539",
+    "record_ids": [
+      "f_5ct4dl6agxaxc"
+    ],
+    "target_forms": [
+      "raːt [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_3vusqpkg67wm6"
+    ],
+    "anchor_forms": [
+      "raːt [liljegren-hindukush]"
+    ]
+  },
+  {
+    "candidate": 277,
+    "language": "Sv",
+    "gloss": "bone",
+    "spelling": "haɖu",
+    "family_id": "13952",
+    "record_ids": [
+      "f_4nhj5b2zgrii2"
+    ],
+    "target_forms": [
+      "haːɖu [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_7dodri4ymhiem"
+    ],
+    "anchor_forms": [
+      "haːɖu [liljegren-hindukush]"
+    ]
+  },
+  {
+    "candidate": 278,
+    "language": "Sv",
+    "gloss": "dog",
+    "spelling": "kucuro",
+    "family_id": "3219",
+    "record_ids": [
+      "f_ttkxv5btpz6qk"
+    ],
+    "target_forms": [
+      "kučuroo [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_gaw35ee65hnva"
+    ],
+    "anchor_forms": [
+      "kučurṓ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 279,
+    "language": "Sv",
+    "gloss": "ear",
+    "spelling": "kaɳ",
+    "family_id": "2830",
+    "record_ids": [
+      "f_y6enpyvsr2h2s"
+    ],
+    "target_forms": [
+      "kaːɳ [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_e5bonfv4jld4q"
+    ],
+    "anchor_forms": [
+      "kaːɳ [liljegren-hindukush]"
+    ]
+  },
+  {
+    "candidate": 280,
+    "language": "Sv",
+    "gloss": "eight",
+    "spelling": "as",
+    "family_id": "941",
+    "record_ids": [
+      "f_xkk2divmrvucw"
+    ],
+    "target_forms": [
+      "aaš [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_qrwgwmuejqz2e"
+    ],
+    "anchor_forms": [
+      "aš [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 281,
+    "language": "Sv",
+    "gloss": "father",
+    "spelling": "babu",
+    "family_id": "9209",
+    "record_ids": [
+      "f_3gqd5crz73fva",
+      "f_gin35x6qyyixu",
+      "f_iz6w5ugu2zrlg"
+    ],
+    "target_forms": [
+      "baabu [knobloch2020sauji]",
+      "baːbu [knobloch2020sauji]",
+      "baːbu [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_keh3okutogoek"
+    ],
+    "anchor_forms": [
+      "bābu [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 282,
+    "language": "Sv",
+    "gloss": "five",
+    "spelling": "panj",
+    "family_id": "7655",
+    "record_ids": [
+      "f_o6c3kqy7ad446"
+    ],
+    "target_forms": [
+      "paanǰ [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_2b7y3lxfyw7ly"
+    ],
+    "anchor_forms": [
+      "pānǰ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 283,
+    "language": "Sv",
+    "gloss": "flour",
+    "spelling": "piso",
+    "family_id": "8218",
+    "record_ids": [
+      "f_7fycjm7sclons"
+    ],
+    "target_forms": [
+      "pišo [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_aanwkovxhjbbm"
+    ],
+    "anchor_forms": [
+      "pišo [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 284,
+    "language": "Sv",
+    "gloss": "fourteen",
+    "spelling": "cadis",
+    "family_id": "4605",
+    "record_ids": [
+      "f_ufxavxkum5lts"
+    ],
+    "target_forms": [
+      "čadiš [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_l77z3rzpr3t2m"
+    ],
+    "anchor_forms": [
+      "čadī́š [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 285,
+    "language": "Sv",
+    "gloss": "house",
+    "spelling": "gos",
+    "family_id": "4336",
+    "record_ids": [
+      "f_n5ftatrrml33k",
+      "f_p6vcjzalap2zq"
+    ],
+    "target_forms": [
+      "gooš [knobloch2020sauji]",
+      "goːš [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_shnaard65ryto"
+    ],
+    "anchor_forms": [
+      "gōš [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 286,
+    "language": "Sv",
+    "gloss": "one",
+    "spelling": "ek",
+    "family_id": "2462",
+    "record_ids": [
+      "f_xqkvlqgef6pia"
+    ],
+    "target_forms": [
+      "ek [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_547mgug5xqgcs"
+    ],
+    "anchor_forms": [
+      "ek [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 287,
+    "language": "Sv",
+    "gloss": "one",
+    "spelling": "yak",
+    "family_id": "2462",
+    "record_ids": [
+      "f_5v2akh7ndqloa"
+    ],
+    "target_forms": [
+      "yak [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_kfe2ye2gscphs"
+    ],
+    "anchor_forms": [
+      "yak [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 288,
+    "language": "Sv",
+    "gloss": "sixteen",
+    "spelling": "ṣuṛas",
+    "family_id": "12812",
+    "record_ids": [
+      "f_726stptjmbgke"
+    ],
+    "target_forms": [
+      "ṣuṛaš [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_qwowrs3pwlzx6"
+    ],
+    "anchor_forms": [
+      "ṣuṛā́s [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 289,
+    "language": "Sv",
+    "gloss": "ten",
+    "spelling": "das",
+    "family_id": "6227",
+    "record_ids": [
+      "f_42uqd33pydu4g"
+    ],
+    "target_forms": [
+      "daš [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_ckvf5rot75e2o"
+    ],
+    "anchor_forms": [
+      "daš [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 290,
+    "language": "Sv",
+    "gloss": "twelve",
+    "spelling": "bas",
+    "family_id": "6658",
+    "record_ids": [
+      "f_3kwkkbqr2sy5g"
+    ],
+    "target_forms": [
+      "baaš [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_iguojyyhxhcdi",
+      "f_kuex3f67nbysq"
+    ],
+    "anchor_forms": [
+      "baš [CDIAL]",
+      "bāš [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 291,
+    "language": "Sv",
+    "gloss": "two",
+    "spelling": "du",
+    "family_id": "6648",
+    "record_ids": [
+      "f_n6zicdhn67vea",
+      "f_3gkvl3us64noo",
+      "f_6ea52nrmxg7rg",
+      "f_wftcfbjrzn5g2",
+      "f_553s6ov6nybd4"
+    ],
+    "target_forms": [
+      "du [decker1992]",
+      "du [knobloch2020sauji]",
+      "duu [knobloch2020sauji]",
+      "duː [knobloch2020sauji]",
+      "duː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_g25ydmch3yedg"
+    ],
+    "anchor_forms": [
+      "dū [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 292,
+    "language": "Sv",
+    "gloss": "we",
+    "spelling": "be",
+    "family_id": "11302",
+    "record_ids": [
+      "f_fmze6dfj5owzu",
+      "f_uhk6xacyyx6ek"
+    ],
+    "target_forms": [
+      "be [knobloch2020sauji]",
+      "be [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_7pdo2dge5zx7c"
+    ],
+    "anchor_forms": [
+      "bē [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 293,
+    "language": "Sv",
+    "gloss": "woman",
+    "spelling": "ɬeṛi",
+    "family_id": "13736",
+    "record_ids": [
+      "f_qwcnycgwn5q7w",
+      "f_myjw3a7n7rlda"
+    ],
+    "target_forms": [
+      "ɬeeṛi [knobloch2020sauji]",
+      "ɬeṛi [knobloch2020sauji]"
+    ],
+    "anchor_ids": [
+      "f_i5rc5sxiwot6k"
+    ],
+    "anchor_forms": [
+      "ɬeṛī́ [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 294,
+    "language": "Ush",
+    "gloss": "nose",
+    "spelling": "noti",
+    "family_id": "7031",
+    "record_ids": [
+      "f_ul3nxj65droum"
+    ],
+    "target_forms": [
+      "noːti [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_nh4fsp23cjgzs"
+    ],
+    "anchor_forms": [
+      "'noti [rensch-decker-hallberg1992]"
+    ]
+  },
+  {
+    "candidate": 295,
+    "language": "Ush",
+    "gloss": "son’s wife",
+    "spelling": "nuʂ",
+    "family_id": "13801",
+    "record_ids": [
+      "f_773vfco7pxrki"
+    ],
+    "target_forms": [
+      "nuːʂ [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_k4me53ghhbpy2"
+    ],
+    "anchor_forms": [
+      "nuʂ [rensch-decker-hallberg1992]"
+    ]
+  },
+  {
+    "candidate": 296,
+    "language": "Ush",
+    "gloss": "sun",
+    "spelling": "suri",
+    "family_id": "13574",
+    "record_ids": [
+      "f_w5geevvugzioa"
+    ],
+    "target_forms": [
+      "suːri [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_c3nzbccjsfhvg"
+    ],
+    "anchor_forms": [
+      "'suːri [rensch-decker-hallberg1992]"
+    ]
+  },
+  {
+    "candidate": 297,
+    "language": "Ush",
+    "gloss": "two",
+    "spelling": "du",
+    "family_id": "6648",
+    "record_ids": [
+      "f_7k5g65kpl6rk2"
+    ],
+    "target_forms": [
+      "duː [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_oq27mscekmo5q"
+    ],
+    "anchor_forms": [
+      "du [rensch-decker-hallberg1992]"
+    ]
+  },
+  {
+    "candidate": 298,
+    "language": "Ush",
+    "gloss": "water",
+    "spelling": "wi",
+    "family_id": "1921",
+    "record_ids": [
+      "f_6kzacpu6jysxc"
+    ],
+    "target_forms": [
+      "wi [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_d4ywfzycxjnhc"
+    ],
+    "anchor_forms": [
+      "wi [rensch-decker-hallberg1992]"
+    ]
+  },
+  {
+    "candidate": 299,
+    "language": "bro",
+    "gloss": "cow",
+    "spelling": "go",
+    "family_id": "4255",
+    "record_ids": [
+      "f_qvs3ja6dupvug",
+      "f_fvqfjuvvawncs"
+    ],
+    "target_forms": [
+      "gō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_5zenojdgtpegq"
+    ],
+    "anchor_forms": [
+      "goo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 300,
+    "language": "bro",
+    "gloss": "ear",
+    "spelling": "kani",
+    "family_id": "2830",
+    "record_ids": [
+      "f_v72ufuobjlp4w",
+      "f_c6jswh4wepiaw"
+    ],
+    "target_forms": [
+      "kani [liljegren-hindukush]",
+      "kāni [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_3wedfsleiasxc"
+    ],
+    "anchor_forms": [
+      "ka'ni [schmidt]"
+    ]
+  },
+  {
+    "candidate": 301,
+    "language": "bro",
+    "gloss": "horse",
+    "spelling": "aps",
+    "family_id": "920",
+    "record_ids": [
+      "f_lf3k3lgk7dpx6"
+    ],
+    "target_forms": [
+      "apš [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_gqcdtnbtxbmj4"
+    ],
+    "anchor_forms": [
+      "apš [CDIAL]"
+    ]
+  },
+  {
+    "candidate": 302,
+    "language": "bro",
+    "gloss": "hundred",
+    "spelling": "so",
+    "family_id": "12278",
+    "record_ids": [
+      "f_vbiu6qdzvfxqu"
+    ],
+    "target_forms": [
+      "šō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_ilydxlwitpxoe"
+    ],
+    "anchor_forms": [
+      "šo [schmidt]"
+    ]
+  },
+  {
+    "candidate": 303,
+    "language": "bro",
+    "gloss": "i",
+    "spelling": "mõ",
+    "family_id": "9691",
+    "record_ids": [
+      "f_p4ljqu2ecaa5q"
+    ],
+    "target_forms": [
+      "mō̃ [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_p6hb3twzrqu7w"
+    ],
+    "anchor_forms": [
+      "mõ [schmidt]"
+    ]
+  },
+  {
+    "candidate": 304,
+    "language": "bro",
+    "gloss": "mouth",
+    "spelling": "uzi",
+    "family_id": "1533",
+    "record_ids": [
+      "f_qshqbduhzc7fg"
+    ],
+    "target_forms": [
+      "uzi [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_g675fnxxzzlec"
+    ],
+    "anchor_forms": [
+      "'uzi [schmidt]"
+    ]
+  },
+  {
+    "candidate": 305,
+    "language": "bro",
+    "gloss": "nose",
+    "spelling": "nuto",
+    "family_id": "7031",
+    "record_ids": [
+      "f_zaklrtqnha62e",
+      "f_xxdt3strlaaq6"
+    ],
+    "target_forms": [
+      "nutō [grierson-lsi1928]",
+      "nuːto [liljegren-hindukush]"
+    ],
+    "anchor_ids": [
+      "f_vddvrcmn7kjks"
+    ],
+    "anchor_forms": [
+      "'nuto [schmidt]"
+    ]
+  },
+  {
+    "candidate": 306,
+    "language": "bro",
+    "gloss": "one",
+    "spelling": "ek",
+    "family_id": "2462",
+    "record_ids": [
+      "f_ixzraujvw5chs",
+      "f_wluxywtiprptk"
+    ],
+    "target_forms": [
+      "ek [liljegren-hindukush]",
+      "ēk [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_5bymqe2hk7ofc"
+    ],
+    "anchor_forms": [
+      "ek [schmidt]"
+    ]
+  },
+  {
+    "candidate": 307,
+    "language": "bro",
+    "gloss": "seven",
+    "spelling": "sat",
+    "family_id": "13139",
+    "record_ids": [
+      "f_plwxdrmxr746e"
+    ],
+    "target_forms": [
+      "sāt [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_thpbigszax67u"
+    ],
+    "anchor_forms": [
+      "sat [schmidt]"
+    ]
+  },
+  {
+    "candidate": 308,
+    "language": "bro",
+    "gloss": "star",
+    "spelling": "turi",
+    "family_id": "5798",
+    "record_ids": [
+      "f_e5bqus5zkxzyw"
+    ],
+    "target_forms": [
+      "turī [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_iezhwlpr3item"
+    ],
+    "anchor_forms": [
+      "'turi [schmidt]"
+    ]
+  },
+  {
+    "candidate": 309,
+    "language": "bro",
+    "gloss": "three",
+    "spelling": "tra",
+    "family_id": "5994",
+    "record_ids": [
+      "f_csc6ai6bejgce"
+    ],
+    "target_forms": [
+      "trā [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_qs3um2acx2pf2"
+    ],
+    "anchor_forms": [
+      "traa [schmidt]"
+    ]
+  },
+  {
+    "candidate": 310,
+    "language": "bro",
+    "gloss": "tooth",
+    "spelling": "dani",
+    "family_id": "6152",
+    "record_ids": [
+      "f_ioo6esrqrr7w2"
+    ],
+    "target_forms": [
+      "dāni [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_4hss4xp6e3ff4"
+    ],
+    "anchor_forms": [
+      "da'nii [schmidt]"
+    ]
+  },
+  {
+    "candidate": 311,
+    "language": "bro",
+    "gloss": "twenty",
+    "spelling": "biza",
+    "family_id": "11616",
+    "record_ids": [
+      "f_oalry5tyk5k6m"
+    ],
+    "target_forms": [
+      "bižā [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_vj7ui5d2d2jde"
+    ],
+    "anchor_forms": [
+      "bi'žaa [schmidt]"
+    ]
+  },
+  {
+    "candidate": 312,
+    "language": "bro",
+    "gloss": "who?",
+    "spelling": "ko",
+    "family_id": "2574",
+    "record_ids": [
+      "f_2mijbqe473vh2"
+    ],
+    "target_forms": [
+      "kō [grierson-lsi1928]"
+    ],
+    "anchor_ids": [
+      "f_gscanqyikmu2o"
+    ],
+    "anchor_forms": [
+      "koo [schmidt]"
+    ]
+  }
+]

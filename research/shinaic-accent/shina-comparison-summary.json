@@ -1,0 +1,24 @@
+{
+  "source": "data/data/other/forms/20230621-shina.csv",
+  "sha256": "c179e476025e1b54898b802d40a65c2a9b19e6f72dcdc29b9523b5966644617c",
+  "rows": 2050,
+  "varieties": {
+    "gil": 375,
+    "koh": 360,
+    "gur": 409,
+    "Astor": 298,
+    "dr": 321,
+    "bro": 287
+  },
+  "linked_rows": 711,
+  "non_turner_linked_rows": 18,
+  "linked_families": 219,
+  "families_with_accent_in_turner_headword": 139,
+  "families_with_palula_comparanda": 124,
+  "cautions": [
+    "Brokskat marks stress, not mora accent.",
+    "Unlinked items are excluded from cognate grouping, not from the source inventory.",
+    "Each Turner family is counted once; multiple dictionary formations may share an ID.",
+    "Rows and proposed source etymologies need manual verification before sound-law counts."
+  ]
+}

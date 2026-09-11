@@ -1,0 +1,143 @@
+
+ d63 {"entry_id": "d63", "family_id": "d63", "concept": "hide, subdue, be compressed", "reconstruction": "*aṭ-a-nk- / *aṭ-a-nkk-", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "ṭ", "c2_structure": "singleton", "v2": "a", "structure": "VC-a-NP / VC-a-NPP", "grammatical_category": "verb", "boundary_evidence": "Nasal intransitive versus stronger transitive formations recur independently in Tamil, Kannada, Telugu and the reconstruction.", "input_support": "Tamil aṭaŋku/aṭakku, Kannada aḍaŋgu/aḍaku and Telugu aḍãgu/aḍacu independently support the uncontracted low-vowel formative. K03 p.107 reconstructs these derivatives at Proto-South Dravidian level; PDr labels in CLDF are not precise historical levels.", "input_confidence": "high", "direction_argument": "The shared vowel-initial aṭ/aḍ order in SD I and aṛ- in Kurux–Malto, including the same stop/nasal formative contrasts, favors older *aṭ-aŋ- over an initial *ḍā- followed by multiple independent vowel insertions.", "derivation": "*aṭ-aŋ- > *aḍ-aŋ- > *ḍāŋ- > Telugu ḍā̃gu/dā̃gu; independently *aṭ-aŋkk- > *ḍāŋc- > ḍā̃cu/dā̃cu. Literal *ḍaaŋ- contraction and assimilation/stress-induced V1 loss are competing implementations; the Telugu nasal-loss and initial ḍ>d are subsequent developments.", "exception_notes": "Telugu retains aḍagu/aḍãgu “submit” and aḍacu “suppress” beside displaced “hide” forms: a real within-family semantic/formation split, not proof of a phonological exceptionless class. Kui also retains āṛpa/āṭpa. Kolami and Naikri are diagnosed as early Telugu loans by K03 p.107; aspiration in Naikri needs a recipient history. Tulu aḍeŋgɯ : ḍeŋgɯ/deŋguni is compatible with local aphaeresis, not independently the Telugu contraction. d80 shares compressed/piled semantics and homophonous Toda/Kannada evidence; sensitivity analysis should collapse d63+d80 without asserting that DEDR erred.", "confidence": "high", "references": "K03 pp.107,162; PSS83 pp.229,233; K61 pp.51–54; DEDR 63", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu mixed aḍacu;aḍagu;aḍãgu;dā̃cu;dā̃gu;ḍācu;ḍāgu;ḍā̃gu
+Tamil R-bearing-no-D aṭakku;aṭaŋku
+Kannada R-bearing-no-D aḍagu;aḍaku;aḍaŋgu;tāguḍi
+Kui mixed āṛpa (āṛt-);āṭpa (āṭt-);ḍāpa (ḍāt-)
+Kuwi missing 
+Gondi missing 
+aḍagu f_jyl2im2bylpky R
+aḍãgu f_7dpiziz3womlk R
+aḍacu f_ba2xhgycj3vys R
+ḍāgu f_6rdekkcsrmxj4 D
+ḍā̃gu f_i77nwvutqgc7i D
+dā̃gu f_sp7jg6ayxkr4m D
+ḍācu f_ccljx3athxqva D
+dā̃cu f_4b2n5ptvxwd5w D
+
+ d474 {"entry_id": "d474", "family_id": "d474", "concept": "two", "reconstruction": "*īr / *ir-V; nonhuman *ir-aṇ-ṭ; human *ir-u-var", "c1": "Ø", "v1": "i", "v1_quantity": "short-and-long-bound-allomorphs", "c2": "r", "c2_structure": "singleton", "v2": "a/u", "structure": "VC-V + gender/number formation", "grammatical_category": "numeral", "boundary_evidence": "Bound īr/iru, nonhuman aṇṭ and human u-var are independently motivated categories; comparisons/counts must not treat them as repeated independent etyma.", "input_support": "Tamil iru-/īr, Kannada iru/ir and eraḍu, Central Dravidian ir- forms and Brahui irā/iraṭ support vowel-first order independently. Nonhuman aṇṭ and human u-var formations can be distinguished by their morphology before their outcomes are inspected.", "input_confidence": "high", "direction_argument": "Wide independent retention of bound ir-/īr and the different human and nonhuman derivatives favors earlier ir-, not original r- with prothesis throughout the family. The shared r-initial nonhuman numeral across SCDr is strong comparative evidence, but recent Tamil/Malayalam/Tulu initial loss must be evaluated separately.", "derivation": "K03 pp.159–160: *ir-aṇṭ > *eraṇḍ > hypothetical *rēṇḍ > Telugu reṇḍu with shortening before a nasal-stop cluster; other SCDr *ir-i/u-ṇṭ > *rīṇḍ with variable shortening and Konda backing to runḍi. Human *iru-var remains vowel-first in Telugu iruvuru and Gondi irvur; r+v assimilation yields Kannada/Old Telugu ibbar forms. Tamil/Malayalam/Tulu aphaeresis produces reṇṭu/raṇṭu/raḍḍɯ in later language histories. Malto *irw > iwr (corpus ivr) is a separate medial consonant transposition.", "exception_notes": "Do not count human, nonhuman, twenty, two hundred and ordinal derivatives as independent roots. Telugu retained iru/īr is a bound root and cannot be treated as an identical free-word input to reṇḍu. The short Telugu output does not prove that a long intermediate existed; *rēṇḍ is K03’s conditional reconstruction. Kui rīnḍe shows that pre-cluster shortening was not universal across languages. Konda iddum retains an initial vowel in a measure compound and needs separate cluster-assimilation/contact analysis. Kodagu daṇḍɨ, Markodi dad and Badaga ratte require local phonological/contact histories; do not automatically equate them with the SCDr innovation. Kurux ēṇḍ has a vowel history K03 explicitly calls puzzling. Toda ačok/acok is a measure term within an example, not another reflex of two.", "confidence": "high", "references": "DEDR 474 p.46 directly checked; K03 pp.159–160 and p.116; Hockings–Pilot-Raichoor 1992 pp.54,86,507; Canvin 2025 lect data", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu mixed ibbaru;ibbaṇḍru;iddaṟu;in-nūṟu;inu māṟu;iru;iruguru;iruvadi;iruvai;iruvuru;panneṇḍu;renca;reṇḍava;reṇḍu;reṇṭa;reṭṭa;reṭṭi;reṭṭimpu;reṭṭincu;īr- = reṇḍu
+Tamil R-bearing-no-D iraṇṭu;iraṭṭai;iru (before consonant);iruvar;reṇṭu;īr
+Kannada R-bearing-no-D eraḍu;eraṛ̆;erḍu;ibbar;innūṟu;ippattu;ir;irbar;irpattu;iru;irvar
+Kui D-bearing-no-R ri;ri'ari;ri'er;rinḍi;rī;rīaru;rīhe;rīnḍe;rīnḍi
+Kuwi D-bearing-no-R ri;ri'ari;ri'ni;riari;rindi;riṇḍi;rī;rīari
+Gondi mixed iruṛ;irvur;irvuṛ;irū;irūr;iver;ivir;ivur;rahk rahk;rancē;ranḍ;ranḍu;ranṭe;renḍ
+reṇḍu f_2htxvumaoczjw D
+reṇḍava f_bkhd5wmrnsjt4 D
+reṭṭa f_sp6x4vguvmszc D
+reṭṭi f_jzp6l3vyzyn7i D
+reṭṭincu f_4ujr5t55avg66 D
+reṭṭimpu f_vfvgfqslu3kc6 D
+reṇṭa f_pd6ynb3gv5lhi D
+renca f_fqoeiv3e7odos D
+iru f_65qhyabhcuwaw R
+īr- = reṇḍu f_qznjy2zdzigrk R
+iruvuru f_i3k7naryq6kzm R
+iruguru f_n2cdyoyequmy6 R
+iruvadi f_qgafogajc4lzg R
+iruvai f_6c6a36yd4iybo R
+iddaṟu f_p3l4befd5utdw O
+in-nūṟu f_dgw5tjtzepqrq O
+inu māṟu f_shooci3xpjwrs O
+panneṇḍu f_qkicfxp5fal3y A
+
+ d1787 {"entry_id": "d1787", "family_id": "d1787", "concept": "blind", "reconstruction": "*kur-uṭ-V; immediate *kur-ḍ-V", "c1": "k", "v1": "u", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "u", "structure": "CVC-u-ṭV / CVC-ḍV", "grammatical_category": "adjective/noun", "boundary_evidence": "Whole blindness stem supported independently; person endings do not add etyma; timing of V2 syncope remains inferential.", "input_support": "Tamil/Malayalam kuruṭu and Kannada kuruḍu independently supply high-u disyllabic input. Tulu kurḍu and Kota kurḍ independently support the syncopated medial cluster, while Kannada kuḍḍu shows its assimilated alternative.", "input_confidence": "high", "direction_argument": "The full and syncopated southern series establishes k-u-r ordering. Telugu gruḍḍi/gruḍḍu has the rhotic before u; guḍḍi is attested beside it but cannot be mechanically generalized to every language with guḍḍi.", "derivation": "*kur-uḍ-V > *kur-ḍ-V > *kru-ḍḍ-V > gruḍḍi/gruḍḍu > guḍḍi, with initial k/g alternation and later r loss. Strengthening might precede displacement; *kurḍḍ > kruḍḍ yields the same result. Contraction followed by shortening is another possible route. Final i/u and gender formations remain separate.", "exception_notes": "Identical u+u does not guarantee a long modern vowel: the independently attested consonantal branch is crucial. Initial g is not explained by naming the r/vowel exchange. Gondi/Kolami/Naikri guḍḍi could be Telugu loans or local medial assimilation; no observed cluster establishes independent metathesis there. Malto qoṭri may involve internal consonant reversal relative to kur-ṭ, but its precise morphology and quantity require separate study.", "confidence": "high", "references": "K61 §§1.142–154; K03 pp.130–131,157–162; DEDR 1787", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu D-bearing-no-R gruḍḍi;gruḍḍu;guḍḍi;guḍḍitanamu
+Tamil R-bearing-no-D kuruṭaṉ;kuruṭi;kuruṭu
+Kannada R-bearing-no-D kuraḍa;kuraḍi;kuraḍu;kuruḍa;kuruḍi;kuruḍu;kuruḷu;kuḍḍa;kuḍḍu
+Kui missing 
+Kuwi missing 
+Gondi uncertain-no-DR guḍḍi
+gruḍḍi f_ndolyy4ysamdc D
+gruḍḍu f_pmbylqwhanjmy D
+guḍḍi f_d5e6rlvcbj4uw D
+guḍḍitanamu f_ynjwjivh7t7rw D
+
+ d4711 {"entry_id": "d4711", "family_id": "d4711", "concept": "tree", "reconstruction": "*mar-am / *mar-an", "c1": "m", "v1": "a", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "a", "structure": "CVC-a-N", "grammatical_category": "noun", "boundary_evidence": "Low-a nominal formation independently supported; n/m endings and velar derivatives kept distinct.", "input_support": "Tamil/Malayalam maram, Kannada/Kodagu/Tulu mara, Gondi mara and Gadaba marin independently establish ma-r-a order; Konda maran independently supplies final n. K03 pp.150,160–161 discusses nominal n/m and dialect stress.", "input_confidence": "high", "direction_argument": "Widespread uncontracted mar- and matching low second vowel make *mar-an earlier than mrān. A consonant-first ancestor would require multiple independent epentheses plus a low-vowel restoration without independent motivation.", "derivation": "*mar-an > *mrān > Telugu mrānu > mānu. Literal *mraan contraction and *marán > *marān > mrān via stress and first-vowel loss are competing implementations. Konda Araku marán versus Sova mrānu supplies a synchronic phonetic analogue, not a directly observed prehistoric time series.", "exception_notes": "Do not derive Telugu n from modern Tamil m: both nominal suffix types have comparative support. Telugu mrā̃ku/mā̃ku has an additional velar formation whose source must be reconstructed separately. Kuvi marnu/mrānu/mārnu preserves dialect and paradigm variation; the long-vowel mārnu type is not a retained exact short input. Kolami/Naikri māk could reflect direct internal assimilation or a borrowed/reduced mrā-type, so its lost r alone cannot prove metathesis. Kurux mann/Malto manu similarly admit medial assimilation.", "confidence": "high", "references": "K03 pp.107,150,160–162 n.16; DEDR 4711(a)", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu D-bearing-no-R mrānu;mrā̃ku;mānu;mā̃ku
+Tamil R-bearing-no-D maram
+Kannada R-bearing-no-D mara
+Kui D-bearing-no-R mrahnu;mrahunḍi ( mrahka);mrānu
+Kuwi mixed mara;marnu;marnu ( marka);mrānu;mārnu ( mārka) (i.e.mrānū; <i>pl.</i> mārka);mṛānū (i.e.mrānū; <i>pl.</i> mārka)
+Gondi R-bearing-no-D mara;marnu;maṛa;maṛā;muranoo;māra;mārnu;māṛa
+mrānu f_cqc6qamwv6hmy D
+mānu f_rirwcupcemybq D
+mrā̃ku f_ymibz5y5h74ku D
+mā̃ku f_fqcf4xzk4r3tg D
+
+ d240 {"entry_id": "d240", "family_id": "d240", "concept": "move, shake, wave", "reconstruction": "*al-ay-; *al-aŋ- / *al-uk- extensions", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "l", "c2_structure": "singleton", "v2": "a", "structure": "VC-ay / VC-a-NC", "grammatical_category": "verb/noun", "boundary_evidence": "-ay and -aŋ/-uk formations independently visible in SD I; exact Pengo/Irula formations unknown.", "input_support": "Tamil alai/alaŋku, Malayalam alayuka/alaŋŋuka and Kannada ale/alagu supply medial l and low formative independently; Telugu ala and allāḍu preserve the order.", "input_confidence": "high", "direction_argument": "The shared vowel-first SD I/Telugu base plus Kurux alr- favors original al-. Kui lāng- is a derived innovative outcome, not a reason to reverse the reconstructed comparison.", "derivation": "*al-aŋ- > *lāŋ- > Kui lānga; its causative lāk-p- > lāpka requires separate stop-cluster metathesis. Telugu allāḍu can be analyzed as a reinforced/reduplicated formation associated with “move” and must not be reduced to an imaginary initial *lā-. Pengo lem- and Irula le·- require a separate vowel and derivative history.", "exception_notes": "Tulu landuni/landele may show independent aphaeresis in a wanderer derivative; no shared SCDr event follows. Pengo e and Irula e· cannot be generated by simple a+a contraction without another change. Malayalam alaŋŋ-/anaŋŋ- is l/n assimilation/variation, not vowel–liquid displacement. DEDR treats this root as originally distinct from d236 but acknowledges semantic convergence.", "confidence": "medium", "references": "DEDR 240; DEDR 236 editorial note", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D ala;allalāḍu;allārucu;allāḍu
+Tamil R-bearing-no-D alai;alaŋku;alukku
+Kannada R-bearing-no-D alagu;ale;aluku;aḷku
+Kui D-bearing-no-R lānga (lāngi-);lāpka (&lt; lākp-; lākt-)
+Kuwi missing 
+Gondi missing 
+ala f_sse3m4kxlu7c4 R
+allāḍu f_eldm6ywbhzgko R
+allalāḍu f_6bupjipoxgkiu R
+allārucu f_aifvh7czpucsy R
+
+ d282 {"entry_id": "d282", "family_id": "d282", "concept": "cry, weep, call", "reconstruction": "*aẓ-u- / *aẓ-ay-; regional vowel history unresolved", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "ẓ", "c2_structure": "singleton", "v2": "u/a", "structure": "VC-V / VC-V-C", "grammatical_category": "verb/noun", "boundary_evidence": "u/ay and causative formations independently attested; exact formative vowels for short Pengo and long Kui stems not forced.", "input_support": "Tamil aṛ̆u/aṛ̆ai, Malayalam aṛ̆uka, Kannada aṛ̆u and Gondi–Konda aṛ- independently establish vowel-first apical and at least u/ay formations. PSS83 pp.14–15 compares *aẓ-u; the database Starostin *jeẓ head is an alternative analysis, not adopted as a given.", "input_confidence": "high", "direction_argument": "Agreement of SD I, Gondi–Konda, Central Dravidian and retained Pengo aṛ- favors earlier V–ẓ. Kui/Kuvi/Manda initial ṛ are innovative under this cognacy, but their ī needs a regional vowel explanation. Pengo causatives supply a within-language original/displaced contrast.", "derivation": "Retained *aẓ-u > Telugu ēḍu- requires vowel fronting/lengthening before or alongside ẓ>ḍ; ēḍucu has an incorporated past palatal according to K03 p.193. Pengo aṛ-/aṛba versus ṛat/ṛatpa shows apical displacement in causative formations; a possible *aẓ-a-t > ṛat route remains conditional. Kui/Kuvi/Manda *aẓV > ṛī is directionally plausible, but a uniquely supported sequence yielding ī is not yet available.", "exception_notes": "Telugu long ē does not mean metathesis: the apical is still after the vowel. Pengo ṛatpa is a source correction of earlier aratpa, which would reverse its outcome classification if not followed. Tulu leppuni/leppu/lāvu may involve local aphaeresis/contraction or another root; DEN1 corrects lāvu for earlier levu. Badaga aḷu/avu/au exemplifies lateral lenition/loss. Gondi R Epic aḍusānā could reflect contact and is not needed to establish native retention.", "confidence": "medium", "references": "DEDR 282; DEN1 1972 p.400 entry 240; PSS83 pp.14–15; K03 p.193", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D ēḍucu;ēḍupu
+Tamil R-bearing-no-D aṛ̆ai;aṛ̆u;aṛ̆uŋku
+Kannada R-bearing-no-D arke;aṛ̆asu;aṛ̆u (aṛ̆t-, att-)
+Kui D-bearing-no-R ṛīka;ṛīva (ṛīt-)
+Kuwi D-bearing-no-R līnai;rīali;ṛi- (-t-);ṛī- (-t-);ṛīt- (-h-)
+Gondi R-bearing-no-D ar;aḍusānā (<i>Voc.</i> 84);aṛ;aṛah- (<i>Voc.</i> 84);āṛānā
+ēḍucu f_7kyymuhrncbie R
+ēḍupu f_n2ipbyqebxtyk R
+
+ d305 {"entry_id": "d305", "family_id": "d305", "concept": "sprinkle, scatter, bail water", "reconstruction": "*al/ḷ- with *-Vk and *-Vñc formations", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "l/ḷ", "c2_structure": "singleton", "v2": "unknown", "structure": "VC-V-C / VC-C", "grammatical_category": "verb", "boundary_evidence": "Velar versus nasal-palatal formations independently distinguished; intervening proto-vowel unknown.", "input_support": "Tamil alavu has plain l but is explicitly queried in DEDR p.29; Naikri aḷk has retroflex ḷ, and Kolami/Parji alk retain a medial lateral. Telugu aluku shares a velar formation; Kui/Kuvi/Manda forms have a nasal-palatal extension.", "input_confidence": "medium", "direction_argument": "Independent southern and Central Dravidian vowel-first forms favor older V–lateral order; initial liquids in Kui/Kuvi/Manda are innovative if the extended formations are cognate.", "derivation": "Retained *al/ḷ-Vk > Telugu aluku, Kolami/Parji alk and Naikri aḷk. Conditional *aḷ-Vñc > lāñj/lanj/ṛanj accounts for initial displacement in eastern SCDr, but its vowel quantity and liquid identity require separately reconstructed regional changes.", "exception_notes": "Kui lānja and lanj, Kuvi rānjali and ṛanj/lanjinai preserve real source/dialect quantity differences. Do not reconstruct a low formative solely for the long variants or a high formative for the short ones. DEDR refers to d3790 noḷ, raising an older initial-consonant/cognacy alternative to investigate.", "confidence": "medium", "references": "DEDR 305 and cross-reference 3790", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D aluku
+Tamil uncertain-no-DR alavu
+Kannada missing 
+Kui D-bearing-no-R lanj;lānja (lānji-)
+Kuwi D-bearing-no-R lanjinai;rānjali;ṛanj
+Gondi missing 
+aluku f_cjuu32h5ztefq R
+
+ d480 {"entry_id": "d480", "family_id": "d480", "concept": "be, sit, abode", "reconstruction": "*ir-u-; *ir-u-v / *ir-a-v place nouns", "c1": "Ø", "v1": "i", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "u/a", "structure": "VC-u / VC-V-v / VC-C formations", "grammatical_category": "verb/noun", "boundary_evidence": "Existential high-u root and a/u place-noun formations distinguished; Kui suffix vowels not chosen from outputs.", "input_support": "Tamil iru/iruppu, Kannada iru/irdu and Kodagu ir- independently support a vowel-first existential root. Telugu iruvu/iravu retains noun formations; Malayalam irippu differs in formative vowel from Tamil iruppu.", "input_confidence": "high", "direction_argument": "The broad existential comparison favors earlier ir-. Kui rīnda/rīspa is innovative under its related steady/stand meaning, but its high-i length and added consonants require separate reconstruction.", "derivation": "Retained *iru-v > Telugu iruvu, with a-bearing iravu; Kannada irke > ikke and Telugu ikka are compatible with medial syncope plus assimilation. Tulu ippuni/itt- can continue r+labial/dental cluster assimilation. Kui *ir-i-nt/*ir-i-sp could yield rīnda/rīspa, but i in those exact formations is not independently established. Kota ig-/ir-/it- is a paradigm, not initial promotion.", "exception_notes": "Low-vowel Telugu iravu must not be erased by choosing only the high-u root label. Telugu iŋkuva has DEDR’s explicit alternative demonstrative iṅku d420. Kui rītka includes plural morphology and possible consonant-order changes, not another etymon. Badaga negative illa/ille is cross-linked but belongs to a separate negative-base analysis, not straightforward irregular sound change of iru.", "confidence": "medium", "references": "DEDR 480; DEN1 p.400 entry407; K03 existential reconstruction; alternative d420 for iŋkuva", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D ikka;iravu;iravupaḍu;iravāru;irugu;iruvu;iŋkuva
+Tamil R-bearing-no-D iru;irukkai;iruppu;iruttu
+Kannada R-bearing-no-D ikke;ir;irapu;iravu;irke;iru (irdu, iddu)
+Kui D-bearing-no-R rīnda (rīndi-);rīspa (rīst-);rītka (rītki-)
+Kuwi uncertain-no-DR re'nai
+Gondi missing 
+iravu f_2tykowphgfk6g R
+iruvu f_oakdhpphktf4g R
+irugu f_qhrugzwzluq72 R
+iravāru f_4mgn5osldllj4 R
+iravupaḍu f_bcpt6uoumxh2y R
+ikka f_u36aljrxwhfy2 O
+iŋkuva f_pcmx5ezbq3ods A
+
+ d3259 {"entry_id": "d3259", "family_id": "d3259", "concept": "open", "reconstruction": "*ti/eṯ-a; velar, labial and palatal extensions", "c1": "t", "v1": "i/e", "v1_quantity": "short", "c2": "ṟ", "c2_structure": "singleton", "v2": "a", "structure": "CVC-a / CVC-a-C", "grammatical_category": "verb/noun", "boundary_evidence": "Low-a root independently attested; local labial/palatal extensions and input grades separate.", "input_support": "Tamil tiṟa, Kannada teṟa/teṟe and Malayalam tuṟakka independently establish a low-a formative and t-V-apical order. Telugu teṟacu/teṟa retains that independently supported environment.", "input_confidence": "high", "direction_argument": "Full southern forms and Konda Gūṛi teṟe support t-V-apical before Konda ṟe. Initial loss alone from teṟa would give ṟa, so the mid vowel in ṟē/jē requires prior vowel interaction or a different independently established formation.", "derivation": "Conditional *teṯ-a > *tṟē > ṟē gives Konda; later apical change gives Pengo/Manda jē and Kuvi de. Kui dāpa adds low outcome (contraction then lowering or lowering then contraction). Telugu teṟacu retains initial order, and suffix cu requires its own historical morphology.", "exception_notes": "A clear low-a retained Telugu family versus broader eastern displacement. Gondi rehānā may show first-member loss, but its own suffix/vowel and donor history remain uncertain. Tulu jappuni/depp could involve medial assimilation plus initial t>j/d, not necessarily the same metathesis; Kurux/Malto tisg likewise preserves the first vowel despite loss/change of apical. Toda key tɨrp is explicitly alternatively compared with turn d3246 or Tamil borrowing and cannot be treated as an independent ordinary open reflex.", "confidence": "medium", "references": "K03 p.160 example 94; K80 pp.497–499 item 10; DEDR 3259", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D teṟa;teṟacu;teṟapa;teṟapi
+Tamil R-bearing-no-D tiṟa;tiṟappu;tiṟavu;tuṟappu
+Kannada R-bearing-no-D teṟa;teṟahu;teṟapu;teṟave;teṟavu;teṟe
+Kui D-bearing-no-R dari inba;dāpa (dāt-)
+Kuwi D-bearing-no-R de'- (det-);de'nai
+Gondi R-bearing-no-D rehānā;tarh;tarih;tarritānā;tarī;tarītānā;taṛi;terr;teṛ;tugaituna
+teṟa f_bsir5okg6tahm R
+teṟacu f_e7hwkfnfyq3ec R
+teṟapa f_fdp2d4dpeqmi2 R
+teṟapi f_kgb6tkj5urbr6 R
+
+ d4760 {"entry_id": "d4760", "family_id": "d4760", "concept": "forget, hide, be lost", "reconstruction": "*maṯ-a/ay; *maṯ-a-nk and *maṯ-u-k formations", "c1": "m", "v1": "a", "v1_quantity": "short", "c2": "ṟ", "c2_structure": "singleton", "v2": "a/u", "structure": "CVC-a / CVC-a-NK / CVC-u-K", "grammatical_category": "verb/noun", "boundary_evidence": "Low-a and high-u formations independently distinguishable; matched lost/transitive nasal/velar comparison across eastern languages.", "input_support": "Tamil maṟa/maṟai, Malayalam maṟakka/maṟayuka and Kannada maṟe/maṟagu establish m-a-apical-a independently. Gondi māraŋg/mareŋg and Konda marg support a nasal/velar lost/hide formation.", "input_confidence": "high", "direction_argument": "Full southern and Gondi/Konda forms support original m-V-apical. Telugu maṟacu/maṟũgu retains that order, while Kui mrāŋga promotes the apical into a cluster.", "derivation": "*maṯ-aŋk > *mṟāŋg > Kui mrānga. Kuvi/Pengo jāŋg and Manda dāŋg are derived by DEDR through *mṟāŋg > *mjāŋg > jāŋg (with Manda apical d); these intermediate clusters are reconstructed, unlike attested Kui mr-. Separate causative mrāk-p > mrāp-k produces Kui mrāpka. Gondi ractāl is explicitly derived by the source from *mṟac with initial m loss.", "exception_notes": "Low-a does not compel Telugu displacement. Different maṟa-cu, maṟu-k and maṟa-ŋ formations must remain distinct before interpreting exact exceptions. Eastern j/d stems support shared development more strongly when nasal/velar morphology agrees, but do not by themselves prove every language inherited an identical completed sound change. Southern and central mak/maŋ/meŋ reductions may be medial assimilation; do not force hidden mr stages. Tamil source ṛ in maṛa is a transcription inconsistency beside its clear ṟ derivatives.", "confidence": "medium", "references": "DEDR 4760 and explicit *mṟāŋg>*mjāŋg note; PSS83 p.229 lexical nonapplication principle", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D kanu-moṟãgu;maṟacu;maṟakuva;maṟapincu;maṟapu;maṟu-paḍu;maṟukuva;maṟuvu;maṟũgu;moṟãgu
+Tamil R-bearing-no-D maṛa;maṟai;maṟaippu;maṟaivu;maṟappu;maṟati
+Kannada R-bearing-no-D maṟagu;maṟapu;maṟasu;maṟavu;maṟe;moṟe
+Kui D-bearing-no-R mrānga (mrāngi-);mrāpka (&lt; mrāk-p-; mrākt-)
+Kuwi D-bearing-no-R jangali;jāk- (-h-);jānginai;jāŋg- (-it-)
+Gondi mixed mak;makk;maksahtānā;mareŋg;maruŋg-sīānā;marēngānā;marūm;māraŋg;ractāl
+maṟacu f_ira6uzmd4liym R
+maṟũgu f_g7rwmbijggk6y R
+maṟuvu f_2cbwy23nb5dce R
+maṟukuva f_6vygbqzong3ve R
+maṟakuva f_warkdf3h7ljeq R
+maṟapu f_n4pi6abajklug R
+maṟapu f_uivtddlaz2itk R
+maṟapincu f_6etfncbqv3tmc R
+maṟu-paḍu f_jfcymk6oq5cqg R
+moṟãgu f_huvgyhyb7s226 R
+kanu-moṟãgu f_ak6hq5d2gk2za R

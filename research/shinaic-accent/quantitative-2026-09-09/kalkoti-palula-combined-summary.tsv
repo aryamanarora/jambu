@@ -1,0 +1,5 @@
+input_class	lexeme_form_cells	broad_families	statuses
+Palula-E-without-short-final-vowel	35	34	"{""unscorable"": 14, ""consistent"": 7, ""residual"": 4, ""excluded"": 10}"
+Palula-L-without-short-final-vowel	13	13	"{""Low-interaction"": 4, ""consistent"": 4, ""unscorable"": 4, ""excluded"": 1}"
+Palula-prefinal-accent-plus-short-final-vowel	28	27	"{""excluded"": 8, ""consistent"": 10, ""unscorable"": 10}"
+other-comparative-structure	2	2	"{""excluded"": 2}"

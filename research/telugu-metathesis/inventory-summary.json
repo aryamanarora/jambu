@@ -1,0 +1,29 @@
+{
+  "inputs": {
+    "cldf/forms.csv": "20dbe52a7c32c0d092658568716542d6a58b36c8bbdaa92a4676b265f002fe7b",
+    "cldf/edges.csv": "4912ce8c7f2a138cddf1ca31316d7c682d34c59de932ef5b03eb93f24c0075f8",
+    "cldf/languages.csv": "baf09089fc9a06c612441ac40b806b385ba6d563bd13959412db624cada81c9c",
+    "cldf/pdr-headword-audit.csv": "21d1abbbe04eacd3f4195b1b1875e512e9557ce73b3763fadee3da332787a888",
+    "data/dedr/pdr.csv": "95beb73b1f9c36d42ecb671df4d8bb01eea27641dffa802ca8c33e5343ceafa9"
+  },
+  "total_cldf_forms": 677797,
+  "total_cldf_edges": 357003,
+  "dedr_head_strategies": {
+    "krishnamurti-pfeiffer": 817,
+    "dedr-reflex": 3575,
+    "merriam-pdr": 1166,
+    "unresolved": 4
+  },
+  "dedr_sets_with_telugu": 2701,
+  "telugu_records_in_those_sets": 8403,
+  "candidate_records": 2311,
+  "candidate_sets": 881,
+  "flags": {
+    "uncontracted-comparison-candidate": 1811,
+    "initial-apical-or-cluster": 506,
+    "initial-cluster": 247
+  },
+  "legacy_level_note_flags": 162,
+  "legacy_level_note_entries": 107,
+  "warning": "Candidate flags and level-note flags require manual review; none are error or loan classifications."
+}

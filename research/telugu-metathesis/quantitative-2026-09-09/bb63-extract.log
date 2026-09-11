@@ -1,0 +1,18 @@
+invalid pdf header: b'<!DOC'
+EOF marker not found
+Traceback (most recent call last):
+  File "/Users/aryamanarora/Documents/Code/jambu-all/jambu-static/research/telugu-metathesis/quantitative-2026-09-09/read_pdf.py", line 17, in <module>
+    r=PdfReader(a.pdf)
+      ^^^^^^^^^^^^^^^^
+  File "/Users/aryamanarora/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pypdf/_reader.py", line 149, in __init__
+    self._initialize_stream(stream)
+  File "/Users/aryamanarora/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pypdf/_reader.py", line 171, in _initialize_stream
+    self.read(stream)
+  File "/Users/aryamanarora/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pypdf/_reader.py", line 645, in read
+    self._find_eof_marker(stream)
+  File "/Users/aryamanarora/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pypdf/_reader.py", line 751, in _find_eof_marker
+    line = read_previous_line(stream)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aryamanarora/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pypdf/_utils.py", line 330, in read_previous_line
+    raise PdfStreamError(STREAM_TRUNCATED_PREMATURELY)
+pypdf.errors.PdfStreamError: Stream has ended unexpectedly

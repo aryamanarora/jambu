@@ -1,0 +1,134 @@
+[
+  {
+    "Language_ID": "Kui",
+    "Disposition": "duplicate-compound",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Kui",
+    "Disposition": "editorial-input-fragment",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Kui",
+    "Disposition": "english-or-metadata-match",
+    "N_Records": 18,
+    "N_Families": 16
+  },
+  {
+    "Language_ID": "Kui",
+    "Disposition": "input-unresolved",
+    "N_Records": 8,
+    "N_Families": 7
+  },
+  {
+    "Language_ID": "Kui",
+    "Disposition": "nominal-plural-control",
+    "N_Records": 6,
+    "N_Families": 6
+  },
+  {
+    "Language_ID": "Kui",
+    "Disposition": "source-supported-verbal-input",
+    "N_Records": 64,
+    "N_Families": 61
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "comparatively-supported-verbal-input",
+    "N_Records": 2,
+    "N_Families": 2
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "different-noninitial-contraction",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "english-or-metadata-match",
+    "N_Records": 14,
+    "N_Families": 11
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "input-unresolved",
+    "N_Records": 2,
+    "N_Families": 2
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "labial-stem-plus-velar-control",
+    "N_Records": 8,
+    "N_Families": 3
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "nominal-plural-control",
+    "N_Records": 7,
+    "N_Families": 5
+  },
+  {
+    "Language_ID": "Kuwi",
+    "Disposition": "possible-retained-counterexample",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Pengo",
+    "Disposition": "english-or-metadata-match",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Pengo",
+    "Disposition": "input-unresolved",
+    "N_Records": 6,
+    "N_Families": 5
+  },
+  {
+    "Language_ID": "Pengo",
+    "Disposition": "nominal-plural-control",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Pengo",
+    "Disposition": "source-supported-verbal-input",
+    "N_Records": 5,
+    "N_Families": 4
+  },
+  {
+    "Language_ID": "Pengo",
+    "Disposition": "word-boundary-control",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Manda",
+    "Disposition": "comparatively-supported-verbal-input",
+    "N_Records": 2,
+    "N_Families": 2
+  },
+  {
+    "Language_ID": "Manda",
+    "Disposition": "english-or-metadata-match",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Manda",
+    "Disposition": "labial-stem-plus-velar-control",
+    "N_Records": 1,
+    "N_Families": 1
+  },
+  {
+    "Language_ID": "Manda",
+    "Disposition": "nominal-plural-control",
+    "N_Records": 1,
+    "N_Families": 1
+  }
+]

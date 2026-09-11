@@ -1,0 +1,10 @@
+{'scope': 'all-sources-all-lects', 'input_class': 'old-long-barytone', 'language': 'Sh', 'scorable_families': 11, 'consistent': 10, 'conflicting': 1}
+{'scope': 'all-sources-all-lects', 'input_class': 'old-long-barytone', 'language': 'Phal', 'scorable_families': 10, 'consistent': 9, 'conflicting': 1}
+{'scope': 'all-sources-all-lects', 'input_class': 'old-long-oxytone', 'language': 'Sh', 'scorable_families': 11, 'consistent': 9, 'conflicting': 2}
+{'scope': 'all-sources-all-lects', 'input_class': 'old-long-oxytone', 'language': 'Phal', 'scorable_families': 7, 'consistent': 5, 'opposite': 2}
+{'scope': 'exclude-documented-input-alternatives', 'input_class': 'old-long-barytone', 'language': 'Sh', 'scorable_families': 10, 'consistent': 9, 'conflicting': 1}
+{'scope': 'exclude-documented-input-alternatives', 'input_class': 'old-long-barytone', 'language': 'Phal', 'scorable_families': 9, 'consistent': 8, 'conflicting': 1}
+{'scope': 'exclude-documented-input-alternatives', 'input_class': 'old-long-oxytone', 'language': 'Sh', 'scorable_families': 10, 'consistent': 8, 'conflicting': 2}
+{'scope': 'exclude-documented-input-alternatives', 'input_class': 'old-long-oxytone', 'language': 'Phal', 'scorable_families': 6, 'consistent': 4, 'opposite': 2}
+{'scope': 'Gilgit-Degener-only', 'input_class': 'old-long-barytone', 'language': 'Sh', 'scorable_families': 7, 'consistent': 7}
+{'scope': 'Gilgit-Degener-only', 'input_class': 'old-long-oxytone', 'language': 'Sh', 'scorable_families': 10, 'consistent': 10}

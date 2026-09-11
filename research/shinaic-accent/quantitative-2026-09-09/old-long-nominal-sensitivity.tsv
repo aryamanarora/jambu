@@ -1,0 +1,169 @@
+scope	input_class	language	scorable_families	consistent	conflicting	opposite
+all-sources-all-lects	old-long-barytone	Sh	11	10	1	
+all-sources-all-lects	old-long-barytone	Phal	10	9	1	
+all-sources-all-lects	old-long-barytone	Sv	0			
+all-sources-all-lects	old-long-barytone	Kalk	0			
+all-sources-all-lects	old-long-barytone	Kund	0			
+all-sources-all-lects	old-long-barytone	bro	0			
+all-sources-all-lects	old-long-barytone	Ush	0			
+all-sources-all-lects	old-long-oxytone	Sh	11	9	2	
+all-sources-all-lects	old-long-oxytone	Phal	7	5		2
+all-sources-all-lects	old-long-oxytone	Sv	0			
+all-sources-all-lects	old-long-oxytone	Kalk	0			
+all-sources-all-lects	old-long-oxytone	Kund	0			
+all-sources-all-lects	old-long-oxytone	bro	0			
+all-sources-all-lects	old-long-oxytone	Ush	0			
+nearest-formation-only	old-long-barytone	Sh	11	10	1	
+nearest-formation-only	old-long-barytone	Phal	10	9	1	
+nearest-formation-only	old-long-barytone	Sv	0			
+nearest-formation-only	old-long-barytone	Kalk	0			
+nearest-formation-only	old-long-barytone	Kund	0			
+nearest-formation-only	old-long-barytone	bro	0			
+nearest-formation-only	old-long-barytone	Ush	0			
+nearest-formation-only	old-long-oxytone	Sh	11	9	2	
+nearest-formation-only	old-long-oxytone	Phal	7	5		2
+nearest-formation-only	old-long-oxytone	Sv	0			
+nearest-formation-only	old-long-oxytone	Kalk	0			
+nearest-formation-only	old-long-oxytone	Kund	0			
+nearest-formation-only	old-long-oxytone	bro	0			
+nearest-formation-only	old-long-oxytone	Ush	0			
+exclude-documented-input-alternatives	old-long-barytone	Sh	9	8	1	
+exclude-documented-input-alternatives	old-long-barytone	Phal	9	8	1	
+exclude-documented-input-alternatives	old-long-barytone	Sv	0			
+exclude-documented-input-alternatives	old-long-barytone	Kalk	0			
+exclude-documented-input-alternatives	old-long-barytone	Kund	0			
+exclude-documented-input-alternatives	old-long-barytone	bro	0			
+exclude-documented-input-alternatives	old-long-barytone	Ush	0			
+exclude-documented-input-alternatives	old-long-oxytone	Sh	9	7	2	
+exclude-documented-input-alternatives	old-long-oxytone	Phal	6	4		2
+exclude-documented-input-alternatives	old-long-oxytone	Sv	0			
+exclude-documented-input-alternatives	old-long-oxytone	Kalk	0			
+exclude-documented-input-alternatives	old-long-oxytone	Kund	0			
+exclude-documented-input-alternatives	old-long-oxytone	bro	0			
+exclude-documented-input-alternatives	old-long-oxytone	Ush	0			
+Gilgit-Degener-only	old-long-barytone	Sh	7	7		
+Gilgit-Degener-only	old-long-barytone	Phal	0			
+Gilgit-Degener-only	old-long-barytone	Sv	0			
+Gilgit-Degener-only	old-long-barytone	Kalk	0			
+Gilgit-Degener-only	old-long-barytone	Kund	0			
+Gilgit-Degener-only	old-long-barytone	bro	0			
+Gilgit-Degener-only	old-long-barytone	Ush	0			
+Gilgit-Degener-only	old-long-oxytone	Sh	10	10		
+Gilgit-Degener-only	old-long-oxytone	Phal	0			
+Gilgit-Degener-only	old-long-oxytone	Sv	0			
+Gilgit-Degener-only	old-long-oxytone	Kalk	0			
+Gilgit-Degener-only	old-long-oxytone	Kund	0			
+Gilgit-Degener-only	old-long-oxytone	bro	0			
+Gilgit-Degener-only	old-long-oxytone	Ush	0			
+Gilgit-Buddruss-only	old-long-barytone	Sh	1			1
+Gilgit-Buddruss-only	old-long-barytone	Phal	0			
+Gilgit-Buddruss-only	old-long-barytone	Sv	0			
+Gilgit-Buddruss-only	old-long-barytone	Kalk	0			
+Gilgit-Buddruss-only	old-long-barytone	Kund	0			
+Gilgit-Buddruss-only	old-long-barytone	bro	0			
+Gilgit-Buddruss-only	old-long-barytone	Ush	0			
+Gilgit-Buddruss-only	old-long-oxytone	Sh	2	1	1	
+Gilgit-Buddruss-only	old-long-oxytone	Phal	0			
+Gilgit-Buddruss-only	old-long-oxytone	Sv	0			
+Gilgit-Buddruss-only	old-long-oxytone	Kalk	0			
+Gilgit-Buddruss-only	old-long-oxytone	Kund	0			
+Gilgit-Buddruss-only	old-long-oxytone	bro	0			
+Gilgit-Buddruss-only	old-long-oxytone	Ush	0			
+Palula-Liljegren-only	old-long-barytone	Sh	0			
+Palula-Liljegren-only	old-long-barytone	Phal	10	9		1
+Palula-Liljegren-only	old-long-barytone	Sv	0			
+Palula-Liljegren-only	old-long-barytone	Kalk	0			
+Palula-Liljegren-only	old-long-barytone	Kund	0			
+Palula-Liljegren-only	old-long-barytone	bro	0			
+Palula-Liljegren-only	old-long-barytone	Ush	0			
+Palula-Liljegren-only	old-long-oxytone	Sh	0			
+Palula-Liljegren-only	old-long-oxytone	Phal	7	5		2
+Palula-Liljegren-only	old-long-oxytone	Sv	0			
+Palula-Liljegren-only	old-long-oxytone	Kalk	0			
+Palula-Liljegren-only	old-long-oxytone	Kund	0			
+Palula-Liljegren-only	old-long-oxytone	bro	0			
+Palula-Liljegren-only	old-long-oxytone	Ush	0			
+Palula-Strand-only	old-long-barytone	Sh	0			
+Palula-Strand-only	old-long-barytone	Phal	9	9		
+Palula-Strand-only	old-long-barytone	Sv	0			
+Palula-Strand-only	old-long-barytone	Kalk	0			
+Palula-Strand-only	old-long-barytone	Kund	0			
+Palula-Strand-only	old-long-barytone	bro	0			
+Palula-Strand-only	old-long-barytone	Ush	0			
+Palula-Strand-only	old-long-oxytone	Sh	0			
+Palula-Strand-only	old-long-oxytone	Phal	6	5		1
+Palula-Strand-only	old-long-oxytone	Sv	0			
+Palula-Strand-only	old-long-oxytone	Kalk	0			
+Palula-Strand-only	old-long-oxytone	Kund	0			
+Palula-Strand-only	old-long-oxytone	bro	0			
+Palula-Strand-only	old-long-oxytone	Ush	0			
+Shina-Schmidt-gil	old-long-barytone	Sh	5	5		
+Shina-Schmidt-gil	old-long-barytone	Phal	0			
+Shina-Schmidt-gil	old-long-barytone	Sv	0			
+Shina-Schmidt-gil	old-long-barytone	Kalk	0			
+Shina-Schmidt-gil	old-long-barytone	Kund	0			
+Shina-Schmidt-gil	old-long-barytone	bro	0			
+Shina-Schmidt-gil	old-long-barytone	Ush	0			
+Shina-Schmidt-gil	old-long-oxytone	Sh	5	4		1
+Shina-Schmidt-gil	old-long-oxytone	Phal	0			
+Shina-Schmidt-gil	old-long-oxytone	Sv	0			
+Shina-Schmidt-gil	old-long-oxytone	Kalk	0			
+Shina-Schmidt-gil	old-long-oxytone	Kund	0			
+Shina-Schmidt-gil	old-long-oxytone	bro	0			
+Shina-Schmidt-gil	old-long-oxytone	Ush	0			
+Shina-Schmidt-koh	old-long-barytone	Sh	5	5		
+Shina-Schmidt-koh	old-long-barytone	Phal	0			
+Shina-Schmidt-koh	old-long-barytone	Sv	0			
+Shina-Schmidt-koh	old-long-barytone	Kalk	0			
+Shina-Schmidt-koh	old-long-barytone	Kund	0			
+Shina-Schmidt-koh	old-long-barytone	bro	0			
+Shina-Schmidt-koh	old-long-barytone	Ush	0			
+Shina-Schmidt-koh	old-long-oxytone	Sh	5	4		1
+Shina-Schmidt-koh	old-long-oxytone	Phal	0			
+Shina-Schmidt-koh	old-long-oxytone	Sv	0			
+Shina-Schmidt-koh	old-long-oxytone	Kalk	0			
+Shina-Schmidt-koh	old-long-oxytone	Kund	0			
+Shina-Schmidt-koh	old-long-oxytone	bro	0			
+Shina-Schmidt-koh	old-long-oxytone	Ush	0			
+Shina-Schmidt-gur	old-long-barytone	Sh	6	6		
+Shina-Schmidt-gur	old-long-barytone	Phal	0			
+Shina-Schmidt-gur	old-long-barytone	Sv	0			
+Shina-Schmidt-gur	old-long-barytone	Kalk	0			
+Shina-Schmidt-gur	old-long-barytone	Kund	0			
+Shina-Schmidt-gur	old-long-barytone	bro	0			
+Shina-Schmidt-gur	old-long-barytone	Ush	0			
+Shina-Schmidt-gur	old-long-oxytone	Sh	4	3		1
+Shina-Schmidt-gur	old-long-oxytone	Phal	0			
+Shina-Schmidt-gur	old-long-oxytone	Sv	0			
+Shina-Schmidt-gur	old-long-oxytone	Kalk	0			
+Shina-Schmidt-gur	old-long-oxytone	Kund	0			
+Shina-Schmidt-gur	old-long-oxytone	bro	0			
+Shina-Schmidt-gur	old-long-oxytone	Ush	0			
+Shina-Schmidt-Astor	old-long-barytone	Sh	6	6		
+Shina-Schmidt-Astor	old-long-barytone	Phal	0			
+Shina-Schmidt-Astor	old-long-barytone	Sv	0			
+Shina-Schmidt-Astor	old-long-barytone	Kalk	0			
+Shina-Schmidt-Astor	old-long-barytone	Kund	0			
+Shina-Schmidt-Astor	old-long-barytone	bro	0			
+Shina-Schmidt-Astor	old-long-barytone	Ush	0			
+Shina-Schmidt-Astor	old-long-oxytone	Sh	5	5		
+Shina-Schmidt-Astor	old-long-oxytone	Phal	0			
+Shina-Schmidt-Astor	old-long-oxytone	Sv	0			
+Shina-Schmidt-Astor	old-long-oxytone	Kalk	0			
+Shina-Schmidt-Astor	old-long-oxytone	Kund	0			
+Shina-Schmidt-Astor	old-long-oxytone	bro	0			
+Shina-Schmidt-Astor	old-long-oxytone	Ush	0			
+Shina-Schmidt-dr	old-long-barytone	Sh	3	3		
+Shina-Schmidt-dr	old-long-barytone	Phal	0			
+Shina-Schmidt-dr	old-long-barytone	Sv	0			
+Shina-Schmidt-dr	old-long-barytone	Kalk	0			
+Shina-Schmidt-dr	old-long-barytone	Kund	0			
+Shina-Schmidt-dr	old-long-barytone	bro	0			
+Shina-Schmidt-dr	old-long-barytone	Ush	0			
+Shina-Schmidt-dr	old-long-oxytone	Sh	1	1		
+Shina-Schmidt-dr	old-long-oxytone	Phal	0			
+Shina-Schmidt-dr	old-long-oxytone	Sv	0			
+Shina-Schmidt-dr	old-long-oxytone	Kalk	0			
+Shina-Schmidt-dr	old-long-oxytone	Kund	0			
+Shina-Schmidt-dr	old-long-oxytone	bro	0			
+Shina-Schmidt-dr	old-long-oxytone	Ush	0			

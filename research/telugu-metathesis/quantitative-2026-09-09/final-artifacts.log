@@ -1,0 +1,34 @@
+Database keys 64 resolved metadata 64 unresolved abbreviations 0 research citation strings 34
+{
+  "casebook_entries": 409,
+  "evidence_links": 9823,
+  "casebook_markdown_bytes": 2375245,
+  "casebook_html_bytes": 3088240
+}
+{
+  "status": "PASS",
+  "family_count_rows_checked": 19823,
+  "family_memberships_checked": 429312,
+  "formation_count_rows_checked": 17,
+  "pairwise_comparison_groups_checked": 5796,
+  "reviewed_entries": 409,
+  "evidence_links": 9823,
+  "errors": [],
+  "scope": "Arithmetic, linkage and appendix completeness checks. These do not mechanically validate linguistic judgments."
+}
+Report words 6434 bytes 49611
+{
+  "status": "PASS",
+  "documents_checked": [
+    "report.md",
+    "README.md",
+    "SOURCE_ACCESS.md"
+  ],
+  "local_links_checked": 150,
+  "statistics_index_rows": 536,
+  "errors": [],
+  "scope": "Local artifact linkage and recorded statistical provenance; citations and linguistic interpretation require scholarly reading."
+}
+Wrote conditioning.png and conditioning.svg
+Report HTML bytes 59190
+Hashed 198 research files

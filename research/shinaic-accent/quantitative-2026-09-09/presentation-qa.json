@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checked_at": "2026-09-09 12:32:44 UTC",
+  "method": "Manual inspection and interaction through the Codex in-app browser against the local research artifacts.",
+  "checks": [
+    "Report title, typography, diacritics, contents navigation, morphology table and Kalkoti comparison table visually inspected; 12 sections and 16 narrative tables; document width equals the 1280-pixel viewport.",
+    "Family explorer contains 1686 dossiers. Exact family 10702 yields one dossier; expanded analysis uses the full card width and includes all seven language panels.",
+    "Exact record f_526agso5rjzf6 yields one analysis token and displays its source assessment and supplementary skin etymology.",
+    "Unlinked view contains 13272 analysis tokens; Ushojo filter yields 328 tokens and advances correctly from page 1 to page 2. These are token counts, distinct from raw-record counts.",
+    "Record review filters are disabled in family view, avoiding a misleading inactive filter.",
+    "Quantitative appendix exposes 43 tables. The class-definition table contains 27 domains. The i-declension extension contains 43 rows and exact thupéek search retains the excluded paradigm.",
+    "Complete-row expansion preserves all 14 fields of the gun example; table and document fit the desktop viewport without page-level clipping.",
+    "Source register visually inspected with formatted bibliographies, full language names and explicit source-access caveats.",
+    "Five supplementary etymology proposals visually inspected; source evidence, accent consequences, confidence and further tests are present.",
+    "No JavaScript console errors observed in the inspected appendix pages."
+  ],
+  "scope": "Presentation changes and expanded counterpart joins use the frozen analytical inventories. No additional phonological laws or lexical assignments were introduced after the 11:55:44 UTC analytical freeze.",
+  "limitations": "This is targeted desktop browser QA, not a claim that every expanded raw-record field or every remote primary-source URL was interactively opened."
+}

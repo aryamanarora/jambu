@@ -1,0 +1,15 @@
+{
+  "analysis_frozen_at": "2026-09-09 11:55:44 UTC",
+  "work_started_at": "2026-09-09 05:07:11 UTC",
+  "work_deadline": "2026-09-09 13:07:11 UTC",
+  "raw_records": 25505,
+  "analysis_tokens": 25593,
+  "family_dossiers": 1686,
+  "research_linked_raw_records": 12235,
+  "historical_observations": 12321,
+  "unlinked_raw_records": 13270,
+  "analysis_reproduction": "All 22 sequential program invocations passed; see reproduction-audit.json.",
+  "integrity": "No lost records, altered raw fields, missing family annotations, duplicate family dossiers or unresolved research ancestor IDs. All nine live database files still match the starting hashes.",
+  "scope_limit": "Every anchored family received a first-pass etymological analysis; not every raw record received individual primary-page verification. Review levels and source access are explicit.",
+  "report_status_at_freeze": "The narrative report has not yet been written. Report composition and presentation QA follow this freeze."
+}

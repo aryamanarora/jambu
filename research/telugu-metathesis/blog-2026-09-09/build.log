@@ -1,0 +1,9 @@
+Generated six charts, 60 annotated examples, 4454 chart memberships.
+inputs All following-vowel classes [('Vowel-initial, short vowel + single apical', [18, 18, 93, 12, 13, 0, 11, 0]), ('Consonant-initial, short vowel + single r/ẓ', [37, 16, 7, 1, 4, 0, 5, 0])]
+inputs Independently classified low-a formations [('Vowel-initial, short vowel + single apical', [8, 10, 30, 0, 6, 0, 2, 0]), ('Consonant-initial, short vowel + single r/ẓ', [13, 1, 3, 0, 1, 0, 1, 0])]
+quantity Matched formations [('Full input: low or equal following vowel → long', [25, 8, 11]), ('Full input: different high following vowel → short', [8, 0, 4]), ('Independent consonantal input → short', [21, 0, 0])]
+reduction Evidence availability [('All Telugu displacement-bearing families', [41, 76])]
+languages Common informative families [('Gondi', [10, 42, 3, 60]), ('Konda', [22, 26, 8, 57]), ('Kui', [38, 6, 18, 29]), ('Kuvi', [29, 14, 13, 37]), ('Pengo', [17, 9, 8, 25]), ('Manda', [13, 4, 6, 18]), ('Brahui', [0, 14, 5, 9])]
+languages All 403 reviewed input families [('Telugu', [66, 51, 196, 17, 39, 1, 33, 0]), ('Gondi', [9, 8, 122, 8, 19, 7, 228, 2]), ('Konda', [23, 12, 92, 5, 9, 0, 261, 1]), ('Kui', [63, 12, 40, 7, 31, 1, 248, 1]), ('Kuvi', [42, 18, 57, 6, 22, 4, 253, 1]), ('Pengo', [30, 4, 40, 4, 11, 0, 314, 0]), ('Manda', [26, 2, 26, 5, 10, 0, 334, 0]), ('Brahui', [4, 3, 25, 5, 18, 1, 346, 1])]
+kui Input-supported stem–suffix formations [('Kui', [61, 0]), ('Kuvi', [2, 1]), ('Pengo', [4, 0]), ('Manda', [2, 0])]
+clusters All previously screened cluster candidates [('Previously collected Telugu cluster candidates', [48, 26, 22, 0, 20, 0, 0, 0])]

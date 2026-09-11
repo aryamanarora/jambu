@@ -1,0 +1,112 @@
+[
+  {
+    "program": "phonology_fixtures.py",
+    "exit_code": 0,
+    "seconds": 0.028
+  },
+  {
+    "program": "analysis_data.py",
+    "exit_code": 0,
+    "seconds": 2.919
+  },
+  {
+    "program": "quantify.py",
+    "exit_code": 0,
+    "seconds": 1.84
+  },
+  {
+    "program": "palula_pairs.py",
+    "exit_code": 0,
+    "seconds": 1.185
+  },
+  {
+    "program": "adjective_test.py",
+    "exit_code": 0,
+    "seconds": 1.195
+  },
+  {
+    "program": "adjective_extension.py",
+    "exit_code": 0,
+    "seconds": 2.464
+  },
+  {
+    "program": "structural_screens.py",
+    "exit_code": 0,
+    "seconds": 1.256
+  },
+  {
+    "program": "kalkoti_pairs.py",
+    "exit_code": 0,
+    "seconds": 1.203
+  },
+  {
+    "program": "kalkoti_adjudication.py",
+    "exit_code": 0,
+    "seconds": 1.141
+  },
+  {
+    "program": "old_long_nominals.py",
+    "exit_code": 0,
+    "seconds": 0.169
+  },
+  {
+    "program": "dras_suffix_accent.py",
+    "exit_code": 0,
+    "seconds": 0.032
+  },
+  {
+    "program": "vowel_raising_pairs.py",
+    "exit_code": 0,
+    "seconds": 1.155
+  },
+  {
+    "program": "vowel_raising_adjudication.py",
+    "exit_code": 0,
+    "seconds": 0.035
+  },
+  {
+    "program": "umlaut_nouns.py",
+    "exit_code": 0,
+    "seconds": 1.516
+  },
+  {
+    "program": "idecl_extension.py",
+    "exit_code": 0,
+    "seconds": 1.259
+  },
+  {
+    "program": "numeral_series.py",
+    "exit_code": 0,
+    "seconds": 1.359
+  },
+  {
+    "program": "kundal_paradigms.py",
+    "exit_code": 0,
+    "seconds": 1.273
+  },
+  {
+    "program": "analysis_data.py",
+    "exit_code": 0,
+    "seconds": 2.932
+  },
+  {
+    "program": "quantify.py",
+    "exit_code": 0,
+    "seconds": 1.748
+  },
+  {
+    "program": "old_long_nominals.py",
+    "exit_code": 0,
+    "seconds": 0.182
+  },
+  {
+    "program": "class_counterparts.py",
+    "exit_code": 0,
+    "seconds": 1.785
+  },
+  {
+    "program": "residual_ledger.py",
+    "exit_code": 0,
+    "seconds": 0.079
+  }
+]

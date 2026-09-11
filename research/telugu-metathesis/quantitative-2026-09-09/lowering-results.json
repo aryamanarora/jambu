@@ -1,0 +1,56 @@
+{
+  "source_items": 25,
+  "positive_items": 18,
+  "control_items": 5,
+  "proposed_exceptions": 2,
+  "input_tiers": {
+    "unknown": 5,
+    "root-low-only": 8,
+    "full-low-formation": 4,
+    "alternative-cognacy": 1,
+    "different-formations": 2,
+    "compound-underdetermined": 1,
+    "high-vowel-formation": 1,
+    "independent-long-root": 2,
+    "independent-nonlow-formation": 1
+  },
+  "printed_list_recount": [
+    {
+      "Language_ID": "Kui",
+      "N_K80_Listed_Lowered": 17,
+      "N_Selected_Positive_Examples": 18,
+      "Listed_Lowered_Over_Selected": "17/18",
+      "Proportion_Selected": 0.944444,
+      "Explicitly_Missing_Items": "3",
+      "Known_Attestation_Adjusted_Denominator": 17,
+      "Lowered_Over_Explicitly_Nonmissing": "17/17",
+      "K80_Item_Membership": "1;10;11;12;13;14;15;16;17;18;2;4;5;6;7;8;9",
+      "Caution": "Recount of the printed positive-example list, not an independently sampled frequency or replication of historical conditioning."
+    },
+    {
+      "Language_ID": "Kuwi",
+      "N_K80_Listed_Lowered": 9,
+      "N_Selected_Positive_Examples": 18,
+      "Listed_Lowered_Over_Selected": "9/18",
+      "Proportion_Selected": 0.5,
+      "Explicitly_Missing_Items": "",
+      "Known_Attestation_Adjusted_Denominator": "",
+      "Lowered_Over_Explicitly_Nonmissing": "",
+      "K80_Item_Membership": "12;15;16;18;2;3;4;5;7",
+      "Caution": "Recount of the printed positive-example list, not an independently sampled frequency or replication of historical conditioning."
+    },
+    {
+      "Language_ID": "Manda",
+      "N_K80_Listed_Lowered": 2,
+      "N_Selected_Positive_Examples": 18,
+      "Listed_Lowered_Over_Selected": "2/18",
+      "Proportion_Selected": 0.111111,
+      "Explicitly_Missing_Items": "",
+      "Known_Attestation_Adjusted_Denominator": "",
+      "Lowered_Over_Explicitly_Nonmissing": "",
+      "K80_Item_Membership": "2;4",
+      "Caution": "Recount of the printed positive-example list, not an independently sampled frequency or replication of historical conditioning."
+    }
+  ],
+  "arithmetic_correction": "K80 p.499 lists 9 Kui-only, 1 Kuvi-only, 6 Kui+Kuvi and 2 Kui+Kuvi+Manda: Kui17/18 selected, or17/17 explicitly nonmissing; not18/18. Kuvi9/18; sharedKuiKuvi8/18. Kui-only9/18, not10/18."
+}

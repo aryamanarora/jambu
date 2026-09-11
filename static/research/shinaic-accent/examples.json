@@ -1,0 +1,2664 @@
+{
+  "old-long": [
+    {
+      "family_id": "2993",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_riw3exz7z7uou",
+          "record_id": "f_riw3exz7z7uou",
+          "family_id": "2993",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "káa~",
+          "gloss": "crow",
+          "historical_input": "kā́ka",
+          "input_basis": "nearest-formation",
+          "input_id": "2993",
+          "input_class": "old-long-barytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "1",
+          "old_accent_from_right": "2",
+          "old_accent_quantity": "long",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "a",
+          "old_intervocalic_cluster": "k",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "E@-1",
+          "raw_outcome": "E",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Palula kóok/Biori káak and Shina káa/káa~ all preserve early accent on an inherited long root. Ashret raising and Shina intervocalic/final consonant loss affect vowel quality and shape without changing the mora class. The onomatopoeic nature of crow vocabulary invites caution about renewed consonants, but the cross-branch accent correspondence is clear.",
+          "family_unresolved": "No principal accent anomaly; do not count masculine/feminine or onomatopoeic suffix variants as independent families.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "The old accented ā stays early despite loss of the second k; nasalization is transcribed as ~.",
+      "cells": [
+        "[kā́ka](entry:2993) — crow",
+        "[káa~](form:f_riw3exz7z7uou)",
+        "E",
+        "The old accented ā stays early despite loss of the second k; nasalization is transcribed as ~."
+      ]
+    },
+    {
+      "family_id": "3735",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_feicyj3ooxgpm",
+          "record_id": "f_feicyj3ooxgpm",
+          "family_id": "3735",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "c̣héec̣",
+          "gloss": "field",
+          "historical_input": "kṣḗtra",
+          "input_basis": "nearest-formation",
+          "input_id": "3735",
+          "input_class": "old-long-barytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "1",
+          "old_accent_from_right": "2",
+          "old_accent_quantity": "long",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "e",
+          "old_intervocalic_cluster": "tr",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "E@-1",
+          "raw_outcome": "E",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Palula c̣híitr/Biori c̣héetr and Schmidt/Degener Shina c̣héec̣ have early accent on the inherited long root, with Ashret raising ee to ii. Buddruss's Gilgit c̣heéc instead has late accent. This is a direct primary-source disagreement in a diagnostic old-long barytone family, and must appear in the exception/source table rather than be resolved by majority vote.",
+          "family_unresolved": "Check Buddruss's printed form and paradigm; source, speaker and consonant-transcription differences may accompany the accent difference.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "Early here and in Palula; Buddruss’s late Gilgit reading is a source disagreement, retained below.",
+      "cells": [
+        "[kṣḗtra](entry:3735) — field",
+        "[c̣héec̣](form:f_feicyj3ooxgpm)",
+        "E",
+        "Early here and in Palula; Buddruss’s late Gilgit reading is a source disagreement, retained below."
+      ]
+    },
+    {
+      "family_id": "4368",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_fuhbv5bn4dwqy",
+          "record_id": "f_fuhbv5bn4dwqy",
+          "family_id": "4368",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "gáam",
+          "gloss": "village",
+          "historical_input": "grā́ma",
+          "input_basis": "nearest-formation",
+          "input_id": "4368",
+          "input_class": "old-long-barytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "1",
+          "old_accent_from_right": "2",
+          "old_accent_quantity": "long",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "a",
+          "old_intervocalic_cluster": "m",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "E@-1",
+          "raw_outcome": "E",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Palula ghróom/Biori ghráam, Astori giróom and Gilgit gáam have early accent on the inherited long root. Astori epenthesis precedes the written accent without changing its historical locus. Aspiration does not force late accent in this old-long class. Hultman2023Table6p12 explicitly gives Kalkoti draám with final High, making village a genuine residual of the simple Palula E→Kalkoti zero-High correspondence. It also lacks the Low one might predict from Palula ghr. Earlier unmarked Kalkoti draam citations supply only segmental evidence and must not erase Hultman's marked reading.",
+          "family_unresolved": "A former additional ending, lexical analogy or contact might explain Kalkoti final High, but none is independently established. Keep village separate from the identifiable teen-compound series that explains twelve and thirteen as a class. Gilgit contact variants and exact local village senses also need checking.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "Early despite simplification of gr. Kalkoti’s final High is a separate correspondence problem.",
+      "cells": [
+        "[grā́ma](entry:4368) — village",
+        "[gáam](form:f_fuhbv5bn4dwqy)",
+        "E",
+        "Early despite simplification of gr. Kalkoti’s final High is a separate correspondence problem."
+      ]
+    },
+    {
+      "family_id": "9072",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_duaxdn62xz4fq",
+          "record_id": "f_duaxdn62xz4fq",
+          "family_id": "9072",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "pháal",
+          "gloss": "plough iron (iron part of the plough), ploughshare",
+          "historical_input": "phā́la",
+          "input_basis": "nearest-formation",
+          "input_id": "9072",
+          "input_class": "old-long-barytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "1",
+          "old_accent_from_right": "2",
+          "old_accent_quantity": "long",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "a",
+          "old_intervocalic_cluster": "l",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "E@-1",
+          "raw_outcome": "E",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Ashret phóol, Biori pháal and Gilgit pháal agree on early accent on the old long root. The Ashret/Biori vowel correspondence gives independent evidence for early-accented ā raising in Ashret. Initial aspiration does not force late accent when the vowel was already long, distinguishing this class from later lengthening of old short a in aspirated closed monosyllables. Sauji phal supplies cognacy but no comparable contour.",
+          "family_unresolved": "Check inflected cells as a control on fixed versus mobile noun accent.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "Inherited long ā remains early despite aspiration; contrast newly lengthened “hand” in §3.",
+      "cells": [
+        "[phā́la](entry:9072) — plough iron (iron part of the plough), ploughshare",
+        "[pháal](form:f_duaxdn62xz4fq)",
+        "E",
+        "Inherited long ā remains early despite aspiration; contrast newly lengthened “hand” in §3."
+      ]
+    },
+    {
+      "family_id": "10104",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_viqgmkttr6g6g",
+          "record_id": "f_viqgmkttr6g6g",
+          "family_id": "10104",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "máaz",
+          "gloss": "month",
+          "historical_input": "mā́sa",
+          "input_basis": "nearest-formation",
+          "input_id": "10104",
+          "input_class": "old-long-barytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "1",
+          "old_accent_from_right": "2",
+          "old_accent_quantity": "long",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "a",
+          "old_intervocalic_cluster": "s",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "E@-1",
+          "raw_outcome": "E",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Gilgit máaz and Kohistani/Guresi/Astori móos have early accent on inherited long ā. This contrasts directly with late moós ‘flesh’ from māṁsá in several of the same dialects. The month/flesh pair isolates inherited accent more closely than comparisons drawn from unrelated modern vowel qualities, although the old nasal and resulting segmental histories must still be retained in the table.",
+          "family_unresolved": "Add independent Gilgit dictionary tokens and noun paradigms; preserve the distinct early máaz vowel quality rather than normalizing it to moos.",
+          "individual_review": "explicit-record-decision"
+        }
+      ],
+      "annotation": "Early “month” contrasts with late “meat” in several lects. Keep Gilgit máaz distinct from móos elsewhere.",
+      "cells": [
+        "[mā́sa](entry:10104) — month",
+        "[máaz](form:f_viqgmkttr6g6g)",
+        "E",
+        "Early “month” contrasts with late “meat” in several lects. Keep Gilgit máaz distinct from móos elsewhere."
+      ]
+    },
+    {
+      "family_id": "3084",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_vwkpjs4qmdgzk",
+          "record_id": "f_vwkpjs4qmdgzk",
+          "family_id": "3084",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "kaál",
+          "gloss": "year",
+          "historical_input": "kālá",
+          "input_basis": "nearest-formation",
+          "input_id": "3084",
+          "input_class": "old-long-oxytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "2",
+          "old_accent_from_right": "1",
+          "old_accent_quantity": "short",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "a",
+          "old_intervocalic_cluster": "l",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "L@-1",
+          "raw_outcome": "L",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Palula kaál and Gilgit/Kohistani kaál have late long accent, with mobile inflections documented independently. An inherited unaccented long ā receives right-edge prominence when final accented a is lost. This is a core apocope comparison against early-long root-accented nouns. The forms saál/sáal belong to the Iranian year word and are lexical replacements/loans, not alternate reflexes of kālá.",
+          "family_unresolved": "All sā(l) records must be excluded from the inherited kālá tally and shown separately as contact evidence.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "Late after the old accented ending disappears. Iranian saal is a different word, excluded from this comparison.",
+      "cells": [
+        "[kālá](entry:3084) — year",
+        "[kaál](form:f_vwkpjs4qmdgzk)",
+        "L",
+        "Late after the old accented ending disappears. Iranian saal is a different word, excluded from this comparison."
+      ]
+    },
+    {
+      "family_id": "4336",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_oetdadrtngayc",
+          "record_id": "f_oetdadrtngayc",
+          "family_id": "4336",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "goóṭ",
+          "gloss": "house",
+          "historical_input": "gōṣṭhá",
+          "input_basis": "nearest-formation",
+          "input_id": "4336",
+          "input_class": "old-long-oxytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "2",
+          "old_accent_from_right": "1",
+          "old_accent_quantity": "short",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "o",
+          "old_intervocalic_cluster": "ṣṭh",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "L@-1",
+          "raw_outcome": "L",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Palula ghoóṣṭ and independently Degener/Buddruss Gilgit goóṭ have late long accent, matching final-accent apocope. Kohistani/Guresi góoṣ is early, with fixed inflection documented elsewhere, requiring a real class difference. Schmidt's Gilgit góoṭ versus Astori goóṣ belongs to a known table reversal/conflict and cannot override the independent Gilgit sources. Aspiration migration in Palula and cluster reduction in Shina are separate preconditions.",
+          "family_unresolved": "Resolve the printed table readings and Astori paradigm; do not turn an editorial reversal into a geographic sound law.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "Independent Gilgit sources agree on late accent; early Kohistani/Guresi forms require a separate explanation.",
+      "cells": [
+        "[gōṣṭhá](entry:4336) — house",
+        "[goóṭ](form:f_oetdadrtngayc)",
+        "L",
+        "Independent Gilgit sources agree on late accent; early Kohistani/Guresi forms require a separate explanation."
+      ]
+    },
+    {
+      "family_id": "4931",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_s2vsbu25rxbug",
+          "record_id": "f_s2vsbu25rxbug",
+          "family_id": "4931",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "čoór",
+          "gloss": "thief",
+          "historical_input": "cōrá",
+          "input_basis": "nearest-formation",
+          "input_id": "4931",
+          "input_class": "old-long-oxytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "2",
+          "old_accent_from_right": "1",
+          "old_accent_quantity": "short",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "o",
+          "old_intervocalic_cluster": "r",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "L@-1",
+          "raw_outcome": "L",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Palula čoór and Gilgit čoór are late long, fitting loss of the old final accented vowel after an unaccented long root. Gilgit čurúṭo is a separate extended/diminutive formation with root-final short accent, not an exception to the simple thief noun. This is a strong apocope example provided the two formations are kept apart.",
+          "family_unresolved": "Check inflection for the simple noun and record the derivational suffix of čurúṭo separately.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "The simple noun is late. Extended čurúṭo belongs to a different formation and is not counted as its variant.",
+      "cells": [
+        "[cōrá](entry:4931) — thief",
+        "[čoór](form:f_s2vsbu25rxbug)",
+        "L",
+        "The simple noun is late. Extended čurúṭo belongs to a different formation and is not counted as its variant."
+      ]
+    },
+    {
+      "family_id": "6849",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_w3x3eqs6pza62",
+          "record_id": "f_w3x3eqs6pza62",
+          "family_id": "6849",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "duúm",
+          "gloss": "smoke",
+          "historical_input": "dhūmá",
+          "input_basis": "nearest-formation",
+          "input_id": "6849",
+          "input_class": "old-long-oxytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "2",
+          "old_accent_from_right": "1",
+          "old_accent_quantity": "short",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "1",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "u",
+          "old_intervocalic_cluster": "m",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "L@-1",
+          "raw_outcome": "L",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Shina duúm is consistently late long in the major modern sources, matching loss of final accented a after old long ū. Palula dhuumíi instead has an accented final feminine/derived ending and cannot be scored as a different contour on the simple smoke stem. Kundal dùmā̂ contains both low and contour notation in another formation, requiring original-source decoding.",
+          "family_unresolved": "Keep simple and feminine smoke nouns separate; the derivative's final accent is not a failure of the simple apocope rule.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "Old ū stays long and becomes late. Palula dhuumíi has another ending and is not the same comparison cell.",
+      "cells": [
+        "[dhūmá](entry:6849) — smoke",
+        "[duúm](form:f_w3x3eqs6pza62)",
+        "L",
+        "Old ū stays long and becomes late. Palula dhuumíi has another ending and is not the same comparison cell."
+      ]
+    },
+    {
+      "family_id": "9216",
+      "source_table": "historical-observations.tsv",
+      "evidence": [
+        {
+          "analysis_token_id": "f_fckikyqkpmuye",
+          "record_id": "f_fckikyqkpmuye",
+          "family_id": "9216",
+          "language": "Sh",
+          "dialect": "gil",
+          "source": "degener-shina2008",
+          "form": "baál",
+          "gloss": "child, boy",
+          "historical_input": "bālá",
+          "input_basis": "nearest-formation",
+          "input_id": "9216",
+          "input_class": "old-long-oxytone",
+          "old_nuclei": "2",
+          "old_accent_count": "1",
+          "old_accent_position": "2",
+          "old_accent_from_right": "1",
+          "old_accent_quantity": "short",
+          "old_final_quantity": "short",
+          "old_later_long": "0",
+          "old_reconstructed": "0",
+          "old_aspiration": "0",
+          "old_initial_h": "0",
+          "old_quantity_pattern": "LS",
+          "old_first_quantity": "long",
+          "old_first_vowel": "a",
+          "old_intervocalic_cluster": "l",
+          "old_shape": "VVV",
+          "notation": "gilgit-mora",
+          "outcome": "L@-1",
+          "raw_outcome": "L",
+          "modern_nuclei": "1",
+          "accent_from_right": "1",
+          "stress_from_right": "",
+          "screening_exclusions": "",
+          "family_analysis": "Gilgit and Kohistani baál ‘child’ show late accent on the preserved old long root after loss of final accented a. Independent Gilgit sources agree. This is a clean counterpart to early long-root barytones and does not require postulating newly created vowel length or a surviving accent-bearing suffix. The wider family's bālaka and feminine forms should remain separate formations.",
+          "family_unresolved": "Confirm mobility in the noun paradigm and add cognates in languages where the concept is lexically replaced.",
+          "individual_review": "family-context-first-pass"
+        }
+      ],
+      "annotation": "The ā was already long in bālá; modern late accent does not require compensatory lengthening.",
+      "cells": [
+        "[bālá](entry:9216) — child, boy",
+        "[baál](form:f_fckikyqkpmuye)",
+        "L",
+        "The ā was already long in bālá; modern late accent does not require compensatory lengthening."
+      ]
+    }
+  ],
+  "gender": [
+    {
+      "family_id": "644",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_rxbwwjrwknd2c",
+          "family_id": "644",
+          "masculine": "áaḍu",
+          "feminine": "éeḍi",
+          "gloss": "half; half of, some of; the one half; half of the people; some of them, etc.",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): éeḍi; Morphemic form: aḍ-",
+          "family_analysis": "Palula áaḍu is early and root-accented before final u. This fits the extended-nominal pattern and subsequent root-a lengthening after rdh reduction. Because the old dictionary also points to árdha, this family is not an unambiguous demonstration of accent reset from an exclusively oxytone ancestor."
+        }
+      ],
+      "annotation": "The masculine/feminine aa : ee alternation leaves the final gender vowel unaccented; old árdha is also attested.",
+      "cells": [
+        "[ardhá](entry:644) — half",
+        "—",
+        "[áaḍu](form:f_rxbwwjrwknd2c) / *éeḍi*",
+        "The masculine/feminine aa : ee alternation leaves the final gender vowel unaccented; old árdha is also attested."
+      ]
+    },
+    {
+      "family_id": "1236",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_bofzrqsrbabiy",
+          "family_id": "1236",
+          "masculine": "óomu",
+          "feminine": "éemi",
+          "gloss": "unripe; raw",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): éemi; Morphemic form: áam-",
+          "family_analysis": "Palula óomu and Biori úumu have early root accent and retain the final gender vowel. This is diagnostic for accent assignment to a long root before extension: the long ā then undergoes Ashret/Biori raising. Copying final accent from āmá would not predict the early raised root. The independently attested āmaka formation makes extension substantially better grounded here than a suffix supplied only from modern u."
+        }
+      ],
+      "annotation": "A long, early root with an independently recorded āmaka formation. Modern -u alone would not establish that history.",
+      "cells": [
+        "[āmá](entry:1236) — unripe",
+        "—",
+        "[óomu](form:f_bofzrqsrbabiy) / *éemi*",
+        "A long, early root with an independently recorded āmaka formation. Modern -u alone would not establish that history."
+      ]
+    },
+    {
+      "family_id": "3523",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_ajjtn2tbz5rp2",
+          "family_id": "3523",
+          "masculine": "koomáalu",
+          "feminine": "kooméeli",
+          "gloss": "soft",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): kooméeli; Morphemic form: koomál-",
+          "family_analysis": "Palula koomáalu and Strand komʹâlu accent the final root syllable and leave the older initial long o unaccented. This supports root-final accent assignment in an extended adjective; it is not quantity attraction to the first long vowel. The aa in the accented open root syllable can be secondary lengthening of old short a."
+        }
+      ],
+      "annotation": "The last root syllable carries accent even though an earlier syllable also has a long vowel.",
+      "cells": [
+        "[kōmalá](entry:3523) — soft",
+        "—",
+        "[koomáalu](form:f_ajjtn2tbz5rp2) / *kooméeli*",
+        "The last root syllable carries accent even though an earlier syllable also has a long vowel."
+      ]
+    },
+    {
+      "family_id": "5244",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_7cgajcw3ofv62",
+          "family_id": "5244",
+          "masculine": "ǰáandu",
+          "feminine": "ǰéendi",
+          "gloss": "alive; living (person)",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): ǰéendi; Morphemic form: ǰand-",
+          "family_analysis": "Palula ǰáandu is early-root-accented, and the old source already supplies barytone jī́vant as an alternative to final-accented jīvantá. Gilgit ǰoóno is late long, while ǰiino is unmarked. Contraction of īva and cluster reduction produce different root vowels, so this family cannot simply be scored as retained or shifted from the first headword."
+        },
+        {
+          "record_id": "f_7xzrim4tncrds",
+          "family_id": "5244",
+          "form": "ǰoóno",
+          "gloss": "alive; living",
+          "source": "degener-shina2008",
+          "input": "source-tagged-adjective-with-final-short-o",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "L",
+          "status": "consistent",
+          "exclusion": ""
+        }
+      ],
+      "annotation": "Palula E and Gilgit L occupy the same penultimate syllable. Contraction and old jī́vant/jīvantá alternatives matter.",
+      "cells": [
+        "[jīvantá](entry:5244) — alive",
+        "[ǰoóno](form:f_7xzrim4tncrds)",
+        "[ǰáandu](form:f_7cgajcw3ofv62) / *ǰéendi*",
+        "Palula E and Gilgit L occupy the same penultimate syllable. Contraction and old jī́vant/jīvantá alternatives matter."
+      ]
+    },
+    {
+      "family_id": "5679",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_nguvkfcw5lnf2",
+          "family_id": "5679",
+          "masculine": "táatu",
+          "feminine": "téeti",
+          "gloss": "hot",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): téeti; Morphemic form: tat-",
+          "family_analysis": "Astori tátto preserves a geminate stage that links old pt reduction to the other dialects. Kohistani táto/Guresi tátu are short, Gilgit taáto is late long, and Palula táatu is early long. A common root-accented extended adjective followed by dialect-specific geminate treatment explains both shared locus and divergent mora alignment: preservation, simplification without lengthening, compensatory late lengthening, or a later Palula open-syllable lengthening layer."
+        },
+        {
+          "record_id": "f_p3m6qkli4ayhk",
+          "family_id": "5679",
+          "form": "taáto",
+          "gloss": "warm",
+          "source": "degener-shina2008",
+          "input": "source-tagged-adjective-with-final-short-o",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "L",
+          "status": "consistent",
+          "exclusion": ""
+        }
+      ],
+      "annotation": "Palula E versus Gilgit L: syllable location agrees while mora alignment differs. Astori tátto supplies a geminate comparison.",
+      "cells": [
+        "[taptá](entry:5679) — hot",
+        "[taáto](form:f_p3m6qkli4ayhk)",
+        "[táatu](form:f_nguvkfcw5lnf2) / *téeti*",
+        "Palula E versus Gilgit L: syllable location agrees while mora alignment differs. Astori tátto supplies a geminate comparison."
+      ]
+    },
+    {
+      "family_id": "6926",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_te7erw54blipe",
+          "family_id": "6926",
+          "masculine": "náanu",
+          "feminine": "néeni",
+          "gloss": "naked",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): néeni; Morphemic form: nan-",
+          "family_analysis": "Palula náanu and Gilgit náno are root-accented before their gender vowel, agreeing with independently attested barytone nágnaka rather than the simple final-accented adjective. Palula long aa versus Gilgit short a then reflects different quantity history after gn simplification. Sauji niċaṅ requires separate suffix/consonant analysis and is unmarked."
+        },
+        {
+          "record_id": "f_cvpx43xzfyvpe",
+          "family_id": "6926",
+          "form": "náno",
+          "gloss": "naked",
+          "source": "degener-shina2008",
+          "input": "source-tagged-adjective-with-final-short-o",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "S",
+          "status": "consistent",
+          "exclusion": ""
+        }
+      ],
+      "annotation": "Both languages accent the stem. Independently attested nágnaka supports an extended historical formation.",
+      "cells": [
+        "[nagná](entry:6926) — naked",
+        "[náno](form:f_cvpx43xzfyvpe)",
+        "[náanu](form:f_te7erw54blipe) / *néeni*",
+        "Both languages accent the stem. Independently attested nágnaka supports an extended historical formation."
+      ]
+    },
+    {
+      "family_id": "6983",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_gyj7em6aqpm4e",
+          "family_id": "6983",
+          "masculine": "náawu",
+          "feminine": "néewi",
+          "gloss": "new",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): néewi; Morphemic form: naw-",
+          "family_analysis": "Palula náawu is early while Gilgit naáwo is late on a long vowel before a preserved w and gender ending. Kohistani nóo~, Guresi náa~ and Astori náu~ have early root prominence with different contraction. Gilgit's late aa therefore cannot be attributed to loss of the visible w alone; a historical extended-stem or geminate/glide stage is needed. This is a stringent residual for a cluster-only account of new late vowels."
+        },
+        {
+          "record_id": "f_xl3kmfsnqx522",
+          "family_id": "6983",
+          "form": "naáwo",
+          "gloss": "new",
+          "source": "degener-shina2008",
+          "input": "source-tagged-adjective-with-final-short-o",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "L",
+          "status": "consistent",
+          "exclusion": ""
+        }
+      ],
+      "annotation": "Palula E versus Gilgit L again. The surviving w makes a simple “lost w caused lengthening” account insufficient.",
+      "cells": [
+        "[náva](entry:6983) — new",
+        "[naáwo](form:f_xl3kmfsnqx522)",
+        "[náawu](form:f_gyj7em6aqpm4e) / *néewi*",
+        "Palula E versus Gilgit L again. The surviving w makes a simple “lost w caused lengthening” account insufficient."
+      ]
+    },
+    {
+      "family_id": "8047",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_dm4orq5vixtfi",
+          "family_id": "8047",
+          "masculine": "paṇáaru",
+          "feminine": "paṇéeri",
+          "gloss": "white",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): paṇéeri; Morphemic form: paṇár-",
+          "family_analysis": "Palula paṇáaru has early accent on the final root syllable before u, while the old principal adjective is initially accented. Old later a was short, so extension-driven root-final accent plus open-syllable lengthening predicts the modern locus and new aa; old first ā has shortened. Kalkoti pänär and Sauji parãṛó represent additional vowel and ending histories. The old alternate pāṇḍurá must remain visible."
+        }
+      ],
+      "annotation": "Accent falls on the final root syllable; old pāṇḍurá competes with the initially accented headword.",
+      "cells": [
+        "[pā́ṇḍara](entry:8047) — white",
+        "—",
+        "[paṇáaru](form:f_dm4orq5vixtfi) / *paṇéeri*",
+        "Accent falls on the final root syllable; old pāṇḍurá competes with the initially accented headword."
+      ]
+    },
+    {
+      "family_id": "8283",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_ff4rkot57t4uy",
+          "family_id": "8283",
+          "masculine": "puróoṇu",
+          "feminine": "puréeṇi",
+          "gloss": "old",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): puréeṇi; Morphemic form: puráaṇ-",
+          "family_analysis": "Palula puróoṇu/Biori purúuṇu and Gilgit puróono have early accent on the final root syllable before the gender ending, against old final accent. The old long ā and its raised/rounded reflexes independently support a root-accented stage before the vowel changes. This is a clear multisyllabic extended-adjective comparison, unlike ordinary long-root apocope."
+        },
+        {
+          "record_id": "f_7xc5vdqk2ywvo",
+          "family_id": "8283",
+          "form": "puróono",
+          "gloss": "old",
+          "source": "degener-shina2008",
+          "input": "source-tagged-adjective-with-final-short-o",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": ""
+        }
+      ],
+      "annotation": "A multisyllabic adjective with early accent before the gender ending; rounded vowels record a separate quantity history.",
+      "cells": [
+        "[purāṇá](entry:8283) — old",
+        "[puróono](form:f_7xc5vdqk2ywvo)",
+        "[puróoṇu](form:f_ff4rkot57t4uy) / *puréeṇi*",
+        "A multisyllabic adjective with early accent before the gender ending; rounded vowels record a separate quantity history."
+      ]
+    },
+    {
+      "family_id": "12487",
+      "source_table": "palula-u-adjectives.tsv;gilgit-o-adjectives.tsv",
+      "evidence": [
+        {
+          "record_id": "f_55ww7ppfj4keu",
+          "family_id": "12487",
+          "masculine": "šidáalu",
+          "feminine": "šidéeli",
+          "gloss": "cold",
+          "source_tags": "adj",
+          "input": "Uml-u-masculine-with-feminine-i",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "E",
+          "status": "consistent",
+          "exclusion": "",
+          "description": "Inflection: Uml (Fem): šidéeli; Morphemic form: šidál-",
+          "family_analysis": "Palula šidáalu and Gilgit šidálo accent the final root syllable before an unaccented gender vowel, with western long versus Gilgit short a. Gilgit/Kohistani šaál ‘fever’ instead has a contracted late-long monosyllabic form and a different grammatical category. Both the retained adjective ending and the noun's contraction are independent conditioning features; the pair must not be collapsed into an irregular single outcome."
+        },
+        {
+          "record_id": "f_rohkcynhsbly6",
+          "family_id": "12487",
+          "form": "šidálo",
+          "gloss": "cold",
+          "source": "degener-shina2008",
+          "input": "source-tagged-adjective-with-final-short-o",
+          "prediction": "penultimate-nucleus",
+          "observed_from_right": "2",
+          "observed_mora": "S",
+          "status": "consistent",
+          "exclusion": ""
+        }
+      ],
+      "annotation": "Both accent the final root syllable. The related contracted noun “fever” must be analyzed separately.",
+      "cells": [
+        "[śītalá](entry:12487) — cold",
+        "[šidálo](form:f_rohkcynhsbly6)",
+        "[šidáalu](form:f_55ww7ppfj4keu) / *šidéeli*",
+        "Both accent the final root syllable. The related contracted noun “fever” must be analyzed separately."
+      ]
+    }
+  ],
+  "lengthening": [
+    {
+      "family_id": "941",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "aṣṭ",
+          "gloss": "eight",
+          "family_ids": "[\"941\"]",
+          "input_class": "short-a-without-h",
+          "expected": "E",
+          "ashret_forms": "[\"áaṣṭ\"]",
+          "observed": "[\"E\"]",
+          "record_ids": "[\"f_a2qflwi6dbs3o\", \"f_rsldl4hnjzwoo\"]",
+          "inflections": "[[\"not-recorded\", \"\"]]",
+          "explanations": "[\"Biori aṣṭ and short Shina aṣ show loss of the old accented ending with a short surviving stem; Ashret áaṣṭ then fits later unaspirated closed-a lengthening with early accent. Its early contour therefore does not refute inherited final accent. Kalkoti eeṣ requires an independent vowel/umlaut or numeral-paradigm history; its unmarked citation cannot supply tone.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "The older numeral lost an accented ending, but Biori has a short stem. Ashret E fits subsequent lengthening, not simple retention.",
+      "cells": [
+        "[aṣṭā́](entry:941) — eight",
+        "[aṣṭ](form:f_a2qflwi6dbs3o) → [áaṣṭ](form:f_rsldl4hnjzwoo)",
+        "No h → E",
+        "The older numeral lost an accented ending, but Biori has a short stem. Ashret E fits subsequent lengthening, not simple retention."
+      ]
+    },
+    {
+      "family_id": "2830",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "kaṇ",
+          "gloss": "ear",
+          "family_ids": "[\"2830\"]",
+          "input_class": "short-a-without-h",
+          "expected": "E",
+          "ashret_forms": "[\"káaṇ\"]",
+          "observed": "[\"E\"]",
+          "record_ids": "[\"f_jzo3xvxyczxoa\", \"f_riwftdprddvuk\"]",
+          "inflections": "[[\"root-retaining\", \"a-decl (Obl, pl): -a\"]]",
+          "explanations": "[\"Palula káaṇ versus Biori kaṇ fits late Ashret closed-a lengthening after rṇ simplification. Short Gilgit kon has nasal-environment backing, and Kalkoti/Kundal kān confirm broader segmental correspondences without reliable tone in these records. A reported mobile Gilgit ear paradigm contrasts with Palula fixed accent despite shared old barytonesis, so the inflectional evidence must override the misleading agreement of short citation forms.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "Biori kaṇ supplies the short-root comparison; Ashret lengthens with early accent after earlier consonant changes.",
+      "cells": [
+        "[kárṇa](entry:2830) — ear",
+        "[kaṇ](form:f_jzo3xvxyczxoa) → [káaṇ](form:f_riwftdprddvuk)",
+        "No h → E",
+        "Biori kaṇ supplies the short-root comparison; Ashret lengthens with early accent after earlier consonant changes."
+      ]
+    },
+    {
+      "family_id": "2892",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "kram",
+          "gloss": "work; deed, behaviour",
+          "family_ids": "[\"2892\"]",
+          "input_class": "short-a-without-h",
+          "expected": "E",
+          "ashret_forms": "[\"kráam\"]",
+          "observed": "[\"E\"]",
+          "record_ids": "[\"f_7hyftv5pgyvaa\", \"f_y5nhy3rinzx7u\"]",
+          "inflections": "[[\"root-retaining\", \"a-decl (Obl, pl): -a\"]]",
+          "explanations": "[\"Biori kram beside inflected kráama, and Ashret kráam, separate an older open-syllable lengthening layer from later Ashret closed-syllable lengthening. Metathesis moves r into the onset before this comparison. Shina kom/krom and Kalkoti traam share the work sense but have independent r-cluster and nasal-vowel developments. A single citation-form mora table must be supplemented by the Biori paradigm, which is the most diagnostic evidence.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "The kr cluster survives in both dialects; early lengthening cannot be attributed to its loss.",
+      "cells": [
+        "[kárman](entry:2892) — work",
+        "[kram](form:f_y5nhy3rinzx7u) → [kráam](form:f_7hyftv5pgyvaa)",
+        "No h → E",
+        "The kr cluster survives in both dialects; early lengthening cannot be attributed to its loss."
+      ]
+    },
+    {
+      "family_id": "10539",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "rat",
+          "gloss": "blood",
+          "family_ids": "[\"10539\"]",
+          "input_class": "short-a-without-h",
+          "expected": "E",
+          "ashret_forms": "[\"ráat\"]",
+          "observed": "[\"E\"]",
+          "record_ids": "[\"f_lmnlacvhvk234\", \"f_ngygjwbkf7xwa\"]",
+          "inflections": "[[\"suffix-accented\", \"a-decl (Obl, pl): ratá\"]]",
+          "explanations": "[\"Palula ráat/Strand rʹât beside Biori rat supports early length from a short stage after cluster reduction. Kalkoti raat is explicitly high-level/default in 2013 and explicitly toneless in Hultman 2023, an important case where zero is positively documented. Kundal and Sauji raːt add segmental evidence; their unmarked tokens do not independently establish zero tone.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "The blood noun has a short Biori root and early Ashret aa; it is distinct from extended “red” adjective forms.",
+      "cells": [
+        "[rakta](entry:10539) — blood",
+        "[rat](form:f_lmnlacvhvk234) → [ráat](form:f_ngygjwbkf7xwa)",
+        "No h → E",
+        "The blood noun has a short Biori root and early Ashret aa; it is distinct from extended “red” adjective forms."
+      ]
+    },
+    {
+      "family_id": "13254",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "sar",
+          "gloss": "lake, pond, puddle",
+          "family_ids": "[\"13254\"]",
+          "input_class": "short-a-without-h",
+          "expected": "E",
+          "ashret_forms": "[\"sáar\"]",
+          "observed": "[\"E\"]",
+          "record_ids": "[\"f_stjehsosoczzo\", \"f_w36mmh5td7wuu\"]",
+          "inflections": "[[\"suffix-accented\", \"i-decl (Obl, pl): sarí\"]]",
+          "explanations": "[\"Palula sáar versus Biori and Gilgit sar preserves initial/root prominence while Ashret alone has a long vowel. The old first vowel was short, and Biori supplies an independent short-stage control. This supports later monosyllabic lengthening with early alignment, complementary to old oxytones such as saptá that reach the same short stage before lengthening.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "The early citation becomes suffix-accented sarí in inflection (§5); E is not an invariant paradigm property.",
+      "cells": [
+        "[sáras](entry:13254) — lake, pond, puddle",
+        "[sar](form:f_w36mmh5td7wuu) → [sáar](form:f_stjehsosoczzo)",
+        "No h → E",
+        "The early citation becomes suffix-accented sarí in inflection (§5); E is not an invariant paradigm property."
+      ]
+    },
+    {
+      "family_id": "3818",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "khar",
+          "gloss": "donkey",
+          "family_ids": "[\"3818\"]",
+          "input_class": "short-a-with-h",
+          "expected": "L",
+          "ashret_forms": "[\"khaár\"]",
+          "observed": "[\"L\"]",
+          "record_ids": "[\"f_lw6ysqpig3ng2\", \"f_wtijmo6m4yece\"]",
+          "inflections": "[[\"suffix-accented\", \"a-decl (Obl, pl): khará\"]]",
+          "explanations": "[\"Palula khaár contrasts with Biori short khar and with feminine khári, which has a short accented root before i. This is a particularly useful morphological and quantity control: aspiration-conditioned late lengthening occurs in the closed monosyllabic masculine, while the disyllabic feminine retains a short root. The old words lack accent, so the contrast is not evidence for different inherited accents.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "The aspirated onset accompanies late new aa. The Biori short comparator supplies the relevant quantity contrast.",
+      "cells": [
+        "[khara](entry:3818) — donkey",
+        "[khar](form:f_lw6ysqpig3ng2) → [khaár](form:f_wtijmo6m4yece)",
+        "h / aspiration → L",
+        "The aspirated onset accompanies late new aa. The Biori short comparator supplies the relevant quantity contrast."
+      ]
+    },
+    {
+      "family_id": "5334",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "ǰhaṭ",
+          "gloss": "goat's hair; fur",
+          "family_ids": "[\"5334\"]",
+          "input_class": "short-a-with-h",
+          "expected": "L",
+          "ashret_forms": "[\"ǰhaáṭ\"]",
+          "observed": "[\"L\"]",
+          "record_ids": "[\"f_4is2ibguxjqkg\", \"f_5jv2k6r5iiuew\"]",
+          "inflections": "[[\"suffix-accented\", \"i-decl (Obl (pl)): ǰhaṭí\"]]",
+          "explanations": "[\"Palula ǰhaáṭ versus Biori ǰhaṭ gives late lengthening in an aspirated closed monosyllable, independently supported by the short dialect form. The old variant family includes both short and long vowels, so its historical quantity cannot be chosen from the modern outcome. Kundal jē̌ṭ ‘goat’ adds a semantic animal-from-hair comparison and a source-specific contour worth checking.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "The hair/fur noun has late aa with aspiration; the goat-hair sense is retained rather than merged with generic hair.",
+      "cells": [
+        "[*jhaṇṭa](entry:5334) — goat's hair",
+        "[ǰhaṭ](form:f_5jv2k6r5iiuew) → [ǰhaáṭ](form:f_4is2ibguxjqkg)",
+        "h / aspiration → L",
+        "The hair/fur noun has late aa with aspiration; the goat-hair sense is retained rather than merged with generic hair."
+      ]
+    },
+    {
+      "family_id": "13952",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "haḍ",
+          "gloss": "bone",
+          "family_ids": "[\"13952\"]",
+          "input_class": "short-a-with-h",
+          "expected": "L",
+          "ashret_forms": "[\"haáḍ\"]",
+          "observed": "[\"L\"]",
+          "record_ids": "[\"f_gylv2zfgesifi\", \"f_zhqwjvhzncmiy\"]",
+          "inflections": "[[\"root-accented\", \"a-decl (Obl, pl): háaḍa\"]]",
+          "explanations": "[\"Palula haáḍ beside Biori haḍ provides a strong late-new-aa example with h in a closed monosyllable. haṇḍúk/haḍúng and Strand haḍʹung are extended skeleton or bone forms, not the same cell; marrow is a compound. Kalkoti aḍ/aṛ loses initial h and has separate tone evidence to establish. Turner explicitly calls the ásthi connection very doubtful.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "Late citation haáḍ contrasts with early inflected háaḍa; morphology changes the mora alignment.",
+      "cells": [
+        "[haḍḍa](entry:13952) — bone",
+        "[haḍ](form:f_zhqwjvhzncmiy) → [haáḍ](form:f_gylv2zfgesifi)",
+        "h / aspiration → L",
+        "Late citation haáḍ contrasts with early inflected háaḍa; morphology changes the mora alignment."
+      ]
+    },
+    {
+      "family_id": "14000",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "hal",
+          "gloss": "plough",
+          "family_ids": "[\"14000\"]",
+          "input_class": "short-a-with-h",
+          "expected": "L",
+          "ashret_forms": "[\"haál\"]",
+          "observed": "[\"L\"]",
+          "record_ids": "[\"f_a3qxhivbqwmwu\", \"f_nh34cikdbtqdu\"]",
+          "inflections": "[[\"suffix-accented\", \"a-decl (Obl, pl): halá\"]]",
+          "explanations": "[\"Ashret haál contrasts with Biori and Shina short hal. The old first vowel was short, so the long late aa is a later western development, compatible with the h/aspiration-conditioned monosyllabic lengthening class. This contrasts with unaspirated sáat/yáab, which become early-long after a comparable short stage; it also shows why old accent alone cannot explain the western contour.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "Initial h belongs to the conditioning group alongside aspirated stops; haál has the predicted late alignment.",
+      "cells": [
+        "[halá](entry:14000) — plough",
+        "[hal](form:f_a3qxhivbqwmwu) → [haál](form:f_nh34cikdbtqdu)",
+        "h / aspiration → L",
+        "Initial h belongs to the conditioning group alongside aspirated stops; haál has the predicted late alignment."
+      ]
+    },
+    {
+      "family_id": "14024",
+      "source_table": "palula-short-a-pairs.tsv",
+      "evidence": [
+        {
+          "biori": "hat",
+          "gloss": "hand",
+          "family_ids": "[\"14024\"]",
+          "input_class": "short-a-with-h",
+          "expected": "L",
+          "ashret_forms": "[\"haát\"]",
+          "observed": "[\"L\"]",
+          "record_ids": "[\"f_7u5cqjsh3cqo2\", \"f_oevcjtgw3t5bo\"]",
+          "inflections": "[[\"root-accented\", \"a-decl (Obl, pl): háata\"]]",
+          "explanations": "[\"Ashret haát is late-long despite old barytonesis, while Biori and all four Shina dialects hat are short. This is a strong independent counterexample to old-accent-only prediction and a positive candidate for late alignment during h-conditioned western lengthening. The old st cluster has simplified before the relevant modern contrast, and retained Sauji hatha can help date apocope if its form is verified.\"]",
+          "status": "consistent"
+        }
+      ],
+      "annotation": "Late haát, but early inflected háata. This is a newly lengthened root, unlike old-long early pháal (§1).",
+      "cells": [
+        "[hásta](entry:14024) — hand",
+        "[hat](form:f_7u5cqjsh3cqo2) → [haát](form:f_oevcjtgw3t5bo)",
+        "h / aspiration → L",
+        "Late haát, but early inflected háata. This is a newly lengthened root, unlike old-long early pháal (§1)."
+      ]
+    }
+  ],
+  "raising": [
+    {
+      "family_id": "125",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "angáar",
+          "ashret": "angóor",
+          "gloss": "fire",
+          "biori_family": "125",
+          "ashret_family": "125",
+          "biori_quality": "aa",
+          "ashret_quality": "ao",
+          "biori_quantity": "SL",
+          "ashret_quantity": "SL",
+          "biori_accent": "E",
+          "biori_accent_position": "2",
+          "ashret_accent": "E",
+          "ashret_accent_position": "2",
+          "record_ids": "[\"f_erczhnnmreb6u\", \"f_fgved6gdr3irg\"]",
+          "biori_description": "Inflection: a-decl (Obl): -a; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl): -a",
+          "tested_nucleus": "2",
+          "biori_test_vowel": "a",
+          "ashret_test_vowel": "o",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "o",
+          "input_class": "Biori-early-a-long-final-closed",
+          "predicted_quality": "o",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "The final closed syllable raises aa to oo. The earlier syllable does not disqualify the word: this is a syllable-domain test.",
+      "cells": [
+        "[áṅgāra](entry:125) — fire",
+        "[angáar](form:f_erczhnnmreb6u)",
+        "[angóor](form:f_fgved6gdr3irg)",
+        "The final closed syllable raises aa to oo. The earlier syllable does not disqualify the word: this is a syllable-domain test."
+      ]
+    },
+    {
+      "family_id": "2993",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "káak",
+          "ashret": "kóok",
+          "gloss": "crow",
+          "biori_family": "2993",
+          "ashret_family": "2993",
+          "biori_quality": "a",
+          "ashret_quality": "o",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_cysfblokv5aly\", \"f_vqyhefphhardq\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: káak; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: káak",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "a",
+          "ashret_test_vowel": "o",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "o",
+          "input_class": "Biori-early-a-long-final-closed",
+          "predicted_quality": "o",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "Old-long early “crow” also fits the inheritance comparison (§1); raising changes quality while E survives.",
+      "cells": [
+        "[kā́ka](entry:2993) — crow",
+        "[káak](form:f_cysfblokv5aly)",
+        "[kóok](form:f_vqyhefphhardq)",
+        "Old-long early “crow” also fits the inheritance comparison (§1); raising changes quality while E survives."
+      ]
+    },
+    {
+      "family_id": "3735",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "c̣héetr",
+          "ashret": "c̣híitr",
+          "gloss": "field; (tilled) land",
+          "biori_family": "3735",
+          "ashret_family": "3735",
+          "biori_quality": "e",
+          "ashret_quality": "i",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_xtgxvpjbrsvsq\", \"f_b5kjievwi6mm2\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: c̣héetr; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: c̣héetr",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "e",
+          "ashret_test_vowel": "i",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "i",
+          "input_class": "Biori-early-e-long-final-closed",
+          "predicted_quality": "i",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "Early ee raises to ii. The Gilgit source disagreement does not erase this local dialect correspondence.",
+      "cells": [
+        "[kṣḗtra](entry:3735) — field",
+        "[c̣héetr](form:f_xtgxvpjbrsvsq)",
+        "[c̣híitr](form:f_b5kjievwi6mm2)",
+        "Early ee raises to ii. The Gilgit source disagreement does not erase this local dialect correspondence."
+      ]
+    },
+    {
+      "family_id": "4368",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "ghráam",
+          "ashret": "ghróom",
+          "gloss": "village; permanent settlement (in contrast with sóon 'summer pasture'); Ashret proper, also atshareét xaás",
+          "biori_family": "4368",
+          "ashret_family": "4368",
+          "biori_quality": "a",
+          "ashret_quality": "o",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_t5btv6xk5bp3i\", \"f_ceqs73vbsapl4\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: ghráam; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: ghráam",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "a",
+          "ashret_test_vowel": "o",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "o",
+          "input_class": "Biori-early-a-long-final-closed",
+          "predicted_quality": "o",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "Early aa raises despite aspiration: distinguish inherited long roots from the short-a lengthening layer.",
+      "cells": [
+        "[grā́ma](entry:4368) — village",
+        "[ghráam](form:f_t5btv6xk5bp3i)",
+        "[ghróom](form:f_ceqs73vbsapl4)",
+        "Early aa raises despite aspiration: distinguish inherited long roots from the short-a lengthening layer."
+      ]
+    },
+    {
+      "family_id": "6547",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "déeš",
+          "ashret": "díiš",
+          "gloss": "(home) village",
+          "biori_family": "6547",
+          "ashret_family": "6547",
+          "biori_quality": "e",
+          "ashret_quality": "i",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_rksdx76oapj5c\", \"f_p3hg4ip75suxu\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: déeš; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: déeš",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "e",
+          "ashret_test_vowel": "i",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "i",
+          "input_class": "Biori-early-e-long-final-closed",
+          "predicted_quality": "i",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "Early ee → ii implies early accent before raising, if dēśá is the ancestor; a very recent retraction is insufficient.",
+      "cells": [
+        "[dēśá](entry:6547) — (home) village",
+        "[déeš](form:f_rksdx76oapj5c)",
+        "[díiš](form:f_p3hg4ip75suxu)",
+        "Early ee → ii implies early accent before raising, if dēśá is the ancestor; a very recent retraction is insufficient."
+      ]
+    },
+    {
+      "family_id": "6914",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "náang",
+          "ashret": "nóong",
+          "gloss": "finger-nail",
+          "biori_family": "6914",
+          "ashret_family": "6914",
+          "biori_quality": "a",
+          "ashret_quality": "o",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_xfa26pc33u5hi\", \"f_d7jo25vaj6y4e\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: náang; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: náang",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "a",
+          "ashret_test_vowel": "o",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "o",
+          "input_class": "Biori-early-a-long-final-closed",
+          "predicted_quality": "o",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "The preserved consonantal frame and fingernail meaning support the paired vowel comparison.",
+      "cells": [
+        "[nakhá](entry:6914) — finger-nail",
+        "[náang](form:f_xfa26pc33u5hi)",
+        "[nóong](form:f_d7jo25vaj6y4e)",
+        "The preserved consonantal frame and fingernail meaning support the paired vowel comparison."
+      ]
+    },
+    {
+      "family_id": "9072",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "pháal",
+          "ashret": "phóol",
+          "gloss": "ploughshare",
+          "biori_family": "9072",
+          "ashret_family": "9072",
+          "biori_quality": "a",
+          "ashret_quality": "o",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_vbndlz7lvuupy\", \"f_jxzfbrvavutio\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: pháal; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: pháal",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "a",
+          "ashret_test_vowel": "o",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "o",
+          "input_class": "Biori-early-a-long-final-closed",
+          "predicted_quality": "o",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "The aspirated old-long root raises normally. Its behavior contrasts with newly lengthened late haát “hand”.",
+      "cells": [
+        "[phā́la](entry:9072) — ploughshare",
+        "[pháal](form:f_vbndlz7lvuupy)",
+        "[phóol](form:f_jxzfbrvavutio)",
+        "The aspirated old-long root raises normally. Its behavior contrasts with newly lengthened late haát “hand”."
+      ]
+    },
+    {
+      "family_id": "9828",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "méeš",
+          "ashret": "míiš",
+          "gloss": "man; person",
+          "biori_family": "9828",
+          "ashret_family": "9828",
+          "biori_quality": "e",
+          "ashret_quality": "i",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_bxmzpz6hgrrdo\", \"f_2rmhvuusytymy\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "e",
+          "ashret_test_vowel": "i",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "i",
+          "input_class": "Biori-early-e-long-final-closed",
+          "predicted_quality": "i",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "Early méeš → míiš is secure in this comparison. Kalkoti meéš is an independent accentual residual.",
+      "cells": [
+        "[manuṣyà](entry:9828) — man",
+        "[méeš](form:f_bxmzpz6hgrrdo)",
+        "[míiš](form:f_2rmhvuusytymy)",
+        "Early méeš → míiš is secure in this comparison. Kalkoti meéš is an independent accentual residual."
+      ]
+    },
+    {
+      "family_id": "12323",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "šéen",
+          "ashret": "šíin",
+          "gloss": "bed (charpoy, string bed)",
+          "biori_family": "12323",
+          "ashret_family": "12323",
+          "biori_quality": "e",
+          "ashret_quality": "i",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_owegg2pm3xzgk\", \"f_bbmp5mitxaydq\"]",
+          "biori_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: šéen; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl, pl): -a; Morphemic form: šéen",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "e",
+          "ashret_test_vowel": "i",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "i",
+          "input_class": "Biori-early-e-long-final-closed",
+          "predicted_quality": "i",
+          "status": "consistent",
+          "special_analysis": "",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. "
+        }
+      ],
+      "annotation": "The bed sense continues a lying-down formation; the early ee → ii correspondence is directly visible.",
+      "cells": [
+        "[śáyana](entry:12323) — bed (charpoy, string bed)",
+        "[šéen](form:f_owegg2pm3xzgk)",
+        "[šíin](form:f_bbmp5mitxaydq)",
+        "The bed sense continues a lying-down formation; the early ee → ii correspondence is directly visible."
+      ]
+    },
+    {
+      "family_id": "12753",
+      "source_table": "vowel-raising-reviewed.tsv",
+      "evidence": [
+        {
+          "biori": "šáar",
+          "ashret": "šúur",
+          "gloss": "father-in-law; husband's or wife's father",
+          "biori_family": "12753",
+          "ashret_family": "12753",
+          "biori_quality": "a",
+          "ashret_quality": "u",
+          "biori_quantity": "L",
+          "ashret_quantity": "L",
+          "biori_accent": "E",
+          "biori_accent_position": "1",
+          "ashret_accent": "E",
+          "ashret_accent_position": "1",
+          "record_ids": "[\"f_4ztuj6gmg7reg\", \"f_nyc3xud7fztig\"]",
+          "biori_description": "Inflection: a-decl (Obl): šúura; Morphemic form: šáur; Variant restriction: Biori",
+          "ashret_description": "Inflection: a-decl (Obl): šúura; Morphemic form: šáur",
+          "tested_nucleus": "1",
+          "biori_test_vowel": "a",
+          "ashret_test_vowel": "u",
+          "tested_syllable_domain": "word-final-closed",
+          "expected_raised_quality": "o",
+          "input_class": "Biori-early-a-long-final-closed",
+          "predicted_quality": "o",
+          "status": "other-quality",
+          "special_analysis": "proto-au-with-internal-w-alternation",
+          "analysis": "Same consonantal frame and gloss; the Biori early long vowel is in the final closed syllable. Test aa→oo or ee→ii without changing the prediction for residuals. Liljegren2009p21 cites ša(w)úra household of father-in-law as independent internal evidence for *au. The šáar/šúur correspondence cannot be derived from an undifferentiated proto-aa class."
+        }
+      ],
+      "annotation": "An aa → uu outcome. Internal ša(w)úra independently supports earlier au; this evidence is stronger than for stream or lap.",
+      "cells": [
+        "[śváśura](entry:12753) — father-in-law",
+        "[šáar](form:f_4ztuj6gmg7reg)",
+        "[šúur](form:f_nyc3xud7fztig)",
+        "An aa → uu outcome. Internal ša(w)úra independently supports earlier au; this evidence is stronger than for stream or lap."
+      ]
+    }
+  ],
+  "inflection": [
+    {
+      "family_id": "10702",
+      "source_table": "palula-umlaut-i-nouns.tsv",
+      "evidence": [
+        {
+          "record_id": "f_5iz34b66lch6i",
+          "family_id": "10702",
+          "citation": "raát",
+          "gloss": "night (as a measure of time); 24-hour period",
+          "inflected": "reetí",
+          "inflection_cells": "Pl",
+          "dialect": "",
+          "citation_outcome": "L",
+          "citation_accent_from_right": "1",
+          "inflected_outcome": "S",
+          "inflected_accent_from_right": "1",
+          "prediction": "citation-final-root-L; inflected-final-short-i-accent",
+          "status": "consistent",
+          "description": "Inflection: i-decl (Pl): reetí",
+          "adjudication": "comparable-lexical-stem",
+          "analysis": "The same lexical stem has citation aa and inflected ee before i; the accents were not used to retrieve this pair. This supports a productive i-declension accent class, not an old-accent inheritance claim."
+        }
+      ],
+      "annotation": "Counted night/day-period: raát/reetí. Ordinary róot/róota is another noun and declension; merging their senses creates a false contradiction.",
+      "cells": [
+        "[rā́trī](entry:10702) — night (as a measure of time)",
+        "[raát](form:f_5iz34b66lch6i) / *reetí*",
+        "L → final -í",
+        "Counted night/day-period: raát/reetí. Ordinary róot/róota is another noun and declension; merging their senses creates a false contradiction."
+      ]
+    },
+    {
+      "family_id": "11564",
+      "source_table": "palula-umlaut-i-nouns.tsv",
+      "evidence": [
+        {
+          "record_id": "f_mtvkqvmfjly4w",
+          "family_id": "11564",
+          "citation": "baát",
+          "gloss": "word; talk; issue, matter; speech, language",
+          "inflected": "beetí",
+          "inflection_cells": "Obl, pl",
+          "dialect": "",
+          "citation_outcome": "L",
+          "citation_accent_from_right": "1",
+          "inflected_outcome": "S",
+          "inflected_accent_from_right": "1",
+          "prediction": "citation-final-root-L; inflected-final-short-i-accent",
+          "status": "consistent",
+          "description": "Inflection: i-decl (Obl, pl): beetí",
+          "adjudication": "comparable-lexical-stem",
+          "analysis": "The same lexical stem has citation aa and inflected ee before i; the accents were not used to retrieve this pair. This supports a productive i-declension accent class, not an old-accent inheritance claim."
+        }
+      ],
+      "annotation": "The word/speech noun joins the aa/ee subclass: late root in citation, final -í in inflection.",
+      "cells": [
+        "[vārtta](entry:11564) — word",
+        "[baát](form:f_mtvkqvmfjly4w) / *beetí*",
+        "L → final -í",
+        "The word/speech noun joins the aa/ee subclass: late root in citation, final -í in inflection."
+      ]
+    },
+    {
+      "family_id": "1577",
+      "source_table": "palula-umlaut-i-nouns.tsv",
+      "evidence": [
+        {
+          "record_id": "f_y4k6pkpg463jm",
+          "family_id": "1577",
+          "citation": "izraáṇ",
+          "gloss": "rainbow",
+          "inflected": "izreeṇí",
+          "inflection_cells": "Obl",
+          "dialect": "",
+          "citation_outcome": "L",
+          "citation_accent_from_right": "1",
+          "inflected_outcome": "S",
+          "inflected_accent_from_right": "1",
+          "prediction": "citation-final-root-L; inflected-final-short-i-accent",
+          "status": "consistent",
+          "description": "Inflection: i-decl (Obl): izreeṇí",
+          "adjudication": "comparable-lexical-stem",
+          "analysis": "The same lexical stem has citation aa and inflected ee before i; the accents were not used to retrieve this pair. This supports a productive i-declension accent class, not an old-accent inheritance claim."
+        }
+      ],
+      "annotation": "This is the valid izraáṇ paradigm. The same izreeṇí was attached to the different Biori synonym niildhráal, an excluded mismatch.",
+      "cells": [
+        "[indradhanúṣ](entry:1577) — rainbow",
+        "[izraáṇ](form:f_y4k6pkpg463jm) / *izreeṇí*",
+        "L → final -í",
+        "This is the valid izraáṇ paradigm. The same izreeṇí was attached to the different Biori synonym niildhráal, an excluded mismatch."
+      ]
+    },
+    {
+      "family_id": "8906",
+      "source_table": "palula-umlaut-i-nouns.tsv",
+      "evidence": [
+        {
+          "record_id": "f_peyh23hgbodl4",
+          "family_id": "8906",
+          "citation": "parhaár",
+          "gloss": "wound",
+          "inflected": "parheerí",
+          "inflection_cells": "Obl, pl",
+          "dialect": "",
+          "citation_outcome": "L",
+          "citation_accent_from_right": "1",
+          "inflected_outcome": "S",
+          "inflected_accent_from_right": "1",
+          "prediction": "citation-final-root-L; inflected-final-short-i-accent",
+          "status": "consistent",
+          "description": "Inflection: i-decl (Obl, pl): parheerí",
+          "adjudication": "comparable-lexical-stem",
+          "analysis": "The same lexical stem has citation aa and inflected ee before i; the accents were not used to retrieve this pair. This supports a productive i-declension accent class, not an old-accent inheritance claim."
+        }
+      ],
+      "annotation": "Wound belongs to the same aa/ee subclass; final -í is observed in the supplied full form, not inferred from suffix shorthand.",
+      "cells": [
+        "[prahāra](entry:8906) — wound",
+        "[parhaár](form:f_peyh23hgbodl4) / *parheerí*",
+        "L → final -í",
+        "Wound belongs to the same aa/ee subclass; final -í is observed in the supplied full form, not inferred from suffix shorthand."
+      ]
+    },
+    {
+      "family_id": "9560",
+      "source_table": "palula-umlaut-i-nouns.tsv",
+      "evidence": [
+        {
+          "record_id": "f_7uajz5tyhjtfu",
+          "family_id": "9560",
+          "citation": "ghuumaál",
+          "gloss": "earthquake",
+          "inflected": "ghuumeelí",
+          "inflection_cells": "Obl, pl",
+          "dialect": "",
+          "citation_outcome": "L",
+          "citation_accent_from_right": "1",
+          "inflected_outcome": "S",
+          "inflected_accent_from_right": "1",
+          "prediction": "citation-final-root-L; inflected-final-short-i-accent",
+          "status": "consistent",
+          "description": "Inflection: i-decl (Obl, pl): ghuumeelí",
+          "adjudication": "comparable-lexical-stem",
+          "analysis": "The same lexical stem has citation aa and inflected ee before i; the accents were not used to retrieve this pair. This supports a productive i-declension accent class, not an old-accent inheritance claim."
+        }
+      ],
+      "annotation": "Earthquake follows the aa/ee pattern. Records carrying a copied wheat gloss require a separate editorial correction.",
+      "cells": [
+        "[bhūmicala](entry:9560) — earthquake",
+        "[ghuumaál](form:f_7uajz5tyhjtfu) / *ghuumeelí*",
+        "L → final -í",
+        "Earthquake follows the aa/ee pattern. Records carrying a copied wheat gloss require a separate editorial correction."
+      ]
+    },
+    {
+      "family_id": "4762",
+      "source_table": "palula-i-decl-extension.tsv",
+      "evidence": [
+        {
+          "record_id": "f_lke2sojllsqo6",
+          "family_id": "4762",
+          "citation": "čáar",
+          "gloss": "fresh grass (esp. as fodder)",
+          "inflected": "čarí",
+          "citation_outcome": "E",
+          "citation_position": "1",
+          "inflected_outcome": "S",
+          "inflected_position": "1",
+          "quantity_pattern": "L",
+          "inflected_quantity_pattern": "SS",
+          "status": "consistent",
+          "analysis": "The full source inflection accents final i. Citation accent is retained as a separate outcome; the class was selected by consonant-final citation and source i-declension, not by either accent. Grass čáar/čarí has E in the citation but final i in the inflection. The independent Biori short čar distinguishes newly lengthened aa from the aa/ee umlaut noun class.",
+          "description": "Inflection: i-decl (Obl, pl): čarí"
+        }
+      ],
+      "annotation": "An early citation also takes final -í. Biori short čar prevents treating its modern aa as inherited old ā.",
+      "cells": [
+        "[*cāri](entry:4762) — fresh grass (esp. as fodder)",
+        "[čáar](form:f_lke2sojllsqo6) / *čarí*",
+        "E → final -í",
+        "An early citation also takes final -í. Biori short čar prevents treating its modern aa as inherited old ā."
+      ]
+    },
+    {
+      "family_id": "13254",
+      "source_table": "palula-i-decl-extension.tsv",
+      "evidence": [
+        {
+          "record_id": "f_stjehsosoczzo",
+          "family_id": "13254",
+          "citation": "sáar",
+          "gloss": "lake, pond, puddle",
+          "inflected": "sarí",
+          "citation_outcome": "E",
+          "citation_position": "1",
+          "inflected_outcome": "S",
+          "inflected_position": "1",
+          "quantity_pattern": "L",
+          "inflected_quantity_pattern": "SS",
+          "status": "consistent",
+          "analysis": "The full source inflection accents final i. Citation accent is retained as a separate outcome; the class was selected by consonant-final citation and source i-declension, not by either accent. Lake sáar/sarí has E after ordinary short-a lengthening, independently supported by short Biori sar; it is a mobile i-declension noun despite citation E.",
+          "description": "Inflection: i-decl (Obl, pl): sarí; Morphemic form: sar"
+        }
+      ],
+      "annotation": "Early sáar → sarí: the general i-declension rule predicts suffix accent, not late accent in every citation.",
+      "cells": [
+        "[sáras](entry:13254) — lake, pond, puddle",
+        "[sáar](form:f_stjehsosoczzo) / *sarí*",
+        "E → final -í",
+        "Early sáar → sarí: the general i-declension rule predicts suffix accent, not late accent in every citation."
+      ]
+    },
+    {
+      "family_id": "7031",
+      "source_table": "palula-i-decl-extension.tsv",
+      "evidence": [
+        {
+          "record_id": "f_ujvlyk74hm24w",
+          "family_id": "7031",
+          "citation": "náas",
+          "gloss": "nose",
+          "inflected": "nastí",
+          "citation_outcome": "E",
+          "citation_position": "1",
+          "inflected_outcome": "S",
+          "inflected_position": "1",
+          "quantity_pattern": "L",
+          "inflected_quantity_pattern": "SS",
+          "status": "consistent",
+          "analysis": "The full source inflection accents final i. Citation accent is retained as a separate outcome; the class was selected by consonant-final citation and source i-declension, not by either accent. Nose náas/nastí has a consonantal stem alternation as well as shortening. Early citation accent matches the independently attested Biori short nas and ordinary short-a lengthening; final plural i is a different accent-bearing position.",
+          "description": "Inflection: i-decl (Obl, pl): nastí"
+        }
+      ],
+      "annotation": "Early náas → nastí also changes the stem shape; do not manufacture the inflection by merely appending -i.",
+      "cells": [
+        "[nasta](entry:7031) — nose",
+        "[náas](form:f_ujvlyk74hm24w) / *nastí*",
+        "E → final -í",
+        "Early náas → nastí also changes the stem shape; do not manufacture the inflection by merely appending -i."
+      ]
+    },
+    {
+      "family_id": "13468",
+      "source_table": "palula-i-decl-extension.tsv",
+      "evidence": [
+        {
+          "record_id": "f_23ubcozln6vgm",
+          "family_id": "13468",
+          "citation": "suthaán",
+          "gloss": "trousers",
+          "inflected": "suthaní",
+          "citation_outcome": "L",
+          "citation_position": "1",
+          "inflected_outcome": "S",
+          "inflected_position": "1",
+          "quantity_pattern": "SL",
+          "inflected_quantity_pattern": "SSS",
+          "status": "consistent",
+          "analysis": "The full source inflection accents final i. Citation accent is retained as a separate outcome; the class was selected by consonant-final citation and source i-declension, not by either accent. ",
+          "description": "Inflection: i-decl (Obl, pl): suthaní; Morphemic form: suthán"
+        }
+      ],
+      "annotation": "The regional trousers noun has late suthaán; Biori suthán is short. Both take the recorded suthaní.",
+      "cells": [
+        "[*sutthanā](entry:13468) — trousers",
+        "[suthaán](form:f_23ubcozln6vgm) / *suthaní*",
+        "L → final -í",
+        "The regional trousers noun has late suthaán; Biori suthán is short. Both take the recorded suthaní."
+      ]
+    },
+    {
+      "family_id": "13878",
+      "source_table": "palula-i-decl-extension.tsv",
+      "evidence": [
+        {
+          "record_id": "f_d6oho7dkvavmi",
+          "family_id": "13878",
+          "citation": "šumaáṇ",
+          "gloss": "trouser-cord",
+          "inflected": "šumaṇí",
+          "citation_outcome": "L",
+          "citation_position": "1",
+          "inflected_outcome": "S",
+          "inflected_position": "1",
+          "quantity_pattern": "SL",
+          "inflected_quantity_pattern": "SSS",
+          "status": "consistent",
+          "analysis": "The full source inflection accents final i. Citation accent is retained as a separate outcome; the class was selected by consonant-final citation and source i-declension, not by either accent. ",
+          "description": "Inflection: i-decl (Obl, pl): šumaṇí"
+        }
+      ],
+      "annotation": "The trouser-cord noun joins the non-aa/ee extension sample, with final -í but no ee umlaut in this pair.",
+      "cells": [
+        "[syū́man](entry:13878) — trouser-cord",
+        "[šumaáṇ](form:f_d6oho7dkvavmi) / *šumaṇí*",
+        "L → final -í",
+        "The trouser-cord noun joins the non-aa/ee extension sample, with final -í but no ee umlaut in this pair."
+      ]
+    }
+  ],
+  "dras": [
+    {
+      "family_id": "12326",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "roof",
+          "plural": "ʃʌro:ɳéh",
+          "suffix": "-eh/-eɦ",
+          "plural_stress_from_right": "1",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"ʃʌró:ɳ\"]",
+          "singular_stress": "[1]",
+          "singular_ids": "[\"f_owz3hu5jg7axk\"]",
+          "plural_id": "f_6yyktgwn5xkfi",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "186",
+          "manual_lexical_note": "The matched source forms were inspected. The plural ending and its accent are retained as printed; no etymology is assigned from a shared English gloss alone. Research comparison: śaraṇá (12326), protecting; shelter, home. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "12326",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Final eh/eɦ is an independently identified suffix; compare final versus retained stem marks without defining membership by acute placement.",
+          "final_vowel_accented": "1",
+          "acute_count": "1",
+          "suffix_accent_status": "final-accent-only"
+        }
+      ],
+      "annotation": "Roof: the plural has final-only accent; the candidate singular has root accent. The shelter/roof semantic link is straightforward.",
+      "cells": [
+        "[śaraṇá](entry:12326) — roof",
+        "[ʃʌro:ɳéh](form:f_6yyktgwn5xkfi)",
+        "Final only",
+        "Roof: the plural has final-only accent; the candidate singular has root accent. The shelter/roof semantic link is straightforward."
+      ]
+    },
+    {
+      "family_id": "7047",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "tube",
+          "plural": "na:lyéh",
+          "suffix": "-eh/-eɦ",
+          "plural_stress_from_right": "1",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"na:lí:\"]",
+          "singular_stress": "[1]",
+          "singular_ids": "[\"f_mkujfsamx7lww\"]",
+          "plural_id": "f_mecchxwbk4v6s",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "195",
+          "manual_lexical_note": "Tube nāli/nālyeh is an i-derived form within the reed/channel complex. Do not transfer the unextended bamboo headword’s accent to it. Research comparison: nāḍī́ (7047), tubular stalk of any plant, tubular organ, tube. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "7047",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Final eh/eɦ is an independently identified suffix; compare final versus retained stem marks without defining membership by acute placement.",
+          "final_vowel_accented": "1",
+          "acute_count": "1",
+          "suffix_accent_status": "final-accent-only"
+        }
+      ],
+      "annotation": "Tube: final yéh follows an i-derived stem. Compare nāḍī́, rather than assigning the accent of an unextended bamboo noun.",
+      "cells": [
+        "[nāḍī́](entry:7047) — tube",
+        "[na:lyéh](form:f_mecchxwbk4v6s)",
+        "Final only",
+        "Tube: final yéh follows an i-derived stem. Compare nāḍī́, rather than assigning the accent of an unextended bamboo noun."
+      ]
+    },
+    {
+      "family_id": "5488",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "barber",
+          "plural": "ʈhʌkuréh",
+          "suffix": "-eh/-eɦ",
+          "plural_stress_from_right": "1",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"ʈhʌkúr\"]",
+          "singular_stress": "[1]",
+          "singular_ids": "[\"f_hnbmnbmkfznda\"]",
+          "plural_id": "f_7du73gc342cha",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "242",
+          "manual_lexical_note": "Barber thakur is a regionally circulating title/occupation word within the ṭhakkura comparison. Its accented eh is an inflectional adaptation, not a direct old-accent reflex. Research comparison: ṭhakkura (5488), idol, deity (cf. <i>ḍhakkārī</i>-),; title. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "5488",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Final eh/eɦ is an independently identified suffix; compare final versus retained stem marks without defining membership by acute placement.",
+          "final_vowel_accented": "1",
+          "acute_count": "1",
+          "suffix_accent_status": "final-accent-only"
+        }
+      ],
+      "annotation": "Barber is a regional title/occupation word. Its final-accented plural illustrates local inflection, not direct Sanskrit accent retention.",
+      "cells": [
+        "[ṭhakkura](entry:5488) — barber",
+        "[ʈhʌkuréh](form:f_7du73gc342cha)",
+        "Final only",
+        "Barber is a regional title/occupation word. Its final-accented plural illustrates local inflection, not direct Sanskrit accent retention."
+      ]
+    },
+    {
+      "family_id": "14028",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "hammer",
+          "plural": "əʈhó:réh",
+          "suffix": "-eh/-eɦ",
+          "plural_stress_from_right": "",
+          "plural_outcome": "multiple-stress",
+          "singulars": "[\"əʈhó:ra\"]",
+          "singular_stress": "[2]",
+          "singular_ids": "[\"f_z4oeirwfi5wzy\"]",
+          "plural_id": "f_bekmf4gzkvfts",
+          "family_ids": "[]",
+          "plural_description": "pl. (sledge",
+          "review_index": "244",
+          "manual_lexical_note": "Hammer aṭho:ra/aṭho:reh retains the root acute and adds another on eh. The hastakūṭa-derived regional hammer family is plausible; contact and fossilized compound history remain open. Research comparison: *hastakūṭa (14028), hand hammer. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "14028",
+          "primary_check": "exact printed passage inspected",
+          "morphological_assessment": "Final eh/eɦ is an independently identified suffix; compare final versus retained stem marks without defining membership by acute placement.",
+          "final_vowel_accented": "1",
+          "acute_count": "2",
+          "suffix_accent_status": "final-plus-other-accent"
+        }
+      ],
+      "annotation": "Hammer has TWO acute marks in print. Final accent is present, but replacing this with a final-only transcription would falsify the source.",
+      "cells": [
+        "[*hastakūṭa](entry:14028) — hammer",
+        "[əʈhó:réh](form:f_bekmf4gzkvfts)",
+        "Final + stem",
+        "Hammer has TWO acute marks in print. Final accent is present, but replacing this with a final-only transcription would falsify the source."
+      ]
+    },
+    {
+      "family_id": "3202",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "nail",
+          "plural": "kí:lyéh",
+          "suffix": "-eh/-eɦ",
+          "plural_stress_from_right": "",
+          "plural_outcome": "multiple-stress",
+          "singulars": "[\"kí:li\"]",
+          "singular_stress": "[2]",
+          "singular_ids": "[\"f_ph2uiffkpegvq\"]",
+          "plural_id": "f_eqecsfyzwv674",
+          "family_ids": "[\"3202\"]",
+          "plural_description": "",
+          "review_index": "182",
+          "manual_lexical_note": "Nail vocabulary prints kí:l yéh with a space and two accents; the merged DB form kí:lyéh retains both. This may be a clitic-like/plural expression or inconsistent accent typography; do not silently remove the root mark. Research comparison: kīla (3202), stake, peg, tumour. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "3202",
+          "primary_check": "exact printed passage inspected",
+          "morphological_assessment": "Final eh/eɦ is an independently identified suffix; compare final versus retained stem marks without defining membership by acute placement.",
+          "final_vowel_accented": "1",
+          "acute_count": "2",
+          "suffix_accent_status": "final-plus-other-accent"
+        }
+      ],
+      "annotation": "Nail also retains two acutes; print separates kí:l yéh. A clitic-like expression or inconsistent typography remains possible.",
+      "cells": [
+        "[kīla](entry:3202) — nail",
+        "[kí:lyéh](form:f_eqecsfyzwv674)",
+        "Final + stem",
+        "Nail also retains two acutes; print separates kí:l yéh. A clitic-like expression or inconsistent typography remains possible."
+      ]
+    },
+    {
+      "family_id": "12497",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "head",
+          "plural": "ʂíʐe",
+          "suffix": "-e",
+          "plural_stress_from_right": "2",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"ʂíʂ\"]",
+          "singular_stress": "[1]",
+          "singular_ids": "[\"f_23svgfvh74tuu\"]",
+          "plural_id": "f_tc55mtuopm7me",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "94",
+          "manual_lexical_note": "The matched source forms were inspected. The plural ending and its accent are retained as printed; no etymology is assigned from a shared English gloss alone. Research comparison: śīrṣá (12497), head, skull. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "12497",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Plain e/i must distinguish suffix addition, vowel replacement, glide formation, syncope and lexical stem alternants; the source marks are not normalized to the majority pattern.",
+          "final_vowel_accented": "0",
+          "acute_count": "1",
+          "suffix_accent_status": "stem-accent-only"
+        }
+      ],
+      "annotation": "Head: plain -e is unaccented. Consonant alternation in the candidate singular/plural is separate from stress location.",
+      "cells": [
+        "[śīrṣá](entry:12497) — head",
+        "[ʂíʐe](form:f_tc55mtuopm7me)",
+        "Stem only",
+        "Head: plain -e is unaccented. Consonant alternation in the candidate singular/plural is separate from stress location."
+      ]
+    },
+    {
+      "family_id": "10394",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "liver",
+          "plural": "yú:ŋe",
+          "suffix": "-e",
+          "plural_stress_from_right": "2",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"yú:ŋ\"]",
+          "singular_stress": "[1]",
+          "singular_ids": "[\"f_76feiecokbojk\"]",
+          "plural_id": "f_pw3jtn2xowmns",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "100",
+          "manual_lexical_note": "The matched source forms were inspected. The plural ending and its accent are retained as printed; no etymology is assigned from a shared English gloss alone. Research comparison: yákr̥t (10394), liver. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "10394",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Plain e/i must distinguish suffix addition, vowel replacement, glide formation, syncope and lexical stem alternants; the source marks are not normalized to the majority pattern.",
+          "final_vowel_accented": "0",
+          "acute_count": "1",
+          "suffix_accent_status": "stem-accent-only"
+        }
+      ],
+      "annotation": "Liver: root stress survives before plain -e; vowel length does not force accent onto the ending.",
+      "cells": [
+        "[yákr̥t](entry:10394) — liver",
+        "[yú:ŋe](form:f_pw3jtn2xowmns)",
+        "Stem only",
+        "Liver: root stress survives before plain -e; vowel length does not force accent onto the ending."
+      ]
+    },
+    {
+      "family_id": "10582",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "rope",
+          "plural": "ráʒe",
+          "suffix": "-e",
+          "plural_stress_from_right": "2",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"ráʒu\"]",
+          "singular_stress": "[2]",
+          "singular_ids": "[\"f_svmrxzq7octqg\"]",
+          "plural_id": "f_vt7kf2ylx7th2",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "188",
+          "manual_lexical_note": "The matched source forms were inspected. The plural ending and its accent are retained as printed; no etymology is assigned from a shared English gloss alone. Research comparison: rájju (10582), rope, cord. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "10582",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Plain e/i must distinguish suffix addition, vowel replacement, glide formation, syncope and lexical stem alternants; the source marks are not normalized to the majority pattern.",
+          "final_vowel_accented": "0",
+          "acute_count": "1",
+          "suffix_accent_status": "stem-accent-only"
+        }
+      ],
+      "annotation": "Rope: a candidate -u singular alternates with plural -e, with accent remaining on the root.",
+      "cells": [
+        "[rájju](entry:10582) — rope",
+        "[ráʒe](form:f_vt7kf2ylx7th2)",
+        "Stem only",
+        "Rope: a candidate -u singular alternates with plural -e, with accent remaining on the root."
+      ]
+    },
+    {
+      "family_id": "4701",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "skin",
+          "plural": "ʧóme",
+          "suffix": "-e",
+          "plural_stress_from_right": "2",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"ʧóm\"]",
+          "singular_stress": "[1]",
+          "singular_ids": "[\"f_apc4x6cvn7zc4\"]",
+          "plural_id": "f_766uzyhomkxfs",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "105",
+          "manual_lexical_note": "The matched source forms were inspected. The plural ending and its accent are retained as printed; no etymology is assigned from a shared English gloss alone. Research comparison: cárman (4701), hide, skin. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "4701",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Plain e/i must distinguish suffix addition, vowel replacement, glide formation, syncope and lexical stem alternants; the source marks are not normalized to the majority pattern.",
+          "final_vowel_accented": "0",
+          "acute_count": "1",
+          "suffix_accent_status": "stem-accent-only"
+        }
+      ],
+      "annotation": "Skin: the consonant-final stem is followed by unaccented -e; the inherited family link does not itself predict this modern suffix behavior.",
+      "cells": [
+        "[cárman](entry:4701) — skin",
+        "[ʧóme](form:f_766uzyhomkxfs)",
+        "Stem only",
+        "Skin: the consonant-final stem is followed by unaccented -e; the inherited family link does not itself predict this modern suffix behavior."
+      ]
+    },
+    {
+      "family_id": "7733",
+      "source_table": "dras-suffix-accent-review.tsv",
+      "evidence": [
+        {
+          "gloss": "leaf",
+          "plural": "pʌ́:ʈe",
+          "suffix": "-e",
+          "plural_stress_from_right": "2",
+          "plural_outcome": "stress-marked",
+          "singulars": "[\"pʌ́:ʈo\"]",
+          "singular_stress": "[2]",
+          "singular_ids": "[\"f_fnvlleq2socp2\"]",
+          "plural_id": "f_4674l576w3lu2",
+          "family_ids": "[]",
+          "plural_description": "",
+          "review_index": "223",
+          "manual_lexical_note": "The matched source forms were inspected. The plural ending and its accent are retained as printed; no etymology is assigned from a shared English gloss alone. Research comparison: páttra (7733), wing-feather; wing; leaf, petal; leaf of book. This links the root/lexeme, not each inflected cell directly to the old headword.",
+          "reviewed_family_comparison": "7733",
+          "primary_check": "database source citation and candidate lexemes inspected",
+          "morphological_assessment": "Plain e/i must distinguish suffix addition, vowel replacement, glide formation, syncope and lexical stem alternants; the source marks are not normalized to the majority pattern.",
+          "final_vowel_accented": "0",
+          "acute_count": "1",
+          "suffix_accent_status": "stem-accent-only"
+        }
+      ],
+      "annotation": "Leaf: the gender/number vowel changes while the root accent stays. Keep the two-mora root separate from the final vowel.",
+      "cells": [
+        "[páttra](entry:7733) — leaf",
+        "[pʌ́:ʈe](form:f_4674l576w3lu2)",
+        "Stem only",
+        "Leaf: the gender/number vowel changes while the root accent stays. Keep the two-mora root separate from the final vowel."
+      ]
+    }
+  ],
+  "numerals": [
+    {
+      "family_id": "2485",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "11",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_ry3n7zva57zx2",
+          "record_id": "f_ry3n7zva57zx2",
+          "form": "akóoš",
+          "gloss": "eleven",
+          "family_id": "2485",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula akóoš/akáaš has E in the final syllable; Kalkoti äkaáš has H2. Brokskat qudeš has initial stress and a distinct compound shape; Kundal yagáy marks final prominence without a recoverable mora contrast."
+        },
+        {
+          "numeral": "11",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_hypanhgngjtta",
+          "record_id": "f_hypanhgngjtta",
+          "form": "äkaáš",
+          "gloss": "eleven",
+          "family_id": "2485",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula akóoš/akáaš has E in the final syllable; Kalkoti äkaáš has H2. Brokskat qudeš has initial stress and a distinct compound shape; Kundal yagáy marks final prominence without a recoverable mora contrast."
+        }
+      ],
+      "annotation": "The compound retains an initial syllable, yet patterns with monosyllabic twelve and thirteen.",
+      "cells": [
+        "11 · [ḗkādaśa](entry:2485)",
+        "[akóoš](form:f_ry3n7zva57zx2)",
+        "[äkaáš](form:f_hypanhgngjtta)",
+        "E → H2. The compound retains an initial syllable, yet patterns with monosyllabic twelve and thirteen."
+      ]
+    },
+    {
+      "family_id": "6658",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "12",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_iu5minc42dt7i",
+          "record_id": "f_iu5minc42dt7i",
+          "form": "bóoš",
+          "gloss": "twelve",
+          "family_id": "6658",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula bóoš/báaš E versus Kalkoti baáš H2 is a real exception to the simple monosyllabic E→zero mapping, but it agrees with the independent ten-compound series. Shina baai vowel sequences require source-specific interpretation; Brokskat budeš has initial stress."
+        },
+        {
+          "numeral": "12",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_nqgd33l5hhkfo",
+          "record_id": "f_nqgd33l5hhkfo",
+          "form": "baáš",
+          "gloss": "twelve",
+          "family_id": "6658",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula bóoš/báaš E versus Kalkoti baáš H2 is a real exception to the simple monosyllabic E→zero mapping, but it agrees with the independent ten-compound series. Shina baai vowel sequences require source-specific interpretation; Brokskat budeš has initial stress."
+        }
+      ],
+      "annotation": "A residual of simple E → zero-High becomes a regular member of the ten-compound series.",
+      "cells": [
+        "12 · [dvā́daśa](entry:6658)",
+        "[bóoš](form:f_iu5minc42dt7i)",
+        "[baáš](form:f_nqgd33l5hhkfo)",
+        "E → H2. A residual of simple E → zero-High becomes a regular member of the ten-compound series."
+      ]
+    },
+    {
+      "family_id": "6001",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "13",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_ewzpbbjprv3hu",
+          "record_id": "f_ewzpbbjprv3hu",
+          "form": "tríiš",
+          "gloss": "thirteen",
+          "family_id": "6001",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula tríiš/tréeš E versus Kalkoti treéš H2 belongs to the same ten-compound pattern as twelve. Brokskat trobeš is unmarked in print, not assigned initial stress by analogy. Shina often contracts to a vowel sequence or monosyllable."
+        },
+        {
+          "numeral": "13",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_kg3kpvjbpbbwo",
+          "record_id": "f_kg3kpvjbpbbwo",
+          "form": "treéš",
+          "gloss": "thirteen",
+          "family_id": "6001",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula tríiš/tréeš E versus Kalkoti treéš H2 belongs to the same ten-compound pattern as twelve. Brokskat trobeš is unmarked in print, not assigned initial stress by analogy. Shina often contracts to a vowel sequence or monosyllable."
+        }
+      ],
+      "annotation": "Early Palula tríiš is explicit; rewriting it as late would remove the very correspondence to explain.",
+      "cells": [
+        "13 · [tráyōdaśa](entry:6001)",
+        "[tríiš](form:f_ewzpbbjprv3hu)",
+        "[treéš](form:f_kg3kpvjbpbbwo)",
+        "E → H2. Early Palula tríiš is explicit; rewriting it as late would remove the very correspondence to explain."
+      ]
+    },
+    {
+      "family_id": "4605",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "14",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_fd7tddjso7t6o",
+          "record_id": "f_fd7tddjso7t6o",
+          "form": "čandíiš",
+          "gloss": "fourteen",
+          "family_id": "4605",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula čandíiš/čandéeš E corresponds to Kalkoti čändeéš H2. Shina includes initial-long, medial-short and final-short marked variants, with different syllable reductions. Brokskat cuudeš and Ushojo cadʌš have initial stress; the western High pattern is not universal Shinaic final stress."
+        },
+        {
+          "numeral": "14",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_vllxcglp6ecfs",
+          "record_id": "f_vllxcglp6ecfs",
+          "form": "čändeéš",
+          "gloss": "fourteen",
+          "family_id": "4605",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula čandíiš/čandéeš E corresponds to Kalkoti čändeéš H2. Shina includes initial-long, medial-short and final-short marked variants, with different syllable reductions. Brokskat cuudeš and Ushojo cadʌš have initial stress; the western High pattern is not universal Shinaic final stress."
+        }
+      ],
+      "annotation": "The ten element carries the compared accent; the initial constituent does not attract it.",
+      "cells": [
+        "14 · [cáturdaśa](entry:4605)",
+        "[čandíiš](form:f_fd7tddjso7t6o)",
+        "[čändeéš](form:f_vllxcglp6ecfs)",
+        "E → H2. The ten element carries the compared accent; the initial constituent does not attract it."
+      ]
+    },
+    {
+      "family_id": "7662",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "15",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_irdjwtnn2inog",
+          "record_id": "f_irdjwtnn2inog",
+          "form": "panǰíiš",
+          "gloss": "fifteen",
+          "family_id": "7662",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula panǰíiš/panǰéeš E corresponds to Kalkoti pänǰeéš H2. Shina preserves several differently expanded formations with final prominence; Brokskat pããdeš has initial stress. Unmarked Sauji variants do not establish an E/L value."
+        },
+        {
+          "numeral": "15",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_tovy6amcooz6o",
+          "record_id": "f_tovy6amcooz6o",
+          "form": "pänǰeéš",
+          "gloss": "fifteen",
+          "family_id": "7662",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula panǰíiš/panǰéeš E corresponds to Kalkoti pänǰeéš H2. Shina preserves several differently expanded formations with final prominence; Brokskat pããdeš has initial stress. Unmarked Sauji variants do not establish an E/L value."
+        }
+      ],
+      "annotation": "The same E → H2 correspondence continues with another independently recognizable first constituent.",
+      "cells": [
+        "15 · [páñcadaśa](entry:7662)",
+        "[panǰíiš](form:f_irdjwtnn2inog)",
+        "[pänǰeéš](form:f_tovy6amcooz6o)",
+        "E → H2. The same E → H2 correspondence continues with another independently recognizable first constituent."
+      ]
+    },
+    {
+      "family_id": "12812",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "16",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_zw6hwi6npjnfw",
+          "record_id": "f_zw6hwi6npjnfw",
+          "form": "ṣoṛíiš",
+          "gloss": "sixteen",
+          "family_id": "12812",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula ṣoṛíiš/ṣoṛéeš E corresponds to Kalkoti ṣureéš H2. Shina contracted ṣoo(y/i) variants and Brokskat ṣobeš are different surface formations; Brokskat has initial stress. A different stem spelling does not erase the independent ten-compound membership."
+        },
+        {
+          "numeral": "16",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_atl6hyfrf52qo",
+          "record_id": "f_atl6hyfrf52qo",
+          "form": "ṣureéš",
+          "gloss": "sixteen",
+          "family_id": "12812",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula ṣoṛíiš/ṣoṛéeš E corresponds to Kalkoti ṣureéš H2. Shina contracted ṣoo(y/i) variants and Brokskat ṣobeš are different surface formations; Brokskat has initial stress. A different stem spelling does not erase the independent ten-compound membership."
+        }
+      ],
+      "annotation": "Segmental reshaping of “six” does not change the series-level accent correspondence.",
+      "cells": [
+        "16 · [ṣṓḍaśa](entry:12812)",
+        "[ṣoṛíiš](form:f_zw6hwi6npjnfw)",
+        "[ṣureéš](form:f_atl6hyfrf52qo)",
+        "E → H2. Segmental reshaping of “six” does not change the series-level accent correspondence."
+      ]
+    },
+    {
+      "family_id": "13146",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "17",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_menivji7rndby",
+          "record_id": "f_menivji7rndby",
+          "form": "satóoš",
+          "gloss": "seventeen",
+          "family_id": "13146",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula satóoš/satáaš E corresponds to Kalkoti sätaáš H2. Unlike the earlier Brokskat teens, sattõõš has final stress. Shina final accented aa precedes y/i material whose syllabicity varies by source."
+        },
+        {
+          "numeral": "17",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_vxf6owtctrkca",
+          "record_id": "f_vxf6owtctrkca",
+          "form": "sätaáš",
+          "gloss": "seventeen",
+          "family_id": "13146",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula satóoš/satáaš E corresponds to Kalkoti sätaáš H2. Unlike the earlier Brokskat teens, sattõõš has final stress. Shina final accented aa precedes y/i material whose syllabicity varies by source."
+        }
+      ],
+      "annotation": "Palula oo and Kalkoti aa differ in quality while preserving this E → H2 pairing.",
+      "cells": [
+        "17 · [saptádaśa](entry:13146)",
+        "[satóoš](form:f_menivji7rndby)",
+        "[sätaáš](form:f_vxf6owtctrkca)",
+        "E → H2. Palula oo and Kalkoti aa differ in quality while preserving this E → H2 pairing."
+      ]
+    },
+    {
+      "family_id": "946",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "18",
+          "formation_class": "ten-compound-series",
+          "language": "Phal",
+          "analysis_token_id": "f_cc4kwqzog2vbs",
+          "record_id": "f_cc4kwqzog2vbs",
+          "form": "aṣṭóoš",
+          "gloss": "eighteen",
+          "family_id": "946",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "E@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula aṣṭóoš/aṣṭáaš E corresponds to Kalkoti iṣṭaáš H2. Brokskat aṣṭõš also has final stress. The independent ten-compound series includes both mono- and polysyllabic modern words; its common Kalkoti H2 cannot be reduced to current syllable count."
+        },
+        {
+          "numeral": "18",
+          "formation_class": "ten-compound-series",
+          "language": "Kalk",
+          "analysis_token_id": "f_lfwqpy7l2tgf4",
+          "record_id": "f_lfwqpy7l2tgf4",
+          "form": "iṣṭaáš",
+          "gloss": "eighteen",
+          "family_id": "946",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H2@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula aṣṭóoš/aṣṭáaš E corresponds to Kalkoti iṣṭaáš H2. Brokskat aṣṭõš also has final stress. The independent ten-compound series includes both mono- and polysyllabic modern words; its common Kalkoti H2 cannot be reduced to current syllable count."
+        }
+      ],
+      "annotation": "The eighth ten-compound completes the observed series; shared morphology makes the examples dependent.",
+      "cells": [
+        "18 · [aṣṭā́daśa](entry:946)",
+        "[aṣṭóoš](form:f_cc4kwqzog2vbs)",
+        "[iṣṭaáš](form:f_lfwqpy7l2tgf4)",
+        "E → H2. The eighth ten-compound completes the observed series; shared morphology makes the examples dependent."
+      ]
+    },
+    {
+      "family_id": "2411",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "19",
+          "formation_class": "nineteen-comparison",
+          "language": "Phal",
+          "analysis_token_id": "f_g3otitvt6nhqg",
+          "record_id": "f_g3otitvt6nhqg",
+          "form": "aṇabhiíš",
+          "gloss": "nineteen",
+          "family_id": "2411",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "L@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula aṇabhiíš L and Kalkoti änbíiš H1 contain the twenty element, unlike 11–18 ten compounds. Their correspondence matches Palula bhiíš L/Kalkoti bíiš H1 twenty. Shina kuniih and Brokskat kunjaa have different one-less formations, so no identical whole-compound accent history is assumed."
+        },
+        {
+          "numeral": "19",
+          "formation_class": "nineteen-comparison",
+          "language": "Kalk",
+          "analysis_token_id": "f_562ykmpnojsxq",
+          "record_id": "f_562ykmpnojsxq",
+          "form": "änbíiš",
+          "gloss": "nineteen",
+          "family_id": "2411",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H1@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula aṇabhiíš L and Kalkoti änbíiš H1 contain the twenty element, unlike 11–18 ten compounds. Their correspondence matches Palula bhiíš L/Kalkoti bíiš H1 twenty. Shina kuniih and Brokskat kunjaa have different one-less formations, so no identical whole-compound accent history is assumed."
+        }
+      ],
+      "annotation": "The twenty-based formation follows twenty’s L → H1 correspondence, not the preceding eight numerals.",
+      "cells": [
+        "19 · [ūnaviṁśati](entry:2411)",
+        "[aṇabhiíš](form:f_g3otitvt6nhqg)",
+        "[änbíiš](form:f_562ykmpnojsxq)",
+        "L → H1. The twenty-based formation follows twenty’s L → H1 correspondence, not the preceding eight numerals."
+      ]
+    },
+    {
+      "family_id": "11616",
+      "source_table": "numeral-series-records.tsv",
+      "evidence": [
+        {
+          "numeral": "20",
+          "formation_class": "twenty-control",
+          "language": "Phal",
+          "analysis_token_id": "f_6pzjkzzpb25ng#1",
+          "record_id": "f_6pzjkzzpb25ng",
+          "form": "bhiíš",
+          "gloss": "twenty; the twenty sth or people; 20",
+          "family_id": "11616",
+          "source": "liljegren",
+          "dialect": "",
+          "outcome": "L@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula bhiíš L corresponds to Kalkoti bíiš H1; Shina commonly has bií L, Kundal bī̌ rising, and Brokskat bižaa final syllable stress. Survey biš panj under twenty contains five as well and is not a clean twenty citation; preserve it with an explicit exclusion."
+        },
+        {
+          "numeral": "20",
+          "formation_class": "twenty-control",
+          "language": "Kalk",
+          "analysis_token_id": "f_7jfvb5xq3n4mi",
+          "record_id": "f_7jfvb5xq3n4mi",
+          "form": "bíiš",
+          "gloss": "twenty",
+          "family_id": "11616",
+          "source": "hultman2023kalkoti",
+          "dialect": "dialect:Kalk:HKAT-xka:Kalkot%20%28HKAT%29",
+          "outcome": "H1@-1",
+          "exclusion": "",
+          "reading_issues": "",
+          "analysis": "Palula bhiíš L corresponds to Kalkoti bíiš H1; Shina commonly has bií L, Kundal bī̌ rising, and Brokskat bižaa final syllable stress. Survey biš panj under twenty contains five as well and is not a clean twenty citation; preserve it with an explicit exclusion."
+        }
+      ],
+      "annotation": "The base for the preceding twenty-element formation supplies an independent morphological control.",
+      "cells": [
+        "20 · [viṁśatí](entry:11616)",
+        "[bhiíš](form:f_6pzjkzzpb25ng)",
+        "[bíiš](form:f_7jfvb5xq3n4mi)",
+        "L → H1. The base for the preceding twenty-element formation supplies an independent morphological control."
+      ]
+    }
+  ]
+}

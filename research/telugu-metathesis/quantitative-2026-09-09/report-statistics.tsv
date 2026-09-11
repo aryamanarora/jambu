@@ -1,0 +1,537 @@
+Statistic	Value	Source_File	Selection
+Telugu D-bearing families	117	family-class-counts.tsv	primary / ALL / Telugu / N_D_Bearing
+Telugu D/R denominator	313	family-class-counts.tsv	primary / ALL / Telugu / N_DR_Informative
+Telugu reviewed-attested denominator	370	family-class-counts.tsv	primary / ALL / Telugu / N_Attested_Reviewed
+Telugu mixed families	51	family-class-counts.tsv	primary / ALL / Telugu / N_Mixed_DR
+Telugu sensitivity D	113	family-class-counts.tsv	sensitivity / ALL / Telugu / N_D_Bearing
+Telugu sensitivity DR	286	family-class-counts.tsv	sensitivity / ALL / Telugu / N_DR_Informative
+Telugu sensitivity reviewed	334	family-class-counts.tsv	sensitivity / ALL / Telugu / N_Attested_Reviewed
+reviewed_entries	409	quantitative-results.json	reviewed_entries
+primary_families	403	quantitative-results.json	primary_families
+sensitivity_families	365	quantitative-results.json	sensitivity_families
+raw_language_ids	46	quantitative-results.json	raw_language_ids
+time_aggregated_language_groups	43	quantitative-results.json	time_aggregated_language_groups
+family_class_count_rows	19823	quantitative-results.json	family_class_count_rows
+membership_rows	429312	quantitative-results.json	membership_rows
+reviewed_entries	409	analysis-progress.json	reviewed_entries
+reviewed_language_cells	3658	analysis-progress.json	reviewed_language_cells
+evidence_record_links	9823	analysis-progress.json	evidence_record_links
+unique_cited_form_ids	9742	analysis-progress.json	unique_cited_form_ids
+cited_supplemental_observations	81	analysis-progress.json	cited_supplemental_observations
+all_records_in_reviewed_groups	17558	analysis-progress.json	all_records_in_reviewed_groups
+linkage_errors	0	analysis-progress.json	linkage_errors
+all_dedr_groups	5548	coverage-results.json	all_dedr_groups
+current_reviewed_entries	409	coverage-results.json	current_reviewed_entries
+remaining_dedr_groups	5139	coverage-results.json	remaining_dedr_groups
+telugu_bearing_dedr_groups	2701	coverage-results.json	telugu_bearing_dedr_groups
+reviewed_telugu_bearing_dedr_groups	375	coverage-results.json	reviewed_telugu_bearing_dedr_groups
+remaining_telugu_bearing_dedr_groups	2326	coverage-results.json	remaining_telugu_bearing_dedr_groups
+independent_input_screen_groups	3489	coverage-results.json	independent_input_screen_groups
+input_screen_reviewed_groups	388	coverage-results.json	input_screen_reviewed_groups
+input_screen_pending_groups	3101	coverage-results.json	input_screen_pending_groups
+prior_cluster_groups	116	coverage-results.json	prior_cluster_groups
+prior_cluster_now_fully_reviewed	116	coverage-results.json	prior_cluster_now_fully_reviewed
+prior_cluster_not_currently_fully_reviewed	0	coverage-results.json	prior_cluster_not_currently_fully_reviewed
+historical_observations	14	auxiliary-results.json	historical_observations
+unlinked_records_assessed	18	auxiliary-results.json	unlinked_records_assessed
+kunha_published_pairs	30	auxiliary-results.json	kunha_published_pairs
+source_paradigms	55	auxiliary-results.json	source_paradigms
+counterexample-to-obligatory-application	134	quantitative-results.json	broad_obligatory_test / counterexample-to-obligatory-application
+consistent-D	55	quantitative-results.json	broad_obligatory_test / consistent-D
+not-decisive	46	quantitative-results.json	broad_obligatory_test / not-decisive
+total_forms	677797	input-manifest.json	total_forms
+total_edges	357003	input-manifest.json	total_edges
+selected_records	162451	input-manifest.json	selected_records
+research_groups	53253	input-manifest.json	research_groups
+dedr_groups	5548	input-manifest.json	dedr_groups
+telugu_bearing_groups	3191	input-manifest.json	telugu_bearing_groups
+telugu_bearing_dedr_groups	2701	input-manifest.json	telugu_bearing_dedr_groups
+Telugu quantity: short-from-consonantal-input	21/21	formation-class-counts.tsv	Telugu / cluster / short-from-consonantal-input
+Telugu quantity: long-if-displaced	25/33	formation-class-counts.tsv	Telugu / full / long-if-displaced
+Telugu quantity: short-if-displaced	8/8	formation-class-counts.tsv	Telugu / full / short-if-displaced
+long-apical-input / consonantal/no-vowel	0/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / long-apical-input / consonantal/no-vowel
+long-apical-input / high-u	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / long-apical-input / high-u
+long-apical-input / mixed/unknown-formative	2/7	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / long-apical-input / mixed/unknown-formative
+mixed-across-related-entries	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / mixed-across-related-entries
+mixed-or-uncertain-quantity / high-u	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / mixed-or-uncertain-quantity / high-u
+mixed-or-uncertain-quantity / low-a	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / mixed-or-uncertain-quantity / low-a
+mixed-or-uncertain-quantity / mixed/unknown-formative	22/31	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / mixed-or-uncertain-quantity / mixed/unknown-formative
+nasal-or-nasal-cluster-input / high-i	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nasal-or-nasal-cluster-input / high-i
+nasal-or-nasal-cluster-input / high-u	0/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nasal-or-nasal-cluster-input / high-u
+nasal-or-nasal-cluster-input / low-a	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nasal-or-nasal-cluster-input / low-a
+nasal-or-nasal-cluster-input / mixed/unknown-formative	0/10	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nasal-or-nasal-cluster-input / mixed/unknown-formative
+nasal-quotative-morphology / mixed/unknown-formative	1/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nasal-quotative-morphology / mixed/unknown-formative
+nonapical-or-uncertain-input / consonantal/no-vowel	0/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nonapical-or-uncertain-input / consonantal/no-vowel
+nonapical-or-uncertain-input / high-u	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nonapical-or-uncertain-input / high-u
+nonapical-or-uncertain-input / low-a	0/3	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nonapical-or-uncertain-input / low-a
+nonapical-or-uncertain-input / mixed/unknown-formative	0/19	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / nonapical-or-uncertain-input / mixed/unknown-formative
+pronominal-morphology / mixed/unknown-formative	1/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / pronominal-morphology / mixed/unknown-formative
+short-C-initial-other-apical / consonantal/no-vowel	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-other-apical / consonantal/no-vowel
+short-C-initial-other-apical / high-u	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-other-apical / high-u
+short-C-initial-other-apical / low-a	0/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-other-apical / low-a
+short-C-initial-other-apical / mixed/unknown-formative	0/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-other-apical / mixed/unknown-formative
+short-C-initial-r-rhotics-retroflex-approximant / consonantal/no-vowel	2/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-r-rhotics-retroflex-approximant / consonantal/no-vowel
+short-C-initial-r-rhotics-retroflex-approximant / high-i	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-r-rhotics-retroflex-approximant / high-i
+short-C-initial-r-rhotics-retroflex-approximant / high-u	2/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-r-rhotics-retroflex-approximant / high-u
+short-C-initial-r-rhotics-retroflex-approximant / low-a	14/17	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-r-rhotics-retroflex-approximant / low-a
+short-C-initial-r-rhotics-retroflex-approximant / mixed/unknown-formative	35/38	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-C-initial-r-rhotics-retroflex-approximant / mixed/unknown-formative
+short-strong-or-mixed-structure / consonantal/no-vowel	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-strong-or-mixed-structure / consonantal/no-vowel
+short-strong-or-mixed-structure / high-i	0/3	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-strong-or-mixed-structure / high-i
+short-strong-or-mixed-structure / high-u	0/2	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-strong-or-mixed-structure / high-u
+short-strong-or-mixed-structure / low-a	0/6	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-strong-or-mixed-structure / low-a
+short-strong-or-mixed-structure / mixed/unknown-formative	2/20	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-strong-or-mixed-structure / mixed/unknown-formative
+short-vowel-initial-singleton-apical / consonantal/no-vowel	0/0	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-vowel-initial-singleton-apical / consonantal/no-vowel
+short-vowel-initial-singleton-apical / high-i	3/9	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-vowel-initial-singleton-apical / high-i
+short-vowel-initial-singleton-apical / high-u	3/19	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-vowel-initial-singleton-apical / high-u
+short-vowel-initial-singleton-apical / low-a	18/48	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-vowel-initial-singleton-apical / low-a
+short-vowel-initial-singleton-apical / mixed/unknown-formative	12/53	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / short-vowel-initial-singleton-apical / mixed/unknown-formative
+uncertain-initial-order / mixed/unknown-formative	0/1	family-class-counts.tsv	primary / Domain_Following_Vowel / Telugu / uncertain-initial-order / mixed/unknown-formative
+AluKurumba N_D_Bearing	0	family-class-counts.tsv	primary / ALL / AluKurumba / N_D_Bearing
+AluKurumba N_DR_Informative	0	family-class-counts.tsv	primary / ALL / AluKurumba / N_DR_Informative
+AluKurumba N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / AluKurumba / N_Attested_Reviewed
+AluKurumba N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / AluKurumba / N_Mixed_DR
+Badaga N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Badaga / N_D_Bearing
+Badaga N_DR_Informative	125	family-class-counts.tsv	primary / ALL / Badaga / N_DR_Informative
+Badaga N_Attested_Reviewed	169	family-class-counts.tsv	primary / ALL / Badaga / N_Attested_Reviewed
+Badaga N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Badaga / N_Mixed_DR
+Belari N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Belari / N_D_Bearing
+Belari N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Belari / N_DR_Informative
+Belari N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Belari / N_Attested_Reviewed
+Belari N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Belari / N_Mixed_DR
+BettaKurumba N_D_Bearing	0	family-class-counts.tsv	primary / ALL / BettaKurumba / N_D_Bearing
+BettaKurumba N_DR_Informative	0	family-class-counts.tsv	primary / ALL / BettaKurumba / N_DR_Informative
+BettaKurumba N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / BettaKurumba / N_Attested_Reviewed
+BettaKurumba N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / BettaKurumba / N_Mixed_DR
+Brahui N_D_Bearing	7	family-class-counts.tsv	primary / ALL / Brahui / N_D_Bearing
+Brahui N_DR_Informative	32	family-class-counts.tsv	primary / ALL / Brahui / N_DR_Informative
+Brahui N_Attested_Reviewed	56	family-class-counts.tsv	primary / ALL / Brahui / N_Attested_Reviewed
+Brahui N_Mixed_DR	3	family-class-counts.tsv	primary / ALL / Brahui / N_Mixed_DR
+Eravallan N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Eravallan / N_D_Bearing
+Eravallan N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Eravallan / N_DR_Informative
+Eravallan N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Eravallan / N_Attested_Reviewed
+Eravallan N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Eravallan / N_Mixed_DR
+Gadaba N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Gadaba / N_D_Bearing
+Gadaba N_DR_Informative	75	family-class-counts.tsv	primary / ALL / Gadaba / N_DR_Informative
+Gadaba N_Attested_Reviewed	104	family-class-counts.tsv	primary / ALL / Gadaba / N_Attested_Reviewed
+Gadaba N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Gadaba / N_Mixed_DR
+Gondi N_D_Bearing	17	family-class-counts.tsv	primary / ALL / Gondi / N_D_Bearing
+Gondi N_DR_Informative	139	family-class-counts.tsv	primary / ALL / Gondi / N_DR_Informative
+Gondi N_Attested_Reviewed	173	family-class-counts.tsv	primary / ALL / Gondi / N_Attested_Reviewed
+Gondi N_Mixed_DR	8	family-class-counts.tsv	primary / ALL / Gondi / N_Mixed_DR
+Irula N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Irula / N_D_Bearing
+Irula N_DR_Informative	2	family-class-counts.tsv	primary / ALL / Irula / N_DR_Informative
+Irula N_Attested_Reviewed	13	family-class-counts.tsv	primary / ALL / Irula / N_Attested_Reviewed
+Irula N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Irula / N_Mixed_DR
+Kadar N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kadar / N_D_Bearing
+Kadar N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Kadar / N_DR_Informative
+Kadar N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Kadar / N_Attested_Reviewed
+Kadar N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kadar / N_Mixed_DR
+Kannada N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kannada / N_D_Bearing
+Kannada N_DR_Informative	272	family-class-counts.tsv	primary / ALL / Kannada / N_DR_Informative
+Kannada N_Attested_Reviewed	295	family-class-counts.tsv	primary / ALL / Kannada / N_Attested_Reviewed
+Kannada N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kannada / N_Mixed_DR
+Kodagu N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kodagu / N_D_Bearing
+Kodagu N_DR_Informative	112	family-class-counts.tsv	primary / ALL / Kodagu / N_DR_Informative
+Kodagu N_Attested_Reviewed	133	family-class-counts.tsv	primary / ALL / Kodagu / N_Attested_Reviewed
+Kodagu N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kodagu / N_Mixed_DR
+Kolami N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kolami / N_D_Bearing
+Kolami N_DR_Informative	64	family-class-counts.tsv	primary / ALL / Kolami / N_DR_Informative
+Kolami N_Attested_Reviewed	120	family-class-counts.tsv	primary / ALL / Kolami / N_Attested_Reviewed
+Kolami N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kolami / N_Mixed_DR
+Konda N_D_Bearing	35	family-class-counts.tsv	primary / ALL / Konda / N_D_Bearing
+Konda N_DR_Informative	127	family-class-counts.tsv	primary / ALL / Konda / N_DR_Informative
+Konda N_Attested_Reviewed	141	family-class-counts.tsv	primary / ALL / Konda / N_Attested_Reviewed
+Konda N_Mixed_DR	12	family-class-counts.tsv	primary / ALL / Konda / N_Mixed_DR
+Koraga N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Koraga / N_D_Bearing
+Koraga N_DR_Informative	19	family-class-counts.tsv	primary / ALL / Koraga / N_DR_Informative
+Koraga N_Attested_Reviewed	28	family-class-counts.tsv	primary / ALL / Koraga / N_Attested_Reviewed
+Koraga N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Koraga / N_Mixed_DR
+Kota N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kota / N_D_Bearing
+Kota N_DR_Informative	147	family-class-counts.tsv	primary / ALL / Kota / N_DR_Informative
+Kota N_Attested_Reviewed	174	family-class-counts.tsv	primary / ALL / Kota / N_Attested_Reviewed
+Kota N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kota / N_Mixed_DR
+Kudiya N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kudiya / N_D_Bearing
+Kudiya N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Kudiya / N_DR_Informative
+Kudiya N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Kudiya / N_Attested_Reviewed
+Kudiya N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kudiya / N_Mixed_DR
+Kui N_D_Bearing	75	family-class-counts.tsv	primary / ALL / Kui / N_D_Bearing
+Kui N_DR_Informative	115	family-class-counts.tsv	primary / ALL / Kui / N_DR_Informative
+Kui N_Attested_Reviewed	154	family-class-counts.tsv	primary / ALL / Kui / N_Attested_Reviewed
+Kui N_Mixed_DR	12	family-class-counts.tsv	primary / ALL / Kui / N_Mixed_DR
+Kurumba N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kurumba / N_D_Bearing
+Kurumba N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Kurumba / N_DR_Informative
+Kurumba N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Kurumba / N_Attested_Reviewed
+Kurumba N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kurumba / N_Mixed_DR
+Kurux N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Kurux / N_D_Bearing
+Kurux N_DR_Informative	50	family-class-counts.tsv	primary / ALL / Kurux / N_DR_Informative
+Kurux N_Attested_Reviewed	74	family-class-counts.tsv	primary / ALL / Kurux / N_Attested_Reviewed
+Kurux N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Kurux / N_Mixed_DR
+Kuwi N_D_Bearing	60	family-class-counts.tsv	primary / ALL / Kuwi / N_D_Bearing
+Kuwi N_DR_Informative	117	family-class-counts.tsv	primary / ALL / Kuwi / N_DR_Informative
+Kuwi N_Attested_Reviewed	149	family-class-counts.tsv	primary / ALL / Kuwi / N_Attested_Reviewed
+Kuwi N_Mixed_DR	18	family-class-counts.tsv	primary / ALL / Kuwi / N_Mixed_DR
+MalaMalasar N_D_Bearing	0	family-class-counts.tsv	primary / ALL / MalaMalasar / N_D_Bearing
+MalaMalasar N_DR_Informative	0	family-class-counts.tsv	primary / ALL / MalaMalasar / N_DR_Informative
+MalaMalasar N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / MalaMalasar / N_Attested_Reviewed
+MalaMalasar N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / MalaMalasar / N_Mixed_DR
+MalaPulaya N_D_Bearing	0	family-class-counts.tsv	primary / ALL / MalaPulaya / N_D_Bearing
+MalaPulaya N_DR_Informative	0	family-class-counts.tsv	primary / ALL / MalaPulaya / N_DR_Informative
+MalaPulaya N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / MalaPulaya / N_Attested_Reviewed
+MalaPulaya N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / MalaPulaya / N_Mixed_DR
+Malasar N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Malasar / N_D_Bearing
+Malasar N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Malasar / N_DR_Informative
+Malasar N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Malasar / N_Attested_Reviewed
+Malasar N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Malasar / N_Mixed_DR
+Malayalam N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Malayalam / N_D_Bearing
+Malayalam N_DR_Informative	257	family-class-counts.tsv	primary / ALL / Malayalam / N_DR_Informative
+Malayalam N_Attested_Reviewed	268	family-class-counts.tsv	primary / ALL / Malayalam / N_Attested_Reviewed
+Malayalam N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Malayalam / N_Mixed_DR
+Malto N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Malto / N_D_Bearing
+Malto N_DR_Informative	47	family-class-counts.tsv	primary / ALL / Malto / N_DR_Informative
+Malto N_Attested_Reviewed	65	family-class-counts.tsv	primary / ALL / Malto / N_Attested_Reviewed
+Malto N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Malto / N_Mixed_DR
+Manda N_D_Bearing	28	family-class-counts.tsv	primary / ALL / Manda / N_D_Bearing
+Manda N_DR_Informative	54	family-class-counts.tsv	primary / ALL / Manda / N_DR_Informative
+Manda N_Attested_Reviewed	69	family-class-counts.tsv	primary / ALL / Manda / N_Attested_Reviewed
+Manda N_Mixed_DR	2	family-class-counts.tsv	primary / ALL / Manda / N_Mixed_DR
+Mannan N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Mannan / N_D_Bearing
+Mannan N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Mannan / N_DR_Informative
+Mannan N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Mannan / N_Attested_Reviewed
+Mannan N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Mannan / N_Mixed_DR
+Muduga N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Muduga / N_D_Bearing
+Muduga N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Muduga / N_DR_Informative
+Muduga N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Muduga / N_Attested_Reviewed
+Muduga N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Muduga / N_Mixed_DR
+Muthuvan N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Muthuvan / N_D_Bearing
+Muthuvan N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Muthuvan / N_DR_Informative
+Muthuvan N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Muthuvan / N_Attested_Reviewed
+Muthuvan N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Muthuvan / N_Mixed_DR
+Naiki N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Naiki / N_D_Bearing
+Naiki N_DR_Informative	28	family-class-counts.tsv	primary / ALL / Naiki / N_DR_Informative
+Naiki N_Attested_Reviewed	45	family-class-counts.tsv	primary / ALL / Naiki / N_Attested_Reviewed
+Naiki N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Naiki / N_Mixed_DR
+Naikri N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Naikri / N_D_Bearing
+Naikri N_DR_Informative	49	family-class-counts.tsv	primary / ALL / Naikri / N_DR_Informative
+Naikri N_Attested_Reviewed	84	family-class-counts.tsv	primary / ALL / Naikri / N_Attested_Reviewed
+Naikri N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Naikri / N_Mixed_DR
+Paliya N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Paliya / N_D_Bearing
+Paliya N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Paliya / N_DR_Informative
+Paliya N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Paliya / N_Attested_Reviewed
+Paliya N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Paliya / N_Mixed_DR
+PaluKurumba N_D_Bearing	0	family-class-counts.tsv	primary / ALL / PaluKurumba / N_D_Bearing
+PaluKurumba N_DR_Informative	0	family-class-counts.tsv	primary / ALL / PaluKurumba / N_DR_Informative
+PaluKurumba N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / PaluKurumba / N_Attested_Reviewed
+PaluKurumba N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / PaluKurumba / N_Mixed_DR
+Parji N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Parji / N_D_Bearing
+Parji N_DR_Informative	93	family-class-counts.tsv	primary / ALL / Parji / N_DR_Informative
+Parji N_Attested_Reviewed	114	family-class-counts.tsv	primary / ALL / Parji / N_Attested_Reviewed
+Parji N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Parji / N_Mixed_DR
+Pengo N_D_Bearing	34	family-class-counts.tsv	primary / ALL / Pengo / N_D_Bearing
+Pengo N_DR_Informative	74	family-class-counts.tsv	primary / ALL / Pengo / N_DR_Informative
+Pengo N_Attested_Reviewed	89	family-class-counts.tsv	primary / ALL / Pengo / N_Attested_Reviewed
+Pengo N_Mixed_DR	4	family-class-counts.tsv	primary / ALL / Pengo / N_Mixed_DR
+Sholaga N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Sholaga / N_D_Bearing
+Sholaga N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Sholaga / N_DR_Informative
+Sholaga N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Sholaga / N_Attested_Reviewed
+Sholaga N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Sholaga / N_Mixed_DR
+Tamil N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Tamil / N_D_Bearing
+Tamil N_DR_Informative	303	family-class-counts.tsv	primary / ALL / Tamil / N_DR_Informative
+Tamil N_Attested_Reviewed	315	family-class-counts.tsv	primary / ALL / Tamil / N_Attested_Reviewed
+Tamil N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Tamil / N_Mixed_DR
+Telugu N_D_Bearing	117	family-class-counts.tsv	primary / ALL / Telugu / N_D_Bearing
+Telugu N_DR_Informative	313	family-class-counts.tsv	primary / ALL / Telugu / N_DR_Informative
+Telugu N_Attested_Reviewed	370	family-class-counts.tsv	primary / ALL / Telugu / N_Attested_Reviewed
+Telugu N_Mixed_DR	51	family-class-counts.tsv	primary / ALL / Telugu / N_Mixed_DR
+Toda N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Toda / N_D_Bearing
+Toda N_DR_Informative	110	family-class-counts.tsv	primary / ALL / Toda / N_DR_Informative
+Toda N_Attested_Reviewed	153	family-class-counts.tsv	primary / ALL / Toda / N_Attested_Reviewed
+Toda N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Toda / N_Mixed_DR
+Tulu N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Tulu / N_D_Bearing
+Tulu N_DR_Informative	201	family-class-counts.tsv	primary / ALL / Tulu / N_DR_Informative
+Tulu N_Attested_Reviewed	226	family-class-counts.tsv	primary / ALL / Tulu / N_Attested_Reviewed
+Tulu N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Tulu / N_Mixed_DR
+Urali N_D_Bearing	0	family-class-counts.tsv	primary / ALL / Urali / N_D_Bearing
+Urali N_DR_Informative	0	family-class-counts.tsv	primary / ALL / Urali / N_DR_Informative
+Urali N_Attested_Reviewed	0	family-class-counts.tsv	primary / ALL / Urali / N_Attested_Reviewed
+Urali N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / Urali / N_Mixed_DR
+markodi N_D_Bearing	0	family-class-counts.tsv	primary / ALL / markodi / N_D_Bearing
+markodi N_DR_Informative	22	family-class-counts.tsv	primary / ALL / markodi / N_DR_Informative
+markodi N_Attested_Reviewed	24	family-class-counts.tsv	primary / ALL / markodi / N_Attested_Reviewed
+markodi N_Mixed_DR	0	family-class-counts.tsv	primary / ALL / markodi / N_Mixed_DR
+Badaga / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_Input_Families
+Badaga / Telugu / N_Common_DR_Informative	106	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_Common_DR_Informative
+Badaga / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_Both_D_Bearing
+Badaga / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_A_D_B_R
+Badaga / Telugu / N_A_R_B_D	44	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_A_R_B_D
+Badaga / Telugu / N_Both_R_No_D	62	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_Both_R_No_D
+Badaga / Telugu / N_Common_With_Mixed_Cell	27	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_Common_With_Mixed_Cell
+Badaga / Telugu / N_Excluded_Not_Common_Informative	297	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Badaga / Telugu / N_Excluded_Not_Common_Informative
+Brahui / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_Input_Families
+Brahui / Telugu / N_Common_DR_Informative	28	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_Common_DR_Informative
+Brahui / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_Both_D_Bearing
+Brahui / Telugu / N_A_D_B_R	5	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_A_D_B_R
+Brahui / Telugu / N_A_R_B_D	14	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_A_R_B_D
+Brahui / Telugu / N_Both_R_No_D	9	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_Both_R_No_D
+Brahui / Telugu / N_Common_With_Mixed_Cell	12	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_Common_With_Mixed_Cell
+Brahui / Telugu / N_Excluded_Not_Common_Informative	375	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Brahui / Telugu / N_Excluded_Not_Common_Informative
+Gadaba / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_Input_Families
+Gadaba / Telugu / N_Common_DR_Informative	70	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_Common_DR_Informative
+Gadaba / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_Both_D_Bearing
+Gadaba / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_A_D_B_R
+Gadaba / Telugu / N_A_R_B_D	33	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_A_R_B_D
+Gadaba / Telugu / N_Both_R_No_D	37	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_Both_R_No_D
+Gadaba / Telugu / N_Common_With_Mixed_Cell	17	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_Common_With_Mixed_Cell
+Gadaba / Telugu / N_Excluded_Not_Common_Informative	333	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gadaba / Telugu / N_Excluded_Not_Common_Informative
+Gondi / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_Input_Families
+Gondi / Telugu / N_Common_DR_Informative	115	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_Common_DR_Informative
+Gondi / Telugu / N_Both_D_Bearing	10	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_Both_D_Bearing
+Gondi / Telugu / N_A_D_B_R	3	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_A_D_B_R
+Gondi / Telugu / N_A_R_B_D	42	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_A_R_B_D
+Gondi / Telugu / N_Both_R_No_D	60	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_Both_R_No_D
+Gondi / Telugu / N_Common_With_Mixed_Cell	29	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_Common_With_Mixed_Cell
+Gondi / Telugu / N_Excluded_Not_Common_Informative	288	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Gondi / Telugu / N_Excluded_Not_Common_Informative
+Irula / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_Input_Families
+Irula / Telugu / N_Common_DR_Informative	2	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_Common_DR_Informative
+Irula / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_Both_D_Bearing
+Irula / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_A_D_B_R
+Irula / Telugu / N_A_R_B_D	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_A_R_B_D
+Irula / Telugu / N_Both_R_No_D	2	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_Both_R_No_D
+Irula / Telugu / N_Common_With_Mixed_Cell	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_Common_With_Mixed_Cell
+Irula / Telugu / N_Excluded_Not_Common_Informative	401	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Irula / Telugu / N_Excluded_Not_Common_Informative
+Kannada / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_Input_Families
+Kannada / Telugu / N_Common_DR_Informative	235	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_Common_DR_Informative
+Kannada / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_Both_D_Bearing
+Kannada / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_A_D_B_R
+Kannada / Telugu / N_A_R_B_D	90	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_A_R_B_D
+Kannada / Telugu / N_Both_R_No_D	145	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_Both_R_No_D
+Kannada / Telugu / N_Common_With_Mixed_Cell	47	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_Common_With_Mixed_Cell
+Kannada / Telugu / N_Excluded_Not_Common_Informative	168	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kannada / Telugu / N_Excluded_Not_Common_Informative
+Kodagu / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_Input_Families
+Kodagu / Telugu / N_Common_DR_Informative	102	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_Common_DR_Informative
+Kodagu / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_Both_D_Bearing
+Kodagu / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_A_D_B_R
+Kodagu / Telugu / N_A_R_B_D	42	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_A_R_B_D
+Kodagu / Telugu / N_Both_R_No_D	60	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_Both_R_No_D
+Kodagu / Telugu / N_Common_With_Mixed_Cell	27	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_Common_With_Mixed_Cell
+Kodagu / Telugu / N_Excluded_Not_Common_Informative	301	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kodagu / Telugu / N_Excluded_Not_Common_Informative
+Kolami / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_Input_Families
+Kolami / Telugu / N_Common_DR_Informative	58	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_Common_DR_Informative
+Kolami / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_Both_D_Bearing
+Kolami / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_A_D_B_R
+Kolami / Telugu / N_A_R_B_D	16	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_A_R_B_D
+Kolami / Telugu / N_Both_R_No_D	42	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_Both_R_No_D
+Kolami / Telugu / N_Common_With_Mixed_Cell	11	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_Common_With_Mixed_Cell
+Kolami / Telugu / N_Excluded_Not_Common_Informative	345	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kolami / Telugu / N_Excluded_Not_Common_Informative
+Konda / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_Input_Families
+Konda / Telugu / N_Common_DR_Informative	113	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_Common_DR_Informative
+Konda / Telugu / N_Both_D_Bearing	22	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_Both_D_Bearing
+Konda / Telugu / N_A_D_B_R	8	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_A_D_B_R
+Konda / Telugu / N_A_R_B_D	26	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_A_R_B_D
+Konda / Telugu / N_Both_R_No_D	57	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_Both_R_No_D
+Konda / Telugu / N_Common_With_Mixed_Cell	36	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_Common_With_Mixed_Cell
+Konda / Telugu / N_Excluded_Not_Common_Informative	290	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Konda / Telugu / N_Excluded_Not_Common_Informative
+Koraga / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_Input_Families
+Koraga / Telugu / N_Common_DR_Informative	17	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_Common_DR_Informative
+Koraga / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_Both_D_Bearing
+Koraga / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_A_D_B_R
+Koraga / Telugu / N_A_R_B_D	9	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_A_R_B_D
+Koraga / Telugu / N_Both_R_No_D	8	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_Both_R_No_D
+Koraga / Telugu / N_Common_With_Mixed_Cell	5	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_Common_With_Mixed_Cell
+Koraga / Telugu / N_Excluded_Not_Common_Informative	386	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Koraga / Telugu / N_Excluded_Not_Common_Informative
+Kota / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_Input_Families
+Kota / Telugu / N_Common_DR_Informative	129	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_Common_DR_Informative
+Kota / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_Both_D_Bearing
+Kota / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_A_D_B_R
+Kota / Telugu / N_A_R_B_D	58	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_A_R_B_D
+Kota / Telugu / N_Both_R_No_D	71	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_Both_R_No_D
+Kota / Telugu / N_Common_With_Mixed_Cell	34	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_Common_With_Mixed_Cell
+Kota / Telugu / N_Excluded_Not_Common_Informative	274	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kota / Telugu / N_Excluded_Not_Common_Informative
+Kui / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_Input_Families
+Kui / Telugu / N_Common_DR_Informative	91	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_Common_DR_Informative
+Kui / Telugu / N_Both_D_Bearing	38	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_Both_D_Bearing
+Kui / Telugu / N_A_D_B_R	18	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_A_D_B_R
+Kui / Telugu / N_A_R_B_D	6	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_A_R_B_D
+Kui / Telugu / N_Both_R_No_D	29	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_Both_R_No_D
+Kui / Telugu / N_Common_With_Mixed_Cell	26	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_Common_With_Mixed_Cell
+Kui / Telugu / N_Excluded_Not_Common_Informative	312	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kui / Telugu / N_Excluded_Not_Common_Informative
+Kurux / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_Input_Families
+Kurux / Telugu / N_Common_DR_Informative	43	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_Common_DR_Informative
+Kurux / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_Both_D_Bearing
+Kurux / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_A_D_B_R
+Kurux / Telugu / N_A_R_B_D	19	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_A_R_B_D
+Kurux / Telugu / N_Both_R_No_D	24	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_Both_R_No_D
+Kurux / Telugu / N_Common_With_Mixed_Cell	12	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_Common_With_Mixed_Cell
+Kurux / Telugu / N_Excluded_Not_Common_Informative	360	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kurux / Telugu / N_Excluded_Not_Common_Informative
+Kuwi / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_Input_Families
+Kuwi / Telugu / N_Common_DR_Informative	93	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_Common_DR_Informative
+Kuwi / Telugu / N_Both_D_Bearing	29	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_Both_D_Bearing
+Kuwi / Telugu / N_A_D_B_R	13	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_A_D_B_R
+Kuwi / Telugu / N_A_R_B_D	14	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_A_R_B_D
+Kuwi / Telugu / N_Both_R_No_D	37	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_Both_R_No_D
+Kuwi / Telugu / N_Common_With_Mixed_Cell	33	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_Common_With_Mixed_Cell
+Kuwi / Telugu / N_Excluded_Not_Common_Informative	310	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Kuwi / Telugu / N_Excluded_Not_Common_Informative
+Malayalam / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_Input_Families
+Malayalam / Telugu / N_Common_DR_Informative	213	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_Common_DR_Informative
+Malayalam / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_Both_D_Bearing
+Malayalam / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_A_D_B_R
+Malayalam / Telugu / N_A_R_B_D	88	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_A_R_B_D
+Malayalam / Telugu / N_Both_R_No_D	125	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_Both_R_No_D
+Malayalam / Telugu / N_Common_With_Mixed_Cell	45	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_Common_With_Mixed_Cell
+Malayalam / Telugu / N_Excluded_Not_Common_Informative	190	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malayalam / Telugu / N_Excluded_Not_Common_Informative
+Malto / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_Input_Families
+Malto / Telugu / N_Common_DR_Informative	39	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_Common_DR_Informative
+Malto / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_Both_D_Bearing
+Malto / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_A_D_B_R
+Malto / Telugu / N_A_R_B_D	18	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_A_R_B_D
+Malto / Telugu / N_Both_R_No_D	21	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_Both_R_No_D
+Malto / Telugu / N_Common_With_Mixed_Cell	11	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_Common_With_Mixed_Cell
+Malto / Telugu / N_Excluded_Not_Common_Informative	364	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Malto / Telugu / N_Excluded_Not_Common_Informative
+Manda / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_Input_Families
+Manda / Telugu / N_Common_DR_Informative	41	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_Common_DR_Informative
+Manda / Telugu / N_Both_D_Bearing	13	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_Both_D_Bearing
+Manda / Telugu / N_A_D_B_R	6	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_A_D_B_R
+Manda / Telugu / N_A_R_B_D	4	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_A_R_B_D
+Manda / Telugu / N_Both_R_No_D	18	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_Both_R_No_D
+Manda / Telugu / N_Common_With_Mixed_Cell	7	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_Common_With_Mixed_Cell
+Manda / Telugu / N_Excluded_Not_Common_Informative	362	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Manda / Telugu / N_Excluded_Not_Common_Informative
+Naiki / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_Input_Families
+Naiki / Telugu / N_Common_DR_Informative	27	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_Common_DR_Informative
+Naiki / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_Both_D_Bearing
+Naiki / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_A_D_B_R
+Naiki / Telugu / N_A_R_B_D	6	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_A_R_B_D
+Naiki / Telugu / N_Both_R_No_D	21	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_Both_R_No_D
+Naiki / Telugu / N_Common_With_Mixed_Cell	4	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_Common_With_Mixed_Cell
+Naiki / Telugu / N_Excluded_Not_Common_Informative	376	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naiki / Telugu / N_Excluded_Not_Common_Informative
+Naikri / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_Input_Families
+Naikri / Telugu / N_Common_DR_Informative	44	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_Common_DR_Informative
+Naikri / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_Both_D_Bearing
+Naikri / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_A_D_B_R
+Naikri / Telugu / N_A_R_B_D	10	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_A_R_B_D
+Naikri / Telugu / N_Both_R_No_D	34	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_Both_R_No_D
+Naikri / Telugu / N_Common_With_Mixed_Cell	7	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_Common_With_Mixed_Cell
+Naikri / Telugu / N_Excluded_Not_Common_Informative	359	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Naikri / Telugu / N_Excluded_Not_Common_Informative
+Parji / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_Input_Families
+Parji / Telugu / N_Common_DR_Informative	83	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_Common_DR_Informative
+Parji / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_Both_D_Bearing
+Parji / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_A_D_B_R
+Parji / Telugu / N_A_R_B_D	40	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_A_R_B_D
+Parji / Telugu / N_Both_R_No_D	43	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_Both_R_No_D
+Parji / Telugu / N_Common_With_Mixed_Cell	20	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_Common_With_Mixed_Cell
+Parji / Telugu / N_Excluded_Not_Common_Informative	320	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Parji / Telugu / N_Excluded_Not_Common_Informative
+Pengo / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_Input_Families
+Pengo / Telugu / N_Common_DR_Informative	59	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_Common_DR_Informative
+Pengo / Telugu / N_Both_D_Bearing	17	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_Both_D_Bearing
+Pengo / Telugu / N_A_D_B_R	8	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_A_D_B_R
+Pengo / Telugu / N_A_R_B_D	9	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_A_R_B_D
+Pengo / Telugu / N_Both_R_No_D	25	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_Both_R_No_D
+Pengo / Telugu / N_Common_With_Mixed_Cell	15	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_Common_With_Mixed_Cell
+Pengo / Telugu / N_Excluded_Not_Common_Informative	344	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Pengo / Telugu / N_Excluded_Not_Common_Informative
+Tamil / Telugu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_Input_Families
+Tamil / Telugu / N_Common_DR_Informative	248	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_Common_DR_Informative
+Tamil / Telugu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_Both_D_Bearing
+Tamil / Telugu / N_A_D_B_R	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_A_D_B_R
+Tamil / Telugu / N_A_R_B_D	100	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_A_R_B_D
+Tamil / Telugu / N_Both_R_No_D	148	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_Both_R_No_D
+Tamil / Telugu / N_Common_With_Mixed_Cell	46	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_Common_With_Mixed_Cell
+Tamil / Telugu / N_Excluded_Not_Common_Informative	155	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Tamil / Telugu / N_Excluded_Not_Common_Informative
+Telugu / Toda / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_Input_Families
+Telugu / Toda / N_Common_DR_Informative	97	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_Common_DR_Informative
+Telugu / Toda / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_Both_D_Bearing
+Telugu / Toda / N_A_D_B_R	40	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_A_D_B_R
+Telugu / Toda / N_A_R_B_D	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_A_R_B_D
+Telugu / Toda / N_Both_R_No_D	57	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_Both_R_No_D
+Telugu / Toda / N_Common_With_Mixed_Cell	30	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_Common_With_Mixed_Cell
+Telugu / Toda / N_Excluded_Not_Common_Informative	306	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Toda / N_Excluded_Not_Common_Informative
+Telugu / Tulu / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_Input_Families
+Telugu / Tulu / N_Common_DR_Informative	172	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_Common_DR_Informative
+Telugu / Tulu / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_Both_D_Bearing
+Telugu / Tulu / N_A_D_B_R	69	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_A_D_B_R
+Telugu / Tulu / N_A_R_B_D	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_A_R_B_D
+Telugu / Tulu / N_Both_R_No_D	103	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_Both_R_No_D
+Telugu / Tulu / N_Common_With_Mixed_Cell	41	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_Common_With_Mixed_Cell
+Telugu / Tulu / N_Excluded_Not_Common_Informative	231	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / Tulu / N_Excluded_Not_Common_Informative
+Telugu / markodi / N_Input_Families	403	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_Input_Families
+Telugu / markodi / N_Common_DR_Informative	20	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_Common_DR_Informative
+Telugu / markodi / N_Both_D_Bearing	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_Both_D_Bearing
+Telugu / markodi / N_A_D_B_R	5	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_A_D_B_R
+Telugu / markodi / N_A_R_B_D	0	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_A_R_B_D
+Telugu / markodi / N_Both_R_No_D	15	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_Both_R_No_D
+Telugu / markodi / N_Common_With_Mixed_Cell	2	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_Common_With_Mixed_Cell
+Telugu / markodi / N_Excluded_Not_Common_Informative	383	pairwise-language-counts.tsv	primary / all-reviewed-inputs / Telugu / markodi / N_Excluded_Not_Common_Informative
+K80 Kui N_K80_Listed_Lowered	17	lowering-source-counts.tsv	Kui / N_K80_Listed_Lowered
+K80 Kui N_Selected_Positive_Examples	18	lowering-source-counts.tsv	Kui / N_Selected_Positive_Examples
+K80 Kui Listed_Lowered_Over_Selected	17/18	lowering-source-counts.tsv	Kui / Listed_Lowered_Over_Selected
+K80 Kui Known_Attestation_Adjusted_Denominator	17	lowering-source-counts.tsv	Kui / Known_Attestation_Adjusted_Denominator
+K80 Kui Lowered_Over_Explicitly_Nonmissing	17/17	lowering-source-counts.tsv	Kui / Lowered_Over_Explicitly_Nonmissing
+K80 Kuwi N_K80_Listed_Lowered	9	lowering-source-counts.tsv	Kuwi / N_K80_Listed_Lowered
+K80 Kuwi N_Selected_Positive_Examples	18	lowering-source-counts.tsv	Kuwi / N_Selected_Positive_Examples
+K80 Kuwi Listed_Lowered_Over_Selected	9/18	lowering-source-counts.tsv	Kuwi / Listed_Lowered_Over_Selected
+K80 Manda N_K80_Listed_Lowered	2	lowering-source-counts.tsv	Manda / N_K80_Listed_Lowered
+K80 Manda N_Selected_Positive_Examples	18	lowering-source-counts.tsv	Manda / N_Selected_Positive_Examples
+K80 Manda Listed_Lowered_Over_Selected	2/18	lowering-source-counts.tsv	Manda / Listed_Lowered_Over_Selected
+Kui / duplicate-compound / N_Records	1	stop-cluster-counts.tsv	Kui / duplicate-compound / N_Records
+Kui / duplicate-compound / N_Families	1	stop-cluster-counts.tsv	Kui / duplicate-compound / N_Families
+Kui / editorial-input-fragment / N_Records	1	stop-cluster-counts.tsv	Kui / editorial-input-fragment / N_Records
+Kui / editorial-input-fragment / N_Families	1	stop-cluster-counts.tsv	Kui / editorial-input-fragment / N_Families
+Kui / english-or-metadata-match / N_Records	18	stop-cluster-counts.tsv	Kui / english-or-metadata-match / N_Records
+Kui / english-or-metadata-match / N_Families	16	stop-cluster-counts.tsv	Kui / english-or-metadata-match / N_Families
+Kui / input-unresolved / N_Records	5	stop-cluster-counts.tsv	Kui / input-unresolved / N_Records
+Kui / input-unresolved / N_Families	5	stop-cluster-counts.tsv	Kui / input-unresolved / N_Families
+Kui / nominal-plural-control / N_Records	6	stop-cluster-counts.tsv	Kui / nominal-plural-control / N_Records
+Kui / nominal-plural-control / N_Families	6	stop-cluster-counts.tsv	Kui / nominal-plural-control / N_Families
+Kui / source-supported-verbal-input / N_Records	64	stop-cluster-counts.tsv	Kui / source-supported-verbal-input / N_Records
+Kui / source-supported-verbal-input / N_Families	61	stop-cluster-counts.tsv	Kui / source-supported-verbal-input / N_Families
+Kui / vowel-stem-plus-complex-pk-control / N_Records	3	stop-cluster-counts.tsv	Kui / vowel-stem-plus-complex-pk-control / N_Records
+Kui / vowel-stem-plus-complex-pk-control / N_Families	2	stop-cluster-counts.tsv	Kui / vowel-stem-plus-complex-pk-control / N_Families
+Kuwi / comparatively-supported-verbal-input / N_Records	2	stop-cluster-counts.tsv	Kuwi / comparatively-supported-verbal-input / N_Records
+Kuwi / comparatively-supported-verbal-input / N_Families	2	stop-cluster-counts.tsv	Kuwi / comparatively-supported-verbal-input / N_Families
+Kuwi / different-noninitial-contraction / N_Records	1	stop-cluster-counts.tsv	Kuwi / different-noninitial-contraction / N_Records
+Kuwi / different-noninitial-contraction / N_Families	1	stop-cluster-counts.tsv	Kuwi / different-noninitial-contraction / N_Families
+Kuwi / english-or-metadata-match / N_Records	14	stop-cluster-counts.tsv	Kuwi / english-or-metadata-match / N_Records
+Kuwi / english-or-metadata-match / N_Families	11	stop-cluster-counts.tsv	Kuwi / english-or-metadata-match / N_Families
+Kuwi / input-unresolved / N_Records	2	stop-cluster-counts.tsv	Kuwi / input-unresolved / N_Records
+Kuwi / input-unresolved / N_Families	2	stop-cluster-counts.tsv	Kuwi / input-unresolved / N_Families
+Kuwi / labial-stem-plus-velar-control / N_Records	8	stop-cluster-counts.tsv	Kuwi / labial-stem-plus-velar-control / N_Records
+Kuwi / labial-stem-plus-velar-control / N_Families	3	stop-cluster-counts.tsv	Kuwi / labial-stem-plus-velar-control / N_Families
+Kuwi / nominal-plural-control / N_Records	7	stop-cluster-counts.tsv	Kuwi / nominal-plural-control / N_Records
+Kuwi / nominal-plural-control / N_Families	5	stop-cluster-counts.tsv	Kuwi / nominal-plural-control / N_Families
+Kuwi / possible-retained-counterexample / N_Records	1	stop-cluster-counts.tsv	Kuwi / possible-retained-counterexample / N_Records
+Kuwi / possible-retained-counterexample / N_Families	1	stop-cluster-counts.tsv	Kuwi / possible-retained-counterexample / N_Families
+Pengo / english-or-metadata-match / N_Records	1	stop-cluster-counts.tsv	Pengo / english-or-metadata-match / N_Records
+Pengo / english-or-metadata-match / N_Families	1	stop-cluster-counts.tsv	Pengo / english-or-metadata-match / N_Families
+Pengo / input-unresolved / N_Records	6	stop-cluster-counts.tsv	Pengo / input-unresolved / N_Records
+Pengo / input-unresolved / N_Families	5	stop-cluster-counts.tsv	Pengo / input-unresolved / N_Families
+Pengo / nominal-plural-control / N_Records	1	stop-cluster-counts.tsv	Pengo / nominal-plural-control / N_Records
+Pengo / nominal-plural-control / N_Families	1	stop-cluster-counts.tsv	Pengo / nominal-plural-control / N_Families
+Pengo / source-supported-verbal-input / N_Records	5	stop-cluster-counts.tsv	Pengo / source-supported-verbal-input / N_Records
+Pengo / source-supported-verbal-input / N_Families	4	stop-cluster-counts.tsv	Pengo / source-supported-verbal-input / N_Families
+Pengo / word-boundary-control / N_Records	1	stop-cluster-counts.tsv	Pengo / word-boundary-control / N_Records
+Pengo / word-boundary-control / N_Families	1	stop-cluster-counts.tsv	Pengo / word-boundary-control / N_Families
+Manda / comparatively-supported-verbal-input / N_Records	2	stop-cluster-counts.tsv	Manda / comparatively-supported-verbal-input / N_Records
+Manda / comparatively-supported-verbal-input / N_Families	2	stop-cluster-counts.tsv	Manda / comparatively-supported-verbal-input / N_Families
+Manda / english-or-metadata-match / N_Records	1	stop-cluster-counts.tsv	Manda / english-or-metadata-match / N_Records
+Manda / english-or-metadata-match / N_Families	1	stop-cluster-counts.tsv	Manda / english-or-metadata-match / N_Families
+Manda / labial-stem-plus-velar-control / N_Records	1	stop-cluster-counts.tsv	Manda / labial-stem-plus-velar-control / N_Records
+Manda / labial-stem-plus-velar-control / N_Families	1	stop-cluster-counts.tsv	Manda / labial-stem-plus-velar-control / N_Families
+Manda / nominal-plural-control / N_Records	1	stop-cluster-counts.tsv	Manda / nominal-plural-control / N_Records
+Manda / nominal-plural-control / N_Families	1	stop-cluster-counts.tsv	Manda / nominal-plural-control / N_Families
+Complete stop screen records	152	stop-cluster-annotations.tsv	all rows
+Complete stop screen groups	123	stop-cluster-annotations.tsv	distinct Entry_ID
+Primary family mergers	6	family-partitions.tsv	distinct nonidentity Primary_Family_ID
+Sensitivity merger proposals	35	family-merge-sensitivity-proposals.tsv	all rows
+Kui / N_Input_Supported_Families	61	stop-rule-counts.tsv	Kui / N_Input_Supported_Families
+Kui / N_D	61	stop-rule-counts.tsv	Kui / N_D
+Kui / N_Possible_R	0	stop-rule-counts.tsv	Kui / N_Possible_R
+Kui / D_Over_All_Input_Supported	61/61	stop-rule-counts.tsv	Kui / D_Over_All_Input_Supported
+Kuwi / N_Input_Supported_Families	3	stop-rule-counts.tsv	Kuwi / N_Input_Supported_Families
+Kuwi / N_D	2	stop-rule-counts.tsv	Kuwi / N_D
+Kuwi / N_Possible_R	1	stop-rule-counts.tsv	Kuwi / N_Possible_R
+Kuwi / D_Over_All_Input_Supported	2/3	stop-rule-counts.tsv	Kuwi / D_Over_All_Input_Supported
+Pengo / N_Input_Supported_Families	4	stop-rule-counts.tsv	Pengo / N_Input_Supported_Families
+Pengo / N_D	4	stop-rule-counts.tsv	Pengo / N_D
+Pengo / N_Possible_R	0	stop-rule-counts.tsv	Pengo / N_Possible_R
+Pengo / D_Over_All_Input_Supported	4/4	stop-rule-counts.tsv	Pengo / D_Over_All_Input_Supported
+Manda / N_Input_Supported_Families	2	stop-rule-counts.tsv	Manda / N_Input_Supported_Families
+Manda / N_D	2	stop-rule-counts.tsv	Manda / N_D
+Manda / N_Possible_R	0	stop-rule-counts.tsv	Manda / N_Possible_R
+Manda / D_Over_All_Input_Supported	2/2	stop-rule-counts.tsv	Manda / D_Over_All_Input_Supported

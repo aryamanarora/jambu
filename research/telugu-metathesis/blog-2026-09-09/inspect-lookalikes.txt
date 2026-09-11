@@ -1,0 +1,120 @@
+
+ d3364 {"entry_id": "d3364", "family_id": "d3364", "concept": "jump, leap, be proud", "reconstruction": "*tuḷḷ-u", "c1": "t", "v1": "u", "v1_quantity": "short", "c2": "ḷḷ", "c2_structure": "singleton", "v2": "u", "structure": "CVCC-V", "grammatical_category": "verb/noun", "boundary_evidence": "Geminate root and subsequent derivatives, no reconstructible pre-vocalic rhotic.", "input_support": "Tamil tuḷḷu, Malayalam tuḷḷuka, Kannada tuḷḷu, Kodagu tuḷḷ and Tulu tuḷḷuni independently establish a geminate lateral with no additional rhotic.", "input_confidence": "high", "direction_argument": "The widespread southern form and Telugu tuḷḷu favor earlier t-u-ḷḷ. Telugu truḷḷu retains that whole sequence and adds r, so ordinary transposition cannot derive it without an extra unsupported ancestral rhotic.", "derivation": "*tuḷḷ-u > tuḷḷu; secondary literary r gives truḷḷu and its derivatives. K61 p.131 n.80 proposes hyperstandardization on the model of archaic Cr forms. This is a source proposal with strong segment-count evidence for addition, less direct evidence for its social mechanism.", "exception_notes": "A central negative control: initial tr does not guarantee metathesis. It is inappropriate to reconstruct **tur-uḷḷ solely from the Telugu outcome. Gondi tul could have simplified gemination or be related through contact; neither supplies the missing r. K61 citation was visually checked in the prior investigation; this run’s attempt to reopen p.131 reached the authorized preview limit and did not independently reverify the page.", "confidence": "medium", "references": "DEDR 3364; K61 p.131 n.80 (prior run page verification, reopened preview unavailable)", "eligibility": "secondary-r-control", "mechanism": "Secondary r; hyperstandardization plausible, not metathesis.", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D truḷḷagincu;truḷḷaginta;truḷḷinta;truḷḷu;truḷḷũbōtu;tuḷḷu
+Tamil R-bearing-no-D tuḷḷal;tuḷḷu
+Kannada R-bearing-no-D tuḷḷu
+Kui missing 
+Kuwi missing 
+Gondi R-bearing-no-D tul
+tuḷḷu f_io32mmrzksq4k R
+truḷḷu f_3kfngjktiueeo O
+truḷḷagincu f_fauktvmbokhbe O
+truḷḷũbōtu f_izof3z7ocfudq O
+truḷḷinta f_uwdxkemsmfwnk O
+truḷḷaginta f_yqmre5wjvln3s O
+
+ d1898 {"entry_id": "d1898", "family_id": "d1898", "concept": "sharp, pointed", "reconstruction": "*kūr; Telugu krūru possibly Sanskrit krūra", "c1": "k", "v1": "ū", "v1_quantity": "long", "c2": "r", "c2_structure": "singleton", "v2": "zero/u", "structure": "CVVC", "grammatical_category": "adjective/noun", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Tamil, Malayalam and Kannada kūr independently establish long ū and postvocalic r; Telugu krūru contains two rhotics, not a single exchanged r.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "A literal kūr > krūr requires duplication or a second rhotic formative. Sanskrit krūra is a competing comparison: Monier-Williams1899 p.322 includes hard/solid and sharp senses. Direct Telugu transmission is still unverified, so no borrowing label is assigned.", "derivation": "Possible secondary initial r in kūru on Cr models, or a loan/semantic convergence with krūra. Telugu kūci/kūcamu reflect a palatal derivative without initial apical movement.", "exception_notes": "Neither a short *kur-u root nor a second inherited r is justified by the output. Long-vowel and segment-number anomaly kept A. Check older dictionary etymology and sharp/cruel semantics to distinguish borrowing and native remodeling.", "confidence": "medium", "references": "DEDR 1898; current comparative cluster panel", "eligibility": "long-input-secondary-r-uncertain", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu other-and-uncertain krūru;kūcamu;kūci
+Tamil R-bearing-no-D kūr;kūrmai;kūrppu
+Kannada R-bearing-no-D kūr;kūritu;kūrpu
+Kui missing 
+Kuwi missing 
+Gondi missing 
+krūru f_uqpfv7at2apre A
+kūci f_qropkmrodhfd4 O
+kūcamu f_ir75kxhsvsh44 O
+
+ d3411 {"entry_id": "d3411", "family_id": "d3411", "concept": "ladle, wooden spoon, oar", "reconstruction": "regional *ta/teḍ-ḍ", "c1": "t/ṭ", "v1": "a/e", "v1_quantity": "short", "c2": "ḍ", "c2_structure": "geminate/short stop variants", "v2": "u", "structure": "CVC(C)-V", "grammatical_category": "noun", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Malto ṭaḍu and Kolami/Naikri teḍḍ independently support dental-retroflex order with no r.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "Telugu treḍḍu adds r beside teḍḍu and retains the original retroflex; no one-for-one exchange is evident.", "derivation": "Possible secondary r in teḍḍu > treḍḍu, perhaps analogical to other tool nouns with tr; alternatively a longer ancestral formation remains to identify.", "exception_notes": "A robust extra-segment control. Regional loan history can affect the full spoon word, but does not independently explain r. Need dated variants or an older full two-apical root.", "confidence": "medium", "references": "DEDR 3411; current comparative cluster panel", "eligibility": "secondary-r-input-unresolved", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D teḍḍu;treḍḍu
+Tamil missing 
+Kannada missing 
+Kui missing 
+Kuwi missing 
+Gondi missing 
+teḍḍu f_6l6evielbuuma R
+treḍḍu f_7a75pyar2zzwy A
+
+ d5368 {"entry_id": "d5368", "family_id": "d5368", "concept": "perch, alight; fly", "reconstruction": "*vāl; extra-r variant", "c1": "v", "v1": "ā", "v1_quantity": "long", "c2": "l", "c2_structure": "singleton", "v2": "zero/u", "structure": "CVVC", "grammatical_category": "verb", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Kannada vāluvike, Gadaba vāl and Parji vēl independently supply a long lateral root.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "Te vrālu retains l and adds r. Adjacent a-l reversal would yield vlā, not vrāl.", "derivation": "Possible secondary r in vālu>vrālu, analogy with other vrā verbs, or a longer ancestral root. No independent second apical is available.", "exception_notes": "Keep A. Compare5369 slope for possible shared polysemous root in sensitivity only; perching and inclination are a possible bridge, not proof. Need dated variants or fuller cognates.", "confidence": "medium", "references": "DEDR 5368; current comparative cluster panel", "eligibility": "secondary-r-input-unresolved", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D vrālu;vālu
+Tamil missing 
+Kannada R-bearing-no-D vāluvike
+Kui missing 
+Kuwi missing 
+Gondi missing 
+vālu f_tmq7uc3f4evu4 R
+vrālu f_fnoir4osz2vlc A
+
+ d5250 {"entry_id": "d5250", "family_id": "d5250", "concept": "stream, river, pit", "reconstruction": "regional *vant; extra-r variant", "c1": "v", "v1": "a", "v1_quantity": "short", "c2": "nt", "c2_structure": "nasal-stop", "v2": "zero/i", "structure": "CVNC", "grammatical_category": "noun", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Kolami/Naikri vanta and Telugu vanta independently supply a nasal-stop root without r.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "Telugu vranti adds r while retaining nt; this is not a simple permutation of the compared input.", "derivation": "Possible secondary r, contamination by a flow/channel root such as the source cross-references5296/5356, or an older two-apical compound; none is established.", "exception_notes": "Keep A for cluster. Need older full r-bearing form and source contexts for river versus pit. A word-initial cluster alone does not justify *var-anti.", "confidence": "medium", "references": "DEDR 5250; current comparative cluster panel", "eligibility": "secondary-r-input-unresolved", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D vanta;vranti
+Tamil missing 
+Kannada missing 
+Kui missing 
+Kuwi missing 
+Gondi missing 
+vanta f_wlqq7rh65e2km R
+vranti f_ajs4ykkpegpni A
+
+ d5555 {"entry_id": "d5555", "family_id": "d5555", "concept": "throw, strike, discharge", "reconstruction": "*wey; long grade and extra-r variants", "c1": "v", "v1": "e/ē", "v1_quantity": "short and long grades", "c2": "y", "c2_structure": "singleton", "v2": "zero/unknown", "structure": "CVC / CVVC", "grammatical_category": "verb/noun", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Konda vey and Kuvi ve/vēp independently supply a nonrhotic root. Telugu vēyu/vaicu likewise has no medial r.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "Te vrēyu/vrēṭu adds r absent from the comparative input; neither the glide nor dental can simply exchange with a vowel to supply it.", "derivation": "Possible analogical r in vēyu>vrēyu followed by derivative spread, or older fuller root/compound not yet identified. Labial/dental suffix alternations in eastern forms do not independently establish r.", "exception_notes": "Keep A, including vrēṭu strike noun and compound. Need early full rhotic witness or a demonstrable analogical model. Modern Telugu r-less variants cannot alone establish r loss as the first history.", "confidence": "medium", "references": "DEDR 5555; current comparative cluster panel", "eligibility": "secondary-r-input-unresolved", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D vaicu;vrēyu;vrē̃ta;vrēṭu;vrēṭu-gonu;vēyu;vē̃ta
+Tamil missing 
+Kannada R-bearing-no-D bese
+Kui not-reviewed 
+Kuwi R-bearing-no-D ve'- (vet-);vēnai;vēp- (-it-)
+Gondi missing 
+vēyu f_cjl2zbnyd27nk R
+vaicu f_6dduwy4gmls4w R
+vē̃ta f_7rg664cd6qs2k R
+vrēyu f_ruseyaaj5wulk A
+vrēṭu f_nqryvnvkmfbas A
+vrē̃ta f_iw2ctkrs6key2 A
+vrēṭu-gonu f_ckt6mljkqcckm A
+
+ d2090 {"entry_id": "d2090", "family_id": "d2090", "concept": "bastion, bulwark", "reconstruction": "regional *kottaḷ-am", "c1": "k", "v1": "o", "v1_quantity": "short", "c2": "tt", "c2_structure": "geminate", "v2": "a", "structure": "CVCCVC-VM", "grammatical_category": "noun", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Tamil/Malayalam kottaḷam and Kannada/Tulu kottaḷa establish an initial geminate dental, with no corresponding r.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "Telugu krottaḷamu retains the later lateral and adds r initially, so simple apical exchange is not supported.", "derivation": "Possible kottaḷam > kottaḷamu > krottaḷamu by secondary r or contamination with krotta new; alternatively an older rhotic source remains to find. Neither is established.", "exception_notes": "Fortification vocabulary may diffuse regionally, but the direction cannot be settled by shared form alone. Do not use similarity to krotta2149 as a proven etymology. Telugu ḷ/ḍ changes are separate.", "confidence": "medium", "references": "DEDR 2090; current comparative cluster panel", "eligibility": "secondary-r-input-unresolved", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D kottaḍamu;krottaḍamu;krottaḷamu
+Tamil R-bearing-no-D kottaḷam
+Kannada R-bearing-no-D kottala;kottaḷa
+Kui missing 
+Kuwi missing 
+Gondi missing 
+kottaḍamu f_72skzztwpgpds R
+krottaḷamu f_z2y7qgou2ra5i A
+krottaḍamu f_k5h3qhwsbaixw A
+
+ d4194 {"entry_id": "d4194", "family_id": "d4194", "concept": "burst, split, hatch, parch", "reconstruction": "*piḷ-i/a; competing Telugu *pir-al > *per-al", "c1": "p", "v1": "i/e", "v1_quantity": "short", "c2": "ḷ / alternative r", "c2_structure": "singleton", "v2": "i/a/unknown", "structure": "CVC-V / CVC-V-l / CVC-K", "grammatical_category": "verb/noun", "boundary_evidence": "Do not invent *peḷal to fit Telugu; lateral/rhotic competing families must remain explicit.", "input_support": "Tamil piḷ/piḷa, Malayalam piḷakka/piḷaruka and Kannada piḷigu support a lateral root, with independently distinct i/a formations. Telugu prēlu has both r and l, not a simple one-liquid reflex. K61 instead compares a rhotic separate root in entry 898 and reconstructs *pir-al for prēlu.", "input_confidence": "high for lateral group; low for uniquely linking Telugu prēlu", "direction_argument": "Southern lateral forms establish p-V-ḷ for the DEDR group and support Kui pl-. They do not alone establish the two-liquid input required by Telugu prēlu. Gondi rhotics cannot settle r versus ḷ because ḷ has rhotic reflexes there independently.", "derivation": "For the securely comparable eastern hatch stems, *piḷ-i/zero > plī/plin gives Kui plīva/pling(a), with stem-specific length and nasal morphology. Telugu alternatives: (1) K61 *pir-al > *per-al > prēlu > pēlu; (2) independently long/lengthened lateral pēlu with secondary literary r; (3) a two-liquid formation related to Malayalam piḷar- with a separate liquid-order change. None is established merely by fitting the modern form.", "exception_notes": "Keep Telugu uncertain, not an automatic exception to the narrow r/ṟ/ẓ restriction or a confirmed lateral metathesis. K61 p.437 entry 859 treats pēlu separately and allows derivation from prēlu; p.445 entry 901 supplies *per-al. Those page images were verified in the prior investigation, not reverified after this run hit preview limits. Kolami pēl could be independently lengthened or borrowed. Gadaba pēlsap is explicitly a Telugu loan. Homophonous prattle d4430 must remain distinct absent evidence of analogical transfer.", "confidence": "medium", "references": "DEDR 4194; K61 p.437 entry 859, p.445 entry 901 and comparison entry 898 (prior verified reading)", "eligibility": "input-cognacy-contested", "mechanism": "Eastern lateral displacement secure; Telugu root choice and possible secondary r unresolved.", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu uncertain-no-DR prēlalu;prēlcu;prēlu;prēlucu;prēlālu;pēlalu;pēlcu;pēlu;pēlucu;pēlālu
+Tamil R-bearing-no-D piḷ;piḷa;piḷappu;piḷavai;piḷavu;piḷāccu;pīḷal
+Kannada R-bearing-no-D hiḷgu;hiḷi;peḍasu;peḷavu;piḷigu
+Kui D-bearing-no-R pliki inba;plinga (plingi-);plipka;plīpa (plīt-);plīva (plīt-)
+Kuwi D-bearing-no-R brīpʰali;plih'nai
+Gondi R-bearing-no-D paṛ;pirr;pirrānā;piṛ;piṛh;piṛiˀ;piṛkānā;piṛus;piṛānā
+prēlu f_5ar2gmzibo4vy A
+prēlalu f_6v3hcnt3ugpio A
+prēlālu f_bnxyu5tpjz23y A
+prēlucu f_f7ckp3bzqrewu A
+prēlcu f_id34nwo6oqiws A
+pēlu f_jtukhddfkkp42 A
+pēlalu f_s4gl7v2pfyjge A
+pēlālu f_zilmpd65bdeb4 A
+pēlucu f_vmg2orqv2jblu A
+pēlcu f_vjzktxvpcjto6 A
+
+ d5087 {"entry_id": "d5087", "family_id": "d5087", "concept": "goat; old cluster word of unknown meaning", "reconstruction": "regional *mē-k; Old Telugu mṛ̆ēka unglossed", "c1": "m", "v1": "ē", "v1_quantity": "long", "c2": "k", "c2_structure": "singleton", "v2": "unknown", "structure": "CVVC", "grammatical_category": "noun", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Kannada mēke and central mēka/mēke support a goat word without a medial apical; source explicitly says Old Telugu mṛ̆ēka has unknown meaning.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "The unglossed Old Telugu cluster cannot establish metathesis of the goat word. Brahui mēṛ̆ẖ is expressly without etymology in the cited source.", "derivation": "Possible expressive mē bleat + k animal name, regional diffusion or Indo-Aryan relationship; no demonstrated full mar/mer antecedent. Old cluster word could be unrelated.", "exception_notes": "Exclude as a metathesis positive. Do not transfer goat gloss to the old form or Brahui word. Need the actual Old Telugu passage and semantic identification before proposing cognacy.", "confidence": "medium", "references": "DEDR 5087; current comparative cluster panel", "eligibility": "unknown-gloss-and-nonapical-control", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D mēka;mē̃ka;mṛ̆ēka
+Tamil missing 
+Kannada R-bearing-no-D mē;mēke
+Kui missing 
+Kuwi missing 
+Gondi R-bearing-no-D mekā;mēka
+mēka f_h5o6tqewvagvc R
+mē̃ka f_rje62z7x7apv2 R
+mṛ̆ēka f_6fx5qs3q536xq A
+
+ d4608 {"entry_id": "d4608", "family_id": "d4608", "concept": "smear, rub", "reconstruction": "regional *prām/prēm; earlier full order unknown", "c1": "p", "v1": "ā/ē", "v1_quantity": "unknown", "c2": "r", "c2_structure": "singleton", "v2": "unknown", "structure": "CCVV-C", "grammatical_category": "verb", "boundary_evidence": "Exact formative correspondence discussed in derivation; not inferred from output.", "input_support": "Only Telugu prāmu:pāmu and Manda prēmba are supplied; neither language supplies an independent medial-r antecedent.", "input_confidence": "Comparative order and exact formation confidence distinguished in support and exception notes", "direction_argument": "r loss prāmu>pāmu is possible, but the original full order cannot be established from two cluster forms.", "derivation": "Possible *par-am/*pir-amb > clusters remains speculative; alternatives include regional expressive formation or a loan adapted with a cluster. Manda ē versus Telugu ā is not explained.", "exception_notes": "A positive-looking cluster is deliberately not a D vote. Need a credible full cognate or dated derivation before reconstructing metathesis.", "confidence": "low", "references": "DEDR 4608; current comparative cluster panel", "eligibility": "no-independent-input", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu uncertain-no-DR prāmu;pāmu
+Tamil missing 
+Kannada missing 
+Kui missing 
+Kuwi missing 
+Gondi missing 
+prāmu f_v44qh6ew3bahg A
+pāmu f_csjrldeju2nnk A

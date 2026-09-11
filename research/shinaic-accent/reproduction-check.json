@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "input_hashes_checked": 8,
+  "scripts_rerun": 6,
+  "public_files_hash_checked": 12,
+  "exact_table_comparisons": {
+    "palula-nominal-screen.tsv": 187,
+    "palula-closed-aa-candidates.tsv": 227,
+    "palula-aa-imperatives.tsv": 34,
+    "shina-survey-selected.tsv": 692,
+    "shina-survey-matrix.tsv": 23,
+    "shina-family-screen.tsv": 139,
+    "palula-short-a-test.tsv": 36
+  },
+  "zip_sha256": "49f97972f92c3b3f8ea98d0b918acbafd2ad252433c8113290527a8aa8e83998"
+}

@@ -1,0 +1,2838 @@
+{
+  "status": "passed",
+  "checked_at": "2026-09-09T12:34:25.886934+00:00",
+  "html_files": 5,
+  "local_links": 61,
+  "quantitative_tables": 43,
+  "checks": [
+    {
+      "check": "unique HTML IDs: REPORT.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → REPORT.md",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #1-scope-units-and-what-deterministic-means-here",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #1-scope-units-and-what-deterministic-means-here",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #2-the-outcomes-are-several-different-things",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #2-the-outcomes-are-several-different-things",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #3-old-long-root-nouns-preserve-a-substantial-accentual-opposition",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #3-old-long-root-nouns-preserve-a-substantial-accentual-opposition",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #4-new-vowel-length-creates-a-different-set-of-accentual-outcomes",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #4-new-vowel-length-creates-a-different-set-of-accentual-outcomes",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #5-short-gender-endings-define-a-strong-stem-accent-domain",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #5-short-gender-endings-define-a-strong-stem-accent-domain",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #6-productive-noun-morphology-explains-an-important-apparent-exception",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #6-productive-noun-morphology-explains-an-important-apparent-exception",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #7-vowel-quality-supplies-relative-chronology",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #7-vowel-quality-supplies-relative-chronology",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #8-kalkoti-separates-final-vowel-loss-mora-correspondence-and-low-tone",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #8-kalkoti-separates-final-vowel-loss-mora-correspondence-and-low-tone",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #9-inflection-and-the-other-shinaic-branches",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #9-inflection-and-the-other-shinaic-branches",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #10-etymological-decisions-that-materially-affect-the-accent-analysis",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #10-etymological-decisions-that-materially-affect-the-accent-analysis",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #11-the-historical-narrative-the-data-support",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #11-the-historical-narrative-the-data-support",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → #12-how-to-audit-and-extend-the-result",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: #12-how-to-audit-and-extend-the-result",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/sources.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#class-counterparts-all-languages.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#class-counterparts-all-languages.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#class-definitions.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#class-definitions.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#editorial-and-source-decisions.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#editorial-and-source-decisions.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#old-long-screen-residuals.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#old-long-screen-residuals.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#old-long-nominal-sensitivity.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#old-long-nominal-sensitivity.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#short-root-cluster-summary.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#short-root-cluster-summary.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#palula-short-a-sensitivity.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#palula-short-a-sensitivity.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#palula-tagged-u-adjectives.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#palula-tagged-u-adjectives.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#exception-ledger.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#exception-ledger.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#property-location-screen.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#property-location-screen.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/index.html#family-10702",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/index.html#family-10702",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#palula-umlaut-i-nouns.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#palula-umlaut-i-nouns.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#vowel-raising-reviewed.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#vowel-raising-reviewed.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#kalkoti-palula-combined.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#kalkoti-palula-combined.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#numeral-series-language-panel.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#numeral-series-language-panel.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#dras-suffix-accent-review.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#dras-suffix-accent-review.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#kundal-primary-paradigms.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#kundal-primary-paradigms.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#editorial-and-source-decisions.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#editorial-and-source-decisions.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/proposals.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#exception-ledger.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#exception-ledger.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/tables.html#all-family-open-issues.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local fragment: appendices/tables.html#all-family-open-issues.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → reproduce.py",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → input-manifest.json",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → integrity-audit.json",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → artifact-manifest.json",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: REPORT.html → appendices/data-dictionary.md",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "unique HTML IDs: appendices/index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → ../REPORT.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → tables.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → sources.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → proposals.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → data-dictionary.md",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → ../annotated-records.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → ../analysis-tokens.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/index.html → family-dossiers.jsonl",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "unique HTML IDs: appendices/proposals.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/proposals.html → index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/proposals.html → ../etymology_proposals.jsonl",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "unique HTML IDs: appendices/sources.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/sources.html → index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/sources.html → ../source-register.tsv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/sources.html → ../PRIMARY_READINGS.md",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "unique HTML IDs: appendices/tables.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/tables.html → index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/tables.html → ../REPORT.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "local link: appendices/tables.html → sources.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "embedded family inventory",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "embedded token inventory",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "embedded original record coverage",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "embedded complete family identities",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "embedded complete token identities",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "table catalog complete",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "embedded TSV equals export: exception-ledger.tsv",
+      "status": "passed",
+      "evidence": 68
+    },
+    {
+      "check": "embedded TSV equals export: editorial-and-source-decisions.tsv",
+      "status": "passed",
+      "evidence": 67
+    },
+    {
+      "check": "embedded TSV equals export: all-family-open-issues.tsv",
+      "status": "passed",
+      "evidence": 1686
+    },
+    {
+      "check": "embedded TSV equals export: class-definitions.tsv",
+      "status": "passed",
+      "evidence": 27
+    },
+    {
+      "check": "embedded TSV equals export: class-counterpart-outcome-summary.tsv",
+      "status": "passed",
+      "evidence": 189
+    },
+    {
+      "check": "embedded TSV equals export: class-counterparts-all-languages.tsv",
+      "status": "passed",
+      "evidence": 8400
+    },
+    {
+      "check": "embedded TSV equals export: class-memberships.tsv",
+      "status": "passed",
+      "evidence": 2987
+    },
+    {
+      "check": "embedded TSV equals export: old-long-screen.tsv",
+      "status": "passed",
+      "evidence": 14
+    },
+    {
+      "check": "embedded TSV equals export: old-long-screen-residuals.tsv",
+      "status": "passed",
+      "evidence": 18
+    },
+    {
+      "check": "embedded TSV equals export: old-long-nominal-sensitivity.tsv",
+      "status": "passed",
+      "evidence": 168
+    },
+    {
+      "check": "embedded TSV equals export: old-long-nominal-formation-audit.tsv",
+      "status": "passed",
+      "evidence": 29
+    },
+    {
+      "check": "embedded TSV equals export: old-long-nominal-language-panel.tsv",
+      "status": "passed",
+      "evidence": 203
+    },
+    {
+      "check": "embedded TSV equals export: old-long-nominal-residuals.tsv",
+      "status": "passed",
+      "evidence": 6
+    },
+    {
+      "check": "embedded TSV equals export: short-root-cluster-screen.tsv",
+      "status": "passed",
+      "evidence": 29
+    },
+    {
+      "check": "embedded TSV equals export: short-root-cluster-summary.tsv",
+      "status": "passed",
+      "evidence": 20
+    },
+    {
+      "check": "embedded TSV equals export: palula-short-a-pairs.tsv",
+      "status": "passed",
+      "evidence": 37
+    },
+    {
+      "check": "embedded TSV equals export: palula-short-a-sensitivity.tsv",
+      "status": "passed",
+      "evidence": 6
+    },
+    {
+      "check": "embedded TSV equals export: palula-u-adjectives.tsv",
+      "status": "passed",
+      "evidence": 134
+    },
+    {
+      "check": "embedded TSV equals export: palula-tagged-u-adjectives.tsv",
+      "status": "passed",
+      "evidence": 131
+    },
+    {
+      "check": "embedded TSV equals export: gilgit-o-adjectives.tsv",
+      "status": "passed",
+      "evidence": 123
+    },
+    {
+      "check": "embedded TSV equals export: adjective-cognate-panel.tsv",
+      "status": "passed",
+      "evidence": 574
+    },
+    {
+      "check": "embedded TSV equals export: property-location-screen.tsv",
+      "status": "passed",
+      "evidence": 867
+    },
+    {
+      "check": "embedded TSV equals export: property-location-summary.tsv",
+      "status": "passed",
+      "evidence": 7
+    },
+    {
+      "check": "embedded TSV equals export: palula-umlaut-i-nouns.tsv",
+      "status": "passed",
+      "evidence": 74
+    },
+    {
+      "check": "embedded TSV equals export: palula-i-decl-extension.tsv",
+      "status": "passed",
+      "evidence": 43
+    },
+    {
+      "check": "embedded TSV equals export: vowel-raising-reviewed.tsv",
+      "status": "passed",
+      "evidence": 78
+    },
+    {
+      "check": "embedded TSV equals export: vowel-raising-summary.tsv",
+      "status": "passed",
+      "evidence": 4
+    },
+    {
+      "check": "embedded TSV equals export: kalkoti-palula-adjudicated.tsv",
+      "status": "passed",
+      "evidence": 160
+    },
+    {
+      "check": "embedded TSV equals export: kalkoti-palula-summary.tsv",
+      "status": "passed",
+      "evidence": 8
+    },
+    {
+      "check": "embedded TSV equals export: kalkoti-palula-combined.tsv",
+      "status": "passed",
+      "evidence": 78
+    },
+    {
+      "check": "embedded TSV equals export: kalkoti-palula-combined-summary.tsv",
+      "status": "passed",
+      "evidence": 4
+    },
+    {
+      "check": "embedded TSV equals export: numeral-series-records.tsv",
+      "status": "passed",
+      "evidence": 381
+    },
+    {
+      "check": "embedded TSV equals export: numeral-series-language-panel.tsv",
+      "status": "passed",
+      "evidence": 70
+    },
+    {
+      "check": "embedded TSV equals export: numeral-series-tests.tsv",
+      "status": "passed",
+      "evidence": 20
+    },
+    {
+      "check": "embedded TSV equals export: dras-paradigm-review.tsv",
+      "status": "passed",
+      "evidence": 287
+    },
+    {
+      "check": "embedded TSV equals export: dras-suffix-accent-review.tsv",
+      "status": "passed",
+      "evidence": 287
+    },
+    {
+      "check": "embedded TSV equals export: dras-suffix-accent-summary.tsv",
+      "status": "passed",
+      "evidence": 4
+    },
+    {
+      "check": "embedded TSV equals export: kundal-primary-paradigms.tsv",
+      "status": "passed",
+      "evidence": 21
+    },
+    {
+      "check": "embedded TSV equals export: sauji-source-review.tsv",
+      "status": "passed",
+      "evidence": 573
+    },
+    {
+      "check": "embedded TSV equals export: input-class-summary.tsv",
+      "status": "passed",
+      "evidence": 42
+    },
+    {
+      "check": "embedded TSV equals export: input-class-family-outcomes.tsv",
+      "status": "passed",
+      "evidence": 3021
+    },
+    {
+      "check": "embedded TSV equals export: coverage-by-source.tsv",
+      "status": "passed",
+      "evidence": 60
+    },
+    {
+      "check": "embedded TSV equals export: coverage-research-by-source.tsv",
+      "status": "passed",
+      "evidence": 74
+    },
+    {
+      "check": "all 27 class definitions exported",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "all seven languages in each class summary",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-without-h Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-without-h Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-a-with-h Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-a-with-h Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Gilgit-short-o-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Gilgit-short-o-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-short-u-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-short-u-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-aa-ee-i-nouns Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-aa-ee-i-nouns Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-other-i-nouns Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-other-i-nouns Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-umlaut-u-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-umlaut-u-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Palula-grammatical-u-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Palula-grammatical-u-adjectives Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-a-long-final-closed Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-a-long-final-closed Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-early-e-long-final-closed Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-early-e-long-final-closed Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: raising-Biori-late-a-long-final-closed Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: raising-Biori-late-a-long-final-closed Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-E-without-short-final-vowel Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-E-without-short-final-vowel Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-L-without-short-final-vowel Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-L-without-short-final-vowel Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Kalkoti-comparison-Palula-prefinal-accent-plus-short-final-vowel Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--e Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--e Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--eh/-eɦ Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--eh/-eɦ Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural--i Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural--i Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: Dras-plural-other Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: Dras-plural-other Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-a Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-a Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-i Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-i Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-r Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-r Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: short-root-cluster-u Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: short-root-cluster-u Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: retained-ending-core-properties Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: retained-ending-core-properties Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: ten-compounds Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: ten-compounds Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: nineteen-twenty-comparison Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: nineteen-twenty-comparison Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-barytone-nominals Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-barytone-nominals Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals Sh",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals Phal",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals Sv",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals Kalk",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals Kund",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals bro",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart availability: old-long-oxytone-nominals Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "counterpart outcome counts: old-long-oxytone-nominals Ush",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report language census: Sh",
+      "status": "passed",
+      "evidence": "| Shina | 16,128 | 8,409 | 1,249 | 7,719 |"
+    },
+    {
+      "check": "report language census: Phal",
+      "status": "passed",
+      "evidence": "| Palula | 5,477 | 2,232 | 733 | 3,245 |"
+    },
+    {
+      "check": "report language census: Sv",
+      "status": "passed",
+      "evidence": "| Sauji | 1,238 | 601 | 289 | 637 |"
+    },
+    {
+      "check": "report language census: Kalk",
+      "status": "passed",
+      "evidence": "| Kalkoti | 1,145 | 449 | 192 | 696 |"
+    },
+    {
+      "check": "report language census: Kund",
+      "status": "passed",
+      "evidence": "| Kundal Shahi | 316 | 176 | 143 | 140 |"
+    },
+    {
+      "check": "report language census: bro",
+      "status": "passed",
+      "evidence": "| Brokskat | 670 | 166 | 143 | 504 |"
+    },
+    {
+      "check": "report language census: Ush",
+      "status": "passed",
+      "evidence": "| Ushojo | 531 | 202 | 186 | 329 |"
+    },
+    {
+      "check": "report broad old-long row: barytone Sh",
+      "status": "passed",
+      "evidence": "| Old long-root barytone | Shina | 20 E | 2 | 2 L | 24 |"
+    },
+    {
+      "check": "report broad old-long row: barytone Phal",
+      "status": "passed",
+      "evidence": "| Old long-root barytone | Palula | 19 E | 1 | 2 L | 22 |"
+    },
+    {
+      "check": "report broad old-long row: oxytone Sh",
+      "status": "passed",
+      "evidence": "| Old long-root oxytone | Shina | 13 L | 4 | 2 E | 19 |"
+    },
+    {
+      "check": "report broad old-long row: oxytone Phal",
+      "status": "passed",
+      "evidence": "| Old long-root oxytone | Palula | 9 L | 1 | 4 E | 14 |"
+    },
+    {
+      "check": "restricted Degener source result retained",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report Palula POS adjectives",
+      "status": "passed",
+      "evidence": "| Palula source-tagged short-*u* adjectives | 111 | 9 | 6 unscorable | 126 unique form/gloss types |"
+    },
+    {
+      "check": "report Gilgit adjectives",
+      "status": "passed",
+      "evidence": "| Gilgit source-tagged short-*o* adjectives | 110 | 0 | 11 unscorable | 121 unique form/gloss types |"
+    },
+    {
+      "check": "report Palula grammatical adjectives",
+      "status": "passed",
+      "evidence": "| Palula regular/umlaut *u : i* gender-inflecting types, including participles | 115 | 8 | 6 unscorable | 129 unique citation types |"
+    },
+    {
+      "check": "combined i-declension cells",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "combined i-declension lexemes",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "all 115 inflections explicitly final-accented",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report combined i-declension result",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report Dras suffix: -eh/-eɦ",
+      "status": "passed",
+      "evidence": "| *-eh/-eɦ* | 53 | 4 | 3 | 0 | 60 |"
+    },
+    {
+      "check": "report Dras suffix: -e",
+      "status": "passed",
+      "evidence": "| *-e* | 22 | 2 | 130 | 22 | 176 |"
+    },
+    {
+      "check": "report Dras suffix: -i",
+      "status": "passed",
+      "evidence": "| *-i* | 1 | 0 | 11 | 3 | 15 |"
+    },
+    {
+      "check": "report Dras suffix: other",
+      "status": "passed",
+      "evidence": "| Other formations | 27 | 1 | 4 | 4 | 36 |"
+    },
+    {
+      "check": "all numeral-series outcomes",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report Kalkoti class: Palula-E-without-short-final-vowel",
+      "status": "passed",
+      "evidence": "| Monosyllabic E without that ending | Zero High / default | 7 | 4 final-High residuals | 14 | 10 |"
+    },
+    {
+      "check": "report Kalkoti class: Palula-L-without-short-final-vowel",
+      "status": "passed",
+      "evidence": "| Monosyllabic L without that ending | H1 / falling | 4 | 4 Low interactions | 4 | 1 |"
+    },
+    {
+      "check": "report Kalkoti class: Palula-prefinal-accent-plus-short-final-vowel",
+      "status": "passed",
+      "evidence": "| Prefinal accent + short unaccented final vowel | Final High / rising | 10 | 0 | 10 | 8 |"
+    },
+    {
+      "check": "consolidated residual explanations are nonempty",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report preserves source-version caveat",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "report preserves review-level limits",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "narrative has twelve sections",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "Node available for script syntax check",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "JavaScript syntax: appendices/index.html",
+      "status": "passed",
+      "evidence": null
+    },
+    {
+      "check": "JavaScript syntax: appendices/tables.html",
+      "status": "passed",
+      "evidence": null
+    }
+  ],
+  "external_source_links": [
+    "http://nuristan.info/",
+    "http://www.sil.org/silewp/abstract.asp?ref=2005-008",
+    "https://dictionaria.clld.org/contributions/palula",
+    "https://doi.org/10.1349/PS1.1537-0852.A.423",
+    "https://doi.org/10.5281/zenodo.13149113",
+    "https://doi.org/10.5281/zenodo.21406260",
+    "https://doi.org/10.5281/zenodo.8361936",
+    "https://doi.org/10.5617/ao.5341",
+    "https://dsal.uchicago.edu/dictionaries/soas/",
+    "https://github.com/cldf-datasets/liljegrenhindukush/tree/v1.1.0",
+    "https://github.com/lexibank/backstromnorthernpakistan",
+    "https://github.com/lexibank/lsi/tree/v1.0",
+    "https://journals.dartmouth.edu/cgi-bin/WebObjects/Journals.woa/1/xmlpage/1/article/423",
+    "https://journals.dartmouth.edu/journals/xmlpage/1/article/423?htmlOnce=yes",
+    "https://langsci-press.org/catalog/view/82/85/399-1.pdf",
+    "https://nuristan.info/IndoAryan/Indus/Atsaret/AtsaretLanguage/Lexicon/phon.html",
+    "https://urn.kb.se/resolve?urn=urn:nbn:se:su:diva-182519",
+    "https://www.aa.tufs.ac.jp/~tjun/shina/Grammar_of_Shina_Language_And_Vocabulary.pdf",
+    "https://www.diva-portal.org/smash/get/diva2%3A1055060/FULLTEXT01.pdf",
+    "https://www.diva-portal.org/smash/get/diva2%3A1772061/FULLTEXT01.pdf",
+    "https://www.wisdomlib.org/uploads/journals/acta-orie/vol-69-2008/7372-6759-23258.pdf"
+  ],
+  "limitation": "External links are a provenance inventory, not a claim that every remote server was rechecked during presentation QA. Browser behavior is recorded separately."
+}

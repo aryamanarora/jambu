@@ -1,0 +1,61 @@
+language	source	records	linked_records	families	original_with_acute	original_with_grave	original_with_stress_mark
+bro	CDIAL	5	5	5	0	0	0
+bro	NTS	1	1	1	0	0	0
+bro	grierson-lsi1928	186	0	0	0	0	0
+bro	liljegren-hindukush	203	0	0	0	0	0
+bro	schmidt	276	3	3	21	0	149
+Kalk	hultman2023kalkoti	475	2	1	116	35	0
+Kalk	kalkoti	276	144	131	6	7	0
+Kalk	liljegren-hindukush	196	5	5	0	0	0
+Kalk	rensch-decker-hallberg1992	198	1	1	0	0	55
+Kund	kund	161	161	143	28	3	0
+Kund	liljegren-hindukush	155	5	5	0	0	0
+Phal	AO	11	11	11	4	0	1
+Phal	BelvalkarVol	1	1	1	0	0	0
+Phal	Buddruss Woṭ	1	1	1	0	0	0
+Phal	CDIAL	928	928	639	290	1	16
+Phal	IIFL	2	2	2	0	0	0
+Phal	Morgenstierne	3	3	3	1	0	0
+Phal	NOPhal	33	33	32	10	0	0
+Phal	decker1992	599	4	2	15	0	0
+Phal	kalkoti	1	1	1	0	0	0
+Phal	liljegren	3322	755	515	3102	0	14
+Phal	liljegren-hindukush	181	3	3	3	0	0
+Phal	strand	518	518	488	34	0	483
+Sh	AO	8	8	8	1	0	0
+Sh	Bailey ShGr	3	3	3	0	0	0
+Sh	BelvalkarVol	1	1	1	0	0	0
+Sh	Buddruss	5	5	4	1	0	0
+Sh	Buddruss Woṭ	1	1	1	0	0	0
+Sh	CDIAL	2233	2233	1155	466	4	2
+Sh	G.M	1	1	1	0	0	0
+Sh	Grahame Bailey	4	4	3	0	0	0
+Sh	IIFL	8	8	8	3	0	0
+Sh	Lor	62	62	61	19	0	0
+Sh	Lorimer BurLg	2	2	2	0	0	0
+Sh	Morgenstierne	7	7	7	3	0	0
+Sh	NTS	6	6	6	2	0	0
+Sh	ShahidullahPresVol	1	1	1	0	0	0
+Sh	ZDMG	3	3	3	0	0	0
+Sh	backstrom1992	6151	4347	204	532	457	3464
+Sh	buddruss-shina1996	311	149	138	198	0	0
+Sh	degener-shina2008	1577	542	487	1057	0	0
+Sh	grierson-lsi1928	592	1	1	0	21	0
+Sh	liljegren-hindukush	565	0	0	0	0	0
+Sh	rajapurohit2012	3021	5	3	2567	0	0
+Sh	schmidt	1732	705	219	1339	2	2
+Sv	AO	1	1	1	0	0	0
+Sv	BKPD	1	1	1	0	0	0
+Sv	Buddruss	5	5	5	1	0	0
+Sv	CDIAL	272	272	225	69	0	1
+Sv	IIFL	2	2	2	1	0	0
+Sv	NOGaw	1	1	1	1	0	0
+Sv	NOPhal	7	7	7	0	0	0
+Sv	NTS	4	4	4	1	0	0
+Sv	ZDMG	2	2	2	0	0	0
+Sv	buddruss1967sau	44	0	0	0	0	0
+Sv	decker1992	201	2	2	3	0	0
+Sv	knobloch2020sauji	573	0	0	0	0	0
+Sv	liljegren-hindukush	192	4	4	0	0	0
+Ush	liljegren-hindukush	213	1	1	0	0	0
+Ush	rensch-decker-hallberg1992	318	1	1	0	0	208

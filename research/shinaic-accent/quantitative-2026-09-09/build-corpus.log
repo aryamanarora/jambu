@@ -1,0 +1,26 @@
+{
+  "records": 25505,
+  "nearest_ancestors": 1848,
+  "families": 1686,
+  "linked_records": 10695,
+  "unanchored_records": 14810,
+  "records_by_language": {
+    "Phal": 5477,
+    "Sh": 16128,
+    "Kalk": 1145,
+    "Kund": 316,
+    "bro": 670,
+    "Sv": 1238,
+    "Ush": 531
+  },
+  "families_by_language": {
+    "bro": 8,
+    "Kalk": 132,
+    "Kund": 143,
+    "OSh": 0,
+    "Phal": 738,
+    "Sh": 1246,
+    "Sv": 228,
+    "Ush": 2
+  }
+}

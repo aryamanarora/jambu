@@ -1,0 +1,47 @@
+{
+  "input_directory": "/Users/aryamanarora/Documents/Code/jambu-all/data/cldf",
+  "input_sha256": {
+    "languages.csv": "baf09089fc9a06c612441ac40b806b385ba6d563bd13959412db624cada81c9c",
+    "dialects.csv": "7d6cc42daf7b62f415a329c909c8834f39aefaecc55a1fe3c6219cfd525fe2c0",
+    "forms.csv": "20dbe52a7c32c0d092658568716542d6a58b36c8bbdaa92a4676b265f002fe7b",
+    "edges.csv": "4912ce8c7f2a138cddf1ca31316d7c682d34c59de932ef5b03eb93f24c0075f8",
+    "references.csv": "ba31f2a56037ef6c5d52d6f50ec3d0a1020299a0ba4c4de93c268a1cdfbc197a",
+    "form_concepts.csv": "298036d83c81486a8fe83d1e370234766e78eefe0b47fc5e5adeaa44faf3064c",
+    "concepts.csv": "1a5ddc75f91ee3f380173dc40a8e905ffd1b256ae7ec87185c2509da84d27a52",
+    "form-source-keys.csv": "6c980d969f860ca8178aa6505f400c531a61d81551412d6618d0fa8ba5018302",
+    "form-id-aliases.csv": "fab19b0d780a7c443e55d033ee3831b36ff060f8d1ee31f31ca9ac066cf7e27f"
+  },
+  "repository_revision": "169616890d196e5246d642d20872a42a9162520b",
+  "counts": {
+    "records": 25505,
+    "nearest_ancestors": 1848,
+    "families": 1686,
+    "linked_records": 10695,
+    "unanchored_records": 14810,
+    "records_by_language": {
+      "Phal": 5477,
+      "Sh": 16128,
+      "Kalk": 1145,
+      "Kund": 316,
+      "bro": 670,
+      "Sv": 1238,
+      "Ush": 531
+    },
+    "families_by_language": {
+      "bro": 8,
+      "Kalk": 132,
+      "Kund": 143,
+      "OSh": 0,
+      "Phal": 738,
+      "Sh": 1246,
+      "Sv": 228,
+      "Ush": 2
+    }
+  },
+  "notes": [
+    "Source counts overlap for merged citations.",
+    "No accent normalization or cognacy proposal is made by this extractor.",
+    "Each family retains its nearest input formation separately.",
+    "Unanchored means no accepted path out of Shinaic; an etymology note may still exist."
+  ]
+}

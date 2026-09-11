@@ -1,0 +1,6 @@
+Collecting Markdown
+  Downloading markdown-3.10.3-py3-none-any.whl.metadata (5.1 kB)
+Downloading markdown-3.10.3-py3-none-any.whl (110 kB)
+Installing collected packages: Markdown
+Successfully installed Markdown-3.10.3
+WARNING: Target directory /private/tmp/telugu-metathesis-plot-libs/bin already exists. Specify --upgrade to force replacement.

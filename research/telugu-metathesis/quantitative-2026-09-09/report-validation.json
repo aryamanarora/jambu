@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "documents_checked": [
+    "report.md",
+    "README.md",
+    "SOURCE_ACCESS.md"
+  ],
+  "local_links_checked": 150,
+  "statistics_index_rows": 536,
+  "errors": [],
+  "scope": "Local artifact linkage and recorded statistical provenance; citations and linguistic interpretation require scholarly reading."
+}

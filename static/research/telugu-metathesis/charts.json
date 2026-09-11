@@ -1,0 +1,474 @@
+{
+  "inputs": {
+    "id": "inputs",
+    "title": "Similar-looking inputs have more than one Telugu outcome",
+    "sourceBase": "/research/telugu-metathesis",
+    "sources": [
+      "chart-membership.tsv",
+      "study-data.zip"
+    ],
+    "views": [
+      {
+        "label": "All following-vowel classes",
+        "unit": "Primary root families",
+        "categories": [
+          "Displaced, no retention",
+          "Displaced and retained",
+          "Retained, no displacement",
+          "Other only",
+          "Uncertain (with or without other)",
+          "Borrowed only",
+          "Missing",
+          "Not reviewed"
+        ],
+        "rows": [
+          {
+            "label": "Vowel-initial, short vowel + single apical",
+            "values": [
+              18,
+              18,
+              93,
+              12,
+              13,
+              0,
+              11,
+              0
+            ]
+          },
+          {
+            "label": "Consonant-initial, short vowel + single r/ẓ",
+            "values": [
+              37,
+              16,
+              7,
+              1,
+              4,
+              0,
+              5,
+              0
+            ]
+          }
+        ],
+        "note": "These input groups were reviewed through different discovery screens. Their proportions describe this sample, not unbiased language-wide change rates. Mixed families occur once; missing and unresolved evidence are separate."
+      },
+      {
+        "label": "Independently classified low-a formations",
+        "unit": "Primary root families",
+        "categories": [
+          "Displaced, no retention",
+          "Displaced and retained",
+          "Retained, no displacement",
+          "Other only",
+          "Uncertain (with or without other)",
+          "Borrowed only",
+          "Missing",
+          "Not reviewed"
+        ],
+        "rows": [
+          {
+            "label": "Vowel-initial, short vowel + single apical",
+            "values": [
+              8,
+              10,
+              30,
+              0,
+              6,
+              0,
+              2,
+              0
+            ]
+          },
+          {
+            "label": "Consonant-initial, short vowel + single r/ẓ",
+            "values": [
+              13,
+              1,
+              3,
+              0,
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        "note": "These input groups were reviewed through different discovery screens. Their proportions describe this sample, not unbiased language-wide change rates. Mixed families occur once; missing and unresolved evidence are separate."
+      }
+    ]
+  },
+  "quantity": {
+    "id": "quantity",
+    "title": "Vowel quantity is a conditional prediction about the immediate formation",
+    "sourceBase": "/research/telugu-metathesis",
+    "sources": [
+      "chart-membership.tsv",
+      "study-data.zip"
+    ],
+    "views": [
+      {
+        "label": "Matched formations",
+        "unit": "Primary root families",
+        "categories": [
+          "Matches predicted quantity",
+          "Contradicts predicted quantity",
+          "Not strictly testable"
+        ],
+        "rows": [
+          {
+            "label": "Full input: low or equal following vowel → long",
+            "values": [
+              25,
+              8,
+              11
+            ]
+          },
+          {
+            "label": "Full input: different high following vowel → short",
+            "values": [
+              8,
+              0,
+              4
+            ]
+          },
+          {
+            "label": "Independent consonantal input → short",
+            "values": [
+              21,
+              0,
+              0
+            ]
+          }
+        ],
+        "note": "Strict displaced-output denominators: 25/33 long, 8/8 short with different high V₂, and 21/21 short from consonantal inputs. Grey/non-testable families stay visible. Families can enter more than one formation class: do not sum rows."
+      }
+    ]
+  },
+  "reduction": {
+    "id": "reduction",
+    "title": "Forty-one families preserve a cluster/reduced-form bridge",
+    "sourceBase": "/research/telugu-metathesis",
+    "sources": [
+      "chart-membership.tsv",
+      "study-data.zip"
+    ],
+    "views": [
+      {
+        "label": "Evidence availability",
+        "unit": "Primary root families",
+        "categories": [
+          "An exact cluster/reduced pair is cited",
+          "No exact pair in the cited evidence"
+        ],
+        "rows": [
+          {
+            "label": "All Telugu displacement-bearing families",
+            "values": [
+              41,
+              76
+            ]
+          }
+        ],
+        "note": "41/117 (35.0%) is the availability of exact paired witnesses, not a rate of consonant loss. The remaining 76 are not negative cases: many lack the relevant initial cluster or an exact cited variant. The 56 pairs are subobservations, not 56 independent etyma."
+      }
+    ]
+  },
+  "languages": {
+    "id": "languages",
+    "title": "A shared process does not give every language the same lexical distribution",
+    "sourceBase": "/research/telugu-metathesis",
+    "sources": [
+      "chart-membership.tsv",
+      "study-data.zip"
+    ],
+    "views": [
+      {
+        "label": "Common informative families",
+        "unit": "Primary root families",
+        "categories": [
+          "Both have displacement",
+          "Telugu displacement; partner retention only",
+          "Telugu retention only; partner displacement",
+          "Both retention only"
+        ],
+        "rows": [
+          {
+            "label": "Gondi",
+            "values": [
+              10,
+              42,
+              3,
+              60
+            ]
+          },
+          {
+            "label": "Konda",
+            "values": [
+              22,
+              26,
+              8,
+              57
+            ]
+          },
+          {
+            "label": "Kui",
+            "values": [
+              38,
+              6,
+              18,
+              29
+            ]
+          },
+          {
+            "label": "Kuvi",
+            "values": [
+              29,
+              14,
+              13,
+              37
+            ]
+          },
+          {
+            "label": "Pengo",
+            "values": [
+              17,
+              9,
+              8,
+              25
+            ]
+          },
+          {
+            "label": "Manda",
+            "values": [
+              13,
+              4,
+              6,
+              18
+            ]
+          },
+          {
+            "label": "Brahui",
+            "values": [
+              0,
+              14,
+              5,
+              9
+            ]
+          }
+        ],
+        "note": "Each bar contains only families with displacement or retention evidence in both languages. A “both displacement” cell may also contain retained formations. Telugu–Kui has 26 mixed-family comparisons among its 91 common families. Shared outcomes do not establish a single inherited event."
+      },
+      {
+        "label": "All 403 reviewed input families",
+        "unit": "Primary root families",
+        "categories": [
+          "Displaced, no retention",
+          "Displaced and retained",
+          "Retained, no displacement",
+          "Other only",
+          "Uncertain (with or without other)",
+          "Borrowed only",
+          "Missing",
+          "Not reviewed"
+        ],
+        "rows": [
+          {
+            "label": "Telugu",
+            "values": [
+              66,
+              51,
+              196,
+              17,
+              39,
+              1,
+              33,
+              0
+            ]
+          },
+          {
+            "label": "Gondi",
+            "values": [
+              9,
+              8,
+              122,
+              8,
+              19,
+              7,
+              228,
+              2
+            ]
+          },
+          {
+            "label": "Konda",
+            "values": [
+              23,
+              12,
+              92,
+              5,
+              9,
+              0,
+              261,
+              1
+            ]
+          },
+          {
+            "label": "Kui",
+            "values": [
+              63,
+              12,
+              40,
+              7,
+              31,
+              1,
+              248,
+              1
+            ]
+          },
+          {
+            "label": "Kuvi",
+            "values": [
+              42,
+              18,
+              57,
+              6,
+              22,
+              4,
+              253,
+              1
+            ]
+          },
+          {
+            "label": "Pengo",
+            "values": [
+              30,
+              4,
+              40,
+              4,
+              11,
+              0,
+              314,
+              0
+            ]
+          },
+          {
+            "label": "Manda",
+            "values": [
+              26,
+              2,
+              26,
+              5,
+              10,
+              0,
+              334,
+              0
+            ]
+          },
+          {
+            "label": "Brahui",
+            "values": [
+              4,
+              3,
+              25,
+              5,
+              18,
+              1,
+              346,
+              1
+            ]
+          }
+        ],
+        "note": "This view restores missing, other, uncertain, borrowed and unreviewed cells. Modern language labels aggregate historical and dialectal records; those remain separate in the evidence download. These are selected-sample proportions, not rates across each language’s whole lexicon."
+      }
+    ]
+  },
+  "kui": {
+    "id": "kui",
+    "title": "The clearest local regularity is velar + labial at a morphological boundary",
+    "sourceBase": "/research/telugu-metathesis",
+    "sources": [
+      "chart-membership.tsv",
+      "study-data.zip"
+    ],
+    "views": [
+      {
+        "label": "Input-supported stem–suffix formations",
+        "unit": "Primary root families",
+        "categories": [
+          "Source-supported reversal",
+          "Possible retained counterexample"
+        ],
+        "rows": [
+          {
+            "label": "Kui",
+            "values": [
+              61,
+              0
+            ]
+          },
+          {
+            "label": "Kuvi",
+            "values": [
+              2,
+              1
+            ]
+          },
+          {
+            "label": "Pengo",
+            "values": [
+              4,
+              0
+            ]
+          },
+          {
+            "label": "Manda",
+            "values": [
+              2,
+              0
+            ]
+          }
+        ],
+        "note": "Kui: 61/61 input-supported families in the selected literal cluster screen. This is not a random sample of verbs, nor proof that all velar–labial sequences reverse. The wider screen adjudicated 152 records in 123 groups, including duplicates, controls and spurious matches."
+      }
+    ]
+  },
+  "clusters": {
+    "id": "clusters",
+    "title": "Only 74 of 116 cluster-candidate families establish displacement",
+    "sourceBase": "/research/telugu-metathesis",
+    "sources": [
+      "chart-membership.tsv",
+      "study-data.zip"
+    ],
+    "views": [
+      {
+        "label": "All previously screened cluster candidates",
+        "unit": "Primary root families",
+        "categories": [
+          "Displaced, no retention",
+          "Displaced and retained",
+          "Retained, no displacement",
+          "Other only",
+          "Uncertain (with or without other)",
+          "Borrowed only",
+          "Missing",
+          "Not reviewed"
+        ],
+        "rows": [
+          {
+            "label": "Previously collected Telugu cluster candidates",
+            "values": [
+              48,
+              26,
+              22,
+              0,
+              20,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "note": "48 displaced without retention + 26 mixed = 74/116 (63.8%). The remaining 42 include retained relatives, other developments and unresolved analyses; they are not all proven false positives. Every candidate family was reviewed."
+      }
+    ]
+  }
+}

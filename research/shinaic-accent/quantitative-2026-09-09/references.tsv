@@ -1,0 +1,90 @@
+ID	Short	Source	Progress	Provenance	Editor	OCR	Etymology_Provenance
+CDIAL	T1962—1966	"Ralph Lilley Turner\.
+*A comparative dictionary of the Indo\-Aryan languages*\.
+Oxford University Press, 1962–1966\.
+URL: [https://dsal\.uchicago\.edu/dictionaries/soas/](https://dsal.uchicago.edu/dictionaries/soas/)\."	Yes	data/cdial/cdial.csv	Aryaman Arora	No	source
+liljegren	L2019	"Henrik Liljegren\.
+Palula dictionary\.
+*Dictionaria*, pages 1&ndash;2700, 2019\.
+URL: [https://dictionaria\.clld\.org/contributions/palula](https://dictionaria.clld.org/contributions/palula)\."	Yes	data/other/forms/20220913-kalkoti.csv; data/other/forms/20220913-palula.csv	Aryaman Arora	No	source
+grierson-lsi1928	G2023	"George Abraham Grierson\.
+Linguistic survey of india\. volume 1\. part 2\. comparative vocabulary: cldf dataset\.
+2023\.
+Digital edition of Grierson's 1928 comparative vocabulary; data curation by Patrick Lundberg and Christoph Rzymski\.
+URL: [https://github\.com/lexibank/lsi/tree/v1\.0](https://github.com/lexibank/lsi/tree/v1.0), [doi:10\.5281/zenodo\.8361936](https://doi.org/10.5281/zenodo.8361936)\."	Full	data/other/forms/20260813-grierson-lsi.csv	OpenAI Codex	No	
+liljegren-hindukush	L2026	"Henrik Liljegren, Robert Forkel, Nina Knobloch, and Noa Lange\.
+Hindu kush areal typology\.
+2026\.
+URL: [https://github\.com/cldf\-datasets/liljegrenhindukush/tree/v1\.1\.0](https://github.com/cldf-datasets/liljegrenhindukush/tree/v1.1.0), [doi:10\.5281/zenodo\.21406260](https://doi.org/10.5281/zenodo.21406260)\."	Full	data/other/forms/20260810-liljegren-hindukush.csv	Aryaman Arora; OpenAI Codex	No	
+strand	S1997—2021	"Richard F\. Strand\.
+Nuristân: hidden land of the hindu\-kush\.
+1997–2021\.
+URL: [http://nuristan\.info/](http://nuristan.info/)\."	Yes	data/other/forms/20220913-strand.csv; data/other/forms/20220913-strand2.csv; data/other/forms/20221003-strand3.csv	Aryaman Arora	No	mixed
+hultman2023kalkoti	H2023	"David Hultman\.
+Topics in the grammar of Kalkoti\.
+Independent thesis, Degree of Bachelor, 15 ECTS, Department of Linguistics, Stockholm University, Stockholm, 2023\.
+Supervisor: Henrik Liljegren\. Reviewer: Ljuba Veselinova\."	Complete: every Kalkoti form the thesis prints, namely Tables 3--7, 9--17, 19--21, 23--26 and 28, all 129 numbered interlinear sub-examples, the phonological illustrations of examples (2)--(4), and the phonemic and phonetic citations in running prose. The Palula, Gawri, Pashto and Urdu comparanda are secondary citations of Liljegren (2016), Baart (1997, 1999) and Baart & Sagar (2004) and are recorded as prose rather than installed; Table 1 lists datasets rather than words; Tables 2 and 8 are phoneme inventories; Table 18 prints bare inflectional suffixes; and Tables 22 and 27 repeat sentences the numbered examples already carry	Open-access thesis PDF published in DiVA by Stockholm University; PDF SHA-256 fa2245e67a5e715312e698500df8cbd327b04ef1b4cdb4e9e03656ff30399810; not redistributed. Reproducible extraction and audit in data/other/forms/raw_data/hultman_kalkoti_2023.py and data/other/forms/raw_data/20260825-hultman-kalkoti-audit.csv; installed rows in data/other/forms/20260825-hultman-kalkoti.csv. The thesis draws on eleven datasets recorded from four Kalkoti speakers between 2006 and 2023, and each installed row cites the dataset item it comes from	Aryaman Arora and Claude	No	none
+kalkoti	L2013	"Henrik Liljegren\.
+Notes on Kalkoti: a Shina language with strong Kohistani influences\.
+*Linguistic Discovery*, 11\(1\):129&ndash;160, 2013\.
+URL: [https://journals\.dartmouth\.edu/cgi\-bin/WebObjects/Journals\.woa/1/xmlpage/1/article/423](https://journals.dartmouth.edu/cgi-bin/WebObjects/Journals.woa/1/xmlpage/1/article/423), [doi:10\.1349/PS1\.1537\-0852\.A\.423](https://doi.org/10.1349/PS1.1537-0852.A.423)\."	Complete: every Kalkoti form the article prints, namely the Kalkoti column of Tables 1--6, 8, 9, 13, 18 and 19, all of Tables 11, 12, 14, 16, 17 and 20, the phonetic citations on pp. 135--137 and p. 144 n. 15, the loanwords of p. 136 n. 5, and all seventeen Kalkoti interlinear examples. The Palula, Gawri, Sawi and Kohistani Shina comparanda are secondary citations of Baart (1997, 1999a), Buddruss (1967), Liljegren (2008) and Schmidt \& Kohistani (2008) and are excluded, as are the phoneme inventories of Tables 7 and 10, the comparative Tables 15 and 21--24, and Palula example (9)	Open-access article PDF from the Dartmouth College Library; PDF SHA-256 7eb1d21fb075e8c65b03924ba04b9bea90c2249b61aef56756f47e9f0c8f20c1; not redistributed. Reproducible extraction, audit and etymology crosswalk in data/other/forms/raw_data/liljegren_kalkoti_2013.py, data/other/forms/raw_data/20260825-liljegren-kalkoti-audit.csv and data/other/forms/raw_data/20260825-liljegren-kalkoti-etymology.csv; installed rows in data/other/forms/20220913-kalkoti.csv. Table 13 prints Turner (1966) numbers for eight words and those are linked directly; every other CDIAL link is an editorial assignment carried over from the 2022 hand-typed snapshot of this article	Aryaman Arora and Claude	No	mixed
+kund	R2005	"Khawaja A\. Rehman and Joan L\. G\. Baart\.
+A first look at the language of kundal shahi in azad kashmir\.
+*SIL Electronic Working Papers*, 2005\.
+URL: [http://www\.sil\.org/silewp/abstract\.asp?ref=2005\-008](http://www.sil.org/silewp/abstract.asp?ref=2005-008)\."	Yes	data/other/forms/20220913-kundalshahi.csv	Aryaman Arora	No	
+buddruss-shina1996	B1996	"Georg Buddruss\.
+Shina\-Rätsel\.
+In Dieter B\. Kapp, editor, *Nānāvidhaikatā: Festschrift für Hermann Berger*, pages 29–54\.
+Harrassowitz, Wiesbaden, 1996\."	Complete analytical glossary on pp. 40--50: every printed Shina headword and explicit headline alternate; the glossary preface on p. 39, 58 running riddles, inflected examples, comparison-only forms, bibliography, and summary are excluded from the form table	Stanford Interlibrary Loan request 446828, supplied by Cornell University Library (Olin); scan SHA-256 2247db7ef88ec280b1e91a0461001ca41b8399d153d2b4e93e2aee88859c9169; all records manually collated against 300 dpi renders on 2026-08-28; reproducible installation and audit in data/other/forms/raw_data/buddruss_shina_1996.py	Aryaman Arora and OpenAI	No	source
+degener-shina2008	D2008	"Almuth Degener\.
+*Shina\-Texte aus Gilgit \(Nord\-Pakistan\): Sprichwörter und Materialien zum Volksglauben, gesammelt von Mohammad Amin Zia*\.
+Beiträge zur Indologie\.
+Harrassowitz, Wiesbaden, 2008\.
+ISBN 9783447056489\."	Complete glossary on pp. 243--315: all 1561 printed headword paragraphs, including light-verb constructions, proper names, headline alternates, and resolvable cross-reference headwords; attestation numbers and inflected sub-paragraph forms are preserved as audit prose; the proverb and folk-belief texts themselves are excluded	Stanford Interlibrary Loan scan requests 446831 (pp. 243--279, SHA-256 9589572ce61d21062454cfa54537c881080e9288bc55292f176fc12ca6264fd5) and 447377 (pp. 280--315, SHA-256 11bb98531bf601c59f5252d361774320bccd0043c627d8c96094df5320517ec4); complete paragraph-by-paragraph manual collation against 300 dpi renders with zoomed band verification on 2026-08-27; reproducible extraction, checked-in transcription layer, and audit in data/other/forms/raw_data/degener_shina_2008.py	Aryaman Arora and Anthropic	No	source
+rajapurohit2012	R2012	"B\. B\. Rajapurohit\.
+*Grammar of Shina Language and Vocabulary: Based on the Dialect Spoken around Dras*\.
+B\. B\. Rajapurohit, 2012\.
+Self\-published electronic book\.
+URL: [https://www\.aa\.tufs\.ac\.jp/~tjun/shina/Grammar\\\_of\\\_Shina\\\_Language\\\_And\\\_Vocabulary\.pdf](https://www.aa.tufs.ac.jp/~tjun/shina/Grammar\_of\_Shina\_Language\_And\_Vocabulary.pdf)\."	Yes	data/other/forms/20260725-drasi.csv	Aryaman Arora	No	
+backstrom1992	B1992a	"Peter C\. Backstrom and Carla F\. Radloff\.
+*Sociolinguistic Survey of Northern Pakistan, Volume 2\. Languages of Northern Areas*\.
+National Institute of Pakistan Studies, Islamabad, 1992\.
+URL: [https://github\.com/lexibank/backstromnorthernpakistan](https://github.com/lexibank/backstromnorthernpakistan), [doi:10\.5281/zenodo\.13149113](https://doi.org/10.5281/zenodo.13149113)\."	Complete lexical appendix: 11,343 rows from 51 varieties; 507 Urdu and Pashto controls retained for audit and excluded from Jambu lexical output	Lexibank backstromnorthernpakistan v1.1, commit 377d157614c706b2fcb61eccd5c839f394b9aa6c; the frozen Jambu raw forms file is byte-identical to the released CLDF forms.csv	Aryaman Arora and OpenAI Codex	No	jambu
+rensch-decker-hallberg1992	R1992	"Calvin R\. Rensch, Sandra J\. Decker, and Daniel G\. Hallberg\.
+*Sociolinguistic Survey of Northern Pakistan, Volume 1\. Languages of Kohistan*\.
+National Institute of Pakistan Studies and Summer Institute of Linguistics, Islamabad, 1992\.
+ISBN 969\-8023\-11\-9\."	Partial	data/other/forms/20260725-ssnp.csv	Aryaman Arora	No	
+decker1992	D1992	"Kendall D\. Decker\.
+*Sociolinguistic Survey of Northern Pakistan, Volume 5\. Languages of Chitral*\.
+National Institute of Pakistan Studies and Summer Institute of Linguistics, Islamabad, 1992\.
+ISBN 969\-8023\-15\-1\."	Partial	data/other/forms/20260725-ssnp.csv	Aryaman Arora	No	
+schmidt	S2008	"Ruth Laila Schmidt and Vijay Kumar Kaul\.
+A comparative analysis of shina and kashmiri vocabularies\.
+*Acta Orientalia*, 69:231–302, 2008\."	Partial	data/other/forms/20230621-shina.csv; data/other/forms/20260725-schmidt-kashmiri.csv	Aryaman Arora; OpenAI Codex	No	source
+knobloch2020sauji	K2020	"Nina Knobloch\.
+A grammar sketch of sauji: an indo\-aryan language of afghanistan\.
+Independent thesis, Degree of Master (One Year), 15 ECTS, Stockholm University, Stockholm, 2020\.
+Department of Linguistics, General Linguistics; supervised by Henrik Liljegren; produced within the project “Language Contact and Relatedness in the Hindu Kush Region” \(Swedish Research Council VR 421\-2014\-631\)\.
+URL: [https://urn\.kb\.se/resolve?urn=urn:nbn:se:su:diva\-182519](https://urn.kb.se/resolve?urn=urn:nbn:se:su:diva-182519)\."	Every glossed Sauji form printed in the thesis: Tables 2, 4, 6, 7, 8, 9, 10 and 11, the Sauji column of Table 14, the syllable-structure examples in (1), all interlinear examples including the three appendix texts, and the italicised citations in running prose. Excludes the Palula and Kalkoti comparanda, the phoneme-inventory and case-suffix charts, bare inflectional affixes, the Appendix B index of recordings, and the bibliography	Open-access full text downloaded from DiVA record diva2:1440556 on 2026-08-25; PDF SHA-256 38e02514183aa4b7d6a424e81a06f27d31d99b0935af87a49488ebbab859da38 and SHA-512 matching the checksum published in the DiVA record; reproducible extraction, checked-in extraction snapshot and audit in data/other/forms/raw_data/knobloch_sauji_2020.py and data/other/forms/raw_data/20260825-knobloch-sauji-audit.csv; installed rows in data/other/forms/20260825-knobloch-sauji.csv	Aryaman Arora and Anthropic Claude	No	none
+buddruss1967sau	B1967a	"Georg Buddruss\.
+*Die Sprache von Sau in Ostafghanistan: Beiträge zur Kenntnis des dardischen Phalūra*\.
+Münchener Studien zur Sprachwissenschaft, Beiheft M\.
+Kitzinger in Kommission, Munich, 1967\.
+The first grammar sketch of Sauji, based on two days of work with a single consultant in Jalalabad in 1956\."	Cited only as the secondary authority behind individual forms that Knobloch (2020) reproduces from it; the work itself has not been ingested	data/other/forms/20260825-knobloch-sauji.csv	Aryaman Arora	No	
+AO	AO	Acta Orientalia. Leiden. [Unless otherwise stated, the author of the article referred to is G. Morgenstierne.]	No	data/cdial/cdial.csv	Aryaman Arora	No	
+BKPD	BKPD	Georg Buddruss, Beiträge zur Kenntnis der Pašai-Dialekte. [Abhandlungen für die Kunde des Morgenlandes xxxiii, 2.]	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Bailey ShGr	Bailey ShGr	T. Grahame Bailey, Grammar of the Shina (Ṣiṇā) Language. London, 1924.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+BelvalkarVol	BelvalkarVol	Dr. S. K. Belvalkar Felicitation Volume. [All references, unless otherwise stated, are to the article by G. Morgenstierne.]	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Buddruss	Buddruss	(or G.B.) Personally communicated by Professor G. Buddruss.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Buddruss Woṭ	Buddruss Woṭ	Georg Buddruss, Die Sprache von Woṭapūr und Kaṭārqalā. Bonn, 1960.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+G.M	G.M	See Morgenstierne.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Grahame Bailey	Grahame Bailey	Personally communicated by Dr. T. Grahame Bailey.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+IIFL	IIFL	G. Morgenstierne, Indo-Iranian Frontier Languages. Oslo, 1929-56.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Lor	Lor	(or Lorimer) Personally communicated by Lt. Col. D. L. R. Lorimer C.I.E.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Lorimer BurLg	Lorimer BurLg	D. L. R. Lorimer, The Burushaski Language. Oslo, 1935.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+Morgenstierne	Morgenstierne	(or G.M.) Personally communicated by Professor G. Morgenstierne.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+NOGaw	NOGaw	Georg Morgenstierne, Notes on Gawar-Bati. [Skrifter utgitt av Det Norske Videnskaps-Akademi i Oslo, II Hist.-Filos. Klasse. 1950 No. 1.] Oslo, 1950.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+NOPhal	NOPhal	Georg Morgenstierne, Notes on Phalūṛa an unknown Dardic language of Chitral. [Skrifter utgitt av Det Norske Videnskaps-Akademi i Oslo, II Hist.-Filos. Klasse. 1940 No. 5.] Oslo, 1941.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+NTS	NTS	Norsk Tidsskrift for Sprogvidenskap. Oslo. [Unless otherwise stated, the author of the article referred to is G. Morgenstierne.]	No	data/cdial/cdial.csv	Aryaman Arora	No	
+ShahidullahPresVol	ShahidullahPresVol	Shahidullah Presentation Volume. Ed. A. S. Dil. Pakistani Linguistics Series VII. Lahore, 1966.	No	data/cdial/cdial.csv	Aryaman Arora	No	
+ZDMG	ZDMG	Zeitschrift der Deutschen Morgenländischen Gesellschaft.	No	data/cdial/cdial.csv	Aryaman Arora	No	

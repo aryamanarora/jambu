@@ -1,0 +1,136 @@
+[
+  {
+    "input_class": "Palula-E-without-short-final-vowel",
+    "source": "kalkoti",
+    "lexical_cells": 27,
+    "broad_families": 26,
+    "statuses": {
+      "unscorable": 16,
+      "consistent": 5,
+      "excluded": 6
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "Palula-E-without-short-final-vowel",
+    "source": "hultman2023kalkoti",
+    "lexical_cells": 31,
+    "broad_families": 30,
+    "statuses": {
+      "unscorable": 14,
+      "residual": 4,
+      "consistent": 4,
+      "excluded": 9
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "Palula-L-without-short-final-vowel",
+    "source": "kalkoti",
+    "lexical_cells": 7,
+    "broad_families": 7,
+    "statuses": {
+      "Low-interaction": 3,
+      "unscorable": 3,
+      "consistent": 1
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "Palula-L-without-short-final-vowel",
+    "source": "hultman2023kalkoti",
+    "lexical_cells": 11,
+    "broad_families": 10,
+    "statuses": {
+      "consistent": 5,
+      "Low-interaction": 2,
+      "unscorable": 3,
+      "excluded": 1
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "Palula-prefinal-accent-plus-short-final-vowel",
+    "source": "kalkoti",
+    "lexical_cells": 22,
+    "broad_families": 20,
+    "statuses": {
+      "excluded": 5,
+      "consistent": 9,
+      "unscorable": 8
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "Palula-prefinal-accent-plus-short-final-vowel",
+    "source": "hultman2023kalkoti",
+    "lexical_cells": 17,
+    "broad_families": 17,
+    "statuses": {
+      "excluded": 7,
+      "consistent": 6,
+      "unscorable": 4
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "other-comparative-structure",
+    "source": "kalkoti",
+    "lexical_cells": 0,
+    "broad_families": 0,
+    "statuses": {},
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  },
+  {
+    "input_class": "other-comparative-structure",
+    "source": "hultman2023kalkoti",
+    "lexical_cells": 2,
+    "broad_families": 2,
+    "statuses": {
+      "excluded": 2
+    },
+    "scope": "Manually reviewed DB cognates; different gloss cells in a family remain separate. Author-selected phonetic examples are not an unbiased known-tone sample."
+  }
+]
+COMBINED [
+  {
+    "input_class": "Palula-E-without-short-final-vowel",
+    "lexeme_form_cells": 35,
+    "broad_families": 34,
+    "statuses": {
+      "unscorable": 14,
+      "consistent": 7,
+      "residual": 4,
+      "excluded": 10
+    }
+  },
+  {
+    "input_class": "Palula-L-without-short-final-vowel",
+    "lexeme_form_cells": 13,
+    "broad_families": 13,
+    "statuses": {
+      "Low-interaction": 4,
+      "consistent": 4,
+      "unscorable": 4,
+      "excluded": 1
+    }
+  },
+  {
+    "input_class": "Palula-prefinal-accent-plus-short-final-vowel",
+    "lexeme_form_cells": 28,
+    "broad_families": 27,
+    "statuses": {
+      "excluded": 8,
+      "consistent": 10,
+      "unscorable": 10
+    }
+  },
+  {
+    "input_class": "other-comparative-structure",
+    "lexeme_form_cells": 2,
+    "broad_families": 2,
+    "statuses": {
+      "excluded": 2
+    }
+  }
+]

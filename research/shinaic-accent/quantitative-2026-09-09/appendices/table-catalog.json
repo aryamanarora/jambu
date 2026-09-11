@@ -1,0 +1,217 @@
+[
+  {
+    "file": "exception-ledger.tsv",
+    "title": "Consolidated model exception ledger",
+    "description": "Every tested residual and documented special case, with its source table and full evidence. Repeated membership in different tests is retained, not counted as independent exceptions."
+  },
+  {
+    "file": "editorial-and-source-decisions.tsv",
+    "title": "Editorial, formation and source decisions",
+    "description": "Every research-only correction or explicit source observation, preserving its original locator and rationale."
+  },
+  {
+    "file": "all-family-open-issues.tsv",
+    "title": "All family-level open questions",
+    "description": "The complete first-pass unresolved-issue register. An open verification question is not automatically a counterexample to a sound law."
+  },
+  {
+    "file": "class-definitions.tsv",
+    "title": "Lexical class definitions and selection tables",
+    "description": "All 27 class domains represented in the counterpart panels, with the frozen source inventory defining each. Overlapping subsets are not independent innovations."
+  },
+  {
+    "file": "class-counterpart-outcome-summary.tsv",
+    "title": "Every tested class: all-language outcome ranges",
+    "description": "Complete counterpart outcome sets in all seven languages. Broad family counterparts can have different formations; these counts are not cross-language prediction accuracies."
+  },
+  {
+    "file": "class-counterparts-all-languages.tsv",
+    "title": "Every tested class: individual counterpart families",
+    "description": "Exact selected class tokens are distinguished from every other record in the same research family. Unlinked members remain visible without invented cognates."
+  },
+  {
+    "file": "class-memberships.tsv",
+    "title": "Every tested class: exact member tokens",
+    "description": "The records that define each tested class; source constraints and split-token identity are retained."
+  },
+  {
+    "file": "old-long-screen.tsv",
+    "title": "Broad old-long falsification screen",
+    "description": "All eligible old-long two-nucleus inputs with modern monosyllabic E/L readings. Family-level source and dialect conflicts remain conflicts."
+  },
+  {
+    "file": "old-long-screen-residuals.tsv",
+    "title": "Every broad old-long residual",
+    "description": "Opposite or conflicting family/language cells, with individual explanations and unresolved issues."
+  },
+  {
+    "file": "old-long-nominal-sensitivity.tsv",
+    "title": "Restricted nominal class: source and input sensitivity",
+    "description": "29 explicitly selected old nominal a-stem families; twelve input/source/lect scopes. This subset is not a claim of exhaustive nominal reconstruction."
+  },
+  {
+    "file": "old-long-nominal-formation-audit.tsv",
+    "title": "Restricted nominal class: selection rationale",
+    "description": "Every selected family, its independent nominal formation basis, and documented alternatives."
+  },
+  {
+    "file": "old-long-nominal-language-panel.tsv",
+    "title": "Restricted nominal class: all seven languages",
+    "description": "Every selected family/language cell, including unmarked and excluded evidence."
+  },
+  {
+    "file": "old-long-nominal-residuals.tsv",
+    "title": "Restricted nominal class: all residuals",
+    "description": "Smell, village and source/lect/sense conflicts retained."
+  },
+  {
+    "file": "short-root-cluster-screen.tsv",
+    "title": "Short-root cluster comparisons",
+    "description": "Old input and Shina lect outcomes. A descriptive structural screen, not a universal cluster-lengthening law."
+  },
+  {
+    "file": "short-root-cluster-summary.tsv",
+    "title": "Short-root cluster summary",
+    "description": "Family outcome sets by old root vowel and Shina lect; vowels are not pooled."
+  },
+  {
+    "file": "palula-short-a-pairs.tsv",
+    "title": "Palula new short-a length: every pair",
+    "description": "Biori short-a versus Ashret long-a; aspiration/h, forms, predictions and all residuals."
+  },
+  {
+    "file": "palula-short-a-sensitivity.tsv",
+    "title": "Palula short-a: units and scope",
+    "description": "All forms, closed syllables, and closed lexemes with article/numeral identity collapsed."
+  },
+  {
+    "file": "palula-u-adjectives.tsv",
+    "title": "Palula grammatical short-u class",
+    "description": "Gender-inflecting regular/umlaut types, including accented ú and participles. Source metadata is not assumed to prove an exact dialect paradigm."
+  },
+  {
+    "file": "palula-tagged-u-adjectives.tsv",
+    "title": "Palula POS-tagged short-u adjectives",
+    "description": "Separate lexical-POS selection; all final-accented exceptions retained."
+  },
+  {
+    "file": "gilgit-o-adjectives.tsv",
+    "title": "Gilgit short-o adjectives",
+    "description": "Independent adjective tags and final short-o selection, with all unscorable records."
+  },
+  {
+    "file": "adjective-cognate-panel.tsv",
+    "title": "Adjective counterparts in all languages",
+    "description": "Whole-family panel associated with source-tagged adjectives; includes other formations and senses, not one pooled adjective statistic."
+  },
+  {
+    "file": "property-location-screen.tsv",
+    "title": "Core property comparison: records",
+    "description": "Predeclared property families, retained short endings and source-specific stress/accent position."
+  },
+  {
+    "file": "property-location-summary.tsv",
+    "title": "Core property comparison: seven-language counts",
+    "description": "Penultimate, other, mixed and unscorable family outcomes. Restricted lexical comparison, not a fitted law."
+  },
+  {
+    "file": "palula-umlaut-i-nouns.tsv",
+    "title": "Palula aa/ee+i noun paradigms",
+    "description": "All 74 candidates, 73 comparable full-form cells/66 lexemes, and the excluded mismatched rainbow paradigm. Selection ignores accent."
+  },
+  {
+    "file": "palula-i-decl-extension.tsv",
+    "title": "Palula i-declension: extension beyond umlaut",
+    "description": "All 43 further candidates, 42 comparable cells/30 lexemes. Final-i accent persists while citation E/L varies; the unverified gun variant paradigm is excluded."
+  },
+  {
+    "file": "vowel-raising-reviewed.tsv",
+    "title": "Biori–Ashret raising: all 78 pairs",
+    "description": "Quality, accent and syllable domain, including six aa-to-uu residuals and independently supported versus speculative proto-au analyses."
+  },
+  {
+    "file": "vowel-raising-summary.tsv",
+    "title": "Vowel-raising outcome summary",
+    "description": "Form-pair counts; two late-aa forms instantiate one accusative suffix, and five genitive forms instantiate one ending."
+  },
+  {
+    "file": "kalkoti-palula-adjudicated.tsv",
+    "title": "Kalkoti–Palula: every comparison",
+    "description": "Source-specific tone/contour observations with formation exclusions, uncertainties and residual analysis."
+  },
+  {
+    "file": "kalkoti-palula-summary.tsv",
+    "title": "Kalkoti–Palula: source-specific counts",
+    "description": "2013 phonetic contours and 2023 High/Low analysis kept separate."
+  },
+  {
+    "file": "kalkoti-palula-combined.tsv",
+    "title": "Kalkoti–Palula: consolidated lexical cells",
+    "description": "Cell consolidation by broad family and Palula citation; missing tone remains unknown."
+  },
+  {
+    "file": "kalkoti-palula-combined-summary.tsv",
+    "title": "Kalkoti–Palula: class counts",
+    "description": "Known outcomes, Low interactions, unknown and excluded cells; not an unbiased sample of all tone categories."
+  },
+  {
+    "file": "numeral-series-records.tsv",
+    "title": "Numerals 11–20: complete records",
+    "description": "381 source tokens across all seven languages, including different formations and misglossed twenty-plus-five expressions."
+  },
+  {
+    "file": "numeral-series-language-panel.tsv",
+    "title": "Numerals 11–20: seven-language panel",
+    "description": "Ten-compound series11–18; nineteen and twenty compared separately. Not eight independent innovations."
+  },
+  {
+    "file": "numeral-series-tests.tsv",
+    "title": "Palula–Kalkoti numeral correspondence",
+    "description": "Eight ten compounds plus two twenty-element controls, with predictions and all source outcomes."
+  },
+  {
+    "file": "dras-paradigm-review.tsv",
+    "title": "Dras: every reviewed plural citation",
+    "description": "287 plural citations with singular candidates and individual or paradigm-class assessments. Exact-gloss matches are not automatically valid paradigms."
+  },
+  {
+    "file": "dras-suffix-accent-review.tsv",
+    "title": "Dras: final-suffix accent readings",
+    "description": "Every plural, including dual stem/final marks and source contradictions."
+  },
+  {
+    "file": "dras-suffix-accent-summary.tsv",
+    "title": "Dras: plural suffix counts",
+    "description": "Final-only, dual, stem-only and unmarked citations. Counts are citations, not independent etyma."
+  },
+  {
+    "file": "kundal-primary-paradigms.tsv",
+    "title": "Kundal Shahi: all 21 primary paradigms",
+    "description": "Fixed, mobile rising, truncated feminine and unexplained postaccenting paradigms from the 2004 draft."
+  },
+  {
+    "file": "sauji-source-review.tsv",
+    "title": "Sauji: all 573 Knobloch records",
+    "description": "335 manually reviewed gloss groups; linked, provisional, component-only and unknown analyses. Accent was not investigated by this source."
+  },
+  {
+    "file": "input-class-summary.tsv",
+    "title": "Full nearest-input class inventory",
+    "description": "Seven-language outcome sets for every automatically described historical input class; overlapping family counts are explicit."
+  },
+  {
+    "file": "input-class-family-outcomes.tsv",
+    "title": "Full input classes: family/language cells",
+    "description": "Complete eligible and excluded outcomes, with all forms and sources."
+  },
+  {
+    "file": "coverage-by-source.tsv",
+    "title": "Frozen raw source coverage",
+    "description": "Counts overlap for merged citations; accent-mark presence is not a phonological interpretation."
+  },
+  {
+    "file": "coverage-research-by-source.tsv",
+    "title": "Research source coverage",
+    "description": "Tokens, linked ancestry, unknown ancestry and explicit review counts after research-only corrections."
+  }
+]

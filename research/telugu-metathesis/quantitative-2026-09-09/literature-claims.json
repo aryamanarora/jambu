@@ -1,0 +1,100 @@
+[
+  {
+    "id": "K03-rule20",
+    "source": "Krishnamurti 2003 pp.157–158, Rule20",
+    "claim": "Initial apical displacement and C-initial cluster formation have distinct segmental domains; equal vowels or low V2 yield long V1, unequal high V2 can yield a short outcome.",
+    "status": "Tested against182 manually annotated formations covering every117 Telugu D-bearing family; strict surface quantity results25/33 long,8/8 differing-high short,21/21 consonantal short. Conditional/mixed inputs excluded.",
+    "test": "Use independent V1,V2,apical,C1 and syllable/morphological input annotations, never fit V2 to observed output.",
+    "analysis_artifacts": "formation-tests.tsv; formation-count-membership.tsv"
+  },
+  {
+    "id": "K03-rule21",
+    "source": "Krishnamurti 2003 p.158, Rule21",
+    "claim": "Later CR cluster simplification loses R in Telugu but can lose C1 in other SCDr languages, especially initial n,w,s.",
+    "status": "Tested across409 comparative entries: visible cluster/reduced doublets support concealment, but direct medial assimilation remains an alternative for r-less forms without cluster witnesses. Telugu vrāyu>rāyu is a first-member-loss exception to a uniform Telugu R-loss formula.",
+    "test": "Separate visible metathesis, historically attested clusters and only inferred hidden outcomes; verify dated/dialect clusters.",
+    "analysis_artifacts": "casebook.md; cited-evidence.tsv"
+  },
+  {
+    "id": "K03-SDI-aph",
+    "source": "Krishnamurti 2003 pp.115–117; Kekunnaya 1994 pp.42–44 quoted there",
+    "claim": "Recent SD I initial-vowel loss, especially in Tulu/Irula, need not be historically shared with SCDr metathesis.",
+    "status": "Primary K03 source and source-labeled DEDR variants inspected; Kekunnaya full source not obtained",
+    "test": "Compare vowel survival, quantity and dialect restrictions; do not count every initial liquid as the same event."
+  },
+  {
+    "id": "K03-davvu",
+    "source": "Krishnamurti 2003 p.57",
+    "claim": "The derivation of Telugu davvu and Naikri dhāv from *iṭ-a is questioned.",
+    "status": "Primary text inspected, d446 marked ambiguous",
+    "test": "Check aspirated recipient forms, possible alternative ancestry and exact historical vowels; no unsupported a-reconstruction."
+  },
+  {
+    "id": "H04-cluster",
+    "source": "Hume 2004 pp.225–226, example18 and n.16; DOI10.1353/lan.2004.0083",
+    "claim": "Later Kuvi metathesis targets closed-syllable sonorants; earlier VLV reduction supplied initial-liquid patterns. Nasals were added to the domain.",
+    "status": "Full final PDF obtained; pp.225–226 images checked",
+    "test": "Audit nasal plurals and lexical doublets separately from older initial-vowel contraction. The proposed perceptual motivation is not established by dictionary correspondences alone."
+  },
+  {
+    "id": "H04-counts",
+    "source": "Hume 2004 pp.225–226 reporting Krishnamurti1978 and Israel1979",
+    "claim": "Published counts: Kui98 and Kuvi59 changed forms, plus19/23 variable forms; Kuvi open/closed initial-syllable text frequencies1535/736.",
+    "status": "Verified as Hume’s reporting; underlying K78 and Israel full sources not yet obtained",
+    "test": "Do not claim replication or compare token-frequency denominators with database lexical-type counts."
+  },
+  {
+    "id": "H04-kp",
+    "source": "Hume 2004 p.203; Winfield1928 cited there",
+    "claim": "Stem-final velar plus labial verbal formative surfaces in reversed order; nonvelar controls retain their order. The suffix is not uniformly causative.",
+    "status": "All152 literal-screen records adjudicated. Supported-family counts Kui61/61,Kuvi2/3 with one possible retained source variant,Pengo4/4,Manda2/2; additional55 source paradigm observations preserve nonvelar and vowel-stem controls.",
+    "test": "152 screen records include 61 Kui source-supported verbal families, nominal and labial-stem pk controls, and Kuvi Schulze kakpinai as a possible retained counterexample. Garrett and Blevins2009 analogical-origin hypothesis remains distinct from synchronic regularity.",
+    "analysis_artifacts": "stop-cluster-annotations.tsv; stop-rule-counts.tsv; kondh-source-paradigms.tsv"
+  },
+  {
+    "id": "S69-destroy",
+    "source": "Sastri1969 pp.291–292,310–311,350; DHARMA00026",
+    "claim": "Source-attributed first-quarter seventh-century initial-ḻ destroy at Potladurti, independent670–680 witness, and890 coexisting full/displaced formations.",
+    "status": "Fourteen historical observations exported with separate source dating, written reading and inferred sound history. Earlier first-quarter seventh-century claim is source-attributed, not an absolute onset date.",
+    "test": "Differentiate relative chronology, source-attributed dates and nonidentical morphological contexts; one root regardless of token count.",
+    "analysis_artifacts": "historical-evidence.tsv"
+  },
+  {
+    "id": "S69-productivity",
+    "source": "Sastri1969 p.72",
+    "claim": "Older native metathesis ceased as an active formative principle in Middle Telugu while literary doublets and distinct sporadic/loan metatheses persisted.",
+    "status": "Primary page visually checked",
+    "test": "Test actual grammatical formations and dated texts; neither coexisting doublets nor1290 Druggādēvi alone demonstrate continuous productivity."
+  },
+  {
+    "id": "GB09-analogy",
+    "source": "Garrett and Blevins2009 pp.537–543, §22.4; p.538 image checked",
+    "claim": "Kondh kp/pk and gb/bg alternations may arise from causative replacement, reinterpretation, plural-action double marking and analogical generalization rather than a phonetic KP>PK sound change.",
+    "status": "Source paradigms and labial/vowel-base controls establish nonexchange routes to pk. They make the analogical account viable but do not uniquely establish its reconstructed historical sequence.",
+    "test": "Winfield73 vowel-final bases with strengthened -p plus -ki and database labial-base pk derivatives establish a nonmetathetic source of pk. These support possibility, not unique historical proof.",
+    "analysis_artifacts": "kondh-source-paradigms.tsv; source-paradigm-counts.tsv"
+  },
+  {
+    "id": "H02-table-discrepancy",
+    "source": "Hume2002 p.38 ex.38 versus Winfield1928 p.72 and DEDR1080",
+    "claim": "The manuscript table labels kaksa/ḍiksa as infinitives, whereas Winfield assigns -sa to perfect participles and -pa to infinitives.",
+    "status": "Both page images checked; DEDR kapka confirms labial infinitive in laugh",
+    "test": "Retain the source discrepancy; use verified suffix cells, not a silently repaired table."
+  },
+  {
+    "id": "BB63-source-quality",
+    "source": "Burrow and Bhattacharya1963 p.231, https://brill.com/previewpdf/journals/iij/6/3-4/article-p231_3.xml",
+    "claim": "Schulze/Fitzgerald transcriptions can be inaccurate; Bisamkatak consultant resident in Kui area may show contact effects.",
+    "status": "Introductory p.231 read; attempted local full-PDF extraction failed because the saved file was an HTML access page. Full article not consulted. Source/dialect caveat retained without deleting contrary evidence.",
+    "test": "Preserve source/dialect labels; neither source criticism nor possible contact licenses automatic deletion of kakpinai or treating every Bisamkatak feature as borrowed.",
+    "analysis_artifacts": "SOURCE_ACCESS.md"
+  },
+  {
+    "id": "K80-lowering-recount",
+    "source": "Krishnamurti1980 pp.495–506, especially499,501",
+    "claim": "Lowering distribution and relative chronology distinguish vowels produced by different contractions.",
+    "status": "All25 numbered positive/control/exception items audited; printed-list Kui17/18 selected or17/17 explicitly nonmissing, Kuvi9/18, Manda2/18. Exact inherited low-a formation is independently supported in only a subset.",
+    "test": "No population estimate from the selected list; preserved open-mid quality is a historical hypothesis, not a look-back rule.",
+    "analysis_artifacts": "lowering-source-audit.tsv; lowering-language-panels.tsv; lowering-results.json"
+  }
+]

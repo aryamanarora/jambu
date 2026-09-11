@@ -1,0 +1,104 @@
+
+ d229 {"entry_id": "d229", "family_id": "d229", "concept": "half", "reconstruction": "*ar-ay", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "a", "structure": "VC-ay; free nominal base", "grammatical_category": "noun/adjective", "boundary_evidence": "The historical separability of -ay is unproved; retain as a root-shape control instead of forcing the core classification.", "input_support": "Tamil arai, Kannada are, Telugu ara/aṟa and Naiki ar establish V–r ordering and the ay/a/e regional vowel correspondences.", "input_confidence": "high", "direction_argument": "The same ordering is widespread within SD I and retained in Telugu and Naiki. Nothing requires either a prior displacement or reinsertion.", "derivation": "*aray > Tamil arai, Kannada/Tulu are, Malayalam/Telugu ara; Kota/Toda/Naiki ar lose the final vowel. These changes do not relocate the rhotic.", "exception_notes": "This is a useful contrast to *ar-ay “grind”, but historical identity of the formative -ay is not proven: half may be a lexical free base, whereas grind enters verbal derivation. The distinction cannot be manufactured after noticing opposite outcomes. Telugu ṟ/r is recorded but its chronology remains unestablished.", "confidence": "medium", "references": "DEDR 229", "eligibility": "free-base-control", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D ara;aṟa
+Tamil R-bearing-no-D arai
+Kannada R-bearing-no-D ara;arake;are
+Kui missing 
+Kuwi missing 
+Gondi missing 
+ara f_bzeztn2fkuamo R
+aṟa f_73yfjkyby7tk2 R
+
+ d472 {"entry_id": "d472", "family_id": "d472", "concept": "beg, borrow", "reconstruction": "*ir-a / *ir-av-", "c1": "Ø", "v1": "i", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "a", "structure": "VC-a / VC-a-v", "grammatical_category": "verb/noun", "boundary_evidence": "av noun matched in several languages; Tulu nd verb is a different formation, not a reason to change its input class.", "input_support": "Tamil ira/iravu, Malayalam iravu/irakkuka, Kannada era/eravu and Telugu eravu independently support i/e before r and a low formative.", "input_confidence": "high", "direction_argument": "The widespread vowel-first form, corroborated by Malto irɣre, favors original ir-; Tulu randuni is innovated under this comparison.", "derivation": "*ir-av > *erav > Telugu eravu preserves the order despite an input that could permit contraction. Tulu randuni may follow initial vowel loss in a nasal-bearing begging formation; its exact preceding full form is not attested here.", "exception_notes": "Do not explain Telugu retention by assigning an unsupported high formative: southern av words directly match its loan noun. Late lexical borrowing remains possible but is not documented, so this stays a genuine low-vowel retention counterexample. Tulu verbal morphology differs from eravu and does not prove a shared event.", "confidence": "medium", "references": "DEDR 472", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D eravu
+Tamil R-bearing-no-D ira;iraval;iravu
+Kannada R-bearing-no-D era;eraval;eravu;ere (erad-)
+Kui missing 
+Kuwi missing 
+Gondi missing 
+eravu f_7mxhybbcyt32g R
+
+ d490 {"entry_id": "d490", "family_id": "d490", "concept": "food, prey", "reconstruction": "*ir-ay", "c1": "Ø", "v1": "i", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "a", "structure": "VC-ay", "grammatical_category": "noun", "boundary_evidence": "ay formation independently supported in southern comparison; Brahui final material not equated mechanically.", "input_support": "Tamil irai/erav, Malayalam ira, Kannada ere, Kota er and Telugu era independently support a vowel-first r with low a/ay formation.", "input_confidence": "high", "direction_argument": "The cross-branch agreement, including Brahui iraɣẖ food, favors earlier ir- rather than repeated prothesis before a hypothetical rē.", "derivation": "*ir-ay > *eray > Telugu era, Kannada ere and Kota er with lowering/final contraction while maintaining V–r order. Brahui has a different final extension.", "exception_notes": "A genuine simple low-vowel retention comparison, semantically basic and not source-marked as a loan. No attested SCDr comparison in this group besides Telugu: missing elsewhere is not retention. Full Brahui suffix reconstruction is unnecessary for the initial-order observation but remains unresolved.", "confidence": "medium", "references": "DEDR 490", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D era
+Tamil R-bearing-no-D erav;irai
+Kannada R-bearing-no-D ere
+Kui missing 
+Kuwi missing 
+Gondi missing 
+era f_lzfmtmyxydwz4 R
+
+ d240 {"entry_id": "d240", "family_id": "d240", "concept": "move, shake, wave", "reconstruction": "*al-ay-; *al-aŋ- / *al-uk- extensions", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "l", "c2_structure": "singleton", "v2": "a", "structure": "VC-ay / VC-a-NC", "grammatical_category": "verb/noun", "boundary_evidence": "-ay and -aŋ/-uk formations independently visible in SD I; exact Pengo/Irula formations unknown.", "input_support": "Tamil alai/alaŋku, Malayalam alayuka/alaŋŋuka and Kannada ale/alagu supply medial l and low formative independently; Telugu ala and allāḍu preserve the order.", "input_confidence": "high", "direction_argument": "The shared vowel-first SD I/Telugu base plus Kurux alr- favors original al-. Kui lāng- is a derived innovative outcome, not a reason to reverse the reconstructed comparison.", "derivation": "*al-aŋ- > *lāŋ- > Kui lānga; its causative lāk-p- > lāpka requires separate stop-cluster metathesis. Telugu allāḍu can be analyzed as a reinforced/reduplicated formation associated with “move” and must not be reduced to an imaginary initial *lā-. Pengo lem- and Irula le·- require a separate vowel and derivative history.", "exception_notes": "Tulu landuni/landele may show independent aphaeresis in a wanderer derivative; no shared SCDr event follows. Pengo e and Irula e· cannot be generated by simple a+a contraction without another change. Malayalam alaŋŋ-/anaŋŋ- is l/n assimilation/variation, not vowel–liquid displacement. DEDR treats this root as originally distinct from d236 but acknowledges semantic convergence.", "confidence": "medium", "references": "DEDR 240; DEDR 236 editorial note", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D ala;allalāḍu;allārucu;allāḍu
+Tamil R-bearing-no-D alai;alaŋku;alukku
+Kannada R-bearing-no-D alagu;ale;aluku;aḷku
+Kui D-bearing-no-R lānga (lāngi-);lāpka (&lt; lākp-; lākt-)
+Kuwi missing 
+Gondi missing 
+ala f_sse3m4kxlu7c4 R
+allāḍu f_eldm6ywbhzgko R
+allalāḍu f_6bupjipoxgkiu R
+allārucu f_aifvh7czpucsy R
+
+ d61 {"entry_id": "d61", "family_id": "d61", "concept": "shoot, discharge", "reconstruction": "regional *aṭ-a- (Te -r-, Tu -k-)", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "ṭ", "c2_structure": "singleton", "v2": "a", "structure": "VC-a-C", "grammatical_category": "verb", "boundary_evidence": "Different final extensions support segmentation only provisionally.", "input_support": "Tulu aḍakuni and Telugu aḍarucu/aḍarincu agree in aḍa-, with different final extensions. The database PSTDr reconstruction rests on only this two-language comparison.", "input_confidence": "low", "direction_argument": "Both comparative members are vowel-initial; no independent displaced member motivates an earlier alternative order.", "derivation": "*aṭ-a-r- > aḍarucu in Telugu; *aṭ-a-k- > aḍakuni in Tulu, conditionally on cognacy. No vowel/apical exchange is necessary.", "exception_notes": "A low second vowel is directly shared, but the narrow distribution and final r:k mismatch limit the reconstruction level. The contrast is retained as a narrow comparison, not elevated to secure PDr evidence.", "confidence": "medium", "references": "DEDR 61", "eligibility": "narrow-comparison-control", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D aḍarincu;aḍarucu
+Tamil missing 
+Kannada missing 
+Kui missing 
+Kuwi missing 
+Gondi missing 
+aḍarucu f_3q5xbq5rhq75c R
+aḍarincu f_nhqmog2x777im R
+
+ d84 {"entry_id": "d84", "family_id": "d84", "concept": "collect, crowd, increase", "reconstruction": "*aṭ-ay- / *aṭ-ar-; strengthened *aṭṭ-", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "ṭ", "c2_structure": "singleton", "v2": "a", "structure": "VC-ay / VC-ar / VCC", "grammatical_category": "verb/noun", "boundary_evidence": "plausible formative boundary; not independently dated", "input_support": "Tamil aṭai/aṭar, Kannada aḍe/aḍar and Telugu aḍaru establish short a, singleton apical and low vowel extensions. These are independent of the strengthened pile nouns.", "input_confidence": "high", "direction_argument": "SD I, Telugu, Konda aḍar and Pengo aḍer all put a before the apical; no reversal is required.", "derivation": "*aṭ-ar- > aḍaru in Telugu and aḍar in Kannada/Konda. *aṭ-ay- > aṭai/aḍe; strengthened *aṭṭ- appears in pile nouns. Pengo e after the apical is a local vowel development without displacement.", "exception_notes": "Telugu eṭṭam differs in V1, and aṭṭaḍi/aṭṭava have strengthened compound-like shapes: these are not examples of initial displacement. The root is semantically close to pile d80 and approach d79; audit an alternative broad family collapse rather than treating semantic similarity as proof of one root.", "confidence": "medium", "references": "DEDR 84", "eligibility": "core", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D aḍa;aḍaru;aḍi;aṭṭamu;aṭṭaḍi;eṭṭam
+Tamil R-bearing-no-D aṭacu;aṭai;aṭar;aṭi
+Kannada R-bearing-no-D aḍar;aḍe;aḍḍa;aṭṭu
+Kui missing 
+Kuwi missing 
+Gondi missing 
+aḍaru f_p63j66pzb5y4w R
+aḍa f_qlr7ichhhihvy R
+aḍi f_udy2vnaz6nh2i R
+aṭṭamu f_eynm7a23m67ps R
+eṭṭam f_6dwdgnqq73qeq R
+aṭṭaḍi f_3u3em7cpbm3ps R
+
+ d89 {"entry_id": "d89", "family_id": "d89", "concept": "sign, token", "reconstruction": "regional *aṭay-āḷ-am? (internal analysis uncertain)", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "ṭ", "c2_structure": "singleton", "v2": "a", "structure": "VCay-VVCV(m)", "grammatical_category": "noun", "boundary_evidence": "Opaque internal segmentation; no outcome-based boundary is invented.", "input_support": "Tamil aṭaiyāḷam, Malayalam aṭayāḷam and Kannada aḍayāḷa agree in a long word; Telugu has aḍiyālamu. The inherited morpheme structure is not independently established.", "input_confidence": "low", "direction_argument": "All comparison languages have a before the apical. The Toda source explicitly compares Tamil, so Toda is not an independent proto-stage witness.", "derivation": "Regional aṭayāḷam > aḍayāḷa / aḍiyālamu is a plausible transmission/adaptation series; exact vowel, lateral and direction of loans need separate evidence. No displacement is required.", "exception_notes": "Do not use the starred database PSTDr string as proof of ancient inheritance. This word may have spread after the sound change or contain an ineligible boundary. Neither explanation is established by its retained outcome, so it remains outside the decisive inherited denominator.", "confidence": "medium", "references": "DEDR 89; Emeneau 1984 p.10 via Toda record", "eligibility": "compound-contact-control", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D aḍiyālamu
+Tamil R-bearing-no-D aṭaiyāḷam
+Kannada R-bearing-no-D aḍayāḷa
+Kui missing 
+Kuwi missing 
+Gondi missing 
+aḍiyālamu f_vusva7tdjpzmw R
+
+ d247 {"entry_id": "d247", "family_id": "d247", "concept": "blossom, expand, flower", "reconstruction": "*al-ar- (two distinct liquids)", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "l", "c2_structure": "singleton", "v2": "a", "structure": "VC-VC with L...R", "grammatical_category": "verb/noun", "boundary_evidence": "Whether -ar is a separable formative is unresolved; the consonant order is directly comparable.", "input_support": "Tamil alar, Malayalam alar and Telugu alaru support older l...r order, independently of Kannada/Tulu variants. Kannada retains alar beside aral/araḷ, so both orders occur within one language.", "input_confidence": "high", "direction_argument": "Concordant l...r in Tamil, Malayalam and Telugu plus retained Kannada alar favors *alar > aral, not *aral as the uniform family input. There is no evidence that the initial vowel has moved.", "derivation": "*alar > Kannada/Tulu aral by nonadjacent consonant metathesis; *aral > araḷ by a separate lateral change. Kannada alal may instead reflect r-to-l assimilation. Kannada arlu involves medial syncope, plausibly after the r...l ordering had developed.", "exception_notes": "This is a real comparative metathesis candidate outside Telugu, but a different process from initial apical promotion. R in the main outcome matrix means the target initial V–apical order remains; an orthogonal process annotation records the l/r exchange. DEDR tentatively relates beauty d248, which must be collapsed in a conservative family sensitivity. Marathi araḷ/arala is a contact comparison, not an independent Dravidian language vote.", "confidence": "high", "references": "DEDR 247 and editorial cross-references to DEDR 248 and Marathi", "eligibility": "core", "mechanism": "Nonadjacent l...r > r...l metathesis in Kannada/Tulu; no initial-vowel displacement", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D alarcu;alaru
+Tamil R-bearing-no-D alar;alari;alarttu
+Kannada R-bearing-no-D alal;alar;aral;araḷ;arlu
+Kui missing 
+Kuwi missing 
+Gondi missing 
+alaru f_sbkthip6qkwii R
+alarcu f_5niqcsf7gzfq2 R
+
+ d249 {"entry_id": "d249", "family_id": "d249", "concept": "habit, become accustomed", "reconstruction": "Telugu ala-vaḍ-/ala-vaṟ-; earlier independent base unknown", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "l", "c2_structure": "singleton", "v2": "a", "structure": "VCV + verbal element", "grammatical_category": "verb/noun", "boundary_evidence": "Local compound/derivative segmentation plausible, proto-stage not independently recovered.", "input_support": "Telugu ala-vaḍu, ala-vaṟucu and ala-vāṭu show local derivative alternation. The Tamil alavāṭṭu is explicitly borrowed from Telugu, so it supplies no independent earlier input.", "input_confidence": "low", "direction_argument": "The current evidence gives only a local vowel-first stem, not a comparative proof of a Proto-South-Central *ala-. The database starred PSD2 root overstates what this isolated group can establish.", "derivation": "Telugu ala-vaḍu : ala-vaṟucu : ala-vāṭu exhibits verb/causative/nominal morphology. No initial consonant movement is observed; chronology and origin of the first component are unknown.", "exception_notes": "This cannot become a secure retained sound-law counterexample merely because it looks like ala-. Conversely, absence of independent cognates does not prove it entered Telugu too late for the sound change. A dated early compound and independently cognate first member would resolve eligibility.", "confidence": "medium", "references": "DEDR 249", "eligibility": "single-language-input-uncertain", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D ala-varincu;ala-vaḍu;ala-vaṟucu;ala-vāṭu
+Tamil borrowed-only alavāṭṭu
+Kannada missing 
+Kui missing 
+Kuwi missing 
+Gondi missing 
+ala-vaḍu f_jg6lbbbk6lzmi R
+ala-vaṟucu f_h7obdiyyaaaj4 R
+ala-varincu f_vmhccfwtxyya2 R
+ala-vāṭu f_ajjvw4ccisbg4 R
+
+ d203 {"entry_id": "d203", "family_id": "d203", "concept": "nuptial gift", "reconstruction": "regional *araṇa-; internal segmentation unknown", "c1": "Ø", "v1": "a", "v1_quantity": "short", "c2": "r", "c2_structure": "singleton", "v2": "a", "structure": "VCVCV, segmentation uncertain", "grammatical_category": "noun", "boundary_evidence": "No independently demonstrated root/formative boundary.", "input_support": "Kannada araṇa and Telugu araṇamu independently agree on the whole stem. DEDR only tentatively compares grace d227, so a bare *ar plus a formative is not established.", "input_confidence": "medium", "direction_argument": "Both attested languages have vowel-first order; their agreement supports the regional stem, while inheritance versus early borrowing is unresolved.", "derivation": "Regional araṇa > Kannada araṇa and Telugu araṇamu by final nominal adaptation. No initial displacement is required.", "exception_notes": "The possible relationship to aruḷ grace would require a lateral/nasal correspondence and a different stem vowel. Do not use that uncertain comparison to supply a decisive reconstructed sound-law input. The cultural gift term needs earlier textual and contact evidence.", "confidence": "medium", "references": "DEDR 203 and tentative comparison 227", "eligibility": "core-formation-uncertain", "mechanism": "Target initial-order comparison; literal exchange, assimilation and syncope distinguished in the derivation and language notes", "review_status": "reviewed", "review_date": "2026-09-09"}
+Telugu R-bearing-no-D araṇamu
+Tamil missing 
+Kannada R-bearing-no-D araṇa
+Kui missing 
+Kuwi missing 
+Gondi missing 
+araṇamu f_b2pn5szvoauzs R

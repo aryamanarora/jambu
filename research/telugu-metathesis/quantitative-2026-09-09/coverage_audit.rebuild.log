@@ -1,0 +1,34 @@
+{
+  "all_dedr_groups": 5548,
+  "current_reviewed_entries": 409,
+  "remaining_dedr_groups": 5139,
+  "telugu_bearing_dedr_groups": 2701,
+  "reviewed_telugu_bearing_dedr_groups": 375,
+  "remaining_telugu_bearing_dedr_groups": 2326,
+  "independent_input_screen_groups": 3489,
+  "input_screen_reviewed_groups": 388,
+  "input_screen_pending_groups": 3101,
+  "prior_cluster_groups": 116,
+  "prior_cluster_now_fully_reviewed": 116,
+  "prior_cluster_not_currently_fully_reviewed": 0,
+  "prior_cluster_pending_ids": [],
+  "input_screen_classes": {
+    "consonant-initial-short-nonnasal-apical": {
+      "groups": 2378,
+      "reviewed": 198
+    },
+    "long-vowel-apical-control": {
+      "groups": 1464,
+      "reviewed": 167
+    },
+    "vowel-initial-nasal-control": {
+      "groups": 247,
+      "reviewed": 39
+    },
+    "vowel-initial-short-nonnasal-apical": {
+      "groups": 807,
+      "reviewed": 247
+    }
+  },
+  "scope_warning": "Screen matches are modern-form candidates, not verified reconstructed-input eligibility. Unreviewed groups cannot be assigned negative outcomes."
+}

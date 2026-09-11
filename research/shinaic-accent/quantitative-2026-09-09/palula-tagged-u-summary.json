@@ -1,0 +1,10 @@
+{
+  "raw_records": 131,
+  "unique_form_gloss_types": 126,
+  "counts": {
+    "consistent": 111,
+    "exception": 9,
+    "unscorable": 6
+  },
+  "domain": "Explicit source adjective tag, final short u including accented ú; no inflection-class filter. This corrects an earlier accent-sensitive literal-suffix selection."
+}

@@ -163,7 +163,7 @@ function conceptIndex() {
 export const prerender = false;
 
 const ASSIGNMENTS = resolve(process.cwd(), '../data/data/etymology-assignments.csv');
-const FIELDS = ['Form_ID', 'Etymon_ID', 'Kind', 'Rank', 'Status', 'Source', 'Notes'] as const;
+const FIELDS = ['Form_ID', 'Etymon_ID', 'Kind', 'Rank', 'Status', 'Source', 'Notes', 'Pos'] as const;
 
 function localOnly(request: Request) {
 	if (!dev) error(404, 'Not found');
@@ -683,6 +683,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			Etymon_ID: etymonId,
 			Kind: (input.Kind ?? input.Relation) === 'borrowed' ? 'borrowed' : 'reflex',
 			Rank: rank,
+			Pos: '',
 			Status: 'accepted',
 			Source: input.Source?.trim() ?? '',
 			Notes: input.Notes?.trim() ?? ''
@@ -728,6 +729,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			Etymon_ID: etymonId,
 			Kind: (body.Kind === 'borrowed' ? 'borrowed' : 'reflex') as string,
 			Rank: rank,
+			Pos: '',
 			Status: 'rejected',
 			Source: body.Source?.trim() ?? '',
 			Notes: body.Notes?.trim() ?? ''

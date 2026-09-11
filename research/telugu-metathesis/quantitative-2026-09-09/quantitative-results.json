@@ -1,0 +1,20 @@
+{
+  "reviewed_entries": 409,
+  "primary_families": 403,
+  "sensitivity_families": 365,
+  "raw_language_ids": 46,
+  "time_aggregated_language_groups": 43,
+  "aliases": {
+    "OTelugu": "Telugu",
+    "OMal": "Malayalam",
+    "pampa": "Kannada"
+  },
+  "family_class_count_rows": 19823,
+  "membership_rows": 429312,
+  "broad_obligatory_test": {
+    "counterexample-to-obligatory-application": 134,
+    "consistent-D": 55,
+    "not-decisive": 46
+  },
+  "warning": "Targeted reviewed frame; no population frequency or random-sample inference."
+}

@@ -1,0 +1,410 @@
+entry_id	family_id	concept	reconstruction	c1	v1	v1_quantity	c2	c2_structure	v2	structure	eligibility	input_confidence
+d1	deictic-a-i	distal demonstratives and adverbs	*a-t(u), *a-w-an/-ar; oblique *ad-an-i / *aw-an-i, *aw-att-i	Ø	a	short deictic input; secondary long formations	t/w/b	morphological dental/labial elements	a/i/u/variable	deictic base + gender/number + oblique augment	morphological-pronoun-domain	high for order and morphological augment; medium for exact immediate sequence
+d61	d61	shoot, discharge	regional *aṭ-a- (Te -r-, Tu -k-)	Ø	a	short	ṭ	singleton	a	VC-a-C	narrow-comparison-control	low
+d63	d63	hide, subdue, be compressed	*aṭ-a-nk- / *aṭ-a-nkk-	Ø	a	short	ṭ	singleton	a	VC-a-NP / VC-a-NPP	core	high
+d64	d64+d88	betel pouch	*aṭ-a-ppay / *aṭay-ppay	Ø	a	short	ṭ	singleton	a	VC-a(y) + pp-ay	compound-contact-control	high
+d72	d72	foot, base	*aṭ-V; regional *aṭ-Vk-	Ø	a	short	ṭ	singleton	unknown	VC-V(k)	core	medium
+d75	d75	earthen pot	*aṭ-V-k-? / *aṭ-V-	Ø	a	short	ṭ	singleton	unknown	VC-V-C / VC-C	core-formation-uncertain	medium
+d76	d76	cook, burn; pancake	*aṭ-u- / *aṭ-; strengthened *aṭṭ-u noun	Ø	a	short	ṭ	singleton	u	VC-u; VC-CV; derivatives and compounds	core	high
+d77	d77	pound, beat	*aṭ-V-; *aṭ-aŋ- / *aṭ-Vmp- derivatives	Ø	a	short	ṭ	singleton	unknown	VC-V-NP and other formations	core	medium
+d78	d78	be fit, be able	*aṭ-u-; Telugu *aṭ-ar- formation	Ø	a	short	ṭ	singleton	unknown	VC-V / VC-VC	core-formation-uncertain	medium
+d79	d79	approach, join, near	*aṭ-ay-; *aṭ-ar- and *aṭ-Vk- extensions	Ø	a	short	ṭ	singleton	a	VC-ay / other derivatives	core	high
+d80	d80	pile, arrange in tiers	*aṭ-uk(k)- / *aṭ-aŋk-	Ø	a	short	ṭ	singleton	u	VC-u-PP	core	high
+d81	d81	ask, beg	*aṭ-uk-?; wider root *aṭ-/aḷ- uncertain	Ø	a	short	ṭ	singleton	u	VC-u-C	cognacy-or-input-uncertain	low
+d83	d83	close, obstruct, transverse	*aṭ-ay- beside *aṭṭ-a- / *aṭṭ-i-	Ø	a	short	ṭ	singleton-and-geminate-formations	a	VC-ay and VCC-V	mixed-input-formations	high
+d84	d84	collect, crowd, increase	*aṭ-ay- / *aṭ-ar-; strengthened *aṭṭ-	Ø	a	short	ṭ	singleton	a	VC-ay / VC-ar / VCC	core	high
+d86	d86	anvil, support	*aṭ-ay(-kal)	Ø	a	short	ṭ	singleton	a	VC-ay + noun compound	core	high
+d88	d64+d88	areca nut and its implements	*aṭ-ay-kkāy; *aṭay + tool/bag	Ø	a	short	ṭ	singleton	a	VC-ay + compound noun	compound-contact-control	high
+d89	d89	sign, token	regional *aṭay-āḷ-am? (internal analysis uncertain)	Ø	a	short	ṭ	singleton	a	VCay-VVCV(m)	compound-contact-control	low
+d109	d109	thirst, hunger	*aṭ/ẓ/ṇṭ-? plus Telugu *-p(p)- formation	Ø	a	short	uncertain-apical	singleton/geminate/nasal-cluster-uncertain	unknown	VC(-C) plus P formation	cognacy-or-input-uncertain	low
+d201	d201	king, royalty	Sanskrit *rājan- > regional *(a)rāca- / araca-	r	ā	long	j	singleton	a	CVVCVC donor; prothetic recipient form	loan-input-control	high
+d202	d202	pipal tree	*ar-a- (extensions *-c, *-ḷ, *-y and Telugu -v/-g)	Ø	a	short	r	singleton	a	VC-a-C	core	high
+d203	d203	nuptial gift	regional *araṇa-; internal segmentation unknown	Ø	a	short	r	singleton	a	VCVCV, segmentation uncertain	core-formation-uncertain	medium
+d205	d205	banana, plantain	regional *ar-Vṇṭṭi; independent earlier form uncertain	Ø	a	short	r	singleton	unknown	VC-V-NPPV	single-language-input-uncertain	low
+d207	d207	interlace, spread as a creeper	*ar-il- / *ar-al-?	Ø	a	short	r	singleton	i/a	VC-VC	core-formation-uncertain	medium
+d211	d211	trunk, post, pillar	*ar-ay / *ar-aḷ-?; Telugu -ḍ extension uncertain	Ø	a	short	r	singleton	a	VC-ay / VC-a-C	cognacy-or-input-uncertain	medium
+d215	d215	rice, rice cake	*ari; *ar-i-ci / *ar-ki- formations	Ø	a	short	r	singleton	i	VC-i-C / VC-C	core-formation-uncertain	medium
+d216	d216	tax, debt, pay	*ar-i tax; *ar-VC and strengthened derivatives uncertain	Ø	a	short	r	singleton	i	VC-i; VC-VC; VCCV	cognacy-or-input-uncertain	low
+d221	d221	rare, difficult	*ar-u(-t)- / *ar-i(-t)-	Ø	a	short	r	singleton	u/i	VC-high-C	core	high
+d222	d222	approach, near, edge	*ar-u-k- / *ar-u-v- and high-vowel variants	Ø	a	short	r	singleton	u/i	VC-high-C	core	high
+d227	d227	grace, favor, affection	*ar-uḷ- (internal boundary uncertain)	Ø	a	short	r	singleton	u	VCVC root/extension	core-formation-uncertain	high
+d228	d228	rub, grind, smear	*ar-ay-; additional *ar-a-C formations	Ø	a	short	r	singleton	a	VC-ay / VC-a-C	core	high
+d229	d229	half	*ar-ay	Ø	a	short	r	singleton	a	VC-ay; free nominal base	free-base-control	high
+d232	d232	gain, enjoyment, good luck	*ar-b-? / *ar-V-b-?	Ø	a	short	r	cluster-or-syncopated-unknown	unknown	VC-C / VC-V-C	cognacy-or-input-uncertain	low
+d233	d233	fall, drop	*ar-; Telugu *ar-al-? and regional high-vowel derivatives	Ø	a	short	r	singleton	unknown	VC-VC / VC-V	core-formation-uncertain	medium
+d236	d236	suffer, tire	*al-a- and *al-a-NC- formations	Ø	a	short	l	singleton	a	VC-a-(NC)	core	medium
+d237	d237	blade, tip	*al-ak- / *al-uk-	Ø	a	short	l	singleton	a/u	VC-V-C	core-formation-uncertain	medium
+d240	d240	move, shake, wave	*al-ay-; *al-aŋ- / *al-uk- extensions	Ø	a	short	l	singleton	a	VC-ay / VC-a-NC	core	high
+d241	d241	confusion, tumult	alaŋkōlam / allakallōla; complex or contaminated stem	Ø	a	short	l	singleton-and-geminate-formations	a	complex lexical formation, single/geminate variants	complex-or-contact-input-uncertain	low
+d242	d242	pulse, cowpea	regional alasand-/alasaṇḍ-; ultimate origin undetermined	Ø	a	short	l	singleton	a	VCVCVNC, lexical crop name	complex-or-contact-input-uncertain	medium
+d244	d244	weeds, leguminous plants	regional *al-a/u-b/m- (medial nasal uncertain)	Ø	a	short	l	singleton	a/u	VC-V-C	narrow-comparison-control	low
+d245	d245	chatter, roar, noise	*al-a- with *-r/ṟ, *-mp and other extensions	Ø	a	short	l	singleton	a	VC-a-C	core	high
+d246	d246	wash, rinse, smear	*al-ay- / *al-a-mp- / *al-a-k(k)-; *al-uk-	Ø	a	short	l	singleton	a/u	VC-V-C	core	high
+d247	d247	blossom, expand, flower	*al-ar- (two distinct liquids)	Ø	a	short	l	singleton	a	VC-VC with L...R	core	high
+d248	d248	beauty, please, shine	*al-ar-? beside *al-amp-?	Ø	a	short	l	singleton	a	VC-a-C; different extensions	core-formation-uncertain	medium
+d249	d249	habit, become accustomed	Telugu ala-vaḍ-/ala-vaṟ-; earlier independent base unknown	Ø	a	short	l	singleton	a	VCV + verbal element	single-language-input-uncertain	low
+d256	d256	waterlily	*alli (geminate lateral)	Ø	a	short	l	geminate	i	VCCV	geminate-control	high
+d257	d257	iron-wood tree	*al/alli; compound *ali-mar	Ø	a	short	l	singleton-and-geminate-formations	i/a	VCV / VCCV + tree noun	complex-or-contact-input-uncertain	medium
+d259	d259+d260	bowstring	*al-k-?; weaving-family formation	Ø	a	short	l	singleton	Ø	VC-C	consonantal-formation-control	medium
+d260	d259+d260	weave, plait, intertwine	*al- with consonantal *-p/-t and strengthened *all-	Ø	a	short	l	singleton-and-geminate-formations	Ø	VC-C / VC and VCC derivatives	consonantal-formation-control	high
+d276	d276	burn, grieve, ember	*aẓ-al- / *aẓ-Vŋk-; possible older *c/t-initial cognate	Ø	a	short	ẓ	singleton	a/u	VC-VC / VC-V-NC	core	high
+d277	d277	perish, destroy	*aẓ-i-; transitive *aẓ-i-mpp- and *aẓ-i-ntt-	Ø	a	short	ẓ	singleton	i	VC-i-NPP / VC-i-	core	high
+d281	d281	affection, desire	*aẓ-i-; *aẓ(i)-k-ar- and *aẓ-ti formations	Ø	a	short	ẓ	singleton	i	VC-i-C / VC-C	core	high
+d282	d282	cry, weep, call	*aẓ-u- / *aẓ-ay-; regional vowel history unresolved	Ø	a	short	ẓ	singleton	u/a	VC-V / VC-V-C	core	high
+d285	d285	dip, press, immerse	*aẓ-unt- / *aẓ-utt-	Ø	a	short	ẓ	singleton	u	VC-u-NP / VC-u-PP	core	high
+d291	d291+d295	strength, size, ability	*aḷ-; *aḷ-av-; long-root alternative *āḷ?	Ø	a	short	ḷ	singleton	a	VC-a-C	core	high
+d295	d291+d295	measure, size	*aḷ-a-; *aḷ-a-p/-v and dental extensions	Ø	a	short	ḷ	singleton	a	VC-a-C	core	high
+d296	d296	mix, join, approach, seize	*aḷ-a- / *aḷ-ay-; *aḷ-p-? and other formations	Ø	a	short	ḷ	singleton	a	VC-ay / VC-a-C / VC-C	core	high
+d298	d298	water, semiliquid	*aḷ-ak- / *aḷ-uk-?	Ø	a	short	ḷ	singleton	a/u	VC-V-C	cognacy-or-input-uncertain	medium
+d299	d299	saltpan, salt marsh	*aḷ-am; compound *uppu + aḷam	Ø	a	short	ḷ	singleton	a	VC-am as noninitial compound member	noninitial-compound-control	high
+d301	d301	love, desire, protect	*aḷ-i-; Telugu nasal-palatal extension unresolved	Ø	a	short	ḷ	singleton	i	VC-i-C / VC-V-NC?	core	high
+d303	d303	earthen vessel	*aḷ-Vk-; regional a/i variation	Ø	a	short	ḷ	singleton	a/i	VC-V-C	core-formation-uncertain	medium
+d304	d304	prick, throb, be angry	*aḷ-Vk-; high-u and low-a variants	Ø	a	short	ḷ	singleton	u/a	VC-V-C	core-formation-uncertain	medium
+d305	d305	sprinkle, scatter, bail water	*al/ḷ- with *-Vk and *-Vñc formations	Ø	a	short	l/ḷ	singleton	unknown	VC-V-C / VC-C	core	medium
+d306	d306	fear, start, be frightened	*aḷ-uk(k)-, beside *aḷ-ar/ik-	Ø	a	short	ḷ	singleton	u	VC-u-C(C)	core	high
+d307	d307	enclose, cover, spread	*aḷ-V- with *-r, *-m and nasal-palatal extensions	Ø	a	short	ḷ	singleton	unknown	VC-V-C	core	medium
+d308	d308	hole, cave, burrow	*aḷ-ay; labial and velar formations of uncertain relationship	Ø	a	short	ḷ	singleton	a	VC-ay / VC-V-C	core	high
+d310	d310	palm of hand, sole of foot	*aṟ-a(n) + hand/foot compound	Ø	a	short	ṯ	singleton	a	VCV(N) + body-part noun	compound-formation-control	medium
+d313	d313	Tamil people/language, regional name	aruvā/arava regional ethnonym; proto-root unspecified	Ø	a	short	r/ṟ	singleton	u/a	VCVCV, regional name	proper-name-contact-control	low
+d314	d314	know, understand, inquire	*aṯ-V-; regional *eṟ-uk/ŋk-	Ø	a	short	ṯ	singleton	unknown	VC-V / VC-V-C	core-formation-uncertain	high
+d315	d315	sever, cut, decrease, scratch	*aṯ-u- / *aṯ-al- and velar/labial formations	Ø	a	short	ṯ	singleton	u	VC-u-C / VC-a-C	core	high
+d316	d316	digest, wear away, indigestion	*aṯ-u-; *aṟ-ak/uk- and labial formations	Ø	a	short	ṯ	singleton	u/a	VC-V-C	core	high
+d317	d317	abide, preserve, secure	*aṯ-u-; labial extension *-p	Ø	a	short	ṯ	singleton	u	VC-u-p / VC-u-	core-formation-uncertain	medium
+d318	d318	cloth, rag, curtain	*aṟ-Vv-ay / *aṟ-ay; quantity of formative variable	Ø	a	short	ṯ	singleton	u/a/i	VC-V-v-ay / VC-ay	core-formation-uncertain	medium
+d319	d319	sound, shout, ring, prattle	*aṯ-ay / *aṯ-a-; *-c/-p/-ŋk and consonantal extensions	Ø	a	short	ṯ	singleton	a	VC-a-C / VC-C	core	high
+d321	d321	rock, stone	*aṯ-ay / regional *aṟ-ay; *aṟ-pp-? derivative	Ø	a	short	ṯ	singleton	a	VC-ay / VC-C	core	high
+d322	d322	room, partition	*aṯ-ay; regional strengthened *aṟṟa	Ø	a	short	ṯ	singleton-and-geminate-formations	a	VC-ay / VCCV	core	high
+d328	d328	fit, suitable, fertile	*an-V-v-; possible older *can- comparison	Ø	a	short	n	singleton	u/a	VC-V-C	nasal-control	medium
+d329	d329	send, leave, start off	*an-V-p-; high-u regional extension	Ø	a	short	n	singleton	u	VC-u-p / VC-p	nasal-control	high
+d410	deictic-a-i	proximal demonstratives and adverbs	*i-t(u), *i-w-an/-ar; oblique *id-an-i / *iw-an-i, *iw-att-i	Ø	i	short deictic input; secondary long formations	t/w/b	morphological dental/labial elements	a/i/u/variable	deictic base + gender/number + oblique augment	morphological-pronoun-domain	high for order; medium for immediate oblique prehistory
+d432	d432	split, crumble, crack	*iṭ-i- / *iṭ-a- and labial nominal extensions	Ø	i	short	ṭ	singleton	i/a	VCV / VCVC	core	high
+d434	d434+d448	place, room, opportunity	*iṭ-a-m / *iṭ-ay	Ø	i	short	ṭ	singleton	a	VC-a-C / VC-ay	core	high
+d435	d435	affliction, obstacle	*iṭ-ar / *iṭ-um(p)-	Ø	i	short	ṭ	singleton	a/u	VCVC / VC-V-NC	core	medium
+d437	d437	stumble, hinder	*iṭ-aṟ / *iṭ-aŋk / *iṭ-Vp	Ø	i	short	ṭ	singleton	a	VC-a-C	core	medium
+d439	d439	flour-based cake	*iṭ-i (food noun)	Ø	i	short	ṭ	singleton	i	VCV, also compound-initial	core-formation-uncertain	high
+d442	d442	put, place, give	*iṭ-u- (past *iṭ-ṭ-); nominal *īṭ-u	Ø	i	short	ṭ	singleton	u	VC-u / VC-C tense alternation	core	high
+d443	d443	beat, strike, butt	*iṭ-i- / *iṭ-u- / *iṭ-a- formations	Ø	i	short	ṭ	singleton	i	VC-i (beside u/a formations)	core	high
+d444	d444	pinch, pincers, tongs	*iṭ-uk-; distinct tool-name formations	Ø	i	short	ṭ	singleton	u	VC-u-CC	core-formation-uncertain	medium
+d445	d445	narrow, crowded, abundant	*iṭ-u-k / *iṭ-ṭ-aḷ formation	Ø	i	short	ṭ	geminate	a	VCC-a-C (Telugu-matching strong formation)	geminate-control	high
+d446	d446	separate, distant	*iṭ-ay / *iṭ-av; regional *eṭ-	Ø	i	short	ṭ	singleton	a	VC-a-y / VC-a-v	core	high
+d447	d447	grow weary, become thin	*iṭ-ay?; vowel reconstruction and lexical direction not final	Ø	i	short	ṭ	singleton	a	VC-ay	cognacy-or-input-uncertain	medium
+d448	d434+d448	interval, middle, waist	*iṭ-ay / *iṭ-a-m	Ø	i	short	ṭ	singleton	a	VC-ay / VC-a-C	core	high
+d449	d449	left side	*iṭ-a(y)/m; *eṭ- regional outcome	Ø	i	short	ṭ	singleton	a	VC-a-C / VC-ay	core	high
+d451	d451	parch, roast grain	Kurux–Malto *i/eṛ-; deeper apical source unresolved	Ø	i/e	short	ṛ	singleton	unknown	VC plus language-specific inflection	regional-input-only	medium
+d452	d452	wall	regional *iṬ-V-p; Ṭ likely retroflex, V2 unknown	Ø	i	short	ṭ	singleton	unknown	VC-(V)-p	cognacy-or-input-uncertain	medium
+d453	d453	touch, feel	regional *iṭ-(V)-; velar extension, quantity unresolved	Ø	i	short	ṭ	singleton	unknown	VC-(V)-k / VC-C	core-formation-uncertain	medium
+d454	d454	notched timber block, mortice	regional *iṭṭaṟa / *iṭṭire	Ø	i	short	ṭ	geminate	a/i	VCCVCV	geminate-contact-control	high
+d455	d455	steamed cake	regional *iṭṭali / *iḍḍali	Ø	i	short	ṭ	geminate	a	VCCVCV	geminate-contact-control	high
+d457	d457	join, equal, pair	*iṇ-ay / *iṇ-aŋk-; nasal control	Ø	i	short	ṇ	singleton	a	VC-ay / VC-a-NC	nasal-control	high
+d472	d472	beg, borrow	*ir-a / *ir-av-	Ø	i	short	r	singleton	a	VC-a / VC-a-v	core	high
+d474	d474	two	*īr / *ir-V; nonhuman *ir-aṇ-ṭ; human *ir-u-var	Ø	i	short-and-long-bound-allomorphs	r	singleton	a/u	VC-V + gender/number formation	core	high
+d475	d475	jujube	regional *ir-a-; nasal/velar and dental tree-name formations	Ø	i	short	r/l	singleton	a	VC-a-NC / VC-a-C	core	medium
+d476	d476	deer, antelope	*ir-al-ay, r/l order variation	Ø	i	short	r	singleton	a	VC-a-C-ay	core	medium
+d477	d477	cassia tree	*ir/ṟ-al/ḷ-i; regional liquid identity uncertain	Ø	i	short	r/ṟ	singleton	a	VC-a-C-i	cognacy-or-input-uncertain	medium
+d480	d480	be, sit, abode	*ir-u-; *ir-u-v / *ir-a-v place nouns	Ø	i	short	r	singleton	u/a	VC-u / VC-V-v / VC-C formations	core	high
+d481	d481	great, vast	*ir-u, compound-bound; Telugu inu-	Ø	i	short	r	singleton	u	VC-u + compound member	compound-formation-control	medium
+d483	d483	blackwood tree	*ir-u-? plus tree-name formations; bīṭi series uncertain	Ø	i	short	r	singleton	u	complex plant-name derivatives	complex-or-contact-input-uncertain	low
+d484	d484	axle	*ir-u-c/s; regional technical term	Ø	i	short	r	singleton	u	VC-u-C	core-formation-uncertain	high
+d485	d485	mahua tree	*ir-u-ppay / *ir-V-p; r/l variants	Ø	i	short	r	singleton	u	VC-u-PP-ay / VC-C	core	high
+d486	d486	iron	regional *ir-ump; earlier *cir-ump proposed	Ø	i	short	r	singleton	u	VC-u-NP	core	high
+d489	d489	roar, noise, cough	*ir-a/um(p)- versus expressive *ramp-; direction uncertain	Ø	i	short	r	singleton	a/u	VC-V-NP or original expressive CVC	expressive-or-contact-input-uncertain	low
+d490	d490	food, prey	*ir-ay	Ø	i	short	r	singleton	a	VC-ay	core	high
+d494	d494	house	*il; strengthened free form *ill-u/am	Ø	i	short	l	root-final-singleton-with-strengthened-free-forms	none	VC root / VCCV free form	root-shape-control	high
+d495	d495	silk-cotton tree	regional *il-av-; *il-a-k tree formation?	Ø	i	short	l	singleton	a	VC-a-v / VC-a-k	core	medium
+d499	d499	backbiter, tell-tale	regional illāmalli; deeper segmentation unknown	Ø	i	short	ll	geminate	ā	VCCVCCV opaque word	regional-opaque-control	low
+d502	d502	descend, lower, sink	*iẓ-i-; *iẓ-k-, *iẓi-(m)pp-, *iẓi-nt(t)-	Ø	i	short	ẓ	singleton	i/zero	VC-i + tense/voice suffixes	core	high
+d504	d504	pull, drag, pant	*i/īẓ-u-; long and short formations	Ø	i/ī	mixed/uncertain	ẓ	singleton	u	VC-u / VVC-C	core	medium
+d507	d507	copulate, desire	regional *iẓ-ay- / *iẓ-aŋ-?	Ø	i	short	ẓ	singleton	a	VC-ay / VC-a-NC	cognacy-or-input-uncertain	low
+d508	d508	creep, slide along ground	regional *iẓ-ay-; *iẓ-aŋk-?	Ø	i	short	ẓ	singleton	a	VC-ay / VC-a-NC	cognacy-or-input-uncertain	low
+d512	d512	grow weary, become emaciated	*iḷ-ay-; Telugu *iḷ-a-n-?	Ø	i	short	ḷ	singleton	a	VC-ay / VC-a-n	core	medium
+d513	d513	young, tender; young person; calf	*i/eḷ-a-; *iḷ-aŋk- and human formations	Ø	i/e	short	ḷ	singleton	a	VC-a + nominal/human suffixes	core	high
+d516	d516	descend, bow; landing place	*i/eṟ-a-; *iṟ-aŋk- and *iṟ-av- formations	Ø	i/e	short	ṟ	singleton	a	VC-a-NC / VC-av	core	high
+d517	d517	prawn, shrimp	*i/eṟ-a/v/y-; exact nominal formation uncertain	Ø	i/e	short	ṟ	singleton	a	VC-a-v / VC-V-y	core	medium
+d520	d520	break, snap	*iṟ-u-; eastern *iṟ-aŋk / *iṟ-ek-p?	Ø	i	short	ṟ	singleton	u/unknown	VC-u / VC-NC / VC-C-p	core	medium
+d524	d524	be tight, squeeze, narrow place	*iṟ-u-k(k)-; other *iṟ-V formations	Ø	i	short	ṟ	singleton	u	VC-u-k(k)	core	high
+d527	d527	lord, king, husband	*i/eṟ-ay-; human *iṟ-ay-anṟu	Ø	i/e	short	ṟ	singleton	a	VC-ay + human suffix	core	high
+d528	d528	eaves, roof, edge	*i/eṟ-ay-; *iṟ-ak- roof formation	Ø	i/e	short	ṟ	singleton	a	VC-ay / VC-ak; second compound member	core	high
+d529	d529	meat, eat meat	*iṟ-ay-cci / *iṟ-a-cci	Ø	i	short	ṟ	singleton	a	VC-a-cc-i	core	high
+d533	d533	fly, bee	*ī; formations with -p/-k and compounds	Ø	ī	long	Ø	absent	none	V long root + nominal extensions	outside-target-control	high
+d536	d536	winged termite	*īc-al / *īy-al; Telugu i/u-vowel variants	Ø	ī	long	c/y	singleton	a	VVC-al	other-process-control	medium
+d545	d545	slight, minute	regional *īr	Ø	ī	long	r	singleton	none	VVC free/bound adjective	long-root-control	high
+d558	d558	be pleased, love; affection	*uk-a / *uv-a; possible Telugu gōmu comparison	Ø	u	short	k/v	singleton	a	VC-a + nominal extensions	exceptional-nonapical-input	medium
+d560	d560	sandpaper, toothbrush and related tree names	regional *uk-a / *uv-a; Kannada *og-an-	Ø	u/o	short	k/v	singleton	a	VC-a / VC-a-n	exceptional-nonapical-input	medium
+d561	d561	finger/toe nail; finger	regional *ukir, *gōr/*kōr, *or-kk; deeper order unresolved	Ø	u/o	mixed/uncertain	k	singleton	i/u/unknown	VC-VC / CVC / VC-CC regional formations	exceptional-nonapical-input	low
+d562	d562	shed, spill, pour	*uk-u; *uk-ipp / *uk-upp transitive formations	Ø	u	short	k	singleton	u/i	VC-u / VC-V-pp	exceptional-nonapical-input	medium
+d570	d570	suspending cord, load-rope knot	regional *ukk/ugg-; relation to *uṟ-V unresolved	Ø	u	short	kk	geminate	unknown	VCC-V nominal formations	input-or-contact-uncertain-control	medium
+d572	d572	finger ring	regional *uŋgar- / *uŋgur-	Ø	u	short	ŋg	nasal-stop-cluster	a/u	VNCVC regional noun	outside-target-control	high
+d586	d586	body, belly	*uṭ-al / *uṭ-amp-; expressive belly formations	Ø	u	short	ṭ	singleton	a	VC-al / VC-a-mp	core	high
+d587	d587	wear clothes; clothing	*uṭ-u-; *uṭ-upp- clothing noun	Ø	u	short	ṭ	singleton	u	VC-u-pp	core	high
+d588	d588	boil, heat	regional *uṭ-uk- / *uṭ-ik-; deeper *uṭ-V	Ø	u	short	ṭ	singleton	u/i	VC-V-k	core-formation-uncertain	medium
+d589	d589	hourglass drum	regional *uṭ-ukk-ay	Ø	u	short	ṭ	singleton	u	VC-u-kk-ay	contact-chronology-control	high
+d590	d590	squirrel	regional *uḍ-ut-V	Ø	u	short	ṭ/ḍ	singleton	u	VC-u-t-V	regional-control	medium
+d592	d592	monitor lizard	*uṭ-ump-; regional velar and labial formations	Ø	u	short	ṭ	singleton	u	VC-u-mp	core	high
+d593	d593	property; owner, lord	*uṭ-ay-; *uṭ-ay-an human and *uṭ-am property forms	Ø	u	short	ṭ	singleton	a	VC-ay + human/nominal suffixes	core	high
+d648	d648	speak, roar, pant; silence	*ur-ay / *ur-a; nasal-palatal extensions	Ø	u	short	r	singleton	a	VC-ay / VC-a-NC	core	medium
+d649	d649	strength, firmness, coarseness	*ur-a-; *ur-k- and *ur-aṭ- formations	Ø	u	short	r	singleton	a/zero	VC-a / VC-k / VC-aṭ	core	medium
+d651	d651	mortar	*ur-al; compounds with stone	Ø	u	short	r	singleton	a	VC-a-C	core	high
+d655	d655	noose, snare	*ur-i/u; *ur-ul and related extensions	Ø	u	short	r/ṟ	singleton	i/u	VC-V / VC-V-l	core	medium
+d656	d656	burn, heat, sweat, grief	*ur-u / *ur-i; nominal *ur-u-m and other extensions	Ø	u	short	r	singleton	u/i	VC-V + heat/sweat formations	core	high
+d657	d657	form, shape, beauty	regional *ur-u/v; possible adaptation of Sanskrit rūpa	Ø	u	short	r	singleton	u/a	VC-u-v	loan-or-inheritance-uncertain	low
+d658	d658	ripen, mature, become grey	regional *ur-u / *ur-i	Ø	u	short	r	singleton	u/i	VC-V	core	medium
+d661	d661	melt, steel	*ur-uk(k)-; shorter *ur- forms	Ø	u	short	r	singleton	u	VC-u-k(k)	core	high
+d663	d663	pierce, penetrate	*ur-uv- / *ur-c-; labial nasal extension	Ø	u	short	r	singleton	u/zero	VC-u-v / VC-c	core	high
+d664	d664	roll, round object, wheel, egg	*ur-uḷ-; *ur-uṇṭ- and low-vowel variants	Ø	u	short	r	singleton	u/a	VC-V-lateral / nasal-stop formation	core	high
+d665	d665	rub, grind, touchstone; pestle	*ur-ay; *ur-d / *ur-upp and other formations	Ø	u	short	r	singleton	a/u/zero	VC-ay / VC-C / VC-V-pp	core	high
+d666	d666	swell, boil over	*ur-p / *ur-k; long and short *ūr/ur	Ø	u/ū	mixed/uncertain	r	singleton	zero/unknown	VC-C / VVC	core	medium
+d672	d672	pestle	regional *ul-akk-ay; contact comparison with Indo-Aryan ulūkhala	Ø	u	short	l	singleton	a	VC-a-kk-ay	regional-contact-uncertain	medium
+d675	d675	Crataeva tree	regional *ulimiri	Ø	u	short	l	singleton	i	VC-i-C-i-C-i	regional-control	medium
+d676	d676	hilsa fish	regional *ullam / *uḷḷam	Ø	u	short	ll/ḷḷ	geminate	a	VCC-am + fish compound	geminate-contact-control	high
+d686	d686+d689	stroke, rub, anoint	*uẓ-i/v-; long *ū-s anoint series uncertain	Ø	u	short	ẓ	singleton	i/u/unknown	VC-V + labial/palatal extensions	core	medium
+d688	d688	plough, root up soil	*uẓ-u; *uẓ-n- verb and *uẓ-kk- noun	Ø	u	short	ẓ	singleton	u/zero	VC-u / VC-n / VC-kk	core	high
+d689	d686+d689	comb, arrange hair	*uẓ-u/v; consonantal labial expansion	Ø	u	short	ẓ	singleton	u/zero	VC-u / VC-v	core	high
+d690	d690	black gram	*uẓ-unt- / *uẓ-untu	Ø	u	short	ẓ	singleton	u	VC-u-NT	core	high
+d692	d692	tiger, panther	*uẓ-uv-ay / *uẓ-v-	Ø	u	short	ẓ	singleton	u/zero	VC-u-v-ay / VC-v	core	medium
+d693	d693	goby and related fish names	regional *uẓ-uv-ay; Telugu comparison uncertain	Ø	u	short	ẓ	singleton	u	VC-u-v-ay	cognacy-or-input-uncertain	medium
+d694	d694	spotted deer, stag	*uẓ-up(p)-; southern shorter *uẓ-ay	Ø	u	short	ẓ	singleton	u	VC-u-p(p)	core	high
+d695	d695	sweep, scrape into heap	regional *ū/uẓ-C; labial, velar and coronal extensions	Ø	u/ū	mixed/uncertain	ẓ	singleton	zero/unknown	V(V)C-C	core	medium
+d696	d696	urine, purge, diarrhoea	*ur/ẓ-c-; northern *uṛ-k- extension	Ø	u	short	r/ẓ	singleton	zero	VC-C	core	medium
+d697	d697	be, exist, have	*uḷ-; *uḷ-nt- > *uṇṭ-	Ø	u	short	ḷ	singleton	zero/a	VC + person/tense formations	core	high
+d698	d698	inside, mind, house	*uḷ; locative *uḷ-a-n; geminate *uḷḷ-am mind	Ø	u	short	ḷ	singleton/geminate by formation	a/zero	VC-a-n versus VCC-am	core	high
+d699	d699	chisel	*uḷ-i	Ø	u	short	ḷ	singleton	i	VC-i	core	high
+d700	d700	woodworm, ant	*uḷ-u; *uḷ-u-pp derivatives; ant cognacy queried	Ø	u	short	ḷ	singleton	u	VC-u-(pp)	cognacy-or-input-uncertain	medium
+d703	d703	start with fear	*uḷ-k / *uḷ-uk; Tamil uṭk; exact deep cluster uncertain	Ø	u	short	ḷ/ṭ	cluster-or-vocalic-extension	zero/u/a	VC-C / VC-V-C	core-formation-uncertain	medium
+d704	d704	snipe, lapwing	regional *uḷḷ-V(n/k)-	Ø	u	short	ḷ	geminate	a/i/u	VCC-V	structural-control	high
+d705	d705	onion, garlic	*uḷḷ-i	Ø	u	short	ḷ	geminate	i	VCC-i	structural-control	high
+d706	d706	butt, gore, crush nits	*uṯ-/uṟ-; velar/labial derivative uncertain	zero	u	short	ṟ	singleton	zero/unknown	VC / VC-C	core	high for apical set; low for Kui velar linkage
+d707	d707	sleep, recline, bend	*u/oṯ-a-nk-; shorter *u/oṯ-ak-	Ø	u/o	short	ṟ	singleton	a	VC-a-NK / VC-a-K	core	high
+d708	d708	rope sling, suspend	*uṯ-i and strengthened *uṯ-C formations	Ø	u	short	ṟ	singleton/strengthened by formation	i	VC-i / VCC-i	core	medium
+d709	d709	sip, suck, inhale	*uṯ-i; *uṯ-i-nc	zero	u	short	ṟ	singleton	i	VC-i / VC-i-NC	core	high for order/high-i core
+d710	d710	be, happen, be fit, join	*uṯ-u; consonantal person/tense/voice derivatives	Ø	u	short	ṟ	singleton	u	VC-u / VC-C	core	high
+d711	d711	increase, abundance	*uṯ-u; *uṯ-a/u-v derivatives	Ø	u	short	ṟ	singleton	u/a	VC-u / VC-V-v	core	high
+d712	d712	think, care, heed	*uṯ-u; negative *uṯ-a-k/person endings	Ø	u	short	ṟ	singleton	u/a	VC-u / negative VC-a	core	high
+d713	d713	jump, run away; squirrel	*uṯ-uk(k); *uṯ-tt-ay animal derivative	Ø	u	short	ṟ	singleton	u	VC-u-K / VC-tt-ay	core	high
+d715	d715	suffer, be afflicted	*uṯ-u; velar/causative formations	zero	u	short	ṟ	singleton	u/unknown	VC-u / VC-V-K	core	high for root order; medium for exact Kui formation
+d718	d718	roar, thunder, lament	*uṯ/ur-um; *u/oṟ-al; labial derivatives	Ø	u/o	short	ṟ/r	singleton	u/a	VC-u-m / VC-a-l / VC-pp	core	medium
+d719	d719	throw, speed, force	*uṯ-u-b/v; *uṯ-a-v; nasal throwing derivative	Ø	u	short	ṟ	singleton	u/a	VC-u-b / VC-a-v / VC-m	core	medium
+d721	d721	firm, steady, support	*u/oṯ-ay; consonantal support derivatives	Ø	u/o	short	ṟ	singleton	a/i	VC-ay / VC-C	core	high
+d722	d722	pungent, acrid	*uṯ-ay; strengthened *uṯ-C-a	Ø	u	short	ṟ	singleton/strengthened-history-uncertain	a	VC-ay / VCC-a	core-formation-uncertain	medium
+d723	d723	sheath, cover	*u/oṯ-ay	Ø	u/o	short	ṟ	singleton	a	VC-ay	core	high
+d789	d789	long-bow	regional *eṛ-et/eth or *eṛt with anaptyxis	Ø	e	short initial vowel	ṛ	singleton or cluster input uncertain	e/zero	VCVC / VCC	northern-medial-reduction-comparison	high for initial order; low for medial e versus zero
+d800	d800	fan, blow, wave	*e/iṟ-i-ñc; regional *er-sk	Ø	e/i	short	ṟ	singleton	i/unknown	VC-i-NC / VC-sk	core	medium for exact input; high regional order contrast
+d809	d809	arrive, reach	*ey-t; regional *e/ik-pa	Ø	e/i	short	y	glide plus dental	zero	VC-T / V-K#P	nonapical-control	high for nonapical root and local Pengo boundary
+d810	d810	wind, breeze	regional *er-al / *el-ar	Ø	e	short	r/l	singleton	a	VC-aC / compound#VC-aC	compound-process-separate	medium for regional vowel-first root; low for liquid order
+d811	d811	burn, blaze, smart, pungency	*er-i; related high/low and long derivatives	zero	e	short	r	singleton	i/a/u	VC-i / VC-V-C / VVC	core	high for e-r core; low for Kui earlier vowel
+d813	d813	manure, defecate	*er-u(k)/er-Vk; nasal velar extensions	Ø	e	short	r	singleton	u/unknown	VC-uK / VC-NK	core	high for order; medium for exact shared formation
+d815	d815	bull, ox; consecrated bull compound	*er-ut / *er-t	Ø	e	short	r	singleton	u/zero	VC-uT / VCT	core	high for full order; uncertain pre-metathesis syncope
+d816	d816	buffalo	*er-um-ay / regional *erm	Ø	e	short	r	singleton	u	VC-uM-ay / VCM	core	high
+d817	d817	red/dark colour; wild dog	*er-Vc; related *er-om/*er-uv	Ø	e/i	short	r	singleton	i/u/unknown	VC-VC / VC-VM#dog	core	high for order; low for exact shared V2
+d820	d820	black soil, clay	regional *er-e? + *kaṭṭ clod	Ø	e	short	r	singleton	unknown	VC-V#clod	core	medium for regional order; low for V2
+d822	d822	worm, bait	*ir/er-ay; regional *eṟ-a	Ø	i/e	short	r/ṟ	singleton	a/ay	VC-ay	core	high for order and low-vowel root
+d826	d826	branch, twig	regional *ir-k / *eŋk / *ekk; Telugu comparison queried	Ø	i/e	short	r/ŋ/kk	cluster/uncertain	unknown	VC-C / VCC	questionable-cognacy	low
+d827	d827	chest, heart, courage	regional *ed-V; *erd-V alternative	Ø	e	short	d/rd?	singleton/cluster uncertain	a/unknown	VC-V / VCC-V	input-uncertain-control	medium for order; low for exact input
+d829	d829	sunshine, shine	*el; *il-a-k/ŋk	Ø	e/i	short	l	singleton	zero/a	VC free root / VC-a-K/NC	core	high for root; medium for shared formation
+d832	d832	joy, enliven	regional *el-ar / *el-ay	Ø	e	short	l	singleton	a	VC-ar / VC-ay	core	high regional order; medium inheritance
+d833	d833	rat, mouse	*el-i; regional *el-i/u-k	Ø	e/i	short	l	singleton	i/u	VC-i / VC-iK	core	high
+d835	d835	voice, noise, tune	regional *el-i/u-Nk / *il-i-Nk	Ø	e/i	short	l	singleton	i/u	VC-i/u-NK	core	high for order; medium for vowel grades
+d837	d837	white ant, termite	regional *el-u-m/b; exact older vowel grades uncertain	Ø	e/a	short	l	singleton	u	VC-u-M/B	core	high for order; medium for exact shared vowels
+d839	d839	bone	*el-u-mp / *el-u-ŋk; regional *el-mu-ka?	Ø	e	short	l	singleton	u	VC-u-MP / VC-u-NK	core	high full root; low for makkelu formation
+d844	d844	all, whole; additive clitic	*ell-a(m), personal expansions	Ø	e	short	ll	geminate	a	VCC-a(m)	geminate-control	high
+d845	d845	tomorrow, day after tomorrow	regional *ell-i/e	Ø	e	short	ll	geminate	i/e	VCC-V; compounds	geminate-control	high regional shape
+d846	d846	boundary, limit	*ell-ay; Malayalam *el-u-k variant	Ø	e	short	ll/l	geminate main formation; singleton derivative	a/ay/u	VCC-ay / VC-uK	geminate-control	high by formation
+d851	d851	rise, lift; awake, caution	*eẓ-u; *eẓ-c/ar, nasal/velar/labial extensions	Ø	e	short/long by formation	ẓ	singleton	u/a/unknown	VC-u / VC-C / VC-ar	core	high root order; low exact eastern V2
+d856	d856	slight, weak, contemptible	*eḷ-i; *iḷ-a; strong *eḷḷ	Ø	e/i	short	ḷ	singleton/strong by formation	i/a/u	VC-i / VC-a / VCC	core	high root; medium exact Telugu formation
+d857	d857	bear	*eḷ-V-ñc; regional *uḷ-iy-am and *el-uK	Ø	e/i/u	short	ḷ/l	singleton	unknown/i/u	VC-V-NC / VC-uK / VC-iy-am	core	high for order; medium for full root
+d859	d859	throw, strike, shoot	*e/iṟ-i/u; long *ēṟ; labial extensions	Ø	e/i	short/long by formation	ṟ	singleton	i/u/a	VC-i / VC-C / VVC	core	high root order; low exact Telugu mm suffix
+d860	d860	pull, drag, pluck	regional *ṟel / *er-i / *ar-i; deeper order uncertain	Ø/r	e/a	short	r/ṟ/l	singleton	i/unknown	VC-i versus CVC	lookalike-unresolved	low for common full input
+d865	d865	red	*eṯ-V; *eṯ-a/*eṯ-up	Ø	e	short	ṟ/ṯ	singleton and strengthened formations	a/u	VC-a / VC-uP; strengthened VCC-a	core	high regional order; medium deeper cognacy
+d868	d868	say, quotative; literary contracted grammatical forms	regional *an/en/in; proposed deeper *aHn; grammatical *an-an, *an-ā-baḍu etc.	Ø	a/e/i	short regional roots; long northern grade and grammatical contractions	n	nasal with tense-conditioned cluster variants	a/ā/u/zero	VC+infinitive/passive/negative morphology	nasal-grammatical-displacement	high for local an+suffix order; medium for phonetic mechanism
+d869	d869	sunshine, dry in sun	*en-ṯ-V / *enṯ	Ø	e	short	nṯ	nasal-stop cluster	u/a	VNC-V	root-cluster-control	high for cluster
+d910	d910	seven, seventy	short *eẓ-u-pat- tens versus long *ēẓ-u numeral	Ø	e	mixed by formation	ẓ	singleton	u/zero	VC-u + ten / VVC-u	core	high
+d913	d913	song, metre; sing	regional *ēl/ēḷ; Malto el-	Ø	ē	long southern; northern uncertain	l/ḷ	singleton	e/a	VVC-V	long-input-control	medium
+d914	d914	glean, gather, select	regional *ēṟ-	Ø	ē	long	ṟ	singleton	zero/u	VVC / VVC-C	long-input-control	high for regional long order
+d915	d915	separate, winnow, sift	*ēṟ- / shorter extended *eṟ-l-; possible *cēṟ connection	Ø	ē/e	long and independently short extended forms	ṟ	singleton	zero/i/unknown	VVC-C / VC-l-is	long-short-formation-challenge	high for mixed quantity; low for immediate displaced input
+d916	d916	rise, ascend, rouse; dawn; water-lift	*ēṟ / *ēl; displaced regional rē/lē derivatives; alternative *sal?	Ø	ē	long independently attested; immediate displaced input unresolved	ṟ/l	singleton	u/zero/unknown	VVC / VVC-V; disputed earlier short derivatives	long-input-challenge	high for comparative long root; low for immediate displaced derivative
+d917	d917	male buffalo, bull, male animal	*ēṯ / *ēṟ-	Ø	ē	long	ṯ/ṟ	singleton	zero/u/an	VVC / VVC-V	long-input-control	high for southern long order
+d919	d919	other, the rest	*ēn-ay?; Brahui ēlō	Ø	ē	long	n/l	singleton	ay/ō	VVC-V	long-nasal-cognacy-control	low for common root, high for attested order
+d931	d931	carry in loads, cart	*ok-; transitive *ok-p-	Ø	o	short	k	nonapical velar	zero	VC-p	nonapical-kp-domain	high for velar-labial order
+d944	d944	join, undertake; arise	regional *oṭ-ar / *oṭ-am	Ø	o	short	ṭ	singleton	a	VC-a-C	regional-formation-control	medium
+d945	d945	with, together; agree, reconcile	*uṭ-an / *oṭ-an; compound *oṭam#paṭ-	Ø	u/o	short base with long grammatical variants	ṭ	singleton	a	VC-a-n # verb; grammatical suffix variants	compound-aphaeresis-comparison	high for full compound
+d946	d946	break, burst; crack; defeat	*oṭ-i / *oṭ-ay; long *ōṭ variants	Ø	o/u	short and independently long formations	ṭ	singleton	i/ay	VC-V; long and strong nominal formations	mixed-quantity-formation-control	high for comparative short and long forms
+d947	d947	lap, groin, waist	*oṭ/uṭ-V; varied extensions	Ø	o/u	short	ṭ	singleton	i/u/a/e	VC-V / VC-VC	core	high for order; medium for root-vowel quality
+d949	d949	sling; brickbat	regional *oṭ-icil	Ø	o	short	ṭ	singleton	i	VC-i-CVC	core	high for full form
+d950	d950	sore, bubo	*oṭ-u/i; regional *oṭ-is/uc-	Ø	o/u	short	ṭ	singleton	u/i/a	VC-V(C)	core	high for order
+d954	d954	shrink, subdue, cease, leave	*oṭ-uŋ / *oṭ-ukk; regional *uṭ-uŋ/uk	Ø	o/u	short	ṭ	singleton	u	VC-u-NC / VC-u-CC	core-vowel-history-variable	high for order and u-formative; medium for immediate root-vowel quality
+d958	d958	adhere, join, heap; smear	*oṭṭ- / *oṇṭ-; Central *oṭ-p-	Ø	o	short	ṭ	geminate/nasal cluster independently attested; Central formation uncertain	u/i/zero	VCC-V / VC-p	strong-cluster-control	high for strong SD I formation
+d959	d959	oath, wager	regional *oṭṭ/oḍḍ; Indo-Aryan *hōḍḍa comparison	Ø	o	short	ṭ	geminate independently supported	u/a	VCC-V	strong-cluster-contact-control	high for strong regional form; inherited distribution uncertain
+d962	d962	place, offer, extend; set net or snare	regional *oḍḍ-; Old Telugu oḍ-uk variant	Ø	o	short	ṭ	geminate with separate singleton extension	u	VCC-V / VC-u-C	strong-formation-contact-control	high for strong regional form; medium for full cognacy
+d965	d965	bank, shore, slope	*oṭṭ / *oṇṭ-	Ø	o	short	ṭ	geminate/nasal cluster	u/i	VCC-V	strong-cluster-control	high for non-singleton regional input
+d967	d967	clear, pure, beautiful; filter	regional *oṭ-V	Ø	o	short	ṭ	singleton	i/a/unknown	VC-V / VC-p	regional-formation-control	medium
+d985	d985	slowly, gently; constantly	expressive *oll-/oyy- with adverbial material	Ø	o	short	ll/yy	geminate lateral/glide	a/e	VCC-V(n)	expressive-geminate-control	medium
+d996	d996	sound, cry, weep	*ol-i/u; *ol-k; *ul-amp; long *ōl formations	Ø	o/u	short root and separately long formations	l	singleton	i/u/zero/a	VC-V / VC-k / VC-a-mp; long nouns	mixed-formation-cluster-loss-control	high for northern ol-k comparison
+d1079	d1079	vomit, regurgitate	*kak; possible regional *kaẓ-k beside kak	k	a	short	k / possible ẓ	velar singleton/geminate; alternative apical+velar cluster	zero/u	CVC / possible CVC-C	input-uncertain-secondary-r-comparison	high for kak family; low for apical antiquity
+d1123	d1123	calf, young cattle	*kaṭ-a-c / *kiṭ-a-v; regional apical+l formation	k	a/i	short	ṭ	singleton	a	CVC-a-C	mixed-vowel-regional-apical	Comparative order and exact formation confidence distinguished in support and exception notes
+d1181	d1181	quickly, rapidly	regional *kaṇṇa; earlier r unknown	k	a	short	ṇṇ	geminate	a	CVNNV	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d1235	d1235	bramble, thorn hedge	regional *kamp / *komp	k	a/o	short	mp	nasal-labial cluster	a/e	CVNC-V	secondary-r-compound-comparison	Comparative order and exact formation confidence distinguished in support and exception notes
+d1278	d1278	black, scorch, burn	*kar-u; long *kār and consonantal/nasal derivatives	k	a	short and independent long grades	r	singleton	u/zero/unknown	CVC-V / CVC-NC / CVVC	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1287	d1287	strong, abundant, excessive	*kar-u; Telugu consonantal/nasal derivative	k	a	short	r	singleton	u/zero/unknown	CVC-V / CVC-ND	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1291	d1291	sound, call, ring	*kar-ay; *kar-NK and labial formations	k	a	short	r	singleton	a/zero/unknown	CVC-ay / CVC-NC	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1292	d1292	melt, dissolve	*kar-a-NK; *kar-k; high-vowel derivatives	k	a	short	r	singleton	a/zero/i	CVC-a-NC / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1347	d1347	bonduc nut, molucca bean	*kaẓ-aṟ/ñc; distinct from tuber *kiẓ-aŋk	k	a	short	ẓ	singleton	a	CVC-a-NC / CVC-a-CC	botanical-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1349	d1349	loosen, slip off; move, shake	*kaẓ-al; *kaẓ-i; nasal-velar derivatives	k	a	short	ẓ	singleton	a/i	CVC-a-l / CVC-i / CVC-NK	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1359	d1359	backwater, salt marsh; canal	*kaẓ-i; Telugu *kaẓ-y?	k	a	short	ẓ	singleton	i/zero	CVC-i / CVC-y	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1368	d1368	full, spread, overflow	*kaẓ-um; consonantal *kaẓ-m/cc	k	a	short	ẓ	singleton	u/zero	CVC-u-m / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1477	d1477	vomit, spit, hawk	*kār/ṟ/l; short Tulu *kar-āy derivative	k	ā/a	long root with independent short expanded Tulu formations	r/ṟ/l	singleton	zero/a/y	CVVC / CVC-a-y	quantity-and-formation-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d1479	d1479	leg, foot, quarter	*kāl	k	ā	long	l	singleton	zero	CVVC free root	long-free-root-control	high
+d1507	d1507	Indian beech, Pongamia	regional *kar-aŋ; tree compound *kar-aŋ#mar-an	k	a	short	r	singleton	a	CVC-a-NK	regional-botanical-input	Comparative order and exact formation confidence distinguished in support and exception notes
+d1509	d1509	crowd, be dense	regional *kikkiṟ-i / *kikkaṟ-i	k	i	short	kk	geminate	i/a	CVCCVCV	secondary-r-or-reduplication	Comparative order and exact formation confidence distinguished in support and exception notes
+d1574	d1574	cry, crow, make noise	*kil-a/ay; *kil-i and expressive extensions	k	i/e	short	l	singleton	a/i	CVC-a / CVC-i / CVC-C	core	high
+d1580	d1580	curd, thick buttermilk	*ka/iẓ-al/ān	k	a/i	short	ẓ	singleton	a	CVC-a-l/n	regional-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1594	d1594	small, young, grow lean	*kiṯ/ṟ-u/i/a; strong small compounds separate	k	i	short	ṟ	singleton	i/u/a	CVC-V; strong compounds	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1595	d1595	whirl, be giddy, turn a mill	*kiṟ-u/i/a; expressive strong and reduplicated formations	k	i	short	ṟ	singleton and expressive geminate	u/i/a	CVC-V / CVC-C / reduplication	expressive-retention-control	medium
+d1619	d1619	below, lower, east	short *kiẓ-nd / *kiẓ-V-kk versus long *kīẓ	k	i	mixed by formation	ẓ	singleton	zero/unknown	CVC-nd / CVC-V-kk / CVVC	core	high
+d1680	d1680	eyeball, egg, round object	*kuṭ/guḍ; regional *gurḍ?	k/g	u	short	ṭ/ḍ	stop geminate or rhotic-stop cluster uncertain	u/zero	CVC / CVCC	input-uncertain-secondary-r-comparison	Comparative order and exact formation confidence distinguished in support and exception notes
+d1767	d1767	bend, droop, sink low	*kur-aŋk; *kur-k; long grade *kūr	k	u	short and independent long grades	r	singleton	a/zero	CVC-a-NK / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1769	d1769	monkey	*kur-aŋk; regional *kor-a-nt?	k	u/o	short	r	singleton	a	CVC-a-NK / CVC-a-NT	core-formation-and-contact-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1774	d1774	voice, throat; sing, recite	*kur-al; verb *kor-al-c	k	u/o	short	r	singleton	a	CVC-a-l-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1778	d1778	shrivel, grow lean	*kur/kor-V; nasal/dental/velar derivatives	k	u/o	short	r	singleton	a/u/unknown	CVC-V-C	alternative-cognacy-control	Comparative order and exact formation confidence distinguished in support and exception notes
+d1787	d1787	blind	*kur-uṭ-V; immediate *kur-ḍ-V	k	u	short	r	singleton	u	CVC-u-ṭV / CVC-ḍV	core	high
+d1802	d1802	embrace tightly, seize	regional *guh?; Telugu earlier r unknown	g	u	short	h	singleton	unknown	CVC / complex predicate	unreconstructible-input-cluster-comparison	Comparative order and exact formation confidence distinguished in support and exception notes
+d1818	d1818	pit, hollow, tube, dig	*ku/oẓ-i pit; *ku/oẓ-al/av tube; consonantal digging formations	k	u/o	short	ẓ	singleton	i/a/u	CVC-i / CVC-a-L / CVC-a-v / CVC-C	core	high
+d1822	d1822	rot, become soft, decay	*kuẓ-ay; *kuẓ-l? and other derivatives	k	u/o	short	ẓ	singleton	a/zero	CVC-ay / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1826	d1826	sink, submerge, set	regional *kruŋ/kru; precluster order unknown	k	unknown	unknown before regional cluster	r input position unknown	singleton	unknown	CCV(N)C	unreconstructible-input-cluster-comparison	Comparative order and exact formation confidence distinguished in support and exception notes
+d1850	d1850	pound, strike with fist	*kuṯ-u / *kuṯ-ṯ; regional *gur-d	k/g	u	short	ṟ/ṯ	singleton and strong formations	u/zero	CVC-V / CVCC / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d1851	d1851	short, diminish	*kuṯ/ṟ-u/ay; strong and nasal derivatives	k	u/o	short	ṟ/ṯ	singleton and strong formations	u/a	CVC-V / CVNC / CVCC	alternative-cognacy-control	Comparative order and exact formation confidence distinguished in support and exception notes
+d1853	d1853	gulp, swallow liquid	regional *guk/guh; no independent r	g	u	short	k/h	velar singleton/geminate	u/zero	CVC / CVCC	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d1859	d1859	cut, reap, saw	*ku/oṯ-ay; high-vowel and consonantal cut derivatives	k	u/o	short	ṟ	singleton	a/u/zero	CVC-ay / CVC-u / CVC-C	core	high
+d1861	d1861	pierce, insert, prick	*kuṯṯ; alternative weak *kuṯ-C	k	u	short	ṟ	geminate independently supported	zero/u	CVCC / CVC-C	strong-input-metathesis-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1898	d1898	sharp, pointed	*kūr; Telugu krūru possibly Sanskrit krūra	k	ū	long	r	singleton	zero/u	CVVC	long-input-secondary-r-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d1906	d1906	paddy, grain	*kūl-i / *kūl-am	k	ū	long	l	singleton	i/a	CVVC-i / CVVC-am	long-vowel-control	high for regional long root; deeper borrowing uncertain
+d1923	d1923	stuff, cram	*kūr/kuṟ; regional *kul-uk	k	ū/u	long and short independently different formations	r/ṟ/l	singleton	u/zero	CVVC / CVC-V-C	quantity-and-formation-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d1959	d1959	scoop up	regional *ker-V; K80 proposes *ker-a	k	e	short	r	singleton	unknown	CVC-V + labial/palatal formation	core-formation-uncertain	medium
+d1964	d1964	cough, clear throat	*ker/cer-um versus *kem/kom; exact root disputed	k/c	e/o	short	r/m	singleton	u/unknown	CVC-V-m / CVC	input-and-cognacy-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d2008	d2008	side, flank, behind	regional *kēr/ker-i	k	ē/e	independent long and short forms	r	singleton	i/unknown	CVVC-i / CVC-i	quantity-and-formation-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d2010	d2010	mock, deride	regional *kēr/kīr; extensions d/n/s	k	ē/ī	long independently established	r	singleton	unknown	CVVC-C	long-input-displacement-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d2018	d2018	kindred, family, friend	short *ki/eḷ-ay and long *kēḷ; Kui nominal -mbu formation	k	i/e	mixed by formation	ḷ	singleton	a	CVC-ay / CVVC / CVC-a-mb	core	high
+d2090	d2090	bastion, bulwark	regional *kottaḷ-am	k	o	short	tt	geminate	a	CVCCVC-VM	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d2146	d2146	fat, become fat, proud	*koẓ-u; *koẓ-(u)-w / *koẓ-(u)-kk; long *kōẓ	k	o	short and independently long grade	ẓ	singleton	u/zero	CVC-u / CVC-w / CVC-K / CVVC	core	high
+d2149	d2149	new, sprout, young; kinship derivatives	*koẓ-utt-V; short *koẓ-V and long *kōẓ formations	k	o	mixed by formation	ẓ	singleton	u/unknown	CVC-u-tt / CVC-V / CVVC	core	high
+d2176	d2176	string, thread, arrange	*kō; *kō-r/v/p derivative series	k	ō	long	r/v/zero	singleton	zero/unknown	CVV / CVVC	long-input-derivative-r-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d2233	d2233	drink, guzzle	*kōr/koḷ; eastern gronj formation	k	ō/o	long versus short strong formations	r/l	singleton versus geminate	u/zero/unknown	CVVC / CVCC	input-and-cognacy-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d2237	d2237	stick, shaft, long	*kōl	k	ō	long	l	singleton	zero/a/u	CVVC / CVVC-V	core	high
+d2247	d2247	ivy-gourd and related plant names	regional *kōv-ay	k	ō	long	v	singleton	a	CVVC-ay	botanical-cognacy-and-secondary-r-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d2356	d2356	cord, rope, twine	*car-aṭ	c	a	short	r	singleton	a	CVC-a-Ṭ	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d2359	d2359	snake, cobra, krait	*car-a-(n)c(c)-; immediate Telugu *tar-a-ncc-	c/t	a	short	r	singleton	a	CVC-a-(N)CC	core	high for segment order; medium for exact common suffix
+d2360	d2360	slip, slide, occur; decrease	*car-i/u; regional *sar-k / *jar-k	c/s/j	a	short	r	singleton	i/u/zero	CVC-V-C / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d2456	d2456	incline, side; disputed eastern descend	*cāy; alternative eastern *i/eṟ-a (d516)	c	ā	long in southern root; short under alternative eastern etymology	y	singleton	zero/a	CVVC / alternative VC-a	alternative-cognacy-control	high southern; low eastern cognacy
+d2628	d2628	chironji tree and nut	*cir/cēr-V?; regional *ser/ sar-ēk	c/s	i/e/a	mixed, proto-quantity unresolved	r	singleton	e/unknown	CVC-V-K / CVVC	regional-contact-uncertain	medium for order; low for exact vowels/quantity
+d2674	d2674	salt, brackish/astringent	*cup; *cow-ar/*cov-ar > *ow-ar	c/zero	u/o	short	p/w	singleton	a/zero	CVC / CVw-ar	nonapical-contraction-control	high for full low-a extension; exact vowel grades differ
+d2687	d2687	shrink, shrivel, wrinkle	*cur-uŋk / *cur-kk; regional s/k initial correspondences	c/s	u	short	r	singleton	u/zero	CVC-u-NK / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d2698	d2698	whirl, roll, revolve	*cuẓ-i/a; initial-loss *uẓ-al and related formations	c/zero	u/o	short	ẓ	singleton	i/a	CVC-i / CVC-a-l / VC-a-l	conditional-displacement	high for uẓ-al order; medium for exact Telugu trajectory
+d2883	d2883	flow, pour, drip; blood/drop	*cor/tar? regional *cur/tor with short and long grades; labial drop derivative	c/t	o/u	short and long grades	r	singleton	i/u/a / unknown	CVC-V / CVVC / CVC-m-p	brahui-displacement-comparison	high for full r order; conditional for exact drop stem
+d2929	d2929	fire, blaze, live coal	*nir-/ner-; labial *nir/ner-upp and velar derivatives	n	i/e	short	r	singleton	u/unknown	CVC-u-PP / CVC-V / CVC-K	core	high for n-V-r; medium for exact vowels/formations
+d2988	d2988	fall, lie down, die	*ḍol-/ḍul- (regional); relationship to ūḍu unresolved	ḍ	o/u	short	l	singleton	zero/u	CVC / CVC-C	lookalike-unresolved	medium; regional reconstruction, deeper source unresolved
+d3014	d3014	remain, stay, be obtained	*taŋ-k / *tak-k	t	a	short	nonapical	singleton	u	CVNK / CVKK	nonapical-control	high
+d3095	d3095	churn, produce fire by rubbing	*tar-i; *tar-c / *tar-V-c	t	a/e	short	r	singleton	i/zero/unknown	CVC-V / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3115	d3115	fire, embers, fire pit	*taẓ; *taẓ-m / *taẓ-al	t	a	short	ẓ	singleton	zero/a	CVC-C / CVC-a-l	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3119	d3119	sprout, flourish	*taẓ-a / *teẓ; derivative with k	t	a/e	short	ẓ	singleton	a/i/unknown	CVC-V-k	brahui-displacement-comparison	high for order, low for exact displaced formative
+d3122	d3122	dig, excavate, scratch	regional *taẓ/taṛ; labial and palatal derivatives	t	a	short and long independently attested grades	ẓ	singleton	zero/unknown	CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d3158	d3158	dance, jump, leap	*tā-ṇṭ-	t	a	long	ṇṭ	nasal-stop cluster	u	CVV-NP	long-nasal-cluster-control	medium
+d3174	d3174	drink, swallow	regional *tār-g; earlier short formation unverified	t	ā	long in full comparanda; pre-Telugu quantity unresolved	r	singleton	zero/unknown	CVVC-C	quantity-and-contact-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d3192	d3192	wither, become lean	*tāṟ; short *taṟ-al/agu and consonantal derivatives	t	ā/a	long root and independent short derivatives	ṟ	singleton	a/u/zero	CVVC / CVC-V-C	quantity-and-formation-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d3195	d3195	sift, winnow	*taṟ- / *tāṟ-; proposed Brahui *tar-añc-	t	a	short and long independent grades	ṟ	singleton	i / unknown formative	CVC-V / CVVC / CVC-NC	brahui-displacement-comparison	high for root order, conditional for exact displaced formative
+d3244	d3244	wrinkle, wither, be dried up	*tir-aŋ/k; *tir-ay	t	i	short	r	singleton	a	CVC-a-NC / CVC-a-kk / CVC-ay	brahui-displacement-comparison	high for i-r-a in southern strong stem; medium for exact Brahui identity
+d3246	d3246	turn, return, twist, wander	*tir-i/u; *tir-u-pp; *tir-u-kk; nasal and low-a derivatives	t	i	short	r	singleton	i/u/a	CVC-u-K / CVC-u-PP / CVC-u-KK / CVC-V-NK	core	high for matched high-vowel formations; medium for eastern low-a input
+d3259	d3259	open	*ti/eṯ-a; velar, labial and palatal extensions	t	i/e	short	ṟ	singleton	a	CVC-a / CVC-a-C	core	high
+d3305	d3305	cut into pieces, fragment	*tuṇ-i/u; long *tūṇ formation	t	u/ū	short and long formations	ṇ	nasal	i/u	CVC-V / CVVC	alternative-cognacy-control	Comparative order and exact formation confidence distinguished in support and exception notes
+d3339	d3339	bore, pierce, scrape	*tur-a/u/i; nasal/velar derivatives	t	u	short	r	singleton	a/u/i	CVC-V-C	alternative-cognacy-control	Comparative order and exact formation confidence distinguished in support and exception notes
+d3340	d3340	push, drive, propel	*tur-a; labial and other derivatives	t	u/o	short	r	singleton	a/zero	CVC-a-C / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d3343	d3343	rust, verdigris	*tur-u; labial/velar strong formations	t	u	short	r	singleton	u/zero	CVC-V / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3358	d3358	pluck, nip off	North Dravidian *tur/tuṛ-(u)-k	t	u	short	r	singleton	u/zero uncertain	CVC-(V)-k	brahui-displacement-comparison	high for order, uncertain for V2 phonemic status
+d3364	d3364	jump, leap, be proud	*tuḷḷ-u	t	u	short	ḷḷ	singleton	u	CVCC-V	secondary-r-control	high
+d3367	d3367	stuff, crowd, thrust in	*tuṯ/tuṟ-u; strong and velar/labial derivatives	t	u	short	ṯ/ṟ	singleton and strong apical formations	u/a	CVC-V-C / CVCC	brahui-displacement-comparison	high for u-apical order; conditional for affricate formation
+d3393	d3393	feather, down, soft hair	*tū; *tupp-uẓ/ṭ derivatives	t	ū/u	long root and short labial derivatives	p/ẓ later	noninitial apical after geminate	u/a	CVV / CVCCVC	nonadjacent-or-secondary-r-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3402	d3402	winnow, scatter, sprinkle	*tūr / *tūṯ- strong formation	t	u	long	ṟ/ṯ	singleton and strong apical formation	u	CVVC / CVVC-C	long-vowel-control	medium
+d3411	d3411	ladle, wooden spoon, oar	regional *ta/teḍ-ḍ	t/ṭ	a/e	short	ḍ	geminate/short stop variants	u	CVC(C)-V	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d3437	d3437	snap, break, cut	*te/tiṟ-i; velar/labial/nasal derivatives	t	e/i	short	ṟ	singleton	i/zero/unknown	CVC-V-C / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3451	d3451	belch, eructate	*tēk; regional *dēr-k / *der-b; Telugu nasal derivative	t/d	ē/e	long core root and regional short/long derivatives	k/r	singleton	zero/unknown	CVVC-C / CVC-C	secondary-r-regional-comparison	Comparative order and exact formation confidence distinguished in support and exception notes
+d3520	d3520	armpit, side of body, flank	*tok-k / regional *tolokʰ, *tolkʰ	t	o	short	l/k	lateral only in northern forms; deeper k/l uncertain	o/zero	CVCVC / CVCC	northern-medial-reduction-comparison	medium for local northern order; low for wider cognacy
+d3522	d3522	tread, trample, crush	*tuẓ-i; velar/labial derivatives	t	u/o	short	ẓ	singleton	i/zero	CVC-i / CVC-C	core-vowel-and-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3559	d3559	skin, bark, rind	*tokk; *tok-al > *tōl; short *toli	t	o/ō	long contracted root versus distinct short formations	l / earlier k...l	singleton	a/i	CVVC / CVC-a-l / CVKK	core	high
+d3754	d3754	moon, month, moonlight	*nel-a-nc/-ncc; *nel-V	n	e/i	short	l	singleton	a	CVC-a-NC / CVC-V	core	high for order and formative family
+d3821	d3821	green, fresh, moist; moss	*pac/pas; *pas-ir/ar extensions	p	a	short	c/s	singleton	i/a/unknown	CVC / CVC-V-r	alternative-cognacy-nonadjacent-process	Comparative order and exact formation confidence distinguished in support and exception notes
+d3949	d3949	spread, crawl, bed, expanse	*par-a; *par-a-k(k), *par-a-pp, *par-u-w; long *pār	p	a	short and independent long grade	r/ṟ	singleton	a/u	CVC-a-K / CVC-a-PP / CVC-u-w / CVVC	core	high for broad formations; medium for exact velar quantity
+d3962	d3962	split, tear, slice	*par-i; consonantal *par-t/d and velar/labial derivatives	p	a	short	r	singleton	i/zero/a	CVC-i / CVC-C	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d3972	d3972	grow large, increase, flourish	*par-u; *par-b/d; long *pār	p	a	short root and independent long grade	r	singleton	u/zero	CVC-V / CVC-C / CVVC	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d3976	d3976	cotton	*par-utti; immediate *par-tt-i	p	a	short	r	singleton	u	CVC-u-tt-i	core	high
+d3982	d3982	husked rice, grain of boiled rice	*per/par-V; velar, labial and plural formations	p	e/a	short	r	singleton	unknown	CVC-V / CVC-V-K / CVC-V-m	vowel-input-uncertain	high for order; low for exact vowel reconstruction
+d3986	d3986	tooth; toothstick compounds	*pal; *pal#kar tooth-stick	p	a	short	l	singleton	zero	CVC free root / CVC#CVC	free-root-control	high
+d3999	d3999	old, worn, stale	*paẓ-a; *paẓ-a-nt/n	p	a	short	ẓ	singleton	a	CVC-a-NT / CVC-a-n	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d4002	d4002	blame, scold, censure	*paẓ-i; consonantal y/b derivatives	p	a	short	ẓ	singleton	i/zero	CVC-i / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4005	d4005	rib, side, armpit	*paẓ-k-; shorter *paẓ-u	p	a	short	ẓ	singleton	zero/u	CVC-k / CVC-u	core-contact-convergence	high
+d4039	d4039	pig	*pan-ṯ-i / *panṯ-i	p	a	short	nṯ	nasal-stop cluster	i	CVNC-i	root-cluster-control	high
+d4057	d4057	stale, rotten, foul	regional *pās; alternative relation to *paẓ-a3999	p	ā	long	s	singleton	zero/u	CVVC	alternative-cognacy-secondary-r	Comparative order and exact formation confidence distinguished in support and exception notes
+d4175	d4175	rattan, cane	*pir-amp; strengthened labial variant	p	i/e	short	r	singleton	a	CVC-a-NP	core-contact-caveat	Comparative order and exact formation confidence distinguished in support and exception notes
+d4176	d4176	separate, split, loosen	*pir-i; *pir-k / nasal and labial derivatives	p	i	short	r	singleton	i/zero	CVC-i / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4177	d4177	twist, roll into a coil	*pur-i / *pir-i; velar and labial formations	p	u/i	short	r	singleton	i	CVC-i-k / CVC-i-p	brahui-retention-counterexample	high for full high-vowel stem
+d4183	d4183	squeeze, express liquid, milk	*piẓ-i; nasal-stop derivatives *piṇṭ-	p	i	short	ẓ	singleton plus nasal-stop derivatives	i	CVC-i / CVC-NC / CVNC	brahui-displacement-comparison	high for singleton full order; medium for exact cross-language formations
+d4193	d4193	intestine, bowel	*piẓ-ul / *piẓ-uv-ul; Telugu velar derivative	p	i/e	short and long comparison grades	ẓ	singleton	u/unknown	CVC-V-C	quantity-and-formation-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d4194	d4194	burst, split, hatch, parch	*piḷ-i/a; competing Telugu *pir-al > *per-al	p	i/e	short	ḷ / alternative r	singleton	i/a/unknown	CVC-V / CVC-V-l / CVC-K	input-cognacy-contested	high for lateral group; low for uniquely linking Telugu prēlu
+d4283	d4283	protect, nourish, support	*pur-a; palatal/labial/dental derivatives	p	u/o	short	r	singleton	a	CVC-a-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4312	d4312	worm, decay	*puẓ-u; labial/velar and plural formations	p	u/i	short	ẓ	singleton	u/i/zero	CVC-V / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4335	d4335	anthill	*puṯṯ / *punṯṯ-V; regional *puṭṭ	p	u	short	ṯṯ/ṇṯṯ	geminate or nasal-plus-geminate	a/u/i	CVCC-V / CVNCC-V	root-cluster-control	high for nonsingleton; medium for nasal
+d4410	d4410	name, name someone	*pin-cc-Vr > *pic-ar / *pec-ar; regional pidir/peder	p	i/e/ē	long produced by contraction in relevant southern forms	c/d with final r	singleton	a/i	CVC-a-r / CVVC	contraction-and-secondary-apical-control	high for contraction family; low for eastern dental-initial history
+d4411	d4411	grow, increase, big; elder kin	*per-u-k(k); *per-V / *pēr; kinship derivatives	p	e	mixed by formation	r	singleton	u/i/unknown	CVC-u-K / CVC-V / CVVC	core	high
+d4418	d4418	bone, hard stone of fruit	*peẓ/ṛ-V-n; plural -k	p	e	short	ẓ/ṛ	singleton	e/a/unknown	CVC-V-n	regional-vowel-input-uncertain	high for regional order; medium for segment, low for exact V2
+d4430	d4430	talk, prattle, command	*pēc / *pēẓ; short expressive variants distinct	p	ē	long independently established	ẓ/c	singleton	u/zero	CVVC / CVVC-V	long-input-secondary-r-uncertain	high for long input; low for Telugu added-r history
+d4438	d4438	god, spirit, demon	*pēy / regional *pēn; Kuvi plural pēn-ka	p	ē	long regional root; Pengo short	n/y	nasal in immediate Kuvi input; deeper n/y uncertain	zero/u	CVVC + plural-k(a)	late-kuvi-long-nasal-plural	high for immediate Kuvi nasal and length
+d4449	d4449	louse, flea	*pēn; Kuvi plural *pēn-ka	p	ē	long independently established; short regional Pengo/Manda	n	nasal	zero/u	CVVC + plural-k(a)	late-kuvi-long-nasal-plural	high
+d4536	d4536	sell	*por-V; proposed *por-a, *prō	p	o	short	r	singleton	unknown	CVC-V	regional-vowel-input-uncertain	medium for order; low for independently established V2
+d4537	d4537	parch, fry; hearth	*por-i; y/d/n/s formations	p	o/u	short	r	singleton	i/zero/unknown	CVC-i / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4545	d4545	earring	*por-c; Telugu nasal-velar formation	p	o	short	r	singleton	zero/unknown	CVC-C	core-contact-and-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4555	d4555	town, city	regional *poẓ-al	p	o	short	ẓ	singleton	a	CVC-a-L	regional-contact-uncertain	medium
+d4559	d4559	sun, day, time	*poẓ-ut; *poẓ-t; deictic compounds	p	o	short	ẓ	singleton	u/zero	CVC-u-T / CVC-T	core-formation-and-boundary-sensitive	Comparative order and exact formation confidence distinguished in support and exception notes
+d4591	d4591	heap	*pōr; short *por-aḷ formation	p	ō/o	long root and independent short derivative	r	singleton	zero/a	CVVC / CVC-a-C	quantity-and-formation-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d4599	d4599	split into threads; strand	*pōẓ; nasal-velar/palatal derivatives	p	ō	long	ẓ	singleton	zero/unknown	CVVC-C	long-input-residual	Comparative order and exact formation confidence distinguished in support and exception notes
+d4608	d4608	smear, rub	regional *prām/prēm; earlier full order unknown	p	ā/ē	unknown	r	singleton	unknown	CCVV-C	no-independent-input	Comparative order and exact formation confidence distinguished in support and exception notes
+d4680	d4680	burn, blaze	*maṇṭ; regional *maṛ-g and nasal derivative	m	a	short	ṇṭ/ṛ	mixed nasal-stop/apical	zero/unknown	CVNC / CVC-C	alternative-root-shapes	Comparative order and exact formation confidence distinguished in support and exception notes
+d4710	d4710	drowsy, close eyes	expressive *mar-a-mar-a; possible simple *mar	m	a	short	r	singleton	a	reduplicated CVC-a	expressive-cognacy-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4711	d4711	tree	*mar-am / *mar-an	m	a	short	r	singleton	a	CVC-a-N	core	high
+d4716	d4716	emetic nut tree	*maru#kārai?; regional nasal-velar tree name	m	a	short	r	singleton	u	CVC-u#CVC	compound-contact-cognacy-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4728	d4728	darkness, cloud, stupor	*mar-b / *mar-v	m	a	short	r	singleton	zero	CVC-C	core-contact-caveat	Comparative order and exact formation confidence distinguished in support and exception notes
+d4737	d4737	eel, elongated fish	*mal-aŋ; regional fish-name variants	m	a	short	l	singleton	a	CVC-a-NC	core-secondary-nasal-warning	high for lateral input; medium for exact eastern cognacy
+d4750	d4750	be blunt, dull, dim, perish	*maẓ-u-k(k); *maẓ-u-ŋk; low-a nominal grade	m	a	short	ẓ	singleton	u/a	CVC-u-KK / CVC-u-NK	core	high
+d4756	d4756	man, husband, male	regional *maṟ/maẓ-s/c; vowel/grade uncertain	m	a/u	short and long regional grades; immediate input uncertain	r/ẓ	singleton	unknown	CVC-s / CVC-s-V plus gender suffixes	regional-displacement-vocalism-unresolved	high for full apical order, low for exact immediate vowels
+d4760	d4760	forget, hide, be lost	*maṯ-a/ay; *maṯ-a-nk and *maṯ-u-k formations	m	a	short	ṟ	singleton	a/u	CVC-a / CVC-a-NK / CVC-u-K	core	high
+d4761	d4761	turn over, return, be distressed, fall	*maṯ-i/u; *maṯ-aŋk; *maṯ-al	m	a	short	ṟ	singleton	i/u/a	CVC-i / CVC-u-K / CVC-a-NK / CVC-a-l	core	high for root family; medium for exact Telugu formation
+d4806	d4806	bamboo, thorny bamboo	regional *māṇ/ṛ-i; Kuvi mṇāhu formation	m	ā	long independently established	ṇ/ṛ	nasal/rhotic singleton; immediate suffixal s cluster inferred	i / unknown	CVVC-i / CVVC-s?	late-kuvi-long-apical-variable	high for long vowel and full order; medium for segment and formation
+d4831	d4831	die, cease, extinguish, erase	*māḷ; short *maḷ-a/u-NK; regional *maṇ-k	m	ā/a	independent long root and short derivatives	ḷ/ṇ	lateral/nasal; short consonantal formations	a/u/zero	CVVC / CVC-V-NK / CVC-C	late-kuvi-mixed-quantity-secondary-nasal	high for full order; medium for grades; low for e outcome
+d4855	d4855	Anogeissus tree	regional *miṇ-iya	m	i	short	ṇ	nasal	i	CVC-i-yV	late-kuvi-short-nasal	high for immediate segment order, medium for common inheritance
+d4866	d4866	swallow	*miẓ-u-nk; regional *miẓ-i-nk and mu/v variants	m	i	short	ẓ	singleton	u/i	CVC-V-NK	core	high
+d4876	d4876	shine, flash, lightning; star	*min / *min-uŋ/ukk; long star *mīn; regional *min-s	m	i/ī	short verbal root and independent long star formation	n	nasal; regional r/ḍ secondary	u/zero/unknown	CVC-C / CVC-u-CC; long noun	late-kuvi-nasal-mixed-formation	high for nasal root; medium for immediate long verb
+d4885	d4885	fish	*mīn; Kuvi mīn-ka	m	ī	long independently attested; Pengo/Manda short	n	nasal	zero/u	CVVC + plural-k(a)	late-kuvi-long-nasal-plural	high
+d4968	d4968	hare	*muc/y-al; regional *mol/mor-Vl, K80 *moẓ-al	m	u/o	short	secondary l/r, earlier c/y	singleton	a/o	CVC-a-l	secondary-apical-regional	high for broad order; medium for secondary-apical intermediate
+d4971	d4971	rough, knotty; tree stump	*mur-aṭ; other roughness derivatives	m	u/o	short	r	singleton	a	CVC-a-Ṭ	core	Comparative order and exact formation confidence distinguished in support and exception notes
+d4973	d4973	sound, murmur, roar	*mur-al/av; competing *muẓ-aŋk4989	m	u/o	short	r	singleton	a	CVC-a-C	alternative-cognacy	Comparative order and exact formation confidence distinguished in support and exception notes
+d4975	d4975	break, perish, kill	*mur-i; velar/nasal derivatives and long grade	m	u/ū	short and independent long grades	r	singleton	i/u/zero	CVC-V-C / CVVC	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d4976	d4976	rope, cord, bark fibre	*mur-a-ṟc / regional *mor-a-(n)c	m	u/o	short	r	singleton	a	CVC-a-(N)C	core	high for order and low-a formation; medium for root mid-vowel stage
+d4986	d4986	waist, back, loins	*mol / *mul-k	m	o/u	short	l	singleton or preconsonantal lateral	zero / a	CVC / CVC-k	cluster-loss-control	medium
+d4989	d4989	roar, resound; speak	*muẓ-aŋk; *moẓ-i; competing *mur4973	m	u/o	short	ẓ	singleton	a/i	CVC-a-NK / CVC-i	alternative-cognacy	Comparative order and exact formation confidence distinguished in support and exception notes
+d4993	d4993	sink, immerse, drown	*muẓ-u-nk / *muẓ-u-nkk; long and shorter formations	m	u	mixed by formation	ẓ	singleton	u/i/a	CVC-u-NK / CVVC-K / CVC-C	core	high
+d5007	d5007	spoil, become mouldy; dirt	*muṟ-i; *muṟ-k/g	m	u	short	ṟ	singleton	i/zero	CVC-i / CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d5017	d5017	ripen, mature	*muṟṟ-u; alternative *mūẓ5046	m	u	short	ṟṟ	geminate	u	CVCC-V	alternative-cognacy-geminate-control	Comparative order and exact formation confidence distinguished in support and exception notes
+d5046	d5046	ripen after plucking	*mūẓ; short *muṛ-k derivative	m	ū/u	long root and independent short derivatives	ẓ	singleton	zero/unknown	CVVC / CVC-C	alternative-cognacy	Comparative order and exact formation confidence distinguished in support and exception notes
+d5078	d5078	soft, weak, gentle; knead	*mel; *mel-k; strong *mell-	m	e	short	l	singleton and geminate and l-k cluster	i/u/a / zero	CVC-V / CVC-k / CVCC	cluster-loss-control	high for mel-k order; conditional for Kui exact formative
+d5082	d5082	smear, plaster, wax	*meẓ-u-k; other *meẓ-V-nḍ/ŋk/w formations	m	e/i	short	ẓ	singleton	u / unknown	CVC-u-K / CVC-V-NK / CVC-V-w	vowel-input-uncertain	high for apical order; low for proposed exact low-a input
+d5087	d5087	goat; old cluster word of unknown meaning	regional *mē-k; Old Telugu mṛ̆ēka unglossed	m	ē	long	k	singleton	unknown	CVVC	unknown-gloss-and-nonapical-control	Comparative order and exact formation confidence distinguished in support and exception notes
+d5114	d5114	blunt, maimed, stump	*moṇṭ / *moṭ; long variants	m	o/ō	short and long grades	ṇṭ/ṭ	nasal-stop/strong stop	zero/u	CVNC / CVC	secondary-r-or-alternative-root	Comparative order and exact formation confidence distinguished in support and exception notes
+d5123	d5123	bow, kneel, salute	*moẓ-k/g; other apical derivatives	m	o/u	short	ẓ	singleton	zero	CVC-C	core-formation-uncertain	Comparative order and exact formation confidence distinguished in support and exception notes
+d5124	d5124	ladle, draw water by dipping	*moḷ-k / *muḷ-k	m	o/u	short	ḷ	lateral plus velar formative	zero	CVC-C	core-cluster-secondary-nasal	high for earlier order; medium for root vowel and common inheritance
+d5146	d5146	steal, deceive; mouse as thief	regional *mṛā / *mṇā; precluster input unknown	m	unknown	unknown before observed long cluster	r/n input order unknown	precluster structure unknown	unknown	attested CCVV; older structure unknown	unreconstructible-input-cluster-comparison	low for precluster input
+d5153	d5153	year; this/last/next year compounds	*yĀṇṭ-u; K80 *nīt-yāṇṭ > *nir-ēṇḍ/*nir-ōṇḍ	y/zero; compound n	ā/ē/ō; compound i	long bare root; compound first-member quantity unresolved	ṇṭ; compound r	singleton	compound boundary	(C)VVNC / CVC#VVNC	compound-process-separate	high for year; low for exact completed-year compound stages
+d5159	d5159	river, water, thirst	*yĀṯ-u, oblique *yĀṯṯ-; regional *ēṯ	y/zero	ā/ē	long	ṟ/ṯ	singleton	u/zero	(C)VVC / (C)VVCC	core	high
+d5250	d5250	stream, river, pit	regional *vant; extra-r variant	v	a	short	nt	nasal-stop	zero/i	CVNC	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d5263	d5263	write, draw lines, scratch	*war-ay; *war-i and other scratching formations	w	a	short	r	singleton	a/i	CVC-ay / CVC-i	core	high
+d5295	d5295	scrape, wipe, erase inscription	*waẓ-i; *waẓ-C / *waẓ-a/icu causative formations	w	a	short	ẓ	singleton	i/a/zero	CVC-i / CVC-C	core	medium
+d5368	d5368	perch, alight; fly	*vāl; extra-r variant	v	ā	long	l	singleton	zero/u	CVVC	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d5369	d5369	incline, slope, bend	*vāl; extra-r variant	v	ā	long	l	singleton	zero/u	CVVC	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes
+d5372	d5372	live, flourish, livelihood	*wāẓ; short *waẓ-d-uk / regional *bar-d-uk	v/b	ā/a	long root and independently short derivative	ẓ/r	singleton	zero/u	CVVC / CVC-C-V-C	core-morphology-and-contact-caveat	Comparative order and exact formation confidence distinguished in support and exception notes
+d5409	d5409	finger	*wir/wer-al; distinct *wir-and/anj derivatives	w	i/e	short	r	singleton	a	CVC-a-L / CVC-a-NC	core	high
+d5411	d5411	open, split, go to pieces	*wir-i; *wir-i-nk/nkk; proposed *wir-il	w	i	short	r	singleton	i/u/a	CVC-i / CVC-i-NK / CVC-i-l?	core	high for root; low for exact Telugu -il suffix
+d5555	d5555	throw, strike, discharge	*wey; long grade and extra-r variants	v	e/ē	short and long grades	y	singleton	zero/unknown	CVC / CVVC	secondary-r-input-unresolved	Comparative order and exact formation confidence distinguished in support and exception notes

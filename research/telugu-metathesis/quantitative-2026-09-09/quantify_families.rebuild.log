@@ -1,0 +1,63 @@
+{
+  "reviewed_entries": 409,
+  "primary_families": 403,
+  "sensitivity_families": 365,
+  "raw_language_ids": 46,
+  "time_aggregated_language_groups": 43,
+  "aliases": {
+    "OTelugu": "Telugu",
+    "OMal": "Malayalam",
+    "pampa": "Kannada"
+  },
+  "family_class_count_rows": 19823,
+  "membership_rows": 429312,
+  "broad_obligatory_test": {
+    "counterexample-to-obligatory-application": 134,
+    "consistent-D": 55,
+    "not-decisive": 46
+  },
+  "warning": "Targeted reviewed frame; no population frequency or random-sample inference."
+}
+AluKurumba 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Badaga 0/125 0/169 mixed 0 uncertain 17 other 26 not-reviewed 20
+Belari 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+BettaKurumba 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Brahui 7/32 7/56 mixed 3 uncertain 18 other 5 not-reviewed 1
+Eravallan 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Gadaba 0/75 0/104 mixed 0 uncertain 17 other 7 not-reviewed 3
+Gondi 17/139 17/173 mixed 8 uncertain 19 other 8 not-reviewed 2
+Irula 0/2 0/13 mixed 0 uncertain 8 other 3 not-reviewed 0
+Kadar 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Kannada 0/272 0/295 mixed 0 uncertain 14 other 8 not-reviewed 1
+Kodagu 0/112 0/133 mixed 0 uncertain 3 other 17 not-reviewed 4
+Kolami 0/64 0/120 mixed 0 uncertain 38 other 8 not-reviewed 5
+Konda 35/127 35/141 mixed 12 uncertain 9 other 5 not-reviewed 1
+Koraga 0/19 0/28 mixed 0 uncertain 4 other 5 not-reviewed 4
+Kota 0/147 0/174 mixed 0 uncertain 3 other 23 not-reviewed 6
+Kudiya 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Kui 75/115 75/154 mixed 12 uncertain 30 other 7 not-reviewed 1
+Kurumba 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Kurux 0/50 0/74 mixed 0 uncertain 6 other 18 not-reviewed 5
+Kuwi 60/117 60/149 mixed 18 uncertain 22 other 6 not-reviewed 1
+MalaMalasar 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+MalaPulaya 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Malasar 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Malayalam 0/257 0/268 mixed 0 uncertain 5 other 5 not-reviewed 2
+Malto 0/47 0/65 mixed 0 uncertain 6 other 12 not-reviewed 3
+Manda 28/54 28/69 mixed 2 uncertain 10 other 5 not-reviewed 0
+Mannan 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Muduga 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Muthuvan 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Naiki 0/28 0/45 mixed 0 uncertain 9 other 7 not-reviewed 2
+Naikri 0/49 0/84 mixed 0 uncertain 22 other 7 not-reviewed 3
+Paliya 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+PaluKurumba 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Parji 0/93 0/114 mixed 0 uncertain 10 other 8 not-reviewed 5
+Pengo 34/74 34/89 mixed 4 uncertain 11 other 4 not-reviewed 0
+Sholaga 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+Tamil 0/303 0/315 mixed 0 uncertain 6 other 3 not-reviewed 1
+Telugu 117/313 117/370 mixed 51 uncertain 36 other 17 not-reviewed 0
+Toda 0/110 0/153 mixed 0 uncertain 10 other 31 not-reviewed 7
+Tulu 0/201 0/226 mixed 0 uncertain 10 other 14 not-reviewed 7
+Urali 0/0 0/0 mixed 0 uncertain 0 other 0 not-reviewed 0
+markodi 0/22 0/24 mixed 0 uncertain 0 other 2 not-reviewed 4

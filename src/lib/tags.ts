@@ -37,7 +37,11 @@ export const GRAMMATICAL_TAGS = [
 	'remoteness', 'complementizer', 'definite',
 	'proper-noun', 'multiword-expression', 'demonstrative', 'personal', 'reciprocal',
 	'copula', 'modal', 'conjunct-verb', 'incorporating', 'non-incorporating',
-	'temporal', 'spatial', 'manner', 'degree', 'sentential', 'onomatopoeia', 'quantifier'
+	'temporal', 'spatial', 'manner', 'degree', 'sentential', 'onomatopoeia', 'quantifier',
+	'animate', 'inanimate', 'kinship', 'collective', 'second-causative',
+	'indirect-past', 'potential-past', 'inchoative-participle',
+	'topic-same', 'topic-shift', 'prohibitive', 'echo', 'epenthetic',
+	'appropriate-place', 'first-person', 'second-person', 'third-person', 'quotative', 'filler'
 ];
 // The most common attestation sources, offered in the filter (the full set is larger; see
 // ../data/tags.py). `lex` = "known only from lexicographers".
@@ -79,6 +83,14 @@ export function tagLabel(tag: string): string {
 }
 
 export const TAG_NAMES: Record<string, string> = {
+	animate: 'animate', inanimate: 'inanimate', kinship: 'kinship', collective: 'collective',
+	'second-causative': 'second causative', 'indirect-past': 'indirect past',
+	'potential-past': 'potential past', 'inchoative-participle': 'inchoative participle',
+	'topic-same': 'same-topic marker', 'topic-shift': 'shift-topic marker',
+	prohibitive: 'prohibitive', echo: 'echo formation', epenthetic: 'epenthetic vowel',
+	'appropriate-place': 'appropriate place', 'first-person': 'first person',
+	'second-person': 'second person', 'third-person': 'third person',
+	quotative: 'quotative', filler: 'filler',
 	m: 'masculine', f: 'feminine', n: 'neuter',
 	sg: 'singular', pl: 'plural', du: 'dual', 'double-plural': 'double plural',
 	noun: 'noun', adj: 'adjective', adv: 'adverb', pron: 'pronoun', num: 'numeral', postp: 'postposition',

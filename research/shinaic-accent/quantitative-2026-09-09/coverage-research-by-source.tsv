@@ -1,0 +1,75 @@
+language	source	tokens	linked	unknown_ancestry	explicit_review
+Kalk	hultman2023kalkoti	475	262	213	473
+Kalk	kalkoti	276	169	107	69
+Kalk	liljegren-hindukush	196	9	187	14
+Kalk	rensch-decker-hallberg1992	198	9	189	11
+Kund	kund	161	161	0	16
+Kund	liljegren-hindukush	155	15	140	20
+Phal	CDIAL	867	867	0	62
+Phal	CDIAL;AO	4	4	0	0
+Phal	CDIAL;AO;Buddruss Woṭ	1	1	0	0
+Phal	CDIAL;AO;NOPhal	1	1	0	0
+Phal	CDIAL;AO;liljegren	1	1	0	0
+Phal	CDIAL;BelvalkarVol	1	1	0	0
+Phal	CDIAL;IIFL	2	2	0	0
+Phal	CDIAL;Morgenstierne	1	1	0	0
+Phal	CDIAL;Morgenstierne;NOPhal	2	2	0	0
+Phal	CDIAL;NOPhal	27	27	0	0
+Phal	CDIAL;NOPhal;AO	1	1	0	0
+Phal	CDIAL;liljegren	20	20	0	0
+Phal	decker1992	599	60	539	65
+Phal	kalkoti	1	1	0	0
+Phal	liljegren	3301	754	2547	334
+Phal	liljegren-hindukush	181	22	159	29
+Phal	strand	518	518	0	52
+Sh	CDIAL	2120	2120	0	36
+Sh	CDIAL;AO	8	8	0	0
+Sh	CDIAL;Bailey ShGr	3	3	0	0
+Sh	CDIAL;BelvalkarVol	1	1	0	0
+Sh	CDIAL;Buddruss	3	3	0	0
+Sh	CDIAL;Buddruss Woṭ	1	1	0	0
+Sh	CDIAL;Buddruss;ZDMG	2	2	0	0
+Sh	CDIAL;G.M	1	1	0	0
+Sh	CDIAL;Grahame Bailey	4	4	0	0
+Sh	CDIAL;IIFL	7	7	0	0
+Sh	CDIAL;Lor	62	62	0	1
+Sh	CDIAL;Lorimer BurLg	1	1	0	0
+Sh	CDIAL;Morgenstierne	3	3	0	0
+Sh	CDIAL;Morgenstierne;IIFL	1	1	0	0
+Sh	CDIAL;Morgenstierne;Lorimer BurLg	1	1	0	0
+Sh	CDIAL;Morgenstierne;NTS	2	2	0	0
+Sh	CDIAL;NTS	4	4	0	0
+Sh	CDIAL;ShahidullahPresVol	1	1	0	0
+Sh	CDIAL;ZDMG	1	1	0	0
+Sh	CDIAL;schmidt	7	7	0	0
+Sh	backstrom1992	6149	4347	1802	112
+Sh	backstrom1992;schmidt	2	0	2	0
+Sh	buddruss-shina1996	311	154	157	6
+Sh	degener-shina2008	1577	555	1022	18
+Sh	grierson-lsi1928	592	95	497	95
+Sh	liljegren-hindukush	565	50	515	77
+Sh	rajapurohit2012	2999	184	2815	563
+Sh	schmidt	1701	814	887	194
+Sh	schmidt;rajapurohit2012	22	0	22	0
+Sv	CDIAL	251	251	0	13
+Sv	CDIAL;AO	1	1	0	0
+Sv	CDIAL;BKPD	1	1	0	0
+Sv	CDIAL;Buddruss	3	3	0	1
+Sv	CDIAL;Buddruss;ZDMG	1	1	0	0
+Sv	CDIAL;IIFL	2	2	0	0
+Sv	CDIAL;NOGaw	1	1	0	0
+Sv	CDIAL;NOPhal	6	6	0	0
+Sv	CDIAL;NOPhal;Buddruss	1	1	0	0
+Sv	CDIAL;NTS	4	4	0	0
+Sv	CDIAL;ZDMG	1	1	0	0
+Sv	decker1992	201	3	198	5
+Sv	knobloch2020sauji	529	309	220	529
+Sv	knobloch2020sauji;buddruss1967sau	44	9	35	44
+Sv	liljegren-hindukush	192	8	184	15
+Ush	liljegren-hindukush	213	6	207	15
+Ush	rensch-decker-hallberg1992	323	202	121	322
+bro	CDIAL	4	4	0	0
+bro	CDIAL;NTS	1	1	0	0
+bro	grierson-lsi1928	186	15	171	15
+bro	liljegren-hindukush	203	3	200	13
+bro	schmidt	285	149	136	284

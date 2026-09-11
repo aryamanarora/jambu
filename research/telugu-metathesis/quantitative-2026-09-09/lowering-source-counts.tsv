@@ -1,0 +1,4 @@
+Language_ID	N_K80_Listed_Lowered	N_Selected_Positive_Examples	Listed_Lowered_Over_Selected	Proportion_Selected	Explicitly_Missing_Items	Known_Attestation_Adjusted_Denominator	Lowered_Over_Explicitly_Nonmissing	K80_Item_Membership	Caution
+Kui	17	18	17/18	0.944444	3	17	17/17	1;10;11;12;13;14;15;16;17;18;2;4;5;6;7;8;9	Recount of the printed positive-example list, not an independently sampled frequency or replication of historical conditioning.
+Kuwi	9	18	9/18	0.5				12;15;16;18;2;3;4;5;7	Recount of the printed positive-example list, not an independently sampled frequency or replication of historical conditioning.
+Manda	2	18	2/18	0.111111				2;4	Recount of the printed positive-example list, not an independently sampled frequency or replication of historical conditioning.

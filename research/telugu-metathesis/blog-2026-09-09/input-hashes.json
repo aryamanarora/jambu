@@ -1,0 +1,15 @@
+{
+  "etymon-annotations.tsv": "51c2f95acccdac5f960ffdf60d1b8d094f2052f09b7ac5a0cc671ebd3853f9de",
+  "family-input-classes.tsv": "ba1f0c01f6cc56ffd05d75206431884ebe866671a00eef08bd8b4912736abad8",
+  "family-language-outcomes.tsv": "39f5e1f4fe2ca31f105e627e258672af37c05f072b77dd0d3e9611f851396db2",
+  "cited-evidence.tsv": "46cd06af7d4aba3e869da9a84ed9bf9e5f81f09a0a1b3b533ca051cee5c73e51",
+  "formation-tests.tsv": "792858d44d71f8446bb8810d59a852ee09154a4b236daf2d18cdd8c7ff3cbaf4",
+  "formation-count-membership.tsv": "49e4716eb07a4208d756b639d384df54b8a26a92caec697d5f14b453f36492c4",
+  "formation-class-counts.tsv": "6c9683c8d9eca48864f12abe117e554e74abff529a3fcf6efa0c63cf8c4a3445",
+  "stop-cluster-annotations.tsv": "f7353882eb95513e90d3a367371e5c434ed1dc3b2794f1f6755cb33ef1e86039",
+  "stop-rule-counts.tsv": "62fb4f0c42fe7dd0dfa5b400569265bd8c5a59acd4ba1fa955b81335f854dcf5",
+  "stop-cluster-count-membership.tsv": "db9308eb41db20e73b55043a7adf7b32f9487430b8149df4e6d12171ca7574a4",
+  "pairwise-language-counts.tsv": "4b173279562abbd1332564981fdc95ee3e2d99e7cbcd724cb71660094f166de4",
+  "references.tsv": "f95b25d338de59385884525728950c453c6c7ae0d7822f23341800f8554bc994",
+  "SOURCE_ACCESS.md": "8e2002e6c26be575a5866fa81b4c5df7a43f03451de991fa7c3baebf399e2add"
+}

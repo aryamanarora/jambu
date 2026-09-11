@@ -1,0 +1,204 @@
+family_id	language	all_forms	outcomes	excluded_outcomes	sources	formation_basis
+2563	Sh	"[""ó:ʈe"", ""ó:ʈo"", ""óo~ṭ"", ""óo~ṭi"", ""óo~ṭo"", ""ō̃ṭi̯"", ""ō̃ṭṷ""]"	"[""E@-1"", ""E@-2"", ""stress-marked@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008"", ""rajapurohit2012"", ""schmidt""]"	lip, old a-stem body-part noun
+2563	Phal	[]	[]	[]	[]	lip, old a-stem body-part noun
+2563	Sv	[]	[]	[]	[]	lip, old a-stem body-part noun
+2563	Kalk	[]	[]	[]	[]	lip, old a-stem body-part noun
+2563	Kund	[]	[]	[]	[]	lip, old a-stem body-part noun
+2563	bro	"[""'yṭi""]"	"[""stress-marked@-2""]"	[]	"[""schmidt""]"	lip, old a-stem body-part noun
+2563	Ush	[]	[]	[]	[]	lip, old a-stem body-part noun
+2993	Sh	"[""káa"", ""káa~"", ""kāh"", ""kā̃""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008"", ""schmidt""]"	crow, old a-stem animal noun
+2993	Phal	"[""káak"", ""kóok"", ""kōk"", ""kʹôk""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	crow, old a-stem animal noun
+2993	Sv	[]	[]	[]	[]	crow, old a-stem animal noun
+2993	Kalk	[]	[]	[]	[]	crow, old a-stem animal noun
+2993	Kund	[]	[]	[]	[]	crow, old a-stem animal noun
+2993	bro	"[""qoo""]"	"[""unmarked""]"	[]	"[""schmidt""]"	crow, old a-stem animal noun
+2993	Ush	[]	[]	[]	[]	crow, old a-stem animal noun
+3023	Sh	"[""kóon"", ""kóoṇ"", ""kōn"", ""kōṇ""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008"", ""schmidt""]"	arrow, old a-stem nominal; both old accents explicitly attested
+3023	Phal	"[""kóoṇ"", ""kóoṇṭ"", ""kōṇ"", ""kʹôṇ"", ""šará""]"	"[""E@-1"", ""S@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	arrow, old a-stem nominal; both old accents explicitly attested
+3023	Sv	"[""kā̃ṛa""]"	"[""unmarked""]"	[]	"[""CDIAL""]"	arrow, old a-stem nominal; both old accents explicitly attested
+3023	Kalk	[]	[]	[]	[]	arrow, old a-stem nominal; both old accents explicitly attested
+3023	Kund	[]	[]	[]	[]	arrow, old a-stem nominal; both old accents explicitly attested
+3023	bro	[]	[]	[]	[]	arrow, old a-stem nominal; both old accents explicitly attested
+3023	Ush	[]	[]	[]	[]	arrow, old a-stem nominal; both old accents explicitly attested
+3084	Sh	"[""kaál"", ""kāl"", ""kɑl"", ""kɑɑl"", ""kɑɑ́l"", ""kɑ̀ɑl"", ""kɑ̀ɑlo̱"", ""sáal"", ""sɑl"", ""ˈkɑ̀ɑlo""]"	"[""F"", ""F@-2"", ""L@-1"", ""R@-1"", ""unmarked""]"	"[""E@-1"", ""unmarked""]"	"[""CDIAL"", ""backstrom1992"", ""degener-shina2008"", ""schmidt""]"	year/time, old a-stem time noun; Iranian saal excluded separately
+3084	Phal	"[""kaál"", ""kâʹl"", ""kāl"", ""saál""]"	"[""L@-1"", ""unmarked""]"	"[""L@-1""]"	"[""CDIAL"", ""liljegren"", ""strand""]"	year/time, old a-stem time noun; Iranian saal excluded separately
+3084	Sv	[]	[]	[]	[]	year/time, old a-stem time noun; Iranian saal excluded separately
+3084	Kalk	[]	[]	[]	[]	year/time, old a-stem time noun; Iranian saal excluded separately
+3084	Kund	[]	[]	[]	[]	year/time, old a-stem time noun; Iranian saal excluded separately
+3084	bro	[]	[]	[]	[]	year/time, old a-stem time noun; Iranian saal excluded separately
+3084	Ush	"[""kɑːl""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	year/time, old a-stem time noun; Iranian saal excluded separately
+3696	Sh	[]	[]	[]	[]	milk, old neuter a-stem mass noun
+3696	Phal	"[""c̣hiír"", ""c̣hîʹr"", ""c̣hīr""]"	"[""L@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	milk, old neuter a-stem mass noun
+3696	Sv	"[""c̣hir"", ""ʈ͡ʂir""]"	"[""unmarked""]"	[]	"[""CDIAL"", ""knobloch2020sauji""]"	milk, old neuter a-stem mass noun
+3696	Kalk	"[""c̣iir""]"	"[""unmarked""]"	[]	"[""hultman2023kalkoti""]"	milk, old neuter a-stem mass noun
+3696	Kund	[]	[]	[]	[]	milk, old neuter a-stem mass noun
+3696	bro	[]	[]	[]	[]	milk, old neuter a-stem mass noun
+3696	Ush	[]	[]	[]	[]	milk, old neuter a-stem mass noun
+3735	Sh	"[""c̣ec̣"", ""c̣heéc"", ""c̣héec̣"", ""ʈʂhé:ʂ"", ""ʈʂhé:ʐe""]"	"[""E@-1"", ""L@-1"", ""stress-marked@-1"", ""stress-marked@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""buddruss-shina1996"", ""degener-shina2008"", ""rajapurohit2012"", ""schmidt""]"	field, old neuter a-stem land noun
+3735	Phal	"[""c̣héetr"", ""c̣híitr"", ""c̣hītru"", ""c̣hʹîtr""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	field, old neuter a-stem land noun
+3735	Sv	[]	[]	[]	[]	field, old neuter a-stem land noun
+3735	Kalk	[]	[]	[]	[]	field, old neuter a-stem land noun
+3735	Kund	[]	[]	[]	[]	field, old neuter a-stem land noun
+3735	bro	[]	[]	[]	[]	field, old neuter a-stem land noun
+3735	Ush	[]	[]	[]	[]	field, old neuter a-stem land noun
+4336	Sh	"[""gooṣ̌"", ""goóṣ"", ""goóṭ"", ""goṣ"", ""goṣ̌"", ""goṭ"", ""gòóṭ"", ""gó:ʂ"", ""gó:ʐe"", ""góoṣ"", ""góoṭ"", ""gōṭ""]"	"[""E@-1"", ""L@-1"", ""LR@-1"", ""stress-marked@-1"", ""stress-marked@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""backstrom1992"", ""buddruss-shina1996"", ""degener-shina2008"", ""grierson-lsi1928"", ""rajapurohit2012"", ""schmidt""]"	house, old a-stem dwelling noun
+4336	Phal	"[""ghoóṣṭ"", ""ghôʹsṭ"", ""ghōṣṭ""]"	"[""L@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	house, old a-stem dwelling noun
+4336	Sv	"[""gooš"", ""gooš-a"", ""gooš-ee"", ""goš-a"", ""goš-ee"", ""goːš"", ""guš"", ""gōš"", ""s̊ṭh"", ""š""]"	"[""unmarked""]"	"[""unmarked""]"	"[""CDIAL"", ""CDIAL;Buddruss"", ""CDIAL;ZDMG"", ""knobloch2020sauji""]"	house, old a-stem dwelling noun
+4336	Kalk	[]	[]	[]	[]	house, old a-stem dwelling noun
+4336	Kund	[]	[]	[]	[]	house, old a-stem dwelling noun
+4336	bro	"[""gooṭ""]"	"[""unmarked""]"	[]	"[""schmidt""]"	house, old a-stem dwelling noun
+4336	Ush	"[""goːʈ""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	house, old a-stem dwelling noun
+4368	Sh	"[""giróom"", ""girōm"", ""gom"", ""gro"", ""grom"", ""gá:m"", ""gáam"", ""gām"", ""gāõ"", ""gɑm"", ""gɪˈrom"", ""gɪˈroom"", ""lōm""]"	"[""E@-1"", ""stress-marked@-1"", ""unmarked""]"	"[""unmarked""]"	"[""CDIAL"", ""CDIAL;Morgenstierne;Lorimer BurLg"", ""backstrom1992"", ""degener-shina2008"", ""rajapurohit2012"", ""schmidt""]"	village, old a-stem settlement noun
+4368	Phal	"[""ghráam"", ""ghróom"", ""ghrʹôm"", ""grōm""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	village, old a-stem settlement noun
+4368	Sv	"[""grom"", ""grom-a"", ""grom-e"", ""grome"", ""grām"", ""grɑːm""]"	"[""unmarked""]"	"[""unmarked""]"	"[""CDIAL"", ""knobloch2020sauji""]"	village, old a-stem settlement noun
+4368	Kalk	"[""draam"", ""draám""]"	"[""H2@-1"", ""unmarked""]"	[]	"[""hultman2023kalkoti"", ""kalkoti""]"	village, old a-stem settlement noun
+4368	Kund	"[""grā̃""]"	"[""unmarked""]"	[]	"[""kund""]"	village, old a-stem settlement noun
+4368	bro	[]	[]	[]	[]	village, old a-stem settlement noun
+4368	Ush	[]	[]	[]	[]	village, old a-stem settlement noun
+4531	Sh	[]	[]	[]	[]	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4531	Phal	"[""ghróoṇ"", ""ghrʹôṇ"", ""grhōṇ"", ""grhōṇu""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4531	Sv	[]	[]	[]	[]	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4531	Kalk	[]	[]	[]	[]	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4531	Kund	[]	[]	[]	[]	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4531	bro	[]	[]	[]	[]	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4531	Ush	[]	[]	[]	[]	smell, old neuter a-stem action/result noun; retained as a possible counterexample
+4931	Sh	"[""čoríṭŭ"", ""čoór"", ""čurúṭo"", ""čōr""]"	"[""L@-1"", ""S@-2"", ""syllable-marked@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008""]"	thief, old a-stem agent noun
+4931	Phal	"[""čoór"", ""čuōr"", ""čôʹr"", ""čōr""]"	"[""L@-1"", ""unmarked""]"	"[""unmarked""]"	"[""CDIAL"", ""liljegren"", ""strand""]"	thief, old a-stem agent noun
+4931	Sv	[]	[]	[]	[]	thief, old a-stem agent noun
+4931	Kalk	[]	[]	[]	[]	thief, old a-stem agent noun
+4931	Kund	[]	[]	[]	[]	thief, old a-stem agent noun
+4931	bro	[]	[]	[]	[]	thief, old a-stem agent noun
+4931	Ush	"[""t͡ɕoɽ""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	thief, old a-stem agent noun
+5206	Sh	"[""j"", ""y"", ""yār"", ""yāre̯"", ""yāri̯"", ""ǰaár"", ""ǰār""]"	"[""L@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008""]"	lover/friend, old a-stem person noun
+5206	Phal	[]	[]	[]	[]	lover/friend, old a-stem person noun
+5206	Sv	[]	[]	[]	[]	lover/friend, old a-stem person noun
+5206	Kalk	[]	[]	[]	[]	lover/friend, old a-stem person noun
+5206	Kund	[]	[]	[]	[]	lover/friend, old a-stem person noun
+5206	bro	[]	[]	[]	[]	lover/friend, old a-stem person noun
+5206	Ush	[]	[]	[]	[]	lover/friend, old a-stem person noun
+5958	Sh	"[""tel"", ""teél"", ""téel"", ""tɛl"", ""tɛɛl"", ""tɛɛ́l"", ""tɛ̀ɛ́l""]"	"[""E@-1"", ""L@-1"", ""LR@-1"", ""R@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""backstrom1992"", ""buddruss-shina1996"", ""degener-shina2008""]"	oil, old neuter a-stem substance noun
+5958	Phal	[]	[]	[]	[]	oil, old neuter a-stem substance noun
+5958	Sv	[]	[]	[]	[]	oil, old neuter a-stem substance noun
+5958	Kalk	[]	[]	[]	[]	oil, old neuter a-stem substance noun
+5958	Kund	"[""tɛ̄l""]"	"[""unmarked""]"	[]	"[""kund""]"	oil, old neuter a-stem substance noun
+5958	bro	[]	[]	[]	[]	oil, old neuter a-stem substance noun
+5958	Ush	"[""tɛl""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	oil, old neuter a-stem substance noun
+6547	Sh	[]	[]	[]	[]	village/region, old a-stem place noun; retained as a possible counterexample
+6547	Phal	"[""déeš"", ""díiš"", ""dēš"", ""dīš""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren""]"	village/region, old a-stem place noun; retained as a possible counterexample
+6547	Sv	[]	[]	[]	[]	village/region, old a-stem place noun; retained as a possible counterexample
+6547	Kalk	[]	[]	[]	[]	village/region, old a-stem place noun; retained as a possible counterexample
+6547	Kund	[]	[]	[]	[]	village/region, old a-stem place noun; retained as a possible counterexample
+6547	bro	[]	[]	[]	[]	village/region, old a-stem place noun; retained as a possible counterexample
+6547	Ush	[]	[]	[]	[]	village/region, old a-stem place noun; retained as a possible counterexample
+6849	Sh	"[""d'ūm"", ""d(h)ūm"", ""dum"", ""duum"", ""duúm"", ""dùum"", ""dùúm"", ""dūm""]"	"[""F"", ""L@-1"", ""LR@-1"", ""R@-1"", ""unmarked""]"	"[""stress-in-vowel-sequence@position-unresolved"", ""unmarked""]"	"[""CDIAL"", ""backstrom1992"", ""degener-shina2008"", ""rajapurohit2012"", ""schmidt""]"	smoke, old a-stem substance noun
+6849	Phal	"[""dhumi"", ""dhumʹî"", ""dhuumíi""]"	"[""E@-1"", ""unmarked""]"	[]	"[""decker1992"", ""liljegren"", ""strand""]"	smoke, old a-stem substance noun
+6849	Sv	[]	[]	[]	[]	smoke, old a-stem substance noun
+6849	Kalk	[]	[]	[]	[]	smoke, old a-stem substance noun
+6849	Kund	"[""dùmā̂""]"	"[""F@-1""]"	[]	"[""kund""]"	smoke, old a-stem substance noun
+6849	bro	"[""duu""]"	"[""unmarked""]"	[]	"[""schmidt""]"	smoke, old a-stem substance noun
+6849	Ush	"[""d(h )um""]"	[]	"[""unmarked""]"	"[""rensch-decker-hallberg1992""]"	smoke, old a-stem substance noun
+9072	Sh	"[""pháal"", ""phāl""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008""]"	ploughshare, old a-stem implement noun
+9072	Phal	"[""pháal"", ""phóol"", ""phōl"", ""phʹôl""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	ploughshare, old a-stem implement noun
+9072	Sv	"[""phal""]"	"[""unmarked""]"	[]	"[""CDIAL""]"	ploughshare, old a-stem implement noun
+9072	Kalk	[]	[]	[]	[]	ploughshare, old a-stem implement noun
+9072	Kund	[]	[]	[]	[]	ploughshare, old a-stem implement noun
+9072	bro	[]	[]	[]	[]	ploughshare, old a-stem implement noun
+9072	Ush	[]	[]	[]	[]	ploughshare, old a-stem implement noun
+9108	Sh	"[""fīṇĕ"", ""phīṇ""]"	"[""unmarked""]"	[]	"[""CDIAL""]"	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9108	Phal	"[""phin"", ""phiíṇ"", ""phīn"", ""phʹîṇ""]"	"[""E@-1"", ""L@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9108	Sv	[]	[]	[]	[]	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9108	Kalk	[]	[]	[]	[]	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9108	Kund	[]	[]	[]	[]	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9108	bro	[]	[]	[]	[]	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9108	Ush	[]	[]	[]	[]	foam/steam, old a-stem substance noun; related senses kept distinct in the dossier
+9216	Sh	"[""baál"", ""bāl"", ""bɑl"", ""bɑɑl"", ""bɑɑl čɑl"", ""bɑɑ́l"", ""bɑ̀ɑ́l"", ""čuno bɑɑl"", ""čuno bɑɑ́l"", ""čɑl bɑɑl""]"	"[""L@-1"", ""LR@-1"", ""R@-1"", ""unmarked""]"	"[""R@-1"", ""unmarked""]"	"[""CDIAL"", ""backstrom1992"", ""degener-shina2008"", ""grierson-lsi1928"", ""schmidt""]"	child, independently attested nominal use of the old a-stem adjective
+9216	Phal	[]	[]	[]	[]	child, independently attested nominal use of the old a-stem adjective
+9216	Sv	[]	[]	[]	[]	child, independently attested nominal use of the old a-stem adjective
+9216	Kalk	[]	[]	[]	[]	child, independently attested nominal use of the old a-stem adjective
+9216	Kund	[]	[]	[]	[]	child, independently attested nominal use of the old a-stem adjective
+9216	bro	[]	[]	[]	[]	child, independently attested nominal use of the old a-stem adjective
+9216	Ush	[]	[]	[]	[]	child, independently attested nominal use of the old a-stem adjective
+9250	Sh	"[""bi"", ""bii"", ""bíi"", ""bīh""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008"", ""schmidt""]"	seed, old neuter a-stem noun
+9250	Phal	"[""bíi"", ""bʹî""]"	"[""E@-1""]"	[]	"[""liljegren"", ""strand""]"	seed, old neuter a-stem noun
+9250	Sv	[]	[]	[]	[]	seed, old neuter a-stem noun
+9250	Kalk	"[""bii""]"	"[""0-explicit""]"	[]	"[""hultman2023kalkoti""]"	seed, old neuter a-stem noun
+9250	Kund	[]	[]	[]	[]	seed, old neuter a-stem noun
+9250	bro	"[""bii""]"	"[""unmarked""]"	[]	"[""schmidt""]"	seed, old neuter a-stem noun
+9250	Ush	[]	[]	[]	[]	seed, old neuter a-stem noun
+9459	Sh	"[""bar"", ""baár"", ""bār""]"	"[""L@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008""]"	load/burden, old a-stem noun; short bhara alternative separately documented
+9459	Phal	"[""bháaru"", ""bhā́ru""]"	"[""E@-2"", ""syllable-marked@-2""]"	[]	"[""CDIAL"", ""liljegren""]"	load/burden, old a-stem noun; short bhara alternative separately documented
+9459	Sv	[]	[]	[]	[]	load/burden, old a-stem noun; short bhara alternative separately documented
+9459	Kalk	[]	[]	[]	[]	load/burden, old a-stem noun; short bhara alternative separately documented
+9459	Kund	[]	[]	[]	[]	load/burden, old a-stem noun; short bhara alternative separately documented
+9459	bro	[]	[]	[]	[]	load/burden, old a-stem noun; short bhara alternative separately documented
+9459	Ush	[]	[]	[]	[]	load/burden, old a-stem noun; short bhara alternative separately documented
+9982	Sh	"[""moos"", ""mos"", ""mot͡s"", ""mozăi"", ""moós"", ""moót͡s"", ""moóz"", ""mòós"", ""mòót͡s"", ""mòóz"", ""mó:s"", ""mós"", ""mōs"", ""mō̃s""]"	"[""L@-1"", ""LR@-1"", ""R@-1"", ""stress-marked@-1"", ""unmarked""]"	"[""unmarked""]"	"[""CDIAL"", ""backstrom1992"", ""degener-shina2008"", ""rajapurohit2012"", ""schmidt""]"	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+9982	Phal	"[""mhaás"", ""mhâʹ˜s"", ""mᵃhās""]"	"[""L@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren"", ""strand""]"	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+9982	Sv	"[""mās""]"	"[""unmarked""]"	[]	"[""CDIAL""]"	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+9982	Kalk	"[""maas""]"	"[""unmarked""]"	[]	"[""hultman2023kalkoti""]"	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+9982	Kund	[]	[]	[]	[]	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+9982	bro	"[""moos""]"	"[""unmarked""]"	[]	"[""schmidt""]"	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+9982	Ush	"[""mɔːs""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	flesh, old neuter a-stem mass noun; old consonant-stem maas is a separate alternative
+10042	Sh	[]	[]	[]	[]	nest, old a-stem dwelling noun with semantic specialization
+10042	Phal	"[""móoṇ"", ""mōṇ""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL;IIFL"", ""liljegren""]"	nest, old a-stem dwelling noun with semantic specialization
+10042	Sv	[]	[]	[]	[]	nest, old a-stem dwelling noun with semantic specialization
+10042	Kalk	[]	[]	[]	[]	nest, old a-stem dwelling noun with semantic specialization
+10042	Kund	[]	[]	[]	[]	nest, old a-stem dwelling noun with semantic specialization
+10042	bro	[]	[]	[]	[]	nest, old a-stem dwelling noun with semantic specialization
+10042	Ush	[]	[]	[]	[]	nest, old a-stem dwelling noun with semantic specialization
+10104	Sh	"[""moos"", ""moot͡s"", ""mooz"", ""mos"", ""moz"", ""máaz"", ""mãs"", ""mãzi̯"", ""mòos"", ""móos"", ""mõõs"", ""mō̃s"", ""mō̃zi"", ""mɑt͡s"", ""mɑz"", ""mɑɑs"", ""mɑɑt͡s"", ""mɑɑz""]"	"[""E@-1"", ""F"", ""unmarked""]"	[]	"[""CDIAL"", ""backstrom1992"", ""degener-shina2008"", ""schmidt""]"	month, old a-stem time noun
+10104	Phal	[]	[]	[]	[]	month, old a-stem time noun
+10104	Sv	[]	[]	[]	[]	month, old a-stem time noun
+10104	Kalk	[]	[]	[]	[]	month, old a-stem time noun
+10104	Kund	[]	[]	[]	[]	month, old a-stem time noun
+10104	bro	[]	[]	[]	[]	month, old a-stem time noun
+10104	Ush	"[""moːz""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	month, old a-stem time noun
+10234	Sh	[]	[]	[]	[]	urine, old neuter a-stem mass noun
+10234	Phal	"[""mutr"", ""múutr"", ""mūtr"", ""mʹûtr""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""decker1992"", ""liljegren"", ""strand""]"	urine, old neuter a-stem mass noun
+10234	Sv	"[""mutre""]"	"[""unmarked""]"	[]	"[""CDIAL""]"	urine, old neuter a-stem mass noun
+10234	Kalk	[]	[]	[]	[]	urine, old neuter a-stem mass noun
+10234	Kund	"[""mutrā̂̃""]"	"[""F@-1""]"	[]	"[""kund""]"	urine, old neuter a-stem mass noun
+10234	bro	[]	[]	[]	[]	urine, old neuter a-stem mass noun
+10234	Ush	[]	[]	[]	[]	urine, old neuter a-stem mass noun
+11572	Sh	"[""báal"", ""báali"", ""báalo"", ""bāl"", ""bāle̯"", ""bālo"", ""bālŭ"", ""bālṷ"", ""bɑl"", ""ˈbɑlo"", ""ˈbɑɑlo""]"	"[""E@-1"", ""E@-2"", ""stress-marked@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""backstrom1992"", ""buddruss-shina1996"", ""degener-shina2008"", ""grierson-lsi1928"", ""schmidt""]"	hair, old a-stem body-material noun
+11572	Phal	"[""bóolu"", ""búulu"", ""bōla"", ""būla"", ""būlu""]"	"[""E@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""liljegren""]"	hair, old a-stem body-material noun
+11572	Sv	[]	[]	[]	[]	hair, old a-stem body-material noun
+11572	Kalk	"[""baál""]"	"[""P-high-rising@-1""]"	[]	"[""kalkoti""]"	hair, old a-stem body-material noun
+11572	Kund	"[""báal""]"	"[""F@-1""]"	[]	"[""kund""]"	hair, old a-stem body-material noun
+11572	bro	[]	[]	[]	[]	hair, old a-stem body-material noun
+11572	Ush	"[""'bɑːle""]"	"[""stress-marked@-2""]"	[]	"[""rensch-decker-hallberg1992""]"	hair, old a-stem body-material noun
+11591	Sh	"[""bas"", ""bazí"", ""baás""]"	"[""L@-1"", ""syllable-marked@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008""]"	lodging, old a-stem residence noun
+11591	Phal	[]	[]	[]	[]	lodging, old a-stem residence noun
+11591	Sv	[]	[]	[]	[]	lodging, old a-stem residence noun
+11591	Kalk	[]	[]	[]	[]	lodging, old a-stem residence noun
+11591	Kund	[]	[]	[]	[]	lodging, old a-stem residence noun
+11591	bro	[]	[]	[]	[]	lodging, old a-stem residence noun
+11591	Ush	[]	[]	[]	[]	lodging, old a-stem residence noun
+12497	Sh	"[""šɪš"", ""ʂíʂ"", ""ʂíʐe"", ""ṣiíṣ"", ""ṣiṣ"", ""ṣīṣ"", ""ṣīṣo"", ""ṣĭ̃ṣu"", ""ṣĭṣ"", ""ṣ̌iṣ̌"", ""ṣ̌ɪ̱ṣ̌"", ""ṣ̌ɪṣ̌""]"	"[""L@-1"", ""short-monosyllable"", ""stress-marked@-1"", ""stress-marked@-2"", ""unmarked""]"	[]	"[""CDIAL"", ""backstrom1992"", ""buddruss-shina1996"", ""degener-shina2008"", ""grierson-lsi1928"", ""rajapurohit2012"", ""schmidt""]"	head, old neuter a-stem body-part noun
+12497	Phal	"[""ṣiṣ"", ""ṣīṣa"", ""ṣʹiṣ""]"	"[""S@-1"", ""short-monosyllable"", ""unmarked""]"	[]	"[""CDIAL"", ""CDIAL;liljegren"", ""strand""]"	head, old neuter a-stem body-part noun
+12497	Sv	"[""šeš"", ""ṣiṣ""]"	"[""unmarked""]"	[]	"[""CDIAL"", ""knobloch2020sauji""]"	head, old neuter a-stem body-part noun
+12497	Kalk	"[""ṣiṣ""]"	"[""0-explicit"", ""P-high-level""]"	[]	"[""hultman2023kalkoti"", ""kalkoti""]"	head, old neuter a-stem body-part noun
+12497	Kund	[]	[]	[]	[]	head, old neuter a-stem body-part noun
+12497	bro	"[""ṣiṣ""]"	"[""unmarked""]"	[]	"[""schmidt""]"	head, old neuter a-stem body-part noun
+12497	Ush	"[""ʂuʂ""]"	"[""unmarked""]"	[]	"[""rensch-decker-hallberg1992""]"	head, old neuter a-stem body-part noun
+12575	Sh	"[""šúul"", ""šūl"", ""šūlo"", ""šūlə""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""degener-shina2008""]"	labor pain, old a-stem pain noun with narrowed sense
+12575	Phal	[]	[]	[]	[]	labor pain, old a-stem pain noun with narrowed sense
+12575	Sv	[]	[]	[]	[]	labor pain, old a-stem pain noun with narrowed sense
+12575	Kalk	[]	[]	[]	[]	labor pain, old a-stem pain noun with narrowed sense
+12575	Kund	[]	[]	[]	[]	labor pain, old a-stem pain noun with narrowed sense
+12575	bro	[]	[]	[]	[]	labor pain, old a-stem pain noun with narrowed sense
+12575	Ush	[]	[]	[]	[]	labor pain, old a-stem pain noun with narrowed sense
+12619	Sh	"[""šo"", ""šoo"", ""šuu"", ""šóo"", ""šɔ"", ""šᶦo"", ""ˈšɪu"", ""ˈšᶦo""]"	"[""E@-1"", ""stress-marked@-1"", ""unmarked""]"	"[""stress-marked@position-unresolved""]"	"[""CDIAL"", ""backstrom1992"", ""schmidt""]"	ashes, old a-stem heat noun with semantic specialization
+12619	Phal	[]	[]	[]	[]	ashes, old a-stem heat noun with semantic specialization
+12619	Sv	[]	[]	[]	[]	ashes, old a-stem heat noun with semantic specialization
+12619	Kalk	[]	[]	[]	[]	ashes, old a-stem heat noun with semantic specialization
+12619	Kund	[]	[]	[]	[]	ashes, old a-stem heat noun with semantic specialization
+12619	bro	[]	[]	[]	[]	ashes, old a-stem heat noun with semantic specialization
+12619	Ush	[]	[]	[]	[]	ashes, old a-stem heat noun with semantic specialization
+13561	Sh	[]	[]	[]	[]	thread, old neuter a-stem implement/material noun
+13561	Phal	"[""sutr"", ""súutr"", ""sūtr"", ""sʹûtr""]"	"[""E@-1"", ""unmarked""]"	[]	"[""CDIAL"", ""decker1992"", ""liljegren"", ""strand""]"	thread, old neuter a-stem implement/material noun
+13561	Sv	[]	[]	[]	[]	thread, old neuter a-stem implement/material noun
+13561	Kalk	[]	[]	[]	[]	thread, old neuter a-stem implement/material noun
+13561	Kund	[]	[]	[]	[]	thread, old neuter a-stem implement/material noun
+13561	bro	[]	[]	[]	[]	thread, old neuter a-stem implement/material noun
+13561	Ush	[]	[]	[]	[]	thread, old neuter a-stem implement/material noun

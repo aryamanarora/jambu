@@ -1,0 +1,506 @@
+{
+  "old-long": {
+    "id": "old-long",
+    "title": "Inherited accent: a clean local result, a messier wider comparison",
+    "sources": [
+      "old-long-nominal-sensitivity.tsv",
+      "old-long-screen.tsv"
+    ],
+    "views": [
+      {
+        "label": "Restricted nouns · Degener Gilgit",
+        "unit": "Scorable etymological families",
+        "note": "The restricted set is a selected follow-up of 29 nominal families, not an exhaustive a-stem census. Source pooling reintroduces disagreement. Documented alternative old inputs remain visible in the audit.",
+        "categories": [
+          "Predicted outcome only",
+          "Conflicting outcomes",
+          "Opposite outcome only"
+        ],
+        "rows": [
+          {
+            "label": "Shina · root-accented → E",
+            "values": [
+              7,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Shina · ending-accented → L",
+            "values": [
+              10,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Restricted nouns · all Shina / Palula sources",
+        "unit": "Scorable etymological families",
+        "note": "The restricted set is a selected follow-up of 29 nominal families, not an exhaustive a-stem census. Source pooling reintroduces disagreement. Documented alternative old inputs remain visible in the audit.",
+        "categories": [
+          "Predicted outcome only",
+          "Conflicting outcomes",
+          "Opposite outcome only"
+        ],
+        "rows": [
+          {
+            "label": "Shina · root-accented → E",
+            "values": [
+              10,
+              1,
+              0
+            ]
+          },
+          {
+            "label": "Palula · root-accented → E",
+            "values": [
+              9,
+              1,
+              0
+            ]
+          },
+          {
+            "label": "Shina · ending-accented → L",
+            "values": [
+              9,
+              2,
+              0
+            ]
+          },
+          {
+            "label": "Palula · ending-accented → L",
+            "values": [
+              5,
+              0,
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Broad screen · all formations",
+        "unit": "Scorable etymological families",
+        "note": "This exploratory screen also includes other grammatical formations. A family with both E and L is counted once as conflicting, not twice as confirming evidence.",
+        "categories": [
+          "Predicted outcome only",
+          "Conflicting outcomes",
+          "Opposite outcome only"
+        ],
+        "rows": [
+          {
+            "label": "Shina · root-accented → E",
+            "values": [
+              20,
+              2,
+              2
+            ]
+          },
+          {
+            "label": "Palula · root-accented → E",
+            "values": [
+              19,
+              1,
+              2
+            ]
+          },
+          {
+            "label": "Shina · ending-accented → L",
+            "values": [
+              13,
+              4,
+              2
+            ]
+          },
+          {
+            "label": "Palula · ending-accented → L",
+            "values": [
+              9,
+              1,
+              4
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "gender": {
+    "id": "gender",
+    "title": "Short gender endings leave the preceding syllable prominent",
+    "sources": [
+      "gilgit-o-adjectives.tsv",
+      "palula-tagged-u-adjectives.tsv",
+      "palula-u-adjectives.tsv",
+      "property-location-summary.tsv"
+    ],
+    "views": [
+      {
+        "label": "Source-tagged grammatical classes",
+        "unit": "Unique form/gloss or citation types",
+        "note": "The broader Palula adjective class has nine final-accented types. The regular/umlaut pool includes participles; these overlapping samples must not be added together.",
+        "categories": [
+          "Penultimate",
+          "Final",
+          "Unscorable"
+        ],
+        "rows": [
+          {
+            "label": "Gilgit · short -o adjectives",
+            "values": [
+              110,
+              0,
+              11
+            ]
+          },
+          {
+            "label": "Palula · short -u adjectives",
+            "values": [
+              111,
+              9,
+              6
+            ]
+          },
+          {
+            "label": "Palula · regular/umlaut u:i types",
+            "values": [
+              115,
+              8,
+              6
+            ]
+          },
+          {
+            "label": "Palula · umlaut subclass",
+            "values": [
+              37,
+              0,
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Core property families · seven languages",
+        "unit": "Families in a separate retained-ending screen",
+        "note": "This is syllable location, not a pan-Shinaic tone comparison. Kalkoti has no candidates in this retained-ending domain. Unknown readings stay in the denominator.",
+        "categories": [
+          "Penultimate only",
+          "Mixed with penultimate",
+          "Other position only",
+          "Unscorable"
+        ],
+        "rows": [
+          {
+            "label": "Shina",
+            "values": [
+              35,
+              4,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Palula",
+            "values": [
+              25,
+              2,
+              1,
+              0
+            ]
+          },
+          {
+            "label": "Sauji",
+            "values": [
+              1,
+              0,
+              3,
+              10
+            ]
+          },
+          {
+            "label": "Kalkoti",
+            "values": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Kundal Shahi",
+            "values": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "label": "Brokskat",
+            "values": [
+              10,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "label": "Ushojo",
+            "values": [
+              14,
+              0,
+              1,
+              4
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "lengthening": {
+    "id": "lengthening",
+    "title": "Aspiration separates most early and late new long vowels",
+    "sources": [
+      "palula-short-a-pairs.tsv",
+      "palula-short-a-sensitivity.tsv"
+    ],
+    "views": [
+      {
+        "label": "Closed monosyllables · lexemes",
+        "unit": "35 lexemes",
+        "note": "Biori short a and Ashret long aa define the comparison before Ashret accent is scored. Article and numeral “one” count as one lexeme. Today, mountain and grape are retained residuals.",
+        "categories": [
+          "Early (E)",
+          "Late (L)"
+        ],
+        "rows": [
+          {
+            "label": "Without h / aspiration",
+            "values": [
+              25,
+              1
+            ]
+          },
+          {
+            "label": "With h / aspiration",
+            "values": [
+              2,
+              7
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "raising": {
+    "id": "raising",
+    "title": "Early long vowels raise in the final closed syllable",
+    "sources": [
+      "vowel-raising-reviewed.tsv"
+    ],
+    "views": [
+      {
+        "label": "Final closed syllables",
+        "unit": "Form pairs",
+        "note": "The six aa → uu cases are raised, but are residuals of a narrower aa → oo rule. The two late-aa controls are two pronoun forms with one accusative ending, not two independent lexical controls. Thirty other-domain pairs are outside this test.",
+        "categories": [
+          "oo",
+          "uu",
+          "ii",
+          "aa retained"
+        ],
+        "rows": [
+          {
+            "label": "Biori early aa",
+            "values": [
+              29,
+              6,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Biori early ee",
+            "values": [
+              0,
+              0,
+              11,
+              0
+            ]
+          },
+          {
+            "label": "Biori late aa",
+            "values": [
+              0,
+              0,
+              0,
+              2
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "inflection": {
+    "id": "inflection",
+    "title": "Different citation accents converge on inflected -í",
+    "sources": [
+      "palula-umlaut-i-nouns.tsv",
+      "palula-i-decl-extension.tsv"
+    ],
+    "views": [
+      {
+        "label": "Inflected outcomes by morphological sample",
+        "unit": "Retrieved paradigm cells",
+        "note": "115 comparable cells represent 95 operational lexemes; the two samples overlap in one lexeme. Exclusions are mismatched synonym/variant paradigms, not observed exceptions.",
+        "categories": [
+          "Final -í",
+          "Other accent",
+          "Excluded pairing"
+        ],
+        "rows": [
+          {
+            "label": "aa / ee+i subclass",
+            "values": [
+              73,
+              0,
+              1
+            ]
+          },
+          {
+            "label": "Further i-declension paradigms",
+            "values": [
+              42,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Citation accents before final-accented inflection",
+        "unit": "Comparable paradigm cells",
+        "note": "Every citation group shown here has final -í in the corresponding full inflected form. E/L distinguish the two morae of a long vowel; short citations cannot exhibit that contrast.",
+        "categories": [
+          "Late (L)",
+          "Early (E)",
+          "Short accented",
+          "Short monosyllable, unmarked"
+        ],
+        "rows": [
+          {
+            "label": "aa / ee+i subclass",
+            "values": [
+              73,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Further i-declension paradigms",
+            "values": [
+              24,
+              6,
+              5,
+              7
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "dras": {
+    "id": "dras",
+    "title": "Dras plural endings differ sharply in accent marking",
+    "sources": [
+      "dras-suffix-accent-review.tsv"
+    ],
+    "views": [
+      {
+        "label": "All plural ending groups",
+        "unit": "287 raw plural citations",
+        "note": "“Final present” includes final-only and double-accented citations: 57/60 for -eh, 24/176 for -e. These are not independent etyma or automatically verified singular–plural paradigms.",
+        "categories": [
+          "Final only",
+          "Final + another acute",
+          "Stem only",
+          "Unmarked"
+        ],
+        "rows": [
+          {
+            "label": "-eh / -eɦ",
+            "values": [
+              53,
+              4,
+              3,
+              0
+            ]
+          },
+          {
+            "label": "-e",
+            "values": [
+              22,
+              2,
+              130,
+              22
+            ]
+          },
+          {
+            "label": "-i",
+            "values": [
+              1,
+              0,
+              11,
+              3
+            ]
+          },
+          {
+            "label": "Other formations",
+            "values": [
+              27,
+              1,
+              4,
+              4
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "numerals": {
+    "id": "numerals",
+    "title": "Ten-compounds and twenty-based forms diverge together",
+    "sources": [
+      "numeral-series-tests.tsv",
+      "numeral-series-records.tsv"
+    ],
+    "views": [
+      {
+        "label": "Kalkoti outcomes by numeral formation",
+        "unit": "Numeral families",
+        "note": "All eight 11–18 forms have E in both recorded Palula dialect comparisons and H2 in Kalkoti. Nineteen and twenty have Palula L and Kalkoti H1. Shared compound structure means the ten rows are not ten independent innovations.",
+        "categories": [
+          "H2 · second-mora High",
+          "H1 · first-mora High"
+        ],
+        "rows": [
+          {
+            "label": "11–18 · ten compounds (Palula E)",
+            "values": [
+              8,
+              0
+            ]
+          },
+          {
+            "label": "19–20 · twenty-based (Palula L)",
+            "values": [
+              0,
+              2
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

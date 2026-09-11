@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "local_links_checked": 90,
+  "statistics_index_rows": 77,
+  "errors": [
+    "Missing anchor casebook.html#d1080",
+    "Missing target README.md"
+  ],
+  "scope": "Local artifact linkage and recorded statistical provenance; citations and linguistic interpretation require scholarly reading."
+}

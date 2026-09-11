@@ -1,0 +1,6 @@
+{
+  "record_id": "10310-2",
+  "source_file": "/Users/aryamanarora/Documents/Code/jambu-all/data/cldf/forms.csv",
+  "source_sha256": "20dbe52a7c32c0d092658568716542d6a58b36c8bbdaa92a4676b265f002fe7b",
+  "reason": "Existing subentry required by source-verified ram reference correction, record_decisions_02.jsonl:1; original ancestry extract remains unchanged."
+}

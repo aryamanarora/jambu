@@ -1,0 +1,17 @@
+{
+  "scope": "All Shinaic languages, following the user’s expansion beyond Palula",
+  "previous_goal_turn": "no progress toward publication: completion evidence was revalidated, but the merge-approval blocker remained",
+  "requirements": {
+    "comparative_research": "Complete for the inspected published evidence; uneven documentation and unavailable works are expressly identified",
+    "support_and_opposition": "Present throughout the essay and the 62-row evidence ledger",
+    "minimal_change_account": "Nine mechanism groups with 32 detailed records distinguishing sound changes, morphology, inheritance, hypotheses and gaps",
+    "justified_etymological_proposals": "Present, explicitly distinguished from established source etymologies; no lexical database facts changed",
+    "Jambu_post": "Complete source and production HTML; original workspace and reviewed branch article bytes match",
+    "validation": "Full build, four blog tests, zero Svelte errors, archive reproduction, 17 record links, anchors, download and static fallback verified",
+    "live_publication": "Incomplete: PR 1 is OPEN and MERGEABLE, mergedAt null; explicit merge approval remains pending"
+  },
+  "pull_request": "https://github.com/aryamanarora/jambu/pull/1",
+  "head": "252b3cb9b47c7efe3cfb4784627d4f7224891e8d",
+  "completion": "Not claimed; goal blocked pending explicit approval to merge PR 1 and publish",
+  "blocked_audit": "Same explicit merge-approval blocker revalidated across three consecutive goal turns; PR remains OPEN and MERGEABLE, with no merge or approval. All available authorized preparation is complete."
+}

@@ -1,0 +1,35 @@
+{
+  "url": "http://127.0.0.1:5188/jambu/blogs/telugu-metathesis",
+  "headings": [
+    "1. A short vowel before an apical does not guarantee Telugu metathesis.",
+    "2. The immediate stem formation helps predict vowel length after metathesis.",
+    "3. Later consonant loss can conceal earlier Telugu metathesis.",
+    "4. Related Dravidian languages differ in which words metathesize.",
+    "5. Kui velar–labial reversal belongs to a particular stem–suffix construction.",
+    "6. An initial Telugu cluster alone does not prove metathesis."
+  ],
+  "rows": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10
+  ],
+  "charts": 6,
+  "recordLinks": 155,
+  "recordDestinationsFetched": 0,
+  "recordIDsResolvedDuringSSR": true,
+  "hoverPreview": true,
+  "downloads": [
+    "/jambu/research/telugu-metathesis/annotated-examples.tsv",
+    "/jambu/research/telugu-metathesis/chart-membership.tsv",
+    "/jambu/research/telugu-metathesis/study-data.zip",
+    "/jambu/research/telugu-metathesis/reduction-audit.json"
+  ],
+  "desktop": true,
+  "mobile": true,
+  "dark": true,
+  "noJavaScript": true,
+  "pageErrors": []
+}

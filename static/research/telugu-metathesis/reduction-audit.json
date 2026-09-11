@@ -1,0 +1,1346 @@
+[
+  {
+    "family": "d2149",
+    "entry": "d2149",
+    "concept": "new, sprout, young; kinship derivatives",
+    "cluster": "krotta",
+    "reduced": "kotta",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_ti4dmnqgr73ha"
+    ],
+    "reduced_ids": [
+      "research:d2149-telugu-kotta"
+    ],
+    "derivation": "*koẓ-utt-V > *koẓ-tt-V > *kẓott-V > krott-V > kotta is the proposed short branch. The tt belongs to the formation before metathesis in K03, not automatic new gemination. Telugu koḍuku preserves medial *ẓ > ḍ; kōḍalu has a long root grade. Kui kuṛa/kṛua and Kuvi koṛgi/kṛōgi show different formations and dialect outcomes.",
+    "exception": "Tamil koẓuntu has nt, not the identical tt formation: do not invent nt>tt to derive Telugu from Tamil directly. Exact *-utt support is the comparative reconstruction, whereas high-u formation is independently visible. Kui kṛua preserves two vowels and need not represent contraction; Kuvi long ō needs its own vowel/quantity history. Some kinship/nasal forms may have assimilated medially; neither those nor the related crop and kinship derivatives count as independent roots. Konda kodma is explicitly Telugu borrowing.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4711",
+    "entry": "d4711",
+    "concept": "tree",
+    "cluster": "mrānu",
+    "reduced": "mānu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_cqc6qamwv6hmy"
+    ],
+    "reduced_ids": [
+      "f_rirwcupcemybq"
+    ],
+    "derivation": "*mar-an > *mrān > Telugu mrānu > mānu. Literal *mraan contraction and *marán > *marān > mrān via stress and first-vowel loss are competing implementations. Konda Araku marán versus Sova mrānu supplies a synchronic phonetic analogue, not a directly observed prehistoric time series.",
+    "exception": "Do not derive Telugu n from modern Tamil m: both nominal suffix types have comparative support. Telugu mrā̃ku/mā̃ku has an additional velar formation whose source must be reconstructed separately. Kuvi marnu/mrānu/mārnu preserves dialect and paradigm variation; the long-vowel mārnu type is not a retained exact short input. Kolami/Naikri māk could reflect direct internal assimilation or a borrowed/reduced mrā-type, so its lost r alone cannot prove metathesis. Kurux mann/Malto manu similarly admit medial assimilation.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4711",
+    "entry": "d4711",
+    "concept": "tree",
+    "cluster": "mrā̃ku",
+    "reduced": "mā̃ku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_ymibz5y5h74ku"
+    ],
+    "reduced_ids": [
+      "f_fqcf4xzk4r3tg"
+    ],
+    "derivation": "*mar-an > *mrān > Telugu mrānu > mānu. Literal *mraan contraction and *marán > *marān > mrān via stress and first-vowel loss are competing implementations. Konda Araku marán versus Sova mrānu supplies a synchronic phonetic analogue, not a directly observed prehistoric time series.",
+    "exception": "Do not derive Telugu n from modern Tamil m: both nominal suffix types have comparative support. Telugu mrā̃ku/mā̃ku has an additional velar formation whose source must be reconstructed separately. Kuvi marnu/mrānu/mārnu preserves dialect and paradigm variation; the long-vowel mārnu type is not a retained exact short input. Kolami/Naikri māk could reflect direct internal assimilation or a borrowed/reduced mrā-type, so its lost r alone cannot prove metathesis. Kurux mann/Malto manu similarly admit medial assimilation.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d5409",
+    "entry": "d5409",
+    "concept": "finger",
+    "cluster": "vrēlu",
+    "reduced": "vēlu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_5krorzllosgw6"
+    ],
+    "reduced_ids": [
+      "f_m4k2ln4qkit3k"
+    ],
+    "derivation": "Immediate *wer-al > *wrēl > vrēlu > vēlu. Deeper *wir-al > *wer-al lowering is one analysis; ancestral e is an alternative where southern vowel mergers obscure the contrast. Simple initial-vowel deletion from weral would give wral with wrong quality; prior a>e assimilation plus deletion gives wrēl without literal exchange.",
+    "exception": "The exact mechanism remains underdetermined but plain deletion alone is inadequate. Konda veṛska versus ṛeska/ṛaska permits *vṛ- > ṛ- with first-member loss; exact a/e suffix history differs from Telugu -al. Kui vanju/Kuvi vansu and Central vande admit medial r assimilation in a nasal-stop formation; they are not secure concealed initial metathesis. Toda pēḷ can likewise arise by medial r loss and contraction. Badaga bēru index finger has a competing relation to full beralu or another finger-name root.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1787",
+    "entry": "d1787",
+    "concept": "blind",
+    "cluster": "gruḍḍi",
+    "reduced": "guḍḍi",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_ndolyy4ysamdc"
+    ],
+    "reduced_ids": [
+      "f_d5e6rlvcbj4uw"
+    ],
+    "derivation": "*kur-uḍ-V > *kur-ḍ-V > *kru-ḍḍ-V > gruḍḍi/gruḍḍu > guḍḍi, with initial k/g alternation and later r loss. Strengthening might precede displacement; *kurḍḍ > kruḍḍ yields the same result. Contraction followed by shortening is another possible route. Final i/u and gender formations remain separate.",
+    "exception": "Identical u+u does not guarantee a long modern vowel: the independently attested consonantal branch is crucial. Initial g is not explained by naming the r/vowel exchange. Gondi/Kolami/Naikri guḍḍi could be Telugu loans or local medial assimilation; no observed cluster establishes independent metathesis there. Malto qoṭri may involve internal consonant reversal relative to kur-ṭ, but its precise morphology and quantity require separate study.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4866",
+    "entry": "d4866",
+    "concept": "swallow",
+    "cluster": "mriŋgu",
+    "reduced": "miŋgu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_7dp2pr3nbysj6"
+    ],
+    "reduced_ids": [
+      "f_vsrzcq3kxyfta"
+    ],
+    "derivation": "*miẓ-u-ŋk > *miẓ-ŋk > *mẓiŋk > mriŋgu > miŋgu, with nasal-stop voicing and postconsonantal ẓ>r. Konda miṛiŋ > *mṛiŋ > ṛiŋ gives first-member loss under the displacement account. Tamil/Malayalam v-initial forms need a separate labial history.",
+    "exception": "Do not replace all historical V2 values with u: the Konda i form is real and may involve assimilation. Kannada/Kota/central miŋ(g) can result directly from medial ẓ loss, or contact with Telugu, so matching modern Telugu miŋgu is not independent proof of concealed metathesis. Pengo ṛuggiŋga/ṛugginda is explicitly onomatopoeic and has different vowels/formation. Tamil English gloss words consume/devour are parser errors, not linguistic witnesses.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1619",
+    "entry": "d1619",
+    "concept": "below, lower, east",
+    "cluster": "krinda",
+    "reduced": "kinda",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_vgz6cxcqnfieo"
+    ],
+    "reduced_ids": [
+      "f_oses7f2zth6mw"
+    ],
+    "derivation": "*kiẓ-nd > *kẓind > krind > kind gives krinda/kinda. Displacement removes the front vowel from immediately after k, blocking Telugu k>c palatalization; later r-loss restores ki after that palatalization has ceased to act on this item. Long kīḍupaḍu retains the apical medially; krī may be a separate contraction or abbreviated derivative.",
+    "exception": "This is a relative chronology argument conditional on inheritance and the independently established palatalization environment, not proof from an isolated unpalatalized k. Do not shorten the citation root kīẓ ad hoc: a short allomorph is independently attested. Exact -nd and -nc history is less secure than initial order. Nilgiri/Brahui kī types admit medial-apical loss without displacement; they do not independently prove the Telugu route.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1619",
+    "entry": "d1619",
+    "concept": "below, lower, east",
+    "cluster": "krindu",
+    "reduced": "kindu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_zzgh3zwhibmt6"
+    ],
+    "reduced_ids": [
+      "f_z7ucfq5ej57tw"
+    ],
+    "derivation": "*kiẓ-nd > *kẓind > krind > kind gives krinda/kinda. Displacement removes the front vowel from immediately after k, blocking Telugu k>c palatalization; later r-loss restores ki after that palatalization has ceased to act on this item. Long kīḍupaḍu retains the apical medially; krī may be a separate contraction or abbreviated derivative.",
+    "exception": "This is a relative chronology argument conditional on inheritance and the independently established palatalization environment, not proof from an isolated unpalatalized k. Do not shorten the citation root kīẓ ad hoc: a short allomorph is independently attested. Exact -nd and -nc history is less secure than initial order. Nilgiri/Brahui kī types admit medial-apical loss without displacement; they do not independently prove the Telugu route.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1619",
+    "entry": "d1619",
+    "concept": "below, lower, east",
+    "cluster": "krincu",
+    "reduced": "kincu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_un6oy37s3wdky"
+    ],
+    "reduced_ids": [
+      "f_otngr35lvxsa2"
+    ],
+    "derivation": "*kiẓ-nd > *kẓind > krind > kind gives krinda/kinda. Displacement removes the front vowel from immediately after k, blocking Telugu k>c palatalization; later r-loss restores ki after that palatalization has ceased to act on this item. Long kīḍupaḍu retains the apical medially; krī may be a separate contraction or abbreviated derivative.",
+    "exception": "This is a relative chronology argument conditional on inheritance and the independently established palatalization environment, not proof from an isolated unpalatalized k. Do not shorten the citation root kīẓ ad hoc: a short allomorph is independently attested. Exact -nd and -nc history is less secure than initial order. Nilgiri/Brahui kī types admit medial-apical loss without displacement; they do not independently prove the Telugu route.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d3976",
+    "entry": "d3976",
+    "concept": "cotton",
+    "cluster": "pratti",
+    "reduced": "patti",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_beigjhoyb4dck"
+    ],
+    "reduced_ids": [
+      "f_lehyil4knhwl6"
+    ],
+    "derivation": "*par-utti > *par-tti > *pra-tti > pratti > patti. The derivative already has tt; metathesis need not create it anew. Kannada parti > patti is also possible through direct medial r assimilation, without a pra stage.",
+    "exception": "Cotton vocabulary can travel, and Kuvi Sunkarametta pratti may be a Telugu loan; other Kuvi/Kui forms retain part-. Neither shared crop semantics nor a matching modern patti establishes inheritance. Kannada paẓti has an additional apical correspondence and should not override the robust r series. Long Tamil pāram is a separate formation, not the exact input to Telugu short a.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d5263",
+    "entry": "d5263",
+    "concept": "write, draw lines, scratch",
+    "cluster": "vrāyu",
+    "reduced": "rāyu",
+    "operation": "lose-first",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_vphwyxedrelvg"
+    ],
+    "reduced_ids": [
+      "f_vj7msytpxb3s6"
+    ],
+    "derivation": "*war-ay > *wrāy > vrāyu > rāyu. Writing nouns vrā̃ta/vrālu and causative vrāyincu have distinct suffix histories. Telugu variyu metal-testing preserves the high-i formation. Kui vrīsa/Kuvi brīnai has high ī and different suffix history, potentially *war-i versus a different earlier vowel grade.",
+    "exception": "One first-member-loss word does not establish a universal low-vowel rule for wr clusters. Literacy vocabulary readily diffuses: Gondi/Konda/Kuvi rās/rāc and Gadaba rāyap may be Telugu exports or reflect local developments. Gondi varasānā retains full order, but its relation to a possible borrowed rās is uncertain. Telugu baruku and Parji varc have explicit alternative d5322 etymologies. Badaga finger/place-name homonyms attached to this group are not writing reflexes.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d5263",
+    "entry": "d5263",
+    "concept": "write, draw lines, scratch",
+    "cluster": "vrāyasamu",
+    "reduced": "rāyasamu",
+    "operation": "lose-first",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_n7s5kt47ng4jw"
+    ],
+    "reduced_ids": [
+      "f_4bl55aufe6jo6"
+    ],
+    "derivation": "*war-ay > *wrāy > vrāyu > rāyu. Writing nouns vrā̃ta/vrālu and causative vrāyincu have distinct suffix histories. Telugu variyu metal-testing preserves the high-i formation. Kui vrīsa/Kuvi brīnai has high ī and different suffix history, potentially *war-i versus a different earlier vowel grade.",
+    "exception": "One first-member-loss word does not establish a universal low-vowel rule for wr clusters. Literacy vocabulary readily diffuses: Gondi/Konda/Kuvi rās/rāc and Gadaba rāyap may be Telugu exports or reflect local developments. Gondi varasānā retains full order, but its relation to a possible borrowed rās is uncertain. Telugu baruku and Parji varc have explicit alternative d5322 etymologies. Badaga finger/place-name homonyms attached to this group are not writing reflexes.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1818",
+    "entry": "d1818",
+    "concept": "pit, hollow, tube, dig",
+    "cluster": "krōlu",
+    "reduced": "kōlu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_jby43elvgqkno"
+    ],
+    "reduced_ids": [
+      "f_6apfcyxs2r7nk"
+    ],
+    "derivation": "Low-a *koẓ-al/av > *kẓōl/ōv > krōlu/krōvi, then kōlu. A consonantal *koẓ-cc > *kẓocc > kroccu explains short digging forms; old kẓōce has a distinct long variant. Kui kṛāu/Kuvi gṛāyu are displaced pit names with low outcome, but independently known pit *kuẓ-i is not the same low-a tube derivative. Exact pit-name -ay formation needs reconstruction.",
+    "exception": "K80 explicitly contrasts Kui pit kṛāu and tube krōḍu; that semantic distinction describes distribution without itself explaining a sound condition. Kui krūpa has another vowel/formation. Telugu kukki/goppu could be direct medial assimilation; do not infer concealed metathesis merely from lost ẓ. Kannada kōvi is explicitly Telugu borrowing. The porridge *kūẓ reconstruction attached to this group is not evidence for a long pit input.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1818",
+    "entry": "d1818",
+    "concept": "pit, hollow, tube, dig",
+    "cluster": "groyyi",
+    "reduced": "goyyi",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_hos3a4hrtzpp6"
+    ],
+    "reduced_ids": [
+      "f_dedl5wyt5agce"
+    ],
+    "derivation": "Low-a *koẓ-al/av > *kẓōl/ōv > krōlu/krōvi, then kōlu. A consonantal *koẓ-cc > *kẓocc > kroccu explains short digging forms; old kẓōce has a distinct long variant. Kui kṛāu/Kuvi gṛāyu are displaced pit names with low outcome, but independently known pit *kuẓ-i is not the same low-a tube derivative. Exact pit-name -ay formation needs reconstruction.",
+    "exception": "K80 explicitly contrasts Kui pit kṛāu and tube krōḍu; that semantic distinction describes distribution without itself explaining a sound condition. Kui krūpa has another vowel/formation. Telugu kukki/goppu could be direct medial assimilation; do not infer concealed metathesis merely from lost ẓ. Kannada kōvi is explicitly Telugu borrowing. The porridge *kūẓ reconstruction attached to this group is not evidence for a long pit input.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d2146",
+    "entry": "d2146",
+    "concept": "fat, become fat, proud",
+    "cluster": "krovvu",
+    "reduced": "kovvu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_pxrplumkoerqe"
+    ],
+    "reduced_ids": [
+      "f_iffkeavvvwzxk"
+    ],
+    "derivation": "*koẓ-w > *kẓow > krovvu > kovvu gives Telugu schematically, with labial gemination a separate issue. Kui *koẓ-(u)-k > krōg gives a long mid vowel without the low ā found after independently low-a formations. Pengo kṛō and Manda kṛuva preserve different quantity/suffix histories. Kannada korbu > kobbu permits medial assimilation without an initial kr stage.",
+    "exception": "This is a useful high-u comparison for eastern lowering, but exact u/zero in each immediate velar input is not supplied by the bare root alone. Toda kvāv/kvaḷp has initial k-v after loss/change of ẓ and a different vowel history; it is not evidence of the same k-r metathesis. Kuvi candle klōva is semantically plausible from fat/tallow yet requires source/contact scrutiny; kept uncertain. Related derivatives count as one family.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4750",
+    "entry": "d4750",
+    "concept": "be blunt, dull, dim, perish",
+    "cluster": "mrakku",
+    "reduced": "makku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_xrwtk7qdnczyu"
+    ],
+    "reduced_ids": [
+      "f_rh4qvlb3ka7es"
+    ],
+    "derivation": "*maẓ-ukk > *maẓ-kk > *mẓa-kk > mrakku; voiced mraggu may involve voicing or a different consonantal history. Telugu mrakku > makku and mraggu > maggu are possible locally supported r-loss chains, but inherited/borrowed already assimilated forms can converge on the same outputs. Nasal forms maŋku need only medial assimilation.",
+    "exception": "A high-u geminate formation supports the short displaced outcome. The paired plain forms cannot all be assigned exclusively to r loss because independently plain cognates exist. Source hypothesis of old Kannada borrowing for some voiced geminate Telugu formations is relevant but unproved for this individual root. Do not merge with alveolar turn d4761 or forget d4760 simply because Telugu collapses the apicals to r and meanings overlap.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes. Direct assimilation or medial loss is demonstrably available elsewhere in this family."
+  },
+  {
+    "family": "d4750",
+    "entry": "d4750",
+    "concept": "be blunt, dull, dim, perish",
+    "cluster": "mraggu",
+    "reduced": "maggu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_qubbupqrnim6g"
+    ],
+    "reduced_ids": [
+      "f_ls6tncdxnev4e"
+    ],
+    "derivation": "*maẓ-ukk > *maẓ-kk > *mẓa-kk > mrakku; voiced mraggu may involve voicing or a different consonantal history. Telugu mrakku > makku and mraggu > maggu are possible locally supported r-loss chains, but inherited/borrowed already assimilated forms can converge on the same outputs. Nasal forms maŋku need only medial assimilation.",
+    "exception": "A high-u geminate formation supports the short displaced outcome. The paired plain forms cannot all be assigned exclusively to r loss because independently plain cognates exist. Source hypothesis of old Kannada borrowing for some voiced geminate Telugu formations is relevant but unproved for this individual root. Do not merge with alveolar turn d4761 or forget d4760 simply because Telugu collapses the apicals to r and meanings overlap.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes. Direct assimilation or medial loss is demonstrably available elsewhere in this family."
+  },
+  {
+    "family": "d5082",
+    "entry": "d5082",
+    "concept": "smear, plaster, wax",
+    "cluster": "mrē̃gu",
+    "reduced": "mē̃gu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_7msblpleyzn3c"
+    ],
+    "reduced_ids": [
+      "f_umeht4sejjcai"
+    ],
+    "derivation": "Conditional *meẓ-a-ŋk > *mẓēŋk > mrē̃gu > mē̃gu gives Telugu if low a is justified; *meẓ-a-nḍ > *mẓēnḍ > mrānḍa adds Kui lowering. High-u/zero inputs could instead involve other contraction/lengthening routes. Telugu mrēvu has a different final labial development, not a free substitute for ŋg. Kuvi mrispi matches the high-i Konda form more closely.",
+    "exception": "A real quantity/formative residual: do not use long ē/ā to manufacture the a whose prediction is being tested. Telugu mēdu could be another formation or internal assimilation and is uncertain. Kolami mēg/Naikri mēgh may be old Telugu loans or independently medially reduced forms. Kuvi mṇek introduces a nasal not directly expected from ẓ, so its cognacy/assimilation needs separate evidence.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1347",
+    "entry": "d1347",
+    "concept": "bonduc nut, molucca bean",
+    "cluster": "gracca",
+    "reduced": "gacca",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_xrgs6g6gqjumu"
+    ],
+    "reduced_ids": [
+      "f_pu6o6irnx6zf2"
+    ],
+    "derivation": "Conditional *kaẓ-a-cc > *kẓācc > gracca requires shortening/strengthening; an earlier consonantal *kaẓ-cc > *kẓacc gives short a directly. The exact suffix and botanical transmission are not settled.",
+    "exception": "Do not import the kiẓ tuber reconstruction to explain this bonduc name. Kannada gajiga/gajjuga can be medial loss/palatalization without initial exchange; Tulu gajigɛ may be contact. Composite malformed Tamil row preserved as source evidence, not several independent records.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d1359",
+    "entry": "d1359",
+    "concept": "backwater, salt marsh; canal",
+    "cluster": "krayya",
+    "reduced": "kayya",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_loq3jelndwedg"
+    ],
+    "reduced_ids": [
+      "f_6hi2bvq3t5k2o"
+    ],
+    "derivation": "Possible *kaẓ-y > *kẓa-y > krayya with strengthening; *kaẓ-iya with high-vowel loss is another route. kayya can follow r loss or direct ẓ/y assimilation.",
+    "exception": "Sparse comparison and exact y formation limit confidence. Brahui kallar is explicitly associated with Balochi/Sindhi/Jatki by Bray and cannot independently reconstruct this Telugu formation. A fuller canal derivative would decide the proposed consonantal input.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d1477",
+    "entry": "d1477",
+    "concept": "vomit, spit, hawk",
+    "cluster": "grāyu",
+    "reduced": "gāyu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_eykqzbsh7udsw"
+    ],
+    "reduced_ids": [
+      "f_3i2zmjsspzkhu"
+    ],
+    "derivation": "Possible *kar-āy > *krāy produces Telugu with aphaeresis/reassociation and suffixal long ā; alternatively *kār-y > krāy is long-vowel displacement. gāyu can then lose r, while initial k/g variation is separate.",
+    "exception": "A real quantity/formation residual outside a uniform short-root law. Tamil l/ṟ and nasal variants need comparative correspondence; neither is chosen merely to fit r. DEDR1079 kakku is an explicit comparison but not merged without a defensible apical/expressive history.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d1507",
+    "entry": "d1507",
+    "concept": "Indian beech, Pongamia",
+    "cluster": "krānugu",
+    "reduced": "kānugu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_vx5ejnfq4o4gi"
+    ],
+    "reduced_ids": [
+      "f_rx7ui6kwbz3la"
+    ],
+    "derivation": "*kar-aŋ > *krāŋ, with Telugu krānugu reflecting a further vowel/velar shape; later r loss gives kānugu/kānuga/kāngu. Tree maran>mrānu is d4711 and must not count as a second Pongamia-root event.",
+    "exception": "Botanical names can diffuse. Kannada kānagu has a different species identification (Dalbergia), so its semantic identity is uncertain. Exact Telugu medial -nu-gu versus Konda -ŋ needs nominal history; it is not supplied by a bare contraction.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1580",
+    "entry": "d1580",
+    "concept": "curd, thick buttermilk",
+    "cluster": "krānu",
+    "reduced": "kānu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_z3hnf3r6w2viw"
+    ],
+    "reduced_ids": [
+      "f_ackldew2rf672"
+    ],
+    "derivation": "Conditional *kaẓ-an > *kẓān > krānu > kānu preserves final n. Tamil ki and long ā plus Kannada final l show that this exact immediate form is reconstructed, not simply copied from one modern cognate.",
+    "exception": "Dairy vocabulary is geographically narrow and may diffuse. Vowel alternation and final n/l morphology remain unresolved; do not treat each differing ending as an independently confirmed contraction input.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1767",
+    "entry": "d1767",
+    "concept": "bend, droop, sink low",
+    "cluster": "kruŋgu",
+    "reduced": "kuŋgu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_eqqola7bngbzy"
+    ],
+    "reduced_ids": [
+      "f_7lskelrzopela"
+    ],
+    "derivation": "Consonantal *kur-ŋg > kruŋgu; low-vowel *kur-aŋg > *kor-aŋg > krōŋga could yield Kui. Telugu kuŋgu could lose initial-cluster r or assimilate internally, as Kannada kuŋgu/kuggu does.",
+    "exception": "Do not impose one identical suffix vowel on both languages. Manda grūc adds long ū/palatal formation not explained by that o-a derivation. Alternative related sink1826 supplies only clusters and is tested in family-merge sensitivity.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d1769",
+    "entry": "d1769",
+    "concept": "monkey",
+    "cluster": "krō̃ti",
+    "reduced": "kō̃ti",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_fnt4htr2q5egm"
+    ],
+    "reduced_ids": [
+      "f_tcoysnjdvgdoe"
+    ],
+    "derivation": "Conditional *kor-ant > *krōnt > krō̃ti > kō̃ti; this is not direct transformation of Tamil kuraŋku into Telugu. A velar-to-dental suffix history or distinct formative must be justified.",
+    "exception": "Tamil kōnti is explicitly Telugu borrowing. Kannada/Tulu kōti and central kōti may also diffuse, but absent explicit source evidence remain uncertain transmission cases, not automatic independent metatheses. Species and monkey-name replacement need preservation.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d1822",
+    "entry": "d1822",
+    "concept": "rot, become soft, decay",
+    "cluster": "kruḷḷu",
+    "reduced": "kuḷḷu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_fao23wizo6rio"
+    ],
+    "reduced_ids": [
+      "f_hglqd62jsdrcm"
+    ],
+    "derivation": "Conditional *kuẓ-l > *kẓu-l > kruḷḷu, or a fuller derivative plus syncope, supplies a short consonantal route. kuḷḷu may lose cluster r or reflect direct medial assimilation.",
+    "exception": "Keep distinct from truḷḷu3364 with no independent r/ẓ. Gondi kukk and Kannada kocce can develop by medial assimilation; no concealed initial cluster is required. Low-a source formation does not independently verify the assumed lateral suffix.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d1850",
+    "entry": "d1850",
+    "concept": "pound, strike with fist",
+    "cluster": "gruddu",
+    "reduced": "guddu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_ery2rzlbv2jv6"
+    ],
+    "reduced_ids": [
+      "f_usoa3j6kvuybk"
+    ],
+    "derivation": "*kur-d > *krud > gruddu with initial/suffix voicing and strengthening is plausible; guddu can be direct rd assimilation or later cluster-r loss. Labial kummu/guppu formations must be analyzed separately.",
+    "exception": "The many expressive impact words and ṯṯ/tt changes do not all share one literal r root. Telugu krummu is embedded in a gloss, not a separately linked form in this annotation. Source-level extraction could recover it without adding a root. Marathi guddā could reflect diffusion but does not decide it.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d1923",
+    "entry": "d1923",
+    "concept": "stuff, cram",
+    "cluster": "krukku",
+    "reduced": "kukku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_o4b4iwmz35zfk"
+    ],
+    "reduced_ids": [
+      "f_prhyxkjszzrs6"
+    ],
+    "derivation": "Conditional *kur-kk > krukku, with independent medial syncope possible; kūru is not mechanically shortened by the exchange alone. kukku can be direct assimilation or later r loss.",
+    "exception": "The kuṟum/kuluku comparison must be resolved before a strict formative test. Both Gadaba words are explicitly Telugu loans; they add no independent shared innovation.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d2360",
+    "entry": "d2360",
+    "concept": "slip, slide, occur; decrease",
+    "cluster": "sraggu",
+    "reduced": "saggu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_wfczz7oghcdqo"
+    ],
+    "reduced_ids": [
+      "f_gvqqpczg4fvi6"
+    ],
+    "derivation": "Conditional *sar-g > sraggu with suffix strengthening/voicing; saggu can follow r loss or direct rg assimilation. Full jarugu and sraggu need not have identical initial or formative histories.",
+    "exception": "K61 probable early Kannada-loan class may apply to voiced geminates, but no individual loan proof is supplied here. Malto jarq retains order, showing velar suffigation does not by itself force reordering. Source crossreference snake2359 is not a root merger.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3115",
+    "entry": "d3115",
+    "concept": "fire, embers, fire pit",
+    "cluster": "trampi",
+    "reduced": "tampi",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_6iieamq4yekai"
+    ],
+    "reduced_ids": [
+      "f_gg246dpgbq43e"
+    ],
+    "derivation": "*taẓ-m-p > *tẓa-mp > trampi, then possible r loss > tampi. Tamil taṇal/Kannada taṇalu involve medial nasalization/assimilation, not initial reversal. Kui *taẓ-av > dlāv is conditional on the root assignment.",
+    "exception": "The database Kui aṛ̆al, *c and *t are editorial comparison fragments, not lexical attestations. Kui alternative276 must not be counted twice; its outcome stays A here. Telugu tanuku requires a different nasal/velar history.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3122",
+    "entry": "d3122",
+    "concept": "dig, excavate, scratch",
+    "cluster": "travvu",
+    "reduced": "tavvu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_cpjuuxs5a7tmu"
+    ],
+    "reduced_ids": [
+      "f_n67dygocvqany"
+    ],
+    "derivation": "*taẓ-v > *tẓav > travvu > tavvu with labial strengthening and later r loss; Kuvi taṛj > tṛaj has the same directional relation with a palatal suffix. Konda ṟeb/Kuvi ṛev/Pengo ṛav can follow C1 loss, but e/o variants require distinct vowel histories.",
+    "exception": "A shared regional displacement pattern is plausible; exact v/b/j formation and long/short chronology are not one uniform word history. Kolami/Naikri tavv may reflect Telugu contact or internal apical loss; neither is independently demonstrated.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d3340",
+    "entry": "d3340",
+    "concept": "push, drive, propel",
+    "cluster": "trōlu",
+    "reduced": "tōlu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_smcykvf5urehu"
+    ],
+    "reduced_ids": [
+      "f_moezk777s5uuy"
+    ],
+    "derivation": "Conditional *tor-a-y/c/l > trōy/c/l, with low-a root supported but exact suffixes distinct. *tor-b > trobb/drobb gives a short voiced-geminate derivative; dobbu can be later r loss or imported/assimilated form. Gondi ro- can lose C1 after a cluster.",
+    "exception": "Kannada/Tulu dobbu and Naikri ḍʰobb make early contact plausible for the voiced-geminate subformation, not proven for every pushing word. The various Telugu suffixes and meanings remain one family, with a separate quantity test for each.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d3340",
+    "entry": "d3340",
+    "concept": "push, drive, propel",
+    "cluster": "drobbu",
+    "reduced": "dobbu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_ad2a7upowopsu"
+    ],
+    "reduced_ids": [
+      "f_ljehi7gup5qnm"
+    ],
+    "derivation": "Conditional *tor-a-y/c/l > trōy/c/l, with low-a root supported but exact suffixes distinct. *tor-b > trobb/drobb gives a short voiced-geminate derivative; dobbu can be later r loss or imported/assimilated form. Gondi ro- can lose C1 after a cluster.",
+    "exception": "Kannada/Tulu dobbu and Naikri ḍʰobb make early contact plausible for the voiced-geminate subformation, not proven for every pushing word. The various Telugu suffixes and meanings remain one family, with a separate quantity test for each.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3343",
+    "entry": "d3343",
+    "concept": "rust, verdigris",
+    "cluster": "truppu",
+    "reduced": "tuppu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_ouwrj4t6guwre"
+    ],
+    "reduced_ids": [
+      "f_emjfsvj7gqtxc"
+    ],
+    "derivation": "Possible *tur-pp > truppu and *tur-kk > trukku; full *tur-upp/ukk plus syncope is an alternative. Telugu tuppu may be later r loss or an independently assimilated form.",
+    "exception": "Same-u full inputs do not automatically force long ū. Mineral names can diffuse, but a lexical label is insufficient proof. Labial and velar derivatives are not two roots.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3437",
+    "entry": "d3437",
+    "concept": "snap, break, cut",
+    "cluster": "tregu",
+    "reduced": "tegu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_ac5m6v5uobtos"
+    ],
+    "reduced_ids": [
+      "f_xluqd2rcfx6gk"
+    ],
+    "derivation": "Consonantal *teṟ-g/v/mp/nc > treg/trevv/tremp/trenc with strengthening and nasal distinctions. Earlier high-i deletion is possible. tegu/tempu/tencu can subsequently lose r but may also converge with direct medial assimilation.",
+    "exception": "Pengo trēz has long ē unlike the short Telugu series; its exact formation/length remains unresolved. Konda/Gondi labial forms lack a historical cluster witness, so not automatically D. Several Telugu suffixes are one root.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3437",
+    "entry": "d3437",
+    "concept": "snap, break, cut",
+    "cluster": "trempu",
+    "reduced": "tempu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_lr7rrcqoxabam"
+    ],
+    "reduced_ids": [
+      "f_7iyuujkczzshe"
+    ],
+    "derivation": "Consonantal *teṟ-g/v/mp/nc > treg/trevv/tremp/trenc with strengthening and nasal distinctions. Earlier high-i deletion is possible. tegu/tempu/tencu can subsequently lose r but may also converge with direct medial assimilation.",
+    "exception": "Pengo trēz has long ē unlike the short Telugu series; its exact formation/length remains unresolved. Konda/Gondi labial forms lack a historical cluster witness, so not automatically D. Several Telugu suffixes are one root.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3437",
+    "entry": "d3437",
+    "concept": "snap, break, cut",
+    "cluster": "trencu",
+    "reduced": "tencu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_wcmnrwtkxjxes"
+    ],
+    "reduced_ids": [
+      "f_cv7l6xydsohz6"
+    ],
+    "derivation": "Consonantal *teṟ-g/v/mp/nc > treg/trevv/tremp/trenc with strengthening and nasal distinctions. Earlier high-i deletion is possible. tegu/tempu/tencu can subsequently lose r but may also converge with direct medial assimilation.",
+    "exception": "Pengo trēz has long ē unlike the short Telugu series; its exact formation/length remains unresolved. Konda/Gondi labial forms lack a historical cluster witness, so not automatically D. Several Telugu suffixes are one root.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3962",
+    "entry": "d3962",
+    "concept": "split, tear, slice",
+    "cluster": "bradda",
+    "reduced": "badda",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_gs5vla3nwer2g"
+    ],
+    "reduced_ids": [
+      "f_gd5wgsk5qexs4"
+    ],
+    "derivation": "Possible *par-d > *prad > bradda with voicing/strengthening; badda may lose cluster r or assimilate internally. Kui *par-a-k > prāk followed by k+p > pk yields pṛāpka, while parpa retains order.",
+    "exception": "Initial p>b and voiced gemination require a contact/phonological history beyond metathesis. Konda bada/Kuvi badda may be borrowed or independently simplified, so no automatic D votes. Exact apical identity and source grouping remain qualified.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d3999",
+    "entry": "d3999",
+    "concept": "old, worn, stale",
+    "cluster": "prā̃ta",
+    "reduced": "pā̃ta",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_k6jtvm35n2m3g"
+    ],
+    "reduced_ids": [
+      "f_elp64yudfljjs"
+    ],
+    "derivation": "*paẓ-ant > *pẓānt > prā̃ta > pā̃ta/pāta; *paẓ-an > prān in Pengo/Manda. Kuvi prāi > pṇāi may assimilate the promoted liquid to a nasal, but reverse order of assimilation/movement is also possible.",
+    "exception": "Suffix nt versus n versus k matters; do not count old-person and old-object derivatives separately. Konda pāta cloth is explicitly Telugu borrowing while paṛay retains native full order. Nasal loss and shortening/denasalization are later changes, not the original displacement.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4175",
+    "entry": "d4175",
+    "concept": "rattan, cane",
+    "cluster": "prēmu",
+    "reduced": "pēmu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_fzxffnanjdxb4"
+    ],
+    "reduced_ids": [
+      "f_vb7wwj377n25o"
+    ],
+    "derivation": "*pir-amp > *priamp > prēmu, with coalescence and nasal/labial simplification; prabba/prabbili require a strengthened short-vowel formation, not this exact sequence. pēmu can follow r loss.",
+    "exception": "Rattan names may travel with the object. Kannada prabbali cannot alone prove a Kannada sound law; its vowel, suffix and gemination pattern require source history. Long and short Telugu derivatives count as one family.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4193",
+    "entry": "d4193",
+    "concept": "intestine, bowel",
+    "cluster": "prēgu",
+    "reduced": "pēgu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_mjnf4qdw3jyyk"
+    ],
+    "reduced_ids": [
+      "f_fyrxm7g56e24y"
+    ],
+    "derivation": "Conditional *piẓ-V-g > *pẓiVg > prēgu > pēgu; low-a coalescence is not independently supported here. Southern-central apical-to-velar/stop developments and noun morphology must be distinguished.",
+    "exception": "Long ē challenges an automatic short prediction from Parji high-u if those suffixes are equated; their l/g mismatch prevents that equation. Gondi long pīr is another grade. Need older full velar derivative and dialect vowel evidence.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4312",
+    "entry": "d4312",
+    "concept": "worm, decay",
+    "cluster": "pruccu",
+    "reduced": "puccu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_4aeozp6sxs63y"
+    ],
+    "reduced_ids": [
+      "f_tg6hs45rr3ohg"
+    ],
+    "derivation": "*puẓ-v > pruvvu after cluster reordering/strengthening; alternative *puẓ-uv > *pẓuuv with later shortening cannot be excluded. Kui piṛu > pṛiu > pṛīu provides a high-vowel displacement/coalescence comparison; Kuvi pliguli includes lateral outcome and separate morphology.",
+    "exception": "Short Telugu pruvvu is not proof of original zero V2 because puruvu exists. puccu/puppi can be internal assimilation or later r loss; classify A. Brahui pū and Kota pū can lose the apical without metathesis. Toda u· is explicitly a Badaga loan.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d4312",
+    "entry": "d4312",
+    "concept": "worm, decay",
+    "cluster": "pruppi",
+    "reduced": "puppi",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_fgqdccak2efbk"
+    ],
+    "reduced_ids": [
+      "f_vgo5afnsmgmre"
+    ],
+    "derivation": "*puẓ-v > pruvvu after cluster reordering/strengthening; alternative *puẓ-uv > *pẓuuv with later shortening cannot be excluded. Kui piṛu > pṛiu > pṛīu provides a high-vowel displacement/coalescence comparison; Kuvi pliguli includes lateral outcome and separate morphology.",
+    "exception": "Short Telugu pruvvu is not proof of original zero V2 because puruvu exists. puccu/puppi can be internal assimilation or later r loss; classify A. Brahui pū and Kota pū can lose the apical without metathesis. Toda u· is explicitly a Badaga loan.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d4537",
+    "entry": "d4537",
+    "concept": "parch, fry; hearth",
+    "cluster": "proyi",
+    "reduced": "poyi",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_3ru7eesgwd3am"
+    ],
+    "reduced_ids": [
+      "f_qnf3xznf3vszq"
+    ],
+    "derivation": "*por-y > proyyi with strengthening; possible high-i loss before this stage. poyyi may lose r, while Kannada burugalu and Telugu borugulu preserve medial r in a separate grain noun. Eastern long brō/brū forms have different dental/nasal morphology.",
+    "exception": "Do not reconstruct a shared low vowel merely for Kui long outputs. Kolami/Naikri poy can be apical loss or contact with Telugu poyyi. Kui uncertain ash brūḍa retains source question mark and is not counted as independent root evidence.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4537",
+    "entry": "d4537",
+    "concept": "parch, fry; hearth",
+    "cluster": "proyyi",
+    "reduced": "poyyi",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_alslnjparpqqy"
+    ],
+    "reduced_ids": [
+      "f_wli4podauzais"
+    ],
+    "derivation": "*por-y > proyyi with strengthening; possible high-i loss before this stage. poyyi may lose r, while Kannada burugalu and Telugu borugulu preserve medial r in a separate grain noun. Eastern long brō/brū forms have different dental/nasal morphology.",
+    "exception": "Do not reconstruct a shared low vowel merely for Kui long outputs. Kolami/Naikri poy can be apical loss or contact with Telugu poyyi. Kui uncertain ash brūḍa retains source question mark and is not counted as independent root evidence.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4545",
+    "entry": "d4545",
+    "concept": "earring",
+    "cluster": "prō̃gu",
+    "reduced": "pō̃gu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_tm4y4odxa5fg4"
+    ],
+    "reduced_ids": [
+      "f_t4jvlzmrkzcwc"
+    ],
+    "derivation": "Conditional *por-Vŋg > prō̃gu > pō̃gu; *por-c cannot directly yield the long vowel and nasal velar without additional morphology or sound changes.",
+    "exception": "Rare object term, only three attested languages. Contact and nonmatching suffixes make exact chronology uncertain; no low-a reconstruction is licensed merely by ō. More older source forms are needed.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4559",
+    "entry": "d4559",
+    "concept": "sun, day, time",
+    "cluster": "proddu",
+    "reduced": "poddu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_zuzesjd7nkk44"
+    ],
+    "reduced_ids": [
+      "f_kwctjywqt2way"
+    ],
+    "derivation": "*poẓ-t > *pẓot > proddu with stop strengthening/voicing; high-u syncope may precede exchange. Telugu poddu may lose r; eastern pod forms could instead assimilate directly. appuḍu/ippuḍu/eppuḍu have deictic boundaries and a separate reduction history.",
+    "exception": "Treat deictic compounds separately; their initial ap/ep sequence cannot be scored as retained plain por. No first-member-loss rule is required for Konda podu. Long pōtu elsewhere can be contraction without initial metathesis.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes. Direct assimilation or medial loss is demonstrably available elsewhere in this family."
+  },
+  {
+    "family": "d4599",
+    "entry": "d4599",
+    "concept": "split into threads; strand",
+    "cluster": "prō̃gu",
+    "reduced": "pō̃gu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_3bhnvnrn3loau"
+    ],
+    "reduced_ids": [
+      "f_meimgdwmmhtoa"
+    ],
+    "derivation": "Possible *pōẓ-ŋg/j > prōŋg/j with displacement; an unrecorded short expanded allomorph is another hypothesis, not an independently reconstructed fact. pō̃gu/pō̃ju can follow r loss.",
+    "exception": "This is a genuine long-input residual for any short-only application law. Nasalization and thread-specific semantics require separate derivation. Similar Telugu prō̃gu earring4545 is not a reason to merge the roots.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4599",
+    "entry": "d4599",
+    "concept": "split into threads; strand",
+    "cluster": "prō̃ju",
+    "reduced": "pō̃ju",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_touc7knyckgvy"
+    ],
+    "reduced_ids": [
+      "f_ijsmokmsxkn34"
+    ],
+    "derivation": "Possible *pōẓ-ŋg/j > prōŋg/j with displacement; an unrecorded short expanded allomorph is another hypothesis, not an independently reconstructed fact. pō̃gu/pō̃ju can follow r loss.",
+    "exception": "This is a genuine long-input residual for any short-only application law. Nasalization and thread-specific semantics require separate derivation. Similar Telugu prō̃gu earring4545 is not a reason to merge the roots.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes."
+  },
+  {
+    "family": "d4728",
+    "entry": "d4728",
+    "concept": "darkness, cloud, stupor",
+    "cluster": "mrabbu",
+    "reduced": "mabbu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_wvu3wftw2bels"
+    ],
+    "reduced_ids": [
+      "f_3lv7ov4u3m7yg"
+    ],
+    "derivation": "*mar-b > mrabb with reordering and strengthening; mabbu can follow either mrabbu r loss or direct marbu assimilation. Gondi mabbu explicitly comes from Telugu.",
+    "exception": "Strong directional consonantal case, but transmission of the cloud submeaning may involve contact. Distinct darkness/stupor derivatives are one family; proposed connections with4750/4753 remain unproved.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d5007",
+    "entry": "d5007",
+    "concept": "spoil, become mouldy; dirt",
+    "cluster": "mrukku",
+    "reduced": "mukku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_dcisehtnly34y"
+    ],
+    "reduced_ids": [
+      "f_xm647bxiv4ft4"
+    ],
+    "derivation": "*muṟ-k > mrukk with reordering/strengthening; *muṟ-ik > *muṟk by syncope is possible. mrukku > mukku is supported by the pair, while muggu could arise directly as in Kannada muggu.",
+    "exception": "Distinguish same-surface ripen mruggu5017/5046 from mouldy mrukku. Dirt and putrefaction meanings fit one family, but cannot fix vowel deletion chronology. Long mūri stench is a separate grade.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes. Direct assimilation or medial loss is demonstrably available elsewhere in this family."
+  },
+  {
+    "family": "d5007",
+    "entry": "d5007",
+    "concept": "spoil, become mouldy; dirt",
+    "cluster": "mrukka",
+    "reduced": "mukka",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "D"
+    ],
+    "cluster_ids": [
+      "f_7s57h4cwrljpc"
+    ],
+    "reduced_ids": [
+      "f_lsgpwh5hksfzq"
+    ],
+    "derivation": "*muṟ-k > mrukk with reordering/strengthening; *muṟ-ik > *muṟk by syncope is possible. mrukku > mukku is supported by the pair, while muggu could arise directly as in Kannada muggu.",
+    "exception": "Distinguish same-surface ripen mruggu5017/5046 from mouldy mrukku. Dirt and putrefaction meanings fit one family, but cannot fix vowel deletion chronology. Long mūri stench is a separate grade.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "A supported pathway; alternatives and morphology must still be checked in the family notes. Direct assimilation or medial loss is demonstrably available elsewhere in this family."
+  },
+  {
+    "family": "d5123",
+    "entry": "d5123",
+    "concept": "bow, kneel, salute",
+    "cluster": "mrokku",
+    "reduced": "mokku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_nnjwkozyvi3cc"
+    ],
+    "reduced_ids": [
+      "f_fodk2f3bmd742"
+    ],
+    "derivation": "*moẓ-k/g > mrokk/mrogg with reordering and strengthening; Telugu mokku/moggu can be later r loss or direct assimilation. Kui mrōnga has a nasal-velar formation and unexplained long vowel relative to a short cluster input.",
+    "exception": "Ritual salute forms may diffuse. Keep Naikri mokk ambiguous between contact, direct assimilation and hidden displacement. Kuvi bong cannot demonstrate the original apical without a fuller intermediate; b versus m and nasal place require additional history.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d5123",
+    "entry": "d5123",
+    "concept": "bow, kneel, salute",
+    "cluster": "mroggu",
+    "reduced": "moggu",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_miahekturqw6i"
+    ],
+    "reduced_ids": [
+      "f_3zfyxy2zizywi"
+    ],
+    "derivation": "*moẓ-k/g > mrokk/mrogg with reordering and strengthening; Telugu mokku/moggu can be later r loss or direct assimilation. Kui mrōnga has a nasal-velar formation and unexplained long vowel relative to a short cluster input.",
+    "exception": "Ritual salute forms may diffuse. Keep Naikri mokk ambiguous between contact, direct assimilation and hidden displacement. Kuvi bong cannot demonstrate the original apical without a fuller intermediate; b versus m and nasal place require additional history.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d5372",
+    "entry": "d5372",
+    "concept": "live, flourish, livelihood",
+    "cluster": "braduku",
+    "reduced": "baduku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_skfcmvhkfpxnc"
+    ],
+    "reduced_ids": [
+      "f_4fafyfmltdnqg"
+    ],
+    "derivation": "*bar-d-uk > bra-d-uk, with initial w>b and apical development preceding or independent of the observed order change; bratuku has dental voicing variation. baduku/batuku can be direct apical loss or later cluster loss.",
+    "exception": "The apical is followed by d and a further u-k suffix: morphology is crucial. The apparent Telugu b&lt, br&lt and &gt are transcription/editorial fragments, not forms. Neither Arabic barkat cross-reference nor unrelated Badaga place names establish cognacy.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  },
+  {
+    "family": "d5372",
+    "entry": "d5372",
+    "concept": "live, flourish, livelihood",
+    "cluster": "bratuku",
+    "reduced": "batuku",
+    "operation": "lose-apical",
+    "cluster_flags": [
+      "D"
+    ],
+    "reduced_flags": [
+      "A"
+    ],
+    "cluster_ids": [
+      "f_si3ulrjzpo4cm"
+    ],
+    "reduced_ids": [
+      "f_gdfkkqlfuab7i"
+    ],
+    "derivation": "*bar-d-uk > bra-d-uk, with initial w>b and apical development preceding or independent of the observed order change; bratuku has dental voicing variation. baduku/batuku can be direct apical loss or later cluster loss.",
+    "exception": "The apical is followed by d and a further u-k suffix: morphology is crucial. The apparent Telugu b&lt, br&lt and &gt are transcription/editorial fragments, not forms. Neither Arabic barkat cross-reference nor unrelated Badaga place names establish cognacy.",
+    "screen_interpretation": "Exact paired forms within a family with independently supported displacement. A pair supports a possible reduction route, not the exclusive origin or age of the reduced form. See inherited derivation and exception notes.",
+    "competing_analysis": "Reduced form already marked uncertain in frozen analysis."
+  }
+]

@@ -1,0 +1,14 @@
+✔ semantic links resolve labels, escape metadata, support custom text and deduplicate records (11.778ms)
+✔ code examples remain literal and ordinary Markdown links are preserved (3.36625ms)
+✔ missing records fail rather than publishing broken evidence links (0.314167ms)
+✔ all record types resolve and non-entry links omit entry preview attributes (0.336625ms)
+✔ charts interrupt prose without splitting tables or losing linked records (1.914875ms)
+✔ research downloads respect deployment base paths while external and fragment links remain intact (0.214459ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 247.454042

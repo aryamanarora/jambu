@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "family_count_rows_checked": 19823,
+  "family_memberships_checked": 429312,
+  "formation_count_rows_checked": 17,
+  "pairwise_comparison_groups_checked": 5796,
+  "reviewed_entries": 409,
+  "required_annotation_fields_per_entry": 19,
+  "stop_screen_records_checked": 152,
+  "evidence_links": 9823,
+  "errors": [],
+  "scope": "Arithmetic, linkage and appendix completeness checks. These do not mechanically validate linguistic judgments."
+}

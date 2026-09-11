@@ -102,6 +102,8 @@
 	let ownSegs = $state<AlignSeg[]>([]);
 	let dialects = $state<Dialect[]>([]);
 	let loading = $state(true);
+	const hasDescendants = $derived(!loading && !!ea?.reflexes.length);
+	const origin = $derived(ancestryChain[0]?.[0]);
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
 	let view = $state<'align' | 'concept' | 'normal'>('normal');
@@ -132,6 +134,7 @@
 	function reload(id: string) {
 		curId = id;
 		loading = true;
+		ea = null;
 		selected = null;
 		expanded = new Set();
 		variants = [];
@@ -471,25 +474,21 @@
 	<div class="entry-summary">
 		<div class="entry-head">
 			<div class="entry-title">
-		<h1 class="headword">
-			<a href="{base}/languages/{entry.language?.id}" class="faint">{entry.language?.name}</a>
-			<span class="lemma-word"><FormWord word={entry.word} ocr={entry.ocr} /></span>
-			<span class="id-tag">[{entry.id}]</span>
-		</h1>
-		<div class="source-scopes" aria-label="Sources by information supplied">
-			<div class="source-scope" title="Sources for this headword, gloss, tags, and article text">
-				<span class="source-scope-label">Entry</span>
-				<RefList references={entryReferences} />
-			</div>
-			<div class="source-scope" title="Sources for the descendant and borrowed forms shown below">
-				<span class="source-scope-label">Forms</span>
-				{#if loading}<span class="source-loading">loading…</span>{:else}<RefList references={reflexReferences} />{/if}
-			</div>
+		<div class="entry-eyebrow">
+			{#if entry.language}<a href="{base}/languages/{entry.language.id}">{entry.language.name}</a>{/if}
+			<span class="entry-id" title="Entry identifier">{entry.id}</span>
 		</div>
+		<h1 class="headword">
+			<span class="lemma-word"><FormWord word={entry.word} ocr={entry.ocr} /></span>
+		</h1>
+		{#if entry.phonemic}<p class="entry-pronunciation phon">/{entry.phonemic}/</p>{/if}
+		{#if entry.gloss}<div class="gloss serif">{@html safe(entry.gloss)}</div>{/if}
+		{#if entry.tags}<div class="entry-tags"><Tags tags={entry.tags} /></div>{/if}
 			</div>
 	</div>
 {#if ancestryChain.length}
-	<Ancestry label={relLabel} chain={ancestryChain} startLang={entry.language?.name} />
+	<div class="entry-ancestry">
+	<Ancestry label={relLabel} chain={ancestryChain} startLang={entry.language?.name} compact />
 	{#if alternates.length}
 		<p class="alternates">
 			<span class="alt-label">also proposed</span>
@@ -499,12 +498,7 @@
 				<span class="alt-review" title="auto-classified during the edge-model migration — pending curation">?</span>{/if}{/each}
 		</p>
 	{/if}
-{/if}
-{#if entry.gloss || entry.tags}
-	<p class="gloss serif">
-		{@html safe(entry.gloss)}{#if entry.tags}
-			<Tags tags={entry.tags} />{/if}
-	</p>
+	</div>
 {/if}
 {#if variants.length}
 	<div class="variants">
@@ -592,9 +586,31 @@
 	</details>
 {/if}
 	</div>
-	<aside class="entry-context" aria-label="Entry clades">
-		<CladeBars clades={entry.clades} size="lg" />
+	{#if entryReferences.length || hasDescendants}
+	<aside class="entry-context" aria-label="Sources and coverage">
+		<div class="source-scopes" aria-label="Sources by information supplied">
+			{#if entryReferences.length}
+			<div class="source-scope" title="Sources for this headword, gloss, tags, and article text">
+				<h2 class="source-scope-label">Entry sources</h2>
+				<RefList references={entryReferences} />
+			</div>
+			{/if}
+			{#if hasDescendants && reflexReferences.length}
+			<div class="source-scope" title="Sources for the descendant and borrowed forms shown below">
+				<h2 class="source-scope-label">Descendant sources</h2>
+				<RefList references={reflexReferences} />
+			</div>
+			{/if}
+		</div>
+		{#if hasDescendants}
+		<div class="entry-coverage">
+			<h2 class="source-scope-label">Descendant coverage</h2>
+			<p><strong>{ea!.reflexes.length.toLocaleString()}</strong> reflexes <span aria-hidden="true">·</span> <strong>{langCount}</strong> {langCount === 1 ? 'language' : 'languages'}</p>
+			<CladeBars clades={entry.clades} />
+		</div>
+		{/if}
 	</aside>
+	{/if}
 </div>
 
 <!-- how this node itself aligns to its parent (only non-etyma have a segment alignment) -->
@@ -637,7 +653,7 @@
 {/if}
 
 <!-- view toggle -->
-{#if ea}
+{#if hasDescendants}
 	<div class="toggle" role="tablist" aria-label="View">
 		<button role="tab" aria-selected={view === 'normal'} class:on={view === 'normal'} onclick={() => (view = 'normal')}>Forms</button>
 		<button role="tab" aria-selected={view === 'align'} class:on={view === 'align'} onclick={() => (view = 'align')}>Sound alignment</button>
@@ -649,6 +665,20 @@
 {#if loading}
 	<div class="loader-line" style="margin:1.5rem 0"></div>
 {:else if ea}
+	{#if !hasDescendants}
+	<section class="empty-descendants" aria-labelledby="empty-descendants-title">
+		<h2 id="empty-descendants-title">No descendants recorded</h2>
+		<p>Jambu has no descendant or borrowed forms recorded for this term.</p>
+		<nav aria-label="Explore related entries">
+			{#if origin}
+				<a href="{base}/entries/{origin.id}">Explore origin <span class="phon"><FormWord word={origin.word || origin.id} ocr={origin.ocr} /></span> <span aria-hidden="true">→</span></a>
+			{/if}
+			{#if entry.language}
+				<a href="{base}/languages/{entry.language.id}">Browse {entry.language.name} <span aria-hidden="true">→</span></a>
+			{/if}
+		</nav>
+	</section>
+	{:else}
 	<p class="count muted">{ea.reflexes.length.toLocaleString()} reflexes · {langCount} languages</p>
 	<div class="entry-body">
 		<div class="matrix-col">
@@ -839,9 +869,33 @@
 			</aside>
 		{/if}
 	</div>
+	{/if}
 {/if}
 
 <style>
+	.empty-descendants {
+		margin: 1.5rem 0;
+		padding: 1.1rem 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 9px;
+		background: var(--surface);
+	}
+	.empty-descendants h2 {
+		margin: 0;
+		font-size: 1rem;
+	}
+	.empty-descendants p {
+		margin: 0.4rem 0 0;
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+	.empty-descendants nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem 1.5rem;
+		margin-top: 0.85rem;
+		font-size: 0.85rem;
+	}
 	.cross-family {
 		margin: 0.8rem 0 1rem;
 		border: 1px solid color-mix(in srgb, var(--berry) 28%, var(--border));
@@ -996,10 +1050,12 @@
 	}
 	.entry-intro {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+		grid-template-columns: minmax(0, 1fr) minmax(250px, 310px);
 		align-items: start;
-		gap: 1.5rem;
-		margin-top: 1rem;
+		gap: 2.5rem;
+		margin: 1.5rem 0;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--border);
 	}
 	.entry-summary,
 	.entry-context {
@@ -1013,40 +1069,81 @@
 		margin-top: 0;
 	}
 	.entry-context :global(.clades) {
-		justify-content: flex-end;
-		margin: 0.25rem 0 0.65rem auto;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		margin: 0.65rem 0 0;
 	}
+	.entry-context {
+		border-left: 1px solid var(--border);
+		padding-left: 1.25rem;
+	}
+	.entry-eyebrow {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.4rem 0.9rem;
+		font-size: 0.85rem;
+	}
+	.entry-eyebrow a { font-weight: 600; }
+	.entry-id {
+		color: var(--muted);
+		font-size: 0.7rem;
+		overflow-wrap: anywhere;
+	}
+	.headword {
+		margin: 0.45rem 0 0.35rem;
+		font-size: clamp(2.2rem, 4vw, 3rem);
+		line-height: 1.15;
+		overflow-wrap: anywhere;
+	}
+	.entry-pronunciation {
+		margin: 0.3rem 0;
+		color: var(--muted);
+		font-size: 1rem;
+	}
+	.entry-tags { margin: 0.55rem 0; }
+	.entry-ancestry {
+		margin: 1.1rem 0 0.8rem;
+		padding-left: 0.85rem;
+		border-left: 2px solid var(--border-strong);
+	}
+	.entry-coverage {
+		margin-top: 1.15rem;
+	}
+	.entry-coverage p {
+		margin: 0.4rem 0 0;
+		font-size: 0.82rem;
+		color: var(--muted);
+	}
+	.entry-coverage strong { color: var(--ink); }
+	.entry-coverage p span { margin: 0 0.25rem; }
 	.entry-title {
 		min-width: 0;
 	}
 	.source-scopes {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
-		gap: 0.35rem 1rem;
-		margin: -0.1rem 0 0.55rem;
+		display: grid;
+		align-items: start;
+		gap: 1rem;
 		font-family: var(--font-sans);
 	}
 	.source-scope {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 0.3rem;
+		display: grid;
+		align-content: start;
+		gap: 0.45rem;
 	}
 	.source-scope-label {
+		margin: 0;
 		color: var(--muted);
+		font-family: var(--font-sans);
 		font-size: 0.68rem;
-		font-variant: small-caps;
+		text-transform: uppercase;
 		font-weight: 600;
-		letter-spacing: 0.055em;
-	}
-	.source-loading {
-		color: var(--faint);
-		font-size: 0.72rem;
+		letter-spacing: 0.08em;
 	}
 	.gloss {
 		font-size: 1.2rem;
-		margin: 0.1rem 0 0.5rem;
+		line-height: 1.5;
+		margin: 0.4rem 0 0.5rem;
 	}
 	/* this node's own alignment to its parent (shown on reflex / section-form pages) */
 	.own-align {
@@ -1603,7 +1700,15 @@
 	@media (max-width: 900px) {
 		.entry-intro {
 			grid-template-columns: 1fr;
-			gap: 0.7rem;
+			gap: 1.25rem;
+		}
+		.entry-context {
+			border-left: 0;
+			padding: 1rem 0 0;
+			border-top: 1px solid var(--border);
+		}
+		.source-scopes {
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 		}
 		.entry-context :global(.clades) {
 			justify-content: flex-start;

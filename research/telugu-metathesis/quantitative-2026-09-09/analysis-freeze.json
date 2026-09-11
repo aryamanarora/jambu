@@ -1,0 +1,10 @@
+{
+  "frozen_at_utc": "2026-09-09 12:26:21 UTC",
+  "reviewed_entries": 409,
+  "primary_families": 403,
+  "sensitivity_families": 365,
+  "evidence_links": 9823,
+  "source_notes": "Final cluster and source-fragment sweep complete; manual hypotheses, uncertainty and coverage limits preserved.",
+  "report_status": "Narrative drafting begins after this analysis freeze.",
+  "scope": "Bounded review; no claim of exhaustive database coverage."
+}

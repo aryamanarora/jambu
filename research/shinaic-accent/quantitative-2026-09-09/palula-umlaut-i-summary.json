@@ -1,0 +1,10 @@
+{
+  "form_gloss_cells": 74,
+  "comparable_form_cells": 73,
+  "comparable_lexemes": 66,
+  "status_counts": {
+    "consistent": 73,
+    "excluded-unmatched-paradigm": 1
+  },
+  "domain": "Source i-decl nouns with a full printed inflection: consonant-final citation whose last vowel is long aa, paired with one-more-nucleus inflection ending long ee plus short i. Selection ignores all accents. No suffix-only expansions. Same-source modern morphological prediction, not proof of a unique OIA ancestor."
+}

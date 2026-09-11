@@ -1,0 +1,18 @@
+Language_ID	Input_Tier	Prediction	N_Formation_Rows	N_Families	N_D_Bearing	N_R_Bearing	N_Quantity_Match_Only	N_Quantity_Counterexample_Only	N_Mixed_Match_Counterexample	N_Not_Strictly_Testable	N_Strict_Quantity_Denominator	Match_Only_Over_Tested	Match_Only_Proportion
+Brahui	cluster	short-from-consonantal-input	1	1	0	1	0	0	0	1	0	0/0	
+Brahui	full	long-if-displaced	1	1	1	0	0	1	0	0	1	0/1	0.0
+Kui	conditional	long-if-displaced	1	1	1	0	0	0	0	1	0	0/0	
+Kui	full	long-if-displaced	5	5	5	0	5	0	0	0	5	5/5	1.0
+Kuwi	full	short-if-displaced	1	1	1	0	0	1	0	0	1	0/1	0.0
+Telugu	cluster	outside-short-singleton-rule	1	1	1	0	0	0	0	1	0	0/0	
+Telugu	cluster	short-from-consonantal-input	23	21	21	1	21	0	0	0	21	21/21	1.0
+Telugu	conditional	input-underdetermined	19	19	19	0	0	0	0	19	0	0/0	
+Telugu	conditional	long-if-displaced	17	17	16	1	0	0	0	17	0	0/0	
+Telugu	conditional	outside-short-singleton-rule	5	5	5	1	0	0	0	5	0	0/0	
+Telugu	conditional	short-from-consonantal-input	4	4	4	0	0	0	0	4	0	0/0	
+Telugu	conditional	short-if-displaced	2	2	2	0	0	0	0	2	0	0/0	
+Telugu	full	long-if-displaced	54	44	33	17	25	8	0	11	33	25/33	0.757576
+Telugu	full	outside-short-singleton-rule	9	7	2	7	0	0	0	7	0	0/0	
+Telugu	full	short-if-displaced	15	12	8	5	8	0	0	4	8	8/8	1.0
+Telugu	mixed	input-underdetermined	18	18	18	0	0	0	0	18	0	0/0	
+Telugu	mixed	outside-short-singleton-rule	6	6	6	0	0	0	0	6	0	0/0	

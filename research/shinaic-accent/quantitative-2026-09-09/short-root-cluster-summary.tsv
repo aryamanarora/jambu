@@ -1,0 +1,21 @@
+old_first_vowel	dialect	families	outcome_sets
+a	Astor	2	"{""L"": 2}"
+a	dr	1	"{""L"": 1}"
+a	gil	5	"{""L"": 5}"
+a	gur	1	"{""L"": 1}"
+a	koh	3	"{""E"": 1, ""L"": 2}"
+i	Astor	1	"{""L"": 1}"
+i	dr	1	"{""L"": 1}"
+i	gil	2	"{""L"": 1, ""E"": 1}"
+i	gur	1	"{""L"": 1}"
+i	koh	1	"{""L"": 1}"
+r	Astor	0	{}
+r	dr	0	{}
+r	gil	0	{}
+r	gur	1	"{""E"": 1}"
+r	koh	1	"{""L"": 1}"
+u	Astor	1	"{""E"": 1}"
+u	dr	0	{}
+u	gil	2	"{""E"": 2}"
+u	gur	2	"{""E"": 2}"
+u	koh	0	{}

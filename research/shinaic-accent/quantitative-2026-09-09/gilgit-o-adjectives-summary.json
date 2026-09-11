@@ -1,0 +1,19 @@
+{
+  "raw_records": 123,
+  "unique_form_gloss_types": 121,
+  "counts": {
+    "consistent": 110,
+    "unscorable": 11
+  },
+  "source_counts": {
+    "buddruss-shina1996": {
+      "consistent": 13,
+      "unscorable": 2
+    },
+    "degener-shina2008": {
+      "consistent": 99,
+      "unscorable": 9
+    }
+  },
+  "domain": "Source adjective tag, at least two nuclei, final short o. Unequal sequences, compound boundaries and absent/multiple marks not scored. Independent source transcriptions are preserved; form/gloss types are not independent historical etyma."
+}

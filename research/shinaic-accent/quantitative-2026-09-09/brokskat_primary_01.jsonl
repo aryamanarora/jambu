@@ -1,0 +1,42 @@
+{"item":1,"forms":["caŋ'khoŋ"],"page":258,"note":"Purik armpit loan; final syllable stress."}
+{"item":2,"forms":["smã'raa"],"page":258,"note":"Purik beard loan; final syllable stress."}
+{"item":3,"forms":["wor"],"page":258,"note":"Belly; no accent marked."}
+{"item":4,"forms":["lyl"],"page":258,"note":"Blood; y is a vowel in this transcription, no accent marked."}
+{"item":5,"forms":["'aaṭi"],"page":258,"note":"Bone; initial syllable stress, retroflex stop normalized from underline."}
+{"item":6,"forms":["xor'mo"],"page":258,"note":"Brain; final stress, tentatively Purik loan in source discussion."}
+{"item":7,"forms":["kry","dut"],"page":258,"note":"Breast has two comma-separated alternatives; neither is accented."}
+{"item":8,"forms":["ka'ni"],"page":258,"note":"Ear; final syllable stress, not an unextended kon form."}
+{"item":9,"forms":["khun"],"page":258,"note":"Elbow; unmarked, tentatively Kashmiri loan in source."}
+{"item":10,"forms":["a'c̣hii"],"page":258,"note":"Eye; final stress. No mora mark is printed."}
+{"item":11,"forms":["'undžuk"],"page":258,"note":"Face; initial stress."}
+{"item":12,"forms":["'guli"],"page":258,"note":"Finger; initial stress, explicitly unidentified Indo-Aryan loan."}
+{"item":13,"forms":["'nuuri"],"page":258,"note":"Fingernail; initial stress; source has uu, not stored uo."}
+{"item":14,"forms":["moos"],"page":258,"note":"Flesh; source Brokskat cell is unmarked. Stored acute belongs to neither a printed Brokskat stress mark nor a mora contrast."}
+{"item":15,"forms":["'kuti"],"page":258,"note":"Foot; initial stress."}
+{"item":16,"forms":["'ẓokur"],"page":259,"note":"Hair; initial stress; root vowel's precise phonetic quality less secure than accent reading."}
+{"item":17,"forms":["hat"],"page":259,"note":"Hand; short unmarked."}
+{"item":18,"forms":["ṣiṣ"],"page":259,"note":"Head; short unmarked."}
+{"item":19,"forms":["hɜɜ"],"page":259,"note":"Heart; doubled central vowel, unmarked. Central-vowel glyph transcribed approximately; no stress conclusion depends on its exact quality."}
+{"item":20,"forms":["kxal'ma"],"page":259,"note":"Kidney; final stress."}
+{"item":21,"forms":["'kuṭo"],"page":259,"note":"Knee; initial stress."}
+{"item":22,"forms":["'yṭi"],"page":259,"note":"Lip; printed initial apostrophe before y-vowel, no initial l consonant. Stored lyti misreads the stress mark."}
+{"item":23,"forms":["gʲim"],"page":259,"note":"Liver; palatalized g marked with superscript j, no stress mark."}
+{"item":24,"forms":["sam'dal"],"page":259,"note":"Moustache; final stress."}
+{"item":25,"forms":["'uzi"],"page":259,"note":"Mouth; initial stress."}
+{"item":26,"forms":["grii","žiŋ'gaṭ"],"page":259,"note":"Neck has inherited grii and a stressed Purik alternative; keep separate."}
+{"item":27,"forms":["'nuto"],"page":259,"note":"Nose; initial stress."}
+{"item":28,"forms":["'thuro"],"page":259,"note":"Skin; initial stress."}
+{"item":29,"forms":["stoḍ"],"page":259,"note":"Shoulder; unmarked Purik loan."}
+{"item":30,"forms":["guḍ 'guli"],"page":259,"note":"Thumb; printed order modifier gud then stressed guli, reversed in DB. This is one phrase, not two alternatives."}
+{"item":31,"forms":["gʲip"],"page":259,"note":"Tongue; palatalized g, final p, unmarked."}
+{"item":32,"forms":["da'nii"],"page":260,"note":"Tooth; source explicitly adds pl.? The uncertainty about plural cell is original, and is relevant to final ii stress."}
+{"item":33,"forms":["tshus"],"page":260,"note":"Urine; unmarked."}
+{"item":34,"forms":["'baayo"],"page":260,"note":"Brother; initially stressed; source explicitly identifies an Indo-Aryan loan."}
+{"item":35,"forms":["'kaakʲe","chi'gaa"],"page":260,"note":"Brother's wife has two alternatives. Superscript j indicates palatalization in the first."}
+{"item":36,"forms":["si'naa"],"page":260,"note":"Child; final stress, distinct from baal."}
+{"item":37,"forms":["mu'ley"],"page":260,"note":"Daughter; final stress in an unequal vowel sequence, y interpreted according to Brokskat vowel notation."}
+{"item":38,"forms":["nuṣ"],"page":260,"note":"Daughter-in-law; unmarked. Central/rounded vowel glyph uncertain, no accent depends on quality."}
+{"item":39,"forms":["boo"],"page":260,"note":"Father; unmarked long vowel."}
+{"item":40,"forms":["'sæno boo"],"page":260,"note":"Father's brother; modifier plus father, first word stressed. Exact æ glyph normalized."}
+{"item":41,"forms":["šur"],"page":260,"note":"Father-in-law; source appears šur with rounded vowel, not stored šcar. Exact vowel quality remains open, but no stress is marked."}
+{"item":42,"forms":["'pyyc̣i"],"page":260,"note":"Granddaughter; initial stress and doubled y vowel."}

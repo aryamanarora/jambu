@@ -91,7 +91,8 @@
 	const nav = [
 		{ href: '/languages', label: 'Languages' },
 		{ href: '/concepts', label: 'Concepts' },
-		{ href: '/references', label: 'Sources' }
+		{ href: '/references', label: 'Sources' },
+		{ href: '/blogs', label: 'Blogs' }
 	];
 	const researchNav = [
 		{ href: '/correspondences', label: 'Sound correspondences' },

@@ -1,0 +1,7 @@
+domain	input_class	units	expected	opposite	consistent	outcome_sets
+all-form-gloss-pairs	short-a-without-h	28	E	1	27	"{""L"": 1, ""E"": 27}"
+all-form-gloss-pairs	short-a-with-h	9	L	2	7	"{""L"": 7, ""E"": 2}"
+closed-form-gloss-pairs	short-a-without-h	27	E	1	26	"{""L"": 1, ""E"": 26}"
+closed-form-gloss-pairs	short-a-with-h	9	L	2	7	"{""L"": 7, ""E"": 2}"
+closed-lexemes-article-numeral-one-collapsed	short-a-without-h	26	E	1	25	"{""L"": 1, ""E"": 25}"
+closed-lexemes-article-numeral-one-collapsed	short-a-with-h	9	L	2	7	"{""L"": 7, ""E"": 2}"

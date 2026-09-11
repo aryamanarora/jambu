@@ -1,0 +1,38 @@
+{"item":230,"forms":["traŋ wu'ji"],"page":277,"note":"Right; two-word Purik expression, final stress; DB word order/spelling differs."}
+{"item":231,"forms":["dii'duuro","'rilbu"],"page":277,"note":"Round; two alternatives, first with long ii and medial stress on duu, second initially stressed. Exact retroflex underlining on first word is less secure than stress; a piṇḍara etymology must remain provisional."}
+{"item":232,"forms":["sat"],"page":277,"note":"Seven; short unmarked."}
+{"item":233,"forms":["sat'tõõš"],"page":277,"note":"Seventeen; final syllable stress and nasal long oo; not a mora-position mark."}
+{"item":234,"forms":["'ṭino","tsap tsap"],"page":277,"note":"Sharp; first adjective initially stressed, second a reduplicated alternative with no stress mark. Initial t underlining normalized retroflex; phonetic distinction should be checked against source conventions."}
+{"item":235,"forms":["ṣaa"],"page":277,"note":"Six; long vowel, unmarked."}
+{"item":236,"forms":["'ṣobeš"],"page":277,"note":"Sixteen; initial stress, b is printed rather than presumed OCR error."}
+{"item":237,"forms":["'titaq","'sææno"],"page":277,"note":"Small; two initially stressed loan alternatives. First Purik, second unidentified Indo-Aryan per source discussion; exact front-vowel quality approximate."}
+{"item":238,"forms":["'cukro"],"page":277,"note":"Sour; initial stress."}
+{"item":239,"forms":["daaṣ"],"page":277,"note":"Ten; long aa and underlined final s, unmarked."}
+{"item":240,"forms":["trobeš"],"page":277,"note":"Thirteen; no stress marked; b is printed and not automatically a transcription error."}
+{"item":241,"forms":["'biẓuu 'kunjaa"],"page":277,"note":"Thirty-nine; two-word numeral with two stresses; first final doubled barred u normalized as uu, not stored m."}
+{"item":242,"forms":["traa"],"page":277,"note":"Three; unmarked long vowel."}
+{"item":243,"forms":["'stoŋ"],"page":277,"note":"Thousand; initial/only-syllable stress, final velar nasal in table. Source discussion stog differs; do not silently turn table ŋ into g."}
+{"item":244,"forms":["'budeš"],"page":277,"note":"Twelve; initial stress; final š omitted in DB bude."}
+{"item":245,"forms":["bi'žaa"],"page":278,"note":"Twenty; final stress."}
+{"item":246,"forms":["biži'nũũ"],"page":278,"note":"Twenty-nine; compound with stress on nine member and nasalized long central/rounded u. Source spacing appears joined; no initial twenty stress marked."}
+{"item":247,"forms":["duu"],"page":278,"note":"Two; long barred/central u normalized as uu, not stored dave. No stress marked."}
+{"item":248,"forms":["šoo"],"page":278,"note":"White; NO acute or stress in Brokskat cell. Stored šóo is not primary Brokskat evidence."}
+{"item":249,"forms":["hal'dẓuro"],"page":278,"note":"Yellow; medial stress; exact affricate underlining normalized."}
+{"item":250,"forms":["pho"],"page":278,"note":"He; unmarked."}
+{"item":251,"forms":["mõ"],"page":278,"note":"I; nasalized vowel, unmarked."}
+{"item":252,"forms":["nuuš"],"page":278,"note":"Not; long barred/central u normalized as uu, no r. No stress mark."}
+{"item":253,"forms":["pho mu'ley"],"page":278,"note":"She; phrase order pho then female modifier muley, final modifier stress. DB reverses words."}
+{"item":254,"forms":["'pheeu"],"page":279,"note":"They masculine distant; initial stress in vowel sequence."}
+{"item":255,"forms":["'pheeu"],"page":279,"note":"They feminine distant; identical to254; not separate lexical evidence."}
+{"item":256,"forms":["a'lo"],"page":279,"note":"They masculine proximate; final stress IS printed, unlike unmarked DB alo."}
+{"item":257,"forms":["a'lo"],"page":279,"note":"They feminine proximate; final stress."}
+{"item":258,"forms":["a'lo"],"page":279,"note":"That masculine; final stress, same alo form as256–257."}
+{"item":259,"forms":[],"page":279,"note":"That feminine; source no data."}
+{"item":260,"forms":["a'lam"],"page":279,"note":"This masculine; final stress."}
+{"item":261,"forms":[],"page":279,"note":"This feminine; source no data."}
+{"item":262,"forms":[],"page":279,"note":"These; source no data."}
+{"item":263,"forms":["beŋ","bɜɜ"],"page":279,"note":"We; two unmarked alternatives. First beŋ differs from village bun81; their merger as ben is an extraction error."}
+{"item":264,"forms":["yee"],"page":279,"note":"What; unmarked vowel sequence/palatal onset."}
+{"item":265,"forms":["koo"],"page":280,"note":"Who; unmarked long vowel."}
+{"item":266,"forms":["ti"],"page":280,"note":"You singular; unmarked short vowel."}
+{"item":267,"forms":["tshuu"],"page":280,"note":"You plural; final doubled barred/central u, not r. No stress marked."}

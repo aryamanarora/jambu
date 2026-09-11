@@ -1,0 +1,147 @@
+[
+  {
+    "path": "tables/coverage-by-source.tsv",
+    "sha256": "bbbf44300f3928f430416b294773296c596a7630612d2b0026bc237000630ee6",
+    "bytes": 1910
+  },
+  {
+    "path": "tables/dras-paradigm-review.tsv",
+    "sha256": "2c12adf73a398a04bb5ae74fc49ef9e1a73414a56556e96f433edd2939041691",
+    "bytes": 151990
+  },
+  {
+    "path": "tables/dras-suffix-accent-review.tsv",
+    "sha256": "312c559a56dc2731d8dfd96b83ae99f8dcc0367dd8f3e54abf2d7dbc2733529d",
+    "bytes": 157991
+  },
+  {
+    "path": "tables/editorial-and-source-decisions.tsv",
+    "sha256": "9ed848ab40438c2b09ec24a225e97126d257b982c76848ddd0f919667ef77ca6",
+    "bytes": 37077
+  },
+  {
+    "path": "tables/etymology_proposals.jsonl",
+    "sha256": "caae5cde7895e38fcffcbaecf4d7a098567f22c54620c038ddd82be8bb38f54f",
+    "bytes": 6220
+  },
+  {
+    "path": "tables/exception-ledger.tsv",
+    "sha256": "e5de5b7002c00510b93c7cbc5b4338410da6821243b7e053bd3c7c6754662376",
+    "bytes": 92192
+  },
+  {
+    "path": "tables/gilgit-o-adjectives.tsv",
+    "sha256": "8631a6c5c0d656d3cacfb3571374b799424859a77d6ef0fcd7385dd0b79bb2c7",
+    "bytes": 17588
+  },
+  {
+    "path": "tables/historical-observations.tsv",
+    "sha256": "f300f2ee7852b57ef15346e8a1ef0af6419b33a8b64157cca0df21cacac8258d",
+    "bytes": 9145770
+  },
+  {
+    "path": "tables/kalkoti-palula-combined.tsv",
+    "sha256": "de353f6a7f8ba7fd12bc8bef1f0fe38d7ea4cff7b404926bc6652fb5e676e02c",
+    "bytes": 38272
+  },
+  {
+    "path": "tables/kundal-primary-paradigms.tsv",
+    "sha256": "13ac7a5fb5ef3dd7a540843f5d7cf19c62d23b95716ad168c950d5907ccf091f",
+    "bytes": 9795
+  },
+  {
+    "path": "tables/numeral-series-records.tsv",
+    "sha256": "c3aa800d2082a42944826060c3cf2b0d14f7387a08c18733e5c854672cd933bd",
+    "bytes": 150886
+  },
+  {
+    "path": "tables/numeral-series-tests.tsv",
+    "sha256": "edd8516c306ce392d26f60f503b5cf58a8d7f070ade779423c872ab715c0d029",
+    "bytes": 877
+  },
+  {
+    "path": "tables/old-long-nominal-formation-audit.tsv",
+    "sha256": "20e1fc1fcb8adcc152075550c8e8da6ab35f77c6b13219f603249cbcdd043328",
+    "bytes": 17038
+  },
+  {
+    "path": "tables/old-long-nominal-residuals.tsv",
+    "sha256": "2d3856563ae2c7f6a0cb60fd15fec5efa28b3cfaf09d59dfc41895a79c5b74e2",
+    "bytes": 4191
+  },
+  {
+    "path": "tables/old-long-nominal-sensitivity.tsv",
+    "sha256": "8fca7617cd7c31b40e518923c277141aa31f59f1558435f170881b63c41f4827",
+    "bytes": 8366
+  },
+  {
+    "path": "tables/old-long-screen-residuals.tsv",
+    "sha256": "ead8355fb860df0d2a95ac9df89becaee210fdf51bcffd6cad114faf0b77c57f",
+    "bytes": 13470
+  },
+  {
+    "path": "tables/old-long-screen.tsv",
+    "sha256": "80fb56330b854463e68c4753be2f451d079f755286c3e6a7655415f5849b113d",
+    "bytes": 2924
+  },
+  {
+    "path": "tables/palula-i-decl-extension.tsv",
+    "sha256": "d8b1111eb4eb4279351f1cbd4bc755ada431f143f3e536679820a0857d919261",
+    "bytes": 16842
+  },
+  {
+    "path": "tables/palula-short-a-pairs.tsv",
+    "sha256": "ad54529dc23d27a062c1c514bbb15885e644041281e216f8d8f1f841bc0c42f1",
+    "bytes": 20895
+  },
+  {
+    "path": "tables/palula-short-a-sensitivity.tsv",
+    "sha256": "dc4816e8b44d7d12c5010a2ca22f3b74ed47159e46cb0df6fdf6cac59bc45b60",
+    "bytes": 548
+  },
+  {
+    "path": "tables/palula-tagged-u-adjectives.tsv",
+    "sha256": "2f66f421389532fcbf3ad53ce6e1e9047c25f2dd1455b7a0990a41b6f4d03a2b",
+    "bytes": 27538
+  },
+  {
+    "path": "tables/palula-u-adjectives.tsv",
+    "sha256": "28703062860b77dadca7eba5a77f3768b1588af3c3e5daa72330c74d1c329b5c",
+    "bytes": 52682
+  },
+  {
+    "path": "tables/palula-umlaut-i-nouns.tsv",
+    "sha256": "e0b6e4f009f86d5beb1726692ebb571d1195d9a460e656165000db9708cf5d98",
+    "bytes": 30751
+  },
+  {
+    "path": "tables/property-location-screen.tsv",
+    "sha256": "596b0a97c263178c89bd577e7790ad291c35c1788d308febf5efcc8922c008c5",
+    "bytes": 445060
+  },
+  {
+    "path": "tables/property-location-summary.tsv",
+    "sha256": "8636d79c71bf18028eba72518930ec8d2fd55985485b2fce813f921185c29aaf",
+    "bytes": 2496
+  },
+  {
+    "path": "tables/short-root-cluster-summary.tsv",
+    "sha256": "88a0956071e6d505b37b8163aea96142021af417a7c8517f1bdbefbe2b6fa527",
+    "bytes": 461
+  },
+  {
+    "path": "tables/source-register.tsv",
+    "sha256": "3a3cc61cabeb086ef625856cc59724a24319c78ad04cd75c87b81e39fbe2a0ea",
+    "bytes": 19774
+  },
+  {
+    "path": "tables/vowel-raising-reviewed.tsv",
+    "sha256": "4ff13b941fe888bc5ce5ad52f9c12605ddc99abca6353ce65113f9ab70565c4b",
+    "bytes": 46549
+  },
+  {
+    "path": "quantitative-2026-09-09.zip",
+    "sha256": "cff67a3590fcffebc2f5177a4bc34f3abd99d71cdc6f53eef4825cb0208595e6",
+    "bytes": 20315168
+  }
+]
