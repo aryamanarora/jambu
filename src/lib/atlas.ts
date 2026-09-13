@@ -63,7 +63,7 @@ export function activePoint(color: string): PointStyle {
 
 /**
  * The same treatment without the raise — for a map where *everything* is live and so nothing needs
- * lifting over anything else. `foreground` costs a DOM move and a drop-shadow filter per point, so
+ * lifting over anything else. `foreground` costs a DOM move per point, so
  * it must be reserved for the few points that are genuinely above the rest.
  */
 export function livePoint(color: string): PointStyle {

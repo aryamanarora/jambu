@@ -9,13 +9,13 @@ on:
 # Deployment target (project page at https://aryamanarora.github.io/jambu/):
 #   • BASE_PATH — "/<repo>" for a project page; "" for a custom domain / user root.
 #   • SITE_URL  — absolute origin (no path), used only for sitemap.xml <loc>s.
-#   • STATIC_DB_URL — the pre-built SQLite source published as a release asset. CI packs this
-#                     build input before deployment; browsers receive only `jambu.db.zst`.
+#   • STATIC_DB_URL — the pre-built SQLite source published as a release asset. CI verifies both
+#                     release assets before deployment; browsers receive only `jambu.db.zst`.
 # ─────────────────────────────────────────────────────────────────────────────
 env:
   BASE_PATH: '/jambu'
   SITE_URL: 'https://aryamanarora.github.io'
-  STATIC_DB_URL: 'https://github.com/aryamanarora/jambu/releases/latest/download/jambu.db'
+  STATIC_DB_URL: 'https://github.com/aryamanarora/jambu/releases/download/db-v35/jambu.db'
   # Public GA4 measurement ID for the existing Jambu/Home property.
   PUBLIC_GA_MEASUREMENT_ID: 'G-W6HV8VE5SV'
 
@@ -43,9 +43,10 @@ jobs:
 
       - name: Download pre-built database (release asset)
         run: |
-          mkdir -p .dbwork
+          mkdir -p .dbwork static/db
           curl -L --fail "$STATIC_DB_URL" -o .dbwork/jambu.db
-          npm run db:stage
+          curl -L --fail "https://github.com/aryamanarora/jambu/releases/download/db-v35/jambu.db.zst" -o static/db/jambu.db.zst
+          node scripts/verify_db_artifact.mjs
           echo "Packed deploy artifact: $(du -h static/db/jambu.db.zst | cut -f1)"
 
       - name: Build site (prerender canonical pages + SPA fallback)

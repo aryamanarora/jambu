@@ -5,6 +5,7 @@ import { publishedPosts } from '$lib/blog';
 import { renderPost, type BlogRecord, type RecordKind } from '$lib/blog/render';
 import shinaicCharts from '$lib/blog/data/shinaic-accent-charts.json';
 import teluguCharts from '$lib/blog/data/telugu-metathesis-charts.json';
+import dardicCharts from '$lib/blog/data/dardic-plains-charts.json';
 
 const content = import.meta.glob('/src/lib/blog/posts/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const href = (route: string, id: string) => `${base}/${route}/${encodeURIComponent(id)}`;
@@ -48,6 +49,6 @@ export function getBlogPost(slug: string) {
 	if (!post) return null;
 	const markdown = content[`/src/lib/blog/posts/${slug}.md`];
 	if (!markdown) throw new Error(`Missing Markdown for blog post ${slug}`);
-	const charts = slug === 'shinaic-accent' ? shinaicCharts : slug === 'telugu-metathesis' ? teluguCharts : {};
+	const charts = slug === 'shinaic-accent' ? shinaicCharts : slug === 'telugu-metathesis' ? teluguCharts : slug === 'dardic-plains-isoglosses' ? dardicCharts : {};
 	return { post, ...renderPost(markdown, resolveBlogRecord, { basePath: base, charts }) };
 }

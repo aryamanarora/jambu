@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { highlightHtml, highlightText, md } from '$lib/render';
+	import { highlightText, referenceLabel } from '$lib/render';
 	import { unicodeSearchIncludes } from '$lib/unicodeSearch';
 	import FilterCell from '$lib/components/FilterCell.svelte';
 	import ListToolbar from '$lib/components/ListToolbar.svelte';
 	import SearchMatchToggle from '$lib/components/SearchMatchToggle.svelte';
+	import ReferenceLink from '$lib/components/ReferenceLink.svelte';
+	import ReferenceFormsCount from '$lib/components/ReferenceFormsCount.svelte';
 	import type { Reference } from '$lib/types';
 
 	let { data } = $props();
@@ -26,8 +27,8 @@
 				reference.short,
 				reference.source,
 				reference.editor,
+				...(data.cladeDistributions[reference.id] ?? []).map((segment) => segment.clade),
 				extractionLabel(reference),
-				etymologyLabel(reference.etymology_provenance),
 				(reference.lemma_count ?? 0).toLocaleString(),
 				(reference.lemma_count ?? 0).toString(),
 				unetymologisedPct(reference.lemma_count ?? 0, reference.unetymologised_count ?? 0)
@@ -40,14 +41,14 @@
 		return rows.sort((a, b) => {
 			let comparison = 0;
 			if (key === 'forms') comparison = (a.lemma_count ?? 0) - (b.lemma_count ?? 0);
+			else if (key === 'reference') comparison = referenceLabel(a).localeCompare(referenceLabel(b));
 			else if (key === 'extraction') comparison = Number(a.ocr) - Number(b.ocr);
-			else if (key === 'etymology') comparison = text(a, 'etymology_provenance').localeCompare(text(b, 'etymology_provenance'));
 			else if (key === 'unetym') {
 				const ap = a.lemma_count ? a.unetymologised_count / a.lemma_count : -1;
 				const bp = b.lemma_count ? b.unetymologised_count / b.lemma_count : -1;
 				comparison = ap - bp;
 			} else {
-				const field = ({ reference: 'short', citation: 'source' }[key] ?? key) as keyof Reference;
+				const field = key as keyof Reference;
 				comparison = text(a, field).localeCompare(text(b, field));
 			}
 			return sign * comparison || (a.short || a.id).localeCompare(b.short || b.id);
@@ -65,15 +66,6 @@
 	}
 	function unetymologisedPct(total: number, unetymologised: number): string {
 		return total ? `${((unetymologised / total) * 100).toFixed(1)}%` : '—';
-	}
-	function etymologyLabel(value: Reference['etymology_provenance']): string {
-		return ({
-			source: 'Source',
-			'source-mapped': 'Source · mapped',
-			jambu: 'Jambu',
-			mixed: 'Source + Jambu',
-			none: 'None'
-		} as Record<string, string>)[value ?? ''] ?? 'Not recorded';
 	}
 	const borderColor = { ok: 'var(--ok)', warn: 'var(--warn)', bad: 'var(--bad)' };
 </script>
@@ -104,20 +96,16 @@
 	<table class="data mobile-cards">
 		<colgroup>
 			<col class="ref-col" />
-			<col class="citation-col" />
 			<col class="editor-col" />
 			<col class="extraction-col" />
-			<col class="etymology-col" />
 			<col class="forms-col" />
 			<col class="unetym-col" />
 		</colgroup>
 		<thead>
 			<tr>
 				<FilterCell label="Reference" sortKey="reference" accent {activeSort} onFilter={() => {}} onSort={setSort} />
-				<FilterCell label="Citation" sortKey="citation" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Editor" sortKey="editor" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Extraction" sortKey="extraction" {activeSort} onFilter={() => {}} onSort={setSort} />
-				<FilterCell label="Etymologies" sortKey="etymology" {activeSort} onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Forms" sortKey="forms" {activeSort} numeric onFilter={() => {}} onSort={setSort} />
 				<FilterCell label="Unetymologised" sortKey="unetym" {activeSort} numeric onFilter={() => {}} onSort={setSort} />
 			</tr>
@@ -125,16 +113,16 @@
 		<tbody>
 			{#each sortedReferences as r (r.id)}
 				{@const b = badge(r.progress)}
+				{@const segments = data.cladeDistributions[r.id] ?? []}
 				<tr>
 					<td class="lang-cell ref-cell" style="border-left-color: {borderColor[b]}">
-						<a href="{base}/references/{r.id}">{@html highlightText(r.short || r.id, search, relaxed)}</a>
-						<span class="id-tag">[{@html highlightText(r.id, search, relaxed)}]</span>
+						<ReferenceLink reference={r} highlight={search} {relaxed} />
 					</td>
-					<td class="markdown" data-label="Citation">{@html highlightHtml(md(r.source), search, relaxed)}</td>
 					<td data-label="Editor">{@html highlightText(r.editor || '—', search, relaxed)}</td>
 					<td data-label="Extraction">{#if r.ocr}<span class="ocr-ref" title="Forms from this reference were parsed with optical character recognition">{@html highlightText('OCR', search, relaxed)}</span>{:else}<span class="faint">{@html highlightText('—', search, relaxed)}</span>{/if}</td>
-					<td data-label="Etymology">{@html highlightText(etymologyLabel(r.etymology_provenance), search, relaxed)}</td>
-					<td class="pct" data-label="Forms">{@html highlightText((r.lemma_count ?? 0).toLocaleString(), numericHighlight((r.lemma_count ?? 0).toLocaleString()))}</td>
+					<td class="pct" data-label="Forms">
+						<ReferenceFormsCount count={r.lemma_count ?? 0} {segments} highlight={numericHighlight((r.lemma_count ?? 0).toLocaleString())} />
+					</td>
 					<td class="pct" data-label="Unetymologised" title="{(r.unetymologised_count ?? 0).toLocaleString()} of {(r.lemma_count ?? 0).toLocaleString()} forms">
 						{@html highlightText(unetymologisedPct(r.lemma_count ?? 0, r.unetymologised_count ?? 0), search, relaxed)}
 					</td>
@@ -151,13 +139,10 @@
 	}
 	table {
 		width: 100%;
-		min-width: 1040px;
+		min-width: 800px;
 		table-layout: fixed;
 	}
 	.ref-col {
-		width: 11rem;
-	}
-	.citation-col {
 		width: auto;
 	}
 	.editor-col {
@@ -166,18 +151,12 @@
 	.extraction-col {
 		width: 6.5rem;
 	}
-	.etymology-col {
-		width: 9.5rem;
-	}
 	.forms-col {
 		width: 6.5rem;
 	}
 	/* wide enough for the header label plus its sort control, so neither spills into Forms */
 	.unetym-col {
 		width: 11rem;
-	}
-	td.markdown {
-		overflow-wrap: anywhere;
 	}
 	.pct {
 		text-align: right;

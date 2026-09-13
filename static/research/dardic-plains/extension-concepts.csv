@@ -1,0 +1,1331 @@
+mode,concept,score,band,diagnostic,separation,support_factor,dardic_own,plains_own,crossover,dardic_family,plains_family
+entry,NOSE,0.853646,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.853646,1,0.775,0.9322916666666666,0,nasta,*nakka
+entry,PARROT,0.808333,High: ≥0.6,"Supported, crossover >10 points",0.808333,1,0.8333333333333334,0.95,0.16666666666666666,śakuná,śúka
+entry,YESTERDAY,0.783738,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.783738,1,0.631578947368421,0.9358974358974359,0,dōṣā́,kālya
+entry,LIVER,0.777473,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.777473,1,0.7857142857142857,0.8461538461538461,0.07692307692307693,yákr̩t,kālēyaka
+entry,MONKEY,0.775439,High: ≥0.6,"Supported, crossover >10 points",0.775439,1,0.85,0.8903508771929823,0.1894736842105263,markáṭa,vānara
+entry,HIGH,0.766865,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.766865,1,0.6805555555555555,0.880952380952381,0.027777777777777776,*uttʰala,ucca
+entry,IRON,0.75871,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.75871,1,0.9615384615384616,0.5558823529411764,0,cīmara,lōhá
+entry,BRIDGE,0.755357,High: ≥0.6,Focal support below five votes,0.839286,0.9,0.9285714285714286,0.75,0,sḗtu,saṁkramá
+entry,MOUSTACHE,0.74697,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.74697,1,0.7272727272727273,0.7666666666666667,0,*pʰuŋga,*muccʰā
+entry,UNRIPE,0.724242,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.724242,1,0.7727272727272727,0.7666666666666667,0.09090909090909091,āmá,*kacca
+entry,SAND,0.719907,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.719907,1,1.0,0.43981481481481477,0,síkatā,vālukā
+entry,OWN,0.705769,High: ≥0.6,"Supported, crossover >10 points",0.705769,1,0.6153846153846154,0.95,0.15384615384615385,tā́nva,ātmán
+entry,RAW,0.702652,High: ≥0.6,"Supported, crossover >10 points",0.702652,1,0.7361111111111112,0.7878787878787878,0.11868686868686869,āmá,*kacca
+entry,BLACK,0.693895,High: ≥0.6,"Supported, crossover >10 points",0.693895,1,0.6041666666666667,0.8961240310077518,0.1125,kr̩ṣṇá,kāla
+entry,LONG,0.676728,High: ≥0.6,"Supported, crossover >10 points",0.676728,1,0.875,0.6991869918699187,0.2207317073170732,dīrgʰá,lamba
+entry,CAT,0.676136,High: ≥0.6,"Supported, crossover >10 points",0.676136,1,0.8181818181818182,0.6875,0.1534090909090909,*puśśī,bíḍāla
+entry,FLOWER,0.672905,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.672905,1,0.4427083333333333,0.9031007751937984,0,púṣya,pʰulla
+entry,SAW,0.670909,High: ≥0.6,Focal support below five votes,0.745455,0.9,0.9,0.5909090909090909,0,dr̩ṣṭá,karapattra
+entry,FROG,0.666667,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.666667,1,0.875,0.4583333333333333,0,maṇḍū́ka,vyàŋga
+entry,UNCOOKED RICE,0.666667,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.666667,1,0.8333333333333334,0.5357142857142857,0.03571428571428571,taṇḍulá,*cāmala
+entry,WOOL,0.666667,High: ≥0.6,"Supported, crossover >10 points",0.666667,1,0.5909090909090909,0.8555555555555555,0.11313131313131314,pákṣman,ū́rṇā
+entry,FIRE,0.6525,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.6525,1,0.8916666666666668,0.4258333333333334,0.0125,áŋgāra,agní
+entry,WATER,0.650568,High: ≥0.6,"Supported, crossover >10 points",0.650568,1,0.6363636363636364,0.8238636363636364,0.1590909090909091,udaká,pānī́ya
+entry,BE ALIVE,0.647436,High: ≥0.6,"Supported, crossover >10 points",0.647436,1,0.8461538461538461,0.6025641025641025,0.15384615384615385,jīvantá,jī́vati
+entry,BEAR,0.629942,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.629942,1,0.7424242424242423,0.5650793650793651,0.047619047619047616,ŕ̩kṣa,bʰallū́ka
+entry,TIE,0.626068,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.626068,1,0.8076923076923077,0.5077777777777778,0.06333333333333332,grantʰáyati,bandʰati
+entry,SNAKE,0.625149,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.625149,1,0.5625,0.7190476190476189,0.03125,jantú,sarpá
+entry,CLOUD,0.610937,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.610937,1,0.484375,0.7666666666666666,0.029166666666666664,abʰrá,vārdala
+entry,MOUSE,0.610119,High: ≥0.6,"Supported, crossover >10 points",0.610119,1,0.9285714285714286,0.4861111111111111,0.19444444444444442,mūṣa,*cūha
+entry,RIGHT,0.60636,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.60636,1,0.7916666666666666,0.42105263157894735,0,dákṣiṇa,dākṣiṇa
+entry,RICE,0.605159,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.605159,1,0.7023809523809523,0.5396825396825397,0.031746031746031744,taṇḍulá,*cāmala
+entry,YEAR,0.599418,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.599418,1,0.8529411764705882,0.46354166666666663,0.11764705882352941,kālá,varṣá
+entry,ANT,0.596955,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.596955,1,0.9230769230769231,0.3958333333333333,0.125,pipīlá,*cimb
+entry,READ,0.592857,Middle: 0.4–<0.6,Focal support below five votes,0.65873,0.9,0.5,0.9285714285714286,0.1111111111111111,mantráyatē,páṭʰati
+entry,HONEY,0.591667,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.591667,1,0.8333333333333334,0.6,0.25,mākṣiká,mádʰu
+entry,SOUR,0.589683,Middle: 0.4–<0.6,"Supported, low crossover, both shares ≥50%",0.589683,1,0.6555555555555554,0.5595238095238095,0.03571428571428571,cukrá,kʰaṭṭa
+entry,CURVED,0.586667,Middle: 0.4–<0.6,Focal support below five votes,0.733333,0.8,0.8,0.6666666666666666,0,*kōla,ṭēraka
+entry,DOOR,0.585283,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.585283,1,0.7631578947368421,0.4074074074074074,0,*dvara,*duvāra
+entry,ROOT,0.576096,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.576096,1,0.4,0.7521929824561404,0,nāḍī́,jáṭā
+entry,WORK (LABOUR),0.572222,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.572222,1,0.8666666666666666,0.43333333333333335,0.15555555555555556,kárman,kāryà
+entry,BARKING,0.57,Middle: 0.4–<0.6,Focal support below five votes,0.7125,0.8,0.8,0.625,0,rā́yati,búkkati
+entry,ASK (INQUIRE),0.569444,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.569444,1,0.6666666666666666,0.5833333333333334,0.1111111111111111,*kʰōjja,pr̩ccʰáti
+entry,WOUND,0.566919,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.566919,1,0.7222222222222222,0.5530303030303031,0.1414141414141414,prahāra,gʰāta
+entry,HOUSE,0.565041,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.565041,1,0.34782608695652173,0.7967479674796749,0.014492753623188404,gōṣṭʰá,gʰara
+entry,BLIND,0.564912,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.564912,1,0.6,0.7631578947368421,0.23333333333333334,*śrēḍa,andʰá
+entry,WINTER,0.563214,Middle: 0.4–<0.6,Focal support below five votes,0.592857,0.95,0.7857142857142857,0.475,0.075,hēmantá,śītakāla
+entry,BEAN,0.5625,Middle: 0.4–<0.6,Focal support below five votes,0.625,0.9,0.5625,0.6875,0,rājamudga,śimba
+entry,GRASSHOPPER,0.559091,Middle: 0.4–<0.6,Focal support below five votes,0.621212,0.9,0.8333333333333334,0.4090909090909091,0,*śalakka,pataŋgá
+entry,PATH,0.555886,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.555886,1,0.9166666666666666,0.21296296296296294,0.017857142857142856,pántʰā,gáti
+entry,DAUGHTER,0.553853,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.553853,1,0.8137254901960784,0.3657407407407407,0.07175925925925924,duhitŕ̩,*biḍḍa
+entry,THIS,0.553704,Middle: 0.4–<0.6,Focal support below five votes,0.638889,0.8666666666666666,0.48148148148148145,1.0,0.2037037037037037,ayám,ēṣá
+entry,COLUMN,0.547576,Middle: 0.4–<0.6,Focal support below five votes,0.631818,0.8666666666666668,0.9333333333333333,0.393939393939394,0.06363636363636363,stʰū́ṇā,stambʰa
+entry,RIB,0.544643,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.544643,1,0.7142857142857143,0.4305555555555555,0.05555555555555555,párśu,*parsula-
+entry,AXE,0.542857,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.542857,1,0.5909090909090909,0.761904761904762,0.26709956709956706,ṭaŋka,kuṭʰāra
+entry,SHEEP,0.542361,Middle: 0.4–<0.6,"Supported, low crossover, both shares ≥50%",0.542361,1,0.5555555555555555,0.5625,0.03333333333333333,ēḍa,bʰēḍra
+entry,RAT,0.540476,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.540476,1,0.7142857142857143,0.5166666666666667,0.15,mūṣa,undura
+entry,BELLY,0.537413,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.537413,1,0.3333333333333333,0.7546511627906978,0.013157894736842105,udára,*pēṭṭa
+entry,MOUTH,0.53574,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.53574,1,0.6710526315789473,0.46621621621621623,0.06578947368421052,āsyà,múkʰa
+entry,UNHUSKED RICE,0.535714,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.535714,1,0.8571428571428571,0.6785714285714286,0.4642857142857143,śāli,dʰānyà
+entry,BIG,0.533964,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.533964,1,0.5543859649122806,0.6532520325203252,0.13970902866923404,gʰaná,vaḍra
+entry,SHIRT,0.533333,Middle: 0.4–<0.6,Focal support below five votes,0.666667,0.8,0.8333333333333334,0.6666666666666666,0.16666666666666666,paridʰā́na,*jʰōla
+entry,MILK,0.532376,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.532376,1,0.6491228070175439,0.7545454545454546,0.33891547049441784,kṣīrá,dugdʰá
+entry,GUEST,0.529773,Middle: 0.4–<0.6,Focal support below five votes,0.588636,0.9,0.45,0.7272727272727273,0,*prārtʰyaka,prāhuṇa
+entry,MY,0.523237,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.523237,1,0.75,0.46153846153846156,0.16506410256410256,ma,kʰāni
+entry,STONE,0.518651,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.518651,1,0.8666666666666666,0.4484126984126984,0.2777777777777778,*varta,prastará
+entry,RIVER,0.51861,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.51861,1,0.46153846153846156,0.8064516129032258,0.23076923076923078,síndʰu,nadī́
+entry,SHE,0.518519,Middle: 0.4–<0.6,Focal support below five votes,0.777778,0.6666666666666667,0.5555555555555556,1.0,0,sá,asáu
+entry,KNEE,0.517647,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.517647,1,0.7352941176470589,0.3,0,*kuṭṭʰa,*gōḍḍa
+entry,WORM,0.516827,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.516827,1,0.6875,0.38461538461538464,0.038461538461538464,kŕ̩mi,kīṭá
+entry,BRAIN,0.516667,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.516667,1,0.7,0.4,0.06666666666666667,masta,*gudda
+entry,PRICE,0.516667,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.516667,1,0.8333333333333334,0.3507936507936508,0.15079365079365079,mūlya,dramma
+entry,SICKLE,0.515278,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.515278,1,0.5555555555555556,0.6416666666666666,0.16666666666666666,aŋká,dā́tra
+entry,HEAVY,0.507986,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.507986,1,0.59375,0.4222222222222223,0,*udguru,bʰārika
+entry,MOUNTAIN,0.506993,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.506993,1,0.46153846153846156,0.5909090909090909,0.038461538461538464,kʰaṇḍá,*pāhāḍa
+entry,DOG,0.506916,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.506916,1,0.5789473684210527,0.43488372093023253,0,*kuccura,*kutta
+entry,WHO,0.505263,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.505263,1,0.5333333333333333,0.6754385964912281,0.19824561403508772,ká,kaḥ punar
+entry,MONTH,0.504304,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.504304,1,0.6538461538461539,0.5352380952380953,0.18047619047619046,mā́sa,mahīnā
+entry,BRANCH,0.500526,Middle: 0.4–<0.6,Focal support below five votes,0.55614,0.9,0.45,0.6622807017543859,0,śaŋkú,ḍāla
+entry,BUY,0.494444,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.494444,1,0.7575757575757575,0.47500000000000003,0.24368686868686867,gr̩bʰāyáti,krīṇā́ti
+entry,LAKE,0.494318,Middle: 0.4–<0.6,Focal support below five votes,0.659091,0.7499999999999999,1.0,0.3409090909090909,0.022727272727272728,sáras,pauṣkara
+entry,GRANDSON,0.485625,Middle: 0.4–<0.6,Focal support below five votes,0.69375,0.7,0.7,0.8125,0.125,paútra,náptr̩
+entry,MOON,0.484211,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.484211,1,0.5,0.7583333333333333,0.28991228070175434,jyṓtsnā,candrá
+entry,THIRST,0.483333,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.483333,1,0.55,0.41666666666666663,0,*tr̩ṣyā,pipāsā́
+entry,DAY (NOT NIGHT),0.481151,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.481151,1,0.5583333333333333,0.6785714285714286,0.2746031746031746,divasá,dina
+entry,COLD,0.480976,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.480976,1,0.6851851851851851,0.4746212121212121,0.19785353535353534,śītalá,stabdʰa
+entry,DAY AFTER TOMORROW,0.48,Middle: 0.4–<0.6,Focal support below five votes,0.533333,0.9,0.45,0.6666666666666666,0.05,tr̩tī́ya,paraśvas
+entry,SKULL,0.48,Middle: 0.4–<0.6,Focal support below five votes,0.6,0.8,0.8,0.5388888888888889,0.1388888888888889,kapā́la,*kʰōppa
+entry,FORGET,0.478632,Middle: 0.4–<0.6,Focal support below five votes,0.512821,0.9333333333333332,0.6666666666666666,0.3589743589743589,0,āmr̩ṣyatē,vismarati
+entry,MOSQUITO,0.476863,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.476863,1,0.45454545454545453,0.5900900900900901,0.09090909090909091,*pʰutta,matsara
+entry,ROUND,0.473333,Middle: 0.4–<0.6,Focal support below five votes,0.591667,0.8,0.6666666666666666,0.6,0.08333333333333333,*piṇḍara,gōla
+entry,BED,0.47123,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.47123,1,0.5555555555555556,0.38690476190476186,0,śáyana,*śēyyā
+entry,DEAF,0.468277,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.468277,1,0.6212121212121212,0.59375,0.27840909090909094,*buṭṭa,badʰirá
+entry,LEFT,0.462963,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.462963,1,0.5925925925925926,0.39705882352941174,0.06372549019607843,kʰarvá,vā́ma
+entry,COW,0.457558,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.457558,1,0.35,0.7817829457364341,0.21666666666666665,*gāvā,*gāva
+entry,BACK,0.452047,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.452047,1,0.34444444444444444,0.6929824561403508,0.13333333333333333,*ḍʰākka,pr̩ṣṭí
+entry,WALL (OF HOUSE),0.451389,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.451389,1,0.5555555555555556,0.4027777777777778,0.05555555555555555,kuḍya,bʰittí
+entry,PALM TREE,0.450658,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.450658,1,0.625,0.5263157894736842,0.25,tala,hastatala
+entry,BUTTON,0.45,Middle: 0.4–<0.6,Focal support below five votes,0.75,0.6,0.6,0.9,0,*ṭikka,vīṭā
+entry,FALSE,0.449949,Middle: 0.4–<0.6,Focal support below five votes,0.549675,0.8185714285714285,0.75,0.37207792207792206,0.022727272727272728,cʰala,*jʰūṭṭʰa
+entry,COME,0.448549,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.448549,1,0.3201754385964912,0.5769230769230769,0,yā́ti,āpayati
+entry,SILVER,0.444293,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.444293,1,0.7291666666666666,0.5289855072463768,0.3695652173913043,rū́pya,candrikā
+entry,LEG,0.442886,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.442886,1,0.55,0.3406504065040651,0.004878048780487805,kʰura,ṭaŋka
+entry,CHEEK,0.441667,Middle: 0.4–<0.6,Focal support below five votes,0.736111,0.6,0.5,0.9722222222222222,0,kapōlá,galla
+entry,CARPENTER,0.439444,Middle: 0.4–<0.6,Focal support below five votes,0.507051,0.8666666666666666,0.95,0.3333333333333333,0.2692307692307692,tákṣan,vardʰaki
+entry,UNDERSTAND,0.438141,Middle: 0.4–<0.6,Focal support below five votes,0.486823,0.9,0.5,0.6474358974358974,0.17378917378917377,*paribudʰyatē,búdʰyatē
+entry,SIEVE,0.433333,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.433333,1,0.7,0.3333333333333333,0.16666666666666666,paripavana,cālana
+entry,NIPPLE,0.433025,Middle: 0.4–<0.6,Focal support below five votes,0.564815,0.7666666666666666,0.8333333333333334,0.4259259259259259,0.12962962962962962,*cuccu,stána
+entry,WINDOW,0.429167,Middle: 0.4–<0.6,Focal support below five votes,0.536458,0.8,0.6666666666666666,0.65625,0.25,*dvara,kʰaṭakkikā
+entry,WALNUT,0.427778,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.427778,1,0.3555555555555555,1.0,0.5,*vr̩mra,akṣōṭa
+entry,SELL,0.425926,Middle: 0.4–<0.6,Focal support below five votes,0.532407,0.8,0.5,0.5648148148148148,0,krīṇā́ti,*vētyayati
+entry,WEIGH,0.425926,Middle: 0.4–<0.6,Focal support below five votes,0.511111,0.8333333333333333,0.8888888888888888,0.41666666666666663,0.2833333333333333,tōláyati,*yōkṣati
+entry,ROOF,0.425505,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.425505,1,0.35416666666666663,0.5176767676767676,0.020833333333333332,śaraṇá,*cʰatti
+entry,FIG,0.425,Middle: 0.4–<0.6,Focal support below five votes,0.708333,0.6,0.5,0.9166666666666666,0,kapittʰa,añjīra
+entry,HEAD,0.423799,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.423799,1,0.5263157894736842,0.3886128364389234,0.06733137190803094,śīrṣá,masta
+entry,WHAT,0.420615,Middle: 0.4–<0.6,Focal support below five votes,0.435119,0.9666666666666668,0.9285714285714286,0.2416666666666667,0.29999999999999993,kím,kīdŕ̩k
+entry,MOTHER,0.418886,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.418886,1,0.45,0.4502721088435374,0.0625,āryikā,mātŕ̩
+entry,ARROW,0.416667,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.416667,1,0.75,0.4583333333333333,0.375,kā́ṇḍa,bāṇá
+entry,FILL,0.416667,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.416667,1,0.6111111111111112,0.5277777777777778,0.3055555555555556,pūráyati,bʰárati
+entry,THAT,0.409804,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.409804,1,0.5,0.6176470588235294,0.2980392156862745,sá,asáu
+entry,BEE,0.405,Middle: 0.4–<0.6,Focal support below five votes,0.45,0.9,0.45,0.5625,0.1125,*mākṣikakara,bʰramará
+entry,THOSE (PLURAL OF THAT),0.405,Middle: 0.4–<0.6,Focal support below five votes,0.675,0.6,0.6,0.75,0,sá,asáu
+entry,HE,0.404221,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.404221,1,0.5227272727272726,0.6071428571428571,0.32142857142857145,sá,asáu
+entry,COUNT,0.404167,Middle: 0.4–<0.6,Focal support below five votes,0.505208,0.8,0.4444444444444444,0.84375,0.2777777777777778,lēkʰya,gaṇáyati
+entry,TAIL,0.399942,Middle: 0.2–<0.4,Focal support below five votes,0.479931,0.8333333333333333,0.34722222222222215,0.66125,0.048611111111111105,lūma,púccʰa
+entry,BITTER,0.399123,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.399123,1,0.4,0.5175438596491228,0.11929824561403508,tr̩ṣṭá,tiktá
+entry,NEW,0.397197,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.397197,1,0.9298245614035087,0.36585365853658536,0.5012836970474968,náva,návya
+entry,ASH,0.397095,Middle: 0.2–<0.4,Focal support below five votes,0.441216,0.9,0.45,0.4981981981981982,0.06576576576576577,cʰādi,rakṣā
+entry,BREAST,0.396717,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.396717,1,0.6055555555555555,0.25,0.062121212121212126,*cuccu,*cʰātti
+entry,SEE,0.396656,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.396656,1,0.4140350877192982,0.46041666666666664,0.08114035087719298,páśyati,*dr̩kṣati
+entry,OTHER,0.396368,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.396368,1,0.48717948717948717,0.4305555555555556,0.125,ápara,anyá
+entry,FAT (ORGANIC SUBSTANCE),0.395939,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.395939,1,0.375,0.4307659932659933,0.013888888888888888,mḗdas,carbī
+entry,SOFT,0.393333,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.393333,1,0.7133333333333333,0.4,0.3266666666666667,kōmalá,narm
+entry,DOVE,0.391667,Middle: 0.2–<0.4,Focal support below five votes,0.652778,0.6,0.5,0.8055555555555556,0,kapṓta,pā́rāvata
+entry,RED,0.386374,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.386374,1,0.275,0.49774774774774766,0,*lōhila,lāl
+entry,ECLIPSE,0.385714,Middle: 0.2–<0.4,Focal support below five votes,0.642857,0.6,0.42857142857142855,1.0,0.14285714285714285,andʰakāra,gráhaṇa
+entry,WET,0.382651,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.382651,1,0.6025641025641026,0.35107142857142853,0.18833333333333332,ārdrá,*bʰiyajyatē
+entry,ENTER,0.378307,Middle: 0.2–<0.4,Focal support below five votes,0.56746,0.6666666666666666,0.8571428571428571,0.27777777777777773,0,átyēti,*ḍʰukyati
+entry,SAY,0.375641,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.375641,1,0.38461538461538464,0.36666666666666664,0,mantráyatē,bʰánati
+entry,EARTH (SOIL),0.373483,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.373483,1,0.3137254901960784,0.503968253968254,0.07072829131652661,dʰaráṇī,mŕ̩ttikā
+entry,NARROW,0.366111,Middle: 0.2–<0.4,Focal support below five votes,0.610185,0.6,0.6,0.6203703703703703,0,ā́vr̩ta,saṁkaṭá
+entry,BAD,0.365579,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.365579,1,0.4264705882352941,0.3046875,0,*latta,xarāb
+entry,SPIDER WEB,0.364583,Middle: 0.2–<0.4,Focal support below five votes,0.520833,0.7,0.5,0.875,0.3333333333333333,mā́na,jā́la
+entry,DECEIT,0.363879,Middle: 0.2–<0.4,Focal support below five votes,0.460606,0.79,0.8,0.3590909090909091,0.23787878787878783,cʰala,*dʰrōkṣa
+entry,KNIFE,0.356155,Middle: 0.2–<0.4,Focal support below five votes,0.410948,0.8666666666666666,0.3611111111111111,0.4754901960784313,0.014705882352941176,*karttāra,cāqū
+entry,TAKE,0.355873,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.355873,1,0.5688888888888889,0.48214285714285715,0.3392857142857143,gr̩bʰāyáti,lábʰatē
+entry,CROOKED,0.355801,Middle: 0.2–<0.4,Focal support below five votes,0.512353,0.6944444444444444,0.8076923076923077,0.2170138888888889,0,*kōla,vaŋka
+entry,CAP,0.355556,Middle: 0.2–<0.4,Focal support below five votes,0.444444,0.8,0.4444444444444444,1.0,0.5555555555555556,kʰōla,*ṭōppa
+entry,DANCE,0.355,Middle: 0.2–<0.4,Focal support below five votes,0.591667,0.6,0.6,0.6833333333333333,0.1,nr̩ttá,nŕ̩tyati
+entry,COPPER,0.352381,Middle: 0.2–<0.4,Focal support below five votes,0.440476,0.8,0.4,0.8809523809523809,0.4,rīti,tāmrá
+entry,GROW,0.352244,Middle: 0.2–<0.4,Focal support below five votes,0.503205,0.7,0.8333333333333334,0.2692307692307692,0.09615384615384616,várdʰatē,útpadyatē
+entry,NECK,0.347854,Middle: 0.2–<0.4,Focal support below five votes,0.359848,0.9666666666666666,0.5,0.2196969696969697,0,maṇi,*gʰicca
+entry,SPLEEN,0.347727,Middle: 0.2–<0.4,Focal support below five votes,0.434659,0.8,0.5,0.6818181818181818,0.3125,śyāmá,plīhán
+entry,CALF,0.345445,Middle: 0.2–<0.4,Focal support below five votes,0.398591,0.8666666666666666,0.71875,0.2549019607843137,0.17647058823529413,vatsá,vatsarūpa
+entry,NEIGHBOUR,0.343636,Middle: 0.2–<0.4,Focal support below five votes,0.572727,0.6,0.6,0.6363636363636364,0.09090909090909091,*grāmārdʰa,prativēśya
+entry,STEAL,0.343636,Middle: 0.2–<0.4,Focal support below five votes,0.572727,0.6,0.6,0.5454545454545454,0,*apalīyatē,cōráyati
+entry,WOOD,0.334444,Middle: 0.2–<0.4,Focal support below five votes,0.358333,0.9333333333333332,0.2333333333333333,0.625,0.14166666666666666,dā́ru,kāṣṭʰá
+entry,POST,0.331333,Middle: 0.2–<0.4,Focal support below five votes,0.517708,0.64,0.8666666666666667,0.2,0.03125,stʰū́ṇā,*kʰuṭṭa
+entry,DAY BEFORE YESTERDAY,0.33,Middle: 0.2–<0.4,Focal support below five votes,0.55,0.6,0.6,0.5,0,*ātr̩tīyam,paraśvas
+entry,WIDOW,0.329583,Middle: 0.2–<0.4,Focal support below five votes,0.470833,0.7,0.35,0.7916666666666666,0.2,*kāŋkunikā,*raṭṭa
+entry,WHITE,0.329029,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.329029,1,0.30952380952380953,0.3793040293040293,0.030769230769230767,pā́ṇḍara,dʰavalá
+entry,BRING,0.325758,Middle: 0.2–<0.4,Focal support below five votes,0.542929,0.6,0.3333333333333333,0.8636363636363636,0.1111111111111111,gr̩bʰāyáti,ā́nayati
+entry,LATE,0.325714,Middle: 0.2–<0.4,Focal support below five votes,0.542857,0.6,0.8,0.42857142857142855,0.14285714285714285,cirá,*ḍʰila
+entry,VEIN,0.325455,Middle: 0.2–<0.4,Focal support below five votes,0.542424,0.6,0.6,0.4848484848484848,0,*snāru,nāḍī́
+entry,YOUNG GOAT (KID),0.325,Middle: 0.2–<0.4,Focal support below five votes,0.40625,0.8,0.5714285714285714,0.5,0.2589285714285714,cʰagalá,*paṣṭʰa
+entry,SON,0.324921,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.324921,1,0.626984126984127,0.26999999999999996,0.2471428571428571,putrá,*biḍḍa
+entry,SALIVA,0.322421,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.322421,1,0.6666666666666666,0.41309523809523807,0.43492063492063493,*tʰukk,lālā
+entry,NEAR,0.322222,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.322222,1,0.5,0.24027777777777776,0.09583333333333334,nikaṭam,pārśvá
+entry,GREEN,0.31684,Middle: 0.2–<0.4,Focal support below five votes,0.380208,0.8333333333333334,0.5625,0.2604166666666667,0.0625,nī́la,śyāvá
+entry,MIDDLE,0.316783,Middle: 0.2–<0.4,Focal support below five votes,0.351981,0.9,0.4090909090909091,0.3589743589743589,0.0641025641025641,madʰyamá,*vīcya
+entry,LAME,0.316667,Middle: 0.2–<0.4,Focal support below five votes,0.5,0.6333333333333334,0.861111111111111,0.2638888888888889,0.12499999999999999,kʰōra,*likka
+entry,SEND,0.312579,Middle: 0.2–<0.4,Focal support below five votes,0.36774,0.85,0.3541666666666667,0.4090909090909091,0.027777777777777776,práhiṇōti,*bʰējj
+entry,BOY,0.312206,Middle: 0.2–<0.4,Focal support below five votes,0.336222,0.9285714285714285,0.33163265306122447,0.3450854700854701,0.004273504273504273,pṓta-,*cʰōkara
+entry,HEAR,0.308625,Middle: 0.2–<0.4,Focal support below five votes,0.342917,0.9,0.28125,0.8733333333333333,0.46875,búdʰyatē,śr̩ṇṓti
+entry,BEHIND,0.305455,Middle: 0.2–<0.4,Focal support below five votes,0.381818,0.8,0.5833333333333333,0.36363636363636365,0.18333333333333332,*patta,*paśca
+entry,MILLET,0.304071,Middle: 0.2–<0.4,Focal support below five votes,0.434387,0.7,0.3888888888888889,0.4798850574712644,0,*aṇuni,*bājjara
+entry,MANY,0.303015,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.303015,1,0.4166666666666667,0.2276422764227642,0.03827913279132791,bahura,bahutva
+entry,RUN,0.300444,Middle: 0.2–<0.4,Focal support below five votes,0.375556,0.8,0.4444444444444444,0.30666666666666664,0,*tarpati,drávati
+entry,MALE GOAT,0.3,Middle: 0.2–<0.4,Focal support below five votes,0.5,0.6,0.3333333333333333,0.6666666666666666,0,vīrá,*bōkka
+entry,SHORT,0.296667,Middle: 0.2–<0.4,Focal support below five votes,0.370833,0.8,0.4444444444444444,0.416025641025641,0.1188034188034188,*kʰuṭṭa,*cʰōṭṭa
+entry,FIREPLACE,0.295139,Middle: 0.2–<0.4,Focal support below five votes,0.520833,0.5666666666666667,0.35416666666666663,0.75,0.0625,*dʰmātra,cullī
+entry,NO,0.29375,Middle: 0.2–<0.4,Focal support below five votes,0.489583,0.6,0.5625,0.5,0.08333333333333333,ná,ā́kṣēti
+entry,HILL,0.293308,Middle: 0.2–<0.4,Focal support below five votes,0.382576,0.7666666666666666,0.4166666666666667,0.34848484848484845,0,dʰā́rā,*pāhāḍa
+entry,HEEL,0.292929,Middle: 0.2–<0.4,Focal support below five votes,0.488215,0.6,0.2727272727272727,0.7037037037037037,0,kʰuriṇī,*aḍḍi
+entry,MALE,0.292411,Middle: 0.2–<0.4,Focal support below five votes,0.584821,0.5,0.8125,0.35714285714285715,0,vīrá,nára
+entry,GO OUT,0.292393,Middle: 0.2–<0.4,Focal support below five votes,0.398718,0.7333333333333333,0.28205128205128205,0.5923076923076923,0.07692307692307693,*niṣkasati,*niṣkalati
+entry,DEW,0.286633,Middle: 0.2–<0.4,Focal support below five votes,0.477721,0.6,0.6,0.3792517006802721,0.023809523809523808,prúṣvā,avaśyā
+entry,WOMAN,0.286618,Middle: 0.2–<0.4,Focal support below five votes,0.318464,0.9,0.2647058823529412,0.38333333333333336,0.01111111111111111,strī́,*lugāī
+entry,TESTICLES,0.283333,Middle: 0.2–<0.4,Focal support below five votes,0.472222,0.6,0.5,0.6111111111111112,0.16666666666666666,kulaka,āṇḍá
+entry,UDDER,0.28,Middle: 0.2–<0.4,Focal support below five votes,0.35,0.8,0.4,0.3722222222222222,0.07222222222222222,ū́dʰas,stána
+entry,STAND,0.278269,Middle: 0.2–<0.4,Focal support below five votes,0.309188,0.9,0.34615384615384615,0.27222222222222225,0,*ut-stʰita,ūrdʰvá
+entry,HEART,0.278245,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.278245,1,0.5882352941176471,0.24007936507936506,0.27182539682539686,hŕ̩daya,dil
+entry,BLOOD,0.272844,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.272844,1,0.5238095238095238,0.5405405405405406,0.5186615186615187,rakta,lṓhita
+entry,ALONE,0.265741,Middle: 0.2–<0.4,Focal support below five votes,0.37963,0.7,0.3888888888888889,0.8148148148148148,0.4444444444444444,kḗvala,*ēkkala
+entry,SUNSHINE,0.265714,Middle: 0.2–<0.4,Focal support below five votes,0.442857,0.6,0.6,0.2857142857142857,0,sū́ra,gʰarmá
+entry,WE,0.265625,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.265625,1,0.375,0.75,0.59375,vayám,asmad
+entry,FACE,0.265476,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.265476,1,0.4404761904761904,0.14285714285714285,0.05238095238095238,múkʰya,mūrdʰán
+entry,LIGHT (RADIATION),0.265077,Middle: 0.2–<0.4,Focal support below five votes,0.305858,0.8666666666666666,0.22807017543859648,0.49768009768009774,0.11403508771929824,*prabʰāla,lagʰú
+entry,LOW,0.263462,Middle: 0.2–<0.4,Focal support below five votes,0.439103,0.6,0.5,0.37820512820512814,0,*lasta,nīcá
+entry,GIRL,0.262685,Middle: 0.2–<0.4,Focal support below five votes,0.328356,0.8,0.3076923076923077,0.3490196078431373,0,pṓta-,*cʰōkara
+entry,STRAIGHT,0.261212,Middle: 0.2–<0.4,Focal support below five votes,0.326515,0.8,0.4,0.253030303030303,0,*sūŋkṣa,śōdʰya
+entry,RESIN,0.259821,Middle: 0.2–<0.4,Focal support below five votes,0.433036,0.6,0.42857142857142855,0.4375,0,kilima,rāla
+entry,THREAD,0.258102,Middle: 0.2–<0.4,Focal support below five votes,0.30365,0.85,0.30357142857142855,0.3118734335839599,0.008145363408521303,daśā,davara
+entry,GRIND,0.258073,Middle: 0.2–<0.4,Focal support below five votes,0.368676,0.7,0.5,0.4583333333333333,0.22098214285714285,pēṣayati,piṁṣáti
+entry,I,0.255556,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.255556,1,0.5,0.7,0.6888888888888889,ahám,ma
+entry,LEOPARD,0.253472,Middle: 0.2–<0.4,Focal support below five votes,0.506944,0.5,0.2777777777777778,0.736111111111111,0,bʰakṣakāra,citraka
+entry,SCORPION,0.252381,Middle: 0.2–<0.4,Focal support below five votes,0.504762,0.5,0.35714285714285715,0.8666666666666667,0.21428571428571427,*ṭōŋka,vŕ̩ścika
+entry,GRANDDAUGHTER,0.25,Middle: 0.2–<0.4,Focal support below five votes,0.5,0.5,0.5,0.6428571428571429,0.14285714285714285,pautrī,náptr̩
+entry,TEAR (OF EYE),0.25,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.25,1,0.7777777777777778,0.25,0.5277777777777778,áśru,rṓda
+entry,PATERNAL AUNT (FATHER'S SISTER),0.247308,Middle: 0.2–<0.4,Focal support below five votes,0.412179,0.6,0.8076923076923077,0.3,0.2833333333333333,*pʰuppʰu,dʰrā́yati
+entry,RAINBOW,0.246795,Middle: 0.2–<0.4,Focal support below five votes,0.49359,0.5,0.48717948717948717,0.5,0,indradʰanúṣ,dʰánus
+entry,SPIDER,0.245897,Middle: 0.2–<0.4,Focal support below five votes,0.526923,0.4666666666666666,0.2333333333333333,0.8205128205128205,0,*buṭṭa,markaṭa
+entry,BODY,0.244375,Middle: 0.2–<0.4,Focal support below five votes,0.366562,0.6666666666666667,0.4166666666666667,0.36645833333333333,0.05,jīvantá,dēha
+entry,SUN,0.24375,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.24375,1,0.9,0.1375,0.55,sū́ra,dina
+entry,BURN,0.243586,Middle: 0.2–<0.4,Focal support below five votes,0.281061,0.8666666666666666,0.3939393939393939,0.2636363636363636,0.09545454545454546,dahyátē,jválati
+entry,BATHE,0.24,Middle: 0.2–<0.4,Focal support below five votes,0.4,0.6,0.5,0.3,0,snāna,dʰā́vati
+entry,SHARP,0.238846,Middle: 0.2–<0.4,Focal support below five votes,0.346154,0.6900000000000001,0.6923076923076923,0.31363636363636366,0.31363636363636366,tīkṣṇá,cōkṣa
+entry,BURY,0.238636,Middle: 0.2–<0.4,Focal support below five votes,0.397727,0.6,0.5,0.3409090909090909,0.045454545454545456,*dabb,*gaḍḍ
+entry,GRINDSTONE,0.2375,Middle: 0.2–<0.4,Focal support below five votes,0.395833,0.6,0.5833333333333334,0.25,0.041666666666666664,*varta,puṭa
+entry,MATERNAL GRANDFATHER,0.237143,Middle: 0.2–<0.4,Focal support below five votes,0.592857,0.4,0.4,0.7857142857142857,0,māma,*nānna
+entry,LEAD (GUIDE),0.236458,Middle: 0.2–<0.4,Focal support below five votes,0.472917,0.5,0.5,0.6458333333333333,0.2,náyati,sī́sa
+entry,GO,0.236023,Middle: 0.2–<0.4,Focal support below five votes,0.37464,0.6300000000000001,0.19687500000000002,0.568030303030303,0.015625,cyávatē,yā́ti
+entry,RIPE,0.235714,Middle: 0.2–<0.4,Focal support below five votes,0.392857,0.6,0.42857142857142855,0.9285714285714286,0.5714285714285714,pacyátē,pakvá
+entry,FIELD,0.235407,Middle: 0.2–<0.4,Focal support below five votes,0.392345,0.6,0.23076923076923078,0.803921568627451,0.25,bʰū́mi,kṣḗtra
+entry,ADZE,0.233333,Middle: 0.2–<0.4,Focal support below five votes,0.388889,0.6,0.5,0.7777777777777778,0.5,takṣa,vā́śī
+entry,BRASS,0.232143,Middle: 0.2–<0.4,Focal support below five votes,0.464286,0.5,0.35714285714285715,1.0,0.42857142857142855,rīti,pittala
+entry,FATHER,0.231305,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.231305,1,0.2771929824561403,0.18541666666666665,0,mahallaka,pitŕ̩
+entry,MEASURE,0.230889,Middle: 0.2–<0.4,Focal support below five votes,0.408654,0.565,0.6,0.21730769230769229,0,tōláyati,*māpyatē
+entry,PATERNAL UNCLE (FATHER'S BROTHER),0.230682,Middle: 0.2–<0.4,Focal support below five votes,0.38447,0.6,0.7727272727272727,0.25,0.2537878787878788,pítriya,*kākka
+entry,CO-WIFE,0.229474,Middle: 0.2–<0.4,Focal support below five votes,0.573684,0.4,0.4,0.9473684210526315,0.2,yā́tr̩,sapátnī
+entry,SMOOTH,0.229167,Middle: 0.2–<0.4,Focal support below five votes,0.458333,0.5,0.4166666666666667,0.5454545454545454,0.045454545454545456,piccʰala,cikkáṇa
+entry,CHEST,0.226377,Middle: 0.2–<0.4,Focal support below five votes,0.565942,0.4,0.4,0.7318840579710144,0,krōḍá,*cʰātti
+entry,FOAM,0.225,Middle: 0.2–<0.4,Focal support below five votes,0.375,0.6,1.0,0.25,0.5,pʰḗna,*gajja
+entry,PULL,0.222546,Middle: 0.2–<0.4,Focal support below five votes,0.290278,0.7666666666666668,0.3194444444444445,0.2611111111111111,0,*drakk,tānáyati
+entry,INSIDE,0.222222,Middle: 0.2–<0.4,Focal support below five votes,0.37037,0.6,0.3333333333333333,0.6018518518518517,0.19444444444444445,ántara,*bʰiyantara
+entry,FEVER,0.222115,Middle: 0.2–<0.4,Focal support below five votes,0.370192,0.6,0.23076923076923078,0.625,0.11538461538461539,prajvāra,jvará
+entry,PATH OR ROAD,0.221429,Middle: 0.2–<0.4,Focal support below five votes,0.553571,0.4,0.8571428571428571,0.3333333333333333,0.08333333333333333,pántʰā,mārga
+entry,TALL,0.219352,Middle: 0.2–<0.4,Focal support below five votes,0.286111,0.7666666666666666,0.6555555555555554,0.3833333333333333,0.4666666666666667,dīrgʰá,lamba
+entry,SPRINGTIME,0.219318,Middle: 0.2–<0.4,Focal support below five votes,0.36553,0.6,0.45833333333333337,0.2727272727272727,0,vasantá,caitrá
+entry,POUR,0.219167,Middle: 0.2–<0.4,Focal support below five votes,0.365278,0.6,0.3333333333333333,0.3972222222222222,0,talati,*ḍʰalati
+entry,FEW,0.218915,Middle: 0.2–<0.4,Focal support below five votes,0.364858,0.6,0.2727272727272727,0.4731182795698925,0.016129032258064516,álpa,stōká
+entry,HURT (SOMEBODY),0.217593,Middle: 0.2–<0.4,Focal support below five votes,0.435185,0.5,0.5,0.37037037037037035,0,śūlatē,duḣkʰati
+entry,BOW,0.217546,Middle: 0.2–<0.4,Focal support below five votes,0.352778,0.6166666666666667,0.5,0.20555555555555557,0,druṇa,námati
+entry,ALL,0.217277,Middle: 0.2–<0.4,Focal support below five votes,0.250704,0.8666666666666666,0.2708333333333333,0.5743243243243243,0.34375,bʰū́yiṣṭʰa,sárva
+entry,MELT,0.216396,Middle: 0.2–<0.4,Focal support below five votes,0.460417,0.47000000000000003,0.75,0.19583333333333333,0.025,vílīyatē,galati
+entry,UPPER LEG (THIGH),0.215476,Middle: 0.2–<0.4,Focal support below five votes,0.53869,0.4,0.2857142857142857,0.7916666666666666,0,máṇḍala,jáŋgʰā
+entry,CRY,0.214286,Middle: 0.2–<0.4,Focal support below five votes,0.267857,0.8,0.2857142857142857,0.4642857142857143,0.21428571428571427,*riŋk,rōdati
+entry,ROAD,0.214144,Middle: 0.2–<0.4,Focal support below five votes,0.443056,0.4833333333333333,0.75,0.20138888888888887,0.06527777777777778,pántʰā,*sr̩tikk-
+entry,REED,0.212946,Middle: 0.2–<0.4,Focal support below five votes,0.354911,0.6,0.42857142857142855,0.40625,0.125,naḍá,vētrá
+entry,LIGHTNING,0.210349,Middle: 0.2–<0.4,Focal support below five votes,0.420699,0.5,0.25,0.5913978494623656,0,bʰramara,vidyullatā
+entry,NAKED,0.210133,Middle: 0.2–<0.4,Focal support below five votes,0.300189,0.7,0.3181818181818182,0.6458333333333333,0.36363636363636365,*niṣṭrāṇa,nagná
+entry,HUSBAND,0.209647,Middle: 0.2–<0.4,Focal support below five votes,0.232941,0.9,0.28125,0.18463203463203465,0,*bʰāriyāpa,*gʰarapāla
+entry,WORD,0.209407,Middle: 0.2–<0.4,Focal support below five votes,0.405303,0.5166666666666666,0.6666666666666666,0.23484848484848483,0.09090909090909091,vārtta,vacaná
+entry,WATERFALL,0.208333,Middle: 0.2–<0.4,Focal support below five votes,0.416667,0.5,0.4166666666666667,0.4166666666666667,0,kṣará,jʰara
+entry,WIFE,0.208234,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.208234,1,0.3125,0.1957142857142857,0.09174603174603176,strī́,*lugāī
+entry,LIE DOWN,0.207143,Middle: 0.2–<0.4,Focal support below five votes,0.345238,0.6,0.3333333333333333,0.40714285714285714,0.05,pátati,lēṭyáti
+entry,BE,0.207075,Middle: 0.2–<0.4,Focal support below five votes,0.214216,0.9666666666666668,0.34019607843137256,0.32222222222222224,0.23398692810457516,stʰitá,ā́kṣēti
+entry,DIE,0.206144,Middle: 0.2–<0.4,Focal support below five votes,0.245409,0.8400000000000001,0.2625,0.7380070546737214,0.5096891534391534,mr̩tá,máratē
+entry,SEIZE,0.203869,Middle: 0.2–<0.4,Focal support below five votes,0.407738,0.5,0.4166666666666667,0.42857142857142855,0.02976190476190476,gr̩bʰāyáti,*pakkaḍ
+entry,AGAIN,0.20236,Middle: 0.2–<0.4,Focal support below five votes,0.40472,0.5,0.22727272727272727,0.6730769230769231,0.09090909090909091,*gʰir,*pʰirati
+entry,GO DOWN (DESCEND),0.201885,Middle: 0.2–<0.4,Focal support below five votes,0.367063,0.55,0.42857142857142855,0.3055555555555556,0,laŋgʰáyati,úttarati
+entry,COOK (SOMETHING),0.200651,Middle: 0.2–<0.4,Focal support below five votes,0.288016,0.6966666666666667,0.4107142857142857,0.23222222222222222,0.0669047619047619,pacyátē,randʰáyati
+entry,GARLIC,0.2,Middle: 0.2–<0.4,Focal support below five votes,0.5,0.4,0.3333333333333333,1.0,0.3333333333333333,uṣṇa,láśuna
+entry,TODAY,0.2,Middle: 0.2–<0.4,Focal support below five votes,0.25,0.8,0.2222222222222222,1.0,0.7222222222222222,nūnám,adyá
+entry,FOX,0.199306,Low: <0.2,Focal support below five votes,0.284722,0.7,0.25,0.3194444444444444,0,*lōpi,kʰiŋkʰira
+entry,RAIN (PRECIPITATION),0.198947,Low: <0.2,Focal support below five votes,0.284211,0.7,0.23333333333333334,0.37368421052631584,0.03859649122807018,abʰrá,mēgʰá
+entry,TREE,0.195734,Low: <0.2,Focal support below five votes,0.264505,0.74,0.21764705882352942,0.31136296415799525,0,stambʰa,*rukṣa
+entry,FOOT,0.19447,Low: <0.2,Focal support below five votes,0.363333,0.5352380952380953,0.6095238095238095,0.13380952380952382,0.016666666666666666,kʰura,*padara
+entry,HAIL,0.194318,Low: <0.2,Focal support below five votes,0.323864,0.6,0.5416666666666666,0.2727272727272727,0.16666666666666666,aśáni,karaka
+entry,THEY,0.193519,Low: <0.2,Focal support below five votes,0.527778,0.3666666666666666,0.3055555555555555,1.0,0.25,tá,asáu
+entry,BREAK (DESTROY OR GET DESTROYED),0.192411,Low: <0.2,Focal support below five votes,0.288616,0.6666666666666666,0.23809523809523808,0.3391369047619048,0,*spʰōṭyatē,trōṭáyati
+entry,MIDDAY,0.192,Low: <0.2,Focal support below five votes,0.64,0.3,0.3,0.98,0,*gʰraṇiṣya,*dva-prahara
+entry,PARTRIDGE,0.191667,Low: <0.2,Focal support below five votes,0.479167,0.4,0.4,0.9583333333333334,0.4,vártikā,tittirá
+entry,DIFFERENT,0.190833,Low: <0.2,Focal support below five votes,0.477083,0.4,0.4,0.5541666666666666,0,ápara,*anyākāra
+entry,FLOCK (OF ANIMALS),0.189495,Low: <0.2,Focal support below five votes,0.406061,0.4666666666666666,0.6,0.2121212121212121,0,rambʰa,*pā́la
+entry,STOMACH,0.189236,Low: <0.2,Focal support below five votes,0.378472,0.5,0.3125,0.4444444444444444,0,*ḍʰiḍḍʰa,*pēṭṭa
+entry,BELOW OR UNDER,0.188761,Low: <0.2,Focal support below five votes,0.333108,0.5666666666666667,0.2833333333333333,0.3828828828828829,0,bundʰa,nīcá
+entry,SPIT,0.188571,Low: <0.2,Focal support below five votes,0.471429,0.4,0.8,0.2857142857142857,0.14285714285714285,*tʰukk,śū́la
+entry,LIP,0.187564,Low: <0.2,Focal support below five votes,0.267949,0.7,0.26666666666666666,0.2692307692307692,0,śuṇḍā,*adʰaōṣṭʰa
+entry,BROKEN,0.186742,Low: <0.2,Focal support below five votes,0.311237,0.6,0.375,0.24747474747474751,0,*spʰōṭyatē,trúṭyati
+entry,GO UP (ASCEND),0.186667,Low: <0.2,Focal support below five votes,0.466667,0.4,0.4,0.5333333333333333,0,*kʰasati,*caḍʰati
+entry,SWEAT (SUBSTANCE),0.186466,Low: <0.2,Focal support below five votes,0.310777,0.6,0.42857142857142855,0.19298245614035087,0,tapyatí,prasvinna
+entry,ROPE,0.186178,Low: <0.2,Focal support below five votes,0.232722,0.8,0.2857142857142857,0.2204750204750205,0.04074529074529074,dā́man,raśmí
+entry,JOINT,0.184936,Low: <0.2,Focal support below five votes,0.369872,0.5,0.4166666666666667,0.3230769230769231,0,bandʰá,grantʰí
+entry,PUPPY,0.184722,Low: <0.2,Focal support below five votes,0.395833,0.4666666666666666,0.29166666666666663,0.6,0.1,kurkurá,*pilla
+entry,LANGUAGE,0.183333,Low: <0.2,Focal support below five votes,0.305556,0.6,0.3333333333333333,0.5,0.2222222222222222,jihvā́,bʰāṣā
+entry,PUT ON,0.183333,Low: <0.2,Focal support below five votes,0.305556,0.6,0.25,0.40277777777777773,0.041666666666666664,bandʰati,páridadʰāti
+entry,VEGETABLES,0.182143,Low: <0.2,Focal support below five votes,0.455357,0.4,0.625,0.2857142857142857,0,śāka,bʰarjita
+entry,TOMORROW,0.18192,Low: <0.2,Focal support below five votes,0.454799,0.4,0.2857142857142857,0.6953125,0.07142857142857142,rucitá,kālya
+entry,DARKNESS,0.180926,Low: <0.2,Focal support below five votes,0.452315,0.4,0.2,0.8796296296296295,0.175,āndʰya,andʰakāra
+entry,SAP,0.18,Low: <0.2,Focal support below five votes,0.45,0.4,0.6,0.4,0.1,kṣīrá,rása
+entry,TRUE,0.179812,Low: <0.2,Focal support below five votes,0.359623,0.5,0.35714285714285715,0.5763888888888888,0.21428571428571427,sā́dʰana,satyá
+entry,BROWN,0.179253,Low: <0.2,Focal support below five votes,0.430208,0.41666666666666663,0.6,0.26041666666666663,0,gaurá,*bʰrūra
+entry,WALK,0.179012,Low: <0.2,Focal support below five votes,0.268519,0.6666666666666666,0.3333333333333333,0.2037037037037037,0,tíllati,*calyati
+entry,SMELL,0.177778,Low: <0.2,Focal support below five votes,0.355556,0.5,0.6,0.2777777777777778,0.16666666666666666,gandʰá,*gāndʰa
+entry,BOIL,0.177352,Low: <0.2,Focal support below five votes,0.27402,0.6472222222222223,0.3939393939393939,0.1541005291005291,0,*pacyatēaya-,*kʰa-ul
+entry,HANDLE,0.175714,Low: <0.2,Focal support below five votes,0.292857,0.6,0.42857142857142855,0.3,0.14285714285714285,daṇḍá,vīṭā
+entry,WEAR,0.175648,Low: <0.2,Focal support below five votes,0.376389,0.4666666666666666,0.4666666666666666,0.4861111111111111,0.2,āmuñcati,páridadʰāti
+entry,PICK,0.173056,Low: <0.2,Focal support below five votes,0.432639,0.4,0.4,0.46527777777777773,0,*utpaṭati,trōṭáyati
+entry,EVENING,0.172703,Low: <0.2,Focal support below five votes,0.575676,0.3,0.3,0.8513513513513513,0,támisrā,saṁdʰyā́
+entry,FLEE,0.172294,Low: <0.2,Focal support below five votes,0.430736,0.4,0.2857142857142857,0.5757575757575757,0,ḍáyatē,bʰajyátē
+entry,SPEECH,0.171515,Low: <0.2,Focal support below five votes,0.428788,0.4,0.7666666666666666,0.18181818181818182,0.09090909090909091,vārtta,vacaná
+entry,DO,0.170278,Low: <0.2,Focal support below five votes,0.30049,0.5666666666666667,0.2833333333333333,0.6176470588235294,0.3,stʰāpáyati,karṓti
+entry,THIRSTY,0.168056,Low: <0.2,Focal support below five votes,0.360119,0.4666666666666666,0.29166666666666663,0.42857142857142855,0,tr̩ṣyā́vant,pipāsitá
+entry,BECOME,0.167951,Low: <0.2,Focal support below five votes,0.479861,0.35,0.7722222222222221,0.21875,0.03125,bʰávati,stʰīyátē
+entry,FOREHEAD,0.167782,Low: <0.2,Focal support below five votes,0.296086,0.5666666666666667,0.31481481481481477,0.4810606060606061,0.2037037037037037,tā́lu,kapā́la
+entry,DRY UP,0.1675,Low: <0.2,Focal support below five votes,0.41875,0.4,0.4,0.4375,0,śúṣyati,*śuṣkati
+entry,ANGER,0.167222,Low: <0.2,Focal support below five votes,0.418056,0.4,0.861111111111111,0.14285714285714285,0.16785714285714287,rōṣa,rāga
+entry,DIG,0.166927,Low: <0.2,Focal support below five votes,0.333854,0.5,0.3125,0.35520833333333335,0,*kōcc,*kʰōdd
+entry,MUCH,0.166781,Low: <0.2,Focal support below five votes,0.232718,0.7166666666666666,0.4090909090909091,0.22395833333333331,0.16761363636363635,bahura,bahutva
+entry,RING,0.166014,Low: <0.2,Focal support below five votes,0.237162,0.7,0.5,0.2539039039039039,0.2795795795795796,aŋguṣṭʰya,mudrā́
+entry,SPINDLE,0.165714,Low: <0.2,Focal support below five votes,0.27619,0.6,0.6,0.25,0.29761904761904756,tarkú,*tarkull-
+entry,BOARD,0.165,Low: <0.2,Focal support below five votes,0.4125,0.4,0.4,0.625,0.2,bʰitta,paṭṭa
+entry,CHICKEN,0.163889,Low: <0.2,Focal support below five votes,0.35119,0.4666666666666666,0.29166666666666663,0.44642857142857145,0.03571428571428571,caṭaka,murɣ
+entry,HOT,0.16366,Low: <0.2,"Supported, crossover >10 points",0.16366,1,0.49999999999999994,0.2188034188034188,0.3914835164835165,taptá,uṣṇá
+entry,SCARF OR TURBAN,0.163519,Low: <0.2,Focal support below five votes,0.408796,0.4,0.4,0.6175925925925926,0.2,*laṭṭa,*paggā
+entry,BRIGHT,0.163167,Low: <0.2,Focal support below five votes,0.407917,0.4,0.4,0.41583333333333333,0,*prabʰāla,ujjvala
+entry,TWIST,0.162338,Low: <0.2,Focal support below five votes,0.38961,0.41666666666666663,0.6428571428571429,0.18939393939393936,0.053030303030303025,vēṣṭáyati,vartáyati
+entry,SHEPHERD,0.161458,Low: <0.2,Focal support below five votes,0.322917,0.5,0.3125,0.3333333333333333,0,paśupāla,rakṣapāla
+entry,BROOM,0.161373,Low: <0.2,Focal support below five votes,0.403431,0.4,0.4,0.40686274509803916,0,mārjana,bahukāra
+entry,GOAT,0.161244,Low: <0.2,Focal support below five votes,0.293171,0.55,0.1527777777777778,0.45625,0.022685185185185183,ajá,bárkara
+entry,SKIN,0.160731,Low: <0.2,Focal support below five votes,0.267885,0.6,0.23076923076923078,0.30500000000000005,0,gā́tra,kʰalla
+entry,SHOW,0.16,Low: <0.2,Focal support below five votes,0.4,0.4,0.4,0.4,0,*pāśayati,*dr̩kṣati
+entry,THEN,0.157619,Low: <0.2,Focal support below five votes,0.394048,0.4,0.2857142857142857,0.55,0.047619047619047616,tátas,tā́t
+entry,SLAVE,0.157153,Low: <0.2,Focal support below five votes,0.304167,0.5166666666666666,0.4,0.2583333333333333,0.05,*lavaṇḍa,bandī
+entry,ABOVE,0.156692,Low: <0.2,Focal support below five votes,0.39173,0.4,0.25,0.5959595959595959,0.0625,ūrdʰvá,*uppari
+entry,HERD (SOMETHING),0.156667,Low: <0.2,Focal support below five votes,0.391667,0.4,0.4,0.3833333333333333,0,rambʰa,várga
+entry,LIZARD,0.156667,Low: <0.2,Focal support below five votes,0.391667,0.4,0.5833333333333334,0.4,0.2,kr̩kalāsá,*gʰaragōlī
+entry,JAW,0.155556,Low: <0.2,Focal support below five votes,0.333333,0.4666666666666666,0.4166666666666667,0.38888888888888884,0.13888888888888887,jámbʰa,hánu
+entry,LOAD,0.155425,Low: <0.2,Focal support below five votes,0.290385,0.5352380952380952,0.7166666666666667,0.20586080586080585,0.3417582417582417,bʰārá,bʰára
+entry,BEAT,0.155093,Low: <0.2,Focal support below five votes,0.232639,0.6666666666666666,0.2222222222222222,0.24305555555555555,0,dádʰāti,piṭṭayati
+entry,WRIST,0.155048,Low: <0.2,Focal support below five votes,0.310096,0.5,0.3125,0.3076923076923077,0,*gulu,nāḍī́
+entry,CLIMB,0.154375,Low: <0.2,Focal support below five votes,0.514583,0.3,0.3,0.7291666666666666,0,*utskadati,*caḍʰati
+entry,NAIL (TOOL),0.153846,Low: <0.2,Focal support below five votes,0.384615,0.4,0.3333333333333333,0.7692307692307693,0.3333333333333333,nakʰará,nakʰá
+entry,FLY (MOVE THROUGH AIR),0.153213,Low: <0.2,Focal support below five votes,0.306426,0.5,0.22727272727272727,0.5977011494252873,0.2121212121212121,*pʰutta,mákṣā
+entry,SHAVE,0.152381,Low: <0.2,Focal support below five votes,0.380952,0.4,0.2857142857142857,0.47619047619047616,0,*nikartati,muṇḍayati
+entry,TORCH,0.152381,Low: <0.2,Focal support below five votes,0.380952,0.4,0.3333333333333333,0.42857142857142855,0,*śōṭṭʰa,ulkā́
+entry,GRANDFATHER,0.151648,Low: <0.2,Focal support below five votes,0.252747,0.6,0.42857142857142855,0.23076923076923078,0.15384615384615385,*bāppa,āryaka
+entry,ROCK,0.15,Low: <0.2,Focal support below five votes,0.375,0.4,0.5833333333333333,0.3333333333333333,0.16666666666666666,*varta,luḍáti
+entry,LIFE,0.14933,Low: <0.2,Focal support below five votes,0.497768,0.3,0.21428571428571427,0.78125,0,jīvalá,jīvá
+entry,POISON,0.148148,Low: <0.2,Focal support below five votes,0.222222,0.6666666666666666,1.0,0.18518518518518517,0.7407407407407407,viṣá,garala
+entry,COOKED,0.146667,Low: <0.2,Focal support below five votes,0.366667,0.4,0.6,0.3333333333333333,0.19999999999999998,pacyátē,r̩dʰáti
+entry,SMILE,0.146667,Low: <0.2,Focal support below five votes,0.366667,0.4,0.3333333333333333,0.4,0,*kṣumbati,vihasati
+entry,MARROW,0.145833,Low: <0.2,Focal support below five votes,0.291667,0.5,0.22727272727272727,0.5833333333333333,0.22727272727272727,mḗdas,majján
+entry,THRESH,0.145833,Low: <0.2,Focal support below five votes,0.3125,0.4666666666666666,0.3333333333333333,0.29166666666666663,0,kṣuṇṇa,*jʰaṭati
+entry,JOIN,0.145556,Low: <0.2,Focal support below five votes,0.363889,0.4,0.4,0.40185185185185185,0.07407407407407407,*gaḍḍ,*yuṭati
+entry,OX,0.145556,Low: <0.2,Focal support below five votes,0.363889,0.4,0.3333333333333333,0.39444444444444443,0,*gāva,balivárda
+entry,ITCH,0.145455,Low: <0.2,Focal support below five votes,0.363636,0.4,0.3333333333333333,0.3939393939393939,0,*avakṣōpa,kʰasa
+entry,HIDE,0.14375,Low: <0.2,Focal support below five votes,0.2875,0.5,0.35714285714285715,0.28928571428571426,0.07142857142857142,*apalīyatē,cárman
+entry,SPEAK,0.14375,Low: <0.2,Focal support below five votes,0.239583,0.6,0.25,0.4375,0.20833333333333331,mantráyatē,*bōll
+entry,MAN,0.14308,Low: <0.2,Focal support below five votes,0.190774,0.75,0.1875,0.519047619047619,0.32499999999999996,mártya,manuṣyà
+entry,WASP,0.142593,Low: <0.2,Focal support below five votes,0.305556,0.4666666666666666,0.3333333333333333,0.3333333333333333,0.05555555555555555,bʰramará,*cʰēdacihnaka
+entry,FIRST,0.14256,Low: <0.2,Focal support below five votes,0.475198,0.3,0.21428571428571427,0.7361111111111112,0,saṁmukʰá,*pratʰila
+entry,BUTTER,0.142029,Low: <0.2,Focal support below five votes,0.355072,0.4,0.25,0.4601449275362318,0,*stanyanīta,mrakṣaṇa
+entry,BULL,0.140756,Low: <0.2,Focal support below five votes,0.234594,0.6,0.25490196078431376,0.21428571428571427,0,gṓ,balivárda
+entry,THICK,0.140642,Low: <0.2,Focal support below five votes,0.234403,0.6,0.2727272727272727,0.19607843137254902,0,*bʰakkʰa,gāḍʰa
+entry,ARRIVE,0.140476,Low: <0.2,Focal support below five votes,0.35119,0.4,0.2,0.5023809523809524,0,*prēratē,prábʰūta
+entry,TIME,0.139904,Low: <0.2,Focal support below five votes,0.310897,0.45,0.45,0.4239316239316239,0.25213675213675213,vāra,vḗlā
+entry,FRIEND,0.139722,Low: <0.2,Focal support below five votes,0.349306,0.4,0.4,0.3986111111111111,0.1,dāraka,mitrá
+entry,YOKE,0.13927,Low: <0.2,Focal support below five votes,0.297222,0.4685714285714286,0.55,0.19523809523809524,0.15079365079365079,yugá,yōktrayati
+entry,WANDER,0.138974,Low: <0.2,Focal support below five votes,0.347436,0.4,0.4,0.2948717948717949,0,tíllati,*gʰummati
+entry,PLACE (POSITION),0.138882,Low: <0.2,Focal support below five votes,0.308626,0.45,0.25,0.4147451963241437,0.047493734335839595,stʰā́na,stʰā́man
+entry,EAT,0.137566,Low: <0.2,Focal support below five votes,0.165079,0.8333333333333333,0.19841269841269837,0.8222222222222222,0.6904761904761905,yuvátē,kʰā́dati
+entry,LOUSE,0.1375,Low: <0.2,Focal support below five votes,0.196429,0.7,0.8095238095238094,0.19444444444444445,0.6111111111111112,yū́kā,utkuṇa
+entry,CAMEL,0.137407,Low: <0.2,Focal support below five votes,0.294444,0.4666666666666666,1.0,0.15555555555555553,0.5666666666666667,úṣṭra,karabʰá
+entry,PREGNANT,0.135625,Low: <0.2,Focal support below five votes,0.452083,0.3,0.1875,0.9666666666666667,0.25,*udguru,garbʰíṇī
+entry,FLAME,0.135556,Low: <0.2,Focal support below five votes,0.338889,0.4,0.4,0.3611111111111111,0.08333333333333333,bʰāsá,arcís
+entry,CHIN,0.135268,Low: <0.2,Focal support below five votes,0.450893,0.3,0.21428571428571427,0.6875,0,jámbʰa,tuṇḍa
+entry,VULVA,0.135227,Low: <0.2,Focal support below five votes,0.270455,0.5,0.25,0.4242424242424242,0.13333333333333333,*bʰucca,*cutta
+entry,BURNING,0.134856,Low: <0.2,Focal support below five votes,0.237981,0.5666666666666667,0.6041666666666666,0.21794871794871792,0.34615384615384615,taptá,dāha
+entry,YELLOW,0.134545,Low: <0.2,Focal support below five votes,0.224242,0.6,0.34848484848484845,0.2,0.1,haridra,haridrā
+entry,GROUND,0.134343,Low: <0.2,Focal support below five votes,0.287879,0.4666666666666667,0.2424242424242424,0.33333333333333337,0,dʰaráṇī,*piṣyatē
+entry,BONE,0.133878,Low: <0.2,Focal support below five votes,0.223129,0.6,0.2,0.9795918367346939,0.7333333333333333,aṣṭʰi,haḍḍa
+entry,BEAUTIFUL,0.133681,Low: <0.2,Focal support below five votes,0.267361,0.5,0.20833333333333334,0.3263888888888889,0,śúbʰvan,śōbʰaná
+entry,STOOL,0.132727,Low: <0.2,Focal support below five votes,0.331818,0.4,0.4,0.41666666666666663,0.15303030303030302,ā́sana,pīṭʰa
+entry,SHOULDERBLADE,0.132143,Low: <0.2,Focal support below five votes,0.330357,0.4,0.375,0.2857142857142857,0,*spʰiyá,áṁsa
+entry,VOMIT,0.131852,Low: <0.2,Focal support below five votes,0.247222,0.5333333333333333,0.3333333333333333,0.17777777777777776,0.016666666666666666,vámati,udgirati
+entry,COUGH,0.131111,Low: <0.2,Focal support below five votes,0.327778,0.4,0.2,0.45555555555555555,0,kā́satē,*kʰōkkʰ
+entry,SCRATCH,0.130603,Low: <0.2,Focal support below five votes,0.313447,0.41666666666666663,0.4375,0.18939393939393936,0,*kōcc,*kōtr
+entry,NECKLACE,0.130556,Low: <0.2,Focal support below five votes,0.326389,0.4,0.3333333333333333,0.4861111111111111,0.16666666666666666,*graíviya,hāra
+entry,DARK,0.130357,Low: <0.2,Focal support below five votes,0.325893,0.4,0.2857142857142857,0.4375,0.07142857142857142,kṣīṇá,andʰakāra
+entry,WAIST,0.130179,Low: <0.2,Focal support below five votes,0.289286,0.45,0.42857142857142855,0.15,0,*ḍʰākka,*lakka
+entry,TOWARDS,0.13,Low: <0.2,Focal support below five votes,0.325,0.4,0.3333333333333333,0.35,0.03333333333333333,kárṇa,bʰitta
+entry,NOT,0.129928,Low: <0.2,Focal support below five votes,0.169471,0.7666666666666666,0.23958333333333331,0.8076923076923077,0.7083333333333333,naiva,ná
+entry,SHADE,0.129545,Low: <0.2,Focal support below five votes,0.215909,0.6,0.25,0.18181818181818182,0,apaccʰāyā,cʰādi
+entry,SMALL,0.129446,Low: <0.2,Focal support below five votes,0.242712,0.5333333333333333,0.14814814814814814,0.40209059233449485,0.06481481481481483,*lukka,*cʰōṭṭa
+entry,PULSE,0.129365,Low: <0.2,Focal support below five votes,0.323413,0.4,0.2857142857142857,0.3611111111111111,0,mudgá,nāḍī́
+entry,LIE (REST),0.128571,Low: <0.2,Focal support below five votes,0.321429,0.4,0.2857142857142857,0.35714285714285715,0,laṭṭa,*jʰūṭṭʰa
+entry,WOLF,0.128571,Low: <0.2,Focal support below five votes,0.321429,0.4,0.35714285714285715,0.2857142857142857,0,grastr̩,*?
+entry,BE BORN,0.127778,Low: <0.2,Focal support below five votes,0.319444,0.4,0.5833333333333334,0.2222222222222222,0.16666666666666666,jā́yatē,dēśī́ya
+entry,LOSE,0.126731,Low: <0.2,Focal support below five votes,0.422436,0.3,0.3,0.5448717948717948,0,*pusati,hārayati
+entry,BARK,0.126667,Low: <0.2,Focal support below five votes,0.316667,0.4,0.4,0.29999999999999993,0.06666666666666667,puṭa,cʰalli
+entry,THROAT,0.125463,Low: <0.2,Focal support below five votes,0.250926,0.5,0.20833333333333334,0.4185185185185185,0.125,*śraṭṭa,gala
+entry,PORCH,0.125333,Low: <0.2,Focal support below five votes,0.313333,0.4,0.4,0.22666666666666668,0,maṇḍapa,*avaśara
+entry,STRING,0.12533,Low: <0.2,Focal support below five votes,0.313324,0.4,0.2857142857142857,0.4077838827838827,0.06684981684981685,sū́tra,davara
+entry,BUILD,0.12381,Low: <0.2,Focal support below five votes,0.309524,0.4,0.3333333333333333,0.2857142857142857,0,dádʰāti,cinṓti
+entry,HIGH TIDE,0.12381,Low: <0.2,Focal support below five votes,0.309524,0.4,0.2857142857142857,0.3333333333333333,0,*avaḍḍʰāla,vŕ̩ddʰi
+entry,HOLD,0.123512,Low: <0.2,Focal support below five votes,0.247024,0.5,0.35714285714285715,0.3083333333333333,0.17142857142857143,dʰāráyati,dʰárati
+entry,RECOGNIZE (SOMEBODY),0.123333,Low: <0.2,Focal support below five votes,0.308333,0.4,0.3333333333333333,0.2833333333333333,0,jānā́ti,pratyabʰijānāti
+entry,SPEAR,0.123333,Low: <0.2,Focal support below five votes,0.308333,0.4,0.3333333333333333,0.45,0.16666666666666666,śalyá,bʰalla
+entry,PLOUGH,0.122854,Low: <0.2,Focal support below five votes,0.263258,0.4666666666666666,0.29166666666666663,0.23484848484848486,0,kr̩ṣáti,*carṣati
+entry,KNOW,0.122751,Low: <0.2,Focal support below five votes,0.306878,0.4,0.42857142857142855,0.2222222222222222,0.037037037037037035,jānā́ti,cihnayati
+entry,ELBOW,0.122294,Low: <0.2,Focal support below five votes,0.244589,0.5,0.22727272727272727,0.2619047619047619,0,*ḍʰōŋga,aratní
+entry,WANT,0.122222,Low: <0.2,Focal support below five votes,0.305556,0.4,0.3333333333333333,0.2777777777777778,0,*gʰaṭṭati,śraddʰā́
+entry,EMERGE (APPEAR),0.121875,Low: <0.2,Focal support below five votes,0.270833,0.45,0.25,0.29166666666666663,0,*niṣkasati,bʰā́sati
+entry,DEER,0.121711,Low: <0.2,Focal support below five votes,0.405702,0.3,0.25,0.8947368421052632,0.3333333333333333,*margā,hariṇá
+entry,FIREWOOD,0.121154,Low: <0.2,Focal support below five votes,0.259615,0.4666666666666666,0.17948717948717946,0.4166666666666667,0.07692307692307693,dā́ru,lakuṭa
+entry,REMAIN,0.119524,Low: <0.2,Focal support below five votes,0.29881,0.4,0.2222222222222222,0.3892857142857143,0.013888888888888888,dʰárati,*rahati
+entry,PALM OF HAND,0.119444,Low: <0.2,Focal support below five votes,0.298611,0.4,0.2222222222222222,0.375,0,pr̩tʰú,nārikēla
+entry,BE HUNGRY,0.119391,Low: <0.2,Focal support below five votes,0.238782,0.5,0.20833333333333334,0.3076923076923077,0.038461538461538464,abʰukta,bubʰukṣatē
+entry,GOOD,0.118562,Low: <0.2,Focal support below five votes,0.197603,0.6,0.21428571428571427,0.18092105263157893,0,bʰagín,vardʰita
+entry,RAVINE,0.117284,Low: <0.2,Focal support below five votes,0.351852,0.3333333333333333,0.5555555555555556,0.18518518518518517,0.037037037037037035,*gʰala,gʰāra
+entry,HARD,0.115909,Low: <0.2,Focal support below five votes,0.289773,0.4,0.45454545454545453,0.25,0.125,kakkʰaṭa,nirbʰara
+entry,OPEN,0.115831,Low: <0.2,Focal support below five votes,0.289579,0.4,0.16666666666666666,0.4680461073318216,0.05555555555555555,*vyapāvarati,*kʰōll
+entry,DUNG (ANIMAL FAECES),0.115323,Low: <0.2,Focal support below five votes,0.364177,0.3166666666666666,0.6904761904761905,0.14393939393939392,0.10606060606060605,pāṣi,kʰā́tra
+entry,GRANDMOTHER,0.114286,Low: <0.2,Focal support below five votes,0.285714,0.4,0.35714285714285715,0.2857142857142857,0.07142857142857142,*dādda,*nānna
+entry,REST,0.114286,Low: <0.2,Focal support below five votes,0.285714,0.4,0.2857142857142857,0.3,0.014285714285714285,viśramatē,suptá
+entry,ROTTEN,0.113636,Low: <0.2,Focal support below five votes,0.284091,0.4,0.25,0.3181818181818182,0,takrá,śáṭati
+entry,SWEET,0.113438,Low: <0.2,Focal support below five votes,0.20625,0.55,0.18333333333333332,0.7125,0.48333333333333334,madʰurá,mr̩ṣṭá
+entry,DEEP,0.113021,Low: <0.2,Focal support below five votes,0.376736,0.3,0.25,0.5034722222222222,0,guptá,gabʰīrá
+entry,SHIELD,0.112963,Low: <0.2,Focal support below five votes,0.423611,0.26666666666666666,0.625,0.2222222222222222,0,kʰēṭa-,*ōḍḍʰ
+entry,SEED,0.111623,Low: <0.2,Focal support below five votes,0.196982,0.5666666666666667,0.7692307692307693,0.11805555555555554,0.4933226495726496,bī́ja,tilá
+entry,JACKAL,0.10943,Low: <0.2,Focal support below five votes,0.269091,0.4066666666666666,0.8181818181818182,0.13555555555555554,0.41555555555555557,śr̩gālá,pʰēru
+entry,AND,0.109127,Low: <0.2,Focal support below five votes,0.297619,0.36666666666666664,0.16666666666666666,0.42857142857142855,0,tadā́,ápara
+entry,NOW,0.108571,Low: <0.2,Focal support below five votes,0.271429,0.4,0.2857142857142857,0.4,0.14285714285714285,*?,adʰunā́
+entry,DIRTY,0.107389,Low: <0.2,Focal support below five votes,0.268473,0.4,0.18181818181818182,0.35512820512820514,0,*kicca,*malin
+entry,PENIS,0.106777,Low: <0.2,Focal support below five votes,0.282051,0.3785714285714285,0.7564102564102563,0.1456043956043956,0.3379120879120879,laṭṭa,lakuṭa
+entry,ONE,0.105528,Low: <0.2,Focal support below five votes,0.120833,0.8733333333333334,0.9166666666666666,0.10916666666666668,0.7841666666666667,ḗka,pādiká
+entry,GO UP OR RISE (ONESELF),0.105429,Low: <0.2,Focal support below five votes,0.210859,0.5,0.2777777777777778,0.23484848484848483,0.09090909090909091,*ut-stʰāti,*caḍʰati
+entry,FINGER,0.104762,Low: <0.2,Focal support below five votes,0.130952,0.8,1.0,0.09523809523809523,0.8333333333333334,aŋgúli,aŋgula
+entry,HAT,0.104029,Low: <0.2,Focal support below five votes,0.260073,0.4,0.2857142857142857,0.9487179487179487,0.7142857142857143,kʰōla,*ṭōppa
+entry,FLOUR,0.103877,Low: <0.2,Focal support below five votes,0.207755,0.5,0.15625,0.7592592592592593,0.5,apūpíya,*ārta
+entry,CUT,0.103824,Low: <0.2,Focal support below five votes,0.167241,0.6208080808080808,0.294047619047619,0.18259061200237672,0.14215686274509803,*cʰindati,kártati
+entry,SLEEP,0.103495,Low: <0.2,Focal support below five votes,0.206989,0.5,0.16666666666666666,0.2806451612903226,0.03333333333333333,*svāpra,suptá
+entry,LOOK,0.103125,Low: <0.2,Focal support below five votes,0.20625,0.5,0.25,0.3125,0.15,*stʰarati,*dr̩kṣati
+entry,OUTSIDE,0.103125,Low: <0.2,Focal support below five votes,0.34375,0.3,0.1875,0.5625,0.0625,*bāhirima,*bāhira
+entry,THERE,0.101786,Low: <0.2,Focal support below five votes,0.339286,0.3,0.25,0.42857142857142855,0,átra,ittʰám
+entry,GET,0.101136,Low: <0.2,Focal support below five votes,0.252841,0.4,0.25,0.5606060606060606,0.30492424242424243,lábʰatē,prāpayati
+entry,BOW STRING,0.100962,Low: <0.2,Focal support below five votes,0.252404,0.4,0.6923076923076923,0.25,0.4375,guṇá,tantí
+entry,FEAR (BE AFRAID),0.098152,Low: <0.2,Focal support below five votes,0.24538,0.4,0.18181818181818182,0.34730725623582775,0.03836580086580087,bibʰḗti,dara
+entry,RUB,0.097527,Low: <0.2,Focal support below five votes,0.243819,0.4,0.2857142857142857,0.2089160839160839,0.006993006993006993,márdati,*marati
+entry,GUARD,0.0975,Low: <0.2,Focal support below five votes,0.325,0.3,0.35,0.3,0,rákṣati,prahara
+entry,HIP,0.097143,Low: <0.2,Focal support below five votes,0.242857,0.4,0.2857142857142857,0.2,0,śrṓṇi,*kulla
+entry,EGG,0.096955,Low: <0.2,Focal support below five votes,0.19391,0.5,0.20833333333333334,0.1794871794871795,0,stʰūlá,ḍimba
+entry,GRAIN,0.096111,Low: <0.2,Focal support below five votes,0.205952,0.4666666666666666,0.2333333333333333,0.17857142857142858,0,bī́ja,annā́dya
+entry,GROOM,0.095893,Low: <0.2,Focal support below five votes,0.319643,0.3,0.25,0.3892857142857143,0,jā́mātr̩,vará
+entry,ACHE,0.095,Low: <0.2,Focal support below five votes,0.475,0.2,0.75,0.2,0,śūlatē,jʰaṇajḣaṇāyatē
+entry,DRUM,0.094182,Low: <0.2,Focal support below five votes,0.252273,0.37333333333333335,0.8,0.1696969696969697,0.4651515151515152,ḍʰōla,*ḍaŋka
+entry,YAWN,0.093333,Low: <0.2,Focal support below five votes,0.233333,0.4,0.5,0.2,0.2333333333333333,jŕ̩mbʰatē,hāyi
+entry,WING,0.092826,Low: <0.2,Focal support below five votes,0.30942,0.3,0.3,0.3623188405797101,0.043478260869565216,pākṣa,ḍayana
+entry,FALL,0.092583,Low: <0.2,Focal support below five votes,0.216026,0.42857142857142855,0.1948051948051948,0.4001543209876543,0.16290684624017956,galati,pátati
+entry,POND,0.092308,Low: <0.2,Focal support below five votes,0.230769,0.4,0.3333333333333333,0.17948717948717946,0.05128205128205128,*ḍʰaṇḍʰa,pauṣkara
+entry,SPLIT,0.091749,Low: <0.2,Focal support below five votes,0.250223,0.3666666666666667,0.2619047619047619,0.25416666666666665,0.015625,pʰálati,*spʰuṭyati
+entry,HEAT,0.091136,Low: <0.2,Focal support below five votes,0.227839,0.4,0.2857142857142857,0.20842490842490843,0.038461538461538464,tápyati,arcís
+entry,LAMB,0.091071,Low: <0.2,Focal support below five votes,0.303571,0.3,0.35714285714285715,0.25,0,*bukka,*lēlla
+entry,PUT,0.090455,Low: <0.2,Focal support below five votes,0.301515,0.3,0.13636363636363635,0.4666666666666666,0,dádʰāti,rákṣati
+entry,HOE,0.09,Low: <0.2,Focal support below five votes,0.3,0.3,0.3,0.5,0.2,karṣí,kuddāla
+entry,DRY,0.089836,Low: <0.2,Focal support below five votes,0.149726,0.6,0.15789473684210525,0.7083333333333334,0.5667763157894736,śúṣyati,śúṣka
+entry,PORCUPINE,0.089773,Low: <0.2,Focal support below five votes,0.224432,0.4,0.25,0.6363636363636364,0.4375,śályaka,śvāvídʰ
+entry,SLOPE,0.088889,Low: <0.2,Focal support below five votes,0.333333,0.26666666666666666,0.4,0.26666666666666666,0,drōṇī,uttáraṇa
+entry,WHEAT,0.088803,Low: <0.2,"Supported, crossover >10 points",0.088803,1,0.8809523809523809,0.13513513513513514,0.8384813384813384,gōdʰū́ma,kaṇika
+entry,WHICH,0.08875,Low: <0.2,Focal support below five votes,0.44375,0.2,0.6875,0.2,0,kím,kaḥ punar
+entry,BLOW (OF WIND),0.08854,Low: <0.2,Focal support below five votes,0.206593,0.42857142857142855,0.4642857142857143,0.16483516483516483,0.215934065934066,*pʰūtka,*ṭʰōkk
+entry,DAWN,0.088525,Low: <0.2,Focal support below five votes,0.265575,0.3333333333333333,0.23809523809523808,0.3030555555555555,0.01,*lōka,*bʰōrā
+entry,FIST,0.087051,Low: <0.2,Focal support below five votes,0.186538,0.4666666666666666,0.95,0.17948717948717946,0.7564102564102563,muṣṭí,*gʰūssa
+entry,FOOD,0.086458,Low: <0.2,Focal support below five votes,0.216146,0.4,0.25,0.18229166666666666,0,apūpá,āhāra
+entry,YOU,0.086429,Low: <0.2,Focal support below five votes,0.144048,0.6000000000000001,0.4880952380952381,0.12000000000000002,0.32,yuṣmad,ātmán
+entry,WEAVE,0.085556,Low: <0.2,Focal support below five votes,0.213889,0.4,0.2222222222222222,0.65,0.4444444444444444,tántra,*vināti
+entry,SPRING (OF WATER),0.084286,Low: <0.2,Focal support below five votes,0.421429,0.2,0.7,0.14285714285714285,0,útsa,*jʰāladʰāraka
+entry,STRAW,0.083995,Low: <0.2,Focal support below five votes,0.209987,0.4,0.2857142857142857,0.16997354497354497,0.03571428571428571,túṣa,pálāla
+entry,WASH,0.083889,Low: <0.2,Focal support below five votes,0.209722,0.4,0.2,0.3194444444444445,0.1,*kṣupyatē,*dʰauvati
+entry,PLAY,0.083761,Low: <0.2,Focal support below five votes,0.314103,0.26666666666666666,0.16666666666666666,0.46153846153846156,0,nŕ̩tyati,*kʰēḍ
+entry,DISTANCE,0.083333,Low: <0.2,Focal support below five votes,0.416667,0.2,1.0,0.16666666666666666,0.3333333333333333,dūrá,pántʰā
+entry,BREAD,0.083175,Low: <0.2,Focal support below five votes,0.311905,0.26666666666666666,0.35714285714285715,0.26666666666666666,0,gōla,*rōṭṭa
+entry,RAM,0.083056,Low: <0.2,Focal support below five votes,0.177976,0.4666666666666666,0.5357142857142857,0.2333333333333333,0.41309523809523807,mēṇḍʰa,bʰēḍra
+entry,CHILD,0.08172,Low: <0.2,Focal support below five votes,0.204301,0.4,0.16666666666666666,0.24193548387096772,0,*kuḍa,*cʰōkara
+entry,THROW,0.081212,Low: <0.2,Focal support below five votes,0.20303,0.4,0.2727272727272727,0.13333333333333333,0,talati,*ral
+entry,BLUNT,0.081019,Low: <0.2,Focal support below five votes,0.202546,0.4,0.2222222222222222,0.19398148148148148,0.011111111111111112,*bukka,*bʰutta
+entry,SELF,0.080159,Low: <0.2,Focal support below five votes,0.400794,0.2,0.14285714285714285,0.9444444444444444,0.2857142857142857,*pʰūtka,ātmán
+entry,MANGO,0.079032,Low: <0.2,Focal support below five votes,0.112903,0.7,1.0,0.11290322580645161,0.8870967741935484,āmrá,kēsarin
+entry,TURN,0.078698,Low: <0.2,Focal support below five votes,0.201667,0.3902380952380952,0.34722222222222215,0.13007936507936507,0.07396825396825397,vāra,*pāḍi
+entry,BITE,0.077976,Low: <0.2,Focal support below five votes,0.259921,0.3,0.21428571428571427,0.3055555555555556,0,*cappayati,kártati
+entry,HOLE,0.076905,Low: <0.2,Focal support below five votes,0.192262,0.4,0.2222222222222222,0.16230158730158728,0,*cumbʰati,cʰidrá
+entry,SWIM,0.076339,Low: <0.2,Focal support below five votes,0.254464,0.3,0.21428571428571427,0.4375,0.14285714285714285,drávati,tárati
+entry,EYE,0.07625,Low: <0.2,Focal support below five votes,0.099457,0.7666666666666666,0.19166666666666665,0.09782608695652174,0.09057971014492752,áśru,cákṣus
+entry,STRONG,0.075,Low: <0.2,Focal support below five votes,0.25,0.3,0.21428571428571427,0.2857142857142857,0,*bʰakkʰa,bála
+entry,SISTER,0.074167,Low: <0.2,Focal support below five votes,0.370833,0.2,0.575,0.16666666666666666,0,svásr̩,*duhitājana
+entry,IN FRONT OF,0.073558,Low: <0.2,Focal support below five votes,0.294231,0.25,0.25,0.5384615384615384,0.2,purás,ágra
+entry,TWO,0.072991,Low: <0.2,Focal support below five votes,0.091238,0.8,0.9469696969696971,0.08695652173913043,0.8514492753623187,dva,ardʰatr̩tīya
+entry,SKY,0.072826,Low: <0.2,Focal support below five votes,0.242754,0.3,0.25,0.36231884057971014,0.12681159420289856,ākāśá,āsmān
+entry,THIN,0.072821,Low: <0.2,Focal support below five votes,0.22996,0.3166666666666667,0.13194444444444445,0.3488095238095238,0.020833333333333332,cūrṇa,pattralá
+entry,MEAT,0.071667,Low: <0.2,Focal support below five votes,0.179167,0.4,0.125,0.23333333333333334,0,ánna,gōśt
+entry,OLD,0.071585,Low: <0.2,Focal support below five votes,0.178963,0.4,0.13333333333333333,0.2245934959349593,0,*ḍagga,jūrṇá
+entry,WEAK,0.071465,Low: <0.2,Focal support below five votes,0.267995,0.26666666666666666,0.2222222222222222,0.31376678876678876,0,*rulla,durbala
+entry,THIEF,0.071429,Low: <0.2,Focal support below five votes,0.178571,0.4,0.14285714285714285,0.32142857142857145,0.10714285714285714,muṣ,*ṭʰagg
+entry,MAIZE,0.071053,Low: <0.2,Focal support below five votes,0.177632,0.4,0.25,0.6403508771929824,0.5350877192982456,yavākāra,markaka
+entry,MORNING,0.070498,Low: <0.2,Focal support below five votes,0.264368,0.26666666666666666,0.16666666666666666,0.3620689655172414,0,rucitá,*vibʰāna
+entry,GATHER,0.07,Low: <0.2,Focal support below five votes,0.35,0.2,0.2,0.5,0,pralabʰatē,cinṓti
+entry,VILLAGE,0.069987,Low: <0.2,Focal support below five votes,0.116646,0.6,0.9078947368421053,0.07142857142857142,0.746031746031746,grā́ma,vasti
+entry,STRIKE,0.069624,Low: <0.2,Focal support below five votes,0.183913,0.3785714285714285,0.2222222222222222,0.1456043956043956,0,lāgáyati,*ṭʰōkk
+entry,STICK,0.06875,Low: <0.2,Focal support below five votes,0.229167,0.3,0.125,0.3333333333333333,0,*drumadaṇḍa,*laṣṭi
+entry,CLOTHES,0.066562,Low: <0.2,Focal support below five votes,0.332812,0.2,0.2,0.515625,0.05,paṭṭa,karpaṭa
+entry,EVIL,0.066481,Low: <0.2,Focal support below five votes,0.249306,0.26666666666666666,0.26666666666666666,0.23194444444444443,0,*latta,*bura
+entry,SIT,0.066176,Low: <0.2,Focal support below five votes,0.220588,0.3,0.21428571428571427,0.4411764705882353,0.21428571428571427,níṣīdati,úpaviśati
+entry,PESTLE,0.063988,Low: <0.2,Focal support below five votes,0.127976,0.5,0.8571428571428571,0.08928571428571429,0.6904761904761905,músala,*ḍʰēŋka
+entry,AWAKE,0.06375,Low: <0.2,Focal support below five votes,0.31875,0.2,0.2,0.4375,0,búdʰyatē,jā́grat
+entry,EMPTY,0.062986,Low: <0.2,Focal support below five votes,0.188957,0.3333333333333333,0.393939393939394,0.1282051282051282,0.14423076923076922,tuccʰyá,vānta
+entry,TIRED,0.06176,Low: <0.2,Focal support below five votes,0.231602,0.26666666666666666,0.2727272727272727,0.19047619047619047,0,*kʰasati,kātara
+entry,GUTS,0.061667,Low: <0.2,Focal support below five votes,0.308333,0.2,0.4166666666666667,0.2,0,ū́badʰya,*pēṭṭa
+entry,MATERNAL UNCLE (MOTHER'S BROTHER),0.060641,Low: <0.2,Focal support below five votes,0.082692,0.7333333333333333,0.28205128205128205,0.75,0.8666666666666667,mātulá,māma
+entry,SLEEVE,0.06,Low: <0.2,Focal support below five votes,0.3,0.2,0.2,0.4,0,*bāhucūḍa,bāhula
+entry,CLOTH,0.05997,Low: <0.2,Focal support below five votes,0.239881,0.25,0.20833333333333334,0.4380952380952381,0.16666666666666666,*ṭukk,karpaṭa
+entry,LOOSE,0.059875,Low: <0.2,Focal support below five votes,0.299373,0.2,0.2,0.4654135338345865,0.06666666666666667,vistīrṇa,*ḍʰila
+entry,BREATH,0.057576,Low: <0.2,Focal support below five votes,0.191919,0.3,0.16666666666666666,0.7727272727272727,0.5555555555555556,dʰamá,śvāsá
+entry,SPLIT OPEN,0.057253,Low: <0.2,Focal support below five votes,0.223065,0.25666666666666665,0.2857142857142857,0.16041666666666665,0,*traṭṭ,traṭ
+entry,VALLEY,0.05641,Low: <0.2,Focal support below five votes,0.282051,0.2,0.3974358974358974,0.16666666666666666,0,*gʰala,drōṇī
+entry,GENTLE,0.056313,Low: <0.2,Focal support below five votes,0.281566,0.2,0.8409090909090909,0.1111111111111111,0.3888888888888889,kōmalá,*pōcca
+entry,MOTHER-IN-LAW,0.05625,Low: <0.2,Focal support below five votes,0.1875,0.3,0.125,0.25,0,jyḗṣṭʰa,*māmikā
+entry,LOST,0.055903,Low: <0.2,Focal support below five votes,0.239583,0.23333333333333334,0.3333333333333333,0.14583333333333334,0,*pusati,kṣapita
+entry,STREAM,0.055769,Low: <0.2,Focal support below five votes,0.278846,0.2,0.16666666666666666,0.391025641025641,0,*gʰala,dʰā́ra
+entry,FULL,0.055386,Low: <0.2,Focal support below five votes,0.174903,0.31666666666666665,0.09895833333333333,0.541025641025641,0.29017857142857145,pūryátē,pūra
+entry,GRASS,0.055222,Low: <0.2,Focal support below five votes,0.135791,0.4066666666666666,0.7555555555555554,0.0782051282051282,0.5621794871794872,gʰāsá,kʰaṭa
+entry,MAKE,0.054563,Low: <0.2,Focal support below five votes,0.204613,0.26666666666666666,0.19047619047619047,0.21875,0,karṓti,*macyatē
+entry,DIRT,0.05439,Low: <0.2,Focal support below five votes,0.191964,0.2833333333333333,0.5714285714285714,0.11805555555555554,0.3055555555555555,mála,*malin
+entry,TEAR (SHRED),0.053571,Low: <0.2,Focal support below five votes,0.178571,0.3,0.2857142857142857,0.21428571428571427,0.14285714285714285,pʰálati,cʰidrá
+entry,FRUIT,0.05328,Low: <0.2,Focal support below five votes,0.266402,0.2,0.16666666666666666,0.7828042328042328,0.4166666666666667,lāva,pʰála
+entry,PERSON,0.052991,Low: <0.2,Focal support below five votes,0.144522,0.36666666666666664,0.14102564102564102,0.5606060606060606,0.4125874125874126,mā́nuṣa,jána
+entry,CRUSH,0.0525,Low: <0.2,Focal support below five votes,0.225,0.2333333333333333,0.3333333333333333,0.11666666666666665,0,kuṭṭáyati,*cittʰ
+entry,FLESH,0.052308,Low: <0.2,Focal support below five votes,0.261538,0.2,0.9230769230769231,0.2,0.6,māṁsá,gōśt
+entry,SPREAD OUT,0.052209,Low: <0.2,Focal support below five votes,0.195784,0.26666666666666666,0.2222222222222222,0.1693452380952381,0,*upastarati,prásārayati
+entry,HAIR,0.051641,Low: <0.2,Focal support below five votes,0.110659,0.4666666666666666,0.11666666666666665,0.10465116279069768,0,*jatta,cū́ḍa
+entry,TRUTH,0.051429,Low: <0.2,Focal support below five votes,0.257143,0.2,0.14285714285714285,0.8,0.42857142857142855,bʰadrá,satyá
+entry,WITH,0.051346,Low: <0.2,Focal support below five votes,0.171154,0.3,0.125,0.3423076923076923,0.125,gr̩bʰāyáti,sā́rtʰa
+entry,FAECES (EXCREMENT),0.051282,Low: <0.2,Focal support below five votes,0.128205,0.4,0.15384615384615385,0.8333333333333334,0.7307692307692307,*rikṣa,gūtʰa
+entry,CLAY,0.051042,Low: <0.2,Focal support below five votes,0.255208,0.2,0.16666666666666666,0.7604166666666666,0.4166666666666667,pāṁśu,mŕ̩ttikā
+entry,STAR,0.050996,Low: <0.2,Focal support below five votes,0.109278,0.4666666666666666,0.1372549019607843,0.08130081300813008,0,stŕ̩,nákṣatra
+entry,FOG,0.050926,Low: <0.2,Focal support below five votes,0.25463,0.2,0.2,0.5092592592592592,0.2,bāṣpá,*kuha
+entry,HOW MUCH,0.05,Low: <0.2,Focal support below five votes,0.25,0.2,0.16666666666666666,1.0,0.6666666666666666,kíyant,*kiyatta
+entry,CALL,0.048846,Low: <0.2,Focal support below five votes,0.244231,0.2,0.2,0.28846153846153844,0,mantráyatē,śábda
+entry,UGLY,0.048571,Low: <0.2,Focal support below five votes,0.242857,0.2,0.2,0.2857142857142857,0,aśubʰa,*bʰuṭṭa
+entry,FLOW,0.048291,Low: <0.2,Focal support below five votes,0.241453,0.2,0.16666666666666666,0.37179487179487175,0.05555555555555555,*avavahati,váhati
+entry,PULL OUT,0.048194,Low: <0.2,Focal support below five votes,0.240972,0.2,0.16666666666666666,0.48194444444444445,0.16666666666666666,cāláyati,*kaḍḍʰati
+entry,FINE (PENALTY),0.048148,Low: <0.2,Focal support below five votes,0.240741,0.2,0.2,0.28148148148148144,0,bʰagín,daṇḍáyati
+entry,ROLL,0.048117,Low: <0.2,Focal support below five votes,0.240584,0.2,0.2,0.2811688311688312,0,*dulati,luṭʰáti
+entry,RIPEN,0.047917,Low: <0.2,Focal support below five votes,0.239583,0.2,0.6666666666666666,0.125,0.3125,pacyátē,spʰáṭati
+entry,PLOUGH (INSTRUMENT),0.047879,Low: <0.2,Focal support below five votes,0.119697,0.4,0.13333333333333333,0.10606060606060605,0,yugá,lā́ŋgala
+entry,FRONT (PART),0.047778,Low: <0.2,Focal support below five votes,0.238889,0.2,0.2,0.27777777777777773,0,dvārakōṣṭʰaka,saṁmukʰá
+entry,OLD (AGED),0.047778,Low: <0.2,Focal support below five votes,0.238889,0.2,0.2777777777777778,0.2,0,gʰaná,bʰāratara
+entry,A LITTLE,0.047768,Low: <0.2,Focal support below five votes,0.159226,0.3,0.1875,0.5059523809523809,0.375,tuccʰyá,*stōkaḍ-
+entry,ARM,0.047743,Low: <0.2,Focal support below five votes,0.190972,0.25,0.10416666666666667,0.5694444444444444,0.2916666666666667,muṣṭí,bāhú
+entry,SHOOT,0.047619,Low: <0.2,Focal support below five votes,0.238095,0.2,0.3333333333333333,0.14285714285714285,0,māráyati,prōdgata
+entry,NIGHT,0.047448,Low: <0.2,Focal support below five votes,0.11862,0.4,0.10526315789473684,0.8863636363636364,0.7543859649122806,vikāla,rā́trī
+entry,STEAM,0.047179,Low: <0.2,Focal support below five votes,0.235897,0.2,0.2,0.8717948717948717,0.6,pʰḗna,bāṣpá
+entry,THUMB,0.046429,Low: <0.2,Focal support below five votes,0.154762,0.3,0.16666666666666666,0.6428571428571429,0.5,jyḗṣṭʰa,aŋguṣṭʰá
+entry,GIVE,0.04624,Low: <0.2,Focal support below five votes,0.173401,0.26666666666666666,0.2727272727272727,0.07407407407407407,0,prádadāti,ālīyatē
+entry,PEA,0.045238,Low: <0.2,Focal support below five votes,0.22619,0.2,0.16666666666666666,0.7857142857142857,0.5,kulattʰa,*maṭṭara
+entry,HUNGER,0.045139,Low: <0.2,Focal support below five votes,0.225694,0.2,0.125,0.8888888888888888,0.5625,anāhāra,bubʰukṣā
+entry,FROM,0.045,Low: <0.2,Focal support below five votes,0.225,0.2,0.2,0.25,0,mádʰya,samá
+entry,HAMMER,0.04424,Low: <0.2,Focal support below five votes,0.221198,0.2,0.14285714285714285,0.7043010752688171,0.4047619047619047,kuṭṭana,*hastakūṭa
+entry,DUST,0.043604,Low: <0.2,Focal support below five votes,0.186874,0.2333333333333333,0.11666666666666665,0.6822954822954822,0.4252136752136752,*uddʰūḍi,*dʰūḍi
+entry,BUFFALO,0.042857,Low: <0.2,Focal support below five votes,0.107143,0.4,0.13333333333333333,0.09523809523809523,0.014285714285714285,sā́ṇḍa,*mahyā
+entry,WHOLE,0.041845,Low: <0.2,Focal support below five votes,0.167381,0.25,0.17857142857142858,0.2633333333333333,0.10714285714285714,bʰū́yiṣṭʰa,pūra
+entry,FLEA,0.041667,Low: <0.2,Focal support below five votes,0.208333,0.2,1.0,0.16666666666666666,0.75,plúṣi,uddaṁśa
+entry,CATCH,0.041429,Low: <0.2,Focal support below five votes,0.207143,0.2,0.2,0.21428571428571427,0,gʰárṣati,dʰárati
+entry,YOUNG,0.04125,Low: <0.2,Focal support below five votes,0.1375,0.3,0.15,0.14285714285714285,0.017857142857142856,lagʰú,táruṇa
+entry,LAY (VERB),0.041071,Low: <0.2,Focal support below five votes,0.205357,0.2,0.2857142857142857,0.125,0,stʰāpáyati,pātáyati
+entry,ABUSE,0.040833,Low: <0.2,Focal support below five votes,0.204167,0.2,0.2,0.20833333333333331,0,gárda,bʰáṇḍatē
+entry,SLIP,0.040833,Low: <0.2,Focal support below five votes,0.204167,0.2,0.2,0.20833333333333334,0,piccʰilá,*kʰasati
+entry,CORNER,0.040575,Low: <0.2,Focal support below five votes,0.202877,0.2,0.14285714285714285,0.548611111111111,0.2857142857142857,kárṇikā,kōṇa
+entry,MAD,0.040139,Low: <0.2,Focal support below five votes,0.200694,0.2,0.2,0.20138888888888892,0,badʰirá,vātula
+entry,COLOR,0.04,Low: <0.2,Focal support below five votes,0.2,0.2,0.2,0.2,0,rajáyati,várṇa
+entry,PIG,0.04,Low: <0.2,Focal support below five votes,0.1,0.4,1.0,0.1,0.9,sūkará,*bʰūṇḍa
+entry,LAUGH,0.039615,Low: <0.2,Focal support below five votes,0.132051,0.3,0.1,0.23076923076923078,0.06666666666666667,hāsayati,*hasyatē
+entry,OTTER,0.039286,Low: <0.2,Focal support below five votes,0.130952,0.3,0.9285714285714286,0.16666666666666666,0.8333333333333334,udrá,lubdʰa
+entry,RISE (MOVE UPWARDS),0.039286,Low: <0.2,Focal support below five votes,0.196429,0.2,0.25,0.14285714285714285,0,*utskadati,*cagʰyati
+entry,FAST,0.038929,Low: <0.2,Focal support below five votes,0.194643,0.2,0.2,0.18928571428571428,0,*jʰamm,*jʰaṭ
+entry,SOLE (FOOT),0.038889,Low: <0.2,Focal support below five votes,0.194444,0.2,0.2,0.3888888888888889,0.2,*prabda,*talapāda
+entry,SALT,0.03869,Low: <0.2,Focal support below five votes,0.077381,0.5,0.9404761904761905,0.07142857142857142,0.8571428571428571,lavaṇá,mr̩ṣṭá
+entry,PLANT (VEGETATION),0.038149,Low: <0.2,Focal support below five votes,0.190747,0.2,0.14285714285714285,0.2386363636363636,0,právr̩ddʰa,ēraṇḍa
+entry,FIX,0.036667,Low: <0.2,Focal support below five votes,0.183333,0.2,0.2,0.16666666666666666,0,baddʰá,hánati
+entry,MUD,0.036508,Low: <0.2,Focal support below five votes,0.18254,0.2,0.14285714285714285,0.2222222222222222,0,mála,karda
+entry,FOREST,0.035686,Low: <0.2,Focal support below five votes,0.178431,0.2,0.2,0.15686274509803924,0,tuṇḍa,áraṇya
+entry,LADDER,0.035498,Low: <0.2,Focal support below five votes,0.177489,0.2,0.14285714285714285,0.2121212121212121,0,*śrēṣṭrī,niśrayaṇī́
+entry,FIND,0.035238,Low: <0.2,Focal support below five votes,0.17619,0.2,0.4,0.14285714285714285,0.19047619047619047,lábʰatē,śṓddʰum
+entry,LEAVE,0.034722,Low: <0.2,Focal support below five votes,0.173611,0.2,0.1111111111111111,0.23611111111111108,0,tyájati,*kṣuṭyatē
+entry,RAFTER,0.033929,Low: <0.2,Focal support below five votes,0.169643,0.2,0.125,0.21428571428571427,0,bʰitta,paṭṭa
+entry,COURTYARD,0.033333,Low: <0.2,Focal support below five votes,0.166667,0.2,0.2,0.13333333333333333,0,maṇḍapa,vēṣṭá
+entry,STUPID,0.033333,Low: <0.2,Focal support below five votes,0.166667,0.2,0.2,0.13333333333333333,0,*alala,*bukka
+entry,SHOULDER,0.032793,Low: <0.2,Focal support below five votes,0.131173,0.25,0.09615384615384616,0.595679012345679,0.42948717948717946,*spʰiyá,skandʰá
+entry,LUNG,0.032738,Low: <0.2,Focal support below five votes,0.109127,0.3,0.10714285714285714,0.1111111111111111,0,*bʰaṣma,*pōka
+entry,EDGE,0.032639,Low: <0.2,Focal support below five votes,0.163194,0.2,0.16666666666666666,0.1597222222222222,0,prastʰa,*pāḍi
+entry,COUNTRY,0.0325,Low: <0.2,Focal support below five votes,0.1625,0.2,0.2,0.125,0,kuṭī,rājyá
+entry,HAND,0.031944,Low: <0.2,Focal support below five votes,0.079861,0.4,0.11764705882352941,0.8263888888888888,0.784313725490196,stʰávira,hásta
+entry,TWENTY,0.03125,Low: <0.2,Focal support below five votes,0.0625,0.5,1.0,0.0625,0.9375,viṁśatí,*kōḍi
+entry,HEAP,0.031111,Low: <0.2,Focal support below five votes,0.155556,0.2,0.2,0.1111111111111111,0,*ḍʰōkka,*ḍʰikka
+entry,BROTHER,0.030692,Low: <0.2,Focal support below five votes,0.122768,0.25,0.08928571428571429,0.15625,0,bʰrātr̩putra,vīrá
+entry,EAR,0.030682,Low: <0.2,Focal support below five votes,0.102273,0.3,0.06818181818181818,1.0,0.8636363636363636,*kāra,kárṇa
+entry,ACROSS,0.03,Low: <0.2,Focal support below five votes,0.15,0.2,0.2,0.9,0.8,*pārima,pārá
+entry,CORPSE,0.03,Low: <0.2,Focal support below five votes,0.15,0.2,0.16666666666666666,0.13333333333333333,0,mártya,śáva
+entry,SCATTER,0.03,Low: <0.2,Focal support below five votes,0.15,0.2,0.2,0.1,0,pʰála,ávadadʰāti
+entry,CLEAN,0.028571,Low: <0.2,Focal support below five votes,0.142857,0.2,0.14285714285714285,0.14285714285714285,0,*dʰauvati,niktá
+entry,FEATHER,0.028431,Low: <0.2,Focal support below five votes,0.142157,0.2,0.16666666666666666,0.11764705882352941,0,páttra,*skambʰa
+entry,MOVE,0.028158,Low: <0.2,Focal support below five votes,0.122299,0.23023809523809521,0.17142857142857143,0.08855311355311354,0.015384615384615385,*cul,*hallati
+entry,BALL,0.027083,Low: <0.2,Focal support below five votes,0.135417,0.2,0.14285714285714285,0.2708333333333333,0.14285714285714285,bāṇá,gōla
+entry,SMOKE (EXHAUST),0.026944,Low: <0.2,Focal support below five votes,0.089815,0.3,0.9629629629629629,0.0375,0.8208333333333332,dʰūmá,dʰūpana
+entry,SON-IN-LAW,0.026923,Low: <0.2,Focal support below five votes,0.134615,0.2,1.0,0.07692307692307693,0.8076923076923077,jā́mātr̩,vará
+entry,IN,0.026481,Low: <0.2,Focal support below five votes,0.132407,0.2,0.6481481481481481,0.1,0.4833333333333333,mádʰya,*vīcya
+entry,PATERNAL GRANDFATHER,0.02619,Low: <0.2,Focal support below five votes,0.130952,0.2,0.8333333333333334,0.14285714285714285,0.7142857142857143,*dādda,āryaka
+entry,URINE,0.026136,Low: <0.2,Focal support below five votes,0.087121,0.3,0.08333333333333333,0.8409090909090909,0.75,mēha,mū́tra
+entry,TOOTH,0.025926,Low: <0.2,Focal support below five votes,0.077778,0.3333333333333333,0.9555555555555556,0.047619047619047616,0.8476190476190476,dánta,dantaka
+entry,CALF OF LEG,0.025397,Low: <0.2,Focal support below five votes,0.126984,0.2,0.1111111111111111,0.14285714285714285,0,daṇḍá,*ḍala
+entry,LAST YEAR,0.025,Low: <0.2,Focal support below five votes,0.125,0.2,0.1111111111111111,0.9166666666666666,0.7777777777777778,*pravatsara,parút
+entry,PASS,0.024158,Low: <0.2,Focal support below five votes,0.120788,0.2,0.14285714285714285,0.09871794871794871,0,tárati,gamáyati
+entry,SHARE,0.023377,Low: <0.2,Focal support below five votes,0.116883,0.2,0.14285714285714285,0.09090909090909091,0,bʰajati,prā́pti
+entry,MATERNAL AUNT (MOTHER'S SISTER),0.022727,Low: <0.2,Focal support below five votes,0.113636,0.2,0.09090909090909091,1.0,0.8636363636363636,*nānna,mātuḣṣvasr̩
+entry,HORN (ANATOMY),0.022566,Low: <0.2,Focal support below five votes,0.112829,0.2,0.05263157894736842,0.9625,0.7894736842105263,tūra,śŕ̩ŋga
+entry,FINGERNAIL,0.022115,Low: <0.2,Focal support below five votes,0.110577,0.2,0.125,0.09615384615384616,0,nakʰará,nāxun
+entry,WIND,0.022039,Low: <0.2,Focal support below five votes,0.110193,0.2,0.07142857142857142,0.14895833333333333,0,*cʰaṭṭa,havā
+entry,HALF,0.021368,Low: <0.2,Focal support below five votes,0.106838,0.2,0.1111111111111111,0.7692307692307693,0.6666666666666666,*kʰaṇḍara-,ardʰá
+entry,WELL,0.021154,Low: <0.2,Focal support below five votes,0.105769,0.2,0.1,0.11153846153846153,0,bʰagín,nīrōga
+entry,FAR,0.02,Low: <0.2,Focal support below five votes,0.075,0.26666666666666666,0.06666666666666667,0.08333333333333333,0,*dūna,seṭī
+entry,HORSE,0.019742,Low: <0.2,Focal support below five votes,0.09871,0.2,0.1349206349206349,0.0625,0,áśva,prakṣara
+entry,ARMPIT,0.019643,Low: <0.2,Focal support below five votes,0.098214,0.2,0.125,0.07142857142857142,0,kiṣku,kukṣí
+entry,BIRD,0.019167,Low: <0.2,Focal support below five votes,0.095833,0.2,0.06666666666666667,0.125,0,jāŋgala,*pakṣirūpa
+entry,BLUE,0.019167,Low: <0.2,Focal support below five votes,0.095833,0.2,0.06666666666666667,0.875,0.75,pā́lāśa,nī́la
+entry,CROW,0.018519,Low: <0.2,Focal support below five votes,0.111111,0.16666666666666666,0.09259259259259259,1.0,0.8703703703703703,*kāvaraka,kā́ka
+entry,HOW MANY,0.018116,Low: <0.2,Focal support below five votes,0.09058,0.2,0.08333333333333333,0.8478260869565217,0.75,kíyant,*kiyatta
+entry,NAVEL,0.017381,Low: <0.2,Focal support below five votes,0.086905,0.2,0.10714285714285714,0.06666666666666667,0,śuṇḍā,gōṇḍa
+entry,HUNDRED,0.016481,Low: <0.2,Focal support below five votes,0.082407,0.2,0.1,0.06481481481481481,0,pā̃cbiśi,śata-kka-ḍa
+entry,COMB,0.016162,Low: <0.2,Focal support below five votes,0.080808,0.2,0.09090909090909091,0.8888888888888888,0.8181818181818182,kaṣá,káŋkata
+entry,PALATE,0.015934,Low: <0.2,Focal support below five votes,0.07967,0.2,0.9285714285714286,0.07692307692307693,0.8461538461538461,tā́lu,tuṇḍa
+entry,KILL,0.015611,Low: <0.2,Focal support below five votes,0.065046,0.24,0.7708333333333333,0.06666666666666667,0.7074074074074075,māráyati,kuṣáti
+entry,YES,0.015,Low: <0.2,Focal support below five votes,0.15,0.1,0.1,0.2,0,ēvá,jī́va
+entry,TUBE,0.013333,Low: <0.2,Focal support below five votes,0.133333,0.1,0.1,0.16666666666666666,0,vaṁśá,*cōŋga
+entry,NEEDLE (FOR SEWING),0.013203,Low: <0.2,Focal support below five votes,0.066017,0.2,0.07142857142857142,0.06060606060606061,0,sī́vyati,sīvana
+entry,SHOP,0.012143,Low: <0.2,Focal support below five votes,0.121429,0.1,0.1,0.14285714285714285,0,āpāna,kṓṣṭʰa
+entry,LEAF,0.011243,Low: <0.2,Focal support below five votes,0.056217,0.2,0.05555555555555555,0.2976190476190476,0.24074074074074073,cʰadana,parṇá
+entry,THOU,0.011111,Low: <0.2,Focal support below five votes,0.055556,0.2,0.05555555555555555,1.0,0.9444444444444444,yuṣmad,tuvám
+entry,TONGUE,0.011061,Low: <0.2,Focal support below five votes,0.055303,0.2,0.06666666666666667,0.9886363636363636,0.9446969696969697,*lōḍa,jihvā́
+entry,THORN,0.011042,Low: <0.2,Focal support below five votes,0.055208,0.2,0.06666666666666667,0.84375,0.8,*jʰaŋk,kaṇṭa
+entry,FISH,0.010837,Low: <0.2,Focal support below five votes,0.054187,0.2,0.058823529411764705,0.04954954954954955,0,rōhitamatsya,āmiṣá
+entry,NINETEEN,0.010819,Low: <0.2,Focal support below five votes,0.054094,0.2,0.05555555555555555,0.05263157894736842,0,návadaśa,ūnapañcāśat
+entry,RADISH,0.010714,Low: <0.2,Focal support below five votes,0.107143,0.1,0.07142857142857142,1.0,0.8571428571428571,tr̩prá,mū́la
+entry,DRINK,0.009757,Low: <0.2,Focal support below five votes,0.048786,0.2,0.047619047619047616,0.9705882352941176,0.9206349206349206,*jʰaggā,píbati
+entry,NET,0.009405,Low: <0.2,Focal support below five votes,0.094048,0.1,0.07142857142857142,0.11666666666666667,0,pōta,jālya
+entry,SEW,0.009028,Low: <0.2,Focal support below five votes,0.090278,0.1,0.05555555555555555,0.125,0,syūtá,ṭáŋkati
+entry,COOKED RICE,0.00767,Low: <0.2,Focal support below five votes,0.076705,0.1,0.0625,0.09090909090909091,0,gʰāsá,kʰiccā
+entry,KNOT,0.007566,Low: <0.2,Focal support below five votes,0.075658,0.1,0.125,0.02631578947368421,0,layana,bándʰana
+entry,DONKEY,0.00754,Low: <0.2,Focal support below five votes,0.075397,0.1,0.42857142857142855,0.05555555555555555,0.3333333333333333,kʰara,*dāyayati
+entry,OIL (ORGANIC SUBSTANCE),0.006838,Low: <0.2,Focal support below five votes,0.034188,0.2,0.9230769230769231,0.02564102564102564,0.8803418803418804,tailá,apūpá
+entry,NAME,0.005263,Low: <0.2,Focal support below five votes,0.052632,0.1,0.02631578947368421,1.0,0.9210526315789473,cʰurayati,nā́man
+entry,BEARD,0.004896,Low: <0.2,Focal support below five votes,0.048958,0.1,0.06666666666666667,0.03125,0,*juŋgʰa,tuṇḍa
+entry,BARLEY,0.004861,Low: <0.2,Focal support below five votes,0.048611,0.1,0.05555555555555555,0.041666666666666664,0,*bājjara,kiṁśā́ru
+entry,FOUR,0.004524,Low: <0.2,Focal support below five votes,0.045238,0.1,0.03571428571428571,0.9833333333333333,0.9285714285714286,catuṣka,catvā́raḣ
+entry,GOLD,0.003816,Low: <0.2,Focal support below five votes,0.038158,0.1,0.05,0.02631578947368421,0,*lōhila,hēman
+entry,SEVEN,0.001777,Low: <0.2,Focal support below five votes,0.017774,0.1,0.022727272727272728,0.01282051282051282,0,sā́pta,triká
+entry,TEN,0.001718,Low: <0.2,Focal support below five votes,0.017178,0.1,0.022727272727272728,0.011627906976744186,0,yávasa,*paṣṭʰa
+entry,SIX,0.001563,Low: <0.2,Focal support below five votes,0.015625,0.1,0.03125,0.016129032258064516,0.016129032258064516,ṣáṭka,stara
+entry,THREE,0.001563,Low: <0.2,Focal support below five votes,0.015625,0.1,1.0,0.015625,0.984375,tráyaḣ,trivāram
+entry,POTATO,0.001515,Low: <0.2,Focal support below five votes,0.015152,0.1,1.0,0.015151515151515152,0.9848484848484849,ālu,batata
+entry,TURMERIC,0.001351,Low: <0.2,Focal support below five votes,0.013514,0.1,1.0,0.013513513513513514,0.9864864864864865,haridrā,kuŋkuma
+entry,ELEVEN,0.001282,Low: <0.2,Focal support below five votes,0.012821,0.1,1.0,0.01282051282051282,0.9871794871794872,ḗkādaśa,triká
+entry,FIVE,0.00125,Low: <0.2,Focal support below five votes,0.0125,0.1,1.0,0.0125,0.9875,páñca,stara
+head,BIRCH,0.9375,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.9375,1,0.9375,1.0,0.0625,bʰūrja,*bʰaurja
+head,PARROT,0.808333,High: ≥0.6,"Supported, crossover >10 points",0.808333,1,0.8333333333333334,0.95,0.16666666666666666,śakuná,śúka
+head,LIVER,0.777473,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.777473,1,0.7857142857142857,0.8461538461538461,0.07692307692307693,yákr̩t,kālēyaka
+head,MONKEY,0.775439,High: ≥0.6,"Supported, crossover >10 points",0.775439,1,0.85,0.8903508771929823,0.1894736842105263,markáṭa,vānara
+head,HIGH,0.766865,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.766865,1,0.6805555555555555,0.880952380952381,0.027777777777777776,*uttʰala,ucca
+head,IRON,0.75871,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.75871,1,0.9615384615384616,0.5558823529411764,0,cīmara,lōhá
+head,BRIDGE,0.755357,High: ≥0.6,Focal support below five votes,0.839286,0.9,0.9285714285714286,0.75,0,sḗtu,saṁkramá
+head,UNRIPE,0.724242,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.724242,1,0.7727272727272727,0.7666666666666667,0.09090909090909091,āmá,*kacca
+head,SAND,0.719907,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.719907,1,1.0,0.43981481481481477,0,síkatā,vālukā
+head,RAW,0.702652,High: ≥0.6,"Supported, crossover >10 points",0.702652,1,0.7361111111111112,0.7878787878787878,0.11868686868686869,āmá,*kacca
+head,MOUSTACHE,0.69697,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.69697,1,0.7272727272727273,0.6666666666666666,0,*pʰuŋga,*muccʰā
+head,BLACK,0.693895,High: ≥0.6,"Supported, crossover >10 points",0.693895,1,0.6041666666666667,0.8961240310077518,0.1125,kr̩ṣṇá,kāla
+head,NOSE,0.686979,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.686979,1,0.4416666666666666,0.9322916666666666,0,nasta,*nakka
+head,LONG,0.676728,High: ≥0.6,"Supported, crossover >10 points",0.676728,1,0.875,0.6991869918699187,0.2207317073170732,dīrgʰá,lamba
+head,FLOWER,0.672905,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.672905,1,0.4427083333333333,0.9031007751937984,0,púṣya,pʰulla
+head,SAW,0.670909,High: ≥0.6,Focal support below five votes,0.745455,0.9,0.9,0.5909090909090909,0,dr̩ṣṭá,karapattra
+head,UNCOOKED RICE,0.666667,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.666667,1,0.8333333333333334,0.5357142857142857,0.03571428571428571,taṇḍulá,*cāmala
+head,WOOL,0.666667,High: ≥0.6,"Supported, crossover >10 points",0.666667,1,0.5909090909090909,0.8555555555555555,0.11313131313131314,pákṣman,ū́rṇā
+head,FIRE,0.6525,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.6525,1,0.8916666666666668,0.4258333333333334,0.0125,áŋgāra,agní
+head,WATER,0.650568,High: ≥0.6,"Supported, crossover >10 points",0.650568,1,0.6363636363636364,0.8238636363636364,0.1590909090909091,udaká,pānī́ya
+head,BE ALIVE,0.644231,High: ≥0.6,"Supported, crossover >10 points",0.644231,1,0.8461538461538461,0.5961538461538461,0.15384615384615385,jīvantá,jī́vati
+head,YESTERDAY,0.642713,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.642713,1,0.631578947368421,0.6538461538461539,0,dōṣā́,kālya
+head,TIE,0.626068,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.626068,1,0.8076923076923077,0.5077777777777778,0.06333333333333332,grantʰáyati,bandʰati
+head,SNAKE,0.625149,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.625149,1,0.5625,0.7190476190476189,0.03125,jantú,sarpá
+head,RIGHT,0.60636,High: ≥0.6,"Supported, low crossover, weaker-side share <50%",0.60636,1,0.7916666666666666,0.42105263157894735,0,dákṣiṇa,dākṣiṇa
+head,BEAR,0.606133,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.606133,1,0.7424242424242423,0.5174603174603175,0.047619047619047616,ŕ̩kṣa,bʰallū́ka
+head,RICE,0.605159,High: ≥0.6,"Supported, low crossover, both shares ≥50%",0.605159,1,0.7023809523809523,0.5396825396825397,0.031746031746031744,taṇḍulá,*cāmala
+head,YEAR,0.599418,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.599418,1,0.8529411764705882,0.46354166666666663,0.11764705882352941,kālá,varṣá
+head,READ,0.592857,Middle: 0.4–<0.6,Focal support below five votes,0.65873,0.9,0.5,0.9285714285714286,0.1111111111111111,mantráyatē,páṭʰati
+head,SOUR,0.589683,Middle: 0.4–<0.6,"Supported, low crossover, both shares ≥50%",0.589683,1,0.6555555555555554,0.5595238095238095,0.03571428571428571,cukrá,kʰaṭṭa
+head,CURVED,0.586667,Middle: 0.4–<0.6,Focal support below five votes,0.733333,0.8,0.8,0.6666666666666666,0,*kōla,ṭēraka
+head,DOOR,0.585283,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.585283,1,0.7631578947368421,0.4074074074074074,0,*dvara,*duvāra
+head,CAT,0.582386,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.582386,1,0.8181818181818182,0.5,0.1534090909090909,*puśśī,bíḍāla
+head,OWN,0.578846,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.578846,1,0.38461538461538464,0.85,0.07692307692307693,*tānuva,*ātmanaka
+head,ROOT,0.575,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.575,1,0.4,0.75,0,nāḍī́,jáṭā
+head,WORK (LABOUR),0.572222,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.572222,1,0.8666666666666666,0.43333333333333335,0.15555555555555556,kárman,kāryà
+head,WOUND,0.566919,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.566919,1,0.7222222222222222,0.5530303030303031,0.1414141414141414,prahāra,gʰāta
+head,BLIND,0.564912,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.564912,1,0.6,0.7631578947368421,0.23333333333333334,*śrēḍa,andʰá
+head,CLOUD,0.564062,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.564062,1,0.390625,0.7666666666666666,0.029166666666666664,abʰrá,vārdala
+head,WINTER,0.563214,Middle: 0.4–<0.6,Focal support below five votes,0.592857,0.95,0.7857142857142857,0.475,0.075,hēmantá,śītakāla
+head,AXE,0.561905,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.561905,1,0.5909090909090909,0.7580952380952382,0.2251948051948052,ṭaŋka,kuṭʰāra
+head,RIB,0.558532,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.558532,1,0.7142857142857143,0.4305555555555555,0.027777777777777776,párśu,*parsula-
+head,MOUSE,0.556548,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.556548,1,0.8214285714285714,0.4861111111111111,0.19444444444444442,mūṣa,*cūha
+head,PATH,0.555886,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.555886,1,0.9166666666666666,0.21296296296296294,0.017857142857142856,pántʰā,gáti
+head,THIS,0.553704,Middle: 0.4–<0.6,Focal support below five votes,0.638889,0.8666666666666666,0.48148148148148145,1.0,0.2037037037037037,ayám,ēṣá
+head,COLUMN,0.547576,Middle: 0.4–<0.6,Focal support below five votes,0.631818,0.8666666666666668,0.9333333333333333,0.393939393939394,0.06363636363636363,stʰū́ṇā,stambʰa
+head,HOUSE,0.543302,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.543302,1,0.30434782608695654,0.7967479674796749,0.014492753623188404,gōṣṭʰá,gʰara
+head,SHEEP,0.542361,Middle: 0.4–<0.6,"Supported, low crossover, both shares ≥50%",0.542361,1,0.5555555555555555,0.5625,0.03333333333333333,ēḍa,bʰēḍra
+head,UNHUSKED RICE,0.535714,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.535714,1,0.8571428571428571,0.6785714285714286,0.4642857142857143,śāli,dʰānyà
+head,BIG,0.533355,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.533355,1,0.5543859649122806,0.6520325203252033,0.13970902866923404,gʰaná,vaḍra
+head,SHIRT,0.533333,Middle: 0.4–<0.6,Focal support below five votes,0.666667,0.8,0.8333333333333334,0.6666666666666666,0.16666666666666666,paridʰā́na,*jʰōla
+head,MILK,0.532376,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.532376,1,0.6491228070175439,0.7545454545454546,0.33891547049441784,kṣīrá,dugdʰá
+head,BELLY,0.531967,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.531967,1,0.3263157894736842,0.7507751937984496,0.013157894736842105,udára,*pēṭṭa
+head,DAUGHTER,0.531863,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.531863,1,0.8137254901960784,0.32175925925925924,0.07175925925925924,duhitŕ̩,*biḍḍa
+head,GUEST,0.529773,Middle: 0.4–<0.6,Focal support below five votes,0.588636,0.9,0.45,0.7272727272727273,0,*prārtʰyaka,prāhuṇa
+head,HONEY,0.529167,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.529167,1,0.7083333333333334,0.6,0.25,mākṣiká,mádʰu
+head,DEAF,0.524716,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.524716,1,0.6090909090909091,0.59375,0.1534090909090909,*bōḍa,badʰirá
+head,MY,0.523237,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.523237,1,0.75,0.46153846153846156,0.16506410256410256,ma,kʰāni
+head,PRICE,0.518651,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.518651,1,0.8333333333333334,0.3507936507936508,0.1468253968253968,mūlya,dramma
+head,RIVER,0.51861,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.51861,1,0.46153846153846156,0.8064516129032258,0.23076923076923078,síndʰu,nadī́
+head,SHE,0.518519,Middle: 0.4–<0.6,Focal support below five votes,0.777778,0.6666666666666667,0.5555555555555556,1.0,0,sá,asáu
+head,KNEE,0.517647,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.517647,1,0.7352941176470589,0.3,0,*kuṭṭʰa,*gōḍḍa
+head,WORM,0.516827,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.516827,1,0.6875,0.38461538461538464,0.038461538461538464,kŕ̩mi,kīṭá
+head,BRAIN,0.508333,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.508333,1,0.65,0.4,0.03333333333333333,masta,*gudda
+head,HEAVY,0.507986,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.507986,1,0.59375,0.4222222222222223,0,*udguru,bʰārika
+head,MOUNTAIN,0.506993,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.506993,1,0.46153846153846156,0.5909090909090909,0.038461538461538464,kʰaṇḍá,*pāhāḍa
+head,DOG,0.506916,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.506916,1,0.5789473684210527,0.43488372093023253,0,*kuccura,*kutta
+head,WHO,0.505263,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.505263,1,0.5333333333333333,0.6754385964912281,0.19824561403508772,ká,kaḥ punar
+head,MONTH,0.504304,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.504304,1,0.6538461538461539,0.5352380952380953,0.18047619047619046,mā́sa,mahīnā
+head,SICKLE,0.498148,Middle: 0.4–<0.6,"Supported, low crossover, both shares ≥50%",0.498148,1,0.5555555555555556,0.5333333333333333,0.09259259259259259,aŋká,dā́tra
+head,FLEA,0.495833,Middle: 0.4–<0.6,Focal support below five votes,0.708333,0.7,1.0,0.5833333333333334,0.16666666666666666,plúṣi,*priṣu
+head,LAKE,0.486045,Middle: 0.4–<0.6,Focal support below five votes,0.656818,0.74,1.0,0.33636363636363636,0.022727272727272728,sáras,pauṣkara
+head,GRANDSON,0.485625,Middle: 0.4–<0.6,Focal support below five votes,0.69375,0.7,0.7,0.8125,0.125,paútra,náptr̩
+head,THIRST,0.483333,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.483333,1,0.55,0.41666666666666663,0,*tr̩ṣyā,pipāsā́
+head,NIPPLE,0.482716,Middle: 0.4–<0.6,Focal support below five votes,0.62963,0.7666666666666666,0.8333333333333334,0.4259259259259259,0,*cuccu,stána
+head,DAY (NOT NIGHT),0.481151,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.481151,1,0.5583333333333333,0.6785714285714286,0.2746031746031746,divasá,dina
+head,STONE,0.481151,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.481151,1,0.7916666666666666,0.4484126984126984,0.2777777777777778,*varta,prastará
+head,COLD,0.480219,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.480219,1,0.6851851851851851,0.4723484848484848,0.1970959595959596,śītalá,stabdʰa
+head,DAY AFTER TOMORROW,0.48,Middle: 0.4–<0.6,Focal support below five votes,0.533333,0.9,0.45,0.6666666666666666,0.05,tr̩tī́ya,paraśvas
+head,FORGET,0.478632,Middle: 0.4–<0.6,Focal support below five votes,0.512821,0.9333333333333332,0.6666666666666666,0.3589743589743589,0,āmr̩ṣyatē,vismarati
+head,BEAN,0.478472,Middle: 0.4–<0.6,Focal support below five votes,0.552083,0.8666666666666666,0.5625,0.5416666666666666,0,rājamudga,śimba
+head,MOSQUITO,0.476863,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.476863,1,0.45454545454545453,0.5900900900900901,0.09090909090909091,*pʰutta,matsara
+head,ROUND,0.473333,Middle: 0.4–<0.6,Focal support below five votes,0.591667,0.8,0.6666666666666666,0.6,0.08333333333333333,*piṇḍara,gōla
+head,BED,0.47123,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.47123,1,0.5555555555555556,0.38690476190476186,0,śáyana,*śēyyā
+head,ONE,0.465972,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.465972,1,0.5648148148148148,0.7666666666666667,0.399537037037037,*ēkka,ḗka
+head,MOON,0.465022,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.465022,1,0.3157894736842105,0.7583333333333333,0.14407894736842106,mā́sa,candrá
+head,ANT,0.464343,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.464343,1,0.5641025641025641,0.3958333333333333,0.03125,pipīlá,*cimb
+head,PALM TREE,0.463816,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.463816,1,0.625,0.5263157894736842,0.2236842105263158,tala,hastatala
+head,BRANCH,0.461053,Middle: 0.4–<0.6,Focal support below five votes,0.512281,0.9,0.45,0.5745614035087719,0,śaŋkú,ḍāla
+head,LEFT,0.461002,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.461002,1,0.5925925925925926,0.3931372549019608,0.06372549019607843,kʰarvá,vā́ma
+head,MOUTH,0.452406,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.452406,1,0.4929824561403509,0.46621621621621623,0.0543859649122807,āsíya,múkʰa
+head,BACK,0.452047,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.452047,1,0.34444444444444444,0.6929824561403508,0.13333333333333333,*ḍʰākka,pr̩ṣṭí
+head,BUTTON,0.45,Middle: 0.4–<0.6,Focal support below five votes,0.75,0.6,0.6,0.9,0,*ṭikka,vīṭā
+head,FALSE,0.449949,Middle: 0.4–<0.6,Focal support below five votes,0.549675,0.8185714285714285,0.75,0.37207792207792206,0.022727272727272728,cʰala,*jʰūṭṭʰa
+head,UNDERSTAND,0.449679,Middle: 0.4–<0.6,Focal support below five votes,0.499644,0.9,0.5,0.6474358974358974,0.14814814814814814,*paribudʰyatē,búdʰyatē
+head,COME,0.448549,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.448549,1,0.3201754385964912,0.5769230769230769,0,yā́ti,āpayati
+head,SILVER,0.444293,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.444293,1,0.7291666666666666,0.5289855072463768,0.3695652173913043,rū́pya,candrikā
+head,CARPENTER,0.439444,Middle: 0.4–<0.6,Focal support below five votes,0.507051,0.8666666666666666,0.95,0.3333333333333333,0.2692307692307692,tákṣan,vardʰaki
+head,SIEVE,0.433333,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.433333,1,0.7,0.3333333333333333,0.16666666666666666,paripavana,cālana
+head,FROG,0.43125,Middle: 0.4–<0.6,Focal support below five votes,0.479167,0.9,0.5625,0.3958333333333333,0,maṇḍū́ka,dardurá
+head,WINDOW,0.429167,Middle: 0.4–<0.6,Focal support below five votes,0.536458,0.8,0.6666666666666666,0.65625,0.25,*dvara,kʰaṭakkikā
+head,YOUNG GOAT (KID),0.428571,Middle: 0.4–<0.6,Focal support below five votes,0.535714,0.8,0.5714285714285714,0.5,0,cʰagalá,*paṣṭʰa
+head,WALNUT,0.427778,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.427778,1,0.3555555555555555,1.0,0.5,*vr̩mra,akṣōṭa
+head,SELL,0.425926,Middle: 0.4–<0.6,Focal support below five votes,0.532407,0.8,0.5,0.5648148148148148,0,krīṇā́ti,*vētyayati
+head,WEIGH,0.425926,Middle: 0.4–<0.6,Focal support below five votes,0.511111,0.8333333333333333,0.8888888888888888,0.41666666666666663,0.2833333333333333,tōláyati,*yōkṣati
+head,FIG,0.425,Middle: 0.4–<0.6,Focal support below five votes,0.708333,0.6,0.5,0.9166666666666666,0,kapittʰa,añjīra
+head,HEAD,0.423799,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.423799,1,0.5263157894736842,0.3886128364389234,0.06733137190803094,śīrṣá,masta
+head,WHAT,0.420615,Middle: 0.4–<0.6,Focal support below five votes,0.435119,0.9666666666666668,0.9285714285714286,0.2416666666666667,0.29999999999999993,kím,*kādr̥k
+head,MOTHER,0.418886,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.418886,1,0.45,0.4502721088435374,0.0625,āryikā,mātŕ̩
+head,ARROW,0.416667,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.416667,1,0.75,0.4444444444444444,0.36111111111111105,kā́ṇḍa,bāṇá
+head,FILL,0.416667,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.416667,1,0.6111111111111112,0.5277777777777778,0.3055555555555556,pūráyati,bʰárati
+head,THAT,0.409804,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.409804,1,0.5,0.6176470588235294,0.2980392156862745,sá,asáu
+head,BUY,0.407323,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.407323,1,0.5,0.47500000000000003,0.16035353535353536,gr̩hṇā́ti,krīṇā́ti
+head,LEG,0.406504,Middle: 0.4–<0.6,"Supported, low crossover, weaker-side share <50%",0.406504,1,0.55,0.2678861788617886,0.004878048780487805,kʰura,ṭaŋka
+head,BARKING,0.405556,Middle: 0.4–<0.6,Focal support below five votes,0.608333,0.6666666666666667,0.8,0.4166666666666667,0,rā́yati,*bʰukkati
+head,BEE,0.405,Middle: 0.4–<0.6,Focal support below five votes,0.45,0.9,0.45,0.5625,0.1125,*mākṣikakara,bʰramará
+head,THOSE (PLURAL OF THAT),0.405,Middle: 0.4–<0.6,Focal support below five votes,0.675,0.6,0.6,0.75,0,sá,asáu
+head,HE,0.404221,Middle: 0.4–<0.6,"Supported, crossover >10 points",0.404221,1,0.5227272727272726,0.6071428571428571,0.32142857142857145,sá,asáu
+head,COUNT,0.404167,Middle: 0.4–<0.6,Focal support below five votes,0.505208,0.8,0.4444444444444444,0.84375,0.2777777777777778,lēkʰya,gaṇáyati
+head,BITTER,0.399123,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.399123,1,0.4,0.5175438596491228,0.11929824561403508,tr̩ṣṭá,tiktá
+head,ASH,0.397095,Middle: 0.2–<0.4,Focal support below five votes,0.441216,0.9,0.45,0.4981981981981982,0.06576576576576577,cʰādi,rakṣā
+head,FAT (ORGANIC SUBSTANCE),0.395939,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.395939,1,0.375,0.4307659932659933,0.013888888888888888,mḗdas,carbī
+head,SOFT,0.393333,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.393333,1,0.7133333333333333,0.4,0.3266666666666667,kōmalá,narm
+head,DOVE,0.391667,Middle: 0.2–<0.4,Focal support below five votes,0.652778,0.6,0.5,0.8055555555555556,0,kapṓta,pā́rāvata
+head,RED,0.386374,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.386374,1,0.275,0.49774774774774766,0,*lōhila,lāl
+head,ECLIPSE,0.385714,Middle: 0.2–<0.4,Focal support below five votes,0.642857,0.6,0.42857142857142855,1.0,0.14285714285714285,andʰakāra,gráhaṇa
+head,ALONE,0.382407,Middle: 0.2–<0.4,Focal support below five votes,0.546296,0.7,0.3888888888888889,0.7037037037037037,0,kḗvala,*ēkkalla
+head,TAIL,0.379722,Middle: 0.2–<0.4,Focal support below five votes,0.474653,0.8,0.3333333333333333,0.6604166666666667,0.044444444444444446,lūma,púccʰa
+head,SAY,0.375641,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.375641,1,0.38461538461538464,0.36666666666666664,0,mantráyatē,bʰánati
+head,EARTH (SOIL),0.373483,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.373483,1,0.3137254901960784,0.503968253968254,0.07072829131652661,dʰaráṇī,mŕ̩ttikā
+head,WET,0.36951,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.36951,1,0.5512820512820513,0.35107142857142853,0.16333333333333333,ārdrá,*bʰiyajyatē
+head,DECEIT,0.366871,Middle: 0.2–<0.4,Focal support below five votes,0.464394,0.79,0.8,0.3590909090909091,0.2303030303030303,cʰala,*dʰrōkṣa
+head,NEW,0.366709,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.366709,1,0.9298245614035087,0.3048780487804878,0.5012836970474968,náva,návya
+head,TAKE,0.366389,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.366389,1,0.35777777777777775,0.48214285714285715,0.10714285714285714,gr̩bʰāyáti,lábʰatē
+head,NARROW,0.366111,Middle: 0.2–<0.4,Focal support below five votes,0.610185,0.6,0.6,0.6203703703703703,0,ā́vr̩ta,saṁkaṭá
+head,SPIDER WEB,0.364583,Middle: 0.2–<0.4,Focal support below five votes,0.520833,0.7,0.5,0.875,0.3333333333333333,mā́na,jā́la
+head,COW,0.363614,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.363614,1,0.34750000000000003,0.5647286821705426,0.185,*gāvā,*gāva
+head,KNIFE,0.356155,Middle: 0.2–<0.4,Focal support below five votes,0.410948,0.8666666666666666,0.3611111111111111,0.4754901960784313,0.014705882352941176,*karttāra,cāqū
+head,CAP,0.355556,Middle: 0.2–<0.4,Focal support below five votes,0.444444,0.8,0.4444444444444444,1.0,0.5555555555555556,kʰōla,*ṭōppa
+head,DANCE,0.355,Middle: 0.2–<0.4,Focal support below five votes,0.591667,0.6,0.6,0.6833333333333333,0.1,nr̩ttá,nŕ̩tyati
+head,GROW,0.352244,Middle: 0.2–<0.4,Focal support below five votes,0.503205,0.7,0.8333333333333334,0.2692307692307692,0.09615384615384616,várdʰatē,útpadyatē
+head,CROOKED,0.345496,Middle: 0.2–<0.4,Focal support below five votes,0.509749,0.6777777777777778,0.8076923076923077,0.21180555555555555,0,*kōla,vaŋka
+head,CALF,0.345445,Middle: 0.2–<0.4,Focal support below five votes,0.398591,0.8666666666666666,0.71875,0.2549019607843137,0.17647058823529413,vatsá,vatsarūpa
+head,BREAST,0.336843,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.336843,1,0.45777777777777773,0.25,0.03409090909090909,*cuccu,*cʰātti
+head,ROOF,0.33266,Middle: 0.2–<0.4,Focal support below five votes,0.383838,0.8666666666666668,0.27083333333333337,0.5176767676767676,0.020833333333333332,tala,*cʰatti
+head,WHITE,0.33051,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.33051,1,0.30952380952380953,0.377991452991453,0.026495726495726492,pā́ṇḍara,dʰavalá
+head,DAY BEFORE YESTERDAY,0.33,Middle: 0.2–<0.4,Focal support below five votes,0.55,0.6,0.6,0.5,0,*ātr̩tīyam,paraśvas
+head,NEIGHBOUR,0.33,Middle: 0.2–<0.4,Focal support below five votes,0.55,0.6,0.6,0.5,0,*grāmārdʰa,*prativēśiya
+head,BRING,0.325758,Middle: 0.2–<0.4,Focal support below five votes,0.542929,0.6,0.3333333333333333,0.8636363636363636,0.1111111111111111,gr̩bʰāyáti,ā́nayati
+head,LATE,0.325714,Middle: 0.2–<0.4,Focal support below five votes,0.542857,0.6,0.8,0.42857142857142855,0.14285714285714285,cirá,*ḍʰilla
+head,VEIN,0.325455,Middle: 0.2–<0.4,Focal support below five votes,0.542424,0.6,0.6,0.4848484848484848,0,*snāru,nāḍī́
+head,SALIVA,0.322421,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.322421,1,0.6666666666666666,0.41309523809523807,0.43492063492063493,*tʰukk,lālā
+head,SON,0.321349,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.321349,1,0.626984126984127,0.2604761904761905,0.24476190476190476,putrá,*biḍḍa
+head,WOOD,0.31875,Middle: 0.2–<0.4,Focal support below five votes,0.354167,0.9,0.225,0.625,0.14166666666666666,śalā́kā,kāṣṭʰá
+head,GREEN,0.31684,Middle: 0.2–<0.4,Focal support below five votes,0.380208,0.8333333333333334,0.5625,0.2604166666666667,0.0625,nī́la,śyāvá
+head,MIDDLE,0.316783,Middle: 0.2–<0.4,Focal support below five votes,0.351981,0.9,0.4090909090909091,0.3589743589743589,0.0641025641025641,madʰyamá,*vīcya
+head,WALL (OF HOUSE),0.316667,Middle: 0.2–<0.4,Focal support below five votes,0.395833,0.8,0.4444444444444444,0.4027777777777778,0.05555555555555555,kuḍya,bʰittí
+head,FATHER,0.312094,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.312094,1,0.26403508771929823,0.54875,0.18859649122807018,mahallaka,*bāppa
+head,HEAR,0.308625,Middle: 0.2–<0.4,Focal support below five votes,0.342917,0.9,0.28125,0.8733333333333333,0.46875,búdʰyatē,śr̩ṇṓti
+head,BEHIND,0.305455,Middle: 0.2–<0.4,Focal support below five votes,0.381818,0.8,0.5833333333333333,0.36363636363636365,0.18333333333333332,*patta,*paśca
+head,MILLET,0.304071,Middle: 0.2–<0.4,Focal support below five votes,0.434387,0.7,0.3888888888888889,0.4798850574712644,0,*aṇuni,*bājjara
+head,MANY,0.303015,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.303015,1,0.4166666666666667,0.2276422764227642,0.03827913279132791,bahura,bahutva
+head,SEE,0.301809,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.301809,1,0.4140350877192982,0.23124999999999996,0.041666666666666664,páśyati,*dēkṣati
+head,ASK (INQUIRE),0.301389,Middle: 0.2–<0.4,Focal support below five votes,0.430556,0.7,0.3888888888888889,0.5833333333333334,0.1111111111111111,*kʰōjjati,pr̩ccʰáti
+head,RUN,0.300444,Middle: 0.2–<0.4,Focal support below five votes,0.375556,0.8,0.4444444444444444,0.30666666666666664,0,*tarpati,drávati
+head,MALE GOAT,0.3,Middle: 0.2–<0.4,Focal support below five votes,0.5,0.6,0.3333333333333333,0.6666666666666666,0,vīrá,*bōkka
+head,GRASSHOPPER,0.298485,Middle: 0.2–<0.4,Focal support below five votes,0.497475,0.6,0.7222222222222222,0.2727272727272727,0,*śalakka,pataŋgá
+head,SHORT,0.296667,Middle: 0.2–<0.4,Focal support below five votes,0.370833,0.8,0.4444444444444444,0.416025641025641,0.1188034188034188,*kʰuṭṭa,*cʰōṭṭa
+head,FIREPLACE,0.295139,Middle: 0.2–<0.4,Focal support below five votes,0.520833,0.5666666666666667,0.35416666666666663,0.75,0.0625,*dʰmātra,cullī
+head,GOAT,0.295139,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.295139,1,0.4629629629629629,0.4520833333333333,0.3247685185185185,cʰagalá,bárkara
+head,NO,0.29375,Middle: 0.2–<0.4,Focal support below five votes,0.489583,0.6,0.5625,0.5,0.08333333333333333,ná,ā́kṣēti
+head,HILL,0.293308,Middle: 0.2–<0.4,Focal support below five votes,0.382576,0.7666666666666666,0.4166666666666667,0.34848484848484845,0,dʰā́rā,*pāhāḍa
+head,MALE,0.292411,Middle: 0.2–<0.4,Focal support below five votes,0.584821,0.5,0.8125,0.35714285714285715,0,vīrá,nára
+head,GO OUT,0.292393,Middle: 0.2–<0.4,Focal support below five votes,0.398718,0.7333333333333333,0.28205128205128205,0.5923076923076923,0.07692307692307693,*niṣkasati,*niṣkalati
+head,DEW,0.286633,Middle: 0.2–<0.4,Focal support below five votes,0.477721,0.6,0.6,0.3792517006802721,0.023809523809523808,prúṣvā,avaśyā
+head,WOMAN,0.286618,Middle: 0.2–<0.4,Focal support below five votes,0.318464,0.9,0.2647058823529412,0.38333333333333336,0.01111111111111111,strī́,*lugāī
+head,WIDOW,0.285833,Middle: 0.2–<0.4,Focal support below five votes,0.408333,0.7,0.35,0.6666666666666666,0.2,*kāŋkunikā,raṇḍa
+head,FINGER,0.283333,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.283333,1,0.36666666666666664,0.8333333333333334,0.6333333333333333,*aŋgūḍi,aŋgúli
+head,SUN,0.283333,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.283333,1,0.36666666666666664,0.5,0.3,sū́riya,sū́ra
+head,TESTICLES,0.283333,Middle: 0.2–<0.4,Focal support below five votes,0.472222,0.6,0.5,0.6111111111111112,0.16666666666666666,kulaka,āṇḍá
+head,ENTER,0.283069,Middle: 0.2–<0.4,Focal support below five votes,0.424603,0.6666666666666666,0.5714285714285714,0.27777777777777773,0,átyēti,*ḍʰukyati
+head,FOUR,0.28,Middle: 0.2–<0.4,Focal support below five votes,0.35,0.8,0.2857142857142857,0.95,0.5357142857142857,catúraḣ,catvā́raḣ
+head,UDDER,0.28,Middle: 0.2–<0.4,Focal support below five votes,0.35,0.8,0.4,0.3722222222222222,0.07222222222222222,ū́dʰas,stána
+head,SKULL,0.278333,Middle: 0.2–<0.4,Focal support below five votes,0.463889,0.6,0.6,0.45555555555555555,0.12777777777777777,*kappāla,*kʰōppa
+head,HEART,0.278245,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.278245,1,0.5882352941176471,0.24007936507936506,0.27182539682539686,hŕ̩daya,dil
+head,BLOOD,0.272844,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.272844,1,0.5238095238095238,0.5405405405405406,0.5186615186615187,rakta,lṓhita
+head,WE,0.265625,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.265625,1,0.375,0.75,0.59375,vayám,asmad
+head,FACE,0.265476,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.265476,1,0.4404761904761904,0.14285714285714285,0.05238095238095238,múkʰya,mūrdʰán
+head,LIGHT (RADIATION),0.265077,Middle: 0.2–<0.4,Focal support below five votes,0.305858,0.8666666666666666,0.22807017543859648,0.49768009768009774,0.11403508771929824,*prabʰāla,lagʰú
+head,NEAR,0.26341,Middle: 0.2–<0.4,Focal support below five votes,0.280556,0.9388888888888889,0.5,0.1564814814814815,0.09537037037037037,nikaṭam,pārśvatás
+head,LOW,0.262308,Middle: 0.2–<0.4,Focal support below five votes,0.437179,0.6,0.5,0.3743589743589744,0,*lasta,nīcá
+head,STRAIGHT,0.261212,Middle: 0.2–<0.4,Focal support below five votes,0.326515,0.8,0.4,0.253030303030303,0,*sūŋkṣa,śōdʰya
+head,CHEEK,0.261111,Middle: 0.2–<0.4,Focal support below five votes,0.652778,0.4,0.3333333333333333,0.9722222222222222,0,kapōlá,galla
+head,RESIN,0.259821,Middle: 0.2–<0.4,Focal support below five votes,0.433036,0.6,0.42857142857142855,0.4375,0,kilima,rāla
+head,THREAD,0.258102,Middle: 0.2–<0.4,Focal support below five votes,0.30365,0.85,0.30357142857142855,0.3118734335839599,0.008145363408521303,daśā,davara
+head,RAT,0.256667,Middle: 0.2–<0.4,Focal support below five votes,0.366667,0.7,0.5,0.38,0.14666666666666667,mūṣa,undura
+head,I,0.255556,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.255556,1,0.5,0.7,0.6888888888888889,ahám,ma
+head,LEOPARD,0.253472,Middle: 0.2–<0.4,Focal support below five votes,0.506944,0.5,0.2777777777777778,0.736111111111111,0,bʰakṣakāra,citraka
+head,GRANDDAUGHTER,0.25,Middle: 0.2–<0.4,Focal support below five votes,0.5,0.5,0.5,0.6428571428571429,0.14285714285714285,pautrī,náptr̩
+head,TEAR (OF EYE),0.25,Middle: 0.2–<0.4,"Supported, crossover >10 points",0.25,1,0.7777777777777778,0.25,0.5277777777777778,áśru,rṓda
+head,SCORPION,0.249603,Middle: 0.2–<0.4,Focal support below five votes,0.499206,0.5,0.35714285714285715,0.8555555555555555,0.21428571428571427,*ṭōŋka,vŕ̩ścika
+head,POST,0.247917,Middle: 0.2–<0.4,Focal support below five votes,0.495833,0.5,0.8666666666666667,0.15625,0.03125,stʰū́ṇā,*kʰuṭṭa
+head,PATERNAL AUNT (FATHER'S SISTER),0.247308,Middle: 0.2–<0.4,Focal support below five votes,0.412179,0.6,0.8076923076923077,0.3,0.2833333333333333,*pʰuppʰu,dʰrā́yati
+head,RAINBOW,0.246795,Middle: 0.2–<0.4,Focal support below five votes,0.49359,0.5,0.48717948717948717,0.5,0,indradʰanúṣ,dʰánus
+head,BODY,0.244097,Middle: 0.2–<0.4,Focal support below five votes,0.366146,0.6666666666666667,0.4166666666666667,0.365625,0.05,jīvantá,dēha
+head,SHARP,0.243671,Middle: 0.2–<0.4,Focal support below five votes,0.353147,0.6900000000000001,0.6153846153846154,0.31363636363636366,0.22272727272727275,tīkṣṇá,cōkṣa
+head,BURN,0.243586,Middle: 0.2–<0.4,Focal support below five votes,0.281061,0.8666666666666666,0.3939393939393939,0.2636363636363636,0.09545454545454546,dahyátē,jválati
+head,CRY,0.242857,Middle: 0.2–<0.4,Focal support below five votes,0.303571,0.8,0.2857142857142857,0.42857142857142855,0.10714285714285714,*riŋk,rōdati
+head,OTHER,0.240064,Middle: 0.2–<0.4,Focal support below five votes,0.342949,0.7,0.2692307692307692,0.4305555555555556,0.013888888888888888,*dutīya,anyá
+head,BATHE,0.24,Middle: 0.2–<0.4,Focal support below five votes,0.4,0.6,0.5,0.3,0,snāna,snā́ti
+head,BURY,0.238636,Middle: 0.2–<0.4,Focal support below five votes,0.397727,0.6,0.5,0.3409090909090909,0.045454545454545456,*dabb,*gaḍḍ
+head,GRIND,0.237847,Middle: 0.2–<0.4,Focal support below five votes,0.356771,0.6666666666666666,0.47619047619047616,0.4583333333333333,0.22098214285714285,pēṣayati,piṁṣáti
+head,GRINDSTONE,0.2375,Middle: 0.2–<0.4,Focal support below five votes,0.395833,0.6,0.5833333333333334,0.25,0.041666666666666664,*varta,puṭa
+head,MATERNAL GRANDFATHER,0.237143,Middle: 0.2–<0.4,Focal support below five votes,0.592857,0.4,0.4,0.7857142857142857,0,māma,*nānna
+head,LEAD (GUIDE),0.236458,Middle: 0.2–<0.4,Focal support below five votes,0.472917,0.5,0.5,0.6458333333333333,0.2,náyati,sī́sa
+head,GO,0.236023,Middle: 0.2–<0.4,Focal support below five votes,0.37464,0.6300000000000001,0.19687500000000002,0.568030303030303,0.015625,cyávatē,yā́ti
+head,BAD,0.235742,Middle: 0.2–<0.4,Focal support below five votes,0.277344,0.85,0.25,0.3046875,0,*latta,xarāb
+head,FIELD,0.235407,Middle: 0.2–<0.4,Focal support below five votes,0.392345,0.6,0.23076923076923078,0.803921568627451,0.25,bʰū́mi,kṣḗtra
+head,COPPER,0.234286,Middle: 0.2–<0.4,Focal support below five votes,0.390476,0.6,0.3,0.8809523809523809,0.4,rīti,tāmrá
+head,ADZE,0.233333,Middle: 0.2–<0.4,Focal support below five votes,0.388889,0.6,0.5,0.7777777777777778,0.5,takṣa,vā́śī
+head,MEASURE,0.230889,Middle: 0.2–<0.4,Focal support below five votes,0.408654,0.565,0.6,0.21730769230769229,0,tōláyati,*māpyatē
+head,SMOOTH,0.229167,Middle: 0.2–<0.4,Focal support below five votes,0.458333,0.5,0.4166666666666667,0.5454545454545454,0.045454545454545456,piccʰala,cikkáṇa
+head,CHEST,0.226377,Middle: 0.2–<0.4,Focal support below five votes,0.565942,0.4,0.4,0.7318840579710144,0,krōḍá,*cʰātti
+head,INSIDE,0.222222,Middle: 0.2–<0.4,Focal support below five votes,0.37037,0.6,0.3333333333333333,0.6018518518518517,0.19444444444444445,ántara,*bʰiyantara
+head,FEVER,0.222115,Middle: 0.2–<0.4,Focal support below five votes,0.370192,0.6,0.23076923076923078,0.625,0.11538461538461539,prajvāra,jvará
+head,PATH OR ROAD,0.221429,Middle: 0.2–<0.4,Focal support below five votes,0.553571,0.4,0.8571428571428571,0.3333333333333333,0.08333333333333333,pántʰā,mārga
+head,RIPE,0.221429,Middle: 0.2–<0.4,Focal support below five votes,0.369048,0.6,0.42857142857142855,0.8809523809523809,0.5714285714285714,pacyátē,pakvá
+head,TALL,0.219352,Middle: 0.2–<0.4,Focal support below five votes,0.286111,0.7666666666666666,0.6555555555555554,0.3833333333333333,0.4666666666666667,dīrgʰá,lamba
+head,SPRINGTIME,0.219318,Middle: 0.2–<0.4,Focal support below five votes,0.36553,0.6,0.45833333333333337,0.2727272727272727,0,vasantá,caitrá
+head,GARLIC,0.219048,Middle: 0.2–<0.4,Focal support below five votes,0.547619,0.4,0.3333333333333333,0.9285714285714286,0.16666666666666666,uṣṇa,láśuna
+head,FEW,0.218915,Middle: 0.2–<0.4,Focal support below five votes,0.364858,0.6,0.2727272727272727,0.4731182795698925,0.016129032258064516,álpa,stōká
+head,HURT (SOMEBODY),0.217593,Middle: 0.2–<0.4,Focal support below five votes,0.435185,0.5,0.5,0.37037037037037035,0,śūlyati,duḣkʰati
+head,ALL,0.217277,Middle: 0.2–<0.4,Focal support below five votes,0.250704,0.8666666666666666,0.2708333333333333,0.5743243243243243,0.34375,bʰū́yiṣṭʰa,sárva
+head,PATERNAL UNCLE (FATHER'S BROTHER),0.217045,Middle: 0.2–<0.4,Focal support below five votes,0.361742,0.6,0.7272727272727273,0.25,0.2537878787878788,pítriya,*kākka
+head,LIE DOWN,0.214643,Middle: 0.2–<0.4,Focal support below five votes,0.357738,0.6,0.3333333333333333,0.40714285714285714,0.025,pátati,lēṭyáti
+head,ROAD,0.214144,Middle: 0.2–<0.4,Focal support below five votes,0.443056,0.4833333333333333,0.75,0.20138888888888887,0.06527777777777778,pántʰā,mārga
+head,HEEL,0.212374,Middle: 0.2–<0.4,Focal support below five votes,0.353956,0.6,0.2727272727272727,0.4351851851851852,0,kʰuriṇī,*aḍḍi
+head,REED,0.212009,Middle: 0.2–<0.4,Focal support below five votes,0.353348,0.6,0.42857142857142855,0.4,0.121875,naḍá,vētrá
+head,LIGHTNING,0.210349,Middle: 0.2–<0.4,Focal support below five votes,0.420699,0.5,0.25,0.5913978494623656,0,bʰramara,vidyullatā
+head,NAKED,0.210133,Middle: 0.2–<0.4,Focal support below five votes,0.300189,0.7,0.3181818181818182,0.6458333333333333,0.36363636363636365,*niṣṭrāṇa,nagná
+head,HUSBAND,0.209647,Middle: 0.2–<0.4,Focal support below five votes,0.232941,0.9,0.28125,0.18463203463203465,0,*bʰāriyāpa,*gʰarapāla
+head,PULL,0.209461,Middle: 0.2–<0.4,Focal support below five votes,0.283056,0.74,0.3194444444444445,0.24666666666666667,0,*drakk,tānáyati
+head,WORD,0.209407,Middle: 0.2–<0.4,Focal support below five votes,0.405303,0.5166666666666666,0.6666666666666666,0.23484848484848483,0.09090909090909091,vārtta,vacaná
+head,WATERFALL,0.208333,Middle: 0.2–<0.4,Focal support below five votes,0.416667,0.5,0.4166666666666667,0.4166666666666667,0,kṣará,jʰara
+head,WIFE,0.208234,Middle: 0.2–<0.4,"Supported, low crossover, weaker-side share <50%",0.208234,1,0.3125,0.1957142857142857,0.09174603174603176,strī́,*lugāī
+head,PUPPY,0.208056,Middle: 0.2–<0.4,Focal support below five votes,0.445833,0.4666666666666666,0.29166666666666663,0.6,0,kurkurá,*pilla
+head,SEND,0.207354,Middle: 0.2–<0.4,Focal support below five votes,0.32399,0.64,0.26666666666666666,0.4090909090909091,0.027777777777777776,práhiṇōti,*bʰējj
+head,BE,0.207075,Middle: 0.2–<0.4,Focal support below five votes,0.214216,0.9666666666666668,0.34019607843137256,0.32222222222222224,0.23398692810457516,stʰitá,ā́kṣēti
+head,DIE,0.206144,Middle: 0.2–<0.4,Focal support below five votes,0.245409,0.8400000000000001,0.2625,0.7380070546737214,0.5096891534391534,mr̩tá,máratē
+head,SPIDER,0.204103,Middle: 0.2–<0.4,Focal support below five votes,0.510256,0.4,0.2,0.8205128205128205,0,jālakāra,markaṭa
+head,GO DOWN (DESCEND),0.201885,Middle: 0.2–<0.4,Focal support below five votes,0.367063,0.55,0.42857142857142855,0.3055555555555556,0,laŋgʰáyati,úttarati
+head,COOK (SOMETHING),0.200651,Middle: 0.2–<0.4,Focal support below five votes,0.288016,0.6966666666666667,0.4107142857142857,0.23222222222222222,0.0669047619047619,pacyátē,randʰáyati
+head,TODAY,0.2,Middle: 0.2–<0.4,Focal support below five votes,0.25,0.8,0.2222222222222222,1.0,0.7222222222222222,nūnám,adyá
+head,FOX,0.199306,Low: <0.2,Focal support below five votes,0.284722,0.7,0.25,0.3194444444444444,0,*lōpi,kʰiŋkʰira
+head,RAIN (PRECIPITATION),0.198947,Low: <0.2,Focal support below five votes,0.284211,0.7,0.23333333333333334,0.37368421052631584,0.03859649122807018,abʰrá,mēgʰá
+head,ROPE,0.19879,Low: <0.2,Focal support below five votes,0.248488,0.8,0.2857142857142857,0.2200970200970201,0.008835758835758836,dā́man,raśmí
+head,SPLEEN,0.196023,Low: <0.2,Focal support below five votes,0.326705,0.6,0.375,0.5909090909090909,0.3125,*śyāmī,plīhán
+head,TREE,0.195734,Low: <0.2,Focal support below five votes,0.264505,0.74,0.21764705882352942,0.31136296415799525,0,stambʰa,*rukṣa
+head,FOOT,0.19447,Low: <0.2,Focal support below five votes,0.363333,0.5352380952380953,0.6095238095238095,0.13380952380952382,0.016666666666666666,kʰura,*padara
+head,HAIL,0.194318,Low: <0.2,Focal support below five votes,0.323864,0.6,0.5416666666666666,0.2727272727272727,0.16666666666666666,aśáni,karaka
+head,THEY,0.193519,Low: <0.2,Focal support below five votes,0.527778,0.3666666666666666,0.3055555555555555,1.0,0.25,tá,asáu
+head,MELT,0.192981,Low: <0.2,Focal support below five votes,0.425694,0.4533333333333333,0.6875,0.18888888888888888,0.025,vílīyatē,galati
+head,BREAK (DESTROY OR GET DESTROYED),0.192121,Low: <0.2,Focal support below five votes,0.288182,0.6666666666666666,0.23809523809523808,0.3382688492063492,0,*spʰōṭyatē,trōṭáyati
+head,MIDDAY,0.192,Low: <0.2,Focal support below five votes,0.64,0.3,0.3,0.98,0,*gʰraṇiṣya,*dva-prahara
+head,NECK,0.190909,Low: <0.2,Focal support below five votes,0.318182,0.6,0.5,0.13636363636363635,0,maṇi,*gʰicca
+head,DIFFERENT,0.190833,Low: <0.2,Focal support below five votes,0.477083,0.4,0.4,0.5541666666666666,0,ápara,*anyākāra
+head,VOMIT,0.190813,Low: <0.2,Focal support below five votes,0.342778,0.5566666666666666,0.5,0.18555555555555556,0,cʰárdati,*cʰr̩ndati
+head,FLOCK (OF ANIMALS),0.189495,Low: <0.2,Focal support below five votes,0.406061,0.4666666666666666,0.6,0.2121212121212121,0,rambʰa,*pā́la
+head,STOMACH,0.189236,Low: <0.2,Focal support below five votes,0.378472,0.5,0.3125,0.4444444444444444,0,*ḍʰiḍḍʰa,*pēṭṭa
+head,STEAL,0.189091,Low: <0.2,Focal support below five votes,0.472727,0.4,0.4,0.5454545454545454,0,*apalīyatē,cōráyati
+head,BELOW OR UNDER,0.188761,Low: <0.2,Focal support below five votes,0.333108,0.5666666666666667,0.2833333333333333,0.3828828828828829,0,bundʰa,nīcá
+head,SPIT,0.188571,Low: <0.2,Focal support below five votes,0.471429,0.4,0.8,0.2857142857142857,0.14285714285714285,*tʰukk,śū́la
+head,LIP,0.187564,Low: <0.2,Focal support below five votes,0.267949,0.7,0.26666666666666666,0.2692307692307692,0,śuṇḍā,*adʰaōṣṭʰa
+head,GO UP (ASCEND),0.186667,Low: <0.2,Focal support below five votes,0.466667,0.4,0.4,0.5333333333333333,0,*kʰasati,*caḍʰati
+head,SWEAT (SUBSTANCE),0.186466,Low: <0.2,Focal support below five votes,0.310777,0.6,0.42857142857142855,0.19298245614035087,0,tapyatí,prasvinna
+head,BROKEN,0.185985,Low: <0.2,Focal support below five votes,0.309975,0.6,0.375,0.24494949494949492,0,*spʰōṭyatē,trúṭyati
+head,JOINT,0.184936,Low: <0.2,Focal support below five votes,0.369872,0.5,0.4166666666666667,0.3230769230769231,0,bandʰá,grantʰí
+head,LANGUAGE,0.183333,Low: <0.2,Focal support below five votes,0.305556,0.6,0.3333333333333333,0.5,0.2222222222222222,jihvā́,bʰāṣā
+head,VEGETABLES,0.182143,Low: <0.2,Focal support below five votes,0.455357,0.4,0.625,0.2857142857142857,0,śāka,bʰarjita
+head,FOAM,0.180556,Low: <0.2,Focal support below five votes,0.361111,0.5,1.0,0.20833333333333334,0.4861111111111111,pʰḗna,*gajja
+head,SAP,0.18,Low: <0.2,Focal support below five votes,0.45,0.4,0.6,0.4,0.1,kṣīrá,rása
+head,TRUE,0.179812,Low: <0.2,Focal support below five votes,0.359623,0.5,0.35714285714285715,0.5763888888888888,0.21428571428571427,sā́dʰana,satyá
+head,BROWN,0.179253,Low: <0.2,Focal support below five votes,0.430208,0.41666666666666663,0.6,0.26041666666666663,0,gaurá,*bʰrūra
+head,WALK,0.179012,Low: <0.2,Focal support below five votes,0.268519,0.6666666666666666,0.3333333333333333,0.2037037037037037,0,tíllati,*calyati
+head,SMELL,0.177778,Low: <0.2,Focal support below five votes,0.355556,0.5,0.6,0.2777777777777778,0.16666666666666666,gandʰá,*gāndʰa
+head,POUR,0.1775,Low: <0.2,Focal support below five votes,0.295833,0.6,0.3333333333333333,0.25833333333333336,0,talati,*ḍʰālayati
+head,HANDLE,0.175714,Low: <0.2,Focal support below five votes,0.292857,0.6,0.42857142857142855,0.3,0.14285714285714285,daṇḍá,vīṭā
+head,EVENING,0.172703,Low: <0.2,Focal support below five votes,0.575676,0.3,0.3,0.8513513513513513,0,támisrā,saṁdʰyā́
+head,BOIL,0.172449,Low: <0.2,Focal support below five votes,0.266444,0.6472222222222223,0.37878787878787873,0.1541005291005291,0,*pacyatēaya-,*kʰa-ul
+head,PICK,0.171667,Low: <0.2,Focal support below five votes,0.429167,0.4,0.4,0.4583333333333333,0,*utpaṭati,trōṭáyati
+head,THREE,0.171528,Low: <0.2,Focal support below five votes,0.21441,0.8,0.2222222222222222,0.984375,0.7777777777777778,*trāyaḣ,tráyaḣ
+head,SPEECH,0.171515,Low: <0.2,Focal support below five votes,0.428788,0.4,0.7666666666666666,0.18181818181818182,0.09090909090909091,vārtta,vacaná
+head,BRASS,0.171429,Low: <0.2,Focal support below five votes,0.428571,0.4,0.2857142857142857,1.0,0.42857142857142855,rīti,pittala
+head,GIRL,0.170995,Low: <0.2,Focal support below five votes,0.284992,0.6,0.23076923076923078,0.3392156862745098,0,*pʰōta,*cʰōkara
+head,DO,0.170278,Low: <0.2,Focal support below five votes,0.30049,0.5666666666666667,0.2833333333333333,0.6176470588235294,0.3,stʰāpáyati,karṓti
+head,THIRSTY,0.168056,Low: <0.2,Focal support below five votes,0.360119,0.4666666666666666,0.29166666666666663,0.42857142857142855,0,tr̩ṣyā́vant,pipāsitá
+head,BECOME,0.167951,Low: <0.2,Focal support below five votes,0.479861,0.35,0.7722222222222221,0.21875,0.03125,bʰávati,stʰīyátē
+head,DRY UP,0.1675,Low: <0.2,Focal support below five votes,0.41875,0.4,0.4,0.4375,0,śúṣyati,*śuṣkati
+head,MUCH,0.166781,Low: <0.2,Focal support below five votes,0.232718,0.7166666666666666,0.4090909090909091,0.22395833333333331,0.16761363636363635,bahura,bahutva
+head,DARKNESS,0.166111,Low: <0.2,Focal support below five votes,0.415278,0.4,0.2,0.8055555555555556,0.175,āndʰya,andʰakāra
+head,ANGER,0.165833,Low: <0.2,Focal support below five votes,0.414583,0.4,0.8541666666666666,0.14285714285714285,0.16785714285714287,rōṣa,rāga
+head,SPINDLE,0.165714,Low: <0.2,Focal support below five votes,0.27619,0.6,0.6,0.25,0.29761904761904756,tarkú,*tarkull-
+head,BOARD,0.165,Low: <0.2,Focal support below five votes,0.4125,0.4,0.4,0.625,0.2,bʰitta,paṭṭa
+head,CHICKEN,0.163889,Low: <0.2,Focal support below five votes,0.35119,0.4666666666666666,0.29166666666666663,0.44642857142857145,0.03571428571428571,caṭaka,murɣ
+head,HOT,0.16366,Low: <0.2,"Supported, crossover >10 points",0.16366,1,0.49999999999999994,0.2188034188034188,0.3914835164835165,taptá,uṣṇá
+head,SCARF OR TURBAN,0.163519,Low: <0.2,Focal support below five votes,0.408796,0.4,0.4,0.6175925925925926,0.2,*laṭṭa,*paggā
+head,BRIGHT,0.163167,Low: <0.2,Focal support below five votes,0.407917,0.4,0.4,0.41583333333333333,0,*prabʰāla,ujjvala
+head,TWIST,0.161717,Low: <0.2,Focal support below five votes,0.389319,0.41538461538461535,0.6428571428571429,0.18881118881118877,0.053030303030303025,vēṣṭáyati,vartáyati
+head,SHEPHERD,0.161458,Low: <0.2,Focal support below five votes,0.322917,0.5,0.3125,0.3333333333333333,0,paśupāla,rakṣapāla
+head,BROOM,0.161373,Low: <0.2,Focal support below five votes,0.403431,0.4,0.4,0.40686274509803916,0,mārjana,bahukāra
+head,SKIN,0.160731,Low: <0.2,Focal support below five votes,0.267885,0.6,0.23076923076923078,0.30500000000000005,0,gā́tra,kʰalla
+head,WIND,0.160469,Low: <0.2,Focal support below five votes,0.229241,0.7,0.25,0.31875,0.11026785714285714,vātala,vātara
+head,AGAIN,0.160023,Low: <0.2,Focal support below five votes,0.320047,0.5,0.22727272727272727,0.4128205128205128,0,*gʰir,*pʰērayati
+head,SHOW,0.16,Low: <0.2,Focal support below five votes,0.4,0.4,0.4,0.4,0,*pāśayati,*dr̩kṣati
+head,THEN,0.157619,Low: <0.2,Focal support below five votes,0.394048,0.4,0.2857142857142857,0.55,0.047619047619047616,tátas,tā́t
+head,MARROW,0.157197,Low: <0.2,Focal support below five votes,0.314394,0.5,0.22727272727272727,0.5833333333333333,0.18181818181818182,mḗdas,majján
+head,SLAVE,0.157153,Low: <0.2,Focal support below five votes,0.304167,0.5166666666666666,0.4,0.2583333333333333,0.05,*lavaṇḍa,bandī
+head,ABOVE,0.156692,Low: <0.2,Focal support below five votes,0.39173,0.4,0.25,0.5959595959595959,0.0625,ūrdʰvá,*uppari
+head,HERD (SOMETHING),0.156667,Low: <0.2,Focal support below five votes,0.391667,0.4,0.4,0.3833333333333333,0,rambʰa,várga
+head,PUT ON,0.15625,Low: <0.2,Focal support below five votes,0.260417,0.6,0.25,0.2986111111111111,0.027777777777777776,bandʰati,páridadʰāti
+head,JAW,0.155556,Low: <0.2,Focal support below five votes,0.333333,0.4666666666666666,0.4166666666666667,0.38888888888888884,0.13888888888888887,jámbʰa,hánu
+head,LOAD,0.155425,Low: <0.2,Focal support below five votes,0.290385,0.5352380952380952,0.7166666666666667,0.20586080586080585,0.3417582417582417,bʰārá,bʰára
+head,BEAT,0.155093,Low: <0.2,Focal support below five votes,0.232639,0.6666666666666666,0.2222222222222222,0.24305555555555555,0,dádʰāti,piṭṭayati
+head,WRIST,0.155048,Low: <0.2,Focal support below five votes,0.310096,0.5,0.3125,0.3076923076923077,0,*gulu,nāḍī́
+head,CLIMB,0.154375,Low: <0.2,Focal support below five votes,0.514583,0.3,0.3,0.7291666666666666,0,*utskadati,*caḍʰati
+head,FLY (MOVE THROUGH AIR),0.153213,Low: <0.2,Focal support below five votes,0.306426,0.5,0.22727272727272727,0.5977011494252873,0.2121212121212121,*pʰutta,mákṣā
+head,NAIL (TOOL),0.152564,Low: <0.2,Focal support below five votes,0.38141,0.4,0.3333333333333333,0.7628205128205128,0.3333333333333333,nakʰará,nakʰá
+head,SHAVE,0.152381,Low: <0.2,Focal support below five votes,0.380952,0.4,0.2857142857142857,0.47619047619047616,0,*nikartati,muṇḍayati
+head,TORCH,0.152381,Low: <0.2,Focal support below five votes,0.380952,0.4,0.3333333333333333,0.42857142857142855,0,*śōṭṭʰa,ulkā́
+head,STAND,0.150897,Low: <0.2,Focal support below five votes,0.251496,0.6,0.23076923076923078,0.27222222222222225,0,úttʰita,ūrdʰvá
+head,UPPER LEG (THIGH),0.150893,Low: <0.2,Focal support below five votes,0.502976,0.3,0.21428571428571427,0.7916666666666666,0,*mandala,jáŋgʰā
+head,LAME,0.150231,Low: <0.2,Focal support below five votes,0.409722,0.3666666666666666,0.6666666666666666,0.15277777777777776,0,*kʰuṭṭa,*likka
+head,ROCK,0.15,Low: <0.2,Focal support below five votes,0.375,0.4,0.5833333333333333,0.3333333333333333,0.16666666666666666,*varta,lōḍyatē
+head,LIFE,0.14933,Low: <0.2,Focal support below five votes,0.497768,0.3,0.21428571428571427,0.78125,0,jīvalá,jīvá
+head,POISON,0.148148,Low: <0.2,Focal support below five votes,0.222222,0.6666666666666666,1.0,0.18518518518518517,0.7407407407407407,viṣá,garala
+head,DIG,0.147805,Low: <0.2,Focal support below five votes,0.29561,0.5,0.3125,0.2787202380952381,0,*kōcc,*kʰōdd
+head,LIZARD,0.146667,Low: <0.2,Focal support below five votes,0.366667,0.4,0.3333333333333333,0.4,0,*kr̩kkalāsa,*gʰaragōlī
+head,SMILE,0.146667,Low: <0.2,Focal support below five votes,0.366667,0.4,0.3333333333333333,0.4,0,*kṣumbati,vihasati
+head,THRESH,0.145833,Low: <0.2,Focal support below five votes,0.3125,0.4666666666666666,0.3333333333333333,0.29166666666666663,0,kṣuṇṇa,*jʰāṭayati
+head,OX,0.145556,Low: <0.2,Focal support below five votes,0.363889,0.4,0.3333333333333333,0.39444444444444443,0,*gāva,balivárda
+head,ITCH,0.145455,Low: <0.2,Focal support below five votes,0.363636,0.4,0.3333333333333333,0.3939393939393939,0,*avakṣōpa,kʰasa
+head,JOIN,0.144444,Low: <0.2,Focal support below five votes,0.361111,0.4,0.4,0.39365079365079364,0.07142857142857142,*gaḍḍ,*yōṭayati
+head,SPEAK,0.14375,Low: <0.2,Focal support below five votes,0.239583,0.6,0.25,0.4375,0.20833333333333331,mantráyatē,*bōll
+head,MAN,0.14308,Low: <0.2,Focal support below five votes,0.190774,0.75,0.1875,0.519047619047619,0.32499999999999996,mártya,manuṣyà
+head,WASP,0.142593,Low: <0.2,Focal support below five votes,0.305556,0.4666666666666666,0.3333333333333333,0.3333333333333333,0.05555555555555555,bʰramará,*cʰēdacihnaka
+head,BUTTER,0.142029,Low: <0.2,Focal support below five votes,0.355072,0.4,0.25,0.4601449275362318,0,*stanyanīta,mrakṣaṇa
+head,BULL,0.140756,Low: <0.2,Focal support below five votes,0.234594,0.6,0.25490196078431376,0.21428571428571427,0,gṓ,balivárda
+head,THICK,0.140642,Low: <0.2,Focal support below five votes,0.234403,0.6,0.2727272727272727,0.19607843137254902,0,*bʰakkʰa,gāḍʰa
+head,LOOK,0.140625,Low: <0.2,Focal support below five votes,0.28125,0.5,0.25,0.3125,0,*stʰarati,*dēkṣati
+head,ARRIVE,0.140476,Low: <0.2,Focal support below five votes,0.35119,0.4,0.2,0.5023809523809524,0,*prēratē,prábʰūta
+head,FRIEND,0.139722,Low: <0.2,Focal support below five votes,0.349306,0.4,0.4,0.3986111111111111,0.1,dāraka,mitrá
+head,YELLOW,0.139545,Low: <0.2,Focal support below five votes,0.232576,0.6,0.34848484848484845,0.2,0.08333333333333333,haridra,haridrā
+head,YOKE,0.13927,Low: <0.2,Focal support below five votes,0.297222,0.4685714285714286,0.55,0.19523809523809524,0.15079365079365079,yugá,yōktrayati
+head,WANDER,0.138974,Low: <0.2,Focal support below five votes,0.347436,0.4,0.4,0.2948717948717949,0,tíllati,*gʰummati
+head,FOREHEAD,0.138924,Low: <0.2,Focal support below five votes,0.24516,0.5666666666666667,0.31481481481481477,0.23106060606060605,0.05555555555555555,tā́lu,masta
+head,PLACE (POSITION),0.138882,Low: <0.2,Focal support below five votes,0.308626,0.45,0.25,0.4147451963241437,0.047493734335839595,stʰā́na,stʰā́man
+head,LOUSE,0.1375,Low: <0.2,Focal support below five votes,0.196429,0.7,0.8095238095238094,0.19444444444444445,0.6111111111111112,yū́kā,utkuṇa
+head,CAMEL,0.137407,Low: <0.2,Focal support below five votes,0.294444,0.4666666666666666,1.0,0.15555555555555553,0.5666666666666667,úṣṭra,karabʰá
+head,SUNSHINE,0.137143,Low: <0.2,Focal support below five votes,0.342857,0.4,0.4,0.2857142857142857,0,sū́ra,gʰarmá
+head,THROAT,0.13588,Low: <0.2,Focal support below five votes,0.271759,0.5,0.20833333333333334,0.4185185185185185,0.08333333333333333,*śraṭṭa,gala
+head,PREGNANT,0.135625,Low: <0.2,Focal support below five votes,0.452083,0.3,0.1875,0.9666666666666667,0.25,*udguru,garbʰíṇī
+head,FLAME,0.135556,Low: <0.2,Focal support below five votes,0.338889,0.4,0.4,0.3611111111111111,0.08333333333333333,bʰāsá,arcís
+head,CHIN,0.135268,Low: <0.2,Focal support below five votes,0.450893,0.3,0.21428571428571427,0.6875,0,jámbʰa,tuṇḍa
+head,BURNING,0.134856,Low: <0.2,Focal support below five votes,0.237981,0.5666666666666667,0.6041666666666666,0.21794871794871792,0.34615384615384615,taptá,dāha
+head,GROUND,0.134343,Low: <0.2,Focal support below five votes,0.287879,0.4666666666666667,0.2424242424242424,0.33333333333333337,0,dʰaráṇī,*piṣyatē
+head,BONE,0.133878,Low: <0.2,Focal support below five votes,0.223129,0.6,0.2,0.9795918367346939,0.7333333333333333,aṣṭʰi,haḍḍa
+head,BEAUTIFUL,0.133681,Low: <0.2,Focal support below five votes,0.267361,0.5,0.20833333333333334,0.3263888888888889,0,śúbʰvan,śōbʰaná
+head,STOOL,0.132727,Low: <0.2,Focal support below five votes,0.331818,0.4,0.4,0.41666666666666663,0.15303030303030302,ā́sana,pīṭʰa
+head,TIME,0.131718,Low: <0.2,Focal support below five votes,0.299359,0.44000000000000006,0.44000000000000006,0.4008547008547009,0.24213675213675212,vāra,vḗlā
+head,COUGH,0.131111,Low: <0.2,Focal support below five votes,0.327778,0.4,0.2,0.45555555555555555,0,kā́satē,*kʰōkkʰ
+head,NECKLACE,0.130556,Low: <0.2,Focal support below five votes,0.326389,0.4,0.3333333333333333,0.4861111111111111,0.16666666666666666,*graíviya,hāra
+head,WAIST,0.130179,Low: <0.2,Focal support below five votes,0.289286,0.45,0.42857142857142855,0.15,0,*ḍʰākka,*lakka
+head,TOWARDS,0.13,Low: <0.2,Focal support below five votes,0.325,0.4,0.3333333333333333,0.35,0.03333333333333333,kárṇa,bʰitta
+head,NOT,0.129928,Low: <0.2,Focal support below five votes,0.169471,0.7666666666666666,0.23958333333333331,0.8076923076923077,0.7083333333333333,naiva,ná
+head,SHADE,0.129545,Low: <0.2,Focal support below five votes,0.215909,0.6,0.25,0.18181818181818182,0,apaccʰāyā,cʰādi
+head,BOW,0.129514,Low: <0.2,Focal support below five votes,0.259028,0.5,0.3125,0.20555555555555557,0,*drōṇa-,námati
+head,PULSE,0.129365,Low: <0.2,Focal support below five votes,0.323413,0.4,0.2857142857142857,0.3611111111111111,0,mudgá,nāḍī́
+head,TOMORROW,0.128795,Low: <0.2,Focal support below five votes,0.321987,0.4,0.2857142857142857,0.4296875,0.07142857142857142,rucitá,kālya
+head,WOLF,0.128571,Low: <0.2,Focal support below five votes,0.321429,0.4,0.35714285714285715,0.2857142857142857,0,grastr̩,*?
+head,SMALL,0.128076,Low: <0.2,Focal support below five votes,0.242305,0.5285714285714286,0.14682539682539683,0.40127758420441356,0.06349206349206349,*lukka,*cʰōṭṭa
+head,BE BORN,0.127778,Low: <0.2,Focal support below five votes,0.319444,0.4,0.5833333333333334,0.2222222222222222,0.16666666666666666,jā́yatē,dēśī́ya
+head,SEIZE,0.127388,Low: <0.2,Focal support below five votes,0.347421,0.3666666666666666,0.3055555555555555,0.3892857142857143,0,gr̩bʰāyáti,*pakkaḍ
+head,EAT,0.127079,Low: <0.2,Focal support below five votes,0.152494,0.8333333333333333,0.19841269841269837,0.7970521541950113,0.6904761904761905,yuvátē,kʰā́dati
+head,FLEE,0.12684,Low: <0.2,Focal support below five votes,0.3171,0.4,0.2857142857142857,0.34848484848484845,0,ḍáyatē,bʰagna
+head,LOSE,0.126731,Low: <0.2,Focal support below five votes,0.422436,0.3,0.3,0.5448717948717948,0,*pusati,hārayati
+head,BARK,0.126667,Low: <0.2,Focal support below five votes,0.316667,0.4,0.4,0.29999999999999993,0.06666666666666667,puṭa,cʰalli
+head,STRING,0.125116,Low: <0.2,Focal support below five votes,0.31279,0.4,0.2857142857142857,0.4067155067155067,0.06684981684981685,sū́tra,davara
+head,BUILD,0.12381,Low: <0.2,Focal support below five votes,0.309524,0.4,0.3333333333333333,0.2857142857142857,0,dádʰāti,cinṓti
+head,HIGH TIDE,0.12381,Low: <0.2,Focal support below five votes,0.309524,0.4,0.2857142857142857,0.3333333333333333,0,*avaḍḍʰāla,vŕ̩ddʰi
+head,HOLD,0.123512,Low: <0.2,Focal support below five votes,0.247024,0.5,0.35714285714285715,0.3083333333333333,0.17142857142857143,dʰāráyati,dʰárati
+head,RECOGNIZE (SOMEBODY),0.123333,Low: <0.2,Focal support below five votes,0.308333,0.4,0.3333333333333333,0.2833333333333333,0,jānā́ti,pratyabʰijānāti
+head,KNOW,0.122751,Low: <0.2,Focal support below five votes,0.306878,0.4,0.42857142857142855,0.2222222222222222,0.037037037037037035,jānā́ti,cihnayati
+head,PORCH,0.122667,Low: <0.2,Focal support below five votes,0.306667,0.4,0.4,0.21333333333333335,0,maṇḍapa,*avaśara
+head,ELBOW,0.122294,Low: <0.2,Focal support below five votes,0.244589,0.5,0.22727272727272727,0.2619047619047619,0,*ḍʰōŋga,aratní
+head,WANT,0.122222,Low: <0.2,Focal support below five votes,0.305556,0.4,0.3333333333333333,0.2777777777777778,0,*gʰaṭṭati,śraddʰā́
+head,EMERGE (APPEAR),0.121875,Low: <0.2,Focal support below five votes,0.270833,0.45,0.25,0.29166666666666663,0,*niṣkasati,dr̩śyátē
+head,DEER,0.121711,Low: <0.2,Focal support below five votes,0.405702,0.3,0.25,0.8947368421052632,0.3333333333333333,*margā,hariṇá
+head,SPEAR,0.12,Low: <0.2,Focal support below five votes,0.3,0.4,0.3333333333333333,0.4333333333333334,0.16666666666666666,śalyá,bʰalla
+head,PALM OF HAND,0.119444,Low: <0.2,Focal support below five votes,0.298611,0.4,0.2222222222222222,0.375,0,pr̩tʰú,nārikēla
+head,BE HUNGRY,0.119391,Low: <0.2,Focal support below five votes,0.238782,0.5,0.20833333333333334,0.3076923076923077,0.038461538461538464,abʰukta,bubʰukṣatē
+head,GOOD,0.118562,Low: <0.2,Focal support below five votes,0.197603,0.6,0.21428571428571427,0.18092105263157893,0,bʰagín,vardʰita
+head,REMAIN,0.118333,Low: <0.2,Focal support below five votes,0.295833,0.4,0.2222222222222222,0.38333333333333336,0.013888888888888888,dʰárati,*rahati
+head,HARD,0.115909,Low: <0.2,Focal support below five votes,0.289773,0.4,0.45454545454545453,0.25,0.125,kakkʰaṭa,nirbʰara
+head,GRANDMOTHER,0.114286,Low: <0.2,Focal support below five votes,0.285714,0.4,0.35714285714285715,0.2857142857142857,0.07142857142857142,*dādda,*nānna
+head,REST,0.114286,Low: <0.2,Focal support below five votes,0.285714,0.4,0.2857142857142857,0.3,0.014285714285714285,viśramatē,suptá
+head,ROTTEN,0.113636,Low: <0.2,Focal support below five votes,0.284091,0.4,0.25,0.3181818181818182,0,takrá,śáṭati
+head,SHIELD,0.112963,Low: <0.2,Focal support below five votes,0.423611,0.26666666666666666,0.625,0.2222222222222222,0,kʰēṭa-,*ōḍḍʰ
+head,BOY,0.112485,Low: <0.2,Focal support below five votes,0.224969,0.5,0.17857142857142858,0.27136752136752135,0,*pʰōta,*cʰōkara
+head,DEEP,0.111979,Low: <0.2,Focal support below five votes,0.373264,0.3,0.25,0.49652777777777773,0,guptá,gabʰīrá
+head,DUNG (ANIMAL FAECES),0.111732,Low: <0.2,Focal support below five votes,0.358225,0.3119047619047619,0.6785714285714286,0.14177489177489178,0.10389610389610389,pāṣi,kʰā́tra
+head,SEED,0.111623,Low: <0.2,Focal support below five votes,0.196982,0.5666666666666667,0.7692307692307693,0.11805555555555554,0.4933226495726496,bī́ja,tilá
+head,BOW STRING,0.111538,Low: <0.2,Focal support below five votes,0.278846,0.4,0.3076923076923077,0.25,0,jiyā́,tantí
+head,SWEET,0.111146,Low: <0.2,Focal support below five votes,0.202083,0.55,0.18333333333333332,0.7041666666666666,0.48333333333333334,madʰurá,mr̩ṣṭá
+head,DARK,0.110079,Low: <0.2,Focal support below five votes,0.275198,0.4,0.2857142857142857,0.3361111111111111,0.07142857142857142,kṣīṇá,andʰakāra
+head,AND,0.109127,Low: <0.2,Focal support below five votes,0.297619,0.36666666666666664,0.16666666666666666,0.42857142857142855,0,tadā́,ápara
+head,NOW,0.108571,Low: <0.2,Focal support below five votes,0.271429,0.4,0.2857142857142857,0.4,0.14285714285714285,*?,adʰunā́
+head,DIRTY,0.107389,Low: <0.2,Focal support below five votes,0.268473,0.4,0.18181818181818182,0.35512820512820514,0,*kʰacca,*malin
+head,PENIS,0.106777,Low: <0.2,Focal support below five votes,0.282051,0.3785714285714285,0.7564102564102563,0.1456043956043956,0.3379120879120879,laṭṭa,lakuṭa
+head,FIREWOOD,0.106325,Low: <0.2,Focal support below five votes,0.265812,0.4,0.15384615384615385,0.3777777777777777,0,śākʰyá,lakuṭa
+head,FINGERNAIL,0.105769,Low: <0.2,Focal support below five votes,0.264423,0.4,0.25,0.9038461538461539,0.625,*nakkʰa,nakʰá
+head,HAT,0.104029,Low: <0.2,Focal support below five votes,0.260073,0.4,0.2857142857142857,0.9487179487179487,0.7142857142857143,kʰōla,*ṭōppa
+head,FLOUR,0.103877,Low: <0.2,Focal support below five votes,0.207755,0.5,0.15625,0.7592592592592593,0.5,apūpíya,*ārta
+head,SLEEP,0.103495,Low: <0.2,Focal support below five votes,0.206989,0.5,0.16666666666666666,0.2806451612903226,0.03333333333333333,*svāpra,suptá
+head,CORNER,0.103472,Low: <0.2,Focal support below five votes,0.221726,0.4666666666666667,0.33333333333333337,0.548611111111111,0.4384920634920635,*kʰuṇṭa,kōṇa
+head,OUTSIDE,0.103125,Low: <0.2,Focal support below five votes,0.34375,0.3,0.1875,0.5625,0.0625,*bāhirima,*bāhira
+head,CUT,0.10286,Low: <0.2,Focal support below five votes,0.166691,0.6170707070707071,0.294047619047619,0.1814913844325609,0.14215686274509803,*cʰindati,kártati
+head,RAVINE,0.102778,Low: <0.2,Focal support below five votes,0.342593,0.3,0.5555555555555556,0.16666666666666666,0.037037037037037035,*gʰala,*kʰaḍḍa
+head,GET,0.101136,Low: <0.2,Focal support below five votes,0.252841,0.4,0.25,0.5606060606060606,0.30492424242424243,lábʰatē,prāpayati
+head,HOE,0.100769,Low: <0.2,Focal support below five votes,0.335897,0.3,0.3,0.37179487179487175,0,karṣí,*kōddāla
+head,WITH,0.098985,Low: <0.2,Focal support below five votes,0.174679,0.5666666666666667,0.23611111111111108,0.3423076923076923,0.22905982905982905,samá,sārtʰēna
+head,OPEN,0.098841,Low: <0.2,Focal support below five votes,0.269567,0.3666666666666666,0.15277777777777776,0.44191232048374907,0.05555555555555555,mucyátē,*kʰōll
+head,FEAR (BE AFRAID),0.098152,Low: <0.2,Focal support below five votes,0.24538,0.4,0.18181818181818182,0.34730725623582775,0.03836580086580087,bibʰḗti,dara
+head,SIX,0.097681,Low: <0.2,Focal support below five votes,0.162802,0.6,0.1875,0.9193548387096774,0.78125,*ṣuvaṭ,ṣáṣ
+head,GUARD,0.0975,Low: <0.2,Focal support below five votes,0.325,0.3,0.35,0.3,0,rákṣati,prahara
+head,RUB,0.097161,Low: <0.2,Focal support below five votes,0.242903,0.4,0.2857142857142857,0.20708458208458208,0.006993006993006993,márdati,*malati
+head,HIP,0.097143,Low: <0.2,Focal support below five votes,0.242857,0.4,0.2857142857142857,0.2,0,śrṓṇi,*kulla
+head,EGG,0.096955,Low: <0.2,Focal support below five votes,0.19391,0.5,0.20833333333333334,0.1794871794871795,0,stʰūlá,ḍimba
+head,GRAIN,0.096111,Low: <0.2,Focal support below five votes,0.205952,0.4666666666666666,0.2333333333333333,0.17857142857142858,0,bī́ja,annā́dya
+head,GROOM,0.095893,Low: <0.2,Focal support below five votes,0.319643,0.3,0.25,0.3892857142857143,0,jā́mātr̩,vará
+head,PORCUPINE,0.095455,Low: <0.2,Focal support below five votes,0.238636,0.4,0.25,0.22727272727272727,0,śályaka,sēdʰā
+head,CO-WIFE,0.094737,Low: <0.2,Focal support below five votes,0.473684,0.2,0.2,0.9473684210526315,0.2,*yātarikā,sapátnī
+head,WEAVE,0.094444,Low: <0.2,Focal support below five votes,0.236111,0.4,0.2222222222222222,0.5833333333333333,0.3333333333333333,tántra,*vunāti
+head,YAWN,0.093333,Low: <0.2,Focal support below five votes,0.233333,0.4,0.5,0.2,0.2333333333333333,jŕ̩mbʰatē,hāyi
+head,WING,0.092826,Low: <0.2,Focal support below five votes,0.30942,0.3,0.3,0.3623188405797101,0.043478260869565216,pākṣa,ḍayana
+head,FALL,0.092583,Low: <0.2,Focal support below five votes,0.216026,0.42857142857142855,0.1948051948051948,0.4001543209876543,0.16290684624017956,galati,pátati
+head,FIRST,0.09256,Low: <0.2,Focal support below five votes,0.308532,0.3,0.21428571428571427,0.40277777777777773,0,saṁmukʰá,*pratʰilla
+head,POND,0.092308,Low: <0.2,Focal support below five votes,0.230769,0.4,0.3333333333333333,0.17948717948717946,0.05128205128205128,*ḍʰaṇḍʰa,pauṣkara
+head,HEAT,0.091136,Low: <0.2,Focal support below five votes,0.227839,0.4,0.2857142857142857,0.20842490842490843,0.038461538461538464,tápyati,arcís
+head,LAMB,0.091071,Low: <0.2,Focal support below five votes,0.303571,0.3,0.35714285714285715,0.25,0,*bukka,*lēlla
+head,PUT,0.090455,Low: <0.2,Focal support below five votes,0.301515,0.3,0.13636363636363635,0.4666666666666666,0,dádʰāti,rákṣati
+head,JACKAL,0.089818,Low: <0.2,Focal support below five votes,0.259091,0.3466666666666667,0.8181818181818182,0.11555555555555556,0.41555555555555557,śr̩gālá,*giddaḍa-
+head,SLOPE,0.088889,Low: <0.2,Focal support below five votes,0.333333,0.26666666666666666,0.4,0.26666666666666666,0,drōṇī,*uttaraṇī
+head,DRY,0.088836,Low: <0.2,Focal support below five votes,0.148059,0.6,0.15789473684210525,0.705,0.5667763157894736,śúṣyati,śúṣka
+head,WHEAT,0.088803,Low: <0.2,"Supported, crossover >10 points",0.088803,1,0.8809523809523809,0.13513513513513514,0.8384813384813384,gōdʰū́ma,kaṇika
+head,WHICH,0.08875,Low: <0.2,Focal support below five votes,0.44375,0.2,0.6875,0.2,0,kím,kaḥ punar
+head,DAWN,0.088525,Low: <0.2,Focal support below five votes,0.265575,0.3333333333333333,0.23809523809523808,0.3030555555555555,0.01,*lōka,*bʰōrā
+head,SHOULDERBLADE,0.088393,Low: <0.2,Focal support below five votes,0.294643,0.3,0.375,0.21428571428571427,0,*spʰiyá,*haṁsa
+head,RAM,0.088111,Low: <0.2,Focal support below five votes,0.18881,0.4666666666666666,0.5357142857142857,0.2333333333333333,0.39142857142857146,mēṇḍʰa,bʰēḍra
+head,GRANDFATHER,0.087912,Low: <0.2,Focal support below five votes,0.21978,0.4,0.2857142857142857,0.23076923076923078,0.07692307692307693,*bāppa,āryaka
+head,FIST,0.087051,Low: <0.2,Focal support below five votes,0.186538,0.4666666666666666,0.95,0.17948717948717946,0.7564102564102563,muṣṭí,*gʰūssa
+head,FOOD,0.086458,Low: <0.2,Focal support below five votes,0.216146,0.4,0.25,0.18229166666666666,0,apūpá,āhāra
+head,YOU,0.086429,Low: <0.2,Focal support below five votes,0.144048,0.6000000000000001,0.4880952380952381,0.12000000000000002,0.32,yuṣmad,ātmán
+head,SMOKE (EXHAUST),0.086366,Low: <0.2,Focal support below five votes,0.12338,0.7,0.19444444444444445,0.8208333333333332,0.7685185185185185,dʰūmikā,dʰūmá
+head,THORN,0.085833,Low: <0.2,Focal support below five votes,0.107292,0.8,0.26666666666666666,0.6645833333333334,0.7166666666666667,káṇṭaka,kaṇṭa
+head,LIE (REST),0.085714,Low: <0.2,Focal support below five votes,0.285714,0.3,0.21428571428571427,0.35714285714285715,0,laṭṭa,*jʰūṭṭʰa
+head,SPRING (OF WATER),0.084286,Low: <0.2,Focal support below five votes,0.421429,0.2,0.7,0.14285714285714285,0,útsa,*jʰāladʰāraka
+head,STRAW,0.083995,Low: <0.2,Focal support below five votes,0.209987,0.4,0.2857142857142857,0.16898148148148148,0.034722222222222224,túṣa,pálāla
+head,WASH,0.083889,Low: <0.2,Focal support below five votes,0.209722,0.4,0.2,0.3194444444444445,0.1,*kṣupyatē,*dʰauvati
+head,PLAY,0.083761,Low: <0.2,Focal support below five votes,0.314103,0.26666666666666666,0.16666666666666666,0.46153846153846156,0,nŕ̩tyati,*kʰēḍ
+head,DISTANCE,0.083333,Low: <0.2,Focal support below five votes,0.416667,0.2,1.0,0.16666666666666666,0.3333333333333333,dūrá,pántʰā
+head,GIVE,0.083333,Low: <0.2,Focal support below five votes,0.166667,0.5,0.22727272727272727,0.16666666666666666,0.0606060606060606,prádadāti,dattá
+head,BREAD,0.083175,Low: <0.2,Focal support below five votes,0.311905,0.26666666666666666,0.35714285714285715,0.26666666666666666,0,gōla,*rōṭṭa
+head,CHILD,0.08172,Low: <0.2,Focal support below five votes,0.204301,0.4,0.16666666666666666,0.24193548387096772,0,*kuḍa,*cʰōkara
+head,THERE,0.080357,Low: <0.2,Focal support below five votes,0.267857,0.3,0.25,0.2857142857142857,0,átra,*uttʰam
+head,SELF,0.080159,Low: <0.2,Focal support below five votes,0.400794,0.2,0.14285714285714285,0.9444444444444444,0.2857142857142857,*pʰūtka,ātmán
+head,MANGO,0.079032,Low: <0.2,Focal support below five votes,0.112903,0.7,1.0,0.11290322580645161,0.8870967741935484,āmrá,kēsarin
+head,SPLIT,0.079018,Low: <0.2,Focal support below five votes,0.237054,0.3333333333333333,0.23809523809523808,0.24851190476190477,0.0125,pʰālayati,*spʰuṭyati
+head,BITE,0.077976,Low: <0.2,Focal support below five votes,0.259921,0.3,0.21428571428571427,0.3055555555555556,0,*cappayati,kártati
+head,DRUM,0.077894,Low: <0.2,Focal support below five votes,0.240909,0.32333333333333336,0.8,0.14696969696969697,0.4651515151515152,ḍʰōla,*ḍaŋka
+head,BLOW (OF WIND),0.077166,Low: <0.2,Focal support below five votes,0.200183,0.3854761904761905,0.4642857142857143,0.14826007326007326,0.2121794871794872,*pʰūtka,*ṭʰōkkarā
+head,HOLE,0.076349,Low: <0.2,Focal support below five votes,0.190873,0.4,0.2222222222222222,0.1595238095238095,0,*cumbʰati,cʰidrá
+head,SWIM,0.076339,Low: <0.2,Focal support below five votes,0.254464,0.3,0.21428571428571427,0.4375,0.14285714285714285,drávati,tárati
+head,EYE,0.07625,Low: <0.2,Focal support below five votes,0.099457,0.7666666666666666,0.19166666666666665,0.09782608695652174,0.09057971014492752,áśru,cákṣus
+head,THIEF,0.07619,Low: <0.2,Focal support below five votes,0.190476,0.4,0.14285714285714285,0.3095238095238095,0.07142857142857142,muṣ,*ṭʰagg
+head,PARTRIDGE,0.075833,Low: <0.2,Focal support below five votes,0.379167,0.2,0.2,0.9583333333333334,0.4,jāŋgala,tittirá
+head,STRONG,0.075,Low: <0.2,Focal support below five votes,0.25,0.3,0.21428571428571427,0.2857142857142857,0,*bʰakkʰa,bála
+head,SCRATCH,0.074495,Low: <0.2,Focal support below five votes,0.279356,0.26666666666666666,0.4375,0.1212121212121212,0,*kōcc,kṣuráti
+head,FAECES (EXCREMENT),0.074359,Low: <0.2,Focal support below five votes,0.185897,0.4,0.15384615384615385,0.8333333333333334,0.6153846153846154,*rikṣa,gūtʰa
+head,SISTER,0.074167,Low: <0.2,Focal support below five votes,0.370833,0.2,0.575,0.16666666666666666,0,svásr̩,*duhitājana
+head,WEAR,0.073704,Low: <0.2,Focal support below five votes,0.276389,0.26666666666666666,0.26666666666666666,0.4861111111111111,0.2,āmuñcati,páridadʰāti
+head,IN FRONT OF,0.073558,Low: <0.2,Focal support below five votes,0.294231,0.25,0.25,0.5384615384615384,0.2,purás,ágra
+head,TURN,0.073207,Low: <0.2,Focal support below five votes,0.200741,0.36468253968253966,0.34722222222222215,0.12156084656084656,0.06730158730158729,vāra,*pāḍi
+head,SKY,0.072826,Low: <0.2,Focal support below five votes,0.242754,0.3,0.25,0.36231884057971014,0.12681159420289856,ākāśá,āsmān
+head,THIN,0.072821,Low: <0.2,Focal support below five votes,0.22996,0.3166666666666667,0.13194444444444445,0.3488095238095238,0.020833333333333332,cūrṇa,pattralá
+head,THROW,0.072407,Low: <0.2,Focal support below five votes,0.197475,0.36666666666666664,0.2727272727272727,0.12222222222222222,0,talati,*pʰēkk
+head,MEAT,0.071667,Low: <0.2,Focal support below five votes,0.179167,0.4,0.125,0.23333333333333334,0,*anda,gōśt
+head,OLD,0.071585,Low: <0.2,Focal support below five votes,0.178963,0.4,0.13333333333333333,0.2245934959349593,0,*ḍagga,jūrṇá
+head,WEAK,0.071465,Low: <0.2,Focal support below five votes,0.267995,0.26666666666666666,0.2222222222222222,0.31376678876678876,0,*rulla,durbala
+head,MAIZE,0.071053,Low: <0.2,Focal support below five votes,0.177632,0.4,0.25,0.6403508771929824,0.5350877192982456,yavākāra,markaka
+head,MORNING,0.070498,Low: <0.2,Focal support below five votes,0.264368,0.26666666666666666,0.16666666666666666,0.3620689655172414,0,rucitá,*vibʰāna
+head,GATHER,0.07,Low: <0.2,Focal support below five votes,0.35,0.2,0.2,0.5,0,pralabʰatē,cinṓti
+head,VILLAGE,0.069987,Low: <0.2,Focal support below five votes,0.116646,0.6,0.9078947368421053,0.07142857142857142,0.746031746031746,grā́ma,vasti
+head,STRIKE,0.069624,Low: <0.2,Focal support below five votes,0.183913,0.3785714285714285,0.2222222222222222,0.1456043956043956,0,lāgáyati,*ṭʰōkk
+head,STICK,0.067639,Low: <0.2,Focal support below five votes,0.225463,0.3,0.125,0.3259259259259259,0,*drumadaṇḍa,*laṣṭi
+head,CLOTHES,0.066562,Low: <0.2,Focal support below five votes,0.332812,0.2,0.2,0.515625,0.05,paṭṭa,karpaṭa
+head,SIT,0.066176,Low: <0.2,Focal support below five votes,0.220588,0.3,0.21428571428571427,0.4411764705882353,0.21428571428571427,níṣīdati,úpaviśati
+head,PLOUGH,0.065073,Low: <0.2,Focal support below five votes,0.205492,0.3166666666666666,0.3125,0.14393939393939392,0.045454545454545456,vāhayati,*kʰēḍ
+head,HIDE,0.064821,Low: <0.2,Focal support below five votes,0.216071,0.3,0.21428571428571427,0.28928571428571426,0.07142857142857142,*apalīyatē,cárman
+head,EVIL,0.064259,Low: <0.2,Focal support below five votes,0.240972,0.26666666666666666,0.26666666666666666,0.21527777777777776,0,*latta,*bura
+head,STAR,0.063755,Low: <0.2,Focal support below five votes,0.141679,0.45,0.1323529411764706,0.6951219512195121,0.5441176470588235,stŕ̩,tārā
+head,AWAKE,0.06375,Low: <0.2,Focal support below five votes,0.31875,0.2,0.2,0.4375,0,búdʰyatē,jā́grat
+head,VULVA,0.063409,Low: <0.2,Focal support below five votes,0.211364,0.3,0.15,0.3060606060606061,0.03333333333333333,*bʰōcca,*cutta
+head,GUTS,0.061667,Low: <0.2,Focal support below five votes,0.308333,0.2,0.4166666666666667,0.2,0,ū́badʰya,*pēṭṭa
+head,MATERNAL UNCLE (MOTHER'S BROTHER),0.060641,Low: <0.2,Focal support below five votes,0.082692,0.7333333333333333,0.28205128205128205,0.75,0.8666666666666667,mātulá,māma
+head,GO UP OR RISE (ONESELF),0.060227,Low: <0.2,Focal support below five votes,0.200758,0.3,0.16666666666666666,0.23484848484848483,0,*uttʰāti,*caḍʰati
+head,SLEEVE,0.06,Low: <0.2,Focal support below five votes,0.3,0.2,0.2,0.4,0,*bāhucūḍa,bāhula
+head,CLOTH,0.05997,Low: <0.2,Focal support below five votes,0.239881,0.25,0.20833333333333334,0.4380952380952381,0.16666666666666666,*ṭukk,karpaṭa
+head,TUBE,0.059167,Low: <0.2,Focal support below five votes,0.197222,0.3,0.3,0.2777777777777778,0.18333333333333335,naḍá,naḍaka
+head,BREATH,0.057576,Low: <0.2,Focal support below five votes,0.191919,0.3,0.16666666666666666,0.7727272727272727,0.5555555555555556,dʰamá,śvāsá
+head,SPLIT OPEN,0.057253,Low: <0.2,Focal support below five votes,0.223065,0.25666666666666665,0.2857142857142857,0.16041666666666665,0,*traṭṭ,traṭ
+head,VALLEY,0.05641,Low: <0.2,Focal support below five votes,0.282051,0.2,0.3974358974358974,0.16666666666666666,0,*gʰala,drōṇī
+head,GENTLE,0.056313,Low: <0.2,Focal support below five votes,0.281566,0.2,0.8409090909090909,0.1111111111111111,0.3888888888888889,kōmalá,*pōcca
+head,MOTHER-IN-LAW,0.05625,Low: <0.2,Focal support below five votes,0.1875,0.3,0.125,0.25,0,jyḗṣṭʰa,*māmikā
+head,COOKED,0.05619,Low: <0.2,Focal support below five votes,0.280952,0.2,0.5952380952380952,0.16666666666666666,0.19999999999999998,pacyátē,bʰṓgya
+head,LOST,0.055903,Low: <0.2,Focal support below five votes,0.239583,0.23333333333333334,0.3333333333333333,0.14583333333333334,0,*pusta,kṣapita
+head,FULL,0.055386,Low: <0.2,Focal support below five votes,0.174903,0.31666666666666665,0.09895833333333333,0.541025641025641,0.29017857142857145,pūryátē,pūra
+head,GRASS,0.055222,Low: <0.2,Focal support below five votes,0.135791,0.4066666666666666,0.7555555555555554,0.0782051282051282,0.5621794871794872,gʰāsá,kʰaṭa
+head,DIRT,0.05498,Low: <0.2,Focal support below five votes,0.194048,0.2833333333333333,0.5714285714285714,0.11805555555555554,0.3013888888888889,mála,*malin
+head,LOOSE,0.054825,Low: <0.2,Focal support below five votes,0.274123,0.2,0.2,0.34824561403508775,0,vistīrṇa,*ḍʰila
+head,TWO,0.054006,Low: <0.2,Focal support below five votes,0.083086,0.6499999999999999,0.9469696969696971,0.07065217391304347,0.8514492753623187,dva,ardʰatr̩tīya
+head,ACHE,0.053333,Low: <0.2,Focal support below five votes,0.266667,0.2,0.3333333333333333,0.2,0,*śūlāyati,jʰaṇajḣaṇāyatē
+head,FRUIT,0.05328,Low: <0.2,Focal support below five votes,0.266402,0.2,0.16666666666666666,0.7828042328042328,0.4166666666666667,lāva,pʰála
+head,PERSON,0.052991,Low: <0.2,Focal support below five votes,0.144522,0.36666666666666664,0.14102564102564102,0.5606060606060606,0.4125874125874126,mā́nuṣa,jána
+head,FLESH,0.052308,Low: <0.2,Focal support below five votes,0.261538,0.2,0.9230769230769231,0.2,0.6,māṁsá,gōśt
+head,SPREAD OUT,0.052209,Low: <0.2,Focal support below five votes,0.195784,0.26666666666666666,0.2222222222222222,0.1693452380952381,0,*upastarati,prásārayati
+head,EMPTY,0.051671,Low: <0.2,Focal support below five votes,0.155012,0.3333333333333333,0.18181818181818182,0.1282051282051282,0,*kṣaṇati,vānta
+head,TRUTH,0.051429,Low: <0.2,Focal support below five votes,0.257143,0.2,0.14285714285714285,0.8,0.42857142857142855,bʰadrá,satyá
+head,CLAY,0.051042,Low: <0.2,Focal support below five votes,0.255208,0.2,0.16666666666666666,0.7604166666666666,0.4166666666666667,pāṁśu,mŕ̩ttikā
+head,FOG,0.050926,Low: <0.2,Focal support below five votes,0.25463,0.2,0.2,0.5092592592592592,0.2,*nabʰalikā,*kuha
+head,BLUNT,0.05,Low: <0.2,Focal support below five votes,0.166667,0.3,0.16666666666666666,0.16666666666666666,0,*muṭṭa,*bʰutta
+head,HOW MUCH,0.05,Low: <0.2,Focal support below five votes,0.25,0.2,0.16666666666666666,1.0,0.6666666666666666,kíyant,*kiyatta
+head,MAKE,0.049665,Low: <0.2,Focal support below five votes,0.198661,0.25,0.17857142857142858,0.21875,0,karṓti,*macyatē
+head,CALL,0.048846,Low: <0.2,Focal support below five votes,0.244231,0.2,0.2,0.28846153846153844,0,mantráyatē,śábda
+head,FLOW,0.048291,Low: <0.2,Focal support below five votes,0.241453,0.2,0.16666666666666666,0.37179487179487175,0.05555555555555555,*avavahati,váhati
+head,PULL OUT,0.048194,Low: <0.2,Focal support below five votes,0.240972,0.2,0.16666666666666666,0.48194444444444445,0.16666666666666666,cāláyati,*kaḍḍʰati
+head,FINE (PENALTY),0.048148,Low: <0.2,Focal support below five votes,0.240741,0.2,0.2,0.28148148148148144,0,bʰagín,daṇḍáyati
+head,RIPEN,0.047917,Low: <0.2,Focal support below five votes,0.239583,0.2,0.6666666666666666,0.125,0.3125,pacyátē,spʰáṭati
+head,PLOUGH (INSTRUMENT),0.047879,Low: <0.2,Focal support below five votes,0.119697,0.4,0.13333333333333333,0.10606060606060605,0,yugá,lā́ŋgala
+head,FRONT (PART),0.047778,Low: <0.2,Focal support below five votes,0.238889,0.2,0.2,0.27777777777777773,0,dvārakōṣṭʰaka,saṁmukʰá
+head,OLD (AGED),0.047778,Low: <0.2,Focal support below five votes,0.238889,0.2,0.2777777777777778,0.2,0,gʰaná,bʰāratara
+head,ARM,0.047743,Low: <0.2,Focal support below five votes,0.190972,0.25,0.10416666666666667,0.5694444444444444,0.2916666666666667,muṣṭí,bāhú
+head,SHOOT,0.047619,Low: <0.2,Focal support below five votes,0.238095,0.2,0.3333333333333333,0.14285714285714285,0,māráyati,prōdgata
+head,NIGHT,0.047448,Low: <0.2,Focal support below five votes,0.11862,0.4,0.10526315789473684,0.8863636363636364,0.7543859649122806,vikāla,rā́trī
+head,THUMB,0.046429,Low: <0.2,Focal support below five votes,0.154762,0.3,0.16666666666666666,0.6428571428571429,0.5,jyḗṣṭʰa,aŋguṣṭʰá
+head,FROM,0.045,Low: <0.2,Focal support below five votes,0.225,0.2,0.2,0.25,0,mádʰya,samá
+head,CRUSH,0.044722,Low: <0.2,Focal support below five votes,0.191667,0.2333333333333333,0.26666666666666666,0.11666666666666665,0,kuṭṭáyati,*cittʰ
+head,NEEDLE (FOR SEWING),0.044102,Low: <0.2,Focal support below five votes,0.088203,0.5,0.17857142857142858,0.7828282828282828,0.784992784992785,*sūñcī,sūcī́
+head,HUNGER,0.044028,Low: <0.2,Focal support below five votes,0.220139,0.2,0.125,0.8777777777777778,0.5625,anāhāra,bubʰukṣā
+head,HAMMER,0.043702,Low: <0.2,Focal support below five votes,0.21851,0.2,0.14285714285714285,0.6989247311827956,0.4047619047619047,*kōṭṭana,*hastakūṭa
+head,DUST,0.043604,Low: <0.2,Focal support below five votes,0.186874,0.2333333333333333,0.11666666666666665,0.6822954822954822,0.4252136752136752,*uddʰūḍi,*dʰūḍi
+head,BUFFALO,0.042857,Low: <0.2,Focal support below five votes,0.107143,0.4,0.13333333333333333,0.09523809523809523,0.014285714285714285,sā́ṇḍa,*mahyā
+head,WHOLE,0.041845,Low: <0.2,Focal support below five votes,0.167381,0.25,0.17857142857142858,0.2633333333333333,0.10714285714285714,bʰū́yiṣṭʰa,pūra
+head,YOUNG,0.041786,Low: <0.2,Focal support below five votes,0.139286,0.3,0.15,0.14285714285714285,0.014285714285714287,lagʰú,táruṇa
+head,TIRED,0.041558,Low: <0.2,Focal support below five votes,0.207792,0.2,0.2727272727272727,0.14285714285714285,0,*kʰasati,bʰagna
+head,CATCH,0.041429,Low: <0.2,Focal support below five votes,0.207143,0.2,0.2,0.21428571428571427,0,gʰárṣati,dʰárati
+head,BALL,0.041369,Low: <0.2,Focal support below five votes,0.206845,0.2,0.14285714285714285,0.2708333333333333,0,bāṇá,gōla
+head,STEAM,0.041154,Low: <0.2,Focal support below five votes,0.205769,0.2,0.2,0.21153846153846154,0,pʰḗna,*bʰāṣpa
+head,LAY (VERB),0.041071,Low: <0.2,Focal support below five votes,0.205357,0.2,0.2857142857142857,0.125,0,stʰāpáyati,pātáyati
+head,ABUSE,0.040833,Low: <0.2,Focal support below five votes,0.204167,0.2,0.2,0.20833333333333331,0,gárda,bʰáṇḍatē
+head,SLIP,0.040833,Low: <0.2,Focal support below five votes,0.204167,0.2,0.2,0.20833333333333334,0,piccʰilá,*kʰasati
+head,MAD,0.040139,Low: <0.2,Focal support below five votes,0.200694,0.2,0.2,0.20138888888888892,0,badʰirá,vātula
+head,COLOR,0.04,Low: <0.2,Focal support below five votes,0.2,0.2,0.2,0.2,0,rajáyati,várṇa
+head,PIG,0.04,Low: <0.2,Focal support below five votes,0.1,0.4,1.0,0.1,0.9,sūkará,*bʰūṇḍa
+head,STREAM,0.04,Low: <0.2,Focal support below five votes,0.2,0.2,0.16666666666666666,0.23333333333333334,0,*gʰala,dʰā́ra
+head,LAUGH,0.039615,Low: <0.2,Focal support below five votes,0.132051,0.3,0.1,0.23076923076923078,0.06666666666666667,hāsayati,*hasyatē
+head,RING,0.039586,Low: <0.2,Focal support below five votes,0.19793,0.2,0.14285714285714285,0.253003003003003,0,*ṭikka,mudrā́
+head,OTTER,0.039286,Low: <0.2,Focal support below five votes,0.130952,0.3,0.9285714285714286,0.16666666666666666,0.8333333333333334,udrá,lubdʰa
+head,RISE (MOVE UPWARDS),0.039286,Low: <0.2,Focal support below five votes,0.196429,0.2,0.25,0.14285714285714285,0,*utskadati,*cagʰyati
+head,FAST,0.038929,Low: <0.2,Focal support below five votes,0.194643,0.2,0.2,0.18928571428571428,0,*jʰamm,*jʰaṭṭ
+head,SOLE (FOOT),0.038889,Low: <0.2,Focal support below five votes,0.194444,0.2,0.2,0.3888888888888889,0.2,*prabda,*talapāda
+head,SALT,0.03869,Low: <0.2,Focal support below five votes,0.077381,0.5,0.9404761904761905,0.07142857142857142,0.8571428571428571,lavaṇá,mr̩ṣṭá
+head,PLANT (VEGETATION),0.038023,Low: <0.2,Focal support below five votes,0.190115,0.2,0.14285714285714285,0.23737373737373735,0,právr̩ddʰa,ēraṇḍa
+head,FIX,0.036667,Low: <0.2,Focal support below five votes,0.183333,0.2,0.2,0.16666666666666666,0,baddʰá,hánati
+head,MUD,0.036508,Low: <0.2,Focal support below five votes,0.18254,0.2,0.14285714285714285,0.2222222222222222,0,mála,karda
+head,TEAR (SHRED),0.035714,Low: <0.2,Focal support below five votes,0.178571,0.2,0.14285714285714285,0.21428571428571427,0,*cʰindati,cʰidrá
+head,FOREST,0.035686,Low: <0.2,Focal support below five votes,0.178431,0.2,0.2,0.15686274509803924,0,tuṇḍa,áraṇya
+head,LADDER,0.035498,Low: <0.2,Focal support below five votes,0.177489,0.2,0.14285714285714285,0.2121212121212121,0,*śrēṣṭrī,niśrayaṇī́
+head,FIND,0.035238,Low: <0.2,Focal support below five votes,0.17619,0.2,0.4,0.14285714285714285,0.19047619047619047,lábʰatē,śṓddʰum
+head,LEAVE,0.034722,Low: <0.2,Focal support below five votes,0.173611,0.2,0.1111111111111111,0.23611111111111108,0,tyájati,*kṣuṭyatē
+head,ROLL,0.034394,Low: <0.2,Focal support below five votes,0.17197,0.2,0.2,0.14393939393939392,0,*dulati,lōṭʰayati
+head,UGLY,0.034286,Low: <0.2,Focal support below five votes,0.171429,0.2,0.2,0.14285714285714285,0,aśubʰa,*bʰuccʰa
+head,RAFTER,0.033929,Low: <0.2,Focal support below five votes,0.169643,0.2,0.125,0.21428571428571427,0,dā́rava,paṭṭa
+head,COURTYARD,0.033333,Low: <0.2,Focal support below five votes,0.166667,0.2,0.2,0.13333333333333333,0,maṇḍapa,vēṣṭá
+head,STUPID,0.033333,Low: <0.2,Focal support below five votes,0.166667,0.2,0.2,0.13333333333333333,0,*alala,*bukka
+head,SHOULDER,0.032793,Low: <0.2,Focal support below five votes,0.131173,0.25,0.09615384615384616,0.595679012345679,0.42948717948717946,*spʰiyá,skandʰá
+head,LUNG,0.032738,Low: <0.2,Focal support below five votes,0.109127,0.3,0.10714285714285714,0.1111111111111111,0,*bʰaṣma,*pōka
+head,EDGE,0.032639,Low: <0.2,Focal support below five votes,0.163194,0.2,0.16666666666666666,0.1597222222222222,0,prastʰa,*pāḍi
+head,COUNTRY,0.0325,Low: <0.2,Focal support below five votes,0.1625,0.2,0.2,0.125,0,kuṭī,rājyá
+head,HAND,0.031944,Low: <0.2,Focal support below five votes,0.079861,0.4,0.11764705882352941,0.8263888888888888,0.784313725490196,stʰávira,hásta
+head,TWENTY,0.03125,Low: <0.2,Focal support below five votes,0.0625,0.5,1.0,0.0625,0.9375,viṁśatí,*kōḍi
+head,PEA,0.030952,Low: <0.2,Focal support below five votes,0.154762,0.2,0.16666666666666666,0.14285714285714285,0,kulattʰa,*maṭṭʰa
+head,BROTHER,0.030692,Low: <0.2,Focal support below five votes,0.122768,0.25,0.08928571428571429,0.15625,0,bʰrātr̩putra,vīrá
+head,EAR,0.030682,Low: <0.2,Focal support below five votes,0.102273,0.3,0.06818181818181818,1.0,0.8636363636363636,*kāra,kárṇa
+head,ACROSS,0.03,Low: <0.2,Focal support below five votes,0.15,0.2,0.2,0.9,0.8,*pārima,pārá
+head,CORPSE,0.03,Low: <0.2,Focal support below five votes,0.15,0.2,0.16666666666666666,0.13333333333333333,0,mártya,śáva
+head,SCATTER,0.03,Low: <0.2,Focal support below five votes,0.15,0.2,0.2,0.1,0,pʰála,ávadadʰāti
+head,MOVE,0.029929,Low: <0.2,Focal support below five votes,0.129991,0.23023809523809521,0.17142857142857143,0.08855311355311354,0,*cul,*hallati
+head,SON-IN-LAW,0.029808,Low: <0.2,Focal support below five votes,0.149038,0.2,0.375,0.07692307692307693,0.15384615384615385,*jāmātra,vará
+head,CLEAN,0.028571,Low: <0.2,Focal support below five votes,0.142857,0.2,0.14285714285714285,0.14285714285714285,0,*dʰauvati,niktá
+head,HEAP,0.028452,Low: <0.2,Focal support below five votes,0.142262,0.2,0.2,0.08452380952380951,0,*ḍʰōkka,kūṭa
+head,FEATHER,0.028431,Low: <0.2,Focal support below five votes,0.142157,0.2,0.16666666666666666,0.11764705882352941,0,páttra,*skambʰa
+head,CHILI PEPPER,0.027564,Low: <0.2,Focal support below five votes,0.137821,0.2,0.1111111111111111,0.9423076923076923,0.7777777777777778,*marucca,marīca
+head,IN,0.026481,Low: <0.2,Focal support below five votes,0.132407,0.2,0.6481481481481481,0.1,0.4833333333333333,mádʰya,*vīcya
+head,PATERNAL GRANDFATHER,0.02619,Low: <0.2,Focal support below five votes,0.130952,0.2,0.8333333333333334,0.14285714285714285,0.7142857142857143,*dādda,āryaka
+head,URINE,0.026136,Low: <0.2,Focal support below five votes,0.087121,0.3,0.08333333333333333,0.8409090909090909,0.75,mēha,mū́tra
+head,TOOTH,0.025926,Low: <0.2,Focal support below five votes,0.077778,0.3333333333333333,0.9555555555555556,0.047619047619047616,0.8476190476190476,dánta,dantaka
+head,A LITTLE,0.025595,Low: <0.2,Focal support below five votes,0.127976,0.2,0.125,0.5059523809523809,0.375,*tuśya,*stōkaḍ-
+head,CALF OF LEG,0.025397,Low: <0.2,Focal support below five votes,0.126984,0.2,0.1111111111111111,0.14285714285714285,0,*puṇḍa,*ḍilla
+head,LAST YEAR,0.025,Low: <0.2,Focal support below five votes,0.125,0.2,0.1111111111111111,0.9166666666666666,0.7777777777777778,*pravatsara,parút
+head,PASS,0.024158,Low: <0.2,Focal support below five votes,0.120788,0.2,0.14285714285714285,0.09871794871794871,0,tárati,gamáyati
+head,SHARE,0.023377,Low: <0.2,Focal support below five votes,0.116883,0.2,0.14285714285714285,0.09090909090909091,0,bʰajati,prā́pti
+head,PESTLE,0.023214,Low: <0.2,Focal support below five votes,0.116071,0.2,0.14285714285714285,0.08928571428571429,0,*varta,*ḍʰēŋka
+head,HAIR,0.022842,Low: <0.2,Focal support below five votes,0.085659,0.26666666666666666,0.06666666666666667,0.10465116279069768,0,*jatta,cū́ḍa
+head,MATERNAL AUNT (MOTHER'S SISTER),0.022727,Low: <0.2,Focal support below five votes,0.113636,0.2,0.09090909090909091,1.0,0.8636363636363636,*nānna,mātuḣṣvasr̩
+head,HORN (ANATOMY),0.022566,Low: <0.2,Focal support below five votes,0.112829,0.2,0.05263157894736842,0.9625,0.7894736842105263,tūra,śŕ̩ŋga
+head,HALF,0.021368,Low: <0.2,Focal support below five votes,0.106838,0.2,0.1111111111111111,0.7692307692307693,0.6666666666666666,*kʰaṇḍara-,ardʰá
+head,WELL,0.021154,Low: <0.2,Focal support below five votes,0.105769,0.2,0.1,0.11153846153846153,0,bʰagín,nīrōga
+head,COMB,0.020202,Low: <0.2,Focal support below five votes,0.10101,0.2,0.09090909090909091,0.1111111111111111,0,kaṣá,*kaŋkaśa
+head,FAR,0.02,Low: <0.2,Focal support below five votes,0.075,0.26666666666666666,0.06666666666666667,0.08333333333333333,0,*dūna,seṭī
+head,HORSE,0.019742,Low: <0.2,Focal support below five votes,0.09871,0.2,0.1349206349206349,0.0625,0,áśva,prakṣara
+head,ARMPIT,0.019643,Low: <0.2,Focal support below five votes,0.098214,0.2,0.125,0.07142857142857142,0,kiṣku,kukṣí
+head,BLUE,0.019167,Low: <0.2,Focal support below five votes,0.095833,0.2,0.06666666666666667,0.875,0.75,pā́lāśa,nī́la
+head,SIXTEEN,0.01875,Low: <0.2,Focal support below five votes,0.09375,0.2,0.0625,1.0,0.875,*ṣēḍaśa,ṣṓḍaśa
+head,CROW,0.018519,Low: <0.2,Focal support below five votes,0.111111,0.16666666666666666,0.09259259259259259,1.0,0.8703703703703703,*kāvaraka,kā́ka
+head,HOW MANY,0.018116,Low: <0.2,Focal support below five votes,0.09058,0.2,0.08333333333333333,0.8478260869565217,0.75,kíyant,*kiyatta
+head,NAVEL,0.017381,Low: <0.2,Focal support below five votes,0.086905,0.2,0.10714285714285714,0.06666666666666667,0,śuṇḍā,gōṇḍa
+head,BIRD,0.016667,Low: <0.2,Focal support below five votes,0.083333,0.2,0.06666666666666667,0.1,0,jāŋgala,*pakṣikarūpa
+head,HUNDRED,0.016481,Low: <0.2,Focal support below five votes,0.082407,0.2,0.1,0.06481481481481481,0,pā̃cbiśi,śata-kka-ḍa
+head,PALATE,0.015934,Low: <0.2,Focal support below five votes,0.07967,0.2,0.9285714285714286,0.07692307692307693,0.8461538461538461,tā́lu,tuṇḍa
+head,KILL,0.015611,Low: <0.2,Focal support below five votes,0.065046,0.24,0.7708333333333333,0.06666666666666667,0.7074074074074075,māráyati,kuṣáti
+head,YES,0.015,Low: <0.2,Focal support below five votes,0.15,0.1,0.1,0.2,0,ēvá,jī́va
+head,SHOP,0.012143,Low: <0.2,Focal support below five votes,0.121429,0.1,0.1,0.14285714285714285,0,āpāna,kṓṣṭʰa
+head,LEAF,0.011243,Low: <0.2,Focal support below five votes,0.056217,0.2,0.05555555555555555,0.2976190476190476,0.24074074074074073,cʰadana,parṇá
+head,THOU,0.011111,Low: <0.2,Focal support below five votes,0.055556,0.2,0.05555555555555555,1.0,0.9444444444444444,yuṣmad,tuvám
+head,TWELVE,0.011111,Low: <0.2,Focal support below five votes,0.055556,0.2,0.05555555555555555,1.0,0.9444444444444444,duvā́daśa,dvā́daśa
+head,TONGUE,0.011061,Low: <0.2,Focal support below five votes,0.055303,0.2,0.06666666666666667,0.9886363636363636,0.9446969696969697,*lōḍa,jihvā́
+head,FISH,0.010837,Low: <0.2,Focal support below five votes,0.054187,0.2,0.058823529411764705,0.04954954954954955,0,rōhitamatsya,āmiṣá
+head,NINETEEN,0.010819,Low: <0.2,Focal support below five votes,0.054094,0.2,0.05555555555555555,0.05263157894736842,0,návadaśa,ūnapañcāśat
+head,RADISH,0.010714,Low: <0.2,Focal support below five votes,0.107143,0.1,0.07142857142857142,1.0,0.8571428571428571,tr̩prá,mū́la
+head,DRINK,0.009757,Low: <0.2,Focal support below five votes,0.048786,0.2,0.047619047619047616,0.9705882352941176,0.9206349206349206,*jʰaggā,píbati
+head,NET,0.009405,Low: <0.2,Focal support below five votes,0.094048,0.1,0.07142857142857142,0.11666666666666667,0,pōta,jālya
+head,SEW,0.009028,Low: <0.2,Focal support below five votes,0.090278,0.1,0.05555555555555555,0.125,0,syūtá,ṭáŋkati
+head,COOKED RICE,0.00767,Low: <0.2,Focal support below five votes,0.076705,0.1,0.0625,0.09090909090909091,0,gʰāsá,kʰiccā
+head,KNOT,0.007566,Low: <0.2,Focal support below five votes,0.075658,0.1,0.125,0.02631578947368421,0,layana,bándʰana
+head,DONKEY,0.00754,Low: <0.2,Focal support below five votes,0.075397,0.1,0.42857142857142855,0.05555555555555555,0.3333333333333333,kʰara,*dāyayati
+head,OIL (ORGANIC SUBSTANCE),0.006966,Low: <0.2,Focal support below five votes,0.034829,0.2,0.9230769230769231,0.02564102564102564,0.879059829059829,tailá,pūpa
+head,TURMERIC,0.006757,Low: <0.2,Focal support below five votes,0.033784,0.2,1.0,0.02702702702702703,0.9594594594594594,haridrā,hāridrá
+head,GRAPE,0.00625,Low: <0.2,Focal support below five votes,0.0625,0.1,0.0625,1.0,0.9375,*drakṣā,drā́kṣā
+head,NAME,0.005263,Low: <0.2,Focal support below five votes,0.052632,0.1,0.02631578947368421,1.0,0.9210526315789473,cʰurayati,nā́man
+head,BARLEY,0.004861,Low: <0.2,Focal support below five votes,0.048611,0.1,0.05555555555555555,0.041666666666666664,0,*bājjara,kiṁśā́ru
+head,GOLD,0.003816,Low: <0.2,Focal support below five votes,0.038158,0.1,0.05,0.02631578947368421,0,*lōhila,hēman
+head,BEARD,0.003229,Low: <0.2,Focal support below five votes,0.032292,0.1,0.03333333333333333,0.03125,0,*cuŋgʰa,tuṇḍa
+head,SEVEN,0.001777,Low: <0.2,Focal support below five votes,0.017774,0.1,0.022727272727272728,0.01282051282051282,0,sā́pta,triká
+head,TEN,0.001718,Low: <0.2,Focal support below five votes,0.017178,0.1,0.022727272727272728,0.011627906976744186,0,yávasa,*pāṣṭʰa
+head,POTATO,0.001515,Low: <0.2,Focal support below five votes,0.015152,0.1,1.0,0.015151515151515152,0.9848484848484849,ālu,batata
+head,BANANA,0.001429,Low: <0.2,Focal support below five votes,0.014286,0.1,1.0,0.014285714285714285,0.9857142857142858,kadala,*kaḍalī
+head,ELEVEN,0.001282,Low: <0.2,Focal support below five votes,0.012821,0.1,1.0,0.01282051282051282,0.9871794871794872,ḗkādaśa,triká
+head,FIVE,0.00125,Low: <0.2,Focal support below five votes,0.0125,0.1,1.0,0.0125,0.9875,páñca,stara

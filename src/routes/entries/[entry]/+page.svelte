@@ -1,5 +1,9 @@
 <script lang="ts">
+	import PageFormsSearch from '$lib/components/PageFormsSearch.svelte';
 	import { base } from '$app/paths';
+	import { browser } from '$app/environment';
+	import { page } from '$app/state';
+	import { unicodeSearchIncludes } from '$lib/unicodeSearch';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import {
@@ -174,10 +178,23 @@
 		cogLabel: string;
 	}
 
+	const formSearch = $derived(browser ? page.url.searchParams.get('word')?.trim() ?? '' : '');
+	const relaxedSearch = $derived(browser && page.url.searchParams.get('relaxed') === '1');
+	const filteredReflexes = $derived((ea?.reflexes ?? []).filter((reflex) => {
+		if (!formSearch) return true;
+		const lemma = reflex.lemma;
+		const fields = [lemma.id, lemma.word, lemma.native, lemma.phonemic, lemma.gloss,
+			lemma.notes, lemma.tags, lemma.cognateset, lemma.language_id,
+			lemma.language?.name, lemma.language?.clade,
+			...(lemma.variants ?? []).flatMap((variant) => [variant.word, variant.gloss]),
+			...(lemma.references ?? []).flatMap((reference) => [reference.id, reference.short, reference.source, reference.locator]),
+			...reflex.concepts.map((concept) => concept.name)];
+		return fields.some((field) => unicodeSearchIncludes(striptags(field ?? ''), formSearch, relaxedSearch));
+	}));
 	const rows = $derived.by<Row[]>(() => {
 		if (!ea) return [];
 		const n = ea.etymon.length;
-		const sorted = [...ea.reflexes].sort((a, b) => {
+		const sorted = [...filteredReflexes].sort((a, b) => {
 			const cladeA = a.lemma.language?.clade ?? 'Other';
 			const cladeB = b.lemma.language?.clade ?? 'Other';
 			// pinned clades (or clades of pinned languages) float to the top, in the user's order
@@ -241,7 +258,7 @@
 	const correspondence = $derived.by<Corr[]>(() => {
 		if (!ea || selected == null) return [];
 		const m = new Map<string, Corr>();
-		for (const r of ea.reflexes) {
+		for (const r of filteredReflexes) {
 			const s = r.segs.find((x) => x.etymonIdx === selected);
 			if (!s) continue;
 			const k = s.reflexSeg + '|' + s.change;
@@ -300,7 +317,7 @@
 	interface ConceptSummary { id: number; name: string; category: string; count: number }
 	const conceptSummary = $derived.by<ConceptSummary[]>(() => {
 		const counts = new Map<number, ConceptSummary>();
-		for (const reflex of ea?.reflexes ?? []) {
+		for (const reflex of filteredReflexes) {
 			for (const concept of reflex.concepts) {
 				const current = counts.get(concept.id);
 				if (current) current.count++;
@@ -313,7 +330,7 @@
 		new Map(conceptSummary.map((concept, index) => [concept.id, PALETTE[index % PALETTE.length]]))
 	);
 	const unmappedConceptCount = $derived(
-		(ea?.reflexes ?? []).filter((reflex) => reflex.concepts.length === 0).length
+		filteredReflexes.filter((reflex) => reflex.concepts.length === 0).length
 	);
 	let pinnedConcepts = $state<number[]>([]);
 	let hoverConcept = $state<number | null>(null);
@@ -358,7 +375,7 @@
 		}
 		const dialectByToken = new Map(dialects.map((d) => [d.token, d]));
 		const byLocation = new Map<string, Location>();
-		for (const r of ea.reflexes) {
+		for (const r of filteredReflexes) {
 			const l = r.lemma.language;
 			if (!l) continue;
 			const tagged = (r.lemma.tags ?? '')
@@ -441,7 +458,7 @@
 	});
 
 	const plainGloss = $derived(striptags(entry.gloss) || shortGloss(entry.etymology ?? ''));
-	const langCount = $derived(new Set(ea?.reflexes.map((r) => r.lemma.language_id) ?? []).size);
+	const langCount = $derived(new Set(filteredReflexes.map((r) => r.lemma.language_id)).size);
 	function rowClick(e: MouseEvent, id: string) {
 		if ((e.target as HTMLElement).closest('a')) return;
 		toggleExp(id);
@@ -605,8 +622,8 @@
 		{#if hasDescendants}
 		<div class="entry-coverage">
 			<h2 class="source-scope-label">Descendant coverage</h2>
-			<p><strong>{ea!.reflexes.length.toLocaleString()}</strong> reflexes <span aria-hidden="true">·</span> <strong>{langCount}</strong> {langCount === 1 ? 'language' : 'languages'}</p>
-			<CladeBars clades={entry.clades} />
+			<p><strong>{filteredReflexes.length.toLocaleString()}</strong> reflexes <span aria-hidden="true">·</span> <strong>{langCount}</strong> {langCount === 1 ? 'language' : 'languages'}</p>
+			<CladeBars clades={formSearch ? filteredReflexes.map((reflex) => reflex.lemma.language?.clade ?? '').join(',') : entry.clades} />
 		</div>
 		{/if}
 	</aside>
@@ -679,9 +696,11 @@
 		</nav>
 	</section>
 	{:else}
-	<p class="count muted">{ea.reflexes.length.toLocaleString()} reflexes · {langCount} languages</p>
+	<p class="count muted" aria-live="polite">{filteredReflexes.length.toLocaleString()}{formSearch ? ` of ${ea.reflexes.length.toLocaleString()}` : ''} reflexes · {langCount} languages</p>
+	{#if formSearch && !filteredReflexes.length}<p class="muted">No forms match “{formSearch}”. Clear the search to show all forms.</p>{/if}
 	<div class="entry-body">
 		<div class="matrix-col">
+			<PageFormsSearch />
 			<div class="table-wrap aln-wrap">
 				<table class="aln">
 			<thead>

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 import { renderPost } from '../src/lib/blog/render.ts';
 
 const resolve = (kind, id) => ({ kind, id, href: `/jambu/entries/${encodeURIComponent(id)}`, label: 'pānī <water>', description: 'Hindi "water"' });
@@ -50,4 +51,33 @@ test('research downloads respect deployment base paths while external and fragme
 	assert.match(html, /href="\/jambu\/research\/file.tsv"/);
 	assert.match(html, /href="#one"/);
 	assert.match(html, /href="https:\/\/example.org"/);
+});
+
+test('research figures respect project deployment base paths', () => {
+	const { html } = renderPost('![Chart](/research/dardic-plains/coverage.svg)', resolve, { basePath: '/jambu' });
+	assert.match(html, /src="\/jambu\/research\/dardic-plains\/coverage.svg"/);
+});
+
+test('weighted votes require explicit opt-in and reject nonfinite or negative values', () => {
+	const make = (fractionalVotes, values) => ({ id: 'votes', title: 'Votes', sources: [], views: [{ label: 'Scope', unit: 'votes', note: '', categories: ['A', 'B'], rows: [{ label: 'Group', values }], fractionalVotes }] });
+	const render = (chart) => renderPost('```chart\nvotes\n```', resolve, { charts: { votes: chart } });
+	assert.equal(render(make(true, [1.5, 2.5])).blocks[1].kind, 'chart');
+	assert.throws(() => render(make(false, [1.5, 2.5])), /Invalid counts/);
+	assert.throws(() => render(make(true, [NaN, 2])), /Invalid counts/);
+	assert.throws(() => render(make(true, [Infinity, 2])), /Invalid counts/);
+	assert.throws(() => render(make(true, [-1, 2])), /Invalid counts/);
+});
+
+test('geographic charts validate points and reconcile the other-family breakdown', () => {
+	const charts = JSON.parse(readFileSync(new URL('../src/lib/blog/data/dardic-plains-charts.json', import.meta.url), 'utf8'));
+	for (const [id] of Object.entries(charts)) {
+		assert.equal(renderPost('```chart\n' + id + '\n```', resolve, { charts }).blocks[1].kind, 'chart');
+	}
+	const id = 'dardic-family-shares';
+	const badLocation = structuredClone(charts);
+	badLocation[id].views[0].map.points[0].latitude = 91;
+	assert.throws(() => renderPost('```chart\n' + id + '\n```', resolve, { charts: badLocation }), /Invalid map point/);
+	const badBreakdown = structuredClone(charts);
+	badBreakdown[id].views[0].otherFamilies[0].values[0] += 1;
+	assert.throws(() => renderPost('```chart\n' + id + '\n```', resolve, { charts: badBreakdown }), /Invalid other-family breakdown/);
 });

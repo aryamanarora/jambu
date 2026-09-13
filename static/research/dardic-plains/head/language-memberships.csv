@@ -1,0 +1,480 @@
+concept,group,unit,languages,families,category,unresolved_records,excluded_loan_records
+RAW,dardic,dame1241,Dameli,1236,Dardic-associated family only,0,0
+RAW,dardic,gawa1247,Gawarbati,8130,Other families only,0,0
+RAW,dardic,indu1241,Indus Kohistani,1236;1533,One focal + other families,0,0
+RAW,dardic,kala1372,Indo-Aryan Kalasha,1236,Dardic-associated family only,1,0
+RAW,dardic,kala1373,Bashkarik,1236,Dardic-associated family only,0,0
+RAW,dardic,kash1277,Kashmiri,1236;2613;9584,Both focal families,0,0
+RAW,dardic,khow1242,Khowar,1236,Dardic-associated family only,0,0
+RAW,dardic,phal1254,Palula,1236,Dardic-associated family only,0,0
+RAW,dardic,savi1242,Sauji,8130,Other families only,0,0
+RAW,dardic,shin1264,Shina,1236,Dardic-associated family only,2,0
+RAW,dardic,shum1235,Shumashti,1236,Dardic-associated family only,0,0
+RAW,dardic,tira1253,Tirahi,1236,Dardic-associated family only,0,0
+RAW,plains,awad1243,Awadhi,2613,Plains-associated family only,0,0
+RAW,plains,beng1280,Bengali,1236;2613,Both focal families,0,0
+RAW,plains,dhat1238,Dhatki,2613,Plains-associated family only,0,0
+RAW,plains,guja1252,Gujarati,1236;2613,Both focal families,0,0
+RAW,plains,hind1269,Hindi-Urdu,10807;14114;2613,One focal + other families,0,0
+RAW,plains,kach1277,Kutchi,2613,Plains-associated family only,0,0
+RAW,plains,mait1250,Maithili,2613,Plains-associated family only,0,0
+RAW,plains,mara1378,Marathi,14114;2613;724,One focal + other families,2,0
+RAW,plains,oriy1255,Odia,2613,Plains-associated family only,0,0
+RAW,plains,panj1256,Punjabi,2613,Plains-associated family only,0,0
+RAW,plains,sind1272,Sindhi,2613,Plains-associated family only,0,0
+RAW,plains,vaag1238,Vaagri Boli,,No resolved family,1,0
+WOOL,dardic,dame1241,Dameli,11549,Other families only,0,0
+WOOL,dardic,gowr1239,Gowro,,No resolved family,2,0
+WOOL,dardic,indu1241,Indus Kohistani,5086,Other families only,2,0
+WOOL,dardic,kala1372,Indo-Aryan Kalasha,11023;7638,One focal + other families,1,0
+WOOL,dardic,kala1373,Bashkarik,7638,Dardic-associated family only,0,0
+WOOL,dardic,kash1277,Kashmiri,2424,Plains-associated family only,0,0
+WOOL,dardic,khow1242,Khowar,7638,Dardic-associated family only,0,0
+WOOL,dardic,nort2666,Pashai,11154;2438,Other families only,0,0
+WOOL,dardic,phal1254,Palula,7638,Dardic-associated family only,0,0
+WOOL,dardic,shin1264,Shina,7638,Dardic-associated family only,1,0
+WOOL,dardic,torw1241,Torwali,7638,Dardic-associated family only,1,0
+WOOL,dardic,usho1238,Ushojo,7638,Dardic-associated family only,0,0
+WOOL,plains,beng1280,Bengali,2424,Plains-associated family only,0,0
+WOOL,plains,dhat1238,Dhatki,2424,Plains-associated family only,0,0
+WOOL,plains,guja1252,Gujarati,2424;3156;7638,Both focal families,0,0
+WOOL,plains,hind1269,Hindi-Urdu,2424,Plains-associated family only,0,0
+WOOL,plains,kach1277,Kutchi,2424,Plains-associated family only,0,0
+WOOL,plains,khet1238,Khetrani,2424,Plains-associated family only,0,0
+WOOL,plains,mait1250,Maithili,2424,Plains-associated family only,0,0
+WOOL,plains,mara1378,Marathi,9301,Other families only,0,0
+WOOL,plains,oriy1255,Odia,10851;2424,One focal + other families,0,0
+WOOL,plains,panj1256,Punjabi,2424,Plains-associated family only,0,0
+WOOL,plains,rajb1243,Rajbanshi,2424,Plains-associated family only,0,0
+WOOL,plains,rang1265,Kamtapuri,2424,Plains-associated family only,2,0
+WOOL,plains,sind1272,Sindhi,2424,Plains-associated family only,0,0
+WOOL,plains,surj1235,Surjapuri,2424,Plains-associated family only,0,0
+WOOL,plains,west2386,Lahnda,2424,Plains-associated family only,0,0
+MOUSTACHE,dardic,bate1261,Bhateri,9083,Dardic-associated family only,1,0
+MOUSTACHE,dardic,brok1247,Brokskat,,No resolved family,1,0
+MOUSTACHE,dardic,dame1241,Dameli,9083,Dardic-associated family only,0,0
+MOUSTACHE,dardic,gawa1247,Gawarbati,4269,Other families only,0,0
+MOUSTACHE,dardic,gowr1239,Gowro,,No resolved family,1,0
+MOUSTACHE,dardic,gran1245,Grangali,,No resolved family,1,0
+MOUSTACHE,dardic,kala1372,Indo-Aryan Kalasha,9083,Dardic-associated family only,0,1
+MOUSTACHE,dardic,kala1373,Bashkarik,9083,Dardic-associated family only,0,0
+MOUSTACHE,dardic,kash1277,Kashmiri; Poguli,4269,Other families only,3,0
+MOUSTACHE,dardic,khow1242,Khowar,,No resolved family,0,2
+MOUSTACHE,dardic,nort2666,Pashai,,No resolved family,1,0
+MOUSTACHE,dardic,phal1254,Palula,9083,Dardic-associated family only,0,0
+MOUSTACHE,dardic,savi1242,Sauji,4269,Other families only,0,0
+MOUSTACHE,dardic,shin1264,Shina,9083,Dardic-associated family only,2,0
+MOUSTACHE,dardic,torw1241,Torwali,9083,Dardic-associated family only,1,0
+MOUSTACHE,dardic,usho1238,Ushojo,9083,Dardic-associated family only,0,0
+MOUSTACHE,plains,assa1263,Assamese,4203-2;6250,Other families only,0,0
+MOUSTACHE,plains,avan1234,Hindko,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,awad1243,Awadhi,10180-2,Other families only,0,0
+MOUSTACHE,plains,beng1280,Bengali,4203-2,Other families only,0,0
+MOUSTACHE,plains,guja1252,Gujarati,10180;13725,One focal + other families,0,0
+MOUSTACHE,plains,hind1269,Hindi-Urdu,10180;10180-2,One focal + other families,1,0
+MOUSTACHE,plains,khet1238,Khetrani,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,konk1267,Konkani,12659,Other families only,0,0
+MOUSTACHE,plains,mara1378,Marathi,,No resolved family,1,0
+MOUSTACHE,plains,oriy1255,Odia,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,panj1256,Punjabi,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,rajb1243,Rajbanshi,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,rang1265,Kamtapuri,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,sind1272,Sindhi,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,surj1235,Surjapuri,10180,Plains-associated family only,0,0
+MOUSTACHE,plains,vaag1238,Vaagri Boli,,No resolved family,1,0
+MOUSTACHE,plains,wadi1248,Wadiyara Koli,,No resolved family,2,0
+MOUSTACHE,plains,west2386,Lahnda,10180,Plains-associated family only,0,0
+LONG,dardic,bate1261,Bhateri,,No resolved family,1,0
+LONG,dardic,brok1247,Brokskat,6368,Dardic-associated family only,0,0
+LONG,dardic,chil1275,Chilisso,6368,Dardic-associated family only,2,0
+LONG,dardic,dame1241,Dameli,6368,Dardic-associated family only,0,0
+LONG,dardic,gawa1247,Gawarbati,6368,Dardic-associated family only,1,0
+LONG,dardic,gowr1239,Gowro,,No resolved family,2,0
+LONG,dardic,indu1241,Indus Kohistani,6368,Dardic-associated family only,6,0
+LONG,dardic,kala1372,Indo-Aryan Kalasha,6368,Dardic-associated family only,3,0
+LONG,dardic,kala1373,Bashkarik,6368,Dardic-associated family only,6,0
+LONG,dardic,kalk1245,Kalkoti,6368,Dardic-associated family only,0,0
+LONG,dardic,kash1277,Kashmiri; Poguli,10951,Plains-associated family only,3,0
+LONG,dardic,khow1242,Khowar,6616,Other families only,9,0
+LONG,dardic,kund1257,Kundal Shahi,6368,Dardic-associated family only,0,0
+LONG,dardic,nort2666,Pashai,1627;6368,One focal + other families,0,0
+LONG,dardic,phal1254,Palula,6368,Dardic-associated family only,1,0
+LONG,dardic,savi1242,Sauji,6368,Dardic-associated family only,1,0
+LONG,dardic,shin1264,Shina,6368,Dardic-associated family only,2,0
+LONG,dardic,shum1235,Shumashti,6368,Dardic-associated family only,0,0
+LONG,dardic,tira1253,Tirahi,6368,Dardic-associated family only,0,0
+LONG,dardic,torw1241,Torwali,6368,Dardic-associated family only,2,0
+LONG,dardic,usho1238,Ushojo,6368,Dardic-associated family only,0,0
+LONG,dardic,wota1240,Wotapuri,6368,Dardic-associated family only,0,0
+LONG,plains,adiv1239,Adivasi Oriya,,No resolved family,9,0
+LONG,plains,assa1263,Assamese,10951;6368,Both focal families,0,0
+LONG,plains,avan1234,Hindko,,No resolved family,11,0
+LONG,plains,bagh1251,Bagheli,10951,Plains-associated family only,4,0
+LONG,plains,bagr1243,Bagri,10951,Plains-associated family only,0,0
+LONG,plains,beng1280,Bengali,9158,Other families only,2,0
+LONG,plains,bhat1265,Bhatri,,No resolved family,8,0
+LONG,plains,bhil1251,Bhili,,No resolved family,4,0
+LONG,plains,bhil1253,Bhilali,,No resolved family,9,0
+LONG,plains,bhoj1244,Bhojpuri,10951,Plains-associated family only,0,0
+LONG,plains,bish1244,Bishnupriya Manipuri,,No resolved family,6,0
+LONG,plains,braj1242,Braj,10951,Plains-associated family only,0,0
+LONG,plains,buks1238,Bhuksa Tharu,10951,Plains-associated family only,0,0
+LONG,plains,bund1253,Bundeli,10951;11225,One focal + other families,0,0
+LONG,plains,chha1249,Chhattisgarhi,10951,Plains-associated family only,0,0
+LONG,plains,chit1274,Chitwania Tharu,10951,Plains-associated family only,1,0
+LONG,plains,dang1260,Dangaura Tharu,10951,Plains-associated family only,5,0
+LONG,plains,dhan1265,Dewas-Done Danuwar,,No resolved family,4,0
+LONG,plains,dhun1238,Dhundari,10951,Plains-associated family only,0,0
+LONG,plains,dung1251,Dungra Bhil,,No resolved family,2,0
+LONG,plains,east2316,Morangia Tharu,10951,Plains-associated family only,0,0
+LONG,plains,godw1241,Godwari,10951,Plains-associated family only,0,0
+LONG,plains,guja1252,Gujarati,10951,Plains-associated family only,0,0
+LONG,plains,guja1253,Gujari,,No resolved family,16,0
+LONG,plains,hada1254,Shahawadi,10951,Plains-associated family only,0,0
+LONG,plains,hado1235,Hadauti,10951;11225,One focal + other families,0,0
+LONG,plains,hajo1238,Hajong,,No resolved family,10,0
+LONG,plains,halb1244,Halbi,,No resolved family,6,0
+LONG,plains,hary1238,Haryanvi,,No resolved family,6,0
+LONG,plains,hind1269,Hindi-Urdu,10951;6368,Both focal families,0,0
+LONG,plains,jadg1238,Zadjali,6368,Dardic-associated family only,0,0
+LONG,plains,kana1281,Kannauji,10951,Plains-associated family only,0,0
+LONG,plains,kath1250,Kathoriya Tharu,,No resolved family,1,0
+LONG,plains,khan1272,Khandesi,,No resolved family,1,0
+LONG,plains,khet1238,Khetrani,6368,Dardic-associated family only,0,0
+LONG,plains,khol1241,Kholosi,6368,Dardic-associated family only,0,0
+LONG,plains,koch1247,Kochila Tharu,,No resolved family,3,0
+LONG,plains,koch1253,Kochariya-East Danuwar,,No resolved family,2,0
+LONG,plains,luwa1238,Luwati; Maimani,6368,Dardic-associated family only,0,0
+LONG,plains,maga1260,Magahi (Nepal survey),,No resolved family,5,0
+LONG,plains,mait1250,Maithili,10951,Plains-associated family only,0,0
+LONG,plains,majh1253,Majhi,,No resolved family,4,0
+LONG,plains,malv1243,Malvi,10951,Plains-associated family only,5,0
+LONG,plains,mara1378,Marathi,10951,Plains-associated family only,1,0
+LONG,plains,marw1260,Marwari,10951;6368,Both focal families,0,0
+LONG,plains,mewa1249,Mewari,10187;10951;11225,One focal + other families,0,0
+LONG,plains,mewa1250,Ahirwadi; Mewati,10951,Plains-associated family only,0,0
+LONG,plains,nima1243,Nimadi,,No resolved family,16,0
+LONG,plains,noir1238,Noiri,,No resolved family,7,0
+LONG,plains,oriy1255,Odia,10951,Plains-associated family only,1,0
+LONG,plains,paha1251,Pahari-Pothwari,,No resolved family,14,0
+LONG,plains,paly1238,Palya Bareli,,No resolved family,2,0
+LONG,plains,panj1256,Punjabi,10951;9162;9165,One focal + other families,0,0
+LONG,plains,paur1238,Pauri Bareli,,No resolved family,6,0
+LONG,plains,raja1256,Rajasthani,10187,Other families only,0,0
+LONG,plains,rajb1243,Rajbanshi,10951,Plains-associated family only,0,0
+LONG,plains,rana1246,Rana Tharu,10951,Plains-associated family only,6,0
+LONG,plains,rang1265,Kamtapuri,10951;5524,One focal + other families,0,0
+LONG,plains,rath1242,Rathwi Bareli,,No resolved family,10,0
+LONG,plains,rath1243,Rathawi,,No resolved family,1,0
+LONG,plains,sera1259,Saraiki,,No resolved family,1,0
+LONG,plains,shek1243,Shekhawati,10951;11225,One focal + other families,0,0
+LONG,plains,sind1272,Sindhi,6368,Dardic-associated family only,0,0
+LONG,plains,surg1246,Surgujia,10951,Plains-associated family only,0,0
+LONG,plains,surj1235,Surjapuri,10951,Plains-associated family only,0,0
+LONG,plains,thar1284,Sunha Tharu,,No resolved family,1,0
+LONG,plains,vaag1238,Vaagri Boli,,No resolved family,1,0
+LONG,plains,vasa1239,Vasavi,,No resolved family,4,0
+LONG,plains,wadi1248,Wadiyara Koli,,No resolved family,2,0
+LONG,plains,wagd1238,Wagri,10951,Plains-associated family only,0,0
+LONG,plains,west2386,Lahnda,10951;6368,Both focal families,0,0
+WATER,dardic,bate1261,Bhateri,8082,Plains-associated family only,2,0
+WATER,dardic,brok1247,Brokskat,,No resolved family,3,0
+WATER,dardic,chil1275,Chilisso,1921,Dardic-associated family only,2,0
+WATER,dardic,dame1241,Dameli,407,Other families only,0,0
+WATER,dardic,gawa1247,Gawarbati,407,Other families only,4,0
+WATER,dardic,gowr1239,Gowro,12485;1921,One focal + other families,1,0
+WATER,dardic,gran1245,Grangali; Ningalami,1799;1921,One focal + other families,2,0
+WATER,dardic,indu1241,Indus Kohistani,1921,Dardic-associated family only,9,0
+WATER,dardic,kala1372,Indo-Aryan Kalasha,1921,Dardic-associated family only,7,0
+WATER,dardic,kala1373,Bashkarik,1921,Dardic-associated family only,8,0
+WATER,dardic,kalk1245,Kalkoti,1921,Dardic-associated family only,0,0
+WATER,dardic,kash1277,Dodi; Kashmiri; Poguli; Rambani,13266;8082,One focal + other families,12,0
+WATER,dardic,khow1242,Khowar,1921,Dardic-associated family only,16,0
+WATER,dardic,kund1257,Kundal Shahi,8082,Plains-associated family only,1,0
+WATER,dardic,nort2666,Pashai,11556,Other families only,13,0
+WATER,dardic,phal1254,Palula,1921,Dardic-associated family only,3,0
+WATER,dardic,savi1242,Sauji,1921,Dardic-associated family only,1,0
+WATER,dardic,shin1264,Shina,1921,Dardic-associated family only,1,0
+WATER,dardic,shum1235,Shumashti,1921,Dardic-associated family only,1,0
+WATER,dardic,tira1253,Tirahi,1921,Dardic-associated family only,0,0
+WATER,dardic,torw1241,Torwali,1921,Dardic-associated family only,4,0
+WATER,dardic,usho1238,Ushojo,1921,Dardic-associated family only,0,0
+WATER,dardic,wota1240,Wotapuri,8082,Plains-associated family only,0,0
+WATER,plains,adiv1239,Adivasi Oriya,,No resolved family,3,0
+WATER,plains,assa1263,Assamese,5155;8082,One focal + other families,1,0
+WATER,plains,avan1234,Hindko,,No resolved family,13,0
+WATER,plains,awad1243,Awadhi,8082,Plains-associated family only,1,0
+WATER,plains,bagh1251,Bagheli,8082,Plains-associated family only,5,0
+WATER,plains,bagr1243,Bagri,8082,Plains-associated family only,0,0
+WATER,plains,beng1280,Bengali,5155;8082,One focal + other families,12,0
+WATER,plains,bhat1265,Bhatri,,No resolved family,9,0
+WATER,plains,bhil1251,Bhili,,No resolved family,4,0
+WATER,plains,bhil1253,Bhilali,,No resolved family,9,0
+WATER,plains,bhoj1244,Bhojpuri,8082,Plains-associated family only,3,0
+WATER,plains,biha1245,Bihari,10085,Other families only,4,0
+WATER,plains,bish1244,Bishnupriya Manipuri,,No resolved family,6,0
+WATER,plains,braj1242,Braj,7552;8082,One focal + other families,2,0
+WATER,plains,buks1238,Bhuksa Tharu,,No resolved family,2,0
+WATER,plains,bund1253,Bundeli,8082,Plains-associated family only,1,0
+WATER,plains,chha1249,Chhattisgarhi,8082,Plains-associated family only,1,0
+WATER,plains,chit1274,Chitwania Tharu,8082,Plains-associated family only,1,0
+WATER,plains,dang1260,Dangaura Tharu,8082,Plains-associated family only,4,0
+WATER,plains,dhan1265,Dewas-Done Danuwar,,No resolved family,4,0
+WATER,plains,dhun1238,Dhundari,8082,Plains-associated family only,1,0
+WATER,plains,dung1251,Dungra Bhil,,No resolved family,2,0
+WATER,plains,east2316,Morangia Tharu,8082,Plains-associated family only,0,0
+WATER,plains,godw1241,Godwari,8082,Plains-associated family only,0,0
+WATER,plains,guja1252,Ghisadi; Gujarati,13388;5155;8082,One focal + other families,5,0
+WATER,plains,guja1253,Gujari,,No resolved family,19,0
+WATER,plains,hada1254,Shahawadi,8082,Plains-associated family only,0,0
+WATER,plains,hado1235,Hadauti,5155;8082,One focal + other families,0,0
+WATER,plains,hajo1238,Hajong,,No resolved family,10,0
+WATER,plains,halb1244,Halbi,,No resolved family,3,0
+WATER,plains,hary1238,Haryanvi,,No resolved family,7,0
+WATER,plains,hind1269,Hindi-Urdu,5155;7143;7552;8082,One focal + other families,4,0
+WATER,plains,jadg1238,Zadjali,8082,Plains-associated family only,0,0
+WATER,plains,kach1277,Kutchi,,No resolved family,2,0
+WATER,plains,kana1281,Kannauji,8082,Plains-associated family only,1,0
+WATER,plains,kath1250,Kathoriya Tharu,,No resolved family,1,0
+WATER,plains,khan1272,Khandesi,,No resolved family,1,0
+WATER,plains,khet1238,Khetrani,8082,Plains-associated family only,1,0
+WATER,plains,khol1241,Kholosi,8082,Plains-associated family only,0,0
+WATER,plains,koch1247,Kochila Tharu,,No resolved family,3,0
+WATER,plains,koch1253,Kochariya-East Danuwar,,No resolved family,2,0
+WATER,plains,konk1267,Konkani,8082,Plains-associated family only,1,0
+WATER,plains,luwa1238,Luwati; Maimani,8082,Plains-associated family only,0,0
+WATER,plains,maga1260,Magahi (Nepal survey),,No resolved family,5,0
+WATER,plains,mait1250,Maithili,8082,Plains-associated family only,2,0
+WATER,plains,majh1253,Majhi,,No resolved family,4,0
+WATER,plains,malv1243,Malvi,8082,Plains-associated family only,9,0
+WATER,plains,mara1378,Marathi,4038;5155;8082,One focal + other families,3,0
+WATER,plains,marw1260,Marwari,8082,Plains-associated family only,2,0
+WATER,plains,mewa1249,Mewari,5155;8082,One focal + other families,0,0
+WATER,plains,mewa1250,Ahirwadi; Mewati,8082,Plains-associated family only,1,0
+WATER,plains,nima1243,Nimadi,,No resolved family,16,0
+WATER,plains,noir1238,Noiri,,No resolved family,7,0
+WATER,plains,oriy1255,Odia,5155;8082,One focal + other families,2,0
+WATER,plains,paha1251,Pahari-Pothwari,,No resolved family,18,0
+WATER,plains,paly1238,Palya Bareli,,No resolved family,2,0
+WATER,plains,panj1256,Punjabi,6896-6;8082,One focal + other families,6,0
+WATER,plains,paur1238,Pauri Bareli,,No resolved family,6,0
+WATER,plains,raja1256,Rajasthani,8082,Plains-associated family only,0,0
+WATER,plains,rajb1243,Rajbanshi,8082,Plains-associated family only,0,0
+WATER,plains,rana1246,Rana Tharu,8082,Plains-associated family only,6,0
+WATER,plains,rang1265,Kamtapuri,8082,Plains-associated family only,0,0
+WATER,plains,rath1242,Rathwi Bareli,,No resolved family,10,0
+WATER,plains,rath1243,Rathawi,,No resolved family,1,0
+WATER,plains,sera1259,Saraiki,,No resolved family,3,0
+WATER,plains,shek1243,Shekhawati,8082,Plains-associated family only,0,0
+WATER,plains,sind1272,Sindhi,5155;8082,One focal + other families,4,0
+WATER,plains,surg1246,Surgujia,8082,Plains-associated family only,0,0
+WATER,plains,surj1235,Surjapuri,8082,Plains-associated family only,0,0
+WATER,plains,thar1284,Sunha Tharu,,No resolved family,1,0
+WATER,plains,vaag1238,Vaagri Boli,,No resolved family,2,0
+WATER,plains,vasa1239,Vasavi,,No resolved family,4,0
+WATER,plains,wadi1248,Wadiyara Koli,8082,Plains-associated family only,0,0
+WATER,plains,wagd1238,Wagri,8082,Plains-associated family only,0,0
+WATER,plains,west2386,Lahnda,5155;7552;8082,One focal + other families,4,0
+IRON,dardic,bate1261,Bhateri,,No resolved family,1,0
+IRON,dardic,brok1247,Brokskat,,No resolved family,1,0
+IRON,dardic,dame1241,Dameli,4842a,Dardic-associated family only,0,0
+IRON,dardic,gawa1247,Gawarbati,4842a,Dardic-associated family only,1,0
+IRON,dardic,indu1241,Indus Kohistani,4842a,Dardic-associated family only,1,0
+IRON,dardic,kala1372,Indo-Aryan Kalasha,4842a,Dardic-associated family only,2,0
+IRON,dardic,kala1373,Bashkarik,4842a,Dardic-associated family only,1,0
+IRON,dardic,kash1277,Dodi; Kashmiri; Poguli; Rambani,12367;4842a,One focal + other families,5,0
+IRON,dardic,khow1242,Khowar,4842a,Dardic-associated family only,2,0
+IRON,dardic,nort2666,Pashai,4842a,Dardic-associated family only,2,0
+IRON,dardic,phal1254,Palula,4842a,Dardic-associated family only,3,0
+IRON,dardic,shin1264,Shina,4842a,Dardic-associated family only,2,0
+IRON,dardic,shum1235,Shumashti,4842a,Dardic-associated family only,0,0
+IRON,dardic,torw1241,Torwali,4842a,Dardic-associated family only,3,0
+IRON,dardic,wota1240,Wotapuri,4842a,Dardic-associated family only,0,0
+IRON,plains,assa1263,Assamese,11158,Plains-associated family only,1,0
+IRON,plains,avan1234,Hindko,11158,Plains-associated family only,1,0
+IRON,plains,awad1243,Awadhi,11158,Plains-associated family only,1,0
+IRON,plains,bagh1251,Bagheli,,No resolved family,1,0
+IRON,plains,beng1280,Bengali,11158,Plains-associated family only,12,0
+IRON,plains,bhoj1244,Bhojpuri,11158,Plains-associated family only,2,0
+IRON,plains,biha1245,Bihari,11170;3264,Other families only,3,0
+IRON,plains,braj1242,Braj,,No resolved family,1,0
+IRON,plains,bund1253,Bundeli,,No resolved family,2,0
+IRON,plains,chha1249,Chhattisgarhi,,No resolved family,1,0
+IRON,plains,dhun1238,Dhundari,,No resolved family,1,0
+IRON,plains,guja1252,Ghisadi; Gujarati,11158;11171;11173;4866-2;6121,One focal + other families,5,0
+IRON,plains,guja1253,Gujari,,No resolved family,1,0
+IRON,plains,halb1244,Halbi,,No resolved family,1,0
+IRON,plains,hary1238,Haryanvi,,No resolved family,1,0
+IRON,plains,hind1269,Hindi-Urdu,11158,Plains-associated family only,5,0
+IRON,plains,kach1277,Kutchi,6121,Other families only,2,0
+IRON,plains,kana1281,Kannauji,,No resolved family,1,0
+IRON,plains,khet1238,Khetrani,6121,Other families only,1,0
+IRON,plains,konk1267,Konkani,,No resolved family,1,0
+IRON,plains,mait1250,Maithili,11158;12349,One focal + other families,1,0
+IRON,plains,malv1243,Malvi,,No resolved family,3,0
+IRON,plains,mara1378,Marathi,11158;11171,One focal + other families,4,0
+IRON,plains,marw1260,Marwari,,No resolved family,1,0
+IRON,plains,mewa1250,Mewati,,No resolved family,1,0
+IRON,plains,oriy1255,Odia,104;10881;10884;11158,One focal + other families,1,0
+IRON,plains,paha1251,Pahari-Pothwari,,No resolved family,3,0
+IRON,plains,panj1256,Punjabi,11158;6121,One focal + other families,3,0
+IRON,plains,rajb1243,Rajbanshi,,No resolved family,2,0
+IRON,plains,rang1265,Kamtapuri,,No resolved family,6,0
+IRON,plains,sera1259,Saraiki,,No resolved family,2,0
+IRON,plains,sind1272,Sindhi,11158;6121,One focal + other families,2,0
+IRON,plains,surj1235,Surjapuri,,No resolved family,1,0
+IRON,plains,vaag1238,Vaagri Boli,,No resolved family,1,0
+IRON,plains,wadi1248,Wadiyara Koli,11173,Other families only,0,0
+IRON,plains,west2386,Lahnda,11158,Plains-associated family only,4,0
+RIVER,dardic,bate1261,Bhateri,13415;3860,One focal + other families,1,0
+RIVER,dardic,brok1247,Brokskat,,No resolved family,1,0
+RIVER,dardic,chil1275,Chilisso,,No resolved family,2,0
+RIVER,dardic,dame1241,Dameli,6943,Plains-associated family only,0,0
+RIVER,dardic,gawa1247,Gawarbati,,No resolved family,1,0
+RIVER,dardic,gowr1239,Gowro,13415,Dardic-associated family only,2,0
+RIVER,dardic,gran1245,Grangali; Ningalami,,No resolved family,2,0
+RIVER,dardic,indu1241,Indus Kohistani,13415,Dardic-associated family only,7,0
+RIVER,dardic,kala1372,Indo-Aryan Kalasha,9645,Other families only,3,2
+RIVER,dardic,kala1373,Bashkarik,6943,Plains-associated family only,6,0
+RIVER,dardic,kalk1245,Kalkoti,,No resolved family,1,0
+RIVER,dardic,kash1277,Kashmiri; Poguli,13415,Dardic-associated family only,3,0
+RIVER,dardic,khow1242,Khowar,13415;4456,One focal + other families,8,0
+RIVER,dardic,kund1257,Kundal Shahi,6943,Plains-associated family only,0,0
+RIVER,dardic,nort2666,Pashai,4453,Other families only,1,0
+RIVER,dardic,phal1254,Palula,13137,Other families only,3,0
+RIVER,dardic,savi1242,Sauji,,No resolved family,1,0
+RIVER,dardic,shin1264,Shina,13415,Dardic-associated family only,5,0
+RIVER,dardic,shum1235,Shumashti,,No resolved family,1,0
+RIVER,dardic,tira1253,Tirahi,13415,Dardic-associated family only,0,0
+RIVER,dardic,torw1241,Torwali,,No resolved family,2,0
+RIVER,dardic,usho1238,Ushojo,,No resolved family,1,0
+RIVER,plains,adiv1239,Adivasi Oriya,,No resolved family,7,0
+RIVER,plains,assa1263,Assamese,3952;6943,One focal + other families,0,0
+RIVER,plains,avan1234,Hindko,,No resolved family,11,0
+RIVER,plains,bagh1251,Bagheli,6943,Plains-associated family only,5,0
+RIVER,plains,bagr1243,Bagri,6943,Plains-associated family only,0,0
+RIVER,plains,beng1280,Bengali,3952;6943,One focal + other families,2,0
+RIVER,plains,bhat1265,Bhatri,,No resolved family,9,0
+RIVER,plains,bhil1251,Bhili,,No resolved family,4,0
+RIVER,plains,bhil1253,Bhilali,,No resolved family,10,0
+RIVER,plains,bish1244,Bishnupriya Manipuri,,No resolved family,6,0
+RIVER,plains,braj1242,Braj,6943,Plains-associated family only,0,0
+RIVER,plains,buks1238,Bhuksa Tharu,,No resolved family,2,0
+RIVER,plains,bund1253,Bundeli,6943,Plains-associated family only,0,0
+RIVER,plains,chha1249,Chhattisgarhi,6943;7047,One focal + other families,2,0
+RIVER,plains,chit1274,Chitwania Tharu,6943,Plains-associated family only,1,0
+RIVER,plains,dang1260,Dangaura Tharu,6943,Plains-associated family only,5,0
+RIVER,plains,dhun1238,Dhundari,6943,Plains-associated family only,0,0
+RIVER,plains,dung1251,Dungra Bhil,,No resolved family,4,0
+RIVER,plains,east2316,Morangia Tharu,6943,Plains-associated family only,0,0
+RIVER,plains,godw1241,Godwari,6943,Plains-associated family only,1,0
+RIVER,plains,guja1253,Gujari,,No resolved family,16,0
+RIVER,plains,hada1254,Shahawadi,6943,Plains-associated family only,0,0
+RIVER,plains,hado1235,Hadauti,6943,Plains-associated family only,0,0
+RIVER,plains,hajo1238,Hajong,,No resolved family,13,0
+RIVER,plains,halb1244,Halbi,,No resolved family,4,0
+RIVER,plains,hind1269,Hindi-Urdu,6943,Plains-associated family only,0,0
+RIVER,plains,kach1277,Kutchi,6943,Plains-associated family only,0,0
+RIVER,plains,kana1281,Kannauji,6943,Plains-associated family only,0,0
+RIVER,plains,kath1250,Kathoriya Tharu,,No resolved family,2,0
+RIVER,plains,khan1272,Khandesi,,No resolved family,1,0
+RIVER,plains,konk1267,Konkani,,No resolved family,1,0
+RIVER,plains,maga1260,Magahi (Nepal survey),,No resolved family,5,0
+RIVER,plains,malv1243,Malvi,6943,Plains-associated family only,6,0
+RIVER,plains,mara1378,Marathi,6943,Plains-associated family only,1,0
+RIVER,plains,marw1260,Marwari,6943;7047,One focal + other families,1,0
+RIVER,plains,mewa1249,Mewari,6943,Plains-associated family only,2,0
+RIVER,plains,mewa1250,Ahirwadi; Mewati,6943;7047,One focal + other families,2,0
+RIVER,plains,nima1243,Nimadi,,No resolved family,16,0
+RIVER,plains,noir1238,Noiri,,No resolved family,7,0
+RIVER,plains,oriy1255,Odia,5629,Other families only,1,0
+RIVER,plains,paha1251,Pahari-Pothwari,,No resolved family,14,0
+RIVER,plains,paly1238,Palya Bareli,,No resolved family,2,0
+RIVER,plains,panj1256,Punjabi,6943,Plains-associated family only,1,0
+RIVER,plains,paur1238,Pauri Bareli,,No resolved family,6,0
+RIVER,plains,raja1256,Rajasthani,6943,Plains-associated family only,0,0
+RIVER,plains,rajb1243,Rajbanshi,,No resolved family,0,2
+RIVER,plains,rana1246,Rana Tharu,6943,Plains-associated family only,6,0
+RIVER,plains,rang1265,Kamtapuri,,No resolved family,0,6
+RIVER,plains,rath1242,Rathwi Bareli,,No resolved family,11,0
+RIVER,plains,rath1243,Rathawi,,No resolved family,1,0
+RIVER,plains,sera1259,Saraiki,13580,Other families only,1,0
+RIVER,plains,shek1243,Shekhawati,6943,Plains-associated family only,0,0
+RIVER,plains,sind1272,Sindhi,13325,Other families only,0,0
+RIVER,plains,surg1246,Surgujia,6943;7047,One focal + other families,0,0
+RIVER,plains,surj1235,Surjapuri,,No resolved family,0,1
+RIVER,plains,thar1284,Sunha Tharu,,No resolved family,1,0
+RIVER,plains,vaag1238,Vaagri Boli,,No resolved family,1,0
+RIVER,plains,vasa1239,Vasavi,,No resolved family,4,0
+RIVER,plains,wadi1248,Wadiyara Koli,,No resolved family,2,0
+RIVER,plains,wagd1238,Wagri,6943,Plains-associated family only,0,0
+UNRIPE,dardic,dame1241,Dameli,1236,Dardic-associated family only,0,0
+UNRIPE,dardic,gowr1239,Gowro,7563,Other families only,0,0
+UNRIPE,dardic,indu1241,Indus Kohistani,2613;7563,One focal + other families,1,0
+UNRIPE,dardic,kala1372,Indo-Aryan Kalasha,1236,Dardic-associated family only,1,0
+UNRIPE,dardic,kala1373,Bashkarik,1236,Dardic-associated family only,0,0
+UNRIPE,dardic,kash1277,Kashmiri,1236;2613,Both focal families,0,0
+UNRIPE,dardic,khow1242,Khowar,1236,Dardic-associated family only,1,0
+UNRIPE,dardic,nort2666,Pashai,,No resolved family,1,0
+UNRIPE,dardic,phal1254,Palula,1236,Dardic-associated family only,0,0
+UNRIPE,dardic,shin1264,Shina,1236,Dardic-associated family only,0,0
+UNRIPE,dardic,shum1235,Shumashti,1236,Dardic-associated family only,0,0
+UNRIPE,dardic,tira1253,Tirahi,1236,Dardic-associated family only,0,0
+UNRIPE,plains,awad1243,Awadhi,2613,Plains-associated family only,0,0
+UNRIPE,plains,beng1280,Bengali,2613;6875,One focal + other families,0,0
+UNRIPE,plains,chit1274,Chitwania Tharu,2613,Plains-associated family only,0,0
+UNRIPE,plains,dang1260,Dangaura Tharu,2613,Plains-associated family only,0,0
+UNRIPE,plains,east2316,Morangia Tharu,2613,Plains-associated family only,0,0
+UNRIPE,plains,guja1252,Gujarati,2613,Plains-associated family only,0,0
+UNRIPE,plains,hind1269,Hindi-Urdu,2613;4012-2,One focal + other families,0,0
+UNRIPE,plains,kach1277,Kutchi,2613,Plains-associated family only,0,0
+UNRIPE,plains,mait1250,Maithili,2613,Plains-associated family only,0,0
+UNRIPE,plains,mara1378,Marathi,14114;2613,One focal + other families,0,0
+UNRIPE,plains,oriy1255,Odia,2613,Plains-associated family only,0,0
+UNRIPE,plains,panj1256,Punjabi,1340-2,Other families only,0,0
+UNRIPE,plains,rana1246,Rana Tharu,2613,Plains-associated family only,0,0
+UNRIPE,plains,sind1272,Sindhi,413,Other families only,0,0
+UNRIPE,plains,wadi1248,Wadiyara Koli,,No resolved family,1,0
+UNRIPE,plains,west2386,Lahnda,2613,Plains-associated family only,0,0
+SOUR,dardic,brok1247,Brokskat,4850,Dardic-associated family only,0,0
+SOUR,dardic,dame1241,Dameli,4850,Dardic-associated family only,0,0
+SOUR,dardic,gawa1247,Gawarbati,12504-2;8182,Other families only,0,0
+SOUR,dardic,gowr1239,Gowro,4850,Dardic-associated family only,1,0
+SOUR,dardic,gran1245,Grangali,,No resolved family,1,0
+SOUR,dardic,kala1372,Indo-Aryan Kalasha,4850,Dardic-associated family only,0,0
+SOUR,dardic,kala1373,Bashkarik,4850,Dardic-associated family only,0,0
+SOUR,dardic,kash1277,Kashmiri; Poguli,4850,Dardic-associated family only,3,0
+SOUR,dardic,khow1242,Khowar,12504,Other families only,0,0
+SOUR,dardic,nort2666,Pashai,12504;4584;4850,One focal + other families,0,0
+SOUR,dardic,phal1254,Palula,4850;5938,One focal + other families,1,0
+SOUR,dardic,savi1242,Sauji,12504-2,Other families only,0,0
+SOUR,dardic,shin1264,Shina,4850,Dardic-associated family only,2,0
+SOUR,dardic,shum1235,Shumashti,4850,Dardic-associated family only,1,0
+SOUR,dardic,torw1241,Torwali,4850,Dardic-associated family only,2,0
+SOUR,dardic,wota1240,Wotapuri,8182,Other families only,0,0
+SOUR,plains,assa1263,Assamese,5808,Other families only,0,0
+SOUR,plains,beng1280,Bengali,3777;4850;5617;579,Both focal families,2,0
+SOUR,plains,bhoj1244,Bhojpuri,3777,Plains-associated family only,0,0
+SOUR,plains,bish1244,Bishnupriya Manipuri,,No resolved family,6,0
+SOUR,plains,chit1274,Chitwania Tharu,579,Other families only,0,0
+SOUR,plains,dang1260,Dangaura Tharu,579,Other families only,0,0
+SOUR,plains,dhat1238,Dhatki,3777,Plains-associated family only,0,0
+SOUR,plains,east2316,Morangia Tharu,3777,Plains-associated family only,0,0
+SOUR,plains,guja1252,Gujarati,3777;579,One focal + other families,0,0
+SOUR,plains,hajo1238,Hajong,,No resolved family,12,0
+SOUR,plains,halb1244,Halbi,,No resolved family,1,0
+SOUR,plains,hind1269,Hindi-Urdu,4850;579,One focal + other families,1,1
+SOUR,plains,kach1277,Kutchi,3777,Plains-associated family only,0,0
+SOUR,plains,konk1267,Konkani,579;579-2,Other families only,0,0
+SOUR,plains,mait1250,Maithili,,No resolved family,0,1
+SOUR,plains,mara1378,Marathi,3777,Plains-associated family only,1,0
+SOUR,plains,oriy1255,Odia,5617;579,Other families only,0,0
+SOUR,plains,panj1256,Punjabi,3777,Plains-associated family only,0,0
+SOUR,plains,rajb1243,Rajbanshi,3777,Plains-associated family only,0,0
+SOUR,plains,rana1246,Rana Tharu,3777,Plains-associated family only,0,0
+SOUR,plains,rang1265,Kamtapuri,3777;5808,One focal + other families,0,0
+SOUR,plains,sind1272,Sindhi,3777;5617,One focal + other families,0,0
+SOUR,plains,surj1235,Surjapuri,3777,Plains-associated family only,0,0
+SOUR,plains,vaag1238,Vaagri Boli,,No resolved family,1,0
+SOUR,plains,wadi1248,Wadiyara Koli,2668,Other families only,0,0
+SOUR,plains,west2386,Lahnda,3777,Plains-associated family only,0,0

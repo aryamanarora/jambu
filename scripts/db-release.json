@@ -1,0 +1,15 @@
+{
+  "version": "35",
+  "assets": {
+    ".dbwork/jambu.db": {
+      "bytes": 124502016,
+      "sha256": "14990724cc34f534337682653e5681a588bae0e7c67093f0dc21622a1d0abbbf"
+    },
+    "static/db/jambu.db.zst": {
+      "bytes": 48801375,
+      "sha256": "ff7728a287bbfc6158f11b23d6ced6a6b61a68bce92055530ab38395e060cd8c"
+    }
+  },
+  "cldfSnapshotCommit": "57b1b9247a98b18a36695799cc957611a5284e3a",
+  "cldfSnapshotStatus": "Committed locally; publication to the separate data repository deferred."
+}

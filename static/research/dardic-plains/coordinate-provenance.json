@@ -1,0 +1,6 @@
+{
+  "source": "data/cldf/languages.csv",
+  "sha256": "baf09089fc9a06c612441ac40b806b385ba6d563bd13959412db624cada81c9c",
+  "matches_lexical_snapshot": true,
+  "note": "Representative base-language coordinates, not elicitation localities. A shared-Glottocode unit uses the first located contributing language in catalogue order."
+}

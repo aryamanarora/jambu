@@ -1,0 +1,106 @@
+concept,group,family_id,family,fractional_votes,share,languages
+RAW,dardic,1236,āmá,8.833333333333334,0.7361111111111112,Bashkarik; Dameli; Indo-Aryan Kalasha; Indus Kohistani; Kashmiri; Khowar; Palula; Shina; Shumashti; Tirahi
+RAW,dardic,8130,pā́lāśa,2.0,0.16666666666666666,Gawarbati; Sauji
+RAW,dardic,1533,āsyà,0.5,0.041666666666666664,Indus Kohistani
+RAW,dardic,2613,*kacca,0.3333333333333333,0.027777777777777776,Kashmiri
+RAW,dardic,9584,*bʰr̩jjita,0.3333333333333333,0.027777777777777776,Kashmiri
+RAW,plains,2613,*kacca,8.666666666666668,0.787878787878788,Awadhi; Bengali; Dhatki; Gujarati; Hindi-Urdu; Kutchi; Maithili; Marathi; Odia; Punjabi; Sindhi
+RAW,plains,1236,āmá,1.0,0.09090909090909091,Bengali; Gujarati
+RAW,plains,10807,*rūṣṭa,0.3333333333333333,0.0303030303030303,Hindi-Urdu
+RAW,plains,14114,*hiru,0.6666666666666666,0.0606060606060606,Hindi-Urdu; Marathi
+RAW,plains,724,*allaḍa,0.3333333333333333,0.0303030303030303,Marathi
+WOOL,dardic,11549,vā́ra,1.0,0.09090909090909091,Dameli
+WOOL,dardic,5086,jáṭā,1.0,0.09090909090909091,Indus Kohistani
+WOOL,dardic,11023,*lāyayati,0.5,0.045454545454545456,Indo-Aryan Kalasha
+WOOL,dardic,7638,pákṣman,6.5,0.5909090909090909,Bashkarik; Indo-Aryan Kalasha; Khowar; Palula; Shina; Torwali; Ushojo
+WOOL,dardic,2424,ū́rṇā,1.0,0.09090909090909091,Kashmiri
+WOOL,dardic,11154,lṓman,0.5,0.045454545454545456,Pashai
+WOOL,dardic,2438,*ūrṣā,0.5,0.045454545454545456,Pashai
+WOOL,plains,2424,ū́rṇā,12.833333333333334,0.8555555555555556,Bengali; Dhatki; Gujarati; Hindi-Urdu; Kamtapuri; Khetrani; Kutchi; Lahnda; Maithili; Odia; Punjabi; Rajbanshi; Sindhi; Surjapuri
+WOOL,plains,3156,kiṭṭa,0.3333333333333333,0.02222222222222222,Gujarati
+WOOL,plains,7638,pákṣman,0.3333333333333333,0.02222222222222222,Gujarati
+WOOL,plains,9301,br̩sī́,1.0,0.06666666666666667,Marathi
+WOOL,plains,10851,rṓman,0.5,0.03333333333333333,Odia
+MOUSTACHE,dardic,9083,*pʰuŋga,8.0,0.7272727272727273,Bashkarik; Bhateri; Dameli; Indo-Aryan Kalasha; Palula; Shina; Torwali; Ushojo
+MOUSTACHE,dardic,4269,gōccʰā,3.0,0.2727272727272727,Gawarbati; Kashmiri; Sauji
+MOUSTACHE,plains,6250,*dāṁṣṭra,0.5,0.03333333333333333,Assamese
+MOUSTACHE,plains,4203-2,gumpʰa,1.5,0.1,Assamese; Bengali
+MOUSTACHE,plains,10180,*muccʰā,10.0,0.6666666666666666,Gujarati; Hindi-Urdu; Hindko; Kamtapuri; Khetrani; Lahnda; Odia; Punjabi; Rajbanshi; Sindhi; Surjapuri
+MOUSTACHE,plains,10180-2,mōccʰā,1.5,0.1,Awadhi; Hindi-Urdu
+MOUSTACHE,plains,13725,*stōbʰya,0.5,0.03333333333333333,Gujarati
+MOUSTACHE,plains,12659,śmáśru,1.0,0.06666666666666667,Konkani
+LONG,dardic,6368,dīrgʰá,17.5,0.875,Bashkarik; Brokskat; Chilisso; Dameli; Gawarbati; Indo-Aryan Kalasha; Indus Kohistani; Kalkoti; Kundal Shahi; Palula; Pashai; Sauji; Shina; Shumashti; Tirahi; Torwali; Ushojo; Wotapuri
+LONG,dardic,10951,lamba,1.0,0.05,Kashmiri
+LONG,dardic,6616,*draŋgʰa,1.0,0.05,Khowar
+LONG,dardic,1627,ukṣa,0.5,0.025,Pashai
+LONG,plains,6368,dīrgʰá,7.0,0.17073170731707318,Assamese; Hindi-Urdu; Khetrani; Kholosi; Lahnda; Luwati; Maimani; Marwari; Sindhi; Zadjali
+LONG,plains,10951,lamba,28.666666666666664,0.6991869918699186,Ahirwadi; Assamese; Bagheli; Bagri; Bhojpuri; Bhuksa Tharu; Braj; Bundeli; Chhattisgarhi; Chitwania Tharu; Dangaura Tharu; Dhundari; Godwari; Gujarati; Hadauti; Hindi-Urdu; Kamtapuri; Kannauji; Lahnda; Maithili; Malvi; Marathi; Marwari; Mewari; Mewati; Morangia Tharu; Odia; Punjabi; Rajbanshi; Rana Tharu; Shahawadi; Shekhawati; Surgujia; Surjapuri; Wagri
+LONG,plains,9158,barbara,1.0,0.024390243902439025,Bengali
+LONG,plains,11225,vaḍra,1.8333333333333333,0.044715447154471545,Bundeli; Hadauti; Mewari; Shekhawati
+LONG,plains,10187,*muṭṭa,1.3333333333333333,0.03252032520325203,Mewari; Rajasthani
+LONG,plains,9162,balakara,0.3333333333333333,0.008130081300813007,Punjabi
+LONG,plains,9165,*balatara,0.3333333333333333,0.008130081300813007,Punjabi
+LONG,plains,5524,*ḍagga,0.5,0.012195121951219513,Kamtapuri
+WATER,dardic,8082,pānī́ya,3.5,0.1590909090909091,Bhateri; Dodi; Kashmiri; Kundal Shahi; Poguli; Rambani; Wotapuri
+WATER,dardic,1921,udaká,14.0,0.6363636363636364,Bashkarik; Chilisso; Gowro; Indo-Aryan Kalasha; Indus Kohistani; Kalkoti; Khowar; Ningalami; Palula; Sauji; Shina; Shumashti; Tirahi; Torwali; Ushojo
+WATER,dardic,407,áp,2.0,0.09090909090909091,Dameli; Gawarbati
+WATER,dardic,12485,śītá,0.5,0.022727272727272728,Gowro
+WATER,dardic,1799,*uttr̩ṣṇa,0.5,0.022727272727272728,Ningalami
+WATER,dardic,13266,sárga,0.5,0.022727272727272728,Kashmiri
+WATER,dardic,11556,vā́ri,1.0,0.045454545454545456,Pashai
+WATER,plains,5155,jala,4.25,0.09659090909090909,Assamese; Bengali; Gujarati; Hadauti; Hindi-Urdu; Lahnda; Marathi; Mewari; Odia; Sindhi
+WATER,plains,8082,pānī́ya,36.25000000000001,0.8238636363636366,Ahirwadi; Assamese; Awadhi; Bagheli; Bagri; Bengali; Bhojpuri; Braj; Bundeli; Chhattisgarhi; Chitwania Tharu; Dangaura Tharu; Dhundari; Godwari; Gujarati; Hadauti; Hindi-Urdu; Kamtapuri; Kannauji; Khetrani; Kholosi; Konkani; Lahnda; Luwati; Maimani; Maithili; Malvi; Marathi; Marwari; Mewari; Mewati; Morangia Tharu; Odia; Punjabi; Rajasthani; Rajbanshi; Rana Tharu; Shahawadi; Shekhawati; Sindhi; Surgujia; Surjapuri; Wadiyara Koli; Wagri; Zadjali
+WATER,plains,10085,*mārtta,1.0,0.022727272727272728,Bihari
+WATER,plains,7552,nīrá,1.0833333333333333,0.02462121212121212,Braj; Hindi-Urdu; Lahnda
+WATER,plains,13388,siktá,0.3333333333333333,0.007575757575757575,Gujarati
+WATER,plains,7143,*nikirati,0.25,0.005681818181818182,Hindi-Urdu
+WATER,plains,4038,garala,0.3333333333333333,0.007575757575757575,Marathi
+WATER,plains,6896-6,*dʰvāsayati,0.5,0.011363636363636364,Punjabi
+IRON,dardic,4842a,cīmara,12.5,0.9615384615384616,Bashkarik; Dameli; Gawarbati; Indo-Aryan Kalasha; Indus Kohistani; Kashmiri; Khowar; Palula; Pashai; Shina; Shumashti; Torwali; Wotapuri
+IRON,dardic,12367,śastrá,0.5,0.038461538461538464,Kashmiri; Poguli
+IRON,plains,11158,lōhá,9.45,0.5558823529411764,Assamese; Awadhi; Bengali; Bhojpuri; Gujarati; Hindi-Urdu; Hindko; Lahnda; Maithili; Marathi; Odia; Punjabi; Sindhi
+IRON,plains,3264,kuṇḍá,0.5,0.029411764705882353,Bihari
+IRON,plains,11170,lōhī,0.5,0.029411764705882353,Bihari
+IRON,plains,11171,*lōhōpaskara,0.7,0.041176470588235294,Gujarati; Marathi
+IRON,plains,4866-2,*cōbb,0.2,0.011764705882352941,Gujarati
+IRON,plains,11173,lauhabʰāṇḍa,1.2,0.07058823529411765,Gujarati; Wadiyara Koli
+IRON,plains,6121,dagdʰá,3.2,0.18823529411764706,Gujarati; Khetrani; Kutchi; Punjabi; Sindhi
+IRON,plains,12349,śalā́kā,0.5,0.029411764705882353,Maithili
+IRON,plains,10884,lakṣáyati,0.25,0.014705882352941176,Odia
+IRON,plains,10881,lakṣá,0.25,0.014705882352941176,Odia
+IRON,plains,104,aŋkáyati,0.25,0.014705882352941176,Odia
+RIVER,dardic,3860,*kʰāḍa,0.5,0.038461538461538464,Bhateri
+RIVER,dardic,13415,síndʰu,6.0,0.46153846153846156,Bhateri; Gowro; Indus Kohistani; Kashmiri; Khowar; Shina; Tirahi
+RIVER,dardic,6943,nadī́,3.0,0.23076923076923078,Bashkarik; Dameli; Kundal Shahi
+RIVER,dardic,9645,*bʰraṁśiṣṭʰa,1.0,0.07692307692307693,Indo-Aryan Kalasha
+RIVER,dardic,4456,*gʰalōdaka,0.5,0.038461538461538464,Khowar
+RIVER,dardic,4453,*gʰala,1.0,0.07692307692307693,Pashai
+RIVER,dardic,13137,*sapānīya,1.0,0.07692307692307693,Palula
+RIVER,plains,3952,gáŋgā,1.0,0.03225806451612903,Assamese; Bengali
+RIVER,plains,6943,nadī́,25.0,0.8064516129032258,Ahirwadi; Assamese; Bagheli; Bagri; Bengali; Braj; Bundeli; Chhattisgarhi; Chitwania Tharu; Dangaura Tharu; Dhundari; Godwari; Hadauti; Hindi-Urdu; Kannauji; Kutchi; Malvi; Marathi; Marwari; Mewari; Mewati; Morangia Tharu; Punjabi; Rajasthani; Rana Tharu; Shahawadi; Shekhawati; Surgujia; Wagri
+RIVER,plains,7047,nāḍī́,2.0,0.06451612903225806,Chhattisgarhi; Marwari; Mewati; Surgujia
+RIVER,plains,5629,taṭa,1.0,0.03225806451612903,Odia
+RIVER,plains,13580,sḗka,1.0,0.03225806451612903,Saraiki
+RIVER,plains,13325,sāgara,1.0,0.03225806451612903,Sindhi
+UNRIPE,dardic,1236,āmá,8.5,0.7727272727272727,Bashkarik; Dameli; Indo-Aryan Kalasha; Kashmiri; Khowar; Palula; Shina; Shumashti; Tirahi
+UNRIPE,dardic,7563,nī́la,1.5,0.13636363636363635,Gowro; Indus Kohistani
+UNRIPE,dardic,2613,*kacca,1.0,0.09090909090909091,Indus Kohistani; Kashmiri
+UNRIPE,plains,2613,*kacca,11.5,0.7666666666666667,Awadhi; Bengali; Chitwania Tharu; Dangaura Tharu; Gujarati; Hindi-Urdu; Kutchi; Lahnda; Maithili; Marathi; Morangia Tharu; Odia; Rana Tharu
+UNRIPE,plains,6875,dʰr̩ṣṭá,0.5,0.03333333333333333,Bengali
+UNRIPE,plains,4012-2,*gaddara,0.5,0.03333333333333333,Hindi-Urdu
+UNRIPE,plains,14114,*hiru,0.5,0.03333333333333333,Marathi
+UNRIPE,plains,1340-2,*ālla,1.0,0.06666666666666667,Punjabi
+UNRIPE,plains,413,apakva,1.0,0.06666666666666667,Sindhi
+SOUR,dardic,4850,cukrá,9.833333333333332,0.6555555555555554,Bashkarik; Brokskat; Dameli; Gowro; Indo-Aryan Kalasha; Kashmiri; Palula; Pashai; Shina; Shumashti; Torwali
+SOUR,dardic,12504-2,*śuktala,1.5,0.1,Gawarbati; Sauji
+SOUR,dardic,8182,*pittaka,1.5,0.1,Gawarbati; Wotapuri
+SOUR,dardic,12504,śuktá,1.3333333333333333,0.08888888888888888,Khowar; Pashai
+SOUR,dardic,4584,cáṇḍa,0.3333333333333333,0.02222222222222222,Pashai
+SOUR,dardic,5938,tr̩ṣṭá,0.5,0.03333333333333333,Palula
+SOUR,plains,5808,tigmá,1.5,0.07142857142857142,Assamese; Kamtapuri
+SOUR,plains,5617,takrá,1.25,0.05952380952380952,Bengali; Odia; Sindhi
+SOUR,plains,579,amlá,4.25,0.20238095238095238,Bengali; Chitwania Tharu; Dangaura Tharu; Gujarati; Hindi-Urdu; Konkani; Odia
+SOUR,plains,4850,cukrá,0.75,0.03571428571428571,Bengali; Hindi-Urdu
+SOUR,plains,3777,kʰaṭṭa,11.75,0.5595238095238095,Bengali; Bhojpuri; Dhatki; Gujarati; Kamtapuri; Kutchi; Lahnda; Marathi; Morangia Tharu; Punjabi; Rajbanshi; Rana Tharu; Sindhi; Surjapuri
+SOUR,plains,579-2,*amlasa-,0.5,0.023809523809523808,Konkani
+SOUR,plains,2668,kaṇṭa,1.0,0.047619047619047616,Wadiyara Koli

@@ -1,0 +1,29 @@
+{
+  "inputs": {
+    "entry-evidence.csv.gz": "ff487ccd961e51ccbb27c9be6fdbb75b72eff6e0d886617a0718d5cf5d46fa4c",
+    "entry-family-map.json": "cdc59dcda56749573cca269357412fe9091d95c218f7fbe94aa7c3859a04fd89",
+    "entry-results.json": "0821eda0967fe4e06d5edac640c0b8f2217116b682bc3c0150f2579a53ae14d4",
+    "head-evidence.csv.gz": "de9120f46f07f372bd4828ca692732ba672fa63a40e72b1d526148d33a6af2f8",
+    "head-metadata.json.gz": "e71be76bb21bffdc314c15622d09913f118bcb7cb453165e3236bfc41c2e57e3",
+    "head-results.json": "4ce47b2777a0a8f8bb019d67265749ee04cefebfc0d1050d8521f1461eaf7236"
+  },
+  "outputs": {
+    "head-age-metadata.csv": "5d02b39cadea313445f81bb42c4244430dbc3965358e54944cda2b32b9753db6",
+    "score-bands.csv": "7976088dc02238973f3409e3a37c83716306e074961cdd5017af366ff2372db7",
+    "asymmetric-ranking.csv": "df8e690804bf482abb02095a6f6793e4a67a3974532069c2b84e74cb55941839",
+    "extension-concepts.csv": "1939187a15b16ff5bffd4934e906dee07a955efc48a166f519e64558281d9ad0",
+    "family-collapse-audit.csv": "05c0f45dc0d9b2f60c90a14ea60fefcfc3eb48d919d7f9b28141c8de335d0813",
+    "age-pairs.csv": "7db197ec88c46013b5a878105d9a88067418c2102db2e97dd23117c7b39176e0",
+    "asymmetric-map-points.csv": "302b10205738ba7b5a8a38ff2685495728615868f57136ae2684615449987d15",
+    "extension-summary.json": "c2e421f4736e88c8689f8fc1ab02da3608cfa59ec11506ee7f57c76686936652",
+    "northwest-alignment.csv": "cc266fbd68a3b7d147350fa8909a738a84a4a08a761dc98124bf69d1ea3d528b"
+  },
+  "checks": [
+    "All eligible distributions reconstructed from evidence in both counting modes",
+    "Asymmetric map weights and other-family details reconcile to bars"
+  ],
+  "eligible": {
+    "entry": 662,
+    "head": 668
+  }
+}

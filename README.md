@@ -31,6 +31,9 @@ npm run dev
 ```
 
 `db:stage` requires the `zstd` command (`brew install zstd` or `apt install zstd`).
+It validates the sub-50 MB artifact and exact restoration through the browser decoder
+before replacing the staged asset. The vendored fzstd wide-offset fix is documented
+in `src/lib/vendor/README.md`.
 
 For a fast production build while iterating, cap prerendering:
 
@@ -107,6 +110,10 @@ For local development, copy `.env.example` to `.env` and set `PUBLIC_GA_MEASUREM
 is disabled when the variable is absent or invalid.
 
 ## Scripts / layout
+
+Reference pills copy canonical BibTeX from `static/bibtex.json`. After updating the data
+bibliography, regenerate it with `../data/.venv/bin/python scripts/export_bibtex.py`.
+Uncatalogued source abbreviations export as `@misc` with the available citation in a note.
 
 - `scripts/build_static_db.py` — dictionary-codes citations, tags, article prose,
   alignments/correspondences, compacts indexes, writes precomputed `meta` counts, and `VACUUM`s.

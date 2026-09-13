@@ -1,0 +1,112 @@
+ID,Name,Glottocode,Latitude,Longitude,Clade,Location,Quality
+KochilaTharu,Kochila Tharu,koch1247,26.65,86.75,Bihari,southeastern Nepal,C
+Majhi,Majhi,majh1253,27.35,86.00,Bihari,"Ramechhap, Khotang, and Kavre districts, Nepal",C
+A,Assamese,assa1263,26.7509,94.2037,Eastern,,
+Aw,Awadhi,awad1243,27.59,82.47,E. Hindi,,
+awan,Hindko,avan1234,33.994201,72.483087,Lahndic,,C
+B,Bengali,beng1280,23.4710,88.5565,Eastern,,
+BH,Kamtapuri,rang1265,26.280348,89.39468,Eastern,,C
+bhatr,Bhateri,bate1261,34.95,72.92,Kohistani,Batera,
+Bhoj,Bhojpuri,bhoj1244,26.46,84.82,Bihari,,
+Bi,Bihari,biha1245,24.68,87.50,Bihari,,
+Brj,Braj,braj1242,26.48,78.08,W. Hindi,,
+bro,Brokskat,brok1247,34.53,76.60,Shinaic,,
+Bshk,Bashkarik,kala1373,35.53,72.57,Kohistani,,
+Chil,Chilisso,chil1275,35.25,73.33,Kohistani,,
+Dm,Dameli,dame1241,35.30,71.68,Kunar,,
+dod,Dodi,kash1277,33.13,75.57,Kashmiric,,
+G,Gujarati,guja1252,22.69,71.10,Gujaratic,,
+Gaw,Gawarbati,gawa1247,35.20,71.54,Kunar,,
+ghis,Ghisadi,guja1252,22.69,71.10,Gujaratic,,
+Gowro,Gowro,gowr1239,35.1243,73.1233,Kohistani,,
+H,Hindi-Urdu,hind1269,28.7041,77.1025,W. Hindi,,
+had,Hadauti,hado1235,24.85,75.84,Rajasthanic,,
+hal,Halbi,halb1244,20.31,81.37,Halbic,,
+K,Kashmiri,kash1277,34.17,74.33,Kashmiric,,
+Kal,Indo-Aryan Kalasha,kala1372,35.64,71.67,Chitrali,,
+Kalk,Kalkoti,kalk1245,35.41,72.17,Shinaic,,
+Kat,Katarqalai,wota1240,34.70,70.86,Kohistani,,
+kcch,Kutchi,kach1277,23.83,69.00,Sindhic,,
+khet,Khetrani,khet1238,30.48,70.28,Sindhic,,
+Kho,Khowar,khow1242,36.00,72.00,Chitrali,,
+Khol,Kholosi,khol1241,27.12,54.30,Sindhic,,
+Ko,Konkani,konk1267,15.2993,74.1240,Marathi-Konkani,,
+KS,Surjapuri,surj1235,26.0982,87.945,Eastern,,C
+Kund,Kundal Shahi,kund1257,34.56,73.83,Shinaic,,
+L,Lahnda,west2386,31.1704,72.7097,Lahndic,,
+M,Marathi,mara1378,18.5204,73.8567,Marathi-Konkani,,
+Mai,Indus Kohistani,indu1241,35.34,73.02,Kohistani,,
+Malw,Malwai,malv1243,23.49,75.56,Bhil,,
+Marw,Marwari,marw1260,27.00,75.07,Rajasthanic,,
+MH,Rajbanshi,rajb1243,26.4877,87.79265,Eastern,,C
+Mth,Maithili,mait1250,26.38,86.22,Bihari,,
+Gng,Grangali,gran1245,34.65,70.73,Kunar,,
+Ning,Ningalami,gran1245,34.65,70.73,Kunar,,
+Or,Odia,oriy1255,21.00,85.00,Eastern,,
+P,Punjabi,panj1256,30.04,75.67,Punjabic,,
+Pas,Pashai,nort2666,34.66,70.43,Pashai,,
+Phal,Palula,phal1254,35.51,71.84,Shinaic,,
+pog,Poguli,kash1277,33.313086,75.261806,Kashmiric,,
+poth,Pahari-Pothwari,paha1251,33.1480,73.7537,Lahndic,,
+ram,Rambani,kash1277,33.2464046,75.1851361,Kashmiric,,
+Rj,Rajasthani,raja1256,26.47,76.20,Rajasthanic,,
+S,Sindhi,sind1272,26.00,69.00,Sindhic,,
+Sh,Shina,shin1264,34.65,75.29,Shinaic,,
+Shum,Shumashti,shum1235,34.48,70.57,Kunar,,
+Sik,Sikalgari,guja1252,22.69,71.10,Gujaratic,,
+srk,Saraiki,sera1259,29.55,71.91,Lahndic,,
+Sv,Sauji,savi1242,35.30,71.56,Shinaic,,
+thar,Dhatki,dhat1238,26.42,70.78,Sindhic,,
+Tir,Tirahi,tira1253,34.18,69.59,Kohistani,,
+Tor,Torwali,torw1241,35.21,72.55,Kohistani,,
+VB,Vaagri Boli,vaag1238,12.21,79.53,Bhil,,
+WK,Wadiyara Koli,wadi1248,26.07,72.13,Gujaratic,,
+Wot,Wotapuri,wota1240,34.70,70.86,Kohistani,,
+Zadj,Zadjali,jadg1238,23.5880,58.3829,Sindhic,,
+NDu,Chhattisgarhi,chha1249,21.225068,82.028298,E. Hindi,,C
+SSr,Surgujia,surg1246,23.045719,83.189104,E. Hindi,,C
+jhang,Jatki,jatk1238,32.139652,72.653674,Lahndic,,C
+kaithal,Haryanvi,hary1238,28.91568,76.37168,W. Hindi,,C
+bagri_fatehabad,Bagri,bagr1243,29.40465,74.40918,Rajasthanic,,C
+dhundari_badagaon,Shekhawati,shek1243,27.978027,75.163279,Rajasthanic,,C
+dhundari_bamore,Dhundari,dhun1238,26.696403,75.972699,Rajasthanic,,C
+hadothi_kelwada,Shahawadi,hada1254,25.138213,76.876916,Rajasthanic,,C
+marwari_bagra,Godwari,godw1241,25.417504,73.107785,Rajasthanic,,C
+mewari_bannoda,Wagri,wagd1238,24.137701,74.047239,Bhil,,C
+mewari_basad,Malvi,malv1243,24.243083,75.027707,Rajasthanic,"SIL ESR 2009-011 contributes 30 locality wordlists from Madhya Pradesh and Rajasthan, grouped in the source as Ujjaini, Rajwadi, Umadwadi, Sondhwadi, Gond-Malvi and Bhil-Malvi",C
+mewari_dholpura,Mewari,mewa1249,25.084731,74.220835,Rajasthanic,,C
+mewati_akera,Mewati,mewa1250,27.817648,77.035043,Rajasthanic,,C
+mewati_jhambaus,Ahirwadi,mewa1250,28.235628,76.927847,Rajasthanic,,C
+bagheli_lakshman,Bagheli,bagh1251,24.482879,81.356341,E. Hindi,,C
+bundeli_atarra,Bundeli,bund1253,25.008376,79.564258,W. Hindi,,C
+maimani,Maimani,luwa1238,23.616667,58.566667,Sindhic,,
+luwati,Luwati,luwa1238,23.621347,58.561492,Sindhic,,
+Rana,Rana Tharu,rana1246,28.65,80.44,Bihari,,
+Dang,Dangaura Tharu,dang1260,27.88,81.78,Bihari,,
+Chitwan,Chitwania Tharu,chit1274,27.58,84.41,Bihari,,
+Morang,Morangia Tharu,east2316,26.666667,87.5,Bihari,,
+sambalpuri,Sambalpuri,samb1261,21.22,83.93,Eastern,,
+Kannauji-Central,Kannauji,kana1281,27.0437956,79.8951742,W. Hindi,,
+Buksa,Bhuksa Tharu,buks1238,29.397962,79.126163,Bihari,,C
+Kathoriya,Kathoriya Tharu,kath1250,28.53981,80.797511,Bihari,,C
+Sunha,Sunha Tharu,thar1284,28.837028,80.320613,Bihari,,C
+Goj,Gujari,guja1253,34.043002,73.225443,Rajasthanic,,C
+Ush,Ushojo,usho1238,35.139395,72.67756,Shinaic,,C
+DewasDoneDanuwar,Dewas-Done Danuwar,dhan1265,27.36,85.41,Bihari,"Makwanpur, Sindhuli, Kavre, and neighboring districts, Nepal",C
+KochariyaEastDanuwar,Kochariya-East Danuwar,koch1253,27.12,85.63,Bihari,"Bara, eastern Sindhuli, and neighboring districts, Nepal",C
+Hajong,Hajong,hajo1238,25.5143,89.8594,Eastern,Bangladesh and India (Glottolog language coordinate),B
+MagahiNepal,Magahi (Nepal survey),maga1260,25.0915,85.3335,Bihari,Glottolog 5.3 language coordinate; parent for the five Nepal survey sites,B
+Bhatri,Bhatri,bhat1265,19.2778,82.1341,Halbic,"Bastar district, Chhattisgarh and Nabarangapur/Koraput districts, Odisha; centroid of Beine's nine 1989 survey sites",C
+AdivasiOriya,Adivasi Oriya,adiv1239,18.3234,82.8806,Eastern,"Araku Valley, Alluri Sitharama Raju district, Andhra Pradesh; Beine's single 1989 survey site",C
+Bishnupriya,Bishnupriya Manipuri,bish1244,24.50,91.80,Eastern,"Sylhet division, northeastern Bangladesh; parent for the six Kim and Kim 2008 survey sites",C
+RathwiBareli,Rathwi Bareli,rath1242,21.4375,74.9958,Bhil,"Madhya Pradesh and northern Maharashtra, India; parent for seven ESR 2018-011 Rathwi/Rathwi Pauri/Rathwi Bareli survey lists",C
+Bhilali,Bhilali,bhil1253,22.58346,74.59014,Bhil,"Western Madhya Pradesh, India; parent for nine ESR 2018-011 Bhilali/Parya Bhilali survey lists",C
+Bhili,Bhili,bhil1251,20.85,73.9592,Bhil,"Madhya Pradesh and Gujarat, India; parent for four ESR 2018-011 Bhili survey lists",C
+Rathawi,Rathawi,rath1243,22.309,73.186,Bhil,"Eastern Gujarat, India; parent for the ESR 2018-011 Mankodi survey list",C
+PalyaBareli,Palya Bareli,paly1238,21.937,75.233,Bhil,"Western Madhya Pradesh and northern Maharashtra, India; parent for two ESR 2018-011 Palya survey lists",C
+PauriBareli,Pauri Bareli,paur1238,21.228,74.337,Bhil,"Northern Maharashtra and western Madhya Pradesh, India; parent for three ESR 2018-011 Bareli Pauri survey lists",C
+Nimadi,Nimadi,nima1243,22.1263,76.1264,Rajasthanic,"Nimar region of Madhya Pradesh, India; parent for thirteen ESR 2012-002 survey lists and three ESR 2018-011 regional comparison lists",C
+Khandesi,Khandesi,khan1272,21.3181,74.142,Bhil,"Dhule district, Maharashtra, India; parent for the ESR 2018-011 Ahirani regional comparison list",C
+Vasavi,Vasavi,vasa1239,,,Bhil,Northern Maharashtra and Gujarat; parent for four Watters 2013 Vasave lists; source supplies no list coordinates,C
+Noiri,Noiri,noir1238,,,Bhil,Northern Maharashtra and adjacent Madhya Pradesh; parent for the ESR 2013-004 and ESR 2015-012 Noiri/Bhilori/Kotli survey lists; Kotli routing is provisional and not a genealogical determination; sources supply no list coordinates,C
+DungraBhili,Dungra Bhil,dung1251,,,Bhil,Western India; parent for the Mathwad and Ambadungar ESR 2015-012 Dungra Bhili survey lists; source supplies no list coordinates,C

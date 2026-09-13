@@ -1,0 +1,44 @@
+{
+  "input_hashes": {
+    "forms.csv": "7d442d72052c6a96a2e995eaa6792975346975e19b035cc0049850e59c8b1d18",
+    "edges.csv": "7b5bb39257b374bc11e119a3d829c942451accdabe4863335c3894c1a204d584",
+    "languages.csv": "baf09089fc9a06c612441ac40b806b385ba6d563bd13959412db624cada81c9c",
+    "concepts.csv": "bb10a6a6faff5398950a12b1c648079b34724123d1f988ec3028ec6b2685dcb1",
+    "form_concepts.csv": "a99b72833dab5ef3a5653d31e284c2406d47e3776cd179446e98c3fc1ff34a1e"
+  },
+  "evidence_rows": 2104,
+  "language_concept_units": 479,
+  "featured_concepts": [
+    "RAW",
+    "WOOL",
+    "MOUSTACHE",
+    "LONG",
+    "WATER",
+    "IRON"
+  ],
+  "verified": "All nine concepts independently recomputed from evidence; every family share and denominator matches the frozen analysis.",
+  "outputs": {
+    "all-concept-ranking.csv": "853ac2a212caab0cfc4a9572b56c68de77aea3076a18c4a50efd9bf14ead475f",
+    "analyze_concept_isoglosses.py": "5217be7a0ab7e6471cf467bb6285096be83edd72571763223b47259e129d67cc",
+    "charts.json": "e910d972145d6dbf4b4f360ce0f2179b53ec16fbd85431e8f76b33406467550c",
+    "coordinate-provenance.json": "980a0516216499999153b3b0f1e0b38e4dc02e948add9ac1d3ae476927a4e3a3",
+    "coverage.png": "070e8022f986f4f64019449b265ff6eac8cb49f4c1886f7235ca21bdc40131fb",
+    "coverage.svg": "ab448336f7994dc2551a9a40ec869f2baff230540d7076dc8270c1add94f8cb8",
+    "edges_util.py": "738902724e6e5616567926bb430b127dc3553f908fcd5d40c224983d10aea501",
+    "evidence.csv": "366b724c7368764e4f09e280467e0b8407e1f62ae2249e47e30eca7387e7c142",
+    "family-contrasts.png": "5bdb6f23dfd8d5cc0b613f4f6df2799a271adf83196f1879eaff97b2c7209890",
+    "family-contrasts.svg": "32adc89c8280b5dcea80d7dbcde6913a3357143d14e9aea1edff36d03f09171d",
+    "family-distributions.csv": "0439acfcef71f1f828781c54cbcb9c954d7ef476f96a87540157e2a8d2b3af96",
+    "language-memberships.csv": "091c83d56e0387345dccbd5d55b3d12f10a10529d1fcb710dabf3e15c12175d6",
+    "long-denominators.png": "c421eac5131f4789487e17af62f124460bc5c5d1843bf5183265d8b3e42ce2fc",
+    "long-denominators.svg": "afe310dfd2bd1dde2a0eb9e18d3b3bc840a2ff375313f107c9fe4dfd2fa4359f",
+    "map-languages.csv": "295d58363f06e1654498093bde05f7b2073719aa55338127b3963b1af336e2b3",
+    "map-points.csv": "01059fcf570f07c8915d51b9578d2ad2b8f22f7e90f1dff9ef23ebec1d95d5fa",
+    "metric-comparison.csv": "1d16955c799fc39f3adfbdad0bbb93cabb32ae9441694fa9eede55e674c34019",
+    "river-sensitivity.csv": "88979684834e56d1a704a3504a7cbbfbfcdf69a74252ab9bcdd6cc75e8c84505",
+    "river-sensitivity.png": "d1741f0d3e739ed6f346c4fae9d24eaf3d422ed56f6aae081b40c1f6200fdc37",
+    "river-sensitivity.svg": "69a7fd1c3923fbad392e20c1a89dcb466eeaed49e589f8e3a110ae3713d723e5",
+    "snapshot.json": "16822439e5d485b4479ccae233371d14c84d427a6a0a3f961b6d80458f8d75aa",
+    "weighted-shares.csv": "046884e10f89d2918aac56bbb813f54c507160ae32e9e51ed60fe507f8413366"
+  }
+}

@@ -14,7 +14,8 @@
 		mutedTiles = false,
 		flush = false,
 		zoomPosition = 'topleft',
-		scrollZoom = false
+		scrollZoom = false,
+		animateZoom = true
 	}: {
 		markers: MapMarker[];
 		center?: [number, number];
@@ -30,6 +31,7 @@
 		// Off by default: inside a scrolling document the wheel belongs to the page. The full-bleed
 		// atlases have no page scroll to steal, so they turn it on.
 		scrollZoom?: boolean;
+		animateZoom?: boolean;
 	} = $props();
 
 	let el: HTMLDivElement;
@@ -43,6 +45,7 @@
 	let ro: ResizeObserver | null = null;
 	let userMoved = false; // the reader has panned or zoomed, so the view is theirs now
 	let fitting = false; // guard so our own fitBounds isn't mistaken for a reader gesture
+	let destroyed = false;
 	// the layers currently on the map, in marker order, so a style-only change can reuse them
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let drawn: { key: string; marker: any }[] = [];
@@ -224,7 +227,8 @@
 
 	onMount(async () => {
 		L = (await import('leaflet')).default;
-		map = L.map(el, { scrollWheelZoom: scrollZoom }).setView(center ?? [20.5937, 78.9629], zoom);
+		if (destroyed) return;
+		map = L.map(el, { scrollWheelZoom: scrollZoom, zoomAnimation: animateZoom }).setView(center ?? [20.5937, 78.9629], zoom);
 		if (zoomPosition !== 'topleft') map.zoomControl.setPosition(zoomPosition);
 		L.tileLayer(
 			'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
@@ -269,8 +273,9 @@
 	});
 
 	onDestroy(() => {
+		destroyed = true;
 		ro?.disconnect();
-		if (map) map.remove();
+		if (map) { map.stop(); map.remove(); map = null; }
 	});
 </script>
 
@@ -310,9 +315,6 @@
 	:global(:root[data-theme='dark']) .map-frame :global(.map-tiles-muted) {
 		filter: saturate(0.28) contrast(0.78) brightness(0.72);
 		opacity: 0.68 !important;
-	}
-	.map-frame :global(.map-point-foreground) {
-		filter: drop-shadow(0 1px 1px rgba(20, 14, 12, 0.9)) drop-shadow(0 0 3px rgba(20, 14, 12, 0.35));
 	}
 	.map-frame :global(.leaflet-control-zoom) {
 		overflow: hidden;

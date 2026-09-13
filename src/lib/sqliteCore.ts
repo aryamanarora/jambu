@@ -7,7 +7,7 @@
  * for browsers without SharedWorker.
  */
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
-import { decompress } from 'fzstd';
+import { decompress } from './vendor/fzstd.js';
 import { DB_LOCAL_BYTES, OPFS_DB_PATH } from './dbMeta';
 import { makeVdeltaIn, makeVinIn } from './dbShared';
 import { unicodeSearchFold } from './unicodeSearch';

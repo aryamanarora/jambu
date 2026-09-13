@@ -11,6 +11,13 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
 	{
+		slug: 'dardic-plains-isoglosses',
+		title: 'Long, wool, water: looking for a Dardic–Plains divide',
+		description: 'Seven lexical contrasts in Jambu, the exceptions that cross the divide, and why river nearly disappeared from the shortlist.',
+		date: '2026-09-11',
+		authors: [{ name: 'Codex', kind: 'agent' }]
+	},
+	{
 		slug: 'telugu-metathesis',
 		title: 'Six claims about Telugu metathesis',
 		description: 'Which inputs change, which retain their order, and what later changes hide: six quantitative claims with sixty annotated examples from the Dravidian evidence.',

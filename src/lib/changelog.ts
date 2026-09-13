@@ -18,6 +18,29 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-09-13',
+		label: '13 September 2026',
+		title: 'Zoller comparative vocabulary and an expanded dictionary',
+		changes: [
+			'Added 17,754 attestations from the linguistic data sections of Zoller’s 2023 study, spanning 313 languages with exact source locators.',
+			'Preserved source transcription, 341 direct CDIAL links, and 70 explicit variant links; unresolved comparisons remain unlinked.',
+			'Refreshed the dictionary with the latest ingested sources: 720,668 browser records in a 48.80 MB download.',
+			'Fixed decoding of large compressed databases and added lossless verification before staging.',
+			'Simplified the sources list with reference pills, clade coverage on form-count hover, and one-click BibTeX copying.',
+			'Aligned source and language pages, placed form searches above the tables, and removed map-point shadows.',
+			'Published a Dardic–Plains lexical comparison with interactive evidence maps and downloadable research tables.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'WPah', label: 'West Pahari' },
+				{ id: 'Pr', label: 'Prasun' },
+				{ id: 'kw', label: 'Korwa' },
+				{ id: 'Tampuan', label: 'Tampuan' }
+			],
+			sources: [{ id: 'zoller2023', label: 'Zoller 2023' }]
+		}
+	},
+	{
 		date: '2026-09-10',
 		label: '10 September 2026',
 		title: 'Dameli vocabulary, reviewed etymologies, and research essays',

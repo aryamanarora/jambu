@@ -16,6 +16,7 @@ import Database from 'better-sqlite3';
 import { statSync } from 'node:fs';
 import { dev } from '$app/environment';
 import { cladeFamily } from '$lib/cladeTree';
+import { CLADE_ORDER } from '$lib/clades';
 import { bestEtymologyGuess } from '$lib/etymologyGuess';
 import { unicodeSearchFold } from '$lib/unicodeSearch';
 import {
@@ -802,6 +803,50 @@ export function getReferenceRow(id: string): Reference | null {
 
 export function allReferences(): Reference[] {
 	return getDb().prepare('SELECT * FROM "references" ORDER BY short').all() as Reference[];
+}
+
+/** Include direct citations and attributed prose, matching references.lemma_count. */
+export function allReferenceCladeDistributions(): Record<string, { clade: string; count: number }[]> {
+	const dbh = getDb();
+	const clades = new Map(
+		(dbh.prepare("SELECT l.rowid AS rid, COALESCE(NULLIF(g.clade, ''), 'Unknown') AS clade FROM lem l LEFT JOIN languages g ON g.rowid = l.lang_rid").all() as
+			{ rid: number; clade: string }[]).map((row) => [row.rid, row.clade])
+	);
+	const members = new Map<number, Set<number>>();
+	const add = (reference: number, lemma: number) => {
+		if (!members.has(reference)) members.set(reference, new Set());
+		members.get(reference)!.add(lemma);
+	};
+	for (const row of dbh.prepare('SELECT ref_rid, lex FROM ref_lex').all() as { ref_rid: number; lex: Uint8Array }[]) {
+		members.set(row.ref_rid, new Set(readVarints(row.lex)));
+	}
+	// The listing index excludes redirects; the bibliography's counts include them.
+	const citationRefs = new Map<number, number>();
+	for (const row of dbh.prepare('SELECT ref_rid, first_rid, n FROM cites').all() as { ref_rid: number; first_rid: number; n: number }[]) {
+		for (let id = row.first_rid; id < row.first_rid + row.n; id++) citationRefs.set(id, row.ref_rid);
+	}
+	for (const row of dbh.prepare('SELECT rowid AS rid, cites FROM lem WHERE link_rid IS NOT NULL AND cites IS NOT NULL').all() as { rid: number; cites: Uint8Array }[]) {
+		for (const citation of readVarints(row.cites)) {
+			const reference = citationRefs.get(citation);
+			if (reference != null) add(reference, row.rid);
+		}
+	}
+	for (const row of dbh.prepare('SELECT DISTINCT ref_rid, lemma_rid FROM texts WHERE ref_rid IS NOT NULL').all() as { ref_rid: number; lemma_rid: number }[]) {
+		add(row.ref_rid, row.lemma_rid);
+	}
+	const rank = (clade: string) => {
+		const index = CLADE_ORDER.indexOf(clade);
+		return index < 0 ? CLADE_ORDER.length : index;
+	};
+	return Object.fromEntries((dbh.prepare('SELECT rowid AS rid, id FROM "references"').all() as { rid: number; id: string }[]).map((row) => {
+		const counts = new Map<string, number>();
+		for (const lemma of members.get(row.rid) ?? []) {
+			const clade = clades.get(lemma) ?? 'Unknown';
+			counts.set(clade, (counts.get(clade) ?? 0) + 1);
+		}
+		return [row.id, [...counts].map(([clade, count]) => ({ clade, count }))
+			.sort((a, b) => rank(a.clade) - rank(b.clade) || a.clade.localeCompare(b.clade))];
+	}));
 }
 
 // ---- global corpus stats --------------------------------------------------

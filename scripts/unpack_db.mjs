@@ -2,7 +2,7 @@
 /** Restore a packed release artifact for better-sqlite3 during prerendering. */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { decompress } from 'fzstd';
+import { decompress } from '../src/lib/vendor/fzstd.js';
 
 const input = process.argv[2] ?? 'static/db/jambu.db.zst';
 const output = process.argv[3] ?? '.dbwork/jambu.db';

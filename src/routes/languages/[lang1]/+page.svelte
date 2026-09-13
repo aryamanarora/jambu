@@ -1,8 +1,5 @@
 <script lang="ts">
-	// A language, as a document with an instrument beside it. The lexicon is the page; the sticky
-	// column on the right is everything that narrows it — where the language is spoken, which
-	// dialect, which etymological origin, which source — gathered next to the table they filter
-	// rather than scattered above and below it.
+	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
@@ -85,6 +82,10 @@
 	// the lexicon is the payload, so the column beside it can be folded away when a reader wants
 	// the full width for the table
 	let sideOpen = $state(true);
+	onMount(() => {
+		sideOpen = window.matchMedia('(min-width: 1001px)').matches;
+		return () => clearTimeout(hoverTimer);
+	});
 	let dialectSearch = $state('');
 	let hovered = $state<string | null>(null);
 	// every hover repaints the points, so let the pointer settle before it does
@@ -111,9 +112,9 @@
 	const locatedCount = $derived(dialects.filter((dialect) => dialect.lat != null).length);
 
 	function dialectHref(dialect: Dialect): string {
-		return dialect.token === selectedToken
-			? `${base}/languages/${lang.id}`
-			: `${base}/languages/${lang.id}?dialect=${encodeURIComponent(dialect.token)}`;
+		return buildQuery(searchParams, {
+			dialect: dialect.token === selectedToken ? '' : dialect.token
+		});
 	}
 	function pickDialect(dialect: Dialect) {
 		goto(dialectHref(dialect), { keepFocus: true, noScroll: true });
@@ -200,7 +201,10 @@
 </svelte:head>
 
 <header class="lang-head">
-	<h1 class="headword">{lang.name} <span class="id-tag">[{lang.id}]</span></h1>
+	<div class="language-title">
+		<a class="back-link" href={`${base}/languages`}>All languages</a>
+		<h1 class="headword">{lang.name} <span class="id-tag">[{lang.id}]</span></h1>
+	</div>
 	<div class="head-right">
 		<dl class="head-stats">
 			<div><dt>Family</dt><dd>{lang.clade}</dd></div>
@@ -208,45 +212,65 @@
 			{#if dialects.length}<div><dt>Dialects</dt><dd>{dialects.length.toLocaleString()}</dd></div>{/if}
 			{#if references.length}<div><dt>Sources</dt><dd>{references.length.toLocaleString()}</dd></div>{/if}
 		</dl>
-		<button class="side-fold" aria-pressed={!sideOpen} onclick={() => (sideOpen = !sideOpen)}>
-			{sideOpen ? 'Hide map & filters' : 'Show map & filters'}
-		</button>
 	</div>
 </header>
 
+<div class="language-charts" aria-label="Lexicon distributions">
+		{#if origins.length}
+			<details class="chart-card" open>
+				<summary>Origins<span>{origins.length.toLocaleString()}</span></summary>
+				<Donut slices={origins} selected={selectedOrigins} onselect={filterOrigins} />
+			</details>
+		{/if}
+		{#if references.length}
+			<details class="chart-card" open>
+				<summary>Sources<span>{references.length.toLocaleString()}</span></summary>
+				<Donut
+					slices={references}
+					unit="citations"
+					label="Distribution of references"
+					selected={selectedReferences}
+					onselect={filterReferences}
+				/>
+			</details>
+		{/if}
+
+</div>
+
+<div class="lexicon-toolbar">
+	<h2>Lexicon</h2>
+	<button class="side-fold" aria-expanded={sideOpen} aria-controls="language-filters" onclick={() => (sideOpen = !sideOpen)}>
+		{sideOpen ? 'Hide map & filters' : 'Show map & filters'}
+	</button>
+</div>
+
 <div class="lang-body" class:no-side={!sideOpen}>
-	<main class="lexicon-col" id="lexicon">
+	<section class="lexicon-col" id="lexicon" aria-label={`${lang.name} lexicon`}>
 		{#if selectedDialect}
 			<p class="active-filter">
 				Lexicon filtered to <strong>{selectedDialect.name}</strong>
-				<a href={`${base}/languages/${lang.id}`}>show all forms</a>
+				<a href={buildQuery(searchParams, { dialect: '' })} data-sveltekit-noscroll>Clear dialect</a>
 			</p>
 		{/if}
 		<ReflexesView mode="lexicon" languageId={lang.id} />
-	</main>
+	</section>
 
 	<!-- everything that narrows the lexicon, beside the lexicon -->
-	{#if sideOpen}
-	<aside class="side-col atlas" aria-label="Where {lang.name} is spoken, and what narrows its lexicon">
+	<aside id="language-filters" class="side-col atlas" hidden={!sideOpen} aria-label={`${lang.name} map and filters`}>
 		{#if markers.length}
-			<div class="side-head">
-				<h2>Distribution</h2>
-				<p class="muted">
-					{#if dialects.length}{locatedCount.toLocaleString()} of {dialects.length.toLocaleString()} dialects located{:else}one location{/if}
-				</p>
-			</div>
-			<GeoMap {markers} height="clamp(15rem, 40vh, 28rem)" />
+			<details class="side-drawer map-drawer" open>
+				<summary>Distribution<span>{#if dialects.length}{locatedCount.toLocaleString()} / {dialects.length.toLocaleString()} located{:else}1 location{/if}</span></summary>
+				<GeoMap {markers} height="16rem" />
+			</details>
 		{/if}
 
 		{#if dialects.length}
-			<div class="side-head picker-head">
-				<h2>Dialects</h2>
-				<p class="muted">{shownDialects.length.toLocaleString()} of {dialects.length.toLocaleString()}</p>
-			</div>
+			<details class="side-drawer" open>
+			<summary>Dialects<span>{shownDialects.length.toLocaleString()} / {dialects.length.toLocaleString()}</span></summary>
 			<div class="controls">
-				<input class="search" placeholder="Filter dialects or places…" bind:value={dialectSearch} />
+				<input class="search" type="search" aria-label="Filter dialects or places" placeholder="Filter dialects or places…" bind:value={dialectSearch} />
 			</div>
-			<p class="hint">Pick a dialect to draw it and narrow the lexicon to it.</p>
+			<p class="hint">Select a dialect to filter the lexicon.</p>
 			<div class="list" role="group" aria-label="Dialects of {lang.name}">
 				{#each shownDialects as dialect (dialect.token)}
 					{@const chosen = dialect.token === selectedToken}
@@ -276,34 +300,16 @@
 					<p class="empty">No dialect matches “{dialectSearch}”.</p>
 				{/each}
 			</div>
+			</details>
 		{/if}
 
-		{#if origins.length}
-			<details class="side-drawer" open>
-				<summary>Origins<span>{origins.length.toLocaleString()}</span></summary>
-				<Donut slices={origins} selected={selectedOrigins} onselect={filterOrigins} />
-			</details>
-		{/if}
-		{#if references.length}
-			<details class="side-drawer">
-				<summary>Sources<span>{references.length.toLocaleString()}</span></summary>
-				<Donut
-					slices={references}
-					unit="citations"
-					label="Distribution of references"
-					selected={selectedReferences}
-					onselect={filterReferences}
-				/>
-			</details>
-		{/if}
 	</aside>
-	{/if}
 </div>
 
 <!-- reference material: read once, then never again -->
 <div class="lang-drawers">
 	<details id="metadata" class="page-disclosure">
-		<summary>More metadata{#if metadataTagCount}<span>{metadataTagCount.toLocaleString()} descriptive tags</span>{/if}</summary>
+		<summary>Language metadata{#if metadataTagCount}<span>{metadataTagCount.toLocaleString()} descriptive tags</span>{/if}</summary>
 		<div class="metadata-grid">
 			<dl class="props card technical-props">
 				<div class="prop"><dt>Jambu ID</dt><dd>{lang.id}</dd></div>
@@ -335,7 +341,7 @@
 
 	{#if dialects.length}
 		<details class="page-disclosure">
-			<summary>Technical metadata for all dialects<span>{dialects.length.toLocaleString()}</span></summary>
+			<summary>Dialect metadata<span>{dialects.length.toLocaleString()}</span></summary>
 			<div class="table-wrap">
 				<table class="data">
 					<thead>
@@ -377,16 +383,34 @@
 </div>
 
 <style>
+	.language-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+	.language-charts:empty { display: none; }
+	.chart-card { min-width: 0; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+	.chart-card summary { cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+	.chart-card[open] summary { margin-bottom: 0.65rem; }
+	.chart-card summary span { float: right; color: var(--muted); font-weight: 400; }
+	.chart-card :global(.legend) { flex: 1; min-width: 0; max-height: 11rem; overflow-y: auto; scrollbar-width: thin; }
+	@media (max-width: 760px) { .language-charts { grid-template-columns: 1fr; } }
+	@media (max-width: 640px) {
+		.chart-card :global(.donut) { width: 112px; height: 112px; }
+		.chart-card :global(.donut-wrap) { gap: 0.8rem; }
+		.chart-card :global(.legend button) { display: grid; grid-template-columns: 0.7rem minmax(0, 1fr); gap: 0.15rem 0.4rem; }
+		.chart-card :global(.ct) { grid-column: 2; font-size: 0.72rem; }
+	}
 	/* ---- header: the name, then the four figures on one line ---- */
 	.lang-head {
 		display: flex;
-		align-items: baseline;
+		align-items: flex-end;
 		justify-content: space-between;
 		flex-wrap: wrap;
 		gap: 0.5rem 1.5rem;
 		margin-bottom: 0.9rem;
 	}
-	.lang-head h1 { margin: 0; }
+	.lang-head h1 { margin: 0.25rem 0 0; }
+	.language-title { min-width: 0; overflow-wrap: anywhere; }
+	.back-link { font-size: 0.8rem; color: var(--muted); }
+	.lexicon-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; margin-top: 1.2rem; border-top: 1px solid var(--border); }
+	.lexicon-toolbar h2 { margin: 0; font-size: 1.1rem; }
 	.head-right {
 		display: flex;
 		align-items: baseline;
@@ -395,17 +419,18 @@
 	}
 	.head-stats {
 		display: flex;
-		gap: 1.4rem;
+		gap: 0.8rem 1.4rem;
+		flex-wrap: wrap;
 		margin: 0;
 	}
 	.side-fold {
-		padding: 0.3rem 0.6rem;
+		padding: 0.5rem 0.7rem;
 		border: 1px solid var(--border-strong);
 		border-radius: var(--radius-sm);
 		background: none;
 		color: var(--muted);
 		font: inherit;
-		font-size: 0.74rem;
+		font-size: 0.8rem;
 		font-weight: 600;
 		white-space: nowrap;
 		cursor: pointer;
@@ -434,6 +459,9 @@
 	.lang-body.no-side { grid-template-columns: minmax(0, 1fr); }
 	.lexicon-col { min-width: 0; }
 	.side-col {
+		padding: 0 0.85rem 0.85rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
 		position: sticky;
 		top: 4.5rem;
 		max-height: calc(100vh - 5.5rem);
@@ -442,7 +470,9 @@
 		scrollbar-width: thin;
 		scrollbar-color: var(--border-strong) transparent;
 	}
+	.side-col[hidden] { display: none; }
 	.active-filter {
+		flex-wrap: wrap;
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
@@ -456,17 +486,6 @@
 	}
 	.active-filter a { font-size: 0.8rem; font-weight: 600; }
 
-	.side-head {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: 0.75rem;
-		margin-bottom: 0.4rem;
-	}
-	.side-head h2 { margin: 0; font-size: 1rem; }
-	.side-head p { margin: 0; font-size: 0.74rem; }
-	.picker-head { margin-top: 1rem; }
-
 	/* the row grammar comes from atlas.css via the `atlas` class; only the second line differs */
 	.side-col :global(.pick) {
 		grid-template-areas:
@@ -474,7 +493,7 @@
 			'. meta meta';
 	}
 	.side-col :global(.controls) { padding: 0.35rem 0 0.3rem; }
-	.side-col :global(.list) { padding: 0 0 0.5rem; overflow: visible; }
+	.side-col :global(.list) { padding: 0 0 0.5rem; max-height: 18rem; overflow-y: auto; scrollbar-width: thin; }
 	.side-col :global(.hint) { padding: 0 0 0.45rem; }
 	.side-col :global(.row) { align-items: center; }
 	.meta {
@@ -504,15 +523,14 @@
 	.qC { background: none; opacity: 0.75; }
 
 	.side-drawer {
-		margin-top: 1rem;
+		margin-top: 0.75rem;
 		border-top: 1px solid var(--border);
 		padding-top: 0.6rem;
 	}
+	.side-drawer:first-child { border-top: 0; margin-top: 0; }
 	.side-drawer > summary {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: 0.5rem;
+		display: list-item;
+		padding: 0.35rem 0;
 		font-size: 0.8rem;
 		font-weight: 600;
 		color: var(--muted);
@@ -520,7 +538,8 @@
 		letter-spacing: 0.06em;
 		cursor: pointer;
 	}
-	.side-drawer > summary span { font-weight: 400; letter-spacing: 0; text-transform: none; }
+	.side-drawer[open] > summary { margin-bottom: 0.6rem; }
+	.side-drawer > summary span { float: right; font-weight: 400; letter-spacing: 0; text-transform: none; }
 
 	/* ---- reference drawers ---- */
 	.lang-drawers { margin-top: 2rem; }
@@ -549,6 +568,7 @@
 		margin-top: 0.7rem;
 	}
 	.compare-picker > div { flex: 1 1 16rem; }
+	.compare-picker select { flex: 1 1 14rem; min-width: 0; max-width: 100%; }
 	.compare-picker label { font-weight: 600; }
 	.compare-picker p { margin: 0.15rem 0 0; font-size: 0.82rem; }
 

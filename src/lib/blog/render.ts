@@ -4,9 +4,29 @@ import type { BlogChart } from './charts';
 function validateChart(chart: BlogChart) {
 	if (!/^[a-z0-9-]+$/.test(chart.id) || !chart.views.length) throw new Error('Invalid blog chart');
 	for (const view of chart.views) {
+		if (view.otherFamilies) {
+			const index = view.categories.indexOf('Other resolved families');
+			if (index < 0 || view.otherFamilies.some((family) => family.values.length !== view.rows.length || family.languages.length !== view.rows.length || family.values.some((n) => !Number.isFinite(n) || n < 0)) ||
+				view.rows.some((row, i) => Math.abs(view.otherFamilies!.reduce((sum, family) => sum + family.values[i], 0) - row.values[index]) > 1e-8)) {
+				throw new Error(`Invalid other-family breakdown in chart ${chart.id}`);
+			}
+		}
+		if (view.map) {
+			const ids = new Set<string>();
+			for (const point of view.map.points) {
+				if (ids.has(point.id) || point.values.length !== view.map.categories.length ||
+					point.values.some((n) => !Number.isFinite(n) || n < 0) ||
+					Math.abs(point.values.reduce((a, b) => a + b, 0) - 1) > 1e-8 ||
+					(point.latitude !== null && (!Number.isFinite(point.latitude) || Math.abs(point.latitude) > 90)) ||
+					(point.longitude !== null && (!Number.isFinite(point.longitude) || Math.abs(point.longitude) > 180))) {
+					throw new Error(`Invalid map point in chart ${chart.id}`);
+				}
+				ids.add(point.id);
+			}
+		}
 		if (!view.categories.length || !view.rows.length) throw new Error(`Empty chart ${chart.id}`);
 		for (const row of view.rows) {
-			if (row.values.length !== view.categories.length || row.values.some((n) => !Number.isSafeInteger(n) || n < 0)) {
+			if (row.values.length !== view.categories.length || row.values.some((n) => (view.fractionalVotes ? !Number.isFinite(n) : !Number.isSafeInteger(n)) || n < 0)) {
 				throw new Error(`Invalid counts in chart ${chart.id}`);
 			}
 		}
@@ -32,6 +52,10 @@ export function renderPost(markdown: string, resolve: (kind: RecordKind, id: str
 	const chartSlots: BlogChart[] = [];
 	const parser = new Marked({
 		renderer: {
+			image(token) {
+				if (/^\/(?!\/)/.test(token.href)) token.href = (options.basePath || '') + token.href;
+				return false;
+			},
 			table(token) {
 				return `<p class="table-hint">Scroll sideways to read the full table.</p><div class="blog-table" role="region" aria-label="Scrollable evidence table" tabindex="0">${Renderer.prototype.table.call(this, token)}</div>`;
 			},
