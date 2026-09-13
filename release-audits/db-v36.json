@@ -1,0 +1,129 @@
+{
+  "release": "db-v36",
+  "data_commit": "8887f1a60e225b58815749d7292d002863d34538",
+  "previous_deployed_release": "db-v35",
+  "scope": "15 West Pahari languages, complete source changelog, published ingestion provenance, portable release checklist and low-resource defaults",
+  "validation": {
+    "focused_tests": "28 passed, 2 deselected; prior source tests retained",
+    "full_suite": {
+      "current_failures": 31,
+      "baseline_failures": 31,
+      "new_failures": [],
+      "resolved_failures": [],
+      "summary": "31 failed, 1846 passed, 18 skipped in 1037.36s (0:17:17)"
+    },
+    "full_build": "generation completed; final two manual-survey tests remain baseline failures",
+    "identity_graph": "855253 CLDF IDs and 403501 edges preserved; exactly2680 language/tag changes",
+    "compact_database": {
+      "integrity": [
+        {
+          "integrity_check": "ok"
+        }
+      ],
+      "source_ids_verified": 17754,
+      "language_and_transcription_mismatches": 0,
+      "total_nodes": 720736,
+      "languages": [
+        {
+          "id": "Bangani",
+          "name": "Bangani",
+          "clade": "W. Pahari",
+          "lemma_count": 2186
+        },
+        {
+          "id": "Deogari",
+          "name": "Deogari",
+          "clade": "W. Pahari",
+          "lemma_count": 236
+        },
+        {
+          "id": "Himachali",
+          "name": "Himachali",
+          "clade": "W. Pahari",
+          "lemma_count": 116
+        },
+        {
+          "id": "Khashdhari",
+          "name": "Khashdhari",
+          "clade": "W. Pahari",
+          "lemma_count": 45
+        },
+        {
+          "id": "Khashi",
+          "name": "Khashi",
+          "clade": "W. Pahari",
+          "lemma_count": 26
+        },
+        {
+          "id": "Padri",
+          "name": "Padri",
+          "clade": "W. Pahari",
+          "lemma_count": 25
+        },
+        {
+          "id": "Bauri",
+          "name": "Bauri",
+          "clade": "W. Pahari",
+          "lemma_count": 19
+        },
+        {
+          "id": "Bushahari",
+          "name": "Bushahari",
+          "clade": "W. Pahari",
+          "lemma_count": 8
+        },
+        {
+          "id": "Barari",
+          "name": "Barari",
+          "clade": "W. Pahari",
+          "lemma_count": 6
+        },
+        {
+          "id": "OuterSiraji",
+          "name": "Outer Siraji",
+          "clade": "W. Pahari",
+          "lemma_count": 3
+        },
+        {
+          "id": "Shoracholi",
+          "name": "Shoracholi",
+          "clade": "W. Pahari",
+          "lemma_count": 3
+        },
+        {
+          "id": "Kotguru",
+          "name": "Kotguru",
+          "clade": "W. Pahari",
+          "lemma_count": 2
+        },
+        {
+          "id": "ShimlaSiraji",
+          "name": "Shimla Siraji",
+          "clade": "W. Pahari",
+          "lemma_count": 2
+        },
+        {
+          "id": "Kotkhai",
+          "name": "Kotkhai",
+          "clade": "W. Pahari",
+          "lemma_count": 1
+        },
+        {
+          "id": "WesternWestPahari",
+          "name": "Western West Pahari",
+          "clade": "W. Pahari",
+          "lemma_count": 2
+        }
+      ]
+    },
+    "compression": "browser roundtrip passed; exact hashes in scripts/db-release.json",
+    "local_browser": "Homepage changelog and Bangani language page: 2186 forms, W. Pahari; ogēr variant entry and source locators visible",
+    "production": "Pending matching-commit CI and live verification; completion evidence will be attached to release"
+  },
+  "source_inventory": {
+    "new_primary_sources_since_v30": 28,
+    "supporting_references": 73,
+    "primary_provenance_paths": "all resolve in selected data commit"
+  },
+  "local_resources": "Existing DB artifacts reused; no repeated full local build, suite, compression, or prerender. CI runs frontend check and full production build."
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jambu Production Release"
+  short_description: "Verify and publish a complete Jambu production release"
+  default_prompt: "Use $jambu-release to prepare, publish, and verify the next Jambu production release."
