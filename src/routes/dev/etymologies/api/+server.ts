@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
 import { error, json } from '@sveltejs/kit';
-import { readFile, rename, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { access, mkdir, readdir, readFile, rename, unlink, writeFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
 import { getDb, ids } from '$lib/server/db';
 import {
 	expandCitationGroups,
@@ -162,7 +162,19 @@ function conceptIndex() {
 
 export const prerender = false;
 
-const ASSIGNMENTS = resolve(process.cwd(), '../data/data/etymology-assignments.csv');
+// Curated etymology decisions live in per-source sidecars (see ../data/etymology_assignments.py):
+// one CSV per lexical source under data/other/forms/etymologies/, plus one per dictionary input.
+// A row goes back to the file it was read from. A form with no row yet is written to the inbox
+// (_pending.csv); the next data build files it under the source that owns the form.
+const DATA_ROOT = resolve(process.cwd(), '../data');
+const SIDECAR_DIR = resolve(DATA_ROOT, 'data/other/forms/etymologies');
+const PENDING = resolve(SIDECAR_DIR, '_pending.csv');
+const DICTIONARY_SIDECARS = [
+	'data/cdial/etymologies.csv',
+	'data/dedr/etymologies.csv',
+	'data/munda/etymologies.csv',
+	'data/dbia/etymologies.csv'
+].map((path) => resolve(DATA_ROOT, path));
 const FIELDS = ['Form_ID', 'Etymon_ID', 'Kind', 'Rank', 'Status', 'Source', 'Notes', 'Pos'] as const;
 
 function localOnly(request: Request) {
@@ -207,6 +219,8 @@ function csvCell(value: string): string {
 }
 
 type Assignment = Record<(typeof FIELDS)[number], string>;
+/** An overlay row together with the sidecar it lives in. */
+type StoredAssignment = Assignment & { file: string };
 
 type CandidateRow = {
 	id: string;
@@ -229,30 +243,69 @@ type SelectedFormRow = {
 	language: string;
 };
 
-async function readAssignments(): Promise<Assignment[]> {
-	let text = '';
+async function exists(path: string): Promise<boolean> {
 	try {
-		text = await readFile(ASSIGNMENTS, 'utf8');
+		await access(path);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+/** Every existing sidecar: forms sidecars (inbox last), then the dictionary sidecars. */
+async function assignmentFiles(): Promise<string[]> {
+	let names: string[] = [];
+	try {
+		names = (await readdir(SIDECAR_DIR)).filter((name) => name.endsWith('.csv')).sort();
 	} catch (cause) {
 		if ((cause as NodeJS.ErrnoException).code !== 'ENOENT') throw cause;
 	}
-	const rows = parseCsv(text);
-	const header = rows.shift() ?? [...FIELDS];
-	return rows
-		.filter((row) => row.some(Boolean))
-		.map((row) => Object.fromEntries(FIELDS.map((field) => [field, row[header.indexOf(field)] ?? ''])) as Assignment);
+	const files = names.map((name) => resolve(SIDECAR_DIR, name)).filter((file) => file !== PENDING);
+	if (await exists(PENDING)) files.push(PENDING);
+	for (const file of DICTIONARY_SIDECARS) if (await exists(file)) files.push(file);
+	return files;
 }
 
-async function writeAssignments(rows: Assignment[]): Promise<void> {
-	const text = [
-		FIELDS.join(','),
-		...rows
-			.sort((a, b) => a.Form_ID.localeCompare(b.Form_ID) || (a.Etymon_ID ?? '').localeCompare(b.Etymon_ID ?? ''))
-			.map((row) => FIELDS.map((field) => csvCell(row[field] ?? '')).join(','))
-	].join('\n') + '\n';
-	const temporary = `${ASSIGNMENTS}.tmp`;
-	await writeFile(temporary, text, 'utf8');
-	await rename(temporary, ASSIGNMENTS);
+async function readAssignments(): Promise<StoredAssignment[]> {
+	const out: StoredAssignment[] = [];
+	for (const file of await assignmentFiles()) {
+		const rows = parseCsv(await readFile(file, 'utf8'));
+		const header = rows.shift() ?? [...FIELDS];
+		for (const row of rows) {
+			if (!row.some(Boolean)) continue;
+			out.push({
+				...(Object.fromEntries(FIELDS.map((field) => [field, row[header.indexOf(field)] ?? ''])) as Assignment),
+				file
+			});
+		}
+	}
+	return out;
+}
+
+/** The sidecar a new row for `formId` belongs in: the file of its existing rows, else the inbox. */
+function homeOf(rows: StoredAssignment[], formId: string): string {
+	return rows.find((row) => row.Form_ID === formId)?.file ?? PENDING;
+}
+
+/** Write the complete row set back, one sidecar at a time; only files whose text changed are touched. */
+async function writeAssignments(rows: StoredAssignment[]): Promise<void> {
+	const grouped = new Map<string, StoredAssignment[]>();
+	for (const row of rows) (grouped.get(row.file) ?? grouped.set(row.file, []).get(row.file)!).push(row);
+	for (const stale of await assignmentFiles()) if (!grouped.has(stale)) await unlink(stale);
+	for (const [file, group] of grouped) {
+		const text =
+			[
+				FIELDS.join(','),
+				...group
+					.sort((a, b) => a.Form_ID.localeCompare(b.Form_ID) || (a.Etymon_ID ?? '').localeCompare(b.Etymon_ID ?? ''))
+					.map((row) => FIELDS.map((field) => csvCell(row[field] ?? '')).join(','))
+			].join('\n') + '\n';
+		if ((await exists(file)) && (await readFile(file, 'utf8')) === text) continue;
+		await mkdir(dirname(file), { recursive: true });
+		const temporary = `${file}.tmp`;
+		await writeFile(temporary, text, 'utf8');
+		await rename(temporary, file);
+	}
 }
 
 export const GET: RequestHandler = async ({ request, url }) => {
@@ -698,6 +751,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (uniqueForms.size !== additions.length) error(400, 'A form can only occur once in a group');
 		let rows = await readAssignments();
 		for (const addition of additions) {
+			const file = homeOf(rows, addition.Form_ID);
 			rows = rows.filter(
 				(row) =>
 					!(
@@ -707,7 +761,7 @@ export const POST: RequestHandler = async ({ request }) => {
 							: row.Etymon_ID === addition.Etymon_ID)
 					)
 			);
-			rows.push(addition);
+			rows.push({ ...addition, file });
 		}
 		await writeAssignments(rows);
 		return json({ ok: true, count: additions.length });
@@ -723,6 +777,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		// a rejection is a durable overlay row: apply_assignments deletes the generated edge
 		const etymonId = body.Etymon_ID?.trim() ?? '';
 		if (!etymonId) error(400, 'Rejection needs the proposed etymon');
+		const file = homeOf(rows, formId);
 		rows = rows.filter((row) => !(row.Form_ID === formId && row.Etymon_ID === etymonId));
 		rows.push({
 			Form_ID: formId,
@@ -732,7 +787,8 @@ export const POST: RequestHandler = async ({ request }) => {
 			Pos: '',
 			Status: 'rejected',
 			Source: body.Source?.trim() ?? '',
-			Notes: body.Notes?.trim() ?? ''
+			Notes: body.Notes?.trim() ?? '',
+			file
 		});
 		await writeAssignments(rows);
 		return json({ ok: true });
@@ -744,12 +800,13 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 	const addition = validatedAssignment(body);
 	const etymonId = addition.Etymon_ID;
+	const file = homeOf(rows, formId);
 	// rank-1 rows are unique per form; rank>=2 rows are keyed (form, etymon)
 	rows = rows.filter(
 		(row) =>
 			!(row.Form_ID === formId && (rank === '1' ? row.Rank === '1' || !row.Rank : row.Etymon_ID === etymonId))
 	);
-	rows.push(addition);
+	rows.push({ ...addition, file });
 	await writeAssignments(rows);
 	return json({ ok: true });
 };
