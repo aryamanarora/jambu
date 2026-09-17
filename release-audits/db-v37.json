@@ -1,0 +1,116 @@
+{
+ "release": "db-v37",
+ "data_commit": "3bf47fb162256493adbf3831e86fd4ab66ba96f5",
+ "previous_deployed_release": "db-v36",
+ "previous_deployed_data_commit": "8887f1a60e225b58815749d7292d002863d34538",
+ "previous_deployed_frontend_commit": "92828aa",
+ "scope": "Sheth's Prakrit dictionary (DDSA), Ho/Bhumij/Dhurwa SIL surveys, Berger and Yoshioka Burushaski re-parse, 38,549 reviewed SIL-survey etymologies, Mewari families and central-survey donors, Nuristani/CDIAL grouping; etymology overlay split into per-source sidecars and per-source YAML settings; Markodi cell keys; sound correspondence explorer and shared list filters in the frontend.",
+ "validation": {
+  "data_tree": "clean at release commit; `make check-sources` passed (194 YAML files, 191 citation keys; 55,872 sidecar rows in 65 files, all placed with their source)",
+  "full_build": "`make all` at the release commit reproduced cldf/edges.csv, cldf/forms.csv, data/form-identities.csv and every etymology sidecar byte-for-byte (sha256 050010fb…, 9826555b…, c9a92516…, 783dbb45…). concepts.csv/form_concepts.csv drifted between runs because pysem breaks Concepticon ties by set iteration order; concepts.py now pins PYTHONHASHSEED=0 and the tables are reproducible (0b9b0b32…, 3e7caa0a…).",
+  "identity_graph": "855,253 -> 932,088 compiled forms; 403,501 -> 437,507 rank edges; 0 form IDs retired outside Markodi (3 Markodi cells split into their own nodes, all 612 existing Markodi IDs kept via seeded Entry_Keys).",
+  "focused_tests": "manual-survey etymology gate (make all) 4 passed; parse_file name= callers 60 passed; routing tests 70 passed; sidecar/YAML-touching suites 117 passed.",
+  "full_suite": {
+   "summary": "37 failed, 1702 passed, 18 skipped in 762.81s",
+   "baseline": "44 failures cached by pytest on 2026-09-15 on the pre-release ingestion tree (v36 audit recorded 31 on its own tree)",
+   "resolved_vs_baseline": 14,
+   "new_vs_baseline": [
+    "tests/test_sil_adi_2015.py::test_preintegration_manifest_render_and_registry_contract_are_exact",
+    "tests/test_sil_india_pakistan_remaining_candidates.py::test_every_country_row_has_a_terminal_or_source_local_classification",
+    "tests/test_sil_india_pakistan_remaining_candidates.py::test_pinned_inputs_and_country_table_counts_are_current",
+    "tests/test_source_checklists.py::test_every_installed_ingestion_unit_has_a_fresh_checklist_copy",
+    "tests/test_source_checklists.py::test_retrospective_audit_accounts_for_every_installed_input_row",
+    "tests/test_source_checklists.py::test_source_checklist_machine_gates_are_clean_before_full_validation",
+    "tests/test_zoller_2023.py::test_counts_replay_keys_and_locators"
+   ],
+   "new_failures_assessment": "test_sil_adi_2015 preintegration: `pdfinfo` (poppler) not on PATH in the release shell, environmental. test_source_checklists (3), test_sil_india_pakistan_remaining_candidates (2), test_zoller_2023 replay: ingestion-side bookkeeping left unfinished by the 2026-09-14 ingestion session (stale checklist copies, census state text, Zoller importer replay vs committed CSV). None reads the compiled graph, whose reproducibility is proven by hash above.",
+   "all_current_failures": [
+    "tests/test_assign_form_ids.py::test_the_dictionary_self_reference_assignments_all_point_at_live_sub_entries",
+    "tests/test_bahl_korwa_1962.py::test_compiled_rows_survive_when_current_cldf_is_built",
+    "tests/test_beine_bhatri.py::test_compiled_forms_are_unlinked_records_on_canonical_languages",
+    "tests/test_beine_bhatri.py::test_source_contributes_no_graph_edges",
+    "tests/test_bhattacharya_bonda_1968.py::test_compiled_rows_survive_when_current_cldf_is_built",
+    "tests/test_burrow_emeneau_1972_den1.py::test_build_merges_source_citations_without_duplicate_reflexes",
+    "tests/test_burrow_emeneau_1972_den2.py::test_build_carries_the_source_citation_without_replacement_glyphs",
+    "tests/test_burushaski_comparisons.py::test_compiled_burushaski_cdial_claims_are_comparisons_not_borrowings",
+    "tests/test_burushaski_comparisons.py::test_relationship_audit_and_review_sample_are_complete",
+    "tests/test_burushaski_integration.py::test_compiled_source_text_and_all_grammatical_labels_are_preserved",
+    "tests/test_cldf.py::test_backstrom_poc_cloth_forms_link_to_pota_not_avajjharati",
+    "tests/test_cldf.py::test_both_shackle_sources_use_cdial_phonetic_conversion_and_tags",
+    "tests/test_cldf.py::test_cross_family_descendants_are_borrowings",
+    "tests/test_cldf.py::test_dedr_old_edition_references_are_structured_on_entry",
+    "tests/test_cldf.py::test_ocr_provenance_is_explicit_on_references",
+    "tests/test_cldf.py::test_reference_editor_credits_for_assisted_sources",
+    "tests/test_cldf.py::test_reference_metadata_is_complete",
+    "tests/test_dedr_headwords.py::test_compiled_pdr_headword_audit_and_forms_follow_policy",
+    "tests/test_gondi_beine.py::test_compiled_forms_are_unlinked_gondi_dialect_records",
+    "tests/test_knobloch_sauji.py::test_every_installed_row_survives_the_full_build",
+    "tests/test_language_coordinates.py::test_only_geographically_undefined_languages_lack_coordinates",
+    "tests/test_munda_proto_kherwarian_1968.py::test_compiled_rows_survive_when_current_cldf_is_built",
+    "tests/test_neojambu_etymology_restoration.py::test_previously_lost_source_groups_have_accepted_edges",
+    "tests/test_neojambu_etymology_restoration.py::test_restored_assignments_survive_in_the_compiled_edge_graph",
+    "tests/test_perder_dameli.py::test_compiled_source_keeps_original_phonemic_and_resolved_graph",
+    "tests/test_pinnow_juang_1960.py::test_compiled_rows_survive_when_current_cldf_is_built",
+    "tests/test_rajasthani.py::test_curated_etymologies_survive_the_compiled_graph",
+    "tests/test_rezai_baghbidi_zargari_2003.py::test_every_installed_row_survives_the_full_build",
+    "tests/test_rezai_baghbidi_zargari_2003.py::test_printed_alternates_become_variant_edges",
+    "tests/test_sil_adi_2015.py::test_preintegration_manifest_render_and_registry_contract_are_exact",
+    "tests/test_sil_india_pakistan_remaining_candidates.py::test_every_country_row_has_a_terminal_or_source_local_classification",
+    "tests/test_sil_india_pakistan_remaining_candidates.py::test_pinned_inputs_and_country_table_counts_are_current",
+    "tests/test_source_checklists.py::test_every_installed_ingestion_unit_has_a_fresh_checklist_copy",
+    "tests/test_source_checklists.py::test_retrospective_audit_accounts_for_every_installed_input_row",
+    "tests/test_source_checklists.py::test_source_checklist_machine_gates_are_clean_before_full_validation",
+    "tests/test_zide_sora_gorum_1982.py::test_compiled_rows_survive_when_current_cldf_is_built",
+    "tests/test_zoller_2023.py::test_counts_replay_keys_and_locators"
+   ]
+  },
+  "frontend_unit_tests": "node --test tests/*.test.mjs: 39 passed",
+  "compact_database": {
+   "integrity_check": "ok",
+   "total_nodes": 794256,
+   "references": 637,
+   "languages": 560,
+   "raw_bytes": 158089216,
+   "raw_sha256": "509098300b615712c42f431173c26685af2d4e1d4b7581ece7ca43e2b07b93de",
+   "size_note": "builder's advisory 97 MB regression warning fired; hard gate is packed < 50,000,000 bytes",
+   "packed_bytes": 55972097,
+   "packed_sha256": "2b6b7f5e4d6e134efa9a5d29fc4f095dce765fff59be2e31cd406745d7225059",
+   "packing": "zstd --ultra -22 --long=27 --threads=1 via npm run db:stage (ZSTD_THREADS=1); browser decoder roundtrip verified by the packer and by scripts/verify_db_artifact.mjs",
+   "download_budget": "packed 55.97 MB exceeded the 50,000,000-byte guard; with the user's approval the guard is raised to 60,000,000 in pack_db.mjs and verify_db_artifact.mjs (download budget, not a platform limit). Growth is real corpus: lem table 23.5 MB compressed of the total; Sheth contributes 68,306 lemmas.",
+   "representative_checks": {
+    "sheth1923": "68306 lemmas / 66041 unetymologised",
+    "varenkamp2024ho": "991/991",
+    "baileymaggard2015bhumij": "1396/1350",
+    "josephmichael2021dhurwa": "382/382",
+    "berger": "3781/2216",
+    "yoshioka2012": "4885/3001",
+    "rama-coltekin-sofroniev2017gondi": "6296/3968 (was 4718 more unlinked)",
+    "canvin2025": "560/140 (v36: 557/137; three split cells)"
+   }
+  },
+  "frontend_release_checkout": "npm run check: 461 files, 0 errors, 6 warnings. Smoke prerender (PRERENDER_LIMIT=3, PRERENDER_SMOKE=1) against .dbwork/jambu.db built in 29.7s. Full production prerender runs in CI."
+ },
+ "source_inventory": {
+  "baseline_ref": "8887f1a",
+  "references": "632 -> 637",
+  "primary_new": [
+   "sheth1923",
+   "varenkamp2024ho",
+   "baileymaggard2015bhumij",
+   "josephmichael2021dhurwa"
+  ],
+  "supporting_new": [
+   "ilcaa1967 (cited via Yoshioka 2012, not independently ingested)"
+  ],
+  "expanded": {
+   "berger": "39 -> 3782 compiled rows",
+   "berger-auto": "10664 -> 11732",
+   "yoshioka2012": "3239 -> 4942",
+   "canvin2025": "612 -> 615 (cell split)"
+  },
+  "etymology_overlay": "16,332 -> 55,872 rows; 38,549 previously unlinked forms across 77 languages newly linked"
+ },
+ "local_resources": "One heavy job at a time: make all (sequential, single-thread env), full pytest, db:transform (OMP_NUM_THREADS=1), zstd --ultra -22 --long=27 --threads=1. No production prerender locally; CI runs npm run check and the full build.",
+ "production": "Pending: release db-v37 assets, matching-commit Actions run, live asset hash check, browser verification. Filled in after deployment.",
+ "local_url": "not requested"
+}

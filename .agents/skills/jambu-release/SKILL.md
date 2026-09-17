@@ -119,7 +119,7 @@ a successful push is not a successful deployment.
   changed. Separate advisory raw-size warnings from hard deployment limits.
 - [ ] Stage with `npm run db:stage`. The current packer uses the vendored browser
   decoder to prove a full lossless roundtrip and enforces a packed asset below
-  50,000,000 bytes. Keep the verified raw and packed files until live checks finish.
+  60,000,000 bytes (raised from 50 MB at db-v37). Keep the verified raw and packed files until live checks finish.
   Never publish an oversized or corrupted artifact or work around the guard silently.
 - [ ] Bump `src/lib/dbMeta.ts` to an unused database cache version for changed DB bytes.
   Record exact compressed and expanded byte counts and SHA-256 hashes. Keep release

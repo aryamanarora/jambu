@@ -18,6 +18,59 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-09-16',
+		label: '16 September 2026',
+		title: 'Sheth’s Prakrit dictionary, Munda surveys, and 38,000 reviewed etymologies',
+		changes: [
+			'Added Sheth’s Paia-sadda-mahannavo (1923–1928) from the Digital Dictionaries of South Asia transcription: 42,118 Prakrit headword, sense, and alternate records from 31,501 articles, with 26,191 source-local Sanskrit equivalents and 27,484 lexical comparison links kept as comparisons rather than asserted ancestry.',
+			'Added three manually keyed SIL Munda surveys: fourteen Ho field lists (Varenkamp 2024, 2,900 cells), ten Bhumij and Bhumij-Mundari lists (Bailey and Maggard 2015, 2,100 cells), and four Dhurwa lists (Joseph and Joseph 2021, 809 cells), each transcribed cell by cell from the source images.',
+			'Re-parsed Berger’s Burushaski dictionary from a repaired image, font, and column extraction (3,743 gold records restored, 1,068 more automatic entries) and Yoshioka’s Eastern Burushaski glossary with checked cross-references (1,703 more records); superseded parsing fragments are retired through recorded aliases so existing links survive.',
+			'Etymologised 38,549 previously unlinked survey attestations across 77 languages in a joint review of the Indo-Aryan SIL surveys: Gondi, Nimadi, Pothwari, Gojri, Hajong, Mewari, Awankari, Dangaura Tharu, Rathwi and Pauri Bareli, Bhilali, Haryanvi, Bhatri, Jaunsari, Bagheli, Rana Tharu, Magahi, Noiri, Bishnupriya, Danuwar, Bundeli, Dotyali, Adivasi Oriya, Majhi, and the Kannauji, Rajasthani, Tharu, Kalkoti, Palula, and northern Pakistan survey lists. Accepted links cite CDIAL or DEDR with the reviewer’s evidence; uncertain cases are held, not guessed.',
+			'Registered reviewed Mewari regional lexical families and donor heads for the central surveys, and grouped Nuristani reflexes under their CDIAL heads.',
+			'Curated etymologies now live beside each source in per-source sidecar files, and every source declares its transcription, identity, and reference settings in a sibling YAML file, replacing per-source branches in the build.',
+			'Markodi wordlist cells are now individually keyed, so a form elicited for two concepts is two attestations; three previously merged cells are separated.',
+			'Refreshed the dictionary with the latest ingested sources: 794,256 browser records in a 55.97 MB download. The download budget rises from 50 to 60 MB to carry Sheth’s articles.'
+		],
+		ingested: {
+			languages: [
+				{ id: 'Pk', label: 'Prakrit' },
+				{ id: 'Ap', label: 'Apabhramsha' },
+				{ id: 'As', label: 'Ashokan Prakrit' },
+				{ id: 'ho', label: 'Ho' },
+				{ id: 'mu', label: 'Mundari (Bhumij)' },
+				{ id: 'Parji', label: 'Dhurwa (Parji)' },
+				{ id: 'Bur', label: 'Burushaski' },
+				{ id: 'Gondi', label: 'Gondi' },
+				{ id: 'Nimadi', label: 'Nimadi' },
+				{ id: 'poth', label: 'Pothwari' },
+				{ id: 'Goj', label: 'Gojri' },
+				{ id: 'Hajong', label: 'Hajong' },
+				{ id: 'mewari_basad', label: 'Mewari' },
+				{ id: 'awan', label: 'Awankari' },
+				{ id: 'Dang', label: 'Dangaura Tharu' },
+				{ id: 'RathwiBareli', label: 'Rathwi Bareli' },
+				{ id: 'Bhilali', label: 'Bhilali' },
+				{ id: 'kaithal', label: 'Haryanvi' },
+				{ id: 'Bhatri', label: 'Bhatri' },
+				{ id: 'jaun', label: 'Jaunsari' },
+				{ id: 'bagheli_lakshman', label: 'Bagheli' },
+				{ id: 'Rana', label: 'Rana Tharu' },
+				{ id: 'MagahiNepal', label: 'Magahi' },
+				{ id: 'Noiri', label: 'Noiri' },
+				{ id: 'Bishnupriya', label: 'Bishnupriya' },
+				{ id: 'markodi', label: 'Markodi' }
+			],
+			sources: [
+				{ id: 'sheth1923', label: 'Sheth, Paia-sadda-mahannavo (DDSA)' },
+				{ id: 'varenkamp2024ho', label: 'Varenkamp, A study of Ho dialects (SIL 2024)' },
+				{ id: 'baileymaggard2015bhumij', label: 'Bailey and Maggard, Bhumij survey (SIL 2015)' },
+				{ id: 'josephmichael2021dhurwa', label: 'Joseph and Joseph, Dhurwa survey (JLSR 2021)' },
+				{ id: 'berger', label: 'Berger, Die Burushaski-Sprache (re-parsed)' },
+				{ id: 'yoshioka2012', label: 'Yoshioka, Eastern Burushaski glossary (re-parsed)' }
+			]
+		}
+	},
+	{
 		date: '2026-09-13',
 		label: '13 September 2026',
 		title: 'New dialect surveys, dictionaries, and Zoller comparative vocabulary',

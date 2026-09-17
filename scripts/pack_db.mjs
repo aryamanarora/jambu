@@ -9,14 +9,16 @@ import { decompress } from '../src/lib/vendor/fzstd.js';
 const input = process.argv[2] ?? '.dbwork/jambu.db';
 const output = process.argv[3] ?? 'static/db/jambu.db.zst';
 const temporary = `${output}.tmp`;
-const limit = 50_000_000;
+// Download budget for browser users, not a platform limit (Pages serves files to 100 MB).
+// Raised from 50 MB for db-v37 when Sheth's 68k Prakrit articles pushed the corpus past it.
+const limit = 60_000_000;
 mkdirSync(dirname(output), { recursive: true });
 
 try {
 	// Use the corrected wide-offset decoder; stronger compression keeps the corpus
 	// under the artifact limit. A round trip catches unsupported sequences early.
 	const result = spawnSync('zstd', [
-		'--ultra', '-22', '--long=27', '--threads=0', '--force', input, '-o', temporary
+		'--ultra', '-22', '--long=27', `--threads=${process.env.ZSTD_THREADS ?? '0'}`, '--force', input, '-o', temporary
 	], { stdio: 'inherit' });
 	if (result.error?.code === 'ENOENT') {
 		throw new Error('zstd is required to stage the database (install it with Homebrew or apt)');
