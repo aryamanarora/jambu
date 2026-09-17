@@ -111,6 +111,16 @@
   "etymology_overlay": "16,332 -> 55,872 rows; 38,549 previously unlinked forms across 77 languages newly linked"
  },
  "local_resources": "One heavy job at a time: make all (sequential, single-thread env), full pytest, db:transform (OMP_NUM_THREADS=1), zstd --ultra -22 --long=27 --threads=1. No production prerender locally; CI runs npm run check and the full build.",
- "production": "Pending: release db-v37 assets, matching-commit Actions run, live asset hash check, browser verification. Filled in after deployment.",
+ "production": {
+  "frontend_commit": "90f465fab951f0fb5342cb3b7289d1e16bfcf010",
+  "data_commit": "3bf47fb162256493adbf3831e86fd4ab66ba96f5",
+  "data_push": "moli-mandala/data main 8887f1a6..3bf47fb1; 3 LFS objects (537 MB) uploaded; remote SHA verified",
+  "release": "https://github.com/aryamanarora/jambu/releases/tag/db-v37 against the full frontend SHA; assets jambu.db 158,089,216 and jambu.db.zst 55,972,097 plus db-release.json manifest",
+  "ci": "run 35175780647 on 90f465f: first attempt failed at asset download (release assets were still uploading when the push triggered CI); rerun after assets were live: build success 02:49:44–03:12:16Z, deploy success 03:12:48Z",
+  "production_url": "https://aryaman.io/jambu/ (Pages custom domain; github.io origin redirects)",
+  "live_asset_check": "GET /jambu/db/jambu.db.zst on aryaman.io and aryamanarora.github.io: 55,972,097 bytes, sha256 2b6b7f5e… identical to the release asset and manifest",
+  "live_browser": "Homepage renders the 16 September 2026 changelog as LATEST with 637 sources and 560 languages; prerendered entry 5131 renders with sources; SPA 404 fallback served for a non-prerendered form ID with all 38 referenced assets 200; SQLite worker, shared worker and wasm served with correct content types and the deployed build's hashes; the load banner already states ~56 MB.",
+  "not_verified": "The actual in-browser database load. By design (src/lib/db.svelte.ts) a hidden tab never claims leadership or downloads the database, and both automated browsers available to this session run as hidden tabs; the Load database click did nothing there. A local vite preview of the same build rendered the non-prerendered Ho entry, but preview serves SSR HTML (200) so it exercises the data, not the browser-SQLite path. A visible-tab load by the user remains the outstanding check."
+ },
  "local_url": "not requested"
 }
