@@ -193,6 +193,10 @@ export interface MapMarker {
 	label?: string; // plain accessible name for keyboard and screen-reader navigation
 	popupHtml?: string;
 	onClick?: () => void;
+	// pointer moved onto / off the point; the hovered element is handed over so the caller can
+	// anchor its own popover (Tooltip.svelte) to it in place of the Leaflet `tooltip`
+	onHover?: (el: Element) => void;
+	onLeave?: () => void;
 	color?: string; // when set, drawn as a filled circle in this colour instead of the SVG icon
 	radius?: number;
 	size?: number; // px the SVG icon is drawn at (default 16, or 14 when raised to the foreground)

@@ -9,17 +9,25 @@
 	// would be cut off by them.
 	import type { Snippet } from 'svelte';
 
+	export type AnchorRect = Pick<DOMRect, 'top' | 'bottom' | 'left' | 'width'>;
+
 	let {
 		anchor,
 		prefer = 'above',
 		interactive = true,
+		pinned = false,
+		follow,
 		onenter,
 		onleave,
 		children
 	}: {
-		anchor: HTMLElement | null;
+		// an SVG map point anchors as well as an HTML element — or, for something with no stable
+		// element (a map point that is redrawn under it), a function that says where it is now
+		anchor: Element | (() => AnchorRect | null) | null;
 		prefer?: 'above' | 'below'; // which side to take when both fit
 		interactive?: boolean; // false for a pure tooltip the pointer should fall through
+		pinned?: boolean; // held open by a click rather than a hover: drawn a touch more solidly
+		follow?: unknown; // re-place whenever this changes (a map view tick, say)
 		onenter?: () => void; // pointer moved onto the card — callers cancel their close timer
 		onleave?: () => void;
 		children: Snippet;
@@ -30,7 +38,12 @@
 
 	function place() {
 		if (!el || !anchor) return;
-		const a = anchor.getBoundingClientRect();
+		const a = typeof anchor === 'function' ? anchor() : anchor.getBoundingClientRect();
+		// nowhere to stand right now (the point is off the map): hide rather than hold a stale spot
+		if (!a) {
+			placed = null;
+			return;
+		}
 		const r = el.getBoundingClientRect();
 		const M = 8; // keep this far clear of every viewport edge
 		const GAP = 9;
@@ -62,6 +75,7 @@
 		anchor;
 		prefer;
 		children;
+		follow;
 		place();
 	});
 </script>
@@ -70,6 +84,7 @@
 	class="tip"
 	class:measuring={!placed}
 	class:inert={!interactive}
+	class:pinned
 	bind:this={el}
 	style={placed ? `left: ${placed.left}px; top: ${placed.top}px` : ''}
 	role="tooltip"
@@ -100,5 +115,9 @@
 	}
 	.tip.inert {
 		pointer-events: none;
+	}
+	.tip.pinned {
+		border-color: var(--plum);
+		box-shadow: 0 0 0 1px color-mix(in srgb, var(--plum) 35%, transparent), 0 12px 34px rgba(20, 12, 18, 0.34);
 	}
 </style>

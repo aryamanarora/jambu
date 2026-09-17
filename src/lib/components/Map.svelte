@@ -15,7 +15,8 @@
 		flush = false,
 		zoomPosition = 'topleft',
 		scrollZoom = false,
-		animateZoom = true
+		animateZoom = true,
+		onView
 	}: {
 		markers: MapMarker[];
 		center?: [number, number];
@@ -32,7 +33,26 @@
 		// atlases have no page scroll to steal, so they turn it on.
 		scrollZoom?: boolean;
 		animateZoom?: boolean;
+		// The view is changing under whatever the caller has anchored to a point: 'move' fires
+		// continuously through a drag, 'zoomstart'/'zoomend' bracket a zoom animation, during which
+		// the pane is mid CSS transition and nothing can be placed against it reliably.
+		onView?: (event: 'move' | 'zoomstart' | 'zoomend') => void;
 	} = $props();
+
+	/**
+	 * Where a coordinate sits on screen right now, as a small box the size of a point, in the
+	 * viewport frame Tooltip.svelte places against. Null until the map exists, and null once the
+	 * point has been panned out of the frame — a card should go with it, not hang over the edge.
+	 */
+	export function project(lat: number, long: number, size = 14) {
+		if (!map) return null;
+		const p = map.latLngToContainerPoint([lat, long]);
+		const c = el.getBoundingClientRect();
+		if (p.x < 0 || p.y < 0 || p.x > c.width || p.y > c.height) return null;
+		const left = c.left + p.x - size / 2;
+		const top = c.top + p.y - size / 2;
+		return { left, top, width: size, bottom: top + size };
+	}
 
 	let el: HTMLDivElement;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -48,7 +68,35 @@
 	let destroyed = false;
 	// the layers currently on the map, in marker order, so a style-only change can reuse them
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let drawn: { key: string; marker: any; onClick?: () => void }[] = [];
+	let drawn: {
+		key: string;
+		marker: any;
+		onClick?: () => void;
+		onHover?: () => void;
+		onLeave?: () => void;
+	}[] = [];
+	// the leave handler of the point currently under the pointer, so a pan, zoom or rebuild can
+	// close a popover whose anchor is about to move or vanish underneath it
+	let hoverLeave: (() => void) | null = null;
+	function endHover() {
+		hoverLeave?.();
+		hoverLeave = null;
+	}
+	/** Leaflet-side hover handlers for a marker, bound once per (re)style like `onClick`. */
+	function hoverHandlers(m: MapMarker, marker: any) {
+		if (!m.onHover && !m.onLeave) return {};
+		return {
+			onHover: () => {
+				hoverLeave = m.onLeave ?? null;
+				const el = marker.getElement?.();
+				if (el) m.onHover?.(el);
+			},
+			onLeave: () => {
+				hoverLeave = null;
+				m.onLeave?.();
+			}
+		};
+	}
 
 	function iconUrl(svg: string): string {
 		return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
@@ -104,6 +152,13 @@
 			if (drawn[i].onClick) marker.off?.('click', drawn[i].onClick);
 			if (m.onClick) marker.on('click', m.onClick);
 			drawn[i].onClick = m.onClick;
+			if (drawn[i].onHover) marker.off?.('mouseover', drawn[i].onHover);
+			if (drawn[i].onLeave) marker.off?.('mouseout', drawn[i].onLeave);
+			const hover = hoverHandlers(m, marker);
+			if (hover.onHover) marker.on('mouseover', hover.onHover);
+			if (hover.onLeave) marker.on('mouseout', hover.onLeave);
+			drawn[i].onHover = hover.onHover;
+			drawn[i].onLeave = hover.onLeave;
 		}
 		return true;
 	}
@@ -162,6 +217,7 @@
 			updateOffscreen();
 			return;
 		}
+		endHover(); // the hovered element is about to be torn down with the rest
 		if (layer) layer.remove();
 		layer = L.layerGroup().addTo(map);
 		drawn = [];
@@ -208,8 +264,11 @@
 			if (m.tooltipOpen) marker.openTooltip?.();
 			if (m.popupHtml) marker.bindPopup(m.popupHtml);
 			if (m.onClick) marker.on('click', m.onClick);
+			const hover = hoverHandlers(m, marker);
+			if (hover.onHover) marker.on('mouseover', hover.onHover);
+			if (hover.onLeave) marker.on('mouseout', hover.onLeave);
 			if (m.foreground) foreground.push(marker);
-			drawn.push({ key: shapeKey(m), marker, onClick: m.onClick });
+			drawn.push({ key: shapeKey(m), marker, onClick: m.onClick, ...hover });
 		}
 		// Raise emphasis markers only after every point exists. Calling bringToFront while drawing is
 		// not sufficient: a later context point can otherwise be appended above the highlight.
@@ -249,7 +308,14 @@
 		map.on('moveend zoomend', updateOffscreen);
 		map.on('movestart zoomstart', () => {
 			if (!fitting) userMoved = true;
+			// a fixed-position popover cannot follow a point the map is dragging away
+			endHover();
 		});
+		if (onView) {
+			map.on('move', () => onView('move'));
+			map.on('zoomstart', () => onView('zoomstart'));
+			map.on('zoomend', () => onView('zoomend'));
+		}
 		draw();
 
 		// Leaflet caches the container size at init, so a box that grows afterwards leaves the map
@@ -291,7 +357,7 @@
 	{#if offscreen.length}
 		<div class="offscreen" title="reflexes outside the current view — pan/zoom to reach them">
 			{#each offscreen.slice(0, 16) as m, i (i)}
-				<span class="odot" style="background: {m.color ?? '#888'}" title={m.tooltip}></span>
+				<span class="odot" style="background: {m.color ?? '#888'}" title={m.label ?? m.tooltip}></span>
 			{/each}
 			<span class="oc-count">+{offscreen.length} off-map</span>
 		</div>
