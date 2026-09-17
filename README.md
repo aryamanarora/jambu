@@ -111,7 +111,7 @@ is disabled when the variable is absent or invalid.
 
 ## Scripts / layout
 
-Reference pills copy canonical BibTeX from `static/bibtex.json`. After updating the data
+Reference pages copy canonical BibTeX from `static/bibtex.json`. After updating the data
 bibliography, regenerate it with `../data/.venv/bin/python scripts/export_bibtex.py`.
 Uncatalogued source abbreviations export as `@misc` with the available citation in a note.
 

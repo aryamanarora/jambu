@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { postDate } from '$lib/blog';
+	import BlogByline from '$lib/components/BlogByline.svelte';
 	import BlogDisclaimer from '$lib/components/BlogDisclaimer.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
@@ -21,7 +21,7 @@
 	<div class="post-list">
 		{#each data.posts as post (post.slug)}
 			<article>
-				<div class="byline"><time datetime={post.date}>{postDate(post.date)}</time><span aria-hidden="true">·</span>{#each post.authors as author}<span>{author.name} <span class="author-kind">{author.kind === 'agent' ? 'AI-written' : 'Human-written'}</span></span>{/each}</div>
+				<BlogByline authors={post.authors} date={post.date} dateFirst />
 				<h2><a href="{base}/blogs/{post.slug}">{post.title}</a></h2>
 				<p>{post.description}</p>
 				<div class="post-foot"><span>{post.recordCount} linked records</span><a href="{base}/blogs/{post.slug}" aria-label={`Read ${post.title}`}>Read essay <span aria-hidden="true">→</span></a></div>
@@ -39,8 +39,7 @@
 	h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4rem); margin: .4rem 0 1rem; font-weight: 400; }
 	.intro { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.65; color: var(--muted); }
 	article { border-top: 1px solid var(--border-strong); padding: 1.8rem 0 2rem; }
-	.byline { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: .875rem; color: var(--muted); }
-	.author-kind { border: 1px solid var(--border-strong); border-radius: 4px; padding: .1rem .35rem; font-size: .75rem; margin-left: .25rem; }
+
 	h2 { font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2rem); margin: 1rem 0 .6rem; font-weight: 400; }
 	h2 a { color: var(--ink); text-decoration: none; }
 	h2 a:hover { color: var(--plum-2); text-decoration: underline; text-underline-offset: .2em; }

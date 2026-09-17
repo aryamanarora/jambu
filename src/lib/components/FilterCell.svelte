@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CharPalette from './CharPalette.svelte';
+	import SearchInput from './SearchInput.svelte';
 	import SelectFilter, { type SelectOption } from './SelectFilter.svelte';
 	import SortToggle from './SortToggle.svelte';
 	let {
@@ -38,25 +38,6 @@
 		onSort: (sortValue: string) => void;
 	} = $props();
 
-	let showPalette = $state(false);
-	let inputEl = $state<HTMLInputElement | null>(null);
-	let local = $state(value);
-	$effect(() => {
-		local = value;
-	});
-
-	let debounce: ReturnType<typeof setTimeout>;
-	function onInput(v: string) {
-		local = v;
-		clearTimeout(debounce);
-		debounce = setTimeout(() => filterKey && onFilter(filterKey, v), 300);
-	}
-	function insert(c: string) {
-		local += c;
-		if (filterKey) onFilter(filterKey, local);
-		inputEl?.focus();
-	}
-
 </script>
 
 <th class:numeric class:accent>
@@ -73,24 +54,14 @@
 		{/if}
 		{#if filterKey && type === 'text'}
 			<div class="filter-box">
-				<input
-					bind:this={inputEl}
-					class="search-box"
-					placeholder={label}
-					value={local}
-					oninput={(e) => onInput(e.currentTarget.value)}
-					onfocus={() => (showPalette = palette)}
-					onblur={() => setTimeout(() => (showPalette = false), 200)}
-				/>
-				{#if showPalette}
-					<CharPalette oninsert={insert} anchor={inputEl} />
-				{/if}
+				<SearchInput {label} placeholder={label} {value} {palette} debounceMs={300}
+					onValue={(next) => filterKey && onFilter(filterKey, next)} />
 			</div>
 		{:else if filterKey && type === 'select'}
 			<SelectFilter
 				placeholder={label}
 				{options}
-				value={local}
+				{value}
 				onSelect={(v) => filterKey && onFilter(filterKey, v)}
 			/>
 		{:else}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Pager from '$lib/components/Pager.svelte';
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
 	import SelectFilter from '$lib/components/SelectFilter.svelte';
@@ -383,7 +384,7 @@
 				{/each}
 				{#if !busy && !queue.length}<p class="empty">No forms match these filters.</p>{/if}
 			</div>
-			<div class="pager"><button disabled={page <= 1} onclick={() => void loadQueue(page - 1)}>Previous</button><button disabled={page * 50 >= count} onclick={() => void loadQueue(page + 1)}>Next</button></div>
+			<Pager {count} {page} pageSize={50} disabled={busy} always label="Etymology queue pages" onpage={(next) => void loadQueue(next)} />
 		</section>
 
 		<section class="editor" aria-label="Etymology editor">
@@ -538,7 +539,7 @@
 	button.primary { background:var(--plum); border-color:var(--plum); color:white; font-weight:700; }
 	.workspace { display:grid; grid-template-columns:minmax(17rem,28%) 1fr; border:1px solid var(--border); border-radius:.75rem; min-height:68vh; overflow:hidden; }
 	.queue { border-right:1px solid var(--border); display:flex; flex-direction:column; min-height:0; background:var(--surface); }
-	.panel-title,.pager { display:flex; align-items:center; justify-content:space-between; gap:.5rem; padding:.7rem .8rem; border-bottom:1px solid var(--border); }
+	.panel-title,
 	.panel-title h2 { font-size:.95rem; margin:0; }
 	.rows { flex:1; overflow:auto; max-height:62vh; }
 	.rows > button { width:100%; border:0; border-bottom:1px solid var(--border); border-radius:0; text-align:left; display:grid; grid-template-columns:1fr auto; gap:.16rem .55rem; padding:.7rem .8rem; }
@@ -547,7 +548,7 @@
 	.language,.family { color:var(--muted); font-size:.76rem; }
 	.gloss { grid-column:1/-1; color:var(--muted); font-size:.83rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 	.saved { color:var(--plum-2); font-size:.72rem; }
-	.pager { border-top:1px solid var(--border); border-bottom:0; justify-content:flex-end; }
+
 	.editor { padding:1.15rem; min-width:0; }
 	.selected-form { display:flex; justify-content:space-between; gap:1rem; align-items:start; }
 	.selected-form h2 { font-family:var(--font-serif); font-size:2rem; margin:.1rem 0; }

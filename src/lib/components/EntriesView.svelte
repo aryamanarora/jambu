@@ -2,26 +2,21 @@
 	import { base } from '$app/paths';
 	import { createListState } from '$lib/listState.svelte';
 	import { getFilterDialects, getFilterLanguages } from '$lib/query';
-	import { PAGE_SIZE } from '$lib/types';
 	import { highlightHtml, highlightText, md, referenceLabel, safe } from '$lib/render';
 	import { tagLabel } from '$lib/tags';
 	import { hashColor, cladeColor } from '$lib/clades';
+	import { languageOptions } from '$lib/languageOptions';
 	import FilterCell from './FilterCell.svelte';
-	import FilterField from './FilterField.svelte';
-	import ListToolbar from './ListToolbar.svelte';
-	import QueryError from './QueryError.svelte';
-	import TagFilter from './TagFilter.svelte';
 	import Tags from './Tags.svelte';
-	import SelectFilter, { type SelectOption } from './SelectFilter.svelte';
+	import type { SelectOption } from '$lib/languageOptions';
+	import LemmaFilters from './LemmaFilters.svelte';
+	import LemmaList from './LemmaList.svelte';
 	import CladeBars from './CladeBars.svelte';
 	import RefList from './RefList.svelte';
-	import Pager from './Pager.svelte';
 	import { getConceptReflexes } from '$lib/query';
 	import type { Lemma, Reference } from '$lib/types';
 	import FormWord from './FormWord.svelte';
-	import SourceFilter from './SourceFilter.svelte';
 	import Ancestry from './Ancestry.svelte';
-	import SearchMatchToggle from './SearchMatchToggle.svelte';
 
 	// `concept` restricts the list to entries expressing that Concepticon concept; `expandable`
 	// lets each entry row expand to an inline reflex view (used on the concepts page).
@@ -41,28 +36,6 @@
 		}
 		expanded = next;
 	}
-	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
-	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
-	const resultLabel = $derived(
-		list.result
-			? `${from.toLocaleString()}–${to.toLocaleString()} of ${list.result.count.toLocaleString()} entries`
-			: ''
-	);
-	const activeFilterCount = $derived(
-		[
-			list.params.relaxed,
-			list.params.form,
-			list.params.origin_lang,
-			list.params.gloss,
-			list.params.etymology,
-			list.params.tags,
-			list.params.source,
-			list.params.rootsOnly,
-			list.params.sectionsOnly,
-			list.params.loanSourcesOnly,
-			list.params.crossFamilyOnly
-		].filter(Boolean).length
-	);
 	// variant word forms arrive \x1f-separated from group_concat (see query.ts)
 	const variantList = (s?: string | null): string[] => (s ? [...new Set(s.split(''))] : []);
 	const ocrVariants = (s?: string | null): Set<string> => new Set(variantList(s));
@@ -84,126 +57,16 @@
 
 	$effect(() => {
 		Promise.all([getFilterLanguages('entries'), getFilterDialects('entries')]).then(([ls, ds]) => {
-			const byId = new Map(ls.map((l) => [l.id, l]));
-			langOptions = [...ls.map((l) => ({
-				value: l.id,
-				label: l.name,
-				sub: l.clade ?? '',
-				swatch: cladeColor(l.clade)
-			})), ...ds.map((d) => {
-				const parent = byId.get(d.language_id);
-				return {
-					value: d.token,
-					label: `${parent?.name ?? d.language_id}: ${d.name}`,
-					sub: `dialect · ${parent?.clade ?? ''}`,
-					swatch: cladeColor(parent?.clade ?? '')
-				};
-			})];
+			langOptions = languageOptions(ls, ds);
 		});
 	});
 </script>
 
 {#snippet filters()}
-	<SearchMatchToggle
-		relaxed={list.params.relaxed}
-		onToggle={(relaxed) => list.setFilter('relaxed', relaxed ? '1' : '')}
-	/>
-	<FilterField
-		label="Form"
-		placeholder="Filter forms…"
-		palette
-		value={list.params.form ?? ''}
-		onValue={(value) => list.setFilter('form', value)}
-	/>
-	<label class="filter-control">
-		<span>Language</span>
-		<SelectFilter
-			placeholder="Any language"
-			options={langOptions}
-			value={list.params.origin_lang ?? ''}
-			onSelect={(value) => list.setFilter('origin_lang', value)}
-		/>
-	</label>
-	<FilterField
-		label="Meaning"
-		placeholder="Filter meanings…"
-		palette
-		value={list.params.gloss ?? ''}
-		onValue={(value) => list.setFilter('gloss', value)}
-	/>
-	<FilterField
-		label="Etymology"
-		placeholder="Filter etymologies…"
-		palette
-		value={list.params.etymology ?? ''}
-		onValue={(value) => list.setFilter('etymology', value)}
-	/>
-	<TagFilter standalone value={list.params.tags ?? ''} onFilter={list.setFilter} />
-	<SourceFilter
-		standalone
-		value={list.params.source ?? ''}
-		activeSort={list.params.sort ?? ''}
-		onFilter={list.setFilter}
-		onSort={list.setSort}
-	/>
-	<div class="filter-control entry-types">
-		<span>Entry type</span>
-		<div class="toggle-group">
-			<button
-				class="roots-toggle"
-				class:on={list.params.rootsOnly}
-				aria-pressed={list.params.rootsOnly}
-				title="Show only root nodes — entries not derived from any other etymon"
-				onclick={() => list.setFilter('roots', list.params.rootsOnly ? '' : '1')}
-			>
-				Roots only
-			</button>
-			<button
-				class="roots-toggle"
-				class:on={list.params.sectionsOnly}
-				aria-pressed={list.params.sectionsOnly}
-				title="Show only CDIAL section-forms — numbered derived forms promoted from an entry's header"
-				onclick={() => list.setFilter('sections', list.params.sectionsOnly ? '' : '1')}
-			>
-				Section-forms
-			</button>
-			<button
-				class="roots-toggle"
-				class:on={list.params.loanSourcesOnly}
-				aria-pressed={list.params.loanSourcesOnly}
-				title="Show only loan sources — reflexes that words in other languages were borrowed from"
-				onclick={() => list.setFilter('loans', list.params.loanSourcesOnly ? '' : '1')}
-			>
-				Loan sources
-			</button>
-			<button
-				class="roots-toggle"
-				class:on={list.params.crossFamilyOnly}
-				aria-pressed={list.params.crossFamilyOnly}
-				title="Show only entries linked to another language family by a sourced DEDR or CDIAL comparison"
-				onclick={() => list.setFilter('comparisons', list.params.crossFamilyOnly ? '' : '1')}
-			>
-				Cross-family
-			</button>
-		</div>
-	</div>
+	<LemmaFilters params={list.params} mode="entries" languages={langOptions} onFilter={list.setFilter} />
 {/snippet}
 
-<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
-<ListToolbar
-	value={list.params.word ?? ''}
-	placeholder="Search all columns…"
-	searchLabel="Search all shown columns"
-	{resultLabel}
-	filterCount={activeFilterCount}
-	onSearch={(value) => list.setFilter('word', value)}
-	{filters}
-/>
-
-{#if list.error}
-	<QueryError error={list.error} />
-{/if}
-
+<LemmaList {list} mode="entries" {filters}>
 <div class="table-wrap">
 	<table class="data mobile-cards">
 		<thead>
@@ -378,53 +241,9 @@
 	</table>
 </div>
 
-{#if list.result}
-	<Pager count={list.result.count} page={list.result.page} onpage={list.setPage} />
-{/if}
+</LemmaList>
 
 <style>
-	.filter-control {
-		display: grid;
-		gap: 0.3rem;
-		min-width: 0;
-		color: var(--muted);
-		font-size: 0.76rem;
-		font-weight: 600;
-	}
-	.entry-types { grid-column: 1 / -1; }
-	.toggle-group {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem;
-	}
-	.roots-toggle {
-		font-family: var(--font-sans);
-		font-size: 0.82rem;
-		font-weight: 500;
-		padding: 3px 14px;
-		border: 1px solid var(--border-strong);
-		border-radius: 999px;
-		background: var(--surface);
-		color: var(--muted);
-		cursor: pointer;
-		white-space: nowrap;
-		transition:
-			background 0.12s,
-			color 0.12s,
-			border-color 0.12s;
-	}
-	.roots-toggle:hover {
-		color: var(--ink);
-	}
-	.roots-toggle.on {
-		background: var(--plum);
-		border-color: var(--plum);
-		color: #fbeefb;
-	}
-	.loader-slot {
-		height: 3px;
-		margin-bottom: 0.4rem;
-	}
 	/* the headword leads the row, with its reflex-clade spread stacked beneath it */
 	.entry-inner {
 		display: flex;
@@ -544,16 +363,5 @@
 	}
 	.reflex-sub .rword {
 		font-family: var(--font-phon);
-	}
-	@media (max-width: 640px) {
-		.toggle-group {
-			display: grid;
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-		.roots-toggle {
-			min-height: 40px;
-			padding-inline: 12px;
-			white-space: normal;
-		}
 	}
 </style>

@@ -20,6 +20,9 @@ import { CLADE_ORDER } from './clades';
 import { referenceLabel } from './render';
 import { tagLabel } from './tags';
 import { unicodeSearchFold, unicodeSearchIncludes } from './unicodeSearch';
+import { analyzeProsody, matchesSound, segmentKey, segmentChanges, isDetachedNotation } from './phonology';
+import { clusterAt, DEFAULT_SOUND_FILTERS, matchesObservation, numberMatches, type SoundFilters, type SoundForm, type SoundObservation, type SoundSource } from './soundExplorer';
+import { parseSoundPattern, matchesPatternToken, matchPattern } from './soundPattern';
 import {
 	IdIndex,
 	hydrateLem,
@@ -904,6 +907,26 @@ async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 	}
 }
 
+function entryKindCondition(params: ListParams, conceptId?: string): Cond {
+	if (params.loanSourcesOnly) return { sql: `(l.flags & ${FLAG_LOAN_SOURCE}) != 0`, params: [] };
+	if (params.sectionsOnly) return { sql: `(l.flags & ${FLAG_SECTION}) != 0`, params: [] };
+	if (conceptId) return { sql: `(l.flags & 7) != ${REL_UNLINKED}`, params: [] };
+	return { sql: `(l.flags & ${FLAG_ENTRY}) != 0`, params: [] };
+}
+
+/** Same search, field filters, entry types and Unicode matching as the Entries toolbar. */
+export async function getSoundAncestorIds(proto: string, params: ListParams): Promise<string[]> {
+	const idx = await ensureCore();
+	const { conds } = await lemmaConditions(params, 'entries');
+	const all = [{ sql: NOT_REDIRECT, params: [] }, entryKindCondition(params), ...conds];
+	const rows = await query<{rid:number}>(
+		`SELECT l.rowid AS rid FROM lem l JOIN languages lang ON lang.rowid = l.lang_rid
+		 WHERE lang.id = ? AND ${all.map(c=>c.sql).join(' AND ')}`,
+		[proto,...all.flatMap(c=>c.params)], all.flatMap(c=>c.sets ?? [])
+	);
+	return rows.map(r=>idx.idOf(r.rid));
+}
+
 export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 	const { mode, languageId, referenceId, conceptId, params } = opts;
 	await ensureCore();
@@ -912,19 +935,7 @@ export async function fetchLemmaList(opts: ListOpts): Promise<ListResult> {
 
 	// base mode condition (see the v1 layer for semantics; redirect stubs are never listed)
 	const modeConds: Cond[] = [{ sql: NOT_REDIRECT, params: [] }];
-	if (mode === 'entries') {
-		if (params.loanSourcesOnly)
-			modeConds.push({ sql: `(l.flags & ${FLAG_LOAN_SOURCE}) != 0`, params: [] });
-		else if (params.sectionsOnly)
-			// Numbered CDIAL sub-entries are dictionary sections even though they are graph children.
-			modeConds.push({ sql: `(l.flags & ${FLAG_SECTION}) != 0`, params: [] });
-		else if (conceptId)
-			// A concept's immediate etymon can itself be a reflex/derived node. The concept
-			// match below supplies the exact head set, so do not apply the global root-only
-			// entries restriction here (users can still request it with the Roots filter).
-			modeConds.push({ sql: `(l.flags & 7) != ${REL_UNLINKED}`, params: [] });
-		else modeConds.push({ sql: `(l.flags & ${FLAG_ENTRY}) != 0`, params: [] });
-	}
+	if (mode === 'entries') modeConds.push(entryKindCondition(params, conceptId));
 	if (mode === 'lexicon' && languageId)
 		modeConds.push({ sql: 'l.lang_rid = ?', params: [langRidOf(languageId) ?? -1] });
 	// The reference's form list is precomputed (ref_lex) and already excludes redirect stubs, so
@@ -1754,7 +1765,8 @@ function decodeSegs(meta: AlignMeta, blob: Uint8Array | null): AlignSeg[] {
 			etymonIdx,
 			etymonSeg,
 			reflexSeg: meta.symbol.get(pair.r) ?? '',
-			change: meta.symbol.get(pair.c) ?? ''
+			change: etymonSeg && segmentKey(etymonSeg) === segmentKey(meta.symbol.get(pair.r) ?? '')
+				? 'kept' : meta.symbol.get(pair.c) ?? ''
 		});
 	}
 	return out;
@@ -1892,6 +1904,140 @@ export async function getAlternates(id: string): Promise<AlternateEtymon[]> {
 }
 
 // ---- sound correspondence explorer ---------------------------------------
+
+/** Fold only accent, keeping quantity and consonantal diacritics distinct. */
+export async function getSoundSegments(proto: string): Promise<ProtoSeg[]> {
+	const segments = await getProtoSegments(proto);
+	const totals = new Map<string, number>();
+	for (const s of segments) {
+		const key = segmentKey(s.seg);
+		if (key && !isDetachedNotation(key)) totals.set(key, (totals.get(key) ?? 0) + s.total);
+	}
+	return [...totals].map(([seg, total]) => ({ seg, total })).sort((a, b) => b.total - a.total);
+}
+
+export async function getSoundLanguages(proto: string): Promise<Language[]> {
+	await ensureCore();
+	const rows = await query<{ lang_rid: number }>('SELECT DISTINCT lang_rid FROM corr_lang2 WHERE proto_rid = (SELECT rowid FROM languages WHERE id = ?)', [proto]);
+	return rows.map(r => langByRid(r.lang_rid)).filter((l): l is Language => !!l).sort((a,b)=>a.name.localeCompare(b.name));
+}
+
+let soundCache: { key: string; promise: Promise<SoundObservation[]> } | null = null;
+let soundGeneration = 0;
+
+/** One selected sound in memory, with full evidence, not a capped sample. No new DB download.
+ * Resolve variant chains with the same rule as data/edges_util.py: aligned_parent. The legacy
+ * drill-down joined the immediate variant target and could disagree with the summary counts.
+ */
+export function getSoundObservations(proto: string, sound: string, options: { languages?: string[]; filters?: Partial<SoundFilters>; entrySearch?: ListParams } = {}): Promise<SoundObservation[]> {
+	const key = `${proto}\0${sound}\0${JSON.stringify(options)}`;
+	if (soundCache?.key === key) return soundCache.promise;
+	const generation = ++soundGeneration;
+	const promise = loadSoundObservations(proto, sound, options, () => generation === soundGeneration);
+	soundCache = { key, promise };
+	promise.catch(() => { if (soundCache?.promise === promise) soundCache = null; });
+	return promise;
+}
+
+async function loadSoundObservations(proto: string, sound: string, options: { languages?: string[]; filters?: Partial<SoundFilters>; entrySearch?: ListParams }, current: () => boolean): Promise<SoundObservation[]> {
+	const idx = await ensureCore();
+	await ensureCites();
+	const meta = await ensureAlignMeta();
+	const old = ['Indo-Aryan', 'OIA', 'PIA'].includes(proto);
+	const pattern = parseSoundPattern(sound, old);
+	if (pattern.error) throw new Error(pattern.error);
+	const anchor = pattern.target ? pattern.tokens[pattern.target.start] : pattern.tokens.find(t => t !== '#');
+	const filters = { ...DEFAULT_SOUND_FILTERS, ...options.filters, p: proto };
+	const candidates: number[] = [];
+	for (let i = 0; i < meta.cells.length; i++) {
+		const p = meta.pair.get(meta.cells[i].pairId)!;
+		const value = meta.symbol.get(p.e) ?? '';
+		if (value && (pattern.whole || anchor && matchesPatternToken(value, anchor, old))) candidates.push(i + 1);
+	}
+	if (!candidates.length) return [];
+	const chosen = vinIn('a.segs', candidates);
+	const languageClause = options.languages?.length ? ` AND rf.lang_rid IN (SELECT rowid FROM languages WHERE id IN ${IN_JSON})` : '';
+	const languageParams = options.languages?.length ? [JSON.stringify(options.languages)] : [];
+	const ancestorIds = options.entrySearch ? await getSoundAncestorIds(proto, options.entrySearch) : null;
+	if (ancestorIds && !ancestorIds.length) return [];
+	const ancestorClause = ancestorIds ? ` AND e.rowid IN ${IN_JSON}` : '';
+	const ancestorParams = ancestorIds ? [jsonList(ancestorIds.map(id=>idx.ridOf(id)!))] : [];
+	const protoIds = "'Indo-Aryan','PDr','PSTDr','PSD1','PSD2','PCDr','PKMDr','PNDr','PMu','PNur','PA','PIA','OIA'";
+	interface RecordRow { rid: number; word: string; gloss: string; lang_rid: number; tagset_rid: number; cites: Uint8Array; flags: number; family: number; origin: number; kind: number; segs: Uint8Array }
+	const records = await query<RecordRow>(
+		`WITH RECURSIVE walk(form, parent, kind, depth) AS (
+		 SELECT rf.rowid, rf.origin_rid, (rf.flags & 7), 0 FROM alignment a JOIN lem rf ON rf.rowid = a.form_rid
+		 WHERE ${chosen.sql} AND rf.origin_rid IS NOT NULL ${languageClause}
+		 UNION ALL
+		 SELECT w.form, p.origin_rid, (p.flags & 7), w.depth + 1 FROM walk w
+		 JOIN lem p ON p.rowid = w.parent JOIN languages pl ON pl.rowid = p.lang_rid
+		 WHERE w.kind = ${REL_VARIANT} AND pl.id NOT IN (${protoIds}) AND p.origin_rid IS NOT NULL AND w.depth < 40
+		)
+		 SELECT rf.rowid AS rid, rf.word, rf.gloss, rf.lang_rid, rf.tagset_rid, rf.cites, rf.flags,
+		 COALESCE(rf.etymon_rid, e.rowid) AS family, e.rowid AS origin, w.kind, a.segs
+		 FROM walk w JOIN lem rf ON rf.rowid = w.form JOIN alignment a ON a.form_rid = rf.rowid
+		 JOIN lem e ON e.rowid = w.parent JOIN languages pl ON pl.rowid = e.lang_rid
+		 WHERE pl.id = ? AND (w.kind != ${REL_VARIANT} OR pl.id IN (${protoIds}) OR e.origin_rid IS NULL) ${ancestorClause}
+		 ORDER BY rf.rowid`, [...chosen.params, ...languageParams, proto, ...ancestorParams], chosen.sets
+	);
+	const originRids = [...new Set(records.map(r => r.origin))];
+	if (!current()) return [];
+	const origins = originRids.length ? await query<{ rid: number; word: string; tagset_rid: number }>(
+		`SELECT rowid AS rid, word, tagset_rid FROM lem WHERE rowid IN ${IN_JSON}`, [jsonList(originRids)]
+	) : [];
+	const parents = new Map(origins.map(r => [r.rid, { id: idx.idOf(r.rid), word: r.word ?? '', tags: (tagsetsByRid[r.tagset_rid - 1] ?? '').split(/\s+/).filter(Boolean) }]));
+	const refLabels = new Map([...referencesByRid!].map(([rid, ref]) => [rid, referenceLabel(ref)]));
+	const sourceCache = new Map<string, SoundSource[]>();
+	const sourceList = (blob: Uint8Array): SoundSource[] => {
+		const ids = readVarints(blob), key = ids.join(',');
+		if (!sourceCache.has(key)) sourceCache.set(key, ids.flatMap(cid => {
+			const cite = citesCache!.get(cid), ref = cite ? referencesByRid!.get(cite.ref) : null;
+			return ref ? [{ id: ref.id, label: refLabels.get(cite!.ref)!, locator: cite!.locator }] : [];
+		}));
+		return sourceCache.get(key)!;
+	};
+	const ancestorCache = new Map<number, ReturnType<typeof analyzeProsody>>();
+	const out: SoundObservation[] = [];
+	for (let ri = 0; ri < records.length; ri++) {
+		// Yield even when every candidate is rejected by the pattern or form filters.
+		if (ri % 1000 === 999) await new Promise(resolve => setTimeout(resolve, 0));
+		if (!current()) return [];
+		const record = records[ri], parent = parents.get(record.origin), lang = langByRid(record.lang_rid);
+		if (!parent || !lang) continue;
+		const columns = decodeSegs(meta, record.segs);
+		const spans = matchPattern(columns, pattern, old);
+		if (!spans.length) continue;
+		const es = columns.filter(c => c.etymonSeg).map(c => c.etymonSeg);
+		const rs = columns.filter(c => c.reflexSeg).map(c => c.reflexSeg);
+		let ancestor = ancestorCache.get(record.origin);
+		if (!ancestor) {
+			ancestor = analyzeProsody(es, { old, word: parent.word });
+			ancestorCache.set(record.origin, ancestor);
+		}
+		if (filters.accent && filters.accent !== ancestor.accentClass || !numberMatches(ancestor.count, filters.syllables)) continue;
+		const sources = sourceList(record.cites);
+		const form: SoundForm = {
+			id: idx.idOf(record.rid), word: record.word ?? '', gloss: record.gloss ?? '',
+			language: lang.id, languageName: lang.name, clade: lang.clade ?? '',
+			parentId: parent.id, parentWord: parent.word, familyId: idx.idOf(record.family),
+			relation: record.kind === REL_BORROWED ? 'borrowed' : 'inherited',
+			tags: (tagsetsByRid[record.tagset_rid - 1] ?? '').split(/\s+/).filter(Boolean),
+			parentTags: parent.tags, sources,
+			ocr: !!(record.flags & FLAG_OCR), ancestor,
+			modern: analyzeProsody(rs, { word: record.word, sources: sources.map(s => s.id) }),
+			columns: columns.map(({ pos, etymonSeg, reflexSeg }) => ({ pos, etymonSeg, reflexSeg }))
+		};
+		if (columns.some(c => c.etymonSeg && isDetachedNotation(c.reflexSeg))) form.modern.issues.push('nonsegment-alignment-needs-review');
+		for (const span of spans) {
+			const changes = columns.filter(c => c.pos >= span.start && c.pos <= span.end).flatMap(c => isDetachedNotation(c.reflexSeg) ? ['unresolved'] : segmentChanges(c.etymonSeg, c.reflexSeg, old));
+			const observation: SoundObservation = { form, pos: span.start, endPos: span.end, positions: span.positions, contextStart: span.contextStart, contextEnd: span.contextEnd, index: span.index, sound: span.sound,
+				outcome: span.outcome, prev: es[span.index - 1] ?? '#', next: es[span.lastIndex + 1] ?? '#',
+				changes: [...new Set(changes)], syllable: ancestor.segmentSyllables[span.index], cluster: clusterAt(es, span.index) };
+			if (matchesObservation(observation, filters)) out.push(observation);
+		}
+	}
+	return out;
+}
 
 export interface ProtoFamily {
 	id: string;

@@ -25,7 +25,7 @@ export const HISTORICAL_MARKER =
  * Pass equal weights for an even split. Returns an SVG string for `MapMarker.svg`; leave
  * `MapMarker.color` unset so Map.svelte draws it as an icon rather than recolouring it.
  */
-export function pieMarker(slices: { color: string; n: number }[], size = 16): string {
+export function pieMarker(slices: { color: string; n: number }[], size = 16, outline = true): string {
 	const total = slices.reduce((sum, s) => sum + s.n, 0) || 1;
 	const c = size / 2;
 	const r = size * 0.3875;
@@ -48,7 +48,7 @@ export function pieMarker(slices: { color: string; n: number }[], size = 16): st
 						})
 						.join('');
 				})();
-	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">${body}${ring}</svg>`;
+	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">${body}${outline ? ring : ''}</svg>`;
 }
 
 /** What a deactivated point falls back to — a slate that never reads as anybody's data colour. */

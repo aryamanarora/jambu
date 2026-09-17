@@ -57,6 +57,16 @@
 	const shownContested = $derived(showAllContested ? contested : contested.slice(0, 12));
 </script>
 
+{#snippet symbol(ipa: string, boxed = false)}
+	{@const entry = lookup(ipa)}
+	{#if ipa}
+		<span class="sym" class:boxed class:respelt={isRespelt(ipa, entry)} class:unmapped={!entry} title={title(ipa, entry)}>
+			<span class="ipa">{ipa}</span>
+			{#if entry}<span class="house">{entry.house}{#if isContested(entry)}<span class="dagger">†</span>{/if}</span>{/if}
+		</span>
+	{:else}<span class="sym empty"></span>{/if}
+{/snippet}
+
 <svelte:head>
 	<title>Transcription — Jambu</title>
 	<meta
@@ -108,25 +118,7 @@
 							<td>
 								<div class="pair">
 									{#each cell as ipa}
-										{@const entry = lookup(ipa)}
-										{#if ipa}
-											<span
-												class="sym"
-												class:respelt={isRespelt(ipa, entry)}
-												class:unmapped={!entry}
-												title={title(ipa, entry)}
-											>
-												<span class="ipa">{ipa}</span>
-												{#if entry}
-													<span class="house"
-														>{entry.house}{#if isContested(entry)}<span class="dagger">†</span
-															>{/if}</span
-													>
-												{/if}
-											</span>
-										{:else}
-											<span class="sym empty"></span>
-										{/if}
+										{@render symbol(ipa)}
 									{/each}
 								</div>
 							</td>
@@ -161,25 +153,7 @@
 						<td>
 							<div class="pair">
 								{#each cell as ipa}
-									{@const entry = lookup(ipa)}
-									{#if ipa}
-										<span
-											class="sym"
-											class:respelt={isRespelt(ipa, entry)}
-											class:unmapped={!entry}
-											title={title(ipa, entry)}
-										>
-											<span class="ipa">{ipa}</span>
-											{#if entry}
-												<span class="house"
-													>{entry.house}{#if isContested(entry)}<span class="dagger">†</span
-														>{/if}</span
-												>
-											{/if}
-										</span>
-									{:else}
-										<span class="sym empty"></span>
-									{/if}
+									{@render symbol(ipa)}
 								{/each}
 							</div>
 						</td>
@@ -203,20 +177,7 @@
 		<p class="caption">{group.note}</p>
 		<div class="strip">
 			{#each group.symbols as ipa}
-				{@const entry = lookup(ipa)}
-				<span
-					class="sym boxed"
-					class:respelt={isRespelt(ipa, entry)}
-					class:unmapped={!entry}
-					title={title(ipa, entry)}
-				>
-					<span class="ipa">{ipa}</span>
-					{#if entry}
-						<span class="house"
-							>{entry.house}{#if isContested(entry)}<span class="dagger">†</span>{/if}</span
-						>
-					{/if}
-				</span>
+				{@render symbol(ipa, true)}
 			{/each}
 		</div>
 	</section>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Pager from '$lib/components/Pager.svelte';
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
 
@@ -62,7 +63,6 @@
 	let formInput = $state<HTMLInputElement>();
 
 	const source = $derived(sources.find((candidate) => candidate.id === sourceId) ?? null);
-	const pageCount = $derived(Math.max(1, Math.ceil(count / pageSize)));
 	const selectedIndex = $derived(selected ? rows.findIndex((row) => row.key === selected?.key) : -1);
 
 	function choose(row: OcrRow | null) {
@@ -263,11 +263,7 @@
 			{/each}
 			{#if !loading && !rows.length}<p class="empty">No entries match this queue.</p>{/if}
 		</div>
-		<div class="pager">
-			<button disabled={page <= 1 || loading} onclick={() => void loadRows(page - 1)}>Previous</button>
-			<span>{page} / {pageCount}</span>
-			<button disabled={page >= pageCount || loading} onclick={() => void loadRows(page + 1)}>Next</button>
-		</div>
+		<Pager {count} {page} pageSize={pageSize} disabled={loading} always label="OCR queue pages" onpage={(next) => void loadRows(next)} />
 	</section>
 
 	<main class="editor" aria-label="OCR correction editor">
@@ -343,7 +339,7 @@
 	.filters label { display:grid; gap:.25rem; color:var(--muted); font-size:.75rem; font-weight:650; }
 	.filters select,.filters input { min-height:2.25rem; border:1px solid var(--border); border-radius:5px; background:var(--bg); color:var(--text); padding:.4rem .55rem; }
 	.filters form { display:flex; align-items:end; gap:.4rem; flex:1; }.filters form label { flex:1; }.filters form input { min-width:14rem; width:100%; }
-	.filters button,.pager button,.entry-nav button,.view-switch button,.evidence button,.actions button,.character-pad button { border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:5px; padding:.48rem .7rem; cursor:pointer; }
+	.filters button,.entry-nav button,.view-switch button,.evidence button,.actions button,.character-pad button { border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:5px; padding:.48rem .7rem; cursor:pointer; }
 	button:disabled { opacity:.45; cursor:default; }.counts { display:flex; gap:.6rem; color:var(--muted); font-size:.75rem; }.danger { color:#b33; }
 	.workspace { display:grid; grid-template-columns:minmax(250px,20vw) minmax(0,1fr); border:1px solid var(--border); border-radius:8px; min-height:70vh; overflow:hidden; }
 	.queue { background:var(--surface); border-right:1px solid var(--border); display:flex; flex-direction:column; min-height:0; }
@@ -351,7 +347,7 @@
 	.rows { overflow:auto; max-height:72vh; }.rows>button { display:grid; gap:.22rem; width:100%; text-align:left; border:0; border-bottom:1px solid var(--border); border-left:3px solid transparent; background:transparent; color:var(--text); padding:.65rem .7rem; cursor:pointer; }.rows>button:hover { background:color-mix(in srgb,var(--accent) 6%,transparent); }.rows>button.active { border-left-color:var(--accent); background:color-mix(in srgb,var(--accent) 10%,transparent); }.rows>button.stale { border-left-color:#c66; }
 	.row-head { display:flex; justify-content:space-between; gap:.4rem; align-items:center; }.row-head strong { font-family:var(--serif); font-size:1rem; }.rows .gloss { color:var(--muted); font-size:.78rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }.rows code { color:var(--muted); font-size:.62rem; }
 	.status { border-radius:99px; padding:.12rem .38rem; background:var(--bg); color:var(--muted); font:600 .58rem/1 sans-serif; text-transform:uppercase; }.status-accepted,.status-corrected { color:#267348; background:color-mix(in srgb,#4a6 14%,transparent); }
-	.pager { margin-top:auto; display:flex; justify-content:space-between; align-items:center; padding:.65rem; border-top:1px solid var(--border); font-size:.75rem; }
+
 	.editor { min-width:0; padding:1rem clamp(.8rem,2vw,1.5rem) 2rem; background:var(--bg); }.entry-head,.section-title { display:flex; justify-content:space-between; align-items:center; gap:1rem; }.entry-head h2 { font:600 .9rem/1.2 monospace; margin:.15rem 0; }.entry-nav { display:flex; gap:.35rem; }
 	.images,.evidence,.correction { margin-top:1.2rem; }.section-title h3 { margin:.1rem 0 .55rem; font-size:1.05rem; }.view-switch { display:flex; }.view-switch button { border-radius:0; }.view-switch button:first-child { border-radius:5px 0 0 5px; }.view-switch button:last-child { border-radius:0 5px 5px 0; }.view-switch button.active { background:var(--accent); color:white; border-color:var(--accent); }
 	.image-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:.7rem; }.image-grid figure { margin:0; border:1px solid var(--border); border-radius:6px; overflow:hidden; background:white; }.image-grid figcaption { background:var(--surface); color:var(--muted); border-bottom:1px solid var(--border); padding:.35rem .55rem; font-size:.72rem; }.image-grid img { display:block; width:100%; min-height:110px; max-height:260px; object-fit:contain; }.image-grid.page-view img { max-height:70vh; }.missing-image { min-height:110px; display:grid; place-content:center; text-align:center; color:#755; background:#f8f2ed; }.missing-image small { display:block; margin-top:.25rem; }

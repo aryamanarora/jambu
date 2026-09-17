@@ -2,22 +2,17 @@
 	import { base } from '$app/paths';
 	import { createListState } from '$lib/listState.svelte';
 	import { getFilterDialects, getFilterLanguages } from '$lib/query';
-	import { PAGE_SIZE } from '$lib/types';
 	import { highlightHtml, highlightText, md, referenceLabel, safe } from '$lib/render';
 	import { tagLabel } from '$lib/tags';
 	import { hashColor, cladeColor } from '$lib/clades';
+	import { languageOptions } from '$lib/languageOptions';
 	import FilterCell from './FilterCell.svelte';
-	import FilterField from './FilterField.svelte';
-	import ListToolbar from './ListToolbar.svelte';
-	import QueryError from './QueryError.svelte';
-	import SelectFilter, { type SelectOption } from './SelectFilter.svelte';
+	import type { SelectOption } from '$lib/languageOptions';
+	import LemmaFilters from './LemmaFilters.svelte';
+	import LemmaList from './LemmaList.svelte';
 	import RefList from './RefList.svelte';
-	import Pager from './Pager.svelte';
 	import Tags from './Tags.svelte';
 	import FormWord from './FormWord.svelte';
-	import TagFilter from './TagFilter.svelte';
-	import SourceFilter from './SourceFilter.svelte';
-	import SearchMatchToggle from './SearchMatchToggle.svelte';
 	import type { Reference } from '$lib/types';
 
 	let {
@@ -28,47 +23,11 @@
 
 	const showLangCol = $derived(mode === 'reflexes');
 	const list = createListState(mode, { languageId, referenceId, withOrigin: true });
-	const from = $derived(list.result ? (list.result.page - 1) * PAGE_SIZE + 1 : 0);
-	const to = $derived(list.result ? from + list.result.rows.length - 1 : 0);
-	const resultLabel = $derived(
-		list.result
-			? `${from.toLocaleString()}–${to.toLocaleString()} of ${list.result.count.toLocaleString()} forms`
-			: ''
-	);
-	const activeFilterCount = $derived(
-		[
-			list.params.relaxed,
-			list.params.form,
-			showLangCol ? list.params.origin_lang : '',
-			list.params.dialect,
-			list.params.origin,
-			list.params.etymon_lang,
-			list.params.gloss,
-			list.params.tags,
-			list.params.notes,
-			list.params.source
-		].filter(Boolean).length
-	);
-
 	let langOptions = $state<SelectOption[]>([]);
 	$effect(() => {
 		if (!showLangCol) return;
 		Promise.all([getFilterLanguages('reflexes'), getFilterDialects('reflexes')]).then(([ls, ds]) => {
-			const byId = new Map(ls.map((l) => [l.id, l]));
-			langOptions = [...ls.map((l) => ({
-				value: l.id,
-				label: l.name,
-				sub: l.clade ?? '',
-				swatch: cladeColor(l.clade)
-			})), ...ds.map((d) => {
-				const parent = byId.get(d.language_id);
-				return {
-					value: d.token,
-					label: `${parent?.name ?? d.language_id}: ${d.name}`,
-					sub: `dialect · ${parent?.clade ?? ''}`,
-					swatch: cladeColor(parent?.clade ?? '')
-				};
-			})];
+			langOptions = languageOptions(ls, ds);
 		});
 	});
 
@@ -76,21 +35,7 @@
 	let originLangOptions = $state<SelectOption[]>([]);
 	$effect(() => {
 		Promise.all([getFilterLanguages('entries'), getFilterDialects('entries')]).then(([ls, ds]) => {
-			const byId = new Map(ls.map((l) => [l.id, l]));
-			originLangOptions = [...ls.map((l) => ({
-				value: l.id,
-				label: l.name,
-				sub: l.clade ?? '',
-				swatch: cladeColor(l.clade)
-			})), ...ds.map((d) => {
-				const parent = byId.get(d.language_id);
-				return {
-					value: d.token,
-					label: `${parent?.name ?? d.language_id}: ${d.name}`,
-					sub: `dialect · ${parent?.clade ?? ''}`,
-					swatch: cladeColor(parent?.clade ?? '')
-				};
-			})];
+			originLangOptions = languageOptions(ls, ds);
 		});
 	});
 	const optionHighlight = (options: SelectOption[], value?: string) => {
@@ -113,78 +58,10 @@
 </script>
 
 {#snippet filters()}
-	<SearchMatchToggle
-		relaxed={list.params.relaxed}
-		onToggle={(relaxed) => list.setFilter('relaxed', relaxed ? '1' : '')}
-	/>
-	<FilterField
-		label="Form"
-		placeholder="Filter forms…"
-		palette
-		value={list.params.form ?? ''}
-		onValue={(value) => list.setFilter('form', value)}
-	/>
-	{#if showLangCol}
-		<label class="filter-control">
-			<span>Language</span>
-			<SelectFilter
-				placeholder="Any language"
-				options={langOptions}
-				value={list.params.origin_lang ?? ''}
-				onSelect={(value) => list.setFilter('origin_lang', value)}
-			/>
-		</label>
-	{/if}
-	<label class="filter-control">
-		<span>Origin language</span>
-		<SelectFilter
-			placeholder="Any origin language"
-			options={originLangOptions}
-			value={list.params.etymon_lang ?? ''}
-			onSelect={(value) => list.setFilter('etymon_lang', value)}
-		/>
-	</label>
-	<FilterField
-		label="Origin form"
-		palette
-		value={list.params.origin ?? ''}
-		onValue={(value) => list.setFilter('origin', value)}
-	/>
-	<FilterField
-		label="Meaning"
-		palette
-		value={list.params.gloss ?? ''}
-		onValue={(value) => list.setFilter('gloss', value)}
-	/>
-	<FilterField
-		label="Notes"
-		palette
-		value={list.params.notes ?? ''}
-		onValue={(value) => list.setFilter('notes', value)}
-	/>
-	<TagFilter standalone value={list.params.tags ?? ''} onFilter={list.setFilter} />
-	<SourceFilter
-		standalone
-		value={list.params.source ?? ''}
-		activeSort={list.params.sort ?? ''}
-		onFilter={list.setFilter}
-		onSort={list.setSort}
-	/>
+	<LemmaFilters params={list.params} mode="forms" showLanguage={showLangCol} languages={langOptions} originLanguages={originLangOptions} onFilter={list.setFilter} />
 {/snippet}
 
-<div class="loader-slot">{#if list.loading}<div class="loader-line"></div>{/if}</div>
-<ListToolbar
-	value={list.params.word ?? ''}
-	placeholder={mode === 'lexicon' ? 'Search all columns in this lexicon…' : 'Search all columns…'}
-	searchLabel="Search all shown columns"
-	{resultLabel}
-	filterCount={activeFilterCount}
-	onSearch={(value) => list.setFilter('word', value)}
-	{filters}
-/>
-
-{#if list.error}<QueryError error={list.error} />{/if}
-
+<LemmaList {list} mode="forms" showLanguage={showLangCol} placeholder={mode === 'lexicon' ? 'Search all columns in this lexicon…' : 'Search all columns…'} {filters}>
 <div class="table-wrap">
 	<table class="data mobile-cards">
 		<thead>
@@ -288,19 +165,9 @@
 	</table>
 </div>
 
-{#if list.result}
-	<Pager count={list.result.count} page={list.result.page} onpage={list.setPage} />
-{/if}
+</LemmaList>
 
 <style>
-	.filter-control {
-		display: grid;
-		gap: 0.3rem;
-		min-width: 0;
-		color: var(--muted);
-		font-size: 0.76rem;
-		font-weight: 600;
-	}
 	/* headword/form is the focus of each row, matching the entries table */
 	.lemma-word a {
 		font-family: var(--font-serif);
@@ -329,9 +196,5 @@
 		color: var(--berry);
 		white-space: nowrap;
 		vertical-align: middle;
-	}
-	.loader-slot {
-		height: 3px;
-		margin-bottom: 0.4rem;
 	}
 </style>

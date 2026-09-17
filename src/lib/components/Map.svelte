@@ -48,7 +48,7 @@
 	let destroyed = false;
 	// the layers currently on the map, in marker order, so a style-only change can reuse them
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let drawn: { key: string; marker: any }[] = [];
+	let drawn: { key: string; marker: any; onClick?: () => void }[] = [];
 
 	function iconUrl(svg: string): string {
 		return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
@@ -93,11 +93,17 @@
 			}
 			if (m.foreground) marker.bringToFront?.();
 			if (m.tooltip) marker.setTooltipContent?.(m.tooltip);
+			if (m.label) marker.getElement?.()?.setAttribute('aria-label', m.label);
+			if (m.popupHtml) {
+				if (marker.getPopup?.()) marker.setPopupContent(m.popupHtml);
+				else marker.bindPopup(m.popupHtml);
+			} else marker.unbindPopup?.();
 			if (m.tooltipOpen) marker.openTooltip?.();
 			else marker.closeTooltip?.();
 			// handlers close over the caller's state, so they have to be re-bound, not kept
-			marker.off?.('click');
+			if (drawn[i].onClick) marker.off?.('click', drawn[i].onClick);
 			if (m.onClick) marker.on('click', m.onClick);
+			drawn[i].onClick = m.onClick;
 		}
 		return true;
 	}
@@ -197,12 +203,13 @@
 				marker = L.marker([m.lat, m.long], { icon }).addTo(layer);
 			}
 			if (m.tooltip) marker.bindTooltip(m.tooltip);
+			if (m.label) marker.getElement?.()?.setAttribute('aria-label', m.label);
 			// a point the page is pointing at names itself, rather than waiting to be hovered
 			if (m.tooltipOpen) marker.openTooltip?.();
 			if (m.popupHtml) marker.bindPopup(m.popupHtml);
 			if (m.onClick) marker.on('click', m.onClick);
 			if (m.foreground) foreground.push(marker);
-			drawn.push({ key: shapeKey(m), marker });
+			drawn.push({ key: shapeKey(m), marker, onClick: m.onClick });
 		}
 		// Raise emphasis markers only after every point exists. Calling bringToFront while drawing is
 		// not sufficient: a later context point can otherwise be appended above the highlight.

@@ -22,6 +22,10 @@ const config = {
 		// Prerendering is opted into per-route (see canonical routes' `prerender = true`).
 		// Errors during prerender crawl of dynamic links shouldn't fail the whole build.
 		prerender: {
+			// A bounded local smoke build must not crawl from sampled entries into the corpus.
+			...(process.env.PRERENDER_SMOKE === '1'
+				? { entries: ['/', '/correspondences'], crawl: false, concurrency: 1, handleUnseenRoutes: 'ignore' }
+				: {}),
 			handleHttpError: 'warn',
 			handleInvalidUrl: 'warn',
 			handleMissingId: 'warn'

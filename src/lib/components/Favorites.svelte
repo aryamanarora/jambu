@@ -5,6 +5,8 @@
 	import { getAllDialects, getAllLanguages } from '$lib/query';
 	import { CLADE_ORDER, cladeColor } from '$lib/clades';
 	import type { Dialect, Language } from '$lib/types';
+	import { languageOptions, type SelectOption } from '$lib/languageOptions';
+	import SearchableOptions from './SearchableOptions.svelte';
 
 	let { variant = 'nav' }: { variant?: 'nav' | 'menu' } = $props();
 
@@ -25,47 +27,29 @@
 		ensureLangs();
 	}
 
-	// search results (languages + clades), excluding anything already pinned; capped for sanity
-	interface Result {
-		key: string;
-		token: FavToken;
-		sub: string;
-		swatch?: string;
-	}
-	const results = $derived.by<Result[]>(() => {
-		const q = query.trim().toLowerCase();
-		if (!q) return [];
-		const out: Result[] = [];
-		for (const c of CLADE_ORDER) {
-			if (c.toLowerCase().includes(q) && !favorites.has('clade', c))
-				out.push({ key: `clade:${c}`, token: { kind: 'clade', id: c, label: c }, sub: 'clade', swatch: cladeColor(c) });
+	// Keep pinning/reordering here; search and option rows are shared with form filters.
+	const results = $derived.by(() => {
+		const options: Array<SelectOption & { token: FavToken }> = CLADE_ORDER
+			.filter(c => !favorites.has('clade', c))
+			.map(c => ({ value: `clade:${c}`, label: c, sub: 'clade', swatch: cladeColor(c), token: { kind: 'clade', id: c, label: c } }));
+		const byId = new Map(langs.map(l => [l.id, l]));
+		const dialectById = new Map(dialects.map(d => [d.token, d]));
+		for (const option of languageOptions(langs, dialects)) {
+			const dialect = dialectById.get(option.value);
+			const language = byId.get(dialect?.language_id ?? option.value);
+			if (!language || favorites.has('lang', language.id)) continue;
+			options.push({ ...option, value: `lang:${option.value}`, token: { kind: 'lang', id: language.id, label: language.name, clade: language.clade } });
 		}
-		for (const l of langs) {
-			if (favorites.has('lang', l.id)) continue;
-			const name = l.name ?? l.id;
-			if (name.toLowerCase().includes(q))
-				out.push({
-					key: `lang:${l.id}`,
-					token: { kind: 'lang', id: l.id, label: name, clade: l.clade },
-					sub: l.clade ?? '—',
-					swatch: cladeColor(l.clade)
-				});
-		}
-		const byId = new Map(langs.map((l) => [l.id, l]));
-		for (const d of dialects) {
-			if (!d.name.toLowerCase().includes(q) || favorites.has('lang', d.language_id)) continue;
-			const parent = byId.get(d.language_id);
-			if (!parent) continue;
-			out.push({
-				key: `dialect:${d.token}`,
-				token: { kind: 'lang', id: parent.id, label: parent.name, clade: parent.clade },
-				sub: `${d.name} dialect`,
-				swatch: cladeColor(parent.clade)
-			});
-		}
-		return out.slice(0, 40);
+		return options;
 	});
+	function add(value: string) {
+		const result = results.find(o => o.value === value);
+		if (result) favorites.add(result.token);
+		query = '';
+	}
 </script>
+
+<svelte:window onkeydown={event => { if (open && event.key === 'Escape') open = false; }} />
 
 <button class="fav-btn" class:menu={variant === 'menu'} onclick={show} aria-label="Favorite languages and clades" title="Favorites">
 	<span class="star">★</span>
@@ -119,32 +103,7 @@
 			<p class="empty">No favourites yet — search below to add some.</p>
 		{/if}
 
-		<input
-			class="search"
-			placeholder="Add a language or clade…"
-			bind:value={query}
-			autocomplete="off"
-		/>
-		{#if query.trim()}
-			<ul class="results">
-				{#each results as r (r.key)}
-					<li>
-						<button
-							onclick={() => {
-								favorites.add(r.token);
-								query = '';
-							}}
-						>
-							<span class="sw" style="background:{r.swatch}"></span>
-							<span class="lbl">{r.token.label}</span>
-							<span class="sub">{r.sub}</span>
-							<span class="add">+</span>
-						</button>
-					</li>
-				{/each}
-				{#if results.length === 0}<li class="none">no match</li>{/if}
-			</ul>
-		{/if}
+		<SearchableOptions options={results} bind:query placeholder="Add a language or clade…" searchLabel="Add a language or clade" requireQuery limit={40} action="+" onSelect={add} focusOnMount />
 	</div>
 {/if}
 
@@ -233,8 +192,7 @@
 	.close:hover {
 		color: var(--ink);
 	}
-	.pinned,
-	.results {
+	.pinned {
 		list-style: none;
 		margin: 0 0 12px;
 		padding: 0;
@@ -301,59 +259,6 @@
 		font-size: 0.82rem;
 		color: var(--muted);
 		margin: 4px 0 12px;
-	}
-
-	.search {
-		width: 100%;
-		box-sizing: border-box;
-		font-size: 0.9rem;
-		padding: 7px 10px;
-		border: 1px solid var(--border-strong);
-		border-radius: 8px;
-		background: var(--bg);
-		color: var(--ink);
-	}
-	.search:focus {
-		outline: none;
-		border-color: var(--berry);
-	}
-	.results {
-		margin-top: 6px;
-		max-height: 260px;
-		overflow-y: auto;
-	}
-	.results li button {
-		display: flex;
-		align-items: center;
-		gap: 7px;
-		width: 100%;
-		background: none;
-		border: none;
-		padding: 5px 4px;
-		border-radius: 6px;
-		cursor: pointer;
-		color: var(--ink);
-		text-align: left;
-	}
-	.results li button:hover {
-		background: var(--surface-2, rgba(128, 128, 128, 0.1));
-	}
-	.results .lbl {
-		flex: 1;
-		font-size: 0.9rem;
-	}
-	.results .sub {
-		font-size: 0.72rem;
-		color: var(--muted);
-	}
-	.results .add {
-		color: var(--berry);
-		font-weight: 700;
-	}
-	.none {
-		font-size: 0.8rem;
-		color: var(--muted);
-		padding: 6px 4px;
 	}
 
 	@media (max-width: 780px) {

@@ -1,9 +1,16 @@
 <script lang="ts">
+	import { referenceProgress, unetymologisedPercent } from '$lib/referenceStatus';
+	import RecordHeader from '$lib/components/RecordHeader.svelte';
+	import OverviewCards from '$lib/components/OverviewCards.svelte';
+	import DisclosureCard from '$lib/components/DisclosureCard.svelte';
+	import LexiconLayout from '$lib/components/LexiconLayout.svelte';
+	import ActiveFilter from '$lib/components/ActiveFilter.svelte';
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { md, referenceLabel, safe } from '$lib/render';
+	import { referenceBibtex } from '$lib/bibtex';
 	import Donut from '$lib/components/Donut.svelte';
 	import GeoMap from '$lib/components/Map.svelte';
 	import ReflexesView from '$lib/components/ReflexesView.svelte';
@@ -12,10 +19,31 @@
 	import { cladeColor } from '$lib/clades';
 	import { activePoint, highlightPoint, livePoint, mutedPoint } from '$lib/atlas';
 	import { buildQuery } from '$lib/urlParams';
-	import '$lib/styles/atlas.css';
 
 	let { data } = $props();
 	const ref = $derived(data.reference);
+	let bibtex = $state('');
+	let copyState = $state<'idle' | 'copying' | 'copied' | 'error'>('idle');
+	let citationError = $state(false);
+	$effect(() => {
+		const reference = ref;
+		let cancelled = false;
+		bibtex = '';
+		copyState = 'idle';
+		citationError = false;
+		referenceBibtex(reference).then((text) => {
+			if (!cancelled) bibtex = text;
+		}).catch(() => { if (!cancelled) citationError = true; });
+		return () => { cancelled = true; };
+	});
+	async function copyBibtex() {
+		const id = ref.id;
+		copyState = 'copying';
+		try {
+			await navigator.clipboard.writeText(bibtex);
+			if (ref.id === id) copyState = 'copied';
+		} catch { if (ref.id === id) copyState = 'error'; }
+	}
 	let languages = $state<OriginSlice[]>([]);
 	let allLanguages = $state<Language[]>([]);
 	let loadError = $state('');
@@ -76,16 +104,7 @@
 			onClick: () => pickLanguage(language.lang)
 		}];
 	}));
-	function badge(progress: string | null): 'ok' | 'warn' | 'bad' {
-		if (progress === 'Yes') return 'ok';
-		if (progress === 'Partial') return 'warn';
-		return 'bad';
-	}
-	function unetymologisedPct(): string {
-		return (ref.lemma_count ?? 0)
-			? `${(((ref.unetymologised_count ?? 0) / ref.lemma_count) * 100).toFixed(1)}%`
-			: '—';
-	}
+
 	function provenanceFiles(provenance: string | null): string[] {
 		return provenance?.split(';').map((file) => file.trim()).filter(Boolean) ?? [];
 	}
@@ -110,57 +129,52 @@
 	<meta name="description" content={`Forms cited in ${referenceLabel(ref)} in the Jambu etymological dictionary.`} />
 </svelte:head>
 
-<header class="ref-head">
-	<div class="reference-title">
-		<a class="back-link" href={`${base}/references`}>All sources</a>
-		<h1 class="headword">{referenceLabel(ref)} <span class="id-tag">[{ref.id}]</span></h1>
-	</div>
-	<dl class="head-stats">
-		<div><dt>Digitisation</dt><dd><span class="badge {badge(ref.progress)}">{ref.progress || 'No'}</span></dd></div>
-		<div><dt>Forms</dt><dd>{(ref.lemma_count ?? 0).toLocaleString()}</dd></div>
-		{#if languages.length}<div><dt>Languages</dt><dd>{languages.length.toLocaleString()}</dd></div>{/if}
-		<div><dt>Unetymologised</dt><dd>{unetymologisedPct()}</dd></div>
-	</dl>
-</header>
+<RecordHeader title={referenceLabel(ref)} id={ref.id} backHref={`${base}/references`} backLabel="All sources">
+	<div><dt>Digitisation</dt><dd><span class="badge {referenceProgress(ref.progress)}">{ref.progress || 'No'}</span></dd></div>
+	<div><dt>Forms</dt><dd>{(ref.lemma_count ?? 0).toLocaleString()}</dd></div>
+	{#if languages.length}<div><dt>Languages</dt><dd>{languages.length.toLocaleString()}</dd></div>{/if}
+	<div><dt>Unetymologised</dt><dd>{unetymologisedPercent(ref.lemma_count ?? 0, ref.unetymologised_count ?? 0)}</dd></div>
+</RecordHeader>
 
-<div class="reference-charts" aria-label="Source overview">
-	<details class="chart-card" open>
-		<summary>Citation</summary>
+<OverviewCards label="Source overview">
+	<DisclosureCard title="Citation" kind="chart">
+
 		<div class="markdown source">{@html md(ref.source || `Reference abbreviation ${ref.id}; full citation not yet catalogued.`)}</div>
-	</details>
+		<div class="citation-actions">
+			<button type="button" disabled={!bibtex || copyState === 'copying'} onclick={copyBibtex}>
+				{copyState === 'copied' ? 'Copied!' : 'Copy BibTeX'}
+			</button>
+			<span role="status">{citationError ? 'Could not load BibTeX. Reload to retry.' : copyState === 'error' ? 'Copy failed. Please try again.' : copyState === 'copied' ? 'BibTeX copied to clipboard.' : ''}</span>
+		</div>
+	</DisclosureCard>
 	{#if languages.length}
-		<details class="chart-card" open>
-			<summary>Languages<span>{languages.length.toLocaleString()}</span></summary>
+		<DisclosureCard title="Languages" kind="chart">
+			{#snippet meta()}{languages.length.toLocaleString()}{/snippet}
+
 			<Donut slices={languages} label="Distribution of forms cited by language" unit="forms" />
-		</details>
+		</DisclosureCard>
 	{/if}
-</div>
+</OverviewCards>
 {#if loadError}<p role="alert" class="muted">Could not load the language distribution: {loadError}</p>{/if}
 
-<div class="lexicon-toolbar">
-	<h2>Cited forms</h2>
-	<button class="side-fold" aria-expanded={sideOpen} aria-controls="reference-filters" onclick={() => (sideOpen = !sideOpen)}>
-		{sideOpen ? 'Hide map & filters' : 'Show map & filters'}
-	</button>
-</div>
-<div class="ref-body" class:no-side={!sideOpen}>
-	<section class="lexicon-col" id="lexicon" aria-label={`${referenceLabel(ref)} cited forms`}>
-		{#if selectedLanguage}
-			<p class="active-filter">Forms filtered to <strong>{selectedLanguage.name}</strong>
-				<a href={buildQuery(searchParams, { origin_lang: '', dialect: '' })} data-sveltekit-noscroll>Clear language</a>
-			</p>
-		{/if}
-		{#key ref.id}<ReflexesView referenceId={ref.id} />{/key}
-	</section>
-	<aside id="reference-filters" class="side-col atlas" hidden={!sideOpen} aria-label="Source map and language filters">
+<LexiconLayout title="Cited forms" label={`${referenceLabel(ref)} cited forms`} sideId="reference-filters" sideLabel="Source map and language filters" bind:open={sideOpen}>
+
+	{#if selectedLanguage}
+		<ActiveFilter label="Forms filtered to" value={selectedLanguage.name} clearHref={buildQuery(searchParams, { origin_lang: '', dialect: '' })} clearLabel="Clear language" />
+	{/if}
+	{#key ref.id}<ReflexesView referenceId={ref.id} />{/key}
+
+	{#snippet sidebar()}
 		{#if markers.length}
-			<details class="side-drawer" open>
-				<summary>Distribution<span>{locatedCount.toLocaleString()} / {languages.length.toLocaleString()} located</span></summary>
+			<DisclosureCard title="Distribution" kind="side">
+				{#snippet meta()}{locatedCount.toLocaleString()} / {languages.length.toLocaleString()} located{/snippet}
+
 				<GeoMap {markers} height="16rem" />
-			</details>
+			</DisclosureCard>
 		{/if}
-		<details class="side-drawer" open>
-			<summary>Languages<span>{shownLanguages.length.toLocaleString()} / {languages.length.toLocaleString()}</span></summary>
+		<DisclosureCard title="Languages" kind="side">
+			{#snippet meta()}{shownLanguages.length.toLocaleString()} / {languages.length.toLocaleString()}{/snippet}
+
 			<div class="controls"><input class="search" type="search" aria-label="Filter languages or clades" placeholder="Filter languages or clades…" bind:value={languageSearch} /></div>
 			<p class="hint">Select a language to filter the cited forms.</p>
 			<div class="list" role="group" aria-label="Languages cited by this source">
@@ -178,9 +192,10 @@
 					</div>
 				{:else}<p class="empty">{languageSearch ? `No language matches “${languageSearch}”.` : 'No cited languages available.'}</p>{/each}
 			</div>
-		</details>
-	</aside>
-</div>
+		</DisclosureCard>
+
+	{/snippet}
+</LexiconLayout>
 
 <div class="ref-drawers">
 	<details id="metadata" class="page-disclosure">
@@ -203,7 +218,7 @@
 	<div class="prop"><dt>Etymologies</dt><dd>{etymologyProvenance(ref.etymology_provenance)}</dd></div>
 	<div class="prop">
 		<dt>Unetymologised</dt>
-		<dd>{unetymologisedPct()} ({(ref.unetymologised_count ?? 0).toLocaleString()} of {(ref.lemma_count ?? 0).toLocaleString()} forms)</dd>
+		<dd>{unetymologisedPercent(ref.lemma_count ?? 0, ref.unetymologised_count ?? 0)} ({(ref.unetymologised_count ?? 0).toLocaleString()} of {(ref.lemma_count ?? 0).toLocaleString()} forms)</dd>
 	</div>
 </dl>
 
@@ -211,59 +226,21 @@
 </div>
 
 <style>
-
-	.reference-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
-	.chart-card { min-width: 0; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); }
-	.chart-card summary { cursor: pointer; font-weight: 600; font-size: 0.85rem; }
-	.chart-card[open] summary { margin-bottom: 0.65rem; }
-	.chart-card summary span { float: right; color: var(--muted); font-weight: 400; }
-	.chart-card :global(.legend) { flex: 1; min-width: 0; max-height: 11rem; overflow-y: auto; scrollbar-width: thin; }
+	.citation-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+	.citation-actions button { padding: 0.3rem 0.6rem; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface-2); color: var(--ink); font: inherit; font-size: 0.78rem; cursor: pointer; }
+	.citation-actions button:disabled { opacity: 0.6; cursor: default; }
+	.citation-actions button:focus-visible { outline: 2px solid var(--plum-2); outline-offset: 2px; }
+	.citation-actions [role='status'] { font-size: 0.75rem; color: var(--muted); }
 	.source { font-size: 1.05rem; overflow-wrap: anywhere; }
-	.ref-head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-bottom: 0.9rem; }
-	.ref-head h1 { margin: 0.25rem 0 0; }
-	.reference-title { min-width: 0; overflow-wrap: anywhere; }
-	.back-link { font-size: 0.8rem; color: var(--muted); }
-	.head-stats { display: flex; gap: 0.8rem 1.4rem; flex-wrap: wrap; margin: 0; }
-	.head-stats dt { color: var(--muted); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em; }
-	.head-stats dd { margin: 0; font-size: 1rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-	.lexicon-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; margin-top: 1.2rem; border-top: 1px solid var(--border); }
-	.lexicon-toolbar h2 { margin: 0; font-size: 1.1rem; }
-	.side-fold { padding: 0.5rem 0.7rem; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: none; color: var(--muted); font: inherit; font-size: 0.8rem; font-weight: 600; white-space: nowrap; cursor: pointer; }
-	.side-fold:hover { border-color: var(--plum-2); color: var(--plum-2); }
-	.ref-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 21rem); gap: 1.5rem; align-items: start; }
-	.ref-body.no-side { grid-template-columns: minmax(0, 1fr); }
-	.lexicon-col { min-width: 0; }
-	.side-col { padding: 0 0.85rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); position: sticky; top: 4.5rem; max-height: calc(100vh - 5.5rem); overflow-y: auto; min-width: 0; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
-	.side-col[hidden] { display: none; }
-	.active-filter { flex-wrap: wrap; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 0 0 0.6rem; padding: 0.5rem 0.7rem; border: 1px solid color-mix(in srgb, var(--berry) 35%, var(--border)); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--berry) 7%, transparent); font-size: 0.85rem; }
-	.active-filter a { font-size: 0.8rem; font-weight: 600; }
-	.side-col :global(.pick) { grid-template-areas: 'dot word count' '. meta meta'; }
-	.side-col :global(.controls) { padding: 0.35rem 0 0.3rem; }
-	.side-col :global(.list) { padding: 0 0 0.5rem; max-height: 18rem; overflow-y: auto; scrollbar-width: thin; }
-	.side-col :global(.hint) { padding: 0 0 0.45rem; }
-	.side-col :global(.row) { align-items: center; }
 	.meta { grid-area: meta; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 0.72rem; line-height: 1.3; }
-	.side-drawer { margin-top: 0.75rem; border-top: 1px solid var(--border); padding-top: 0.6rem; }
-	.side-drawer:first-child { border-top: 0; margin-top: 0; }
-	.side-drawer > summary { display: list-item; padding: 0.35rem 0; font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; }
-	.side-drawer[open] > summary { margin-bottom: 0.6rem; }
-	.side-drawer > summary span { float: right; font-weight: 400; letter-spacing: 0; text-transform: none; }
 	.ref-drawers { margin-top: 2rem; }
 	.reference-metadata { margin: 0.7rem 0 0; padding: 0.4rem 1.15rem; }
 	.prop { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
 	.prop:last-child { border-bottom: none; }
 	.prop dt { color: var(--muted); font-size: 0.85rem; font-weight: 600; }
 	.prop dd { margin: 0; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-	@media (max-width: 1000px) {
-		.ref-body, .ref-body.no-side { grid-template-columns: 1fr; }
-		.side-col { position: static; max-height: none; overflow: visible; grid-row: 1; }
-	}
-	@media (max-width: 760px) { .reference-charts { grid-template-columns: 1fr; } }
+
 	@media (max-width: 640px) {
-		.chart-card :global(.donut) { width: 112px; height: 112px; }
-		.chart-card :global(.donut-wrap) { gap: 0.8rem; }
-		.chart-card :global(.legend button) { display: grid; grid-template-columns: 0.7rem minmax(0, 1fr); gap: 0.15rem 0.4rem; }
-		.chart-card :global(.ct) { grid-column: 2; font-size: 0.72rem; }
 		.prop { align-items: flex-start; flex-direction: column; gap: 0.2rem; }
 		.prop dd { max-width: 100%; text-align: left; }
 	}

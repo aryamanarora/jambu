@@ -7,6 +7,7 @@
 	import { onMount } from 'svelte';
 	import { dev } from '$app/environment';
 	import Favorites from '$lib/components/Favorites.svelte';
+	import NavDropdown from '$lib/components/NavDropdown.svelte';
 	import DbBanner from '$lib/components/DbBanner.svelte';
 	import DbStatusMenu from '$lib/components/DbStatusMenu.svelte';
 	import EntryPeek from '$lib/components/EntryPeek.svelte';
@@ -104,13 +105,10 @@
 		const p = page.url.pathname;
 		return p === base + href || p.startsWith(base + href + '/');
 	}
-	function anyActive(items: { href: string }[]): boolean {
-		return items.some((item) => isActive(item.href));
-	}
 
 	// The concept atlas is an edge-to-edge map with a panel floating over it, so it opts out of
 	// the centred, scrolling document shell and takes whatever height the chrome leaves.
-	const FULL_BLEED_ROUTES = ['/concepts', '/concepts/[id]', '/languages', '/isoglosses', '/correspondences'];
+	const FULL_BLEED_ROUTES = ['/concepts', '/concepts/[id]', '/languages', '/isoglosses'];
 	const fullBleed = $derived(FULL_BLEED_ROUTES.includes(page.route.id ?? ''));
 </script>
 
@@ -122,14 +120,7 @@
 			Jambu
 		</a>
 		<div class="nav-links" class:open={mobileNavOpen} id="primary-nav-links">
-			<details class="nav-dropdown" bind:open={dictionaryOpen}>
-				<summary class:active={anyActive(dictionaryNav)} onclick={() => { researchOpen = false; utilityOpen = false; }}>Dictionary</summary>
-				<div class="nav-dropdown-panel">
-					{#each dictionaryNav as item (item.href)}
-						<a href="{base}{item.href}" class:active={isActive(item.href)}>{item.label}</a>
-					{/each}
-				</div>
-			</details>
+			<NavDropdown label="Dictionary" items={dictionaryNav} bind:open={dictionaryOpen} {isActive} onclick={() => { researchOpen = false; utilityOpen = false; }} />
 			{#each nav as item (item.href)}
 				<a
 					href="{base}{item.href}"
@@ -137,14 +128,7 @@
 					onclick={() => (mobileNavOpen = false)}>{item.label}</a
 				>
 			{/each}
-			<details class="nav-dropdown" bind:open={researchOpen}>
-				<summary class:active={anyActive(researchNav)} onclick={() => { dictionaryOpen = false; utilityOpen = false; }}>Research</summary>
-				<div class="nav-dropdown-panel">
-					{#each researchNav as item (item.href)}
-						<a href="{base}{item.href}" class:active={isActive(item.href)}>{item.label}</a>
-					{/each}
-				</div>
-			</details>
+			<NavDropdown label="Research" items={researchNav} bind:open={researchOpen} {isActive} onclick={() => { dictionaryOpen = false; utilityOpen = false; }} />
 		</div>
 		<span class="spacer"></span>
 		<details class="utility-menu" bind:open={utilityOpen}>

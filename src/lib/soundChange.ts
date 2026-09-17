@@ -13,6 +13,7 @@ interface ChangeInfo {
 }
 
 const CHANGES: Record<string, ChangeInfo> = {
+	unresolved: { cls: 'change', name: 'alignment needs review' },
 	kept: { cls: 'kept', name: 'retained' },
 	loss: { cls: 'loss', name: 'lost' },
 	add: { cls: 'add', name: 'epenthesis' },

@@ -2,6 +2,8 @@
  * tags.ts — client-side classification of the structured `tags` tokens (mirrors ../data/tags.py).
  * Used to colour tag pills by category and to build the tag filter.
  */
+import shethSourceLabels from './shethSourceLabels.json';
+
 export type TagCategory = 'gender' | 'grammatical' | 'source' | 'era' | 'dialect';
 
 export const GENDER_TAGS = ['m', 'f', 'n'];
@@ -17,7 +19,7 @@ export const GRAMMATICAL_TAGS = [
 	'1sg', '2sg', '3sg', '1pl', '2pl', '3pl', 'pret', 'aor', 'opt', 'perfect', 'stem',
 	'weak', 'middle', 'strong', 'reduplicated', 'uncertain', 'sound-variant',
 	'derived', 'loanword', 'diminutive', 'intensive', 'compound', 'not-reconstructed',
-	'impv', 'alternate', 'replaced',
+	'impv', 'alternate', 'replaced', 'etymology-group',
 	'figurative', 'pejorative', 'poetic', 'dialectal', 'archaic', 'modern', 'colloquial', 'vulgar',
 	'Tamil-class-1', 'Tamil-class-2', 'Tamil-class-3', 'Tamil-class-4', 'Tamil-class-5',
 	'Tamil-class-6', 'Tamil-class-7',
@@ -47,7 +49,7 @@ export const GRAMMATICAL_TAGS = [
 // ../data/tags.py). `lex` = "known only from lexicographers".
 export const COMMON_SOURCES = [
 	'RV', 'AV', 'VS', 'TS', 'ŚBr', 'Mn', 'MBh', 'R', 'Suśr', 'Pāṇ', 'Dhātup', 'BhP', 'Kathās',
-	'Kāv', 'MW', 'lex'
+	'Kāv', 'MW', 'lex', 'Sheth:दे', 'Sheth:हे', 'Sheth:गा', 'Sheth:सुपा', 'Sheth:ठा'
 ];
 // era of the earliest Sanskrit attestation (from ../data/sanskrit_works.tsv)
 export const ERA_TAGS = ['Early-Vedic', 'Late-Vedic', 'Epic', 'Classical', 'Medieval'];
@@ -83,6 +85,8 @@ export function tagLabel(tag: string): string {
 }
 
 export const TAG_NAMES: Record<string, string> = {
+	...shethSourceLabels,
+	'etymology-group': 'grouped',
 	animate: 'animate', inanimate: 'inanimate', kinship: 'kinship', collective: 'collective',
 	'second-causative': 'second causative', 'indirect-past': 'indirect past',
 	'potential-past': 'potential past', 'inchoative-participle': 'inchoative participle',

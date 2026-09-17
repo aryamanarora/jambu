@@ -22,7 +22,7 @@
 		getCrossFamilyComparisons,
 		type DerivedNode
 	} from '$lib/query';
-	import { changeInfo, changeLabel } from '$lib/soundChange';
+	import { changeInfo } from '$lib/soundChange';
 	import { cladeRank } from '$lib/cladeTree';
 	import { cladeColor } from '$lib/clades';
 	import { cladeFavRank, langFavRank } from '$lib/prefs.svelte';
@@ -31,6 +31,8 @@
 	import CladeBars from '$lib/components/CladeBars.svelte';
 	import Ancestry from '$lib/components/Ancestry.svelte';
 	import Alignment from '$lib/components/Alignment.svelte';
+	import SegmentChip from '$lib/components/SegmentChip.svelte';
+	import { alignmentGrid, type AlignmentCell as Cell } from '$lib/alignmentGrid';
 	import ReflexDetail from '$lib/components/ReflexDetail.svelte';
 	import LangName from '$lib/components/LangName.svelte';
 	import Tags from '$lib/components/Tags.svelte';
@@ -162,10 +164,7 @@
 	}
 
 	// ---- rows: one per reflex, aligned into etymon-segment columns -----------
-	interface Cell {
-		main: AlignSeg | null; // segment aligned to this etymon position (may be a loss)
-		post: AlignSeg[]; // insertions that follow it
-	}
+
 	interface Row {
 		r: AlignedReflex;
 		clade: string;
@@ -193,7 +192,7 @@
 	}));
 	const rows = $derived.by<Row[]>(() => {
 		if (!ea) return [];
-		const n = ea.etymon.length;
+		const indices = ea.etymon.map((_, index) => index);
 		const sorted = [...filteredReflexes].sort((a, b) => {
 			const cladeA = a.lemma.language?.clade ?? 'Other';
 			const cladeB = b.lemma.language?.clade ?? 'Other';
@@ -224,16 +223,7 @@
 			const firstLang = r.lemma.language_id !== lastLang || firstClade;
 			lastLang = r.lemma.language_id;
 
-			const cells: Cell[] = Array.from({ length: n }, () => ({ main: null, post: [] }));
-			const lead: AlignSeg[] = [];
-			let lastCol = -1;
-			for (const s of r.segs) {
-				if (s.etymonIdx >= 0 && s.etymonIdx < n) {
-					cells[s.etymonIdx].main = s;
-					lastCol = s.etymonIdx;
-				} else if (lastCol >= 0) cells[lastCol].post.push(s);
-				else lead.push(s);
-			}
+			const { cells, lead } = alignmentGrid(r.segs, indices);
 			const cog = r.lemma.cognateset ?? '';
 			const ci = cog.indexOf(':');
 			return {
@@ -465,19 +455,6 @@
 	}
 </script>
 
-{#snippet segChip(s: AlignSeg, ins: boolean)}
-	{@const info = changeInfo(s.change)}
-	{#if s.change === 'loss'}
-		<span class="seg loss" title={changeLabel(s.etymonSeg, '', s.change)}>·</span>
-	{:else}
-		<span
-			class="seg {info.cls}"
-			class:ins
-			title={changeLabel(s.etymonSeg, s.reflexSeg, s.change)}>{s.reflexSeg}</span
-		>
-	{/if}
-{/snippet}
-
 <svelte:head>
 	<title>{striptags(entry.word)} [{entry.id}] — Jambu</title>
 	<meta
@@ -506,6 +483,9 @@
 {#if ancestryChain.length}
 	<div class="entry-ancestry">
 	<Ancestry label={relLabel} chain={ancestryChain} startLang={entry.language?.name} compact />
+	{#if entry.tags?.split(/\s+/).includes('etymology-group')}
+		<p class="muted">Grouped by CDIAL correspondence; inheritance and borrowing are not distinguished.</p>
+	{/if}
 	{#if alternates.length}
 		<p class="alternates">
 			<span class="alt-label">also proposed</span>
@@ -531,7 +511,7 @@
 		<summary>Evidence and notes</summary>
 {#if comparisons.length}
 	<section class="cross-family" aria-labelledby="cross-family-title">
-		<h2 id="cross-family-title">Cross-family comparisons</h2>
+		<h2 id="cross-family-title">Source comparisons</h2>
 		<div class="comparison-list">
 			{#each comparisons as comparison (comparison.id)}
 				{@const comparisonRelation = comparisonLabel(comparison, entry.id)}
@@ -636,6 +616,10 @@
 		<span class="oa-label">Sound changes</span>
 		<Alignment segs={ownSegs} />
 	</div>
+{/if}
+
+{#if filteredReflexes.some((reflex) => reflex.lemma.tags?.split(/\s+/).includes('etymology-group'))}
+	<p class="muted">Nuristani forms and reconstructions are grouped here by CDIAL correspondence; inheritance and borrowing are not distinguished.</p>
 {/if}
 
 <!-- derived terms (compound / affixed etyma built on this one) — before the reflexes -->
@@ -751,9 +735,9 @@
 						{:else if row.r.segs.length}
 							{#each row.cells as cell, i (i)}
 								<td class="c-seg cell" class:sel={selected === i}>
-									{#if i === 0}{#each row.lead as s (s.pos)}{@render segChip(s, true)}{/each}{/if}
-									{#if cell.main}{@render segChip(cell.main, false)}{/if}
-									{#each cell.post as s (s.pos)}{@render segChip(s, true)}{/each}
+									{#if i === 0}{#each row.lead as s (s.pos)}<SegmentChip segment={s} insertion />{/each}{/if}
+									{#if cell.main}<SegmentChip segment={cell.main} />{/if}
+									{#each cell.post as s (s.pos)}<SegmentChip segment={s} insertion />{/each}
 								</td>
 							{/each}
 						{:else}
@@ -1620,45 +1604,6 @@
 		font-family: var(--font-phon);
 		font-size: 1.1rem;
 		color: var(--muted);
-	}
-	/* every segment is a uniform padded slot; changed/inserted ones are filled */
-	.seg {
-		display: inline-block;
-		font-family: var(--font-phon);
-		font-size: 1.06rem;
-		line-height: 1;
-		min-width: 0.9em;
-		padding: 4px 7px;
-		border-radius: 6px;
-		vertical-align: middle;
-	}
-	.seg + .seg {
-		margin-left: 3px;
-	}
-	.seg.change {
-		color: #a85713;
-		background: rgba(181, 100, 26, 0.16);
-	}
-	.seg.loss {
-		color: var(--faint);
-		padding: 4px 5px;
-	}
-	.seg.add,
-	.seg.ins {
-		color: #2563a8;
-		background: rgba(46, 111, 181, 0.16);
-		font-size: 0.86em;
-		padding: 3px 5px;
-	}
-	:global(:root[data-theme='dark']) .seg.change,
-	:global(:root:not([data-theme='light'])) .seg.change {
-		color: #e0a35a;
-	}
-	:global(:root[data-theme='dark']) .seg.add,
-	:global(:root[data-theme='dark']) .seg.ins,
-	:global(:root:not([data-theme='light'])) .seg.add,
-	:global(:root:not([data-theme='light'])) .seg.ins {
-		color: #7fb0e0;
 	}
 	.gloss-cell {
 		color: var(--muted);

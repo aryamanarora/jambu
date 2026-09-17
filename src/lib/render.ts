@@ -209,7 +209,9 @@ export function cognatesetParts(key: string | null | undefined): { code: string 
 export function relationLabel(l: {
 	relation?: string | null;
 	origin_lemma_id?: string | null;
+	tags?: string | null;
 }): string {
+	if (l.tags?.split(/\s+/).includes('etymology-group')) return 'Grouped with';
 	switch (l.relation) {
 		case 'borrowed':
 			return 'Borrowed from';

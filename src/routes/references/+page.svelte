@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { referenceProgress, unetymologisedPercent } from '$lib/referenceStatus';
 	import { highlightText, referenceLabel } from '$lib/render';
 	import { unicodeSearchIncludes } from '$lib/unicodeSearch';
 	import FilterCell from '$lib/components/FilterCell.svelte';
@@ -31,7 +32,7 @@
 				extractionLabel(reference),
 				(reference.lemma_count ?? 0).toLocaleString(),
 				(reference.lemma_count ?? 0).toString(),
-				unetymologisedPct(reference.lemma_count ?? 0, reference.unetymologised_count ?? 0)
+				unetymologisedPercent(reference.lemma_count ?? 0, reference.unetymologised_count ?? 0)
 			].some((field) => unicodeSearchIncludes(field ?? '', needle, relaxed))
 		);
 		if (!activeSort) return rows;
@@ -59,14 +60,7 @@
 	}
 
 	// progress → badge class + border colour (mirrors the old references.html)
-	function badge(progress: string | null): 'ok' | 'warn' | 'bad' {
-		if (progress === 'Yes') return 'ok';
-		if (progress === 'Partial') return 'warn';
-		return 'bad';
-	}
-	function unetymologisedPct(total: number, unetymologised: number): string {
-		return total ? `${((unetymologised / total) * 100).toFixed(1)}%` : '—';
-	}
+
 	const borderColor = { ok: 'var(--ok)', warn: 'var(--warn)', bad: 'var(--bad)' };
 </script>
 
@@ -112,7 +106,7 @@
 		</thead>
 		<tbody>
 			{#each sortedReferences as r (r.id)}
-				{@const b = badge(r.progress)}
+				{@const b = referenceProgress(r.progress)}
 				{@const segments = data.cladeDistributions[r.id] ?? []}
 				<tr>
 					<td class="lang-cell ref-cell" style="border-left-color: {borderColor[b]}">
@@ -124,7 +118,7 @@
 						<ReferenceFormsCount count={r.lemma_count ?? 0} {segments} highlight={numericHighlight((r.lemma_count ?? 0).toLocaleString())} />
 					</td>
 					<td class="pct" data-label="Unetymologised" title="{(r.unetymologised_count ?? 0).toLocaleString()} of {(r.lemma_count ?? 0).toLocaleString()} forms">
-						{@html highlightText(unetymologisedPct(r.lemma_count ?? 0, r.unetymologised_count ?? 0), search, relaxed)}
+						{@html highlightText(unetymologisedPercent(r.lemma_count ?? 0, r.unetymologised_count ?? 0), search, relaxed)}
 					</td>
 				</tr>
 			{/each}

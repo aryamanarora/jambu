@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { postDate } from '$lib/blog';
+	import BlogByline from '$lib/components/BlogByline.svelte';
 	import BlogDisclaimer from '$lib/components/BlogDisclaimer.svelte';
 	import BlogChart from '$lib/components/BlogChart.svelte';
 	import type { PageData } from './$types';
@@ -22,7 +22,7 @@
 	<header>
 		<h1>{data.post.title}</h1>
 		<p class="deck">{data.post.description}</p>
-		<div class="byline">{#each data.post.authors as author}<span>{author.name} <span class="author-kind">{author.kind === 'agent' ? 'AI-written' : 'Human-written'}</span></span>{/each}<time datetime={data.post.date}>{postDate(data.post.date)}</time></div>
+		<BlogByline authors={data.post.authors} date={data.post.date} />
 		{#if data.post.reviewedBy}<p class="review">Reviewed by {data.post.reviewedBy}</p>{/if}
 	</header>
 	{#if data.post.authors.some((author) => author.kind === 'agent')}<BlogDisclaimer />{/if}
@@ -63,9 +63,9 @@
 	header { padding: 2rem 0; border-bottom: 1px solid var(--border-strong); margin-bottom: 2rem; }
 	h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.2rem, 6vw, 3.5rem); line-height: 1.15; margin: 0 0 1rem; letter-spacing: -.025em; }
 	.deck { font-family: var(--font-serif); color: var(--muted); font-size: 1.2rem; line-height: 1.6; }
-	.byline { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.5rem; font-size: .875rem; }
-	time, .review { color: var(--muted); font-size: .875rem; }
-	.author-kind { margin-left: .4rem; padding: .15rem .4rem; background: var(--surface-2); border-radius: 4px; font-size: .75rem; }
+
+	.review { color: var(--muted); font-size: .875rem; }
+
 	.prose { font-family: var(--font-serif); font-size: 1.125rem; line-height: 1.85; }
 	.prose :global(p) { margin: 0 0 1.4em; }
 	.prose :global(h2) { margin: 2em 0 .65em; font-weight: 400; font-size: 1.6rem; line-height: 1.3; }

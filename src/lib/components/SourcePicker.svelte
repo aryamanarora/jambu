@@ -6,11 +6,13 @@
 
 	let {
 		placeholder = 'Source',
+		emptyLabel = 'All sources',
 		value = '',
 		options = [],
 		onSelect
 	}: {
 		placeholder?: string;
+		emptyLabel?: string;
 		value?: string;
 		options?: Reference[];
 		onSelect: (value: string) => void;
@@ -37,7 +39,7 @@
 		}
 	});
 
-	const selected = $derived(references.find((reference) => reference.id === value) ?? null);
+	const selected = $derived(references.find((reference) => reference.id === value || reference.short === value) ?? null);
 	const filtered = $derived.by(() => {
 		const needle = search.trim().toLocaleLowerCase();
 		return needle
@@ -82,9 +84,10 @@
 	<button
 		type="button"
 		class="trigger"
-		class:active={open}
+		class:active={open || !!value}
 		bind:this={triggerEl}
 		aria-expanded={open}
+		aria-label={value ? `Source: ${selected ? referenceLabel(selected) : value}` : 'Filter by source'}
 		onclick={() => (open = !open)}
 	>
 		<span class:placeholder={!value}>{selected ? referenceLabel(selected) : value || placeholder}</span>
@@ -104,10 +107,10 @@
 				{#if value}<button type="button" class="clear" onclick={() => pick('')}>clear</button>{/if}
 			</div>
 			<div class="list">
-				<button type="button" class="option any" class:on={!value} onclick={() => pick('')}>All sources</button>
+				<button type="button" class="option any" class:on={!value} onclick={() => pick('')}>{emptyLabel}</button>
 				{#if !loaded}<div class="hint">loading references…</div>{/if}
 				{#each filtered as reference (reference.id)}
-					<button type="button" class="option" class:on={value === reference.id} onclick={() => pick(reference.id)}>
+					<button type="button" class="option" class:on={value === reference.id || value === reference.short} onclick={() => pick(reference.id)}>
 						<span class="reference-row">
 							<span class="abbr">{referenceLabel(reference)}</span>
 							<span class="count">{reference.lemma_count.toLocaleString()} forms</span>
@@ -122,7 +125,7 @@
 </div>
 
 <style>
-	.picker { position: relative; display: inline-flex; width: 100%; }
+	.picker { position: relative; display: inline-flex; width: 100%; min-width: 0; }
 	.trigger {
 		display: inline-flex;
 		align-items: center;

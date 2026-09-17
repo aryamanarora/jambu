@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import SearchInput from './SearchInput.svelte';
 
 	let {
 		value = '',
@@ -7,7 +8,10 @@
 		searchLabel = 'Search',
 		resultLabel = '',
 		filterCount = 0,
+		filterAlign = 'end',
+		debounceMs = 250,
 		onSearch,
+		onSubmit,
 		filters,
 		actions
 	}: {
@@ -16,36 +20,23 @@
 		searchLabel?: string;
 		resultLabel?: string;
 		filterCount?: number;
+		filterAlign?: 'start' | 'end';
+		debounceMs?: number;
 		onSearch: (value: string) => void;
+		onSubmit?: () => void;
 		filters?: Snippet;
 		actions?: Snippet;
 	} = $props();
 
-	let local = $state('');
 	let filterMenu = $state<HTMLDetailsElement | null>(null);
-	let debounce: ReturnType<typeof setTimeout>;
-
-	$effect(() => {
-		local = value;
-	});
-
-	function update(next: string) {
-		local = next;
-		clearTimeout(debounce);
-		debounce = setTimeout(() => onSearch(next), 250);
-	}
 </script>
 
-<div class="list-toolbar">
+<div class="list-toolbar" class:align-start={filterAlign === 'start'}>
 	<label class="search-field">
 		<span class="visually-hidden">{searchLabel}</span>
 		<span class="search-icon" aria-hidden="true">⌕</span>
-		<input
-			type="search"
-			{placeholder}
-			value={local}
-			oninput={(event) => update(event.currentTarget.value)}
-		/>
+		<SearchInput type="search" inputClass="" label={searchLabel} {placeholder} {value}
+			{debounceMs} onValue={onSearch} {onSubmit} />
 	</label>
 
 	{#if filters}
@@ -80,7 +71,7 @@
 		flex: 1 1 22rem;
 		max-width: 36rem;
 	}
-	.search-field input {
+	.search-field :global(input) {
 		width: 100%;
 		min-height: 42px;
 		padding: 0.58rem 0.8rem 0.58rem 2.15rem;
@@ -90,7 +81,7 @@
 		color: var(--ink);
 		font: inherit;
 	}
-	.search-field input:focus {
+	.search-field :global(input:focus) {
 		outline: none;
 		border-color: var(--plum-2);
 		box-shadow: 0 0 0 3px color-mix(in srgb, var(--berry) 16%, transparent);
@@ -165,6 +156,8 @@
 		gap: 1rem;
 		margin-bottom: 0.75rem;
 	}
+	.align-start .filter-menu { position: static; }
+	.align-start .filter-panel { left: 0; right: auto; }
 	.filter-panel-head button {
 		border: 0;
 		background: none;
@@ -200,6 +193,7 @@
 			max-height: calc(100dvh - 5rem);
 			overflow-y: auto;
 		}
+		.align-start .filter-panel { left: 0.65rem; right: 0.65rem; }
 		.filter-grid { grid-template-columns: 1fr; }
 		.result-label {
 			order: 5;

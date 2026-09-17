@@ -13,7 +13,6 @@
 		anchor,
 		prefer = 'above',
 		interactive = true,
-		portal = false,
 		onenter,
 		onleave,
 		children
@@ -21,7 +20,6 @@
 		anchor: HTMLElement | null;
 		prefer?: 'above' | 'below'; // which side to take when both fit
 		interactive?: boolean; // false for a pure tooltip the pointer should fall through
-		portal?: boolean; // escape a parent control when the card contains its own actions
 		onenter?: () => void; // pointer moved onto the card — callers cancel their close timer
 		onleave?: () => void;
 		children: Snippet;
@@ -29,11 +27,6 @@
 
 	let el = $state<HTMLElement | null>(null);
 	let placed = $state<{ left: number; top: number } | null>(null);
-	function mountPortal(node: HTMLElement) {
-		if (!portal) return;
-		document.body.appendChild(node);
-		return { destroy: () => node.remove() };
-	}
 
 	function place() {
 		if (!el || !anchor) return;
@@ -74,7 +67,6 @@
 </script>
 
 <div
-	use:mountPortal
 	class="tip"
 	class:measuring={!placed}
 	class:inert={!interactive}

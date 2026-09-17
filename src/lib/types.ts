@@ -190,6 +190,7 @@ export interface MapMarker {
 	long: number;
 	svg: string; // inline SVG string (languages.map_marker)
 	tooltip?: string;
+	label?: string; // plain accessible name for keyboard and screen-reader navigation
 	popupHtml?: string;
 	onClick?: () => void;
 	color?: string; // when set, drawn as a filled circle in this colour instead of the SVG icon

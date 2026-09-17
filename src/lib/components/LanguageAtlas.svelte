@@ -1,4 +1,5 @@
 <script lang="ts">
+	import QualityBadge from '$lib/components/QualityBadge.svelte';
 	// The languages of Jambu as a full-screen atlas, in the same idiom as the concept atlas: an
 	// edge-to-edge map with two floating panels over it. Left holds the scope — which family you
 	// are looking at, and what it contains. Right is the list of languages in that scope, working
@@ -400,7 +401,7 @@
 						</a>
 						<span class="dwhere" title={dialect.location || 'location not recorded'}>{dialect.location || 'location not recorded'}</span>
 						{#if dialect.quality}
-							<span class={`dq q${dialect.quality}`} title={`Source quality ${dialect.quality}`}>{dialect.quality}</span>
+							<QualityBadge quality={dialect.quality} />
 						{/if}
 						<span class="dn">{dialect.lemma_count.toLocaleString()}</span>
 					</li>
@@ -814,20 +815,7 @@
 	/* how good the record behind a dialect is — A best, C weakest */
 	/* Outlined rather than filled: a solid tint deep enough to read in one theme goes muddy in the
 	   other, so the letter keeps the accent colour and only the fill deepens with the grade. */
-	.dq {
-		align-self: center;
-		box-sizing: border-box;
-		width: 1.15rem;
-		border: 1px solid color-mix(in srgb, var(--plum-2) 40%, transparent);
-		border-radius: 3px;
-		color: var(--plum-2);
-		font-size: 0.62rem;
-		font-weight: 700;
-		text-align: center;
-	}
-	.qA { background: color-mix(in srgb, var(--plum-2) 26%, transparent); }
-	.qB { background: color-mix(in srgb, var(--plum-2) 12%, transparent); }
-	.qC { background: none; opacity: 0.75; }
+
 	.dialects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
 	.dialects li {
 		display: grid;

@@ -22,6 +22,11 @@ export const changelog: ChangelogEntry[] = [
 		label: '13 September 2026',
 		title: 'New dialect surveys, dictionaries, and Zoller comparative vocabulary',
 		changes: [
+			'Standardised search filters, source selection, pagination, sound-alignment chips, and the responsive layouts of language and source pages.',
+			'Compare sound correspondences with three inputs: ancestor patterns and Entries search filters, descendant languages, and outcome classes such as aligned sounds or tone.',
+			'Filter comparison languages by total forms or matching outcome forms, using the same searchable language picker as Favorites and form filters.',
+			'Choose an aligned target within a larger sound pattern, such as k between vowels; a class picker helps build patterns and parsed chips distinguish the target from its context.',
+			'Group ancestor table columns by sound properties or form properties, including accent, syllable count, and weight patterns; use the same groups on the map and open downloadable evidence from each pie.',
 			'Added a release checklist to keep source coverage, data publication, and deployment verification consistent.',
 			'Added 17,754 attestations from the linguistic data sections of Zoller’s 2023 study, spanning 328 languages after separating its West Pahari varieties, with exact source locators.',
 			'Preserved source transcription, 341 direct CDIAL links, and 70 explicit variant links; unresolved comparisons remain unlinked.',
