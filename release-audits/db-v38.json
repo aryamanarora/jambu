@@ -90,5 +90,16 @@
   "frontend_release_checkout": "npm run check: 461 files, 0 errors, 6 warnings (same 6 as v37). Only release files are committed; the unrelated in-progress edit to src/lib/components/ConceptPicker.svelte is left uncommitted."
  },
  "local_resources": "One heavy job at a time: make all, full pytest, db:transform, zstd --threads=1. No production prerender locally; CI runs npm run check and the full build.",
- "production": "PENDING"
+ "production": {
+  "frontend_commit": "30707ac39bcbfeac6e0072a6c4252473693cb3fc",
+  "data_commit": "c8a88cc637edfd9e6656d41ddb52331c3ae63be4",
+  "data_push": "moli-mandala/data main 3bf47fb1..c8a88cc6 (five commits), pushed before the frontend release; origin/main verified == c8a88cc6",
+  "release": "https://github.com/aryamanarora/jambu/releases/tag/db-v38 against the full frontend SHA (the commit was first pushed to a temporary release/db-v38 branch so the tag target existed remotely, then main was fast-forwarded and the branch deleted); assets jambu.db 158,269,440, jambu.db.zst 55,933,648 and db-release.json; the zst re-downloaded from the release matched the manifest (sha256 2adab26f…)",
+  "ci": "run 35353774672 on 30707ac: build success 14:02:27–14:16:30Z, deploy success 14:17:08Z, first attempt (assets were live before the push)",
+  "production_url": "https://aryaman.io/jambu/ (Pages custom domain; github.io origin redirects)",
+  "live_asset_check": "GET /jambu/db/jambu.db.zst on aryaman.io and aryamanarora.github.io: 55,933,648 bytes, sha256 2adab26f… identical to the release asset and manifest",
+  "live_bundle": "deployed chunk CpAkKXlL.js carries DB_VERSION \"38\", 55933648 and 158269440; homepage renders the 18 September 2026 changelog as latest with 636 sources and 560 languages and the ~56 MB / 55.93 MB banner; prerendered entry 5131 200; non-prerendered deep link /entries/f_gc5kzpm3w2wcm served by the SPA 404 fallback with all immutable assets 200",
+  "live_browser": "In a visible automated tab the Load database click fetched the packed DB and the SQLite worker answered: /entries/f_gc5kzpm3w2wcm (the H. saṛak homograph whose etymon reference broke mid-session) renders 'road' as a reflex of *sr̩tikk-; /entries/5100 lists Pa. jananī, Pk. jaṇaṇī, P. jaṇṇī all glossed 'mother' (blank in v37); /entries/13952 renders 302 reflexes at 373 map locations with L. haḍḍ/haḍḍī 'bone' and haḍḍā 'spavin' as the parser tests specify",
+  "not_verified": "OPFS persistence across navigations in the automation browser (each full navigation re-downloaded); a returning visitor's cache-version bump is exercised only by the DB_VERSION constant in the deployed bundle"
+ }
 }
