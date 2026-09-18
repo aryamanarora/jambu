@@ -1,15 +1,15 @@
 {
-  "version": "37",
+  "version": "38",
   "assets": {
     ".dbwork/jambu.db": {
-      "bytes": 158089216,
-      "sha256": "509098300b615712c42f431173c26685af2d4e1d4b7581ece7ca43e2b07b93de"
+      "bytes": 158269440,
+      "sha256": "025cac5dc62e4fc33add492120163b41897e298c143f675e27577c33425e079c"
     },
     "static/db/jambu.db.zst": {
-      "bytes": 55972097,
-      "sha256": "2b6b7f5e4d6e134efa9a5d29fc4f095dce765fff59be2e31cd406745d7225059"
+      "bytes": 55933648,
+      "sha256": "2adab26fcd3978f99097620a0137d85efb73855d7a1e99f2b4f72573fe1fb098"
     }
   },
-  "cldfSnapshotCommit": "3bf47fb162256493adbf3831e86fd4ab66ba96f5",
-  "cldfSnapshotStatus": "Published with ingestion provenance to data main; see release-audits/db-v37.json for validation and baseline test comparison."
+  "cldfSnapshotCommit": "c8a88cc637edfd9e6656d41ddb52331c3ae63be4",
+  "cldfSnapshotStatus": "Published to data main; see release-audits/db-v38.json for validation and baseline test comparison."
 }

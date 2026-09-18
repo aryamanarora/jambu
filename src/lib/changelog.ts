@@ -18,6 +18,19 @@ type ChangelogLink = {
 // homepage remains deterministic when it is prerendered in a different timezone.
 export const changelog: ChangelogEntry[] = [
 	{
+		date: '2026-09-18',
+		label: '18 September 2026',
+		title: 'Survey-site coordinates, resolved dictionary glosses, and no more non-word rows',
+		changes: [
+			'Reviewed the map location of 587 survey-site dialects that had been sharing one coordinate with their parent language or a sibling site, each placed by hand from the survey’s own site descriptions, gazetteers, and OpenStreetMap: Pashai and Prasun villages, the Bhil, Malvi, Bagheli, Kullu, Pothwari, Ho, Korwa, Koya, Desia, Karbi and Kurumba lists, Zoller’s West Pahari toponyms, and Romani country centroids. 1,967 dialects are now located at 1,732 distinct points (was 1,569 at 1,317), and 25 more languages have a centroid.',
+			'Resolved Turner’s and Burrow–Emeneau’s “id.” and “do.” glosses to the meaning they refer back to, including chains and the entry-initial meaning stated only in the headword, so those forms carry a real gloss instead of an abbreviation.',
+			'Filled 10,375 blank CDIAL glosses (15,353 → 4,978) following Turner’s conventions: an unglossed reflex takes the headword or the meaning printed for its run, borrowings inherit the lender’s gloss, and “the tree” / “its fruit” shorthand is anchored to the sense it abbreviates. Forward grammatical labels (m., f., impv., instr., …) are stored as notes and tags rather than left in the gloss.',
+			'Removed 1,118 CDIAL rows that were never words: sound-change fragments such as “-kk-” and “ch-”, and starred reconstructions quoted inside the discussion, which are now kept as notes on the form they explain.',
+			'Repaired botanical markup in DEDR so Latin species names stay attached to their common-name glosses.',
+			'Refreshed the dictionary: 792,933 browser records in a 55.93 MB download.'
+		]
+	},
+	{
 		date: '2026-09-16',
 		label: '16 September 2026',
 		title: 'Sheth’s Prakrit dictionary, Munda surveys, and 38,000 reviewed etymologies',
