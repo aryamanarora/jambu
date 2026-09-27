@@ -831,10 +831,10 @@ async function attachEntryExtras(rows: HLemma[]): Promise<void> {
 	const rids = rows.map((r) => r.rid);
 	const [derived, parents, comparisons] = await Promise.all([
 		query<{ p: number; c: number }>(
-			`SELECT d.parent_rid AS p, COUNT(*) AS c FROM edges d
-			 JOIN lem c2 ON c2.rowid = d.child_rid
+			`SELECT d.parent_rid AS p, COUNT(DISTINCT d.child_rid) AS c FROM edges d
+			 JOIN lem c2 ON c2.rowid = d.child_rid JOIN lem p2 ON p2.rowid = d.parent_rid
 			 WHERE d.parent_rid IN ${IN_JSON} AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
-			   AND c2.origin_rid IS NULL GROUP BY d.parent_rid`,
+			   AND c2.origin_rid IS NULL AND c2.lang_rid IS p2.lang_rid GROUP BY d.parent_rid`,
 			[jsonList(rids)]
 		),
 		query<{
@@ -1274,10 +1274,10 @@ export async function getEntryGraph(id: string): Promise<EntryGraph> {
 			[rid]
 		),
 		query<{ rid: number; word: string; gloss: string; counts: number | null }>(
-			`SELECT l.rowid AS rid, l.word, l.gloss, l.counts
-			 FROM edges d JOIN lem l ON l.rowid = d.child_rid
+			`SELECT DISTINCT l.rowid AS rid, l.word, l.gloss, l.counts
+			 FROM edges d JOIN lem l ON l.rowid = d.child_rid JOIN lem p ON p.rowid = d.parent_rid
 			 WHERE d.parent_rid = ? AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
-			   AND l.origin_rid IS NULL ORDER BY l.ord`,
+			   AND l.origin_rid IS NULL AND l.lang_rid IS p.lang_rid ORDER BY l.ord`,
 			[rid]
 		)
 	]);
@@ -1353,11 +1353,14 @@ export interface DerivedNode {
 	ocr?: boolean | number;
 }
 
-/** The derived-term subtree of an entry (breadth-first, deduped, bounded). */
+/** The derived-term subtree of an entry (breadth-first, deduped, bounded). Stays within the
+ *  root's own language: a compound built on this etymon in a descendant language is one of its
+ *  reflexes (see getEntryAlignment's `derivatives`), not a derived term. */
 export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<DerivedNode[]> {
 	const idx = await ensureCore();
 	const rootRid = idx.ridOf(rootId);
 	if (!rootRid) return [];
+	const root = await queryOne<{ lang_rid: number | null }>('SELECT lang_rid FROM lem WHERE rowid = ?', [rootRid]);
 	const childrenOf = new Map<number, number[]>();
 	const seen = new Set<number>([rootRid]);
 	let frontier = [rootRid];
@@ -1367,9 +1370,9 @@ export async function getDerivedTree(rootId: string, maxNodes = 800): Promise<De
 			`SELECT d.parent_rid AS p, d.child_rid AS c FROM edges d
 			 JOIN lem l ON l.rowid = d.child_rid
 			 WHERE d.parent_rid IN ${IN_JSON} AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
-			   AND l.origin_rid IS NULL
+			   AND l.origin_rid IS NULL AND l.lang_rid IS ?
 			 ORDER BY d.child_rid`,
-			[jsonList(frontier)]
+			[jsonList(frontier), root?.lang_rid ?? null]
 		);
 		const next: number[] = [];
 		for (const { p, c } of edges) {
@@ -1696,10 +1699,16 @@ export interface AlignedReflex {
 	lemma: Lemma;
 	segs: AlignSeg[];
 	concepts: ReflexConcept[];
+	/** Set on a derivative row: how the form is built on this etymon. */
+	derivation?: 'component' | 'derived';
 }
 export interface EntryAlignment {
 	etymon: { idx: number; seg: string }[];
 	reflexes: AlignedReflex[];
+	/** Forms in OTHER languages built on this etymon (a compound member or an affixed
+	 *  derivative), with no accepted etymon of their own. Same-language derivatives are the
+	 *  entry's derived terms instead (getEntryGraph). */
+	derivatives: AlignedReflex[];
 }
 
 export interface ReflexConcept {
@@ -1776,8 +1785,24 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 	const idx = await ensureCore();
 	const meta = await ensureAlignMeta();
 	const entryRid = idx.ridOf(entryId);
-	if (!entryRid) return { etymon: [], reflexes: [] };
-	const reflexes = await entryChildRows(entryRid, [REL_REFLEX, REL_BORROWED]);
+	if (!entryRid) return { etymon: [], reflexes: [], derivatives: [] };
+	const direct = await entryChildRows(entryRid, [REL_REFLEX, REL_BORROWED]);
+	// cross-language derivatives ride along for language/reference/concept attachment and are
+	// split back out at the end. A repeated component may occupy several positions;
+	// list its child once here while retaining every position in the graph itself.
+	// If both edge kinds apply, the component badge takes precedence (kind 5).
+	const derivativeRows = await query<RawLem & { derivation: number }>(
+		`SELECT ${LEM_COLS}, MIN(d.kind) AS derivation FROM edges d
+		   JOIN lem l ON l.rowid = d.child_rid ${LEM_JOINS}
+		   JOIN lem p ON p.rowid = d.parent_rid
+		 WHERE d.parent_rid = ? AND d.kind IN (${KIND_COMPONENT}, ${KIND_DERIVED}) AND d.rank = 1
+		   AND l.origin_rid IS NULL AND l.lang_rid IS NOT p.lang_rid
+		 GROUP BY l.rowid
+		 ORDER BY l.ord`,
+		[entryRid]
+	);
+	const derivationOf = new Map(derivativeRows.map((r) => [r.rid, r.derivation]));
+	const reflexes = [...direct, ...derivativeRows.map(({ derivation: _, ...r }) => hydrate(r))];
 	await attachLanguages(reflexes);
 	await attachReferences(reflexes);
 	await attachSubCounts(reflexes);
@@ -1837,12 +1862,20 @@ export async function getEntryAlignment(entryId: string): Promise<EntryAlignment
 	const etymon = [...etymonMap.entries()]
 		.sort((a, b) => a[0] - b[0])
 		.map(([i, seg]) => ({ idx: i, seg }));
-	const aligned = reflexes.map((l) => ({
-		lemma: l as Lemma,
-		segs: segsByRid.get(l.rid) ?? [],
-		concepts: conceptsByRid.get(l.rid) ?? []
-	}));
-	return { etymon, reflexes: aligned };
+	const aligned = reflexes.map((l): AlignedReflex => {
+		const kind = derivationOf.get(l.rid);
+		return {
+			lemma: l as Lemma,
+			segs: segsByRid.get(l.rid) ?? [],
+			concepts: conceptsByRid.get(l.rid) ?? [],
+			...(kind ? { derivation: kind === KIND_COMPONENT ? 'component' : 'derived' } : {})
+		};
+	});
+	return {
+		etymon,
+		reflexes: aligned.filter((r) => !r.derivation),
+		derivatives: aligned.filter((r) => !!r.derivation)
+	};
 }
 
 /** The materialised alignment (etymon→reflex sound-change steps) for a single reflex. */

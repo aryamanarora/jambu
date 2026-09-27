@@ -115,8 +115,8 @@
 						{/each}
 					</ul>
 					{#if entry.ingested}
-						<div class="changelog-ingested" aria-label="Newly ingested data">
-							<p class="ingested-title">Newly ingested</p>
+						<div class="changelog-ingested" aria-label="Sources and affected languages">
+							<p class="ingested-title">Data coverage</p>
 							<div>
 								<span class="ingested-label">Languages</span>
 								<div class="ingested-links">

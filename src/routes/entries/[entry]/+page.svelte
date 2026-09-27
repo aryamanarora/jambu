@@ -108,7 +108,7 @@
 	let ownSegs = $state<AlignSeg[]>([]);
 	let dialects = $state<Dialect[]>([]);
 	let loading = $state(true);
-	const hasDescendants = $derived(!loading && !!ea?.reflexes.length);
+	const hasDescendants = $derived(!loading && !!(ea?.reflexes.length || ea?.derivatives.length));
 	const origin = $derived(ancestryChain[0]?.[0]);
 	let selected = $state<number | null>(null);
 	let expanded = $state<Set<string>>(new Set());
@@ -125,7 +125,7 @@
 	);
 	const reflexReferences = $derived.by(() =>
 		referenceSummary(
-			(ea?.reflexes ?? []).flatMap(({ lemma }) => [
+			[...(ea?.reflexes ?? []), ...(ea?.derivatives ?? [])].flatMap(({ lemma }) => [
 				...(lemma.references ?? []),
 				...(lemma.variants ?? []).flatMap((variant) => variant.references ?? [])
 			])
@@ -179,7 +179,7 @@
 
 	const formSearch = $derived(browser ? page.url.searchParams.get('word')?.trim() ?? '' : '');
 	const relaxedSearch = $derived(browser && page.url.searchParams.get('relaxed') === '1');
-	const filteredReflexes = $derived((ea?.reflexes ?? []).filter((reflex) => {
+	function matchesSearch(reflex: AlignedReflex): boolean {
 		if (!formSearch) return true;
 		const lemma = reflex.lemma;
 		const fields = [lemma.id, lemma.word, lemma.native, lemma.phonemic, lemma.gloss,
@@ -189,11 +189,18 @@
 			...(lemma.references ?? []).flatMap((reference) => [reference.id, reference.short, reference.source, reference.locator]),
 			...reflex.concepts.map((concept) => concept.name)];
 		return fields.some((field) => unicodeSearchIncludes(striptags(field ?? ''), formSearch, relaxedSearch));
-	}));
-	const rows = $derived.by<Row[]>(() => {
+	}
+	const filteredReflexes = $derived((ea?.reflexes ?? []).filter(matchesSearch));
+	// compounds / affixed derivatives in other languages: a table subsection under the reflexes
+	const filteredDerivatives = $derived((ea?.derivatives ?? []).filter(matchesSearch));
+	// everything the map, concept key and reference list account for
+	const shownForms = $derived([...filteredReflexes, ...filteredDerivatives]);
+	const rows = $derived(buildRows(filteredReflexes));
+	const derivativeRows = $derived(buildRows(filteredDerivatives));
+	function buildRows(list: AlignedReflex[]): Row[] {
 		if (!ea) return [];
 		const indices = ea.etymon.map((_, index) => index);
-		const sorted = [...filteredReflexes].sort((a, b) => {
+		const sorted = [...list].sort((a, b) => {
 			const cladeA = a.lemma.language?.clade ?? 'Other';
 			const cladeB = b.lemma.language?.clade ?? 'Other';
 			// pinned clades (or clades of pinned languages) float to the top, in the user's order
@@ -238,7 +245,7 @@
 				cogLabel: ci === -1 ? '' : cog.slice(ci + 1)
 			};
 		});
-	});
+	}
 	const totalCols = $derived(
 		view === 'align' ? (ea?.etymon.length ?? 0) + 4 : view === 'concept' ? 6 : 5
 	);
@@ -307,7 +314,7 @@
 	interface ConceptSummary { id: number; name: string; category: string; count: number }
 	const conceptSummary = $derived.by<ConceptSummary[]>(() => {
 		const counts = new Map<number, ConceptSummary>();
-		for (const reflex of filteredReflexes) {
+		for (const reflex of shownForms) {
 			for (const concept of reflex.concepts) {
 				const current = counts.get(concept.id);
 				if (current) current.count++;
@@ -320,7 +327,7 @@
 		new Map(conceptSummary.map((concept, index) => [concept.id, PALETTE[index % PALETTE.length]]))
 	);
 	const unmappedConceptCount = $derived(
-		filteredReflexes.filter((reflex) => reflex.concepts.length === 0).length
+		shownForms.filter((reflex) => reflex.concepts.length === 0).length
 	);
 	let pinnedConcepts = $state<number[]>([]);
 	let hoverConcept = $state<number | null>(null);
@@ -365,7 +372,7 @@
 		}
 		const dialectByToken = new Map(dialects.map((d) => [d.token, d]));
 		const byLocation = new Map<string, Location>();
-		for (const r of filteredReflexes) {
+		for (const r of shownForms) {
 			const l = r.lemma.language;
 			if (!l) continue;
 			const tagged = (r.lemma.tags ?? '')
@@ -448,7 +455,7 @@
 	});
 
 	const plainGloss = $derived(striptags(entry.gloss) || shortGloss(entry.etymology ?? ''));
-	const langCount = $derived(new Set(filteredReflexes.map((r) => r.lemma.language_id)).size);
+	const langCount = $derived(new Set(shownForms.map((r) => r.lemma.language_id)).size);
 	function rowClick(e: MouseEvent, id: string) {
 		if ((e.target as HTMLElement).closest('a')) return;
 		toggleExp(id);
@@ -680,8 +687,8 @@
 		</nav>
 	</section>
 	{:else}
-	<p class="count muted" aria-live="polite">{filteredReflexes.length.toLocaleString()}{formSearch ? ` of ${ea.reflexes.length.toLocaleString()}` : ''} reflexes · {langCount} languages</p>
-	{#if formSearch && !filteredReflexes.length}<p class="muted">No forms match “{formSearch}”. Clear the search to show all forms.</p>{/if}
+	<p class="count muted" aria-live="polite">{filteredReflexes.length.toLocaleString()}{formSearch ? ` of ${ea.reflexes.length.toLocaleString()}` : ''} reflexes · {langCount} languages{#if filteredDerivatives.length}&nbsp;· {filteredDerivatives.length.toLocaleString()}{formSearch ? ` of ${ea.derivatives.length.toLocaleString()}` : ''} compounds &amp; derivatives{/if}</p>
+	{#if formSearch && !shownForms.length}<p class="muted">No forms match “{formSearch}”. Clear the search to show all forms.</p>{/if}
 	<div class="entry-body">
 		<div class="matrix-col">
 			<PageFormsSearch />
@@ -708,7 +715,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each rows as row (row.r.lemma.id)}
+				{#each rows as row (row.r.lemma.id)}{@render reflexRow(row)}{/each}
+				{#if derivativeRows.length}
+					<!-- subsection: not reflexes of the etymon itself, but forms in other languages
+					     that contain it (compound member) or are affixed derivatives of it -->
+					<tr class="section-row">
+						<td colspan={totalCols}>
+							<span class="section-title">Compounds &amp; derivatives</span>
+							<span class="muted">({derivativeRows.length}) — forms in other languages built on this etymon</span>
+						</td>
+					</tr>
+					{#each derivativeRows as row (row.r.lemma.id)}{@render reflexRow(row)}{/each}
+				{/if}
+			</tbody>
+		</table>
+		</div>
+		</div>
+{#snippet reflexRow(row: Row)}
 					<tr
 						class="rrow"
 						class:clade-first={row.firstClade}
@@ -741,7 +764,7 @@
 								</td>
 							{/each}
 						{:else}
-							<td class="c-seg plainform" colspan={ea.etymon.length}
+							<td class="c-seg plainform" colspan={ea?.etymon.length}
 								><FormWord word={row.r.lemma.word} references={row.r.lemma.references} /></td
 							>
 						{/if}
@@ -750,6 +773,12 @@
 								<Tags tags={row.r.lemma.tags} />{/if}{#if row.r.lemma.secondary}<span
 									class="derived-badge"
 									title="alternate etymology — this form's accepted etymon is another entry">alternate</span
+								>{/if}{#if row.r.derivation === 'component'}<span
+									class="derived-badge"
+									title="compound — this etymon is one of its members">compound</span
+								>{:else if row.r.derivation === 'derived'}<span
+									class="derived-badge"
+									title="derivative — built on this etymon with an affix or extension">derivative</span
 								>{/if}</td
 						>
 						{#if view === 'concept'}
@@ -777,11 +806,7 @@
 							</td>
 						</tr>
 					{/if}
-				{/each}
-			</tbody>
-		</table>
-		</div>
-		</div>
+{/snippet}
 
 		{#if markers.length}
 			<aside class="map-col" aria-label="Where these reflexes are attested">
@@ -1580,6 +1605,20 @@
 		background: var(--surface-2);
 	}
 	/* divide only between clade groups, not every row */
+	/* the compounds-&-derivatives subsection header inside the reflex table */
+	.section-row td {
+		padding: 0.55rem 0.55rem 0.3rem;
+		border-top: 2px solid var(--border-strong);
+		border-bottom: 1px solid var(--border-strong);
+		background: var(--surface-2);
+		font-family: var(--font-sans);
+		font-size: 0.78rem;
+	}
+	.section-row .section-title {
+		font-weight: 600;
+		color: var(--ink);
+		margin-right: 0.35rem;
+	}
 	.rrow.clade-first td {
 		border-top: 1px solid var(--border);
 	}

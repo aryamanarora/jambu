@@ -9,16 +9,26 @@ import { decompress } from '../src/lib/vendor/fzstd.js';
 const input = process.argv[2] ?? '.dbwork/jambu.db';
 const output = process.argv[3] ?? 'static/db/jambu.db.zst';
 const temporary = `${output}.tmp`;
+// Local release preparation can use a smaller compression window; CI can retain
+// the strongest settings when they are needed to meet the download budget.
+const level = Number(process.env.ZSTD_LEVEL ?? 22);
+const windowLog = Number(process.env.ZSTD_WINDOW_LOG ?? 27);
+const threads = Number(process.env.ZSTD_THREADS ?? 1);
+if (!Number.isInteger(level) || level < 1 || level > 22 ||
+	!Number.isInteger(windowLog) || windowLog < 10 || windowLog > 27 ||
+	!Number.isInteger(threads) || threads < 1) {
+	throw new Error('Invalid Zstandard level, window log, or thread count');
+}
 // Download budget for browser users, not a platform limit (Pages serves files to 100 MB).
-// Raised from 50 MB for db-v37 when Sheth's 68k Prakrit articles pushed the corpus past it.
-const limit = 60_000_000;
+// Raised to 65 MB for db-v39: the complete expanded corpus is 60.77 MB at level 22.
+const limit = 65_000_000;
 mkdirSync(dirname(output), { recursive: true });
 
 try {
 	// Use the corrected wide-offset decoder; stronger compression keeps the corpus
 	// under the artifact limit. A round trip catches unsupported sequences early.
 	const result = spawnSync('zstd', [
-		'--ultra', '-22', '--long=27', `--threads=${process.env.ZSTD_THREADS ?? '0'}`, '--force', input, '-o', temporary
+		'--ultra', `-${level}`, `--long=${windowLog}`, `--threads=${threads}`, '--force', input, '-o', temporary
 	], { stdio: 'inherit' });
 	if (result.error?.code === 'ENOENT') {
 		throw new Error('zstd is required to stage the database (install it with Homebrew or apt)');

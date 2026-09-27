@@ -11,6 +11,7 @@
 	import { page } from '$app/state';
 	import { md, referenceLabel, safe } from '$lib/render';
 	import { referenceBibtex } from '$lib/bibtex';
+	import { provenanceUrl } from '$lib/provenance';
 	import Donut from '$lib/components/Donut.svelte';
 	import GeoMap from '$lib/components/Map.svelte';
 	import ReflexesView from '$lib/components/ReflexesView.svelte';
@@ -107,11 +108,6 @@
 
 	function provenanceFiles(provenance: string | null): string[] {
 		return provenance?.split(';').map((file) => file.trim()).filter(Boolean) ?? [];
-	}
-	function provenanceUrl(file: string): string | null {
-		return file.startsWith('data/')
-			? `https://github.com/moli-mandala/data/blob/main/${file}`
-			: null;
 	}
 	function etymologyProvenance(value: typeof ref.etymology_provenance): string {
 		return ({

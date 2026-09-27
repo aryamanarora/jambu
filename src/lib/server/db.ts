@@ -745,7 +745,7 @@ export interface DerivedTerm {
 }
 export interface EntryGraph {
 	ancestors: { id: string; word: string }[]; // etyma this one derives from
-	derived: DerivedTerm[]; // etyma derived from this one
+	derived: DerivedTerm[]; // same-language etyma derived from this one
 }
 
 /** The derivation-graph neighbours of an entry (few per node, so prerendered for SEO). */
@@ -763,10 +763,10 @@ export function getEntryGraph(id: string): EntryGraph {
 		.all(rid) as { rid: number; word: string }[]).map((r) => ({ id: idx.idOf(r.rid), word: r.word }));
 	const derived = (dbh
 		.prepare(
-			`SELECT l.rowid AS rid, l.word, l.gloss, l.counts
-			 FROM edges d JOIN lem l ON l.rowid = d.child_rid
+			`SELECT DISTINCT l.rowid AS rid, l.word, l.gloss, l.counts
+			 FROM edges d JOIN lem l ON l.rowid = d.child_rid JOIN lem p ON p.rowid = d.parent_rid
 			 WHERE d.parent_rid = ? AND d.kind IN (5, 6) AND d.rank = 1
-			   AND l.origin_rid IS NULL ORDER BY l.ord`
+			   AND l.origin_rid IS NULL AND l.lang_rid IS p.lang_rid ORDER BY l.ord`
 		)
 		.all(rid) as { rid: number; word: string; gloss: string; counts: number | null }[]).map((r) => ({
 		id: idx.idOf(r.rid),

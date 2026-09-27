@@ -1,15 +1,17 @@
 {
-  "version": "38",
+  "version": "39",
   "assets": {
     ".dbwork/jambu.db": {
-      "bytes": 158269440,
-      "sha256": "025cac5dc62e4fc33add492120163b41897e298c143f675e27577c33425e079c"
+      "bytes": 169197568,
+      "sha256": "60f6537d8b671e0d982e604804b1895440c6e6ddc969eea9aa339c090ae7fdb3"
     },
     "static/db/jambu.db.zst": {
-      "bytes": 55933648,
-      "sha256": "2adab26fcd3978f99097620a0137d85efb73855d7a1e99f2b4f72573fe1fb098"
+      "bytes": 60765561,
+      "sha256": "33a31e4310f3a3ca491fd234bcb9bd026a58c5a54b709132bbff71ad5bee47f4"
     }
   },
-  "cldfSnapshotCommit": "c8a88cc637edfd9e6656d41ddb52331c3ae63be4",
-  "cldfSnapshotStatus": "Published to data main; see release-audits/db-v38.json for validation and baseline test comparison."
+  "cldfSnapshotCommit": "665850cdd1451391dc939063b5ccc972e646f6f6",
+  "cldfSnapshotStatus": "Published to data main; final two test-only follow-ups have byte-identical CLDF to the verified build. See release-audits/db-v39-validation.json.",
+  "downloadBudgetBytes": 65000000,
+  "packagingRun": "https://github.com/aryamanarora/jambu/actions/runs/36292281560"
 }

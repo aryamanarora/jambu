@@ -1,0 +1,2116 @@
+{
+  "baseline": "c8a88cc637edfd9e6656d41ddb52331c3ae63be4",
+  "files": [
+    {
+      "file": "20260817-nagaraja-nihali-wiktionary.csv",
+      "change": "expanded/modified",
+      "old_rows": 1761,
+      "new_rows": 1783,
+      "delta": 22,
+      "languages": [
+        {
+          "id": "Ni",
+          "name": "Nihali"
+        }
+      ],
+      "source_ids": [
+        "nagaraja2014"
+      ],
+      "note": "",
+      "package": null,
+      "sha256": "6dce8f4d408ede2cbbf2323866d3fd577b82f2a594a7fd823b7257a1d6507599",
+      "release_scope": "See source-local final installation checkpoint; no whole-book completeness claim."
+    },
+    {
+      "file": "20260911-lindgren.csv",
+      "change": "expanded/modified",
+      "old_rows": 3754,
+      "new_rows": 3754,
+      "delta": 0,
+      "languages": [
+        {
+          "id": "Belari",
+          "name": "Belari"
+        },
+        {
+          "id": "Kannada",
+          "name": "Kannada"
+        },
+        {
+          "id": "Koraga",
+          "name": "Koraga"
+        },
+        {
+          "id": "Malayalam",
+          "name": "Malayalam"
+        },
+        {
+          "id": "Pattapu",
+          "name": "Pattapu"
+        },
+        {
+          "id": "Tamil",
+          "name": "Tamil"
+        },
+        {
+          "id": "Tulu",
+          "name": "Tulu"
+        }
+      ],
+      "source_ids": [
+        "lindgren2023dravidian"
+      ],
+      "note": "",
+      "package": null,
+      "sha256": "610761c10c62613e5c1fe4120c2ac3572b902227b355f5d6bc60d3f30c71e823",
+      "release_scope": "See source-local final installation checkpoint; no whole-book completeness claim."
+    },
+    {
+      "file": "20260921-bhattacharya-ollari.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 880,
+      "delta": 880,
+      "languages": [
+        {
+          "id": "OllariGadaba",
+          "name": "Ollari Gadaba"
+        }
+      ],
+      "source_ids": [
+        "bhattacharya1957ollari"
+      ],
+      "note": "",
+      "package": "data/other/forms/raw_data/bhattacharya_ollari_1957",
+      "sha256": "9eb26d8ed44e1d05b639af5af42eeadb6c1806f4530e8e4dbb8b017d764ddec9",
+      "release_scope": "Complete vocabulary pp48–77, not whole grammar."
+    },
+    {
+      "file": "20260921-cuj-asur.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 2106,
+      "delta": 2106,
+      "languages": [
+        {
+          "id": "Asuri",
+          "name": "Asuri"
+        }
+      ],
+      "source_ids": [
+        "cuj2020asur"
+      ],
+      "note": "",
+      "package": "data/other/forms/raw_data/cuj_asur_2020",
+      "sha256": "ac4ff66b7c5ebd56de5053cc706141e630415661b2c9202cbac4feedeba23205",
+      "release_scope": "Dictionary installed; one undecoded native head excluded,16 unresolved relationships."
+    },
+    {
+      "file": "20260921-das-yerava.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 90,
+      "delta": 90,
+      "languages": [
+        {
+          "id": "Paniya",
+          "name": "Paniya"
+        },
+        {
+          "id": "Ravula",
+          "name": "Ravula"
+        }
+      ],
+      "source_ids": [
+        "das1987yerava"
+      ],
+      "note": "Popular source spelling preserved; no supported phonemic conversion.",
+      "package": "data/other/forms/raw_data/das_yerava_1987",
+      "sha256": "0eae055e9c08fc75dc8329f353643151f0bc1fb39445534fa249ddd12f3d8af5",
+      "release_scope": "Comparative table pp65–66 only; preceding prose and other chapters excluded."
+    },
+    {
+      "file": "20260921-dhakal-darai.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 485,
+      "delta": 485,
+      "languages": [
+        {
+          "id": "Darai",
+          "name": "Darai"
+        }
+      ],
+      "source_ids": [
+        "dhakal2011darai"
+      ],
+      "note": "Native font decoding; authorial phonemic transcription drives house conversion. Original preserves printed syllable/word spacing; two scoped internal spaces normalize in Phonemic.",
+      "package": "data/other/forms/raw_data/dhakal_darai_2011",
+      "sha256": "89a59e3b08583b16c7b115f5e22422b0f798e7e7577f3059ffcbbf12f9080aa0",
+      "release_scope": "INCOMPLETE: installed chapter3 only; 16 whole-clause recovery and all later partition proposals uninstalled."
+    },
+    {
+      "file": "20260921-niranjan-chakma.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 742,
+      "delta": 742,
+      "languages": [
+        {
+          "id": "Chakma",
+          "name": "Chakma"
+        }
+      ],
+      "source_ids": [
+        "niranjan2010chakma"
+      ],
+      "note": "Bengali-script source spelling preserved without phonemic conversion.",
+      "package": "data/other/forms/raw_data/niranjan_chakma_2010",
+      "sha256": "13aba1342fb4fd20d54b055d85eec90827b4fc99a4649cbdb064ff90be9a59c5",
+      "release_scope": "INCOMPLETE BOOK: main wordlist only; later sections not recovered; damaged readings remain."
+    },
+    {
+      "file": "20260921-peterson-turi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 246,
+      "delta": 246,
+      "languages": [
+        {
+          "id": "Turi",
+          "name": "Turi"
+        }
+      ],
+      "source_ids": [
+        "peterson2024turi"
+      ],
+      "note": "",
+      "package": "data/other/forms/raw_data/peterson_turi_2024",
+      "sha256": "2ad6b00f872ef44a03750d3723c7ed43ac5def07c9b9c59c292c785ba051a9c7",
+      "release_scope": "Appendix1 wordlist only; grammar examples and Appendix2 texts excluded;51 unelicited cells."
+    },
+    {
+      "file": "20260921-sil-gutob-gorum.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 441,
+      "delta": 441,
+      "languages": [
+        {
+          "id": "go",
+          "name": "Gorum"
+        },
+        {
+          "id": "gu",
+          "name": "Gutob"
+        }
+      ],
+      "source_ids": [
+        "mathew-chamberlain2022bonda-didayi"
+      ],
+      "note": "Source-file installation only; does not build CLDF or the browser database.",
+      "package": "data/other/forms/raw_data/sil_gutob_gorum_2022",
+      "sha256": "305c314246ae17140520ddb17492ba7657ee546ed4523643b22ab12dff08c81d",
+      "release_scope": "Gutob/Gorum AppendixB columns supplement existing Bonda/Didayi; other controls excluded."
+    },
+    {
+      "file": "20260922-bhat-belari.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 192,
+      "delta": 192,
+      "languages": [
+        {
+          "id": "Belari",
+          "name": "Belari"
+        }
+      ],
+      "source_ids": [
+        "bhat1971koraga"
+      ],
+      "note": "Source-file installation only; does not build CLDF or the browser database.",
+      "package": "data/other/forms/raw_data/bhat_belari_1971",
+      "sha256": "384fe33430eba74488ed0e6e799bc823740f7eccfe100beaa72de14a33d279eb",
+      "release_scope": "Belari appendix pp119–123; existing Lindgren derivative not independent attestation."
+    },
+    {
+      "file": "20260922-pattapu-iso.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 201,
+      "delta": 201,
+      "languages": [
+        {
+          "id": "Pattapu",
+          "name": "Pattapu"
+        }
+      ],
+      "source_ids": [
+        "rebbavarapu2013pattapu"
+      ],
+      "note": "Source-file installation only; does not build CLDF or the browser database.",
+      "package": "data/other/forms/raw_data/rebbavarapu_pattapu_2013",
+      "sha256": "0efcbb420d5d98f684ee22dcd3791d8707faa7491579e8526354ae9ad248b6f2",
+      "release_scope": "199/210 prompts;10 uncertain transcriptions withheld and1 unanswered."
+    },
+    {
+      "file": "20260925-andronov-koya-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 58,
+      "delta": 58,
+      "languages": [
+        {
+          "id": "Koya",
+          "name": "Koya"
+        }
+      ],
+      "source_ids": [
+        "andronov1995koya"
+      ],
+      "note": "Andronov and Bible Society of India 1995 Koya numbered table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/andronov_koya_1995",
+      "sha256": "997ee3ce5e180eb2f9ba72f944396b20bacf1d0ce9a35496c2b4b6d990019a52",
+      "release_scope": "Credited numeral table only. Andronov and Bible Society of India 1995 Koya numbered table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-babu-malasar-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 41,
+      "delta": 41,
+      "languages": [
+        {
+          "id": "Malasar",
+          "name": "Malasar"
+        }
+      ],
+      "source_ids": [
+        "babu2018malasar"
+      ],
+      "note": "Aswini Babu's 2018 Malasar numbered table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/babu_malasar_2018",
+      "sha256": "27e258425066bf5f0751a02c8631c8005e13c954c6bb3845a3d2a8a14567c962",
+      "release_scope": "Credited numeral table only. Aswini Babu's 2018 Malasar numbered table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-bailey-baghi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 296,
+      "delta": 296,
+      "languages": [
+        {
+          "id": "ba",
+          "name": "Baghi"
+        }
+      ],
+      "source_ids": [
+        "bailey1920baghi"
+      ],
+      "note": "Full 245-cell Baghi glossary pp. 144–147; 240 accepted cells yield 296 forms, three unpaired Rampur controls and two cross-references excluded. All 96 legacy keys retained; fresh audit 0/20.",
+      "package": "data/other/forms/raw_data/bailey_baghi_1920",
+      "sha256": "100bde56a0ba2e8fb44171dde59d9db107ff911f57370d2addfdc9f5337a4b78",
+      "release_scope": "Full 245-cell Baghi glossary pp. 144–147; 240 accepted cells yield 296 forms, three unpaired Rampur controls and two cross-references excluded. All 96 legacy keys retained; fresh audit 0/20."
+    },
+    {
+      "file": "20260925-bailey-bhadrawahi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 709,
+      "delta": 709,
+      "languages": [
+        {
+          "id": "bhad",
+          "name": "Bhadrawahi"
+        }
+      ],
+      "source_ids": [
+        "bailey1908bhadrawahi"
+      ],
+      "note": "Whole printed pp. 57–67 Bhadrawahi chapter plus target-labelled shared introduction pp. 53–55; 623 accounted units, 615 accepted yielding 709 forms, 3 pattern and 5 other-lect exclusions, no blanket holds. Full build deferred.",
+      "package": "data/other/forms/raw_data/bailey_bhadrawahi_1908",
+      "sha256": "2f7301c1d71e89ba6cd4fbb8a997e6c1556e4d519415304f5379b88819a4c893",
+      "release_scope": "Whole printed pp. 57–67 Bhadrawahi chapter plus target-labelled shared introduction pp. 53–55; 623 accounted units, 615 accepted yielding 709 forms, 3 pattern and 5 other-lect exclusions, no blanket holds. Full build deferred."
+    },
+    {
+      "file": "20260925-bailey-bhalesi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 435,
+      "delta": 435,
+      "languages": [
+        {
+          "id": "bhal",
+          "name": "Bhalesi"
+        }
+      ],
+      "source_ids": [
+        "bailey1908bhalesi"
+      ],
+      "note": "Complete Bhalesi chapter pp. 68–75 plus explicit comparisons on pp. 28 and 53–54; 435 rows from 436 editorial units, including 410 target units, 7 other-lect controls, and 19 bound morphology units. All 16 pilot keys preserved. Independent fresh 20-unit audit passed; full database and browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_bhalesi_1908",
+      "sha256": "9be7c6ef82bbc0c95167aa7d1901254c4bf9f589353a8c27bd2a910462d080f6",
+      "release_scope": "Complete Bhalesi chapter pp. 68–75 plus explicit comparisons on pp. 28 and 53–54; 435 rows from 436 editorial units, including 410 target units, 7 other-lect controls, and 19 bound morphology units. All 16 pilot keys preserved. Independent fresh 20-unit audit passed; full database and browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-bilaspuri.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 288,
+      "delta": 288,
+      "languages": [
+        {
+          "id": "bil",
+          "name": "Bilaspuri"
+        }
+      ],
+      "source_ids": [
+        "bailey1920bilaspuri"
+      ],
+      "note": "Full Bailey 1920 Bilaspuri pp. 245–248 glossary, 237 accepted cells expanded to 288 forms; all 114 legacy keys retained; fresh independent audit 0/20.",
+      "package": "data/other/forms/raw_data/bailey_bilaspuri_1920",
+      "sha256": "fe07f60a0fddde01df8fca7c6a79d3d8627db7ffbec1be456d912be89d51893d",
+      "release_scope": "Full Bailey 1920 Bilaspuri pp. 245–248 glossary, 237 accepted cells expanded to 288 forms; all 114 legacy keys retained; fresh independent audit 0/20."
+    },
+    {
+      "file": "20260925-bailey-inner-siraji.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 500,
+      "delta": 500,
+      "languages": [
+        {
+          "id": "insir",
+          "name": "Inner Siraji"
+        }
+      ],
+      "source_ids": [
+        "bailey1908innersiraji"
+      ],
+      "note": "Full Inner Siraji chapter pp. 44–51; 419 source units, 415 accepted yielding 500 forms, four explicit pattern/comparative exclusions, zero unresolved cases. All 88 old keys retained; independent fresh20 audit 0 errors. Full build and requested-refresh browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_inner_siraji_1908",
+      "sha256": "ea96b1358f16cbc289be3463ea0600bbe8bf9a8b7b24185fd4ecc4946de4ad2b",
+      "release_scope": "Full Inner Siraji chapter pp. 44–51; 419 source units, 415 accepted yielding 500 forms, four explicit pattern/comparative exclusions, zero unresolved cases. All 88 old keys retained; independent fresh20 audit 0 errors. Full build and requested-refresh browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-kagani.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 329,
+      "delta": 329,
+      "languages": [
+        {
+          "id": "Northern Hindko",
+          "name": "Northern Hindko"
+        }
+      ],
+      "source_ids": [
+        "bailey1920kagani"
+      ],
+      "note": "Full printed pp.106–109 Kāgānī vocabulary recovered literally: 261 cells, 258 accepted yielding 329 forms, three English cross-references, zero withheld readings; all 83 legacy keys retained. Full build and browser refresh deferred.",
+      "package": "data/other/forms/raw_data/bailey_kagani_1920",
+      "sha256": "cd3fccd764d24b3332df1f1bb8167f4d792242343eb0b329a0858d1af099e83a",
+      "release_scope": "Full printed pp.106–109 Kāgānī vocabulary recovered literally: 261 cells, 258 accepted yielding 329 forms, three English cross-references, zero withheld readings; all 83 legacy keys retained. Full build and browser refresh deferred."
+    },
+    {
+      "file": "20260925-bailey-kiunthali.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 617,
+      "delta": 617,
+      "languages": [
+        {
+          "id": "kiuth",
+          "name": "Kiunthali"
+        }
+      ],
+      "source_ids": [
+        "bailey1908kiunthali"
+      ],
+      "note": "Full main Kiunthali chapter, printed pp.11–20: 515 source units, 505 accepted units yielding 617 forms; one exact plural-vocative pattern unresolved, four grammatical patterns, three Eastern-Kiunthali comparisons and two Panjabi-Urdu comparisons audited. All 36 translated expressions included whole. Independent fresh20 and correction addendum pass; full build/browser deferred.",
+      "package": "data/other/forms/raw_data/bailey_kiunthali_1908",
+      "sha256": "9754233d892a03e2b7df08c04082b6019bb3ff01ea91009936f71890ebd61896",
+      "release_scope": "Full main Kiunthali chapter, printed pp.11–20: 515 source units, 505 accepted units yielding 617 forms; one exact plural-vocative pattern unresolved, four grammatical patterns, three Eastern-Kiunthali comparisons and two Panjabi-Urdu comparisons audited. All 36 translated expressions included whole. Independent fresh20 and correction addendum pass; full build/browser deferred."
+    },
+    {
+      "file": "20260925-bailey-kotguru.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 610,
+      "delta": 610,
+      "languages": [
+        {
+          "id": "Kotguru",
+          "name": "Kotguru"
+        }
+      ],
+      "source_ids": [
+        "bailey1908kotguru"
+      ],
+      "note": "Full Kotguru chapter pp. 25–33; 487 source units, 485 accepted yielding 610 forms, one adjective-pattern exclusion and one specific ink-obscured vowel-stack hold. All 112 old keys retained; independent fresh20 audit 0 errors. Full-build and browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_kotguru_1908",
+      "sha256": "8b5fcb144246c2f92c9deb94a73c0f95a9168138c16930ce1a0d3edb3c3e435b",
+      "release_scope": "Full Kotguru chapter pp. 25–33; 487 source units, 485 accepted yielding 610 forms, one adjective-pattern exclusion and one specific ink-obscured vowel-stack hold. All 112 old keys retained; independent fresh20 audit 0 errors. Full-build and browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-kotkhai.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 73,
+      "delta": 73,
+      "languages": [
+        {
+          "id": "Kotkhai",
+          "name": "Kotkhai"
+        }
+      ],
+      "source_ids": [
+        "bailey1908kotkhai"
+      ],
+      "note": "Complete Kotkhai chapter pp. 23–24: 77 units, 73 forms, all paradigms and vocabulary; 11 printed blank cells and one Kiunthali comparison-control unit accounted. Independent source-stage audit passed; full build deferred.",
+      "package": "data/other/forms/raw_data/bailey_kotkhai_1908",
+      "sha256": "a640943f7092716095096b005df225e1e67c3942884b461fdbec0a6378444b4b",
+      "release_scope": "Complete Kotkhai chapter pp. 23–24: 77 units, 73 forms, all paradigms and vocabulary; 11 printed blank cells and one Kiunthali comparison-control unit accounted. Independent source-stage audit passed; full build deferred."
+    },
+    {
+      "file": "20260925-bailey-north-jubbal.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 330,
+      "delta": 330,
+      "languages": [
+        {
+          "id": "Barari",
+          "name": "Barari"
+        }
+      ],
+      "source_ids": [
+        "bailey1920northjubbal"
+      ],
+      "note": "Full pp. 185–188 North Jubbal glossary; 243 cells, 242 accepted yielding 330 forms and one cross-reference. All 98 legacy keys retained, no unresolved readings; fresh independent audit 0/20.",
+      "package": "data/other/forms/raw_data/bailey_north_jubbal_1920",
+      "sha256": "487685ead47d111f850e565c886c0bf114998179da48f2ce66e1c4ceecac9065",
+      "release_scope": "Full pp. 185–188 North Jubbal glossary; 243 cells, 242 accepted yielding 330 forms and one cross-reference. All 98 legacy keys retained, no unresolved readings; fresh independent audit 0/20."
+    },
+    {
+      "file": "20260925-bailey-outer-siraji.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 450,
+      "delta": 450,
+      "languages": [
+        {
+          "id": "OuterSiraji",
+          "name": "Outer Siraji"
+        }
+      ],
+      "source_ids": [
+        "bailey1908outersiraji"
+      ],
+      "note": "Full Outer Siraji chapter pp. 37–43 plus four attributed introductory units p36; 367 source units, 364 accepted yielding 450 forms, three general pattern exclusions, zero holds. All 100 old keys retained; independent fresh20 audit 0 errors. Full-build/browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_outer_siraji_1908",
+      "sha256": "9dd133ebbd74a5e23e32dfed3cb11b60897d301464f02e6741e56a2763fe55ca",
+      "release_scope": "Full Outer Siraji chapter pp. 37–43 plus four attributed introductory units p36; 367 source units, 364 accepted yielding 450 forms, three general pattern exclusions, zero holds. All 100 old keys retained; independent fresh20 audit 0 errors. Full-build/browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-padari.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 768,
+      "delta": 768,
+      "languages": [
+        {
+          "id": "Padri",
+          "name": "Padri"
+        }
+      ],
+      "source_ids": [
+        "bailey1908padari"
+      ],
+      "note": "Complete Bailey Padari source stage; 753 physical units (748 nonblank and five printed blanks), 768 literal forms, all 13 pilot keys preserved. Part III pp. 76–84, Part IV pp. 33–35 and explicitly attributed comparisons; two glyph uncertainties remain typed. Full database and browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_padari_1908",
+      "sha256": "33d0ef9753ad1de58169885aa74350baa71a5d143f7f2d20911da8deedc427bd",
+      "release_scope": "Complete Bailey Padari source stage; 753 physical units (748 nonblank and five printed blanks), 768 literal forms, all 13 pilot keys preserved. Part III pp. 76–84, Part IV pp. 33–35 and explicitly attributed comparisons; two glyph uncertainties remain typed. Full database and browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-poguli.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 460,
+      "delta": 460,
+      "languages": [
+        {
+          "id": "pog",
+          "name": "Poguli"
+        }
+      ],
+      "source_ids": [
+        "bailey1908poguli"
+      ],
+      "note": "Complete Poguli chapter pp51–60:400 source units,393accepted→460forms;7explicit exclusions and no typography holds. Full build/browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_poguli_1908",
+      "sha256": "c3ccd3268f994225daad725540b6ce86fe88cd311be24763e312d37db22cfed4",
+      "release_scope": "Complete Poguli chapter pp51–60:400 source units,393accepted→460forms;7explicit exclusions and no typography holds. Full build/browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-rambani.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 249,
+      "delta": 249,
+      "languages": [
+        {
+          "id": "ram",
+          "name": "Rambani"
+        }
+      ],
+      "source_ids": [
+        "bailey1908rambani"
+      ],
+      "note": "Whole Rambani chapter pp. 46–50, 214 source units yielding 249 forms; all grammar, 100 glossary cells, and 22 whole specimens. Two documented exclusions, no holds, one literal typography uncertainty. All 62 legacy keys retained. Full database and browser gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_rambani_1908",
+      "sha256": "46dda75c22591a12c7a0ed4f311e2382b322ab71e836d9a31804ba048bd625d3",
+      "release_scope": "Whole Rambani chapter pp. 46–50, 214 source units yielding 249 forms; all grammar, 100 glossary cells, and 22 whole specimens. Two documented exclusions, no holds, one literal typography uncertainty. All 62 legacy keys retained. Full database and browser gates deferred."
+    },
+    {
+      "file": "20260925-bailey-rampur.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 288,
+      "delta": 288,
+      "languages": [
+        {
+          "id": "ramp",
+          "name": "Rampuri"
+        }
+      ],
+      "source_ids": [
+        "bailey1920rampur"
+      ],
+      "note": "Full245-cell Rampur glossary pp144–147;242accepted→288rows,2crossrefs,1specific unresolved body-vowel stack. Breves, underdots and underlined digraphs preserved literally; Baghi controls excluded.",
+      "package": "data/other/forms/raw_data/bailey_rampur_1920",
+      "sha256": "d60e537b0a6a9a9d5856a2149c55e8adf4579b07e8437264edc877fe612f3ec2",
+      "release_scope": "Full245-cell Rampur glossary pp144–147;242accepted→288rows,2crossrefs,1specific unresolved body-vowel stack. Breves, underdots and underlined digraphs preserved literally; Baghi controls excluded."
+    },
+    {
+      "file": "20260925-bailey-rohru.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 309,
+      "delta": 309,
+      "languages": [
+        {
+          "id": "roh",
+          "name": "Rohrui"
+        }
+      ],
+      "source_ids": [
+        "bailey1920rohru"
+      ],
+      "note": "Complete 255-cell Bailey 1920 Rohru glossary pp. 127–130 is audited; 250 accepted cells yield 309 rows, with two specifically documented vowel-stack holds and three cross-reference-only exclusions.",
+      "package": "data/other/forms/raw_data/bailey_rohru_1920",
+      "sha256": "b548b5e2f8d5298a701a2686c6050ab23e42b2102433fa399b648233637dc4dd",
+      "release_scope": "Complete 255-cell Bailey 1920 Rohru glossary pp. 127–130 is audited; 250 accepted cells yield 309 rows, with two specifically documented vowel-stack holds and three cross-reference-only exclusions."
+    },
+    {
+      "file": "20260925-bailey-sainji.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 270,
+      "delta": 270,
+      "languages": [
+        {
+          "id": "sai",
+          "name": "Sainji"
+        }
+      ],
+      "source_ids": [
+        "bailey1908sainji"
+      ],
+      "note": "Whole Sainji chapter pp. 52–56; 241 source units yield 270 forms including all grammar, 46 glossary lines, 20 numerals and 22 whole sentences. Four documented exclusions, no holds; four blank-gloss forms and two provisional typography readings explicitly flagged. All 55 legacy keys retained. Full build gates deferred.",
+      "package": "data/other/forms/raw_data/bailey_sainji_1908",
+      "sha256": "c6aba93ea550c9375a8cad4a000af25eb4887b233fa640d23475687773e27e9a",
+      "release_scope": "Whole Sainji chapter pp. 52–56; 241 source units yield 270 forms including all grammar, 46 glossary lines, 20 numerals and 22 whole sentences. Four documented exclusions, no holds; four blank-gloss forms and two provisional typography readings explicitly flagged. All 55 legacy keys retained. Full build gates deferred."
+    },
+    {
+      "file": "20260925-bailey-surkhuli.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 605,
+      "delta": 605,
+      "languages": [
+        {
+          "id": "surkh",
+          "name": "Surkhuli"
+        }
+      ],
+      "source_ids": [
+        "bailey1920surkhuli"
+      ],
+      "note": "Whole Surkhuli source, shared introduction113–118 with explicit Surkhuli117; main148–158 grammar, 22 translated responses, glossary; 529 physical units, 605 forms. All 267 prior keys/order/rows retained. Literal morphology and source marks preserved.",
+      "package": "data/other/forms/raw_data/bailey_surkhuli_1920",
+      "sha256": "272709d298d6034c00c8e396f75a7376ae4e883cfb6ed3a564b0bbdd04b35064",
+      "release_scope": "Whole Surkhuli source, shared introduction113–118 with explicit Surkhuli117; main148–158 grammar, 22 translated responses, glossary; 529 physical units, 605 forms. All 267 prior keys/order/rows retained. Literal morphology and source marks preserved."
+    },
+    {
+      "file": "20260925-cfel-koda-adornments.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 3223,
+      "delta": 3223,
+      "languages": [
+        {
+          "id": "Koda",
+          "name": "Koda"
+        }
+      ],
+      "source_ids": [
+        "cfel2026koda"
+      ],
+      "note": "Complete 2448-record snapshot for all2450printed units; source-stage only. Historical filename and pilot keys retained.",
+      "package": "data/other/forms/raw_data/cfel_koda_api_2026",
+      "sha256": "9a54ef2713be7245d9355f5dce76420026bcbfed72a3f52f99667aa3b8706f03",
+      "release_scope": "Complete 2448-record snapshot for all2450printed units; source-stage only. Historical filename and pilot keys retained."
+    },
+    {
+      "file": "20260925-cfel-koda-print-pilot.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 3230,
+      "delta": 3230,
+      "languages": [
+        {
+          "id": "Koda",
+          "name": "Koda"
+        }
+      ],
+      "source_ids": [
+        "pradhan-tripathi2022koda-native",
+        "pradhan-tripathi2022koda"
+      ],
+      "note": "Complete 2450-unit paired-print recovery; source-stage only, no database build. Historical filename and pilot keys retained.",
+      "package": "data/other/forms/raw_data/cfel_koda_2022",
+      "sha256": "059da98955efd57821ea0959bd306afc1c72b598daf3d57bf4ff0986da4a408f",
+      "release_scope": "Complete 2450-unit paired-print recovery; source-stage only, no database build. Historical filename and pilot keys retained."
+    },
+    {
+      "file": "20260925-cfel-mahali.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 2451,
+      "delta": 2451,
+      "languages": [
+        {
+          "id": "Mahali",
+          "name": "Mahali"
+        }
+      ],
+      "source_ids": [
+        "pradhan-tripathi2024mahali"
+      ],
+      "note": "Printed lexical records with per-entry native visual review and publisher Unicode assistance; source-only installation, no data or browser database build.",
+      "package": "data/other/forms/raw_data/cfel_mahali_2024",
+      "sha256": "0148691048bd3de49f2f3bf29ff79fe0d17ce7bedb0ffccbe4291ca3cac82418",
+      "release_scope": "Printed lexical records with per-entry native visual review and publisher Unicode assistance; source-only installation, no data or browser database build."
+    },
+    {
+      "file": "20260925-crooke-korwa-mirzapur.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 123,
+      "delta": 123,
+      "languages": [
+        {
+          "id": "kw",
+          "name": "Korwa"
+        }
+      ],
+      "source_ids": [
+        "crooke1892korwa"
+      ],
+      "note": "Crooke's independent 1892 southern Mirzapur Korwa glossary; all 123 printed responses retained, including 30 recovered former holds; 41 comparison annotations preserved without inferred graph edges; one typed source-glyph uncertainty; adjacent Driver article excluded.",
+      "package": "data/other/forms/raw_data/crooke_korwa_1892",
+      "sha256": "a0ec984e2ffd3998e490e338024cab2ac67a6efc238b2247828bcee35164c0e9",
+      "release_scope": "Crooke's independent 1892 southern Mirzapur Korwa glossary; all 123 printed responses retained, including 30 recovered former holds; 41 comparison annotations preserved without inferred graph edges; one typed source-glyph uncertainty; adjacent Driver article excluded."
+    },
+    {
+      "file": "20260925-cust-norton-korku.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 1076,
+      "delta": 1076,
+      "languages": [
+        {
+          "id": "ko",
+          "name": "Korku"
+        }
+      ],
+      "source_ids": [
+        "cust1884korku"
+      ],
+      "note": "Complete477forward cells,427reverse heads,12numerals,42introduction/grammar units including all14whole expressions and3control/metalinguistic units; all printed alternatives and former held heads recovered, exact reuse citations verified, uncertain source glosses and qualifiers preserved.",
+      "package": "data/other/forms/raw_data/norton_korku_1884",
+      "sha256": "5a29dc2b014624c7b46349702ba76d07b85aff4b93378688594c860485c061f5",
+      "release_scope": "Complete477forward cells,427reverse heads,12numerals,42introduction/grammar units including all14whole expressions and3control/metalinguistic units; all printed alternatives and former held heads recovered, exact reuse citations verified, uncertain source glosses and qualifiers preserved."
+    },
+    {
+      "file": "20260925-dalton-haldar-juang.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 196,
+      "delta": 196,
+      "languages": [
+        {
+          "id": "ju",
+          "name": "Juang"
+        }
+      ],
+      "source_ids": [
+        "dalton1872haldarjuang"
+      ],
+      "note": "Complete Haldar-compiled Juanga comparison column on pp. 235–241 and separate Juang list on pp. 241–242; all target cells audited with typed transcription holds; eight adjacent comparison columns excluded.",
+      "package": "data/other/forms/raw_data/dalton_haldar_juang_1872",
+      "sha256": "c2bcb20bfb7ffd3fdb6d803fca505b6d194a69504465ec16783c4dab5b8e187f",
+      "release_scope": "Juang comparative column and list only; typed damaged-reading holds remain."
+    },
+    {
+      "file": "20260925-daniel-paniya-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 34,
+      "delta": 34,
+      "languages": [
+        {
+          "id": "Paniya",
+          "name": "Paniya"
+        }
+      ],
+      "source_ids": [
+        "daniel2013paniya"
+      ],
+      "note": "Explicit Paniyan numerals in Stephen Daniel's 2013 table; six unresolved source-typography cells held.",
+      "package": "data/other/forms/raw_data/daniel_paniya_numerals_2013",
+      "sha256": "bab0dfaca07a6d3dbf9bbdbe3de7bb93f332e233f88cb6091044a535ab2c0d6b",
+      "release_scope": "Credited numeral table only. Explicit Paniyan numerals in Stephen Daniel's 2013 table; six unresolved source-typography cells held."
+    },
+    {
+      "file": "20260925-donegan-stampe-gorum.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 7493,
+      "delta": 7493,
+      "languages": [
+        {
+          "id": "go",
+          "name": "Gorum"
+        }
+      ],
+      "source_ids": [
+        "DSGO"
+      ],
+      "note": "Source-file installation only; no database build. Complete snapshot; ambiguous ASCII notation remains exact source spelling. Unique full-form bracket transcriptions preserved separately; no unsupported phonetic mapping.",
+      "package": "data/other/forms/raw_data/gorum_mla_2004",
+      "sha256": "e378c58b70c8440721ec099e15fc0f23a513a676146829a7e4ca87e16866d53e",
+      "release_scope": "Source-file installation only; no database build. Complete snapshot; ambiguous ASCII notation remains exact source spelling. Unique full-form bracket transcriptions preserved separately; no unsupported phonetic mapping."
+    },
+    {
+      "file": "20260925-donegan-stampe-gta-chatterji.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 2259,
+      "delta": 2259,
+      "languages": [
+        {
+          "id": "gt",
+          "name": "Gtaʔ"
+        }
+      ],
+      "source_ids": [
+        "DSGT"
+      ],
+      "note": "",
+      "package": "data/other/forms/raw_data/gta_chatterji_mla_2004",
+      "sha256": "05a538502ef5fa5f9ebc61ff4b08134175ad1c126281e7e039653179f068c59d",
+      "release_scope": "See source-local final installation checkpoint; no whole-book completeness claim."
+    },
+    {
+      "file": "20260925-donegan-stampe-ho.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 2227,
+      "delta": 2227,
+      "languages": [
+        {
+          "id": "ho",
+          "name": "Ho"
+        }
+      ],
+      "source_ids": [
+        "DHED"
+      ],
+      "note": "Only the archived A–C slice of Deeney via MLA; source-file installation only, no database build.",
+      "package": "data/other/forms/raw_data/ho_mla_2004",
+      "sha256": "fd6f49a6d1d31347fc5399b2ab066ac9f7c99e1506407fe56a1bd0dd8136b529",
+      "release_scope": "Complete archived A–C response only, NOT whole Deeney dictionary."
+    },
+    {
+      "file": "20260925-donegan-stampe-kharia.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 5440,
+      "delta": 5440,
+      "languages": [
+        {
+          "id": "kh",
+          "name": "Kharia"
+        }
+      ],
+      "source_ids": [
+        "DSKH"
+      ],
+      "note": "Source-file installation only; no database build. Complete pinned snapshot; literal source notation preserved with the existing w-to-v display mapping. All witnesses/senses accounted; source claims audited.",
+      "package": "data/other/forms/raw_data/kharia_mla_2004",
+      "sha256": "2aa0b9caee3dad190627ae6c7349a31f0909b22dd341cd7ec96984b204a1f56f",
+      "release_scope": "Source-file installation only; no database build. Complete pinned snapshot; literal source notation preserved with the existing w-to-v display mapping. All witnesses/senses accounted; source claims audited."
+    },
+    {
+      "file": "20260925-edward-kumarbhag-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 43,
+      "delta": 43,
+      "languages": [
+        {
+          "id": "Kumarbhag Paharia",
+          "name": "Kumarbhag Paharia"
+        }
+      ],
+      "source_ids": [
+        "edward2019kumarbhag"
+      ],
+      "note": "Explicit Kumarbhag Paharia numerals in George Edward's 2019 contributed table; the two complete readings of numeral 20 have separate entry keys.",
+      "package": "data/other/forms/raw_data/edward_kumarbhag_numerals_2019",
+      "sha256": "9038e5237e9c5e5ee378eee3ddb8ec781c6ab2409cd0bfc3f55e4bb7b6386272",
+      "release_scope": "Credited numeral table only. Explicit Kumarbhag Paharia numerals in George Edward's 2019 contributed table; the two complete readings of numeral 20 have separate entry keys."
+    },
+    {
+      "file": "20260925-erza-pattapu-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 43,
+      "delta": 43,
+      "languages": [
+        {
+          "id": "Pattapu",
+          "name": "Pattapu"
+        }
+      ],
+      "source_ids": [
+        "erza2015pattapu"
+      ],
+      "note": "Erza/BSI's complete 2015 Pattapu numbered table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/erza_pattapu_numerals_2015",
+      "sha256": "43f0a787688d1f916e691c998cd62fa8d1b287e2317407504058b97eee133b32",
+      "release_scope": "Credited numeral table only. Erza/BSI's complete 2015 Pattapu numbered table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-grierson-haijong.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 896,
+      "delta": 896,
+      "languages": [
+        {
+          "id": "Hajong",
+          "name": "Hajong"
+        }
+      ],
+      "source_ids": [
+        "grierson1903haijong"
+      ],
+      "note": "Full chapter214–220 and all245 comparative-table cells recovered;896rows,385Native rows,907audit units. Full-build gates deferred.",
+      "package": "data/other/forms/raw_data/grierson_haijong_1903",
+      "sha256": "6875ebdbf9d7ee3257a0f29fa0502d3d5a6a7e6b49374d3051b1cb5bb944adbc",
+      "release_scope": "Full chapter214–220 and all245 comparative-table cells recovered;896rows,385Native rows,907audit units. Full-build gates deferred."
+    },
+    {
+      "file": "20260925-grierson-handuri.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 587,
+      "delta": 587,
+      "languages": [
+        {
+          "id": "Hinduri",
+          "name": "Hinduri"
+        }
+      ],
+      "source_ids": [
+        "grierson1916handuri"
+      ],
+      "note": "Full Handuri chapter pp. 586–592 and all 241 target standard-list prompts pp. 628–644; 670 source units reconciled to 587 forms, retaining all repeated specimen citations. Full database and browser gates deferred by user.",
+      "package": "data/other/forms/raw_data/grierson_handuri_1916",
+      "sha256": "2ec66ae6231261bdae59a2f818978e7c9631ebb87fcce92e560c83eddd42f60c",
+      "release_scope": "Full Handuri chapter pp. 586–592 and all 241 target standard-list prompts pp. 628–644; 670 source units reconciled to 587 forms, retaining all repeated specimen citations. Full database and browser gates deferred by user."
+    },
+    {
+      "file": "20260925-grierson-kaikadi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 841,
+      "delta": 841,
+      "languages": [
+        {
+          "id": "Kaikadi",
+          "name": "Kaikadi"
+        }
+      ],
+      "source_ids": [
+        "grierson1906kaikadi",
+        "grierson_addenda_minora_iv_boundin"
+      ],
+      "note": "Complete Kaikadi chapter333–342, four interlinear specimens, all241 comparison-table prompts including22 sentences, and explicit Kaikadi examples elsewhere in the volume. Original quantity, diaeresis, nasal and underbar notation retained without harmonization. Later undated Addenda Minora IV corrections are preserved as distinct witnesses, including a specifically unresolved vowel mark. Database/full build and browser gates deferred by user.",
+      "package": "data/other/forms/raw_data/grierson_kaikadi_1906",
+      "sha256": "1e4c54fe6fffef783230cb54ce115de708188875fb0b1e893a565509454e6404",
+      "release_scope": "Complete Kaikadi chapter333–342, four interlinear specimens, all241 comparison-table prompts including22 sentences, and explicit Kaikadi examples elsewhere in the volume. Original quantity, diaeresis, nasal and underbar notation retained without harmonization. Later undated Addenda Minora IV corrections are preserved as distinct witnesses, including a specifically unresolved vowel mark. Database/full build and browser gates deferred by user."
+    },
+    {
+      "file": "20260925-grierson-kanjari.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 1832,
+      "delta": 1832,
+      "languages": [
+        {
+          "id": "Kanjari",
+          "name": "Kanjari"
+        }
+      ],
+      "source_ids": [
+        "grierson1922lsi11"
+      ],
+      "note": "Complete source-stage transcription of Kanjari lexical and grammatical prose and aligned specimens, printed pp. 96–120, plus all 241 prompts in both Sitapur and Belgaum standard-table columns, printed pp. 180–212. All original readings reviewed against the pinned page-image PDF; three Kheri controls and one bound suffix remain audit-only. Exact specimen form/gloss repeats retain every source locator. Full DB build and browser QA deferred by explicit user instruction.",
+      "package": "data/other/forms/raw_data/grierson_kanjari_1922",
+      "sha256": "c2818893e9e3ea2dc9f2d16048003734dd532f87847bbdc701e9b64aef63f7a4",
+      "release_scope": "Complete source-stage transcription of Kanjari lexical and grammatical prose and aligned specimens, printed pp. 96–120, plus all 241 prompts in both Sitapur and Belgaum standard-table columns, printed pp. 180–212. All original readings reviewed against the pinned page-image PDF; three Kheri controls and one bound suffix remain audit-only. Exact specimen form/gloss repeats retain every source locator. Full DB build and browser QA deferred by explicit user instruction."
+    },
+    {
+      "file": "20260925-grierson-koda-birbhum.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 654,
+      "delta": 654,
+      "languages": [
+        {
+          "id": "Koda",
+          "name": "Koda"
+        }
+      ],
+      "source_ids": [
+        "grierson1906lsi4"
+      ],
+      "note": "Complete LSI IV Koda chapter pp. 107-115 and all 241 Dhangar table prompts; 654 forms from 735 physical units across Birbhum, Bankura and Dhangar. Source-stage installed; full database and browser gates deferred per user.",
+      "package": "data/other/forms/raw_data/grierson_koda_birbhum_1906",
+      "sha256": "2002294c39cfd9c87c500dd3719cc030cc95ad8a134552b332849b9107fb2a29",
+      "release_scope": "Complete LSI IV Koda chapter pp. 107-115 and all 241 Dhangar table prompts; 654 forms from 735 physical units across Birbhum, Bankura and Dhangar. Source-stage installed; full database and browser gates deferred per user."
+    },
+    {
+      "file": "20260925-grierson-korvi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 990,
+      "delta": 990,
+      "languages": [
+        {
+          "id": "Yerukula",
+          "name": "Yerukula"
+        }
+      ],
+      "source_ids": [
+        "grierson1906korava"
+      ],
+      "note": "Complete chapter, five specimens, all 241 table prompts and source-wide comparisons; 990 rows from 1237 audited units, with later corrections separately attributed.",
+      "package": "data/other/forms/raw_data/grierson_korvi_1906",
+      "sha256": "e14af7b3977667610379dcc566d01dfe41faa3959422ed1419b44c8439ccca3e",
+      "release_scope": "Complete chapter, five specimens, all 241 table prompts and source-wide comparisons; 990 rows from 1237 audited units, with later corrections separately attributed."
+    },
+    {
+      "file": "20260925-grierson-malvi-rangri.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 1170,
+      "delta": 1170,
+      "languages": [
+        {
+          "id": "Malw",
+          "name": "Malwai"
+        }
+      ],
+      "source_ids": [
+        "grierson1908malvirangri"
+      ],
+      "note": "Complete Rangri source-stage recovery of shared grammar pp.54–59, all241 standard-list prompts pp.305–321, both Roman specimens pp.249–251/254–256 and native witnesses pp.248/252–253. 1170 rows after citation-preserving exact reuse; 1346 audit units. Malvi-only and other-language comparisons remain excluded controls. Two unpaired p.55 native alternatives remain audit-only. Full CLDF/identity/graph/reference pipeline and full suite deferred; browser refresh not requested.",
+      "package": "data/other/forms/raw_data/grierson_malvi_rangri_1908",
+      "sha256": "46ec977942039e718942da333bd4d3373862eacffd18d5ac717e3f4dd5b8af31",
+      "release_scope": "Complete Rangri source-stage recovery of shared grammar pp.54–59, all241 standard-list prompts pp.305–321, both Roman specimens pp.249–251/254–256 and native witnesses pp.248/252–253. 1170 rows after citation-preserving exact reuse; 1346 audit units. Malvi-only and other-language comparisons remain excluded controls. Two unpaired p.55 native alternatives remain audit-only. Full CLDF/identity/graph/reference pipeline and full suite deferred; browser refresh not requested."
+    },
+    {
+      "file": "20260925-grierson-sansi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 1943,
+      "delta": 1943,
+      "languages": [
+        {
+          "id": "Sansi",
+          "name": "Sansi"
+        }
+      ],
+      "source_ids": [
+        "grierson1922lsi11"
+      ],
+      "note": "Complete Sansi chapter lexical/grammatical prose49–53/60–63, ordinary specimens54–57, argot specimens64–70, all241 prompts in both ordinary and argot columns178–210. 2562 source units yield1943 forms;32 foreign comparisons,80 Kheri Hindostani tokens and26 bound endings remain audit-only,2 pronunciation units attach to target forms,533 exact specimen repetitions retain all locators. Full build/database/browser gates explicitly deferred by user.",
+      "package": "data/other/forms/raw_data/grierson_sansi_1922",
+      "sha256": "94c4467c8fa470a98d062f79872dfe9e15e41b1dd723988615de0e13e17a8290",
+      "release_scope": "Complete Sansi chapter lexical/grammatical prose49–53/60–63, ordinary specimens54–57, argot specimens64–70, all241 prompts in both ordinary and argot columns178–210. 2562 source units yield1943 forms;32 foreign comparisons,80 Kheri Hindostani tokens and26 bound endings remain audit-only,2 pronunciation units attach to target forms,533 exact specimen repetitions retain all locators. Full build/database/browser gates explicitly deferred by user."
+    },
+    {
+      "file": "20260925-grierson-shoracholi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 728,
+      "delta": 728,
+      "languages": [
+        {
+          "id": "Shoracholi",
+          "name": "Shoracholi"
+        }
+      ],
+      "source_ids": [
+        "grierson1916shoracholi"
+      ],
+      "note": "Complete source stage covers27 unusual heads,108 grammatical units,307 aligned specimen attestations, and all241 comparative-table prompts;683 units. 728 forms installed; fresh independent audit passed0/20. Full build deferred by user. No source dependence inferred from mere Zoller form matches; specific typography uncertainty retained.",
+      "package": "data/other/forms/raw_data/grierson_shoracholi_1916",
+      "sha256": "791ce1dd5f8f48d78e03e54b6239ff01953f88a7233299703dcbb2577224921c",
+      "release_scope": "Complete source stage covers27 unusual heads,108 grammatical units,307 aligned specimen attestations, and all241 comparative-table prompts;683 units. 728 forms installed; fresh independent audit passed0/20. Full build deferred by user. No source dependence inferred from mere Zoller form matches; specific typography uncertainty retained."
+    },
+    {
+      "file": "20260925-grierson-sikalgari.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 633,
+      "delta": 633,
+      "languages": [
+        {
+          "id": "Sik",
+          "name": "Sikalgari"
+        }
+      ],
+      "source_ids": [
+        "grierson1922lsi11"
+      ],
+      "note": "Complete Sikalgari (Belgaum) source, printed167-174 and all241 standard-list prompts181-213;790 audited units yield633 rows with157 exact reuses preserving citations, all82 legacykeys retained. Source PDF is optional for deterministic regeneration but required for visual audit.",
+      "package": "data/other/forms/raw_data/grierson_sikalgari_1922",
+      "sha256": "164293c31d7d6702ecdee4e63be3b2d06db65208f2f228feda6dabb34e863b1c",
+      "release_scope": "Complete Sikalgari (Belgaum) source, printed167-174 and all241 standard-list prompts181-213;790 audited units yield633 rows with157 exact reuses preserving citations, all82 legacykeys retained. Source PDF is optional for deterministic regeneration but required for visual audit."
+    },
+    {
+      "file": "20260925-grierson-simla-siraji.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 414,
+      "delta": 414,
+      "languages": [
+        {
+          "id": "ShimlaSiraji",
+          "name": "Shimla Siraji"
+        }
+      ],
+      "source_ids": [
+        "grierson1916simlasiraji"
+      ],
+      "note": "Whole Simla chapter593–598, explicit comparisons599, and all241 standard-list prompts629–645;341 lexical units yield414 forms, two printed blanks, zero unresolved holds; all16 legacy keys retained. Complete untranslated Parable preserved as source facsimile. Full-build/browser gates deferred by user.",
+      "package": "data/other/forms/raw_data/grierson_simla_siraji_1916",
+      "sha256": "a9c46975e0707c982fd5a7fbdfbf605d0f0fd33fedd2249048708f43e9654796",
+      "release_scope": "Whole Simla chapter593–598, explicit comparisons599, and all241 standard-list prompts629–645;341 lexical units yield414 forms, two printed blanks, zero unresolved holds; all16 legacy keys retained. Complete untranslated Parable preserved as source facsimile. Full-build/browser gates deferred by user."
+    },
+    {
+      "file": "20260925-grierson-sodochi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 1146,
+      "delta": 1146,
+      "languages": [
+        {
+          "id": "Kotguru",
+          "name": "Kotguru"
+        },
+        {
+          "id": "OuterSiraji",
+          "name": "Outer Siraji"
+        },
+        {
+          "id": "insir",
+          "name": "Inner Siraji"
+        }
+      ],
+      "source_ids": [
+        "grierson1916sodochi"
+      ],
+      "note": "Full chapter pp. 647–667 inventoried in source-local proposal; mixed glossary, grammar, aligned specimen and all 241 standard prompts. Named lect comparisons and mixed-lect uncertainty retained. Independent fresh20 passed; 1,034 full-scope units yield 1,146 installed source-stage forms. Full database build and browser QA deferred by user.",
+      "package": "data/other/forms/raw_data/grierson_sodochi_1916",
+      "sha256": "f7edc25cacb35279bdcaa020c4c67dc1d54eaf3ea037c0605ecaf8619f75e73e",
+      "release_scope": "Full chapter pp. 647–667 inventoried in source-local proposal; mixed glossary, grammar, aligned specimen and all 241 standard prompts. Named lect comparisons and mixed-lect uncertainty retained. Independent fresh20 passed; 1,034 full-scope units yield 1,146 installed source-stage forms. Full database build and browser QA deferred by user."
+    },
+    {
+      "file": "20260925-grierson-suketi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 353,
+      "delta": 353,
+      "languages": [
+        {
+          "id": "suk",
+          "name": "Suketi"
+        }
+      ],
+      "source_ids": [
+        "grierson1916suketi"
+      ],
+      "note": "Complete manually checked Suketi prose, aligned specimen, and all 241 numbered comparative prompts on printed pp. 757–767 of LSI IX(IV); shared-context controls on pp. 716–718 retained in audit. 353 rows from 440 physical units; all 55 pilot keys preserved. Cached PDF is optional for regeneration and required for visual re-audit.",
+      "package": "data/other/forms/raw_data/grierson_suketi_1916",
+      "sha256": "432e7331913b7080458e8657e36671ba5fc58f34d59077379261039beac521f1",
+      "release_scope": "Complete manually checked Suketi prose, aligned specimen, and all 241 numbered comparative prompts on printed pp. 757–767 of LSI IX(IV); shared-context controls on pp. 716–718 retained in audit. 353 rows from 440 physical units; all 55 pilot keys preserved. Cached PDF is optional for regeneration and required for visual re-audit."
+    },
+    {
+      "file": "20260925-grierson-turi-sites.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 291,
+      "delta": 291,
+      "languages": [
+        {
+          "id": "Turi",
+          "name": "Turi"
+        }
+      ],
+      "source_ids": [
+        "grierson1906lsi4"
+      ],
+      "note": "Complete Turi chapter, printed pp. 128–134: 352 prose/specimen units, 291 forms across four named sites plus unattributed prose; literal transcription with one typed uncertain reading.",
+      "package": "data/other/forms/raw_data/grierson_turi_1906",
+      "sha256": "2452e64fa082c03d617bdcd1abdd21553e49c268fbaf3093aa5469c5fdcf30ba",
+      "release_scope": "Complete Turi chapter, printed pp. 128–134: 352 prose/specimen units, 291 forms across four named sites plus unattributed prose; literal transcription with one typed uncertain reading."
+    },
+    {
+      "file": "20260925-hahn-asur.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 835,
+      "delta": 835,
+      "languages": [
+        {
+          "id": "Asuri",
+          "name": "Asuri"
+        }
+      ],
+      "source_ids": [
+        "hahn1900asur"
+      ],
+      "note": "Whole pp149–172 primer including complete expressions, song, quoted morphology and comparison controls; 835 rows and 670 audited records.",
+      "package": "data/other/forms/raw_data/hahn_asur_1900",
+      "sha256": "0f486898ded8fc4f6620212568aec25d214f3d5277871930acb4f49a3fb198ee",
+      "release_scope": "Whole pp149–172 primer including complete expressions, song, quoted morphology and comparison controls; 835 rows and 670 audited records."
+    },
+    {
+      "file": "20260925-hislop-kuri-muasi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 326,
+      "delta": 326,
+      "languages": [
+        {
+          "id": "ko",
+          "name": "Korku"
+        }
+      ],
+      "source_ids": [
+        "hislop1866papers"
+      ],
+      "note": "Full main Kuri/Muasi column pp.1–43, five-collector comparison and Essay p.27 comparative forms; damaged readings remain explicit audit holds.",
+      "package": "data/other/forms/raw_data/hislop_kuri_muasi_1866",
+      "sha256": "b17d9be9e10f0ee799bb67aca58b71c9b18b765d09ab64aad836f9b4199c74fd",
+      "release_scope": "Kuri/Muasi column and explicit related comparisons; damaged readings remain held."
+    },
+    {
+      "file": "20260925-jeba-jennu-kurumba-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 42,
+      "delta": 42,
+      "languages": [
+        {
+          "id": "Jennu Kurumba",
+          "name": "Jennu Kurumba"
+        }
+      ],
+      "source_ids": [
+        "jeba2018jennukurumba"
+      ],
+      "note": "Melwin Jeba's first Jennu Kurumba numeral table in the immutable 2019 CC-BY archive; separately credited Kodagunti comparator cells excluded.",
+      "package": "data/other/forms/raw_data/jeba_jennu_kurumba_2018",
+      "sha256": "6f8515c2b352d64eb9be346f01f307fddc5be72d84d5535230d41dc89b73684d",
+      "release_scope": "Credited numeral table only. Melwin Jeba's first Jennu Kurumba numeral table in the immutable 2019 CC-BY archive; separately credited Kodagunti comparator cells excluded."
+    },
+    {
+      "file": "20260925-jeba-mullu-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 42,
+      "delta": 42,
+      "languages": [
+        {
+          "id": "Mullu Kurumba",
+          "name": "Mullu Kurumba"
+        }
+      ],
+      "source_ids": [
+        "jeba2018mullu"
+      ],
+      "note": "Explicit Mullu Kurumba numerals in Melwin Jeba's 2018 source table; source phrase spacing retained.",
+      "package": "data/other/forms/raw_data/jeba_mullu_numerals_2018",
+      "sha256": "8eca577a8ed357e26167f4213e47f3b941777fe57df6710bc00a1220beaa46a8",
+      "release_scope": "Credited numeral table only. Explicit Mullu Kurumba numerals in Melwin Jeba's 2018 source table; source phrase spacing retained."
+    },
+    {
+      "file": "20260925-john-pottangi-ollar-gadaba-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 46,
+      "delta": 46,
+      "languages": [
+        {
+          "id": "OllariGadaba",
+          "name": "Ollari Gadaba"
+        }
+      ],
+      "source_ids": [
+        "john2013pottangiollargadaba"
+      ],
+      "note": "John's 2013 Pottangi Ollar Gadaba table from the immutable CC-BY Chan archive; Sharma 1990 Konekor table audited as excluded comparator.",
+      "package": "data/other/forms/raw_data/john_pottangi_ollari_gadaba_2013",
+      "sha256": "cd654ef519e6260b723fead115d0cb97731b823345f5ede1b918697760731b8a",
+      "release_scope": "Credited numeral table only. John's 2013 Pottangi Ollar Gadaba table from the immutable CC-BY Chan archive; Sharma 1990 Konekor table audited as excluded comparator."
+    },
+    {
+      "file": "20260925-kapp-alu-kurumba-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 40,
+      "delta": 40,
+      "languages": [
+        {
+          "id": "AluKurumba",
+          "name": "Alu Kurumba"
+        }
+      ],
+      "source_ids": [
+        "kapp1995alukurumba"
+      ],
+      "note": "Kapp's 1995 Alu Kurumba numbered table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/kapp_alu_kurumba_1995",
+      "sha256": "44fda40a7c4d75d7412fbdcfc77c13fbe5ad2b8401cf3ceae6be79c03f712d74",
+      "release_scope": "Credited numeral table only. Kapp's 1995 Alu Kurumba numbered table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-kardile-southeastern-kolami-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 43,
+      "delta": 43,
+      "languages": [
+        {
+          "id": "Naikri",
+          "name": "Naikri"
+        }
+      ],
+      "source_ids": [
+        "kardile2013southeasternkolami"
+      ],
+      "note": "Credited Southeastern Kolami 2013 numeral table in the immutable 2019 CC-BY Chan archive; Northwestern Kolami comparator excluded.",
+      "package": "data/other/forms/raw_data/kardile_southeastern_kolami_2013",
+      "sha256": "6e95ab532e84afd39babc444929205604ac6eff27b87a27fb4f4234cac058dd8",
+      "release_scope": "Credited numeral table only. Credited Southeastern Kolami 2013 numeral table in the immutable 2019 CC-BY Chan archive; Northwestern Kolami comparator excluded."
+    },
+    {
+      "file": "20260925-kisan-odisha-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 73,
+      "delta": 73,
+      "languages": [
+        {
+          "id": "Kurux",
+          "name": "Kurux"
+        }
+      ],
+      "source_ids": [
+        "kujur-perumalsamy2018kisan"
+      ],
+      "note": "Two explicitly credited Dravidian Kisan tables, mapped under Kurux; duplicate printed 4s held.",
+      "package": "data/other/forms/raw_data/kisan_odisha_numerals_2018",
+      "sha256": "3196d222d4c2c10cc132f3729a3efca6306d6a90d8ad7184e575383e73bdfb1a",
+      "release_scope": "Credited numeral table only. Two explicitly credited Dravidian Kisan tables, mapped under Kurux; duplicate printed 4s held."
+    },
+    {
+      "file": "20260925-kumari-gaddi.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 392,
+      "delta": 392,
+      "languages": [
+        {
+          "id": "ga",
+          "name": "Gaddi"
+        }
+      ],
+      "source_ids": [
+        "kumari2026gaddi"
+      ],
+      "note": "Selectable Tables B.1 and C.1–C.4; preserve printed source anomalies, repair only verified PDF positioning artifacts. The source IPA drives house conversion. Appendix III collector is Kumari Mamta.",
+      "package": "data/other/forms/raw_data/gaddi_grammar_2026",
+      "sha256": "5843d80984899fac2ddbcd141969c667884c661031bde4490d56e1e7223d9d2c",
+      "release_scope": "Complete AppendicesII–III only; grammar/prose/index not ingested."
+    },
+    {
+      "file": "20260925-kuriakose-muduga-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 42,
+      "delta": 42,
+      "languages": [
+        {
+          "id": "Muduga",
+          "name": "Muduga"
+        }
+      ],
+      "source_ids": [
+        "kuriakose2018muduga"
+      ],
+      "note": "Kuriakose and Daniel's 2018 Muduga numeral table in immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/kuriakose_muduga_2018",
+      "sha256": "de2a7908cb45b9dbb37ed20bad57919e4e7eadc1242494f5772edd133418186b",
+      "release_scope": "Credited numeral table only. Kuriakose and Daniel's 2018 Muduga numeral table in immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-kurian-aheri-gondi-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 42,
+      "delta": 42,
+      "languages": [
+        {
+          "id": "Aheri Gondi",
+          "name": "Aheri Gondi"
+        }
+      ],
+      "source_ids": [
+        "kurian2018aherigondi"
+      ],
+      "note": "Benny Kurian's explicitly numbered Aheri Gondi 2018 numeral table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/kurian_aheri_gondi_2018",
+      "sha256": "f0dedfef3ce65bbb0aeac8686edc6e60b8baf42cb35cf5b62b065ea138b31fe1",
+      "release_scope": "Credited numeral table only. Benny Kurian's explicitly numbered Aheri Gondi 2018 numeral table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-metry-holiya-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 39,
+      "delta": 39,
+      "languages": [
+        {
+          "id": "Holiya",
+          "name": "Holiya"
+        }
+      ],
+      "source_ids": [
+        "metry2017holiya"
+      ],
+      "note": "Metry's 2017 Holiya numeral elicitation as displayed in Chan's table; three typographically uncertain items held in audit.",
+      "package": "data/other/forms/raw_data/metry_holiya_numerals_2017",
+      "sha256": "da73c6623d1056e513f20370ef4bed819fd73a4a18cd8dbc7c9c83149a2b682d",
+      "release_scope": "Credited numeral table only. Metry's 2017 Holiya numeral elicitation as displayed in Chan's table; three typographically uncertain items held in audit."
+    },
+    {
+      "file": "20260925-mini-khirwar-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 40,
+      "delta": 40,
+      "languages": [
+        {
+          "id": "Khirwar",
+          "name": "Khirwar"
+        }
+      ],
+      "source_ids": [
+        "mini2018khirwar"
+      ],
+      "note": "Explicit Khirwar numerals in Suraj Mini's 2018 table; unclear spacing in items 5 and 50 held.",
+      "package": "data/other/forms/raw_data/mini_khirwar_numerals_2018",
+      "sha256": "549a9094850aede507744dc16ed984a3e41ebe56e8c2efc22c01fcfb04dd88ae",
+      "release_scope": "Credited numeral table only. Explicit Khirwar numerals in Suraj Mini's 2018 table; unclear spacing in items 5 and 50 held."
+    },
+    {
+      "file": "20260925-nair-kakkala-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 43,
+      "delta": 43,
+      "languages": [
+        {
+          "id": "Kakkala",
+          "name": "Kakkala"
+        }
+      ],
+      "source_ids": [
+        "nair2017kakkala"
+      ],
+      "note": "Explicit Kakkala numerals in Ravi Sankar S. Nair's 2017 table; only printed slash-separated readings were emitted.",
+      "package": "data/other/forms/raw_data/nair_kakkala_numerals_2017",
+      "sha256": "ddc66378057ab5c2038177deda95cf66f6a09245c7c95e62771eb8512c5fb349",
+      "release_scope": "Credited numeral table only. Explicit Kakkala numerals in Ravi Sankar S. Nair's 2017 table; only printed slash-separated readings were emitted."
+    },
+    {
+      "file": "20260925-penny-adilabad-gondi-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 50,
+      "delta": 50,
+      "languages": [
+        {
+          "id": "Adilabad Gondi",
+          "name": "Adilabad Gondi"
+        }
+      ],
+      "source_ids": [
+        "penny2017adilabadgondi"
+      ],
+      "note": "Mark Penny's Western Southern/Adilabad Gondi 2013/2017 table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/penny_adilabad_gondi_2017",
+      "sha256": "5a30e803e7a3776ebeefbc814b708cd796d6d5a3fc4173980de6dc0b73252d90",
+      "release_scope": "Credited numeral table only. Mark Penny's Western Southern/Adilabad Gondi 2013/2017 table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-prendergast-savara.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 270,
+      "delta": 270,
+      "languages": [
+        {
+          "id": "so",
+          "name": "Sora"
+        }
+      ],
+      "source_ids": [
+        "prendergast1881savara"
+      ],
+      "note": "Complete Savara vocabulary on printed pp. 426–428, prepared 1880 and published 1881; 266 cells audited, 270 rows including four printed alternatives.",
+      "package": "data/other/forms/raw_data/prendergast_savara_1880",
+      "sha256": "7d8bdeb6f6b63b82a75cbd8f60c4332269eda5c64efeb9419f116e4f2242a2c5",
+      "release_scope": "Complete Savara vocabulary on printed pp. 426–428, prepared 1880 and published 1881; 266 cells audited, 270 rows including four printed alternatives."
+    },
+    {
+      "file": "20260925-riezen-eastern-muria-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 39,
+      "delta": 39,
+      "languages": [
+        {
+          "id": "Eastern Muria",
+          "name": "Eastern Muria"
+        }
+      ],
+      "source_ids": [
+        "riezen2013easternmuria"
+      ],
+      "note": "Riezen's 2013 Eastern Muria numbered table in the immutable CC-BY Chan archive; one bracketed cell held.",
+      "package": "data/other/forms/raw_data/riezen_eastern_muria_2013",
+      "sha256": "019131346378665892a114761ddc93c42c7cc5cc38cfb1ec15627690ab00bb9c",
+      "release_scope": "Credited numeral table only. Riezen's 2013 Eastern Muria numbered table in the immutable CC-BY Chan archive; one bracketed cell held."
+    },
+    {
+      "file": "20260925-rosemary-aranadan-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 41,
+      "delta": 41,
+      "languages": [
+        {
+          "id": "Aranadan",
+          "name": "Aranadan"
+        }
+      ],
+      "source_ids": [
+        "rosemary2017aranadan"
+      ],
+      "note": "Explicit Aranadan numerals in 2017 SPPEL primary elicitation; one typographically uncertain item held.",
+      "package": "data/other/forms/raw_data/rosemary_aranadan_numerals_2017",
+      "sha256": "8bfcf05a3e91d34b51a9ae71180c0fd39d13ebd5ec72340f8d6d43a9a1c7eea9",
+      "release_scope": "Credited numeral table only. Explicit Aranadan numerals in 2017 SPPEL primary elicitation; one typographically uncertain item held."
+    },
+    {
+      "file": "20260925-roy-birhor-p567-p568.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 1019,
+      "delta": 1019,
+      "languages": [
+        {
+          "id": "Birhor",
+          "name": "Birhor"
+        }
+      ],
+      "source_ids": [
+        "roy1925birhors"
+      ],
+      "note": "Complete Appendix I pp559–591, preserving the historical filename and entry keys; source-file installation only, no database build.",
+      "package": "data/other/forms/raw_data/roy_birhor_1925",
+      "sha256": "8101c08a3fbe1bd86116532ec45da55876e383ce15d0171d915d1a6373b37418",
+      "release_scope": "Complete AppendixI pp559–591 only, not whole monograph."
+    },
+    {
+      "file": "20260925-samuells-juang.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 35,
+      "delta": 35,
+      "languages": [
+        {
+          "id": "ju",
+          "name": "Juang"
+        }
+      ],
+      "source_ids": [
+        "samuells1856juang"
+      ],
+      "note": "Complete article pp.295–303; all31 glossary cells plus2 attested prose units yield35 forms, zero holds. Whole responses retained,21 legacy keys and positions preserved. Full independent33-unit review passed. DB/full-build/browser gates deferred by user.",
+      "package": "data/other/forms/raw_data/samuells_juang_1856",
+      "sha256": "a2b8af370b61b83c4666d145f2aae45c4a9f0bc776d7ad6404ec09a180d39894",
+      "release_scope": "Complete article pp.295–303; all31 glossary cells plus2 attested prose units yield35 forms, zero holds. Whole responses retained,21 legacy keys and positions preserved. Full independent33-unit review passed. DB/full-build/browser gates deferred by user."
+    },
+    {
+      "file": "20260925-selvaraj-betta-kurumba-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 40,
+      "delta": 40,
+      "languages": [
+        {
+          "id": "BettaKurumba",
+          "name": "Betta Kurumba"
+        }
+      ],
+      "source_ids": [
+        "selvaraj1996bettakurumba"
+      ],
+      "note": "Selvaraj's 1996 Betta Kurumba table in immutable CC-BY Chan archive; Coelho 2010/2011 table audited as excluded comparator.",
+      "package": "data/other/forms/raw_data/selvaraj_betta_kurumba_1996",
+      "sha256": "81a950359f994709c032e86bb0e9aa54edc438ced1a9b692e2dd16d34b5a909a",
+      "release_scope": "Credited numeral table only. Selvaraj's 1996 Betta Kurumba table in immutable CC-BY Chan archive; Coelho 2010/2011 table audited as excluded comparator."
+    },
+    {
+      "file": "20260925-sharma-korra-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 29,
+      "delta": 29,
+      "languages": [
+        {
+          "id": "Korra Koraga",
+          "name": "Korra Koraga"
+        }
+      ],
+      "source_ids": [
+        "sharma1990korra"
+      ],
+      "note": "Explicit Korra Koraga numerals in S. R. Sharma's 1990 table; eleven source-blank numbered cells omitted.",
+      "package": "data/other/forms/raw_data/sharma_korra_numerals_1990",
+      "sha256": "136f46af7cd4b9798379b045cbeef1d126fdd2849a473bade19f62fd2ef23c99",
+      "release_scope": "Credited numeral table only. Explicit Korra Koraga numerals in S. R. Sharma's 1990 table; eleven source-blank numbered cells omitted."
+    },
+    {
+      "file": "20260925-sounderaraj-dandami-maria-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 42,
+      "delta": 42,
+      "languages": [
+        {
+          "id": "Dandami Maria",
+          "name": "Dandami Maria"
+        }
+      ],
+      "source_ids": [
+        "sounderaraj1995dandamimaria"
+      ],
+      "note": "The Sounderarajs' 1995 Bison-Horn Madiya numbered table in the immutable CC-BY Chan archive.",
+      "package": "data/other/forms/raw_data/sounderaraj_dandami_maria_1995",
+      "sha256": "dd0872ae751d79ec97f0526053cbc7c4462f416b5a2192a01ed2e3861e6d9784",
+      "release_scope": "Credited numeral table only. The Sounderarajs' 1995 Bison-Horn Madiya numbered table in the immutable CC-BY Chan archive."
+    },
+    {
+      "file": "20260925-vaz-hill-maria-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 40,
+      "delta": 40,
+      "languages": [
+        {
+          "id": "Maria (India)",
+          "name": "Maria (India)"
+        }
+      ],
+      "source_ids": [
+        "vaz2011hillmaria"
+      ],
+      "note": "Vaz's 2011 Hill Madia numbered table in the immutable CC-BY Chan archive; Natarajan 1985 table excluded.",
+      "package": "data/other/forms/raw_data/vaz_hill_maria_2011",
+      "sha256": "9e3ba2e7e1e770edc88008163b2ff4bc8291c4ed483bd64ee361b9779bd0006d",
+      "release_scope": "Credited numeral table only. Vaz's 2011 Hill Madia numbered table in the immutable CC-BY Chan archive; Natarajan 1985 table excluded."
+    },
+    {
+      "file": "20260925-vijayan-eravallan-numerals.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 42,
+      "delta": 42,
+      "languages": [
+        {
+          "id": "Eravallan",
+          "name": "Eravallan"
+        }
+      ],
+      "source_ids": [
+        "vijayan2018eravallan"
+      ],
+      "note": "Vijayan's 2018 Eravallan table selected from immutable CC-BY Chan archive; Gnanasundaram 2014 table audited as excluded comparator.",
+      "package": "data/other/forms/raw_data/vijayan_eravallan_2018",
+      "sha256": "c8bb0026ffdcc9eb36672d186f15e24fa8ab56d1388cce913475ce48004437ae",
+      "release_scope": "Credited numeral table only. Vijayan's 2018 Eravallan table selected from immutable CC-BY Chan archive; Gnanasundaram 2014 table audited as excluded comparator."
+    },
+    {
+      "file": "20260926-grierson-holiya.csv",
+      "change": "new",
+      "old_rows": 0,
+      "new_rows": 900,
+      "delta": 900,
+      "languages": [
+        {
+          "id": "Holiya",
+          "name": "Holiya"
+        }
+      ],
+      "source_ids": [
+        "grierson1906holiya"
+      ],
+      "note": "Complete chapter385–395, all lexical grammar and four full interlinear specimens;900 forms from1282 audited units. Exact repeats retain citations; controls and bound morphology remain audit-only. Source-stage installed; database/full build and browser gates deferred by user.",
+      "package": "data/other/forms/raw_data/grierson_holiya_1906",
+      "sha256": "e1902f212bcd06ecf9fda73b03b4effeccc309e47069f8d79c88924b01c5ec28",
+      "release_scope": "Complete chapter385–395, all lexical grammar and four full interlinear specimens;900 forms from1282 audited units. Exact repeats retain citations; controls and bound morphology remain audit-only. Source-stage installed; database/full build and browser gates deferred by user."
+    }
+  ],
+  "raw_rows_not_merged_nodes": true,
+  "metadata_preservation": {
+    "kind": "Existing duplicate-attestation metadata recovery, not new source ingestion",
+    "changed_compiled_records": 10654,
+    "language_count": 93,
+    "languages": [
+      {
+        "id": "AdivasiOriya",
+        "name": "Adivasi Oriya"
+      },
+      {
+        "id": "As",
+        "name": "Ashokan Prakrit"
+      },
+      {
+        "id": "Bote",
+        "name": "Bote"
+      },
+      {
+        "id": "Brahui",
+        "name": "Brahui"
+      },
+      {
+        "id": "Brj",
+        "name": "Braj"
+      },
+      {
+        "id": "Bugun",
+        "name": "Bugun"
+      },
+      {
+        "id": "Dakpakha",
+        "name": "Dakpakha (Tawang Monpa)"
+      },
+      {
+        "id": "Dotyali",
+        "name": "Dotyali"
+      },
+      {
+        "id": "EasternGorkhaTamang",
+        "name": "Eastern Gorkha Tamang"
+      },
+      {
+        "id": "Gadaba",
+        "name": "Gadaba"
+      },
+      {
+        "id": "Goj",
+        "name": "Gujari"
+      },
+      {
+        "id": "Gondi",
+        "name": "Gondi"
+      },
+      {
+        "id": "Gurung",
+        "name": "Gurung"
+      },
+      {
+        "id": "Humla",
+        "name": "Humla Tibetan"
+      },
+      {
+        "id": "Kal",
+        "name": "Indo-Aryan Kalasha"
+      },
+      {
+        "id": "KalaktangMonpa",
+        "name": "Kalaktang Monpa"
+      },
+      {
+        "id": "Kam",
+        "name": "Kamviri"
+      },
+      {
+        "id": "Kannada",
+        "name": "Kannada"
+      },
+      {
+        "id": "Kho",
+        "name": "Khowar"
+      },
+      {
+        "id": "Kjl",
+        "name": "Western Parbate Kham"
+      },
+      {
+        "id": "KochilaTharu",
+        "name": "Kochila Tharu"
+      },
+      {
+        "id": "Kodagu",
+        "name": "Kodagu"
+      },
+      {
+        "id": "Kodaku",
+        "name": "Kodaku"
+      },
+      {
+        "id": "Kolami",
+        "name": "Kolami"
+      },
+      {
+        "id": "Konda",
+        "name": "Konda"
+      },
+      {
+        "id": "Koraga",
+        "name": "Koraga"
+      },
+      {
+        "id": "Kota",
+        "name": "Kota"
+      },
+      {
+        "id": "Kt",
+        "name": "Katë"
+      },
+      {
+        "id": "Kudiya",
+        "name": "Kudiya"
+      },
+      {
+        "id": "Kui",
+        "name": "Kui"
+      },
+      {
+        "id": "Kurux",
+        "name": "Kurux"
+      },
+      {
+        "id": "Kuwi",
+        "name": "Kuwi"
+      },
+      {
+        "id": "Lohorung",
+        "name": "Lohorung"
+      },
+      {
+        "id": "Loy",
+        "name": "Loke"
+      },
+      {
+        "id": "M",
+        "name": "Marathi"
+      },
+      {
+        "id": "Majhi",
+        "name": "Majhi"
+      },
+      {
+        "id": "Malayalam",
+        "name": "Malayalam"
+      },
+      {
+        "id": "Malto",
+        "name": "Malto"
+      },
+      {
+        "id": "Manda",
+        "name": "Manda"
+      },
+      {
+        "id": "Marw",
+        "name": "Marwari"
+      },
+      {
+        "id": "Miji",
+        "name": "Miji"
+      },
+      {
+        "id": "NDu",
+        "name": "Chhattisgarhi"
+      },
+      {
+        "id": "New",
+        "name": "Newari"
+      },
+      {
+        "id": "NorthernGhale",
+        "name": "Northern Ghale"
+      },
+      {
+        "id": "Nyishi",
+        "name": "Nyishi-Hill Miri"
+      },
+      {
+        "id": "OSi",
+        "name": "Old Sinhala"
+      },
+      {
+        "id": "Parji",
+        "name": "Parji"
+      },
+      {
+        "id": "Pengo",
+        "name": "Pengo"
+      },
+      {
+        "id": "Phal",
+        "name": "Palula"
+      },
+      {
+        "id": "Pr",
+        "name": "Prasun"
+      },
+      {
+        "id": "Psht",
+        "name": "Pashto"
+      },
+      {
+        "id": "Puroik",
+        "name": "Puroik"
+      },
+      {
+        "id": "Rabha",
+        "name": "Rabha"
+      },
+      {
+        "id": "Rj",
+        "name": "Rajasthani"
+      },
+      {
+        "id": "Sartang",
+        "name": "Sartang"
+      },
+      {
+        "id": "Sherdukpen",
+        "name": "Sherdukpen"
+      },
+      {
+        "id": "SouthernGhale",
+        "name": "Southern Ghale"
+      },
+      {
+        "id": "SouthernYamphu",
+        "name": "Southern Yamphu"
+      },
+      {
+        "id": "Tagin",
+        "name": "Tagin"
+      },
+      {
+        "id": "Tamil",
+        "name": "Tamil"
+      },
+      {
+        "id": "Telugu",
+        "name": "Telugu"
+      },
+      {
+        "id": "Ths",
+        "name": "Thakali"
+      },
+      {
+        "id": "Toda",
+        "name": "Toda"
+      },
+      {
+        "id": "Tshangla",
+        "name": "Tshangla"
+      },
+      {
+        "id": "Tulu",
+        "name": "Tulu"
+      },
+      {
+        "id": "VB",
+        "name": "Vaagri Boli"
+      },
+      {
+        "id": "WK",
+        "name": "Wadiyara Koli"
+      },
+      {
+        "id": "Wg",
+        "name": "Nuristani Kalasha"
+      },
+      {
+        "id": "Yamphu",
+        "name": "Yamphu"
+      },
+      {
+        "id": "amri_karbi",
+        "name": "Amri Karbi"
+      },
+      {
+        "id": "as",
+        "name": "Domari"
+      },
+      {
+        "id": "bagheli_lakshman",
+        "name": "Bagheli"
+      },
+      {
+        "id": "bagri_fatehabad",
+        "name": "Bagri"
+      },
+      {
+        "id": "bfu",
+        "name": "Bunan (Gahri)"
+      },
+      {
+        "id": "bundeli_atarra",
+        "name": "Bundeli"
+      },
+      {
+        "id": "cih",
+        "name": "Chinali"
+      },
+      {
+        "id": "dhundari_badagaon",
+        "name": "Shekhawati"
+      },
+      {
+        "id": "dhundari_bamore",
+        "name": "Dhundari"
+      },
+      {
+        "id": "eur",
+        "name": "European Romani"
+      },
+      {
+        "id": "had",
+        "name": "Hadauti"
+      },
+      {
+        "id": "karbi",
+        "name": "Karbi"
+      },
+      {
+        "id": "ko",
+        "name": "Korku"
+      },
+      {
+        "id": "kul",
+        "name": "Kullui"
+      },
+      {
+        "id": "kw",
+        "name": "Korwa"
+      },
+      {
+        "id": "lae",
+        "name": "Pattani"
+      },
+      {
+        "id": "lbf",
+        "name": "Tinani"
+      },
+      {
+        "id": "lhl",
+        "name": "Lahul Lohar"
+      },
+      {
+        "id": "mewari_bannoda",
+        "name": "Wagri"
+      },
+      {
+        "id": "mewari_basad",
+        "name": "Malvi"
+      },
+      {
+        "id": "mewari_dholpura",
+        "name": "Mewari"
+      },
+      {
+        "id": "mewati_akera",
+        "name": "Mewati"
+      },
+      {
+        "id": "re",
+        "name": "Remo"
+      },
+      {
+        "id": "sbu",
+        "name": "Stod Bhoti"
+      }
+    ],
+    "tag_removals": 0,
+    "non_tag_fields_changed": false,
+    "source_inventory_language_count": 78,
+    "release_affected_language_union_count": 163,
+    "delta_sha256": "5ec1dd1ac4da2220aeefa1e267786dd187760b4a98f2f90af481fd4762e528d8",
+    "forms_sha256": {
+      "before": "50352554e6068a37f4a2ba8a88b351f6b0fe4c82ce0d343055d4ef4840eb2330",
+      "after": "b08eb1f0e04777ff8a204b013829d5a3c7cdbde4a54665fd948256ed223bfd28"
+    }
+  }
+}

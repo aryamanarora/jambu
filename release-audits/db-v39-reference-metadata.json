@@ -1,0 +1,761 @@
+{
+  "scope": "Final736-row reference catalog only, parsed source bibliography and YAML; no lexical CLDF scan",
+  "data_commit": "f6f1b43e",
+  "reference_count": 736,
+  "reference_sha256": "2965f1dce82c8a6573a4149db921b4e6a4868382c494d159a7cb2353cffeb97b",
+  "malformed_ho_reference_present": false,
+  "release_sources": 83,
+  "ocr_checks": [
+    {
+      "source": "DHED",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "DSGO",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "DSGT",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "DSKH",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "andronov1995koya",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "babu2018malasar",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908bhadrawahi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908bhalesi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908innersiraji",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908kiunthali",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908kotguru",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908kotkhai",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908outersiraji",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908padari",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908poguli",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908rambani",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1908sainji",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "bailey1920baghi",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bailey1920bilaspuri",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bailey1920kagani",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bailey1920northjubbal",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bailey1920rampur",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bailey1920rohru",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bailey1920surkhuli",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bhat1971koraga",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "bhattacharya1957ollari",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "cfel2026koda",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "crooke1892korwa",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "cuj2020asur",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "cust1884korku",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "dalton1872haldarjuang",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "daniel2013paniya",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "das1987yerava",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "dhakal2011darai",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "edward2019kumarbhag",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "erza2015pattapu",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1903haijong",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "grierson1906holiya",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1906kaikadi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1906korava",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1906lsi4",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "grierson1908malvirangri",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1916handuri",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1916shoracholi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1916simlasiraji",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1916sodochi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1916suketi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "grierson1922lsi11",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "grierson_addenda_minora_iv_boundin",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "hahn1900asur",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "hislop1866papers",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "jeba2018jennukurumba",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "jeba2018mullu",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "john2013pottangiollargadaba",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "kapp1995alukurumba",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "kardile2013southeasternkolami",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "kujur-perumalsamy2018kisan",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "kumari2026gaddi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "kuriakose2018muduga",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "kurian2018aherigondi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "lindgren2023dravidian",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "mathew-chamberlain2022bonda-didayi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "metry2017holiya",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "mini2018khirwar",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "nagaraja2014",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "nair2017kakkala",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "niranjan2010chakma",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "penny2017adilabadgondi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "peterson2024turi",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "pradhan-tripathi2022koda",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "pradhan-tripathi2022koda-native",
+      "declared_yaml_ocr": true,
+      "bibliography_ocr": true,
+      "compiled_ocr": "Yes",
+      "expected": "Yes"
+    },
+    {
+      "source": "pradhan-tripathi2024mahali",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "prendergast1881savara",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "rebbavarapu2013pattapu",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "riezen2013easternmuria",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "rosemary2017aranadan",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "roy1925birhors",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "samuells1856juang",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "selvaraj1996bettakurumba",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "sharma1990korra",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "sounderaraj1995dandamimaria",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "vaz2011hillmaria",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    },
+    {
+      "source": "vijayan2018eravallan",
+      "declared_yaml_ocr": false,
+      "bibliography_ocr": false,
+      "compiled_ocr": "No",
+      "expected": "No"
+    }
+  ],
+  "ocr_mismatches": [],
+  "status": "passed",
+  "non_bibtex_reference_ids": [
+    "ABORI",
+    "AFD",
+    "AKŚ",
+    "AO",
+    "ArchOr",
+    "BB",
+    "BDCRI",
+    "BEFEO",
+    "BHS",
+    "BKPD",
+    "BKhoT",
+    "BR",
+    "BSBU",
+    "BSL",
+    "BSOAS",
+    "BSOS",
+    "Bailey ShGr",
+    "BelvalkarVol",
+    "Bender Nal",
+    "Bloch IA",
+    "Bloch LM",
+    "Bray Brah",
+    "Brough Dhp",
+    "Buddruss",
+    "Buddruss Kan",
+    "Buddruss Woṭ",
+    "Burrow KharDoc",
+    "Burrow Shwa",
+    "C.Shackle",
+    "CII",
+    "COJ",
+    "CPD",
+    "Childers DPL",
+    "ColPa",
+    "DED",
+    "DGW",
+    "DSL",
+    "Dave",
+    "Dave GujLg",
+    "EA",
+    "EGS",
+    "EI",
+    "EOL",
+    "ES",
+    "EVP",
+    "EVSh",
+    "EWA",
+    "EZ",
+    "El",
+    "Emeneau Sk. bhōgin-",
+    "FOK",
+    "FestskrBroch",
+    "Finck AZ",
+    "G.M",
+    "GHA",
+    "GS",
+    "GWZS",
+    "Ge",
+    "Geiger PLS",
+    "Grahame Bailey",
+    "Grierson BPL",
+    "Grierson KD",
+    "Grierson Tor",
+    "Grām",
+    "Gupta Grām",
+    "HJ",
+    "Hendriksen",
+    "Hettiaratchi Indeclinables",
+    "Him.I",
+    "Horn NPE",
+    "Hultzsch As",
+    "HŚS",
+    "IEW",
+    "IF",
+    "IIFL",
+    "IIJ",
+    "IL",
+    "JA",
+    "JAOS",
+    "JBORS",
+    "JGIS",
+    "JGLS",
+    "Ju",
+    "KZ",
+    "Kern Toev",
+    "KharI",
+    "KhubSD",
+    "Kuiper Myth",
+    "Kuiper PMWS",
+    "LFG",
+    "LM",
+    "LNH",
+    "LOL",
+    "LStH",
+    "Laufer",
+    "Lor",
+    "Lorimer BurLg",
+    "Lorimer ḌumLg",
+    "Lüders BSBU",
+    "Lüders PhilInd",
+    "MO",
+    "MSL",
+    "Master GrOM",
+    "Maya Singh PD",
+    "Mayrhofer HPa",
+    "Miklosich Mund",
+    "Miscellany",
+    "Molesworth MD",
+    "Morgenstierne",
+    "Morgenstierne ID",
+    "ND",
+    "NIA",
+    "NOGaw",
+    "NOPhal",
+    "NTS",
+    "ODBL",
+    "PMWS",
+    "POBh",
+    "PSM",
+    "PTSD",
+    "PW",
+    "Panse Jñān",
+    "PhonPj",
+    "Pischel GrPk",
+    "Platts UD",
+    "Pokorny",
+    "Pre-Aryan",
+    "RM",
+    "RTMV2",
+    "Raghu Vira",
+    "Risley",
+    "RoczOrj",
+    "S. K. Chatterji",
+    "S. Varma",
+    "S.M.Katre",
+    "SBAW",
+    "SED",
+    "SN",
+    "SSS",
+    "Saksena",
+    "Sampson",
+    "Schmidt Nachtr",
+    "SigGr",
+    "Stein RājatTrans",
+    "SternbachVol",
+    "StudII",
+    "TPS",
+    "Tau",
+    "Tulpule OMR",
+    "Uhlenbeck",
+    "Varma BhalDial",
+    "Vīsaḷa",
+    "WP",
+    "WR",
+    "Wackernagel AiGr",
+    "Whitney SkGr",
+    "Woolner Gloss",
+    "ZDMG",
+    "ZII",
+    "morgenstierne1950",
+    "ŚSB"
+  ],
+  "placeholder_reference_ids": [
+    "morgenstierne1950"
+  ],
+  "catalogued_abbreviation_count": 160,
+  "notes": "Non-BibTeX CDIAL abbreviation-catalog records are independently descriptive references, not unresolved placeholders; only the generic full-citation-not-yet-catalogued template is counted as unresolved."
+}

@@ -13,7 +13,7 @@
  */
 import { browser } from '$app/environment';
 import { base } from '$app/paths';
-import { DB_DOWNLOAD_BYTES } from './dbMeta';
+import { DB_DOWNLOAD_BYTES, DB_VERSION } from './dbMeta';
 
 // dev loads the local DB automatically (no manual gate); prod waits for the user to opt in.
 const DEV = import.meta.env.DEV;
@@ -45,8 +45,8 @@ export const dbUI = {
 
 // ---- shared state & channels ----------------------------------------------
 
-const LOCK = 'jambu-db-leader';
-const CHANNEL = 'jambu-db';
+const LOCK = `jambu-db-v${DB_VERSION}-leader`;
+const CHANNEL = `jambu-db-v${DB_VERSION}`;
 const DB_URL = () => `${base}/db/jambu.db.zst`;
 
 let started = false;

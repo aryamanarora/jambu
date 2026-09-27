@@ -336,6 +336,101 @@ class UnlinkedDialectDedupTest(unittest.TestCase):
             [("dictionary", "p. 10"), ("dictionary", "p. 12"), ("survey", "p. 9")],
         )
 
+    def test_compound_copies_merge_across_dialects_and_keep_one_edge_set(self):
+        """A survey compound is attested only by its component edges; identical copies from
+        different sites collapse like reflexes, while a copy built on other members stays."""
+        con = sqlite3.connect(":memory:")
+        build_static_db.build_base_schema(con)
+        con.executemany(
+            'INSERT INTO "references" (id,short,source,progress,provenance,editor,ocr) '
+            "VALUES (?,?,?,'Full','','',0)",
+            [("survey", "Survey", "Survey")],
+        )
+        def entry(i, form):
+            return {
+                "ID": i, "Language_ID": "proto", "Form": form, "Gloss": form,
+                "Native": "", "Phonemic": "", "Original": "", "Cognateset": "",
+                "Description": "", "Tags": "", "Source": "", "Etymology": "",
+                "Redirect": "", "Status": "entry",
+            }
+        def compound(i, site, locator):
+            return {
+                "ID": i, "Language_ID": "language", "Form": "bari pen", "Gloss": "older sister",
+                "Native": "", "Phonemic": "bari pen", "Original": "", "Cognateset": "",
+                "Description": "", "Tags": f"dialect:language:{site}:{site.upper()}",
+                "Source": f"survey[{locator}]", "Etymology": "", "Redirect": "", "Status": "",
+            }
+        rows = [
+            entry("big", "*bara"), entry("sister", "*bhagini"), entry("small", "*chotta"),
+            compound("c-a", "site-a", "item 109, A"),
+            compound("c-b", "site-b", "item 109, B"),
+            compound("c-other", "site-c", "item 109, C"),  # same text, different first member
+        ]
+        def edge(child, parent, pos):
+            return {
+                "Child_ID": child, "Parent_ID": parent, "Kind": "component", "Rank": "1",
+                "Pos": pos, "Source": "", "Note": f"{child} note",
+            }
+        edges = [
+            edge("c-a", "big", "1"), edge("c-a", "sister", "2"),
+            edge("c-b", "big", "1"), edge("c-b", "sister", "2"),
+            edge("c-other", "small", "1"), edge("c-other", "sister", "2"),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            forms = Path(directory) / "forms.csv"
+            with forms.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=FIELDS)
+                writer.writeheader()
+                writer.writerows(rows)
+            aliases = build_static_db.load_lemmas(
+                con, forms, edges, {"language": "Other", "proto": "Other"},
+            )
+        with redirect_stdout(io.StringIO()):
+            build_static_db.load_graph_edges(con, edges)
+
+        self.assertEqual(aliases, {"c-b": "c-a"})
+        self.assertEqual(con.execute("SELECT COUNT(*) FROM lemmas").fetchone()[0], 5)
+        tags = con.execute("SELECT tags FROM lemmas WHERE id='c-a'").fetchone()[0].split()
+        self.assertEqual(
+            set(tags), {"dialect:language:site-a:SITE-A", "dialect:language:site-b:SITE-B"}
+        )
+        citations = con.execute(
+            "SELECT locator FROM lemma_reference WHERE lemma_rid="
+            "(SELECT rowid FROM lemmas WHERE id='c-a') ORDER BY locator"
+        ).fetchall()
+        self.assertEqual(citations, [("item 109, A",), ("item 109, B",)])
+        shipped = con.execute(
+            "SELECT child_id, parent_id, pos FROM edges ORDER BY child_id, pos"
+        ).fetchall()
+        self.assertEqual(
+            shipped,
+            [("c-a", "big", 1), ("c-a", "sister", 2), ("c-other", "small", 1), ("c-other", "sister", 2)],
+        )
+        self.assertEqual(
+            con.execute("SELECT note FROM edges WHERE child_id='c-a' ORDER BY pos").fetchall(),
+            [("c-a note\n\nc-b note",), ("c-a note\n\nc-b note",)],
+        )
+
+    def test_equivalent_edges_union_notes_and_sources_without_losing_positions(self):
+        con = sqlite3.connect(":memory:")
+        con.execute("CREATE TABLE lemmas (id TEXT)")
+        con.executemany("INSERT INTO lemmas VALUES (?)", [("child",), ("parent",)])
+        def edge(note, source, pos="1", kind="component"):
+            return dict(Child_ID="child", Parent_ID="parent", Kind=kind, Rank="1",
+                        Pos=pos, Note=note, Source=source)
+        edges = [edge("", ""), edge("first claim", "source[p. 1; line 2]"),
+                 edge("second claim", "other[p. 3]"),
+                 edge("first claim", "source[p. 1; line 2]"),
+                 edge("position two", "source[p. 4]", pos="2"),
+                 edge("", "source[p. 5]", kind="derived")]
+        with redirect_stdout(io.StringIO()):
+            build_static_db.load_graph_edges(con, edges)
+        self.assertEqual(con.execute("SELECT kind, pos, note FROM edges ORDER BY rowid").fetchall(), [
+            ("component", 1, "first claim\n\nsecond claim\n\nSources: source[p. 1; line 2];other[p. 3]"),
+            ("component", 2, "position two\n\nSources: source[p. 4]"),
+            ("derived", 1, "source[p. 5]"),
+        ])
+
     def test_source_defined_reconstruction_records_do_not_merge(self):
         con = sqlite3.connect(":memory:")
         build_static_db.build_base_schema(con)

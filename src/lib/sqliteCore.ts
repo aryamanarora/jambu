@@ -8,7 +8,7 @@
  */
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 import { decompress } from './vendor/fzstd.js';
-import { DB_LOCAL_BYTES, OPFS_DB_PATH } from './dbMeta';
+import { DB_LOCAL_BYTES, DB_VERSION, OPFS_DB_PATH } from './dbMeta';
 import { makeVdeltaIn, makeVinIn } from './dbShared';
 import { unicodeSearchFold } from './unicodeSearch';
 
@@ -16,6 +16,10 @@ import { unicodeSearchFold } from './unicodeSearch';
 // SQLite, so a rebuilt db.db is picked up on reload with no DB_VERSION bump / re-download dance.
 // Production keeps the OPFS SAHPool (one-time download, cached across visits).
 const DEV = import.meta.env.DEV;
+// Separate versions must not contend for the same SAHPool's exclusive handles.
+// Older pools remain untouched; users can reclaim them through site-storage controls.
+const POOL_NAME = `jambu-opfs-v${DB_VERSION}`;
+const POOL_DIRECTORY = `.jambu-opfs-v${DB_VERSION}`;
 
 type Pool = {
 	getFileNames(): string[];
@@ -90,7 +94,7 @@ async function ensureSqlite(): Promise<Sqlite3> {
 async function ensurePool(): Promise<Pool> {
 	if (pool) return pool;
 	const s = await ensureSqlite();
-	pool = (await s.installOpfsSAHPoolVfs({ name: 'jambu-opfs', initialCapacity: 4 })) as Pool;
+	pool = (await s.installOpfsSAHPoolVfs({ name: POOL_NAME, directory: POOL_DIRECTORY, initialCapacity: 4 })) as Pool;
 	return pool;
 }
 

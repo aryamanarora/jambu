@@ -26,12 +26,12 @@ a local SQLite database restored from a compact release artifact.
 ```bash
 npm install
 npm run db:transform   # ../data/cldf → .dbwork/jambu.db
-npm run db:stage       # zstd → static/db/jambu.db.zst (must remain below 50 MB)
+npm run db:stage       # zstd → static/db/jambu.db.zst (must remain below 65 MB)
 npm run dev
 ```
 
 `db:stage` requires the `zstd` command (`brew install zstd` or `apt install zstd`).
-It validates the sub-50 MB artifact and exact restoration through the browser decoder
+It validates the sub-65 MB artifact and exact restoration through the browser decoder
 before replacing the staged asset. The vendored fzstd wide-offset fix is documented
 in `src/lib/vendor/README.md`.
 
@@ -117,7 +117,7 @@ Uncatalogued source abbreviations export as `@misc` with the available citation 
 
 - `scripts/build_static_db.py` — dictionary-codes citations, tags, article prose,
   alignments/correspondences, compacts indexes, writes precomputed `meta` counts, and `VACUUM`s.
-- `scripts/pack_db.mjs` / `unpack_db.mjs` — enforce the sub-50 MB artifact and restore it for CI.
+- `scripts/pack_db.mjs` / `unpack_db.mjs` — enforce the sub-65 MB artifact and restore it for CI.
 - `src/lib/sqliteCore.ts` — downloads, restores, caches, and opens SQLite in a worker.
 - `src/lib/query.ts` — the query layer (port of the old Flask `search.py` + entry grouping).
 - `src/lib/server/db.ts` — build-time `better-sqlite3` access for prerendering.

@@ -301,16 +301,25 @@ def load_lemmas(
         rows = list(csv.DictReader(f))
 
     rank1: dict[str, tuple[str, str]] = {}
+    # A survey compound (Pothwari baṛi pe̤n 'older sister' = baṛā + bhaginī) is attested by its
+    # ordered component/derived edges rather than by an accepted etymon of its own; identical
+    # copies from different survey sites must collapse like any other attestation.
+    derivation: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
     for e in edge_rows:
-        if e["Rank"] == "1" and e["Kind"] in ("reflex", "variant", "borrowed"):
+        if e["Rank"] != "1":
+            continue
+        if e["Kind"] in ("reflex", "variant", "borrowed"):
             rank1[e["Child_ID"]] = (e["Parent_ID"], e["Kind"])
+        elif e["Kind"] in ("component", "derived"):
+            derivation[e["Child_ID"]].append((e["Kind"], e["Parent_ID"], e["Pos"] or ""))
 
     # Dialects are already tags in CLDF. Collapse exact attested copies while retaining every
     # dialect tag and citation on the surviving row.
-    # The rank-1 edge is part of a linked row's identity (identical text under different parents
-    # must never merge). Unlinked attestations use their lexical content as the identity instead;
-    # Source is provenance, so merge its citations onto the retained row rather than using it to
-    # distinguish otherwise identical forms. Etyma/entries remain identified by ID and never merge.
+    # The rank-1 edges are part of a linked row's identity (identical text under different parents
+    # or with different compound members must never merge). Unlinked attestations use their
+    # lexical content as the identity instead; Source is provenance, so merge its citations onto
+    # the retained row rather than using it to distinguish otherwise identical forms.
+    # Etyma/entries remain identified by ID and never merge.
     aliases: dict[str, str] = {}
     unique: dict[tuple, dict[str, str]] = {}
     unlinked_unique: dict[tuple, list[tuple[dict[str, str], set[str]]]] = defaultdict(list)
@@ -331,16 +340,18 @@ def load_lemmas(
             if reference in SOURCE_DEFINED_RECORD_REFERENCES
         )
         # Parentless etyma/entries stay distinct (blank proto heads would otherwise collapse).
-        # Unlinked rows are attestations too, despite having no accepted edge.
+        # Unlinked rows are attestations too, despite having no accepted edge, and so are forms
+        # attested only through their derivation edges.
         is_unlinked = r.get("Status") == "unlinked"
-        if r["ID"] not in rank1 and not is_unlinked:
+        derived_from = tuple(sorted(derivation.get(r["ID"], ())))
+        if r["ID"] not in rank1 and not is_unlinked and not derived_from:
             deduped.append(r)
             continue
         key = (r["Language_ID"],) + tuple(
             r.get(k, "") for k in r.keys() if k not in ignored
         ) + tuple(content_tags) + source_defined_record + (
-            ("unlinked",) if is_unlinked else rank1[r["ID"]]
-        )
+            ("unlinked",) if is_unlinked else rank1.get(r["ID"], ())
+        ) + derived_from
         if is_unlinked:
             # A repeated spelling within one lect may be a genuine homonym or separate lexical
             # record. Merge only when a different source lect normalises to the same language.
@@ -374,8 +385,9 @@ def load_lemmas(
             )
     rows = deduped
     if aliases:
-        # Re-point every edge endpoint through the collapse map; a collapsed linked child's own
-        # edges drop out (the retained row carries the identical edge, guaranteed by the key).
+        # Re-point every edge endpoint through the collapse map; a collapsed child's own rank-1
+        # edges become exact duplicates of the retained row's (guaranteed by the key) and are
+        # dropped when the typed graph is loaded.
         def canon(i: str) -> str:
             while i in aliases:
                 i = aliases[i]
@@ -812,23 +824,42 @@ def load_graph_edges(con: sqlite3.Connection, edge_rows: list[dict]) -> None:
     known = {r[0] for r in con.execute("SELECT id FROM lemmas")}
     rows = []
     dropped = 0
+    duplicates = 0
+    evidence: dict[tuple, tuple[list[str], list[str]]] = {}
     for e in edge_rows:
         if e["Kind"] not in ("component", "derived") and e["Rank"] == "1":
             continue  # attestation edges live on the lemma rows
         if e["Child_ID"] not in known or e["Parent_ID"] not in known:
             dropped += 1
             continue
-        rows.append((
+        row = (
             e["Child_ID"], e["Parent_ID"], e["Kind"], int(e["Rank"]),
             int(e["Pos"]) if e["Pos"] else None,
-            e["Note"] or (e["Source"] or None),
-        ))
+        )
+        # collapsed dialect copies re-point onto the retained row's identical edge
+        if row in evidence:
+            duplicates += 1
+        notes, sources = evidence.setdefault(row, ([], []))
+        # Equivalent structural edges can carry different scholarly explanations or
+        # supporting citations. Keep both fields, including evidence from collapsed sites.
+        for value, values in ((e["Note"], notes), (e["Source"], sources)):
+            if value and value not in values:
+                values.append(value)
+    for row, (notes, sources) in evidence.items():
+        parts = list(notes)
+        if sources:
+            citations = ";".join(sources)
+            parts.append(("Sources: " if notes else "") + citations)
+        rows.append(row + ("\n\n".join(parts) or None,))
     con.executemany(
         "INSERT INTO edges (child_id, parent_id, kind, rank, pos, note) VALUES (?,?,?,?,?,?)",
         rows,
     )
     con.commit()
-    log(f"loaded typed graph edges: {len(rows)} shipped ({dropped} with unknown endpoints dropped)")
+    log(
+        f"loaded typed graph edges: {len(rows)} shipped ({dropped} with unknown endpoints dropped, "
+        f"{duplicates} duplicates of collapsed copies dropped)"
+    )
 
 
 def table_exists(con: sqlite3.Connection, name: str) -> bool:
