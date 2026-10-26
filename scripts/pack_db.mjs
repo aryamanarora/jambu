@@ -20,8 +20,9 @@ if (!Number.isInteger(level) || level < 1 || level > 22 ||
 	throw new Error('Invalid Zstandard level, window log, or thread count');
 }
 // Download budget for browser users, not a platform limit (Pages serves files to 100 MB).
-// Raised to 65 MB for db-v39: the complete expanded corpus is 60.77 MB at level 22.
-const limit = 65_000_000;
+// Raised to 65 MB for db-v39 (60.77 MB at level 22) and to 70 MB for db-v40, which adds the
+// Iranian family and the whole-book source expansions (181 MB expanded).
+const limit = 70_000_000;
 mkdirSync(dirname(output), { recursive: true });
 
 try {

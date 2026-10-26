@@ -4,6 +4,18 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [deploy, pack-only]
+        default: deploy
+      release_branch:
+        description: Exact release branch containing the reviewed packer
+        type: string
+        default: release/db-v40
+      raw_sha256:
+        description: Required exact raw SQLite SHA-256 for pack-only mode
+        type: string
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Deployment target (project page at https://aryamanarora.github.io/jambu/):
@@ -25,11 +37,84 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ inputs.mode == 'pack-only' && format('pack-only-{0}', github.run_id) || 'pages' }}
   cancel-in-progress: true
 
 jobs:
+  pack-only:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'pack-only' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write # GitHub requires write access to read an unpublished draft release.
+    steps:
+      - name: Validate explicit release-branch and raw-hash inputs
+        env:
+          RELEASE_BRANCH: ${{ inputs.release_branch }}
+          RAW_SHA256: ${{ inputs.raw_sha256 }}
+          CURRENT_BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          test "$CURRENT_BRANCH" = "$RELEASE_BRANCH"
+          test "$CURRENT_BRANCH" != main
+          test -n "$RELEASE_BRANCH"
+          [[ "$RAW_SHA256" =~ ^[0-9a-f]{64}$ ]]
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Download exact raw database from the draft db-v40 release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RAW_SHA256: ${{ inputs.raw_sha256 }}
+        run: |
+          set -euo pipefail
+          test "$(gh release view db-v40 --json isDraft --jq .isDraft)" = true
+          mkdir -p .dbwork packed
+          gh release download db-v40 --pattern jambu.db --dir .dbwork
+          printf '%s  %s\n' "$RAW_SHA256" .dbwork/jambu.db | sha256sum --check --strict
+      - name: Install Zstandard
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zstd
+      - name: Pack exact database and verify browser decoder round trip
+        env:
+          ZSTD_LEVEL: '22'
+          ZSTD_WINDOW_LOG: '27'
+          ZSTD_THREADS: '1'
+        run: node scripts/pack_db.mjs .dbwork/jambu.db packed/jambu.db.zst
+      - name: Record artifact hashes and provenance
+        env:
+          RAW_SHA256: ${{ inputs.raw_sha256 }}
+        run: |
+          python3 - <<'PY_MANIFEST'
+          import hashlib, json, os
+          from pathlib import Path
+          def digest(p):
+              h=hashlib.sha256()
+              with p.open('rb') as f:
+                  for block in iter(lambda:f.read(1048576),b''): h.update(block)
+              return h.hexdigest()
+          raw=Path('.dbwork/jambu.db'); packed=Path('packed/jambu.db.zst')
+          assert digest(raw)==os.environ['RAW_SHA256']
+          assert packed.stat().st_size<70000000
+          report={'release':'db-v40','draft':True,'workflow_commit':os.environ['GITHUB_SHA'],
+                  'run_id':os.environ['GITHUB_RUN_ID'],'raw_sha256':digest(raw),
+                  'raw_bytes':raw.stat().st_size,'packed_sha256':digest(packed),
+                  'packed_bytes':packed.stat().st_size,'zstd':{'level':22,'window_log':27,'threads':1},
+                  'browser_decoder_roundtrip':'passed by pack_db.mjs','published':False}
+          Path('packed/manifest.json').write_text(json.dumps(report,indent=2)+'\n')
+          PY_MANIFEST
+      - uses: actions/upload-artifact@v4
+        with:
+          name: db-v40-packed-${{ github.run_id }}
+          path: packed/
+          if-no-files-found: error
+          retention-days: 7
+
   build:
+    if: ${{ inputs.mode != 'pack-only' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
